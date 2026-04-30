@@ -6,14 +6,14 @@
 
 ## 📚 内容结构
 
-| 分类 | 文档数 | 说明 |
-|------|--------|------|
-| **编程语言** | 224 | Go标准库、Python标准库、框架实战 |
-| **AI/机器学习** | 29 | 大模型、算法、AI Agent |
-| **网络协议** | 22 | HTTP/2/3、gRPC、WebRTC、IPv8 |
-| **开发工具** | 30 | Docker、Kubernetes、Linux、Git |
-| **数据库** | 3 | MySQL优化、B+树 |
-| **计算机科学** | 3 | 计算机组成、数学基础 |
+| 分类  | 说明 |
+|------|------|
+| **编程语言**  | Go标准库、Python标准库、框架实战 |
+| **AI/机器学习** |  | 大模型、算法、AI Agent |
+| **网络协议** |  | HTTP/2/3、gRPC、WebRTC、IPv8 |
+| **开发工具** |  | Docker、Kubernetes、Linux、Git |
+| **数据库** |  | MySQL优化、B+树 |
+| **计算机科学** |  | 计算机组成、数学基础 |
 
 ## 🚀 快速开始
 
@@ -24,7 +24,7 @@
 pip install mkdocs mkdocs-material
 
 # 进入项目目录
-cd tech-knowledge-base
+cd note
 
 # 启动开发服务器
 mkdocs serve
