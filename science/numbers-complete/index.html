@@ -15,38 +15,27 @@
     E --&gt; E1[有理数]
     E --&gt; E2[无理数]
     E2 --&gt; E21[代数数]
-    E2 --&gt; E22[超越数]</code></pre> <h3 id=22>2.2 重要的数学常数及其意义<a class=headerlink href=#22 title="Permanent link">&para;</a></h3> <p><strong>基本数学常数在计算机科学中的应用</strong>：</p> <table> <thead> <tr> <th>常数</th> <th>符号</th> <th>近似值</th> <th>应用场景</th> </tr> </thead> <tbody> <tr> <td>π</td> <td>π</td> <td>3.14159</td> <td>图形学、信号处理、加密算法</td> </tr> <tr> <td>e</td> <td>e</td> <td>2.71828</td> <td>概率统计、机器学习、复利计算</td> </tr> <tr> <td>φ</td> <td>φ</td> <td>1.61803</td> <td>算法设计、数据结构、美学优化</td> </tr> <tr> <td>√2</td> <td>√2</td> <td>1.41421</td> <td>图像压缩、数值分析、几何计算</td> </tr> </tbody> </table> <p><strong>欧拉公式的计算机意义</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>e^(iπ) + 1 = 0
-</span></code></pre></div></td></tr></table></div> 这个被誉为"数学中最美的公式"在信号处理中有着重要应用，建立了实数域和复数域之间的桥梁。</p> <h2 id=_3>三、计算机中的数字表示<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <h3 id=31>3.1 二进制系统：计算机的语言<a class=headerlink href=#31 title="Permanent link">&para;</a></h3> <p>计算机使用二进制系统表示数字，这是由电子器件的物理特性决定的：</p> <pre class=mermaid><code>graph LR
+    E2 --&gt; E22[超越数]</code></pre> <h3 id=22>2.2 重要的数学常数及其意义<a class=headerlink href=#22 title="Permanent link">&para;</a></h3> <p><strong>基本数学常数在计算机科学中的应用</strong>：</p> <table> <thead> <tr> <th>常数</th> <th>符号</th> <th>近似值</th> <th>应用场景</th> </tr> </thead> <tbody> <tr> <td>π</td> <td>π</td> <td>3.14159</td> <td>图形学、信号处理、加密算法</td> </tr> <tr> <td>e</td> <td>e</td> <td>2.71828</td> <td>概率统计、机器学习、复利计算</td> </tr> <tr> <td>φ</td> <td>φ</td> <td>1.61803</td> <td>算法设计、数据结构、美学优化</td> </tr> <tr> <td>√2</td> <td>√2</td> <td>1.41421</td> <td>图像压缩、数值分析、几何计算</td> </tr> </tbody> </table> <p><strong>欧拉公式的计算机意义</strong>： <div class="language-text highlight"><pre><span></span><code><span id=__span-0-1>e^(iπ) + 1 = 0
+</span></code></pre></div> 这个被誉为"数学中最美的公式"在信号处理中有着重要应用，建立了实数域和复数域之间的桥梁。</p> <h2 id=_3>三、计算机中的数字表示<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <h3 id=31>3.1 二进制系统：计算机的语言<a class=headerlink href=#31 title="Permanent link">&para;</a></h3> <p>计算机使用二进制系统表示数字，这是由电子器件的物理特性决定的：</p> <pre class=mermaid><code>graph LR
     A[十进制数字] --&gt; B[二进制转换]
     B --&gt; C[内存存储]
     C --&gt; D[CPU处理]
     D --&gt; E[结果输出]
 
     style B fill:#e1f5fe
-    style C fill:#f3e5f5</code></pre> <p><strong>二进制转换原理</strong>： <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1> 1</a></span>
-<span class=normal><a href=#__codelineno-1-2> 2</a></span>
-<span class=normal><a href=#__codelineno-1-3> 3</a></span>
-<span class=normal><a href=#__codelineno-1-4> 4</a></span>
-<span class=normal><a href=#__codelineno-1-5> 5</a></span>
-<span class=normal><a href=#__codelineno-1-6> 6</a></span>
-<span class=normal><a href=#__codelineno-1-7> 7</a></span>
-<span class=normal><a href=#__codelineno-1-8> 8</a></span>
-<span class=normal><a href=#__codelineno-1-9> 9</a></span>
-<span class=normal><a href=#__codelineno-1-10>10</a></span>
-<span class=normal><a href=#__codelineno-1-11>11</a></span>
-<span class=normal><a href=#__codelineno-1-12>12</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=c1># 十进制转二进制算法实现</span>
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a><span class=k>def</span><span class=w> </span><span class=nf>decimal_to_binary</span><span class=p>(</span><span class=n>n</span><span class=p>):</span>
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>    <span class=k>if</span> <span class=n>n</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a>        <span class=k>return</span> <span class=s2>&quot;0&quot;</span>
-</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a>    <span class=n>binary</span> <span class=o>=</span> <span class=s2>&quot;&quot;</span>
-</span><span id=__span-1-6><a id=__codelineno-1-6 name=__codelineno-1-6></a>    <span class=k>while</span> <span class=n>n</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=p>:</span>
-</span><span id=__span-1-7><a id=__codelineno-1-7 name=__codelineno-1-7></a>        <span class=n>binary</span> <span class=o>=</span> <span class=nb>str</span><span class=p>(</span><span class=n>n</span> <span class=o>%</span> <span class=mi>2</span><span class=p>)</span> <span class=o>+</span> <span class=n>binary</span>
-</span><span id=__span-1-8><a id=__codelineno-1-8 name=__codelineno-1-8></a>        <span class=n>n</span> <span class=o>=</span> <span class=n>n</span> <span class=o>//</span> <span class=mi>2</span>
-</span><span id=__span-1-9><a id=__codelineno-1-9 name=__codelineno-1-9></a>    <span class=k>return</span> <span class=n>binary</span>
-</span><span id=__span-1-10><a id=__codelineno-1-10 name=__codelineno-1-10></a>
-</span><span id=__span-1-11><a id=__codelineno-1-11 name=__codelineno-1-11></a><span class=c1># 示例：255的二进制表示</span>
-</span><span id=__span-1-12><a id=__codelineno-1-12 name=__codelineno-1-12></a><span class=nb>print</span><span class=p>(</span><span class=n>decimal_to_binary</span><span class=p>(</span><span class=mi>255</span><span class=p>))</span>  <span class=c1># 输出: &quot;11111111&quot;</span>
-</span></code></pre></div></td></tr></table></div></p> <h3 id=32>3.2 整数表示：原码、反码与补码<a class=headerlink href=#32 title="Permanent link">&para;</a></h3> <p>计算机使用补码表示有符号整数，这是现代计算机体系结构的基础：</p> <p><strong>三种表示方法的对比</strong>：</p> <table> <thead> <tr> <th>数值</th> <th>原码</th> <th>反码</th> <th>补码</th> </tr> </thead> <tbody> <tr> <td>+7</td> <td>0111</td> <td>0111</td> <td>0111</td> </tr> <tr> <td>+0</td> <td>0000</td> <td>0000</td> <td>0000</td> </tr> <tr> <td>-0</td> <td>1000</td> <td>1111</td> <td>0000</td> </tr> <tr> <td>-7</td> <td>1111</td> <td>1000</td> <td>1001</td> </tr> </tbody> </table> <p><strong>补码的优势</strong>： - 统一的零表示（没有+0和-0之分） - 简化加法器设计（减法可以转换为加法） - 便于溢出检测</p> <h3 id=33-ieee-754>3.3 浮点数表示：IEEE 754标准<a class=headerlink href=#33-ieee-754 title="Permanent link">&para;</a></h3> <p>现代计算机使用IEEE 754标准表示浮点数，其结构如下：</p> <pre class=mermaid><code>graph TD
+    style C fill:#f3e5f5</code></pre> <p><strong>二进制转换原理</strong>： <div class="language-python highlight"><pre><span></span><code><span id=__span-1-1><span class=c1># 十进制转二进制算法实现</span>
+</span><span id=__span-1-2><span class=k>def</span><span class=w> </span><span class=nf>decimal_to_binary</span><span class=p>(</span><span class=n>n</span><span class=p>):</span>
+</span><span id=__span-1-3>    <span class=k>if</span> <span class=n>n</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span><span id=__span-1-4>        <span class=k>return</span> <span class=s2>&quot;0&quot;</span>
+</span><span id=__span-1-5>    <span class=n>binary</span> <span class=o>=</span> <span class=s2>&quot;&quot;</span>
+</span><span id=__span-1-6>    <span class=k>while</span> <span class=n>n</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=p>:</span>
+</span><span id=__span-1-7>        <span class=n>binary</span> <span class=o>=</span> <span class=nb>str</span><span class=p>(</span><span class=n>n</span> <span class=o>%</span> <span class=mi>2</span><span class=p>)</span> <span class=o>+</span> <span class=n>binary</span>
+</span><span id=__span-1-8>        <span class=n>n</span> <span class=o>=</span> <span class=n>n</span> <span class=o>//</span> <span class=mi>2</span>
+</span><span id=__span-1-9>    <span class=k>return</span> <span class=n>binary</span>
+</span><span id=__span-1-10>
+</span><span id=__span-1-11><span class=c1># 示例：255的二进制表示</span>
+</span><span id=__span-1-12><span class=nb>print</span><span class=p>(</span><span class=n>decimal_to_binary</span><span class=p>(</span><span class=mi>255</span><span class=p>))</span>  <span class=c1># 输出: &quot;11111111&quot;</span>
+</span></code></pre></div></p> <h3 id=32>3.2 整数表示：原码、反码与补码<a class=headerlink href=#32 title="Permanent link">&para;</a></h3> <p>计算机使用补码表示有符号整数，这是现代计算机体系结构的基础：</p> <p><strong>三种表示方法的对比</strong>：</p> <table> <thead> <tr> <th>数值</th> <th>原码</th> <th>反码</th> <th>补码</th> </tr> </thead> <tbody> <tr> <td>+7</td> <td>0111</td> <td>0111</td> <td>0111</td> </tr> <tr> <td>+0</td> <td>0000</td> <td>0000</td> <td>0000</td> </tr> <tr> <td>-0</td> <td>1000</td> <td>1111</td> <td>0000</td> </tr> <tr> <td>-7</td> <td>1111</td> <td>1000</td> <td>1001</td> </tr> </tbody> </table> <p><strong>补码的优势</strong>： - 统一的零表示（没有+0和-0之分） - 简化加法器设计（减法可以转换为加法） - 便于溢出检测</p> <h3 id=33-ieee-754>3.3 浮点数表示：IEEE 754标准<a class=headerlink href=#33-ieee-754 title="Permanent link">&para;</a></h3> <p>现代计算机使用IEEE 754标准表示浮点数，其结构如下：</p> <pre class=mermaid><code>graph TD
     A[IEEE 754浮点数] --&gt; B[符号位 S]
     A --&gt; C[指数位 E]
     A --&gt; D[尾数位 M]
@@ -55,64 +44,40 @@
     C --&gt; C1[8位: 偏移127]
     D --&gt; D1[23位: 隐含前导1]
 
-    E1[计算公式] --&gt; F[(-1)^S × 1.M × 2^(E-127)]</code></pre> <p><strong>特殊值的表示</strong>： - <strong>零</strong>：指数和尾数全为0 - <strong>无穷大</strong>：指数全1，尾数全0 - <strong>NaN</strong>：指数全1，尾数非0</p> <p><strong>浮点数精度问题示例</strong>： <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span>
-<span class=normal><a href=#__codelineno-2-2>2</a></span>
-<span class=normal><a href=#__codelineno-2-3>3</a></span>
-<span class=normal><a href=#__codelineno-2-4>4</a></span>
-<span class=normal><a href=#__codelineno-2-5>5</a></span>
-<span class=normal><a href=#__codelineno-2-6>6</a></span>
-<span class=normal><a href=#__codelineno-2-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=c1># 浮点数精度丢失示例</span>
-</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a><span class=nb>print</span><span class=p>(</span><span class=mf>0.1</span> <span class=o>+</span> <span class=mf>0.2</span><span class=p>)</span>  <span class=c1># 输出: 0.30000000000000004</span>
-</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a><span class=nb>print</span><span class=p>(</span><span class=mf>0.1</span> <span class=o>+</span> <span class=mf>0.2</span> <span class=o>==</span> <span class=mf>0.3</span><span class=p>)</span>  <span class=c1># 输出: False</span>
-</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a>
-</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a><span class=c1># 使用decimal模块解决精度问题</span>
-</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6></a><span class=kn>from</span><span class=w> </span><span class=nn>decimal</span><span class=w> </span><span class=kn>import</span> <span class=n>Decimal</span>
-</span><span id=__span-2-7><a id=__codelineno-2-7 name=__codelineno-2-7></a><span class=nb>print</span><span class=p>(</span><span class=n>Decimal</span><span class=p>(</span><span class=s1>&#39;0.1&#39;</span><span class=p>)</span> <span class=o>+</span> <span class=n>Decimal</span><span class=p>(</span><span class=s1>&#39;0.2&#39;</span><span class=p>)</span> <span class=o>==</span> <span class=n>Decimal</span><span class=p>(</span><span class=s1>&#39;0.3&#39;</span><span class=p>))</span>  <span class=c1># 输出: True</span>
-</span></code></pre></div></td></tr></table></div></p> <h2 id=_4>四、数值计算的基础算法<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <h3 id=41>4.1 基本算术运算的实现<a class=headerlink href=#41 title="Permanent link">&para;</a></h3> <p><strong>加法运算的硬件实现</strong>： <pre class=mermaid><code>graph LR
+    E1[计算公式] --&gt; F[(-1)^S × 1.M × 2^(E-127)]</code></pre> <p><strong>特殊值的表示</strong>： - <strong>零</strong>：指数和尾数全为0 - <strong>无穷大</strong>：指数全1，尾数全0 - <strong>NaN</strong>：指数全1，尾数非0</p> <p><strong>浮点数精度问题示例</strong>： <div class="language-python highlight"><pre><span></span><code><span id=__span-2-1><span class=c1># 浮点数精度丢失示例</span>
+</span><span id=__span-2-2><span class=nb>print</span><span class=p>(</span><span class=mf>0.1</span> <span class=o>+</span> <span class=mf>0.2</span><span class=p>)</span>  <span class=c1># 输出: 0.30000000000000004</span>
+</span><span id=__span-2-3><span class=nb>print</span><span class=p>(</span><span class=mf>0.1</span> <span class=o>+</span> <span class=mf>0.2</span> <span class=o>==</span> <span class=mf>0.3</span><span class=p>)</span>  <span class=c1># 输出: False</span>
+</span><span id=__span-2-4>
+</span><span id=__span-2-5><span class=c1># 使用decimal模块解决精度问题</span>
+</span><span id=__span-2-6><span class=kn>from</span><span class=w> </span><span class=nn>decimal</span><span class=w> </span><span class=kn>import</span> <span class=n>Decimal</span>
+</span><span id=__span-2-7><span class=nb>print</span><span class=p>(</span><span class=n>Decimal</span><span class=p>(</span><span class=s1>&#39;0.1&#39;</span><span class=p>)</span> <span class=o>+</span> <span class=n>Decimal</span><span class=p>(</span><span class=s1>&#39;0.2&#39;</span><span class=p>)</span> <span class=o>==</span> <span class=n>Decimal</span><span class=p>(</span><span class=s1>&#39;0.3&#39;</span><span class=p>))</span>  <span class=c1># 输出: True</span>
+</span></code></pre></div></p> <h2 id=_4>四、数值计算的基础算法<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <h3 id=41>4.1 基本算术运算的实现<a class=headerlink href=#41 title="Permanent link">&para;</a></h3> <p><strong>加法运算的硬件实现</strong>： <pre class=mermaid><code>graph LR
     A[输入A] --&gt; C[全加器]
     B[输入B] --&gt; C
     D[进位输入] --&gt; C
     C --&gt; E[和输出]
     C --&gt; F[进位输出]
 
-    style C fill:#e1f5fe</code></pre></p> <p><strong>乘法运算的优化算法</strong>：</p> <ol> <li><strong>竖式乘法</strong>：时间复杂度O(n²)</li> <li><strong>Karatsuba算法</strong>：时间复杂度O(n^log₂3) ≈ O(n^1.585)</li> <li><strong>快速傅里叶变换(FFT)</strong>：时间复杂度O(n log n)</li> </ol> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1> 1</a></span>
-<span class=normal><a href=#__codelineno-3-2> 2</a></span>
-<span class=normal><a href=#__codelineno-3-3> 3</a></span>
-<span class=normal><a href=#__codelineno-3-4> 4</a></span>
-<span class=normal><a href=#__codelineno-3-5> 5</a></span>
-<span class=normal><a href=#__codelineno-3-6> 6</a></span>
-<span class=normal><a href=#__codelineno-3-7> 7</a></span>
-<span class=normal><a href=#__codelineno-3-8> 8</a></span>
-<span class=normal><a href=#__codelineno-3-9> 9</a></span>
-<span class=normal><a href=#__codelineno-3-10>10</a></span>
-<span class=normal><a href=#__codelineno-3-11>11</a></span>
-<span class=normal><a href=#__codelineno-3-12>12</a></span>
-<span class=normal><a href=#__codelineno-3-13>13</a></span>
-<span class=normal><a href=#__codelineno-3-14>14</a></span>
-<span class=normal><a href=#__codelineno-3-15>15</a></span>
-<span class=normal><a href=#__codelineno-3-16>16</a></span>
-<span class=normal><a href=#__codelineno-3-17>17</a></span>
-<span class=normal><a href=#__codelineno-3-18>18</a></span>
-<span class=normal><a href=#__codelineno-3-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=k>def</span><span class=w> </span><span class=nf>karatsuba_multiply</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>):</span>
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;Karatsuba快速乘法算法&quot;&quot;&quot;</span>
-</span><span id=__span-3-3><a id=__codelineno-3-3 name=__codelineno-3-3></a>    <span class=k>if</span> <span class=n>x</span> <span class=o>&lt;</span> <span class=mi>10</span> <span class=ow>or</span> <span class=n>y</span> <span class=o>&lt;</span> <span class=mi>10</span><span class=p>:</span>
-</span><span id=__span-3-4><a id=__codelineno-3-4 name=__codelineno-3-4></a>        <span class=k>return</span> <span class=n>x</span> <span class=o>*</span> <span class=n>y</span>
-</span><span id=__span-3-5><a id=__codelineno-3-5 name=__codelineno-3-5></a>
-</span><span id=__span-3-6><a id=__codelineno-3-6 name=__codelineno-3-6></a>    <span class=c1># 计算数字长度</span>
-</span><span id=__span-3-7><a id=__codelineno-3-7 name=__codelineno-3-7></a>    <span class=n>n</span> <span class=o>=</span> <span class=nb>max</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>x</span><span class=p>)),</span> <span class=nb>len</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>y</span><span class=p>)))</span>
-</span><span id=__span-3-8><a id=__codelineno-3-8 name=__codelineno-3-8></a>    <span class=n>m</span> <span class=o>=</span> <span class=n>n</span> <span class=o>//</span> <span class=mi>2</span>
-</span><span id=__span-3-9><a id=__codelineno-3-9 name=__codelineno-3-9></a>
-</span><span id=__span-3-10><a id=__codelineno-3-10 name=__codelineno-3-10></a>    <span class=c1># 分割数字</span>
-</span><span id=__span-3-11><a id=__codelineno-3-11 name=__codelineno-3-11></a>    <span class=n>high1</span><span class=p>,</span> <span class=n>low1</span> <span class=o>=</span> <span class=nb>divmod</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=mi>10</span><span class=o>**</span><span class=n>m</span><span class=p>)</span>
-</span><span id=__span-3-12><a id=__codelineno-3-12 name=__codelineno-3-12></a>    <span class=n>high2</span><span class=p>,</span> <span class=n>low2</span> <span class=o>=</span> <span class=nb>divmod</span><span class=p>(</span><span class=n>y</span><span class=p>,</span> <span class=mi>10</span><span class=o>**</span><span class=n>m</span><span class=p>)</span>
-</span><span id=__span-3-13><a id=__codelineno-3-13 name=__codelineno-3-13></a>
-</span><span id=__span-3-14><a id=__codelineno-3-14 name=__codelineno-3-14></a>    <span class=c1># 递归计算</span>
-</span><span id=__span-3-15><a id=__codelineno-3-15 name=__codelineno-3-15></a>    <span class=n>z0</span> <span class=o>=</span> <span class=n>karatsuba_multiply</span><span class=p>(</span><span class=n>low1</span><span class=p>,</span> <span class=n>low2</span><span class=p>)</span>
-</span><span id=__span-3-16><a id=__codelineno-3-16 name=__codelineno-3-16></a>    <span class=n>z1</span> <span class=o>=</span> <span class=n>karatsuba_multiply</span><span class=p>((</span><span class=n>low1</span> <span class=o>+</span> <span class=n>high1</span><span class=p>),</span> <span class=p>(</span><span class=n>low2</span> <span class=o>+</span> <span class=n>high2</span><span class=p>))</span>
-</span><span id=__span-3-17><a id=__codelineno-3-17 name=__codelineno-3-17></a>    <span class=n>z2</span> <span class=o>=</span> <span class=n>karatsuba_multiply</span><span class=p>(</span><span class=n>high1</span><span class=p>,</span> <span class=n>high2</span><span class=p>)</span>
-</span><span id=__span-3-18><a id=__codelineno-3-18 name=__codelineno-3-18></a>
-</span><span id=__span-3-19><a id=__codelineno-3-19 name=__codelineno-3-19></a>    <span class=k>return</span> <span class=n>z2</span> <span class=o>*</span> <span class=mi>10</span><span class=o>**</span><span class=p>(</span><span class=mi>2</span><span class=o>*</span><span class=n>m</span><span class=p>)</span> <span class=o>+</span> <span class=p>(</span><span class=n>z1</span> <span class=o>-</span> <span class=n>z2</span> <span class=o>-</span> <span class=n>z0</span><span class=p>)</span> <span class=o>*</span> <span class=mi>10</span><span class=o>**</span><span class=n>m</span> <span class=o>+</span> <span class=n>z0</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=42>4.2 数值积分方法<a class=headerlink href=#42 title="Permanent link">&para;</a></h3> <p><strong>常用数值积分算法的比较</strong>：</p> <pre class=mermaid><code>graph TB
+    style C fill:#e1f5fe</code></pre></p> <p><strong>乘法运算的优化算法</strong>：</p> <ol> <li><strong>竖式乘法</strong>：时间复杂度O(n²)</li> <li><strong>Karatsuba算法</strong>：时间复杂度O(n^log₂3) ≈ O(n^1.585)</li> <li><strong>快速傅里叶变换(FFT)</strong>：时间复杂度O(n log n)</li> </ol> <div class="language-python highlight"><pre><span></span><code><span id=__span-3-1><span class=k>def</span><span class=w> </span><span class=nf>karatsuba_multiply</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>):</span>
+</span><span id=__span-3-2><span class=w>    </span><span class=sd>&quot;&quot;&quot;Karatsuba快速乘法算法&quot;&quot;&quot;</span>
+</span><span id=__span-3-3>    <span class=k>if</span> <span class=n>x</span> <span class=o>&lt;</span> <span class=mi>10</span> <span class=ow>or</span> <span class=n>y</span> <span class=o>&lt;</span> <span class=mi>10</span><span class=p>:</span>
+</span><span id=__span-3-4>        <span class=k>return</span> <span class=n>x</span> <span class=o>*</span> <span class=n>y</span>
+</span><span id=__span-3-5>
+</span><span id=__span-3-6>    <span class=c1># 计算数字长度</span>
+</span><span id=__span-3-7>    <span class=n>n</span> <span class=o>=</span> <span class=nb>max</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>x</span><span class=p>)),</span> <span class=nb>len</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>y</span><span class=p>)))</span>
+</span><span id=__span-3-8>    <span class=n>m</span> <span class=o>=</span> <span class=n>n</span> <span class=o>//</span> <span class=mi>2</span>
+</span><span id=__span-3-9>
+</span><span id=__span-3-10>    <span class=c1># 分割数字</span>
+</span><span id=__span-3-11>    <span class=n>high1</span><span class=p>,</span> <span class=n>low1</span> <span class=o>=</span> <span class=nb>divmod</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=mi>10</span><span class=o>**</span><span class=n>m</span><span class=p>)</span>
+</span><span id=__span-3-12>    <span class=n>high2</span><span class=p>,</span> <span class=n>low2</span> <span class=o>=</span> <span class=nb>divmod</span><span class=p>(</span><span class=n>y</span><span class=p>,</span> <span class=mi>10</span><span class=o>**</span><span class=n>m</span><span class=p>)</span>
+</span><span id=__span-3-13>
+</span><span id=__span-3-14>    <span class=c1># 递归计算</span>
+</span><span id=__span-3-15>    <span class=n>z0</span> <span class=o>=</span> <span class=n>karatsuba_multiply</span><span class=p>(</span><span class=n>low1</span><span class=p>,</span> <span class=n>low2</span><span class=p>)</span>
+</span><span id=__span-3-16>    <span class=n>z1</span> <span class=o>=</span> <span class=n>karatsuba_multiply</span><span class=p>((</span><span class=n>low1</span> <span class=o>+</span> <span class=n>high1</span><span class=p>),</span> <span class=p>(</span><span class=n>low2</span> <span class=o>+</span> <span class=n>high2</span><span class=p>))</span>
+</span><span id=__span-3-17>    <span class=n>z2</span> <span class=o>=</span> <span class=n>karatsuba_multiply</span><span class=p>(</span><span class=n>high1</span><span class=p>,</span> <span class=n>high2</span><span class=p>)</span>
+</span><span id=__span-3-18>
+</span><span id=__span-3-19>    <span class=k>return</span> <span class=n>z2</span> <span class=o>*</span> <span class=mi>10</span><span class=o>**</span><span class=p>(</span><span class=mi>2</span><span class=o>*</span><span class=n>m</span><span class=p>)</span> <span class=o>+</span> <span class=p>(</span><span class=n>z1</span> <span class=o>-</span> <span class=n>z2</span> <span class=o>-</span> <span class=n>z0</span><span class=p>)</span> <span class=o>*</span> <span class=mi>10</span><span class=o>**</span><span class=n>m</span> <span class=o>+</span> <span class=n>z0</span>
+</span></code></pre></div> <h3 id=42>4.2 数值积分方法<a class=headerlink href=#42 title="Permanent link">&para;</a></h3> <p><strong>常用数值积分算法的比较</strong>：</p> <pre class=mermaid><code>graph TB
     A[数值积分方法] --&gt; B[简单方法]
     A --&gt; C[复合方法]
     A --&gt; D[自适应方法]
@@ -125,36 +90,22 @@
     C --&gt; C2[复合辛普森法]
 
     D --&gt; D1[自适应辛普森法]
-    D --&gt; D2[龙贝格积分法]</code></pre> <p><strong>梯形法的Python实现</strong>： <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1> 1</a></span>
-<span class=normal><a href=#__codelineno-4-2> 2</a></span>
-<span class=normal><a href=#__codelineno-4-3> 3</a></span>
-<span class=normal><a href=#__codelineno-4-4> 4</a></span>
-<span class=normal><a href=#__codelineno-4-5> 5</a></span>
-<span class=normal><a href=#__codelineno-4-6> 6</a></span>
-<span class=normal><a href=#__codelineno-4-7> 7</a></span>
-<span class=normal><a href=#__codelineno-4-8> 8</a></span>
-<span class=normal><a href=#__codelineno-4-9> 9</a></span>
-<span class=normal><a href=#__codelineno-4-10>10</a></span>
-<span class=normal><a href=#__codelineno-4-11>11</a></span>
-<span class=normal><a href=#__codelineno-4-12>12</a></span>
-<span class=normal><a href=#__codelineno-4-13>13</a></span>
-<span class=normal><a href=#__codelineno-4-14>14</a></span>
-<span class=normal><a href=#__codelineno-4-15>15</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a><span class=k>def</span><span class=w> </span><span class=nf>trapezoidal_rule</span><span class=p>(</span><span class=n>f</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>,</span> <span class=n>n</span><span class=o>=</span><span class=mi>1000</span><span class=p>):</span>
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;梯形法数值积分&quot;&quot;&quot;</span>
-</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a>    <span class=n>h</span> <span class=o>=</span> <span class=p>(</span><span class=n>b</span> <span class=o>-</span> <span class=n>a</span><span class=p>)</span> <span class=o>/</span> <span class=n>n</span>
-</span><span id=__span-4-4><a id=__codelineno-4-4 name=__codelineno-4-4></a>    <span class=n>result</span> <span class=o>=</span> <span class=mf>0.5</span> <span class=o>*</span> <span class=p>(</span><span class=n>f</span><span class=p>(</span><span class=n>a</span><span class=p>)</span> <span class=o>+</span> <span class=n>f</span><span class=p>(</span><span class=n>b</span><span class=p>))</span>
-</span><span id=__span-4-5><a id=__codelineno-4-5 name=__codelineno-4-5></a>
-</span><span id=__span-4-6><a id=__codelineno-4-6 name=__codelineno-4-6></a>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>n</span><span class=p>):</span>
-</span><span id=__span-4-7><a id=__codelineno-4-7 name=__codelineno-4-7></a>        <span class=n>x</span> <span class=o>=</span> <span class=n>a</span> <span class=o>+</span> <span class=n>i</span> <span class=o>*</span> <span class=n>h</span>
-</span><span id=__span-4-8><a id=__codelineno-4-8 name=__codelineno-4-8></a>        <span class=n>result</span> <span class=o>+=</span> <span class=n>f</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
-</span><span id=__span-4-9><a id=__codelineno-4-9 name=__codelineno-4-9></a>
-</span><span id=__span-4-10><a id=__codelineno-4-10 name=__codelineno-4-10></a>    <span class=k>return</span> <span class=n>result</span> <span class=o>*</span> <span class=n>h</span>
-</span><span id=__span-4-11><a id=__codelineno-4-11 name=__codelineno-4-11></a>
-</span><span id=__span-4-12><a id=__codelineno-4-12 name=__codelineno-4-12></a><span class=c1># 计算∫sin(x)dx从0到π，理论值应为2</span>
-</span><span id=__span-4-13><a id=__codelineno-4-13 name=__codelineno-4-13></a><span class=kn>import</span><span class=w> </span><span class=nn>math</span>
-</span><span id=__span-4-14><a id=__codelineno-4-14 name=__codelineno-4-14></a><span class=n>result</span> <span class=o>=</span> <span class=n>trapezoidal_rule</span><span class=p>(</span><span class=n>math</span><span class=o>.</span><span class=n>sin</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=n>math</span><span class=o>.</span><span class=n>pi</span><span class=p>)</span>
-</span><span id=__span-4-15><a id=__codelineno-4-15 name=__codelineno-4-15></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;梯形法结果: </span><span class=si>{</span><span class=n>result</span><span class=si>}</span><span class=s2>&quot;</span><span class=p>)</span>  <span class=c1># 输出: 约2.000</span>
-</span></code></pre></div></td></tr></table></div></p> <h3 id=43>4.3 数值求解方程<a class=headerlink href=#43 title="Permanent link">&para;</a></h3> <p><strong>牛顿迭代法求解方程根</strong>：</p> <pre class=mermaid><code>sequenceDiagram
+    D --&gt; D2[龙贝格积分法]</code></pre> <p><strong>梯形法的Python实现</strong>： <div class="language-python highlight"><pre><span></span><code><span id=__span-4-1><span class=k>def</span><span class=w> </span><span class=nf>trapezoidal_rule</span><span class=p>(</span><span class=n>f</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>,</span> <span class=n>n</span><span class=o>=</span><span class=mi>1000</span><span class=p>):</span>
+</span><span id=__span-4-2><span class=w>    </span><span class=sd>&quot;&quot;&quot;梯形法数值积分&quot;&quot;&quot;</span>
+</span><span id=__span-4-3>    <span class=n>h</span> <span class=o>=</span> <span class=p>(</span><span class=n>b</span> <span class=o>-</span> <span class=n>a</span><span class=p>)</span> <span class=o>/</span> <span class=n>n</span>
+</span><span id=__span-4-4>    <span class=n>result</span> <span class=o>=</span> <span class=mf>0.5</span> <span class=o>*</span> <span class=p>(</span><span class=n>f</span><span class=p>(</span><span class=n>a</span><span class=p>)</span> <span class=o>+</span> <span class=n>f</span><span class=p>(</span><span class=n>b</span><span class=p>))</span>
+</span><span id=__span-4-5>
+</span><span id=__span-4-6>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>n</span><span class=p>):</span>
+</span><span id=__span-4-7>        <span class=n>x</span> <span class=o>=</span> <span class=n>a</span> <span class=o>+</span> <span class=n>i</span> <span class=o>*</span> <span class=n>h</span>
+</span><span id=__span-4-8>        <span class=n>result</span> <span class=o>+=</span> <span class=n>f</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span><span id=__span-4-9>
+</span><span id=__span-4-10>    <span class=k>return</span> <span class=n>result</span> <span class=o>*</span> <span class=n>h</span>
+</span><span id=__span-4-11>
+</span><span id=__span-4-12><span class=c1># 计算∫sin(x)dx从0到π，理论值应为2</span>
+</span><span id=__span-4-13><span class=kn>import</span><span class=w> </span><span class=nn>math</span>
+</span><span id=__span-4-14><span class=n>result</span> <span class=o>=</span> <span class=n>trapezoidal_rule</span><span class=p>(</span><span class=n>math</span><span class=o>.</span><span class=n>sin</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=n>math</span><span class=o>.</span><span class=n>pi</span><span class=p>)</span>
+</span><span id=__span-4-15><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;梯形法结果: </span><span class=si>{</span><span class=n>result</span><span class=si>}</span><span class=s2>&quot;</span><span class=p>)</span>  <span class=c1># 输出: 约2.000</span>
+</span></code></pre></div></p> <h3 id=43>4.3 数值求解方程<a class=headerlink href=#43 title="Permanent link">&para;</a></h3> <p><strong>牛顿迭代法求解方程根</strong>：</p> <pre class=mermaid><code>sequenceDiagram
     participant U as 用户输入
     participant A as 算法引擎
     participant F as 函数求值
@@ -169,54 +120,31 @@
         A-&gt;&gt;C: 检查收敛条件
         C-&gt;&gt;A: 继续或终止
     end
-    A-&gt;&gt;U: 返回根结果</code></pre> <p><strong>牛顿法的Python实现</strong>： <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1> 1</a></span>
-<span class=normal><a href=#__codelineno-5-2> 2</a></span>
-<span class=normal><a href=#__codelineno-5-3> 3</a></span>
-<span class=normal><a href=#__codelineno-5-4> 4</a></span>
-<span class=normal><a href=#__codelineno-5-5> 5</a></span>
-<span class=normal><a href=#__codelineno-5-6> 6</a></span>
-<span class=normal><a href=#__codelineno-5-7> 7</a></span>
-<span class=normal><a href=#__codelineno-5-8> 8</a></span>
-<span class=normal><a href=#__codelineno-5-9> 9</a></span>
-<span class=normal><a href=#__codelineno-5-10>10</a></span>
-<span class=normal><a href=#__codelineno-5-11>11</a></span>
-<span class=normal><a href=#__codelineno-5-12>12</a></span>
-<span class=normal><a href=#__codelineno-5-13>13</a></span>
-<span class=normal><a href=#__codelineno-5-14>14</a></span>
-<span class=normal><a href=#__codelineno-5-15>15</a></span>
-<span class=normal><a href=#__codelineno-5-16>16</a></span>
-<span class=normal><a href=#__codelineno-5-17>17</a></span>
-<span class=normal><a href=#__codelineno-5-18>18</a></span>
-<span class=normal><a href=#__codelineno-5-19>19</a></span>
-<span class=normal><a href=#__codelineno-5-20>20</a></span>
-<span class=normal><a href=#__codelineno-5-21>21</a></span>
-<span class=normal><a href=#__codelineno-5-22>22</a></span>
-<span class=normal><a href=#__codelineno-5-23>23</a></span>
-<span class=normal><a href=#__codelineno-5-24>24</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=k>def</span><span class=w> </span><span class=nf>newton_method</span><span class=p>(</span><span class=n>f</span><span class=p>,</span> <span class=n>df</span><span class=p>,</span> <span class=n>x0</span><span class=p>,</span> <span class=n>tol</span><span class=o>=</span><span class=mf>1e-10</span><span class=p>,</span> <span class=n>max_iter</span><span class=o>=</span><span class=mi>100</span><span class=p>):</span>
-</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;牛顿法求解方程根&quot;&quot;&quot;</span>
-</span><span id=__span-5-3><a id=__codelineno-5-3 name=__codelineno-5-3></a>    <span class=n>x</span> <span class=o>=</span> <span class=n>x0</span>
-</span><span id=__span-5-4><a id=__codelineno-5-4 name=__codelineno-5-4></a>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>max_iter</span><span class=p>):</span>
-</span><span id=__span-5-5><a id=__codelineno-5-5 name=__codelineno-5-5></a>        <span class=n>fx</span> <span class=o>=</span> <span class=n>f</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
-</span><span id=__span-5-6><a id=__codelineno-5-6 name=__codelineno-5-6></a>        <span class=n>dfx</span> <span class=o>=</span> <span class=n>df</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
-</span><span id=__span-5-7><a id=__codelineno-5-7 name=__codelineno-5-7></a>
-</span><span id=__span-5-8><a id=__codelineno-5-8 name=__codelineno-5-8></a>        <span class=k>if</span> <span class=nb>abs</span><span class=p>(</span><span class=n>dfx</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mf>1e-15</span><span class=p>:</span>  <span class=c1># 避免除零</span>
-</span><span id=__span-5-9><a id=__codelineno-5-9 name=__codelineno-5-9></a>            <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=s2>&quot;导数为零，无法继续迭代&quot;</span><span class=p>)</span>
-</span><span id=__span-5-10><a id=__codelineno-5-10 name=__codelineno-5-10></a>
-</span><span id=__span-5-11><a id=__codelineno-5-11 name=__codelineno-5-11></a>        <span class=n>x_new</span> <span class=o>=</span> <span class=n>x</span> <span class=o>-</span> <span class=n>fx</span> <span class=o>/</span> <span class=n>dfx</span>
-</span><span id=__span-5-12><a id=__codelineno-5-12 name=__codelineno-5-12></a>
-</span><span id=__span-5-13><a id=__codelineno-5-13 name=__codelineno-5-13></a>        <span class=k>if</span> <span class=nb>abs</span><span class=p>(</span><span class=n>x_new</span> <span class=o>-</span> <span class=n>x</span><span class=p>)</span> <span class=o>&lt;</span> <span class=n>tol</span><span class=p>:</span>
-</span><span id=__span-5-14><a id=__codelineno-5-14 name=__codelineno-5-14></a>            <span class=k>return</span> <span class=n>x_new</span><span class=p>,</span> <span class=n>i</span> <span class=o>+</span> <span class=mi>1</span>
-</span><span id=__span-5-15><a id=__codelineno-5-15 name=__codelineno-5-15></a>
-</span><span id=__span-5-16><a id=__codelineno-5-16 name=__codelineno-5-16></a>        <span class=n>x</span> <span class=o>=</span> <span class=n>x_new</span>
-</span><span id=__span-5-17><a id=__codelineno-5-17 name=__codelineno-5-17></a>
-</span><span id=__span-5-18><a id=__codelineno-5-18 name=__codelineno-5-18></a>    <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=s2>&quot;未在最大迭代次数内收敛&quot;</span><span class=p>)</span>
-</span><span id=__span-5-19><a id=__codelineno-5-19 name=__codelineno-5-19></a>
-</span><span id=__span-5-20><a id=__codelineno-5-20 name=__codelineno-5-20></a><span class=c1># 求解x² - 2 = 0的根（√2）</span>
-</span><span id=__span-5-21><a id=__codelineno-5-21 name=__codelineno-5-21></a><span class=n>f</span> <span class=o>=</span> <span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=n>x</span><span class=o>**</span><span class=mi>2</span> <span class=o>-</span> <span class=mi>2</span>
-</span><span id=__span-5-22><a id=__codelineno-5-22 name=__codelineno-5-22></a><span class=n>df</span> <span class=o>=</span> <span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=mi>2</span><span class=o>*</span><span class=n>x</span>
-</span><span id=__span-5-23><a id=__codelineno-5-23 name=__codelineno-5-23></a><span class=n>root</span><span class=p>,</span> <span class=n>iterations</span> <span class=o>=</span> <span class=n>newton_method</span><span class=p>(</span><span class=n>f</span><span class=p>,</span> <span class=n>df</span><span class=p>,</span> <span class=mf>1.0</span><span class=p>)</span>
-</span><span id=__span-5-24><a id=__codelineno-5-24 name=__codelineno-5-24></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;根: </span><span class=si>{</span><span class=n>root</span><span class=si>}</span><span class=s2>, 迭代次数: </span><span class=si>{</span><span class=n>iterations</span><span class=si>}</span><span class=s2>&quot;</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div></p> <h2 id=_5>五、数值精度与误差分析<a class=headerlink href=#_5 title="Permanent link">&para;</a></h2> <h3 id=51>5.1 误差类型与来源<a class=headerlink href=#51 title="Permanent link">&para;</a></h3> <p>数值计算中的误差主要分为四类：</p> <pre class=mermaid><code>graph TD
+    A-&gt;&gt;U: 返回根结果</code></pre> <p><strong>牛顿法的Python实现</strong>： <div class="language-python highlight"><pre><span></span><code><span id=__span-5-1><span class=k>def</span><span class=w> </span><span class=nf>newton_method</span><span class=p>(</span><span class=n>f</span><span class=p>,</span> <span class=n>df</span><span class=p>,</span> <span class=n>x0</span><span class=p>,</span> <span class=n>tol</span><span class=o>=</span><span class=mf>1e-10</span><span class=p>,</span> <span class=n>max_iter</span><span class=o>=</span><span class=mi>100</span><span class=p>):</span>
+</span><span id=__span-5-2><span class=w>    </span><span class=sd>&quot;&quot;&quot;牛顿法求解方程根&quot;&quot;&quot;</span>
+</span><span id=__span-5-3>    <span class=n>x</span> <span class=o>=</span> <span class=n>x0</span>
+</span><span id=__span-5-4>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>max_iter</span><span class=p>):</span>
+</span><span id=__span-5-5>        <span class=n>fx</span> <span class=o>=</span> <span class=n>f</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span><span id=__span-5-6>        <span class=n>dfx</span> <span class=o>=</span> <span class=n>df</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span><span id=__span-5-7>
+</span><span id=__span-5-8>        <span class=k>if</span> <span class=nb>abs</span><span class=p>(</span><span class=n>dfx</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mf>1e-15</span><span class=p>:</span>  <span class=c1># 避免除零</span>
+</span><span id=__span-5-9>            <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=s2>&quot;导数为零，无法继续迭代&quot;</span><span class=p>)</span>
+</span><span id=__span-5-10>
+</span><span id=__span-5-11>        <span class=n>x_new</span> <span class=o>=</span> <span class=n>x</span> <span class=o>-</span> <span class=n>fx</span> <span class=o>/</span> <span class=n>dfx</span>
+</span><span id=__span-5-12>
+</span><span id=__span-5-13>        <span class=k>if</span> <span class=nb>abs</span><span class=p>(</span><span class=n>x_new</span> <span class=o>-</span> <span class=n>x</span><span class=p>)</span> <span class=o>&lt;</span> <span class=n>tol</span><span class=p>:</span>
+</span><span id=__span-5-14>            <span class=k>return</span> <span class=n>x_new</span><span class=p>,</span> <span class=n>i</span> <span class=o>+</span> <span class=mi>1</span>
+</span><span id=__span-5-15>
+</span><span id=__span-5-16>        <span class=n>x</span> <span class=o>=</span> <span class=n>x_new</span>
+</span><span id=__span-5-17>
+</span><span id=__span-5-18>    <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=s2>&quot;未在最大迭代次数内收敛&quot;</span><span class=p>)</span>
+</span><span id=__span-5-19>
+</span><span id=__span-5-20><span class=c1># 求解x² - 2 = 0的根（√2）</span>
+</span><span id=__span-5-21><span class=n>f</span> <span class=o>=</span> <span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=n>x</span><span class=o>**</span><span class=mi>2</span> <span class=o>-</span> <span class=mi>2</span>
+</span><span id=__span-5-22><span class=n>df</span> <span class=o>=</span> <span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=mi>2</span><span class=o>*</span><span class=n>x</span>
+</span><span id=__span-5-23><span class=n>root</span><span class=p>,</span> <span class=n>iterations</span> <span class=o>=</span> <span class=n>newton_method</span><span class=p>(</span><span class=n>f</span><span class=p>,</span> <span class=n>df</span><span class=p>,</span> <span class=mf>1.0</span><span class=p>)</span>
+</span><span id=__span-5-24><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;根: </span><span class=si>{</span><span class=n>root</span><span class=si>}</span><span class=s2>, 迭代次数: </span><span class=si>{</span><span class=n>iterations</span><span class=si>}</span><span class=s2>&quot;</span><span class=p>)</span>
+</span></code></pre></div></p> <h2 id=_5>五、数值精度与误差分析<a class=headerlink href=#_5 title="Permanent link">&para;</a></h2> <h3 id=51>5.1 误差类型与来源<a class=headerlink href=#51 title="Permanent link">&para;</a></h3> <p>数值计算中的误差主要分为四类：</p> <pre class=mermaid><code>graph TD
     A[数值误差] --&gt; B[模型误差]
     A --&gt; C[观测误差]
     A --&gt; D[截断误差]
@@ -225,112 +153,64 @@
     B --&gt; B1[数学模型近似]
     C --&gt; C1[测量不精确]
     D --&gt; D1[无限过程截断]
-    E --&gt; E1[有限精度表示]</code></pre> <h3 id=52>5.2 条件数与数值稳定性<a class=headerlink href=#52 title="Permanent link">&para;</a></h3> <p><strong>矩阵条件数的概念</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a>cond(A) = ||A|| · ||A⁻¹||
-</span></code></pre></div></td></tr></table></div></p> <p>条件数反映了线性方程组求解对输入误差的敏感程度：</p> <table> <thead> <tr> <th>条件数范围</th> <th>系统性质</th> <th>求解稳定性</th> </tr> </thead> <tbody> <tr> <td>cond(A) ≈ 1</td> <td>良态系统</td> <td>非常稳定</td> </tr> <tr> <td>1 &lt; cond(A) &lt; 10³</td> <td>中等条件</td> <td>相对稳定</td> </tr> <tr> <td>cond(A) &gt; 10³</td> <td>病态系统</td> <td>不稳定</td> </tr> <tr> <td>cond(A) → ∞</td> <td>奇异系统</td> <td>无法求解</td> </tr> </tbody> </table> <h3 id=53>5.3 数值稳定性的改进技术<a class=headerlink href=#53 title="Permanent link">&para;</a></h3> <p><strong>避免大数吃小数的技巧</strong>： <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1> 1</a></span>
-<span class=normal><a href=#__codelineno-7-2> 2</a></span>
-<span class=normal><a href=#__codelineno-7-3> 3</a></span>
-<span class=normal><a href=#__codelineno-7-4> 4</a></span>
-<span class=normal><a href=#__codelineno-7-5> 5</a></span>
-<span class=normal><a href=#__codelineno-7-6> 6</a></span>
-<span class=normal><a href=#__codelineno-7-7> 7</a></span>
-<span class=normal><a href=#__codelineno-7-8> 8</a></span>
-<span class=normal><a href=#__codelineno-7-9> 9</a></span>
-<span class=normal><a href=#__codelineno-7-10>10</a></span>
-<span class=normal><a href=#__codelineno-7-11>11</a></span>
-<span class=normal><a href=#__codelineno-7-12>12</a></span>
-<span class=normal><a href=#__codelineno-7-13>13</a></span>
-<span class=normal><a href=#__codelineno-7-14>14</a></span>
-<span class=normal><a href=#__codelineno-7-15>15</a></span>
-<span class=normal><a href=#__codelineno-7-16>16</a></span>
-<span class=normal><a href=#__codelineno-7-17>17</a></span>
-<span class=normal><a href=#__codelineno-7-18>18</a></span>
-<span class=normal><a href=#__codelineno-7-19>19</a></span>
-<span class=normal><a href=#__codelineno-7-20>20</a></span>
-<span class=normal><a href=#__codelineno-7-21>21</a></span>
-<span class=normal><a href=#__codelineno-7-22>22</a></span>
-<span class=normal><a href=#__codelineno-7-23>23</a></span>
-<span class=normal><a href=#__codelineno-7-24>24</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=c1># 不稳定的计算方法</span>
-</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a><span class=k>def</span><span class=w> </span><span class=nf>unstable_sum</span><span class=p>(</span><span class=n>numbers</span><span class=p>):</span>
-</span><span id=__span-7-3><a id=__codelineno-7-3 name=__codelineno-7-3></a>    <span class=n>result</span> <span class=o>=</span> <span class=mf>0.0</span>
-</span><span id=__span-7-4><a id=__codelineno-7-4 name=__codelineno-7-4></a>    <span class=k>for</span> <span class=n>num</span> <span class=ow>in</span> <span class=n>numbers</span><span class=p>:</span>
-</span><span id=__span-7-5><a id=__codelineno-7-5 name=__codelineno-7-5></a>        <span class=n>result</span> <span class=o>+=</span> <span class=n>num</span>  <span class=c1># 大数可能吃掉小数</span>
-</span><span id=__span-7-6><a id=__codelineno-7-6 name=__codelineno-7-6></a>    <span class=k>return</span> <span class=n>result</span>
-</span><span id=__span-7-7><a id=__codelineno-7-7 name=__codelineno-7-7></a>
-</span><span id=__span-7-8><a id=__codelineno-7-8 name=__codelineno-7-8></a><span class=c1># 稳定的Kahan求和算法</span>
-</span><span id=__span-7-9><a id=__codelineno-7-9 name=__codelineno-7-9></a><span class=k>def</span><span class=w> </span><span class=nf>kahan_sum</span><span class=p>(</span><span class=n>numbers</span><span class=p>):</span>
-</span><span id=__span-7-10><a id=__codelineno-7-10 name=__codelineno-7-10></a>    <span class=n>total</span> <span class=o>=</span> <span class=mf>0.0</span>
-</span><span id=__span-7-11><a id=__codelineno-7-11 name=__codelineno-7-11></a>    <span class=n>compensation</span> <span class=o>=</span> <span class=mf>0.0</span>  <span class=c1># 补偿项</span>
-</span><span id=__span-7-12><a id=__codelineno-7-12 name=__codelineno-7-12></a>
-</span><span id=__span-7-13><a id=__codelineno-7-13 name=__codelineno-7-13></a>    <span class=k>for</span> <span class=n>num</span> <span class=ow>in</span> <span class=n>numbers</span><span class=p>:</span>
-</span><span id=__span-7-14><a id=__codelineno-7-14 name=__codelineno-7-14></a>        <span class=n>y</span> <span class=o>=</span> <span class=n>num</span> <span class=o>-</span> <span class=n>compensation</span>  <span class=c1># 加上补偿</span>
-</span><span id=__span-7-15><a id=__codelineno-7-15 name=__codelineno-7-15></a>        <span class=n>t</span> <span class=o>=</span> <span class=n>total</span> <span class=o>+</span> <span class=n>y</span>
-</span><span id=__span-7-16><a id=__codelineno-7-16 name=__codelineno-7-16></a>        <span class=n>compensation</span> <span class=o>=</span> <span class=p>(</span><span class=n>t</span> <span class=o>-</span> <span class=n>total</span><span class=p>)</span> <span class=o>-</span> <span class=n>y</span>  <span class=c1># 计算丢失的精度</span>
-</span><span id=__span-7-17><a id=__codelineno-7-17 name=__codelineno-7-17></a>        <span class=n>total</span> <span class=o>=</span> <span class=n>t</span>
-</span><span id=__span-7-18><a id=__codelineno-7-18 name=__codelineno-7-18></a>
-</span><span id=__span-7-19><a id=__codelineno-7-19 name=__codelineno-7-19></a>    <span class=k>return</span> <span class=n>total</span>
-</span><span id=__span-7-20><a id=__codelineno-7-20 name=__codelineno-7-20></a>
-</span><span id=__span-7-21><a id=__codelineno-7-21 name=__codelineno-7-21></a><span class=c1># 测试</span>
-</span><span id=__span-7-22><a id=__codelineno-7-22 name=__codelineno-7-22></a><span class=n>numbers</span> <span class=o>=</span> <span class=p>[</span><span class=mf>1e16</span><span class=p>,</span> <span class=mf>1.0</span><span class=p>,</span> <span class=o>-</span><span class=mf>1e16</span><span class=p>]</span>
-</span><span id=__span-7-23><a id=__codelineno-7-23 name=__codelineno-7-23></a><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;直接求和:&quot;</span><span class=p>,</span> <span class=n>unstable_sum</span><span class=p>(</span><span class=n>numbers</span><span class=p>))</span>  <span class=c1># 可能为0.0</span>
-</span><span id=__span-7-24><a id=__codelineno-7-24 name=__codelineno-7-24></a><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;Kahan求和:&quot;</span><span class=p>,</span> <span class=n>kahan_sum</span><span class=p>(</span><span class=n>numbers</span><span class=p>))</span>     <span class=c1># 正确为1.0</span>
-</span></code></pre></div></td></tr></table></div></p> <h2 id=_6>六、高性能数值计算<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <h3 id=61>6.1 向量化计算<a class=headerlink href=#61 title="Permanent link">&para;</a></h3> <p>现代CPU的SIMD（单指令多数据）架构支持向量化计算：</p> <pre class=mermaid><code>graph LR
+    E --&gt; E1[有限精度表示]</code></pre> <h3 id=52>5.2 条件数与数值稳定性<a class=headerlink href=#52 title="Permanent link">&para;</a></h3> <p><strong>矩阵条件数的概念</strong>： <div class="language-text highlight"><pre><span></span><code><span id=__span-6-1>cond(A) = ||A|| · ||A⁻¹||
+</span></code></pre></div></p> <p>条件数反映了线性方程组求解对输入误差的敏感程度：</p> <table> <thead> <tr> <th>条件数范围</th> <th>系统性质</th> <th>求解稳定性</th> </tr> </thead> <tbody> <tr> <td>cond(A) ≈ 1</td> <td>良态系统</td> <td>非常稳定</td> </tr> <tr> <td>1 &lt; cond(A) &lt; 10³</td> <td>中等条件</td> <td>相对稳定</td> </tr> <tr> <td>cond(A) &gt; 10³</td> <td>病态系统</td> <td>不稳定</td> </tr> <tr> <td>cond(A) → ∞</td> <td>奇异系统</td> <td>无法求解</td> </tr> </tbody> </table> <h3 id=53>5.3 数值稳定性的改进技术<a class=headerlink href=#53 title="Permanent link">&para;</a></h3> <p><strong>避免大数吃小数的技巧</strong>： <div class="language-python highlight"><pre><span></span><code><span id=__span-7-1><span class=c1># 不稳定的计算方法</span>
+</span><span id=__span-7-2><span class=k>def</span><span class=w> </span><span class=nf>unstable_sum</span><span class=p>(</span><span class=n>numbers</span><span class=p>):</span>
+</span><span id=__span-7-3>    <span class=n>result</span> <span class=o>=</span> <span class=mf>0.0</span>
+</span><span id=__span-7-4>    <span class=k>for</span> <span class=n>num</span> <span class=ow>in</span> <span class=n>numbers</span><span class=p>:</span>
+</span><span id=__span-7-5>        <span class=n>result</span> <span class=o>+=</span> <span class=n>num</span>  <span class=c1># 大数可能吃掉小数</span>
+</span><span id=__span-7-6>    <span class=k>return</span> <span class=n>result</span>
+</span><span id=__span-7-7>
+</span><span id=__span-7-8><span class=c1># 稳定的Kahan求和算法</span>
+</span><span id=__span-7-9><span class=k>def</span><span class=w> </span><span class=nf>kahan_sum</span><span class=p>(</span><span class=n>numbers</span><span class=p>):</span>
+</span><span id=__span-7-10>    <span class=n>total</span> <span class=o>=</span> <span class=mf>0.0</span>
+</span><span id=__span-7-11>    <span class=n>compensation</span> <span class=o>=</span> <span class=mf>0.0</span>  <span class=c1># 补偿项</span>
+</span><span id=__span-7-12>
+</span><span id=__span-7-13>    <span class=k>for</span> <span class=n>num</span> <span class=ow>in</span> <span class=n>numbers</span><span class=p>:</span>
+</span><span id=__span-7-14>        <span class=n>y</span> <span class=o>=</span> <span class=n>num</span> <span class=o>-</span> <span class=n>compensation</span>  <span class=c1># 加上补偿</span>
+</span><span id=__span-7-15>        <span class=n>t</span> <span class=o>=</span> <span class=n>total</span> <span class=o>+</span> <span class=n>y</span>
+</span><span id=__span-7-16>        <span class=n>compensation</span> <span class=o>=</span> <span class=p>(</span><span class=n>t</span> <span class=o>-</span> <span class=n>total</span><span class=p>)</span> <span class=o>-</span> <span class=n>y</span>  <span class=c1># 计算丢失的精度</span>
+</span><span id=__span-7-17>        <span class=n>total</span> <span class=o>=</span> <span class=n>t</span>
+</span><span id=__span-7-18>
+</span><span id=__span-7-19>    <span class=k>return</span> <span class=n>total</span>
+</span><span id=__span-7-20>
+</span><span id=__span-7-21><span class=c1># 测试</span>
+</span><span id=__span-7-22><span class=n>numbers</span> <span class=o>=</span> <span class=p>[</span><span class=mf>1e16</span><span class=p>,</span> <span class=mf>1.0</span><span class=p>,</span> <span class=o>-</span><span class=mf>1e16</span><span class=p>]</span>
+</span><span id=__span-7-23><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;直接求和:&quot;</span><span class=p>,</span> <span class=n>unstable_sum</span><span class=p>(</span><span class=n>numbers</span><span class=p>))</span>  <span class=c1># 可能为0.0</span>
+</span><span id=__span-7-24><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;Kahan求和:&quot;</span><span class=p>,</span> <span class=n>kahan_sum</span><span class=p>(</span><span class=n>numbers</span><span class=p>))</span>     <span class=c1># 正确为1.0</span>
+</span></code></pre></div></p> <h2 id=_6>六、高性能数值计算<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <h3 id=61>6.1 向量化计算<a class=headerlink href=#61 title="Permanent link">&para;</a></h3> <p>现代CPU的SIMD（单指令多数据）架构支持向量化计算：</p> <pre class=mermaid><code>graph LR
     A[标量计算] --&gt; B[一次处理一个数据]
     C[向量化计算] --&gt; D[一次处理多个数据]
 
     E[性能对比] --&gt; F[2-8倍加速]
     E --&gt; G[内存访问优化]
-    E --&gt; H[缓存友好]</code></pre> <p><strong>NumPy向量化示例</strong>： <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1> 1</a></span>
-<span class=normal><a href=#__codelineno-8-2> 2</a></span>
-<span class=normal><a href=#__codelineno-8-3> 3</a></span>
-<span class=normal><a href=#__codelineno-8-4> 4</a></span>
-<span class=normal><a href=#__codelineno-8-5> 5</a></span>
-<span class=normal><a href=#__codelineno-8-6> 6</a></span>
-<span class=normal><a href=#__codelineno-8-7> 7</a></span>
-<span class=normal><a href=#__codelineno-8-8> 8</a></span>
-<span class=normal><a href=#__codelineno-8-9> 9</a></span>
-<span class=normal><a href=#__codelineno-8-10>10</a></span>
-<span class=normal><a href=#__codelineno-8-11>11</a></span>
-<span class=normal><a href=#__codelineno-8-12>12</a></span>
-<span class=normal><a href=#__codelineno-8-13>13</a></span>
-<span class=normal><a href=#__codelineno-8-14>14</a></span>
-<span class=normal><a href=#__codelineno-8-15>15</a></span>
-<span class=normal><a href=#__codelineno-8-16>16</a></span>
-<span class=normal><a href=#__codelineno-8-17>17</a></span>
-<span class=normal><a href=#__codelineno-8-18>18</a></span>
-<span class=normal><a href=#__codelineno-8-19>19</a></span>
-<span class=normal><a href=#__codelineno-8-20>20</a></span>
-<span class=normal><a href=#__codelineno-8-21>21</a></span>
-<span class=normal><a href=#__codelineno-8-22>22</a></span>
-<span class=normal><a href=#__codelineno-8-23>23</a></span>
-<span class=normal><a href=#__codelineno-8-24>24</a></span>
-<span class=normal><a href=#__codelineno-8-25>25</a></span>
-<span class=normal><a href=#__codelineno-8-26>26</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a><span class=kn>import</span><span class=w> </span><span class=nn>numpy</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=nn>np</span>
-</span><span id=__span-8-2><a id=__codelineno-8-2 name=__codelineno-8-2></a><span class=kn>import</span><span class=w> </span><span class=nn>time</span>
-</span><span id=__span-8-3><a id=__codelineno-8-3 name=__codelineno-8-3></a>
-</span><span id=__span-8-4><a id=__codelineno-8-4 name=__codelineno-8-4></a><span class=c1># 标量计算（慢）</span>
-</span><span id=__span-8-5><a id=__codelineno-8-5 name=__codelineno-8-5></a><span class=k>def</span><span class=w> </span><span class=nf>scalar_compute</span><span class=p>():</span>
-</span><span id=__span-8-6><a id=__codelineno-8-6 name=__codelineno-8-6></a>    <span class=n>result</span> <span class=o>=</span> <span class=mi>0</span>
-</span><span id=__span-8-7><a id=__codelineno-8-7 name=__codelineno-8-7></a>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1000000</span><span class=p>):</span>
-</span><span id=__span-8-8><a id=__codelineno-8-8 name=__codelineno-8-8></a>        <span class=n>result</span> <span class=o>+=</span> <span class=n>i</span> <span class=o>*</span> <span class=n>i</span>
-</span><span id=__span-8-9><a id=__codelineno-8-9 name=__codelineno-8-9></a>    <span class=k>return</span> <span class=n>result</span>
-</span><span id=__span-8-10><a id=__codelineno-8-10 name=__codelineno-8-10></a>
-</span><span id=__span-8-11><a id=__codelineno-8-11 name=__codelineno-8-11></a><span class=c1># 向量化计算（快）</span>
-</span><span id=__span-8-12><a id=__codelineno-8-12 name=__codelineno-8-12></a><span class=k>def</span><span class=w> </span><span class=nf>vectorized_compute</span><span class=p>():</span>
-</span><span id=__span-8-13><a id=__codelineno-8-13 name=__codelineno-8-13></a>    <span class=n>arr</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>1000000</span><span class=p>)</span>
-</span><span id=__span-8-14><a id=__codelineno-8-14 name=__codelineno-8-14></a>    <span class=k>return</span> <span class=n>np</span><span class=o>.</span><span class=n>sum</span><span class=p>(</span><span class=n>arr</span> <span class=o>*</span> <span class=n>arr</span><span class=p>)</span>
-</span><span id=__span-8-15><a id=__codelineno-8-15 name=__codelineno-8-15></a>
-</span><span id=__span-8-16><a id=__codelineno-8-16 name=__codelineno-8-16></a><span class=c1># 性能对比</span>
-</span><span id=__span-8-17><a id=__codelineno-8-17 name=__codelineno-8-17></a><span class=n>t1</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
-</span><span id=__span-8-18><a id=__codelineno-8-18 name=__codelineno-8-18></a><span class=n>scalar_result</span> <span class=o>=</span> <span class=n>scalar_compute</span><span class=p>()</span>
-</span><span id=__span-8-19><a id=__codelineno-8-19 name=__codelineno-8-19></a><span class=n>t2</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
-</span><span id=__span-8-20><a id=__codelineno-8-20 name=__codelineno-8-20></a>
-</span><span id=__span-8-21><a id=__codelineno-8-21 name=__codelineno-8-21></a><span class=n>vector_result</span> <span class=o>=</span> <span class=n>vectorized_compute</span><span class=p>()</span>
-</span><span id=__span-8-22><a id=__codelineno-8-22 name=__codelineno-8-22></a><span class=n>t3</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
-</span><span id=__span-8-23><a id=__codelineno-8-23 name=__codelineno-8-23></a>
-</span><span id=__span-8-24><a id=__codelineno-8-24 name=__codelineno-8-24></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;标量计算时间: </span><span class=si>{</span><span class=n>t2</span><span class=o>-</span><span class=n>t1</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2>s&quot;</span><span class=p>)</span>
-</span><span id=__span-8-25><a id=__codelineno-8-25 name=__codelineno-8-25></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;向量计算时间: </span><span class=si>{</span><span class=n>t3</span><span class=o>-</span><span class=n>t2</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2>s&quot;</span><span class=p>)</span>
-</span><span id=__span-8-26><a id=__codelineno-8-26 name=__codelineno-8-26></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;加速比: </span><span class=si>{</span><span class=p>(</span><span class=n>t2</span><span class=o>-</span><span class=n>t1</span><span class=p>)</span><span class=o>/</span><span class=p>(</span><span class=n>t3</span><span class=o>-</span><span class=n>t2</span><span class=p>)</span><span class=si>:</span><span class=s2>.1f</span><span class=si>}</span><span class=s2>x&quot;</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div></p> <h3 id=62>6.2 并行计算与多线程<a class=headerlink href=#62 title="Permanent link">&para;</a></h3> <p><strong>数值计算的并行化策略</strong>：</p> <pre class=mermaid><code>graph TB
+    E --&gt; H[缓存友好]</code></pre> <p><strong>NumPy向量化示例</strong>： <div class="language-python highlight"><pre><span></span><code><span id=__span-8-1><span class=kn>import</span><span class=w> </span><span class=nn>numpy</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=nn>np</span>
+</span><span id=__span-8-2><span class=kn>import</span><span class=w> </span><span class=nn>time</span>
+</span><span id=__span-8-3>
+</span><span id=__span-8-4><span class=c1># 标量计算（慢）</span>
+</span><span id=__span-8-5><span class=k>def</span><span class=w> </span><span class=nf>scalar_compute</span><span class=p>():</span>
+</span><span id=__span-8-6>    <span class=n>result</span> <span class=o>=</span> <span class=mi>0</span>
+</span><span id=__span-8-7>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1000000</span><span class=p>):</span>
+</span><span id=__span-8-8>        <span class=n>result</span> <span class=o>+=</span> <span class=n>i</span> <span class=o>*</span> <span class=n>i</span>
+</span><span id=__span-8-9>    <span class=k>return</span> <span class=n>result</span>
+</span><span id=__span-8-10>
+</span><span id=__span-8-11><span class=c1># 向量化计算（快）</span>
+</span><span id=__span-8-12><span class=k>def</span><span class=w> </span><span class=nf>vectorized_compute</span><span class=p>():</span>
+</span><span id=__span-8-13>    <span class=n>arr</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>1000000</span><span class=p>)</span>
+</span><span id=__span-8-14>    <span class=k>return</span> <span class=n>np</span><span class=o>.</span><span class=n>sum</span><span class=p>(</span><span class=n>arr</span> <span class=o>*</span> <span class=n>arr</span><span class=p>)</span>
+</span><span id=__span-8-15>
+</span><span id=__span-8-16><span class=c1># 性能对比</span>
+</span><span id=__span-8-17><span class=n>t1</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
+</span><span id=__span-8-18><span class=n>scalar_result</span> <span class=o>=</span> <span class=n>scalar_compute</span><span class=p>()</span>
+</span><span id=__span-8-19><span class=n>t2</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
+</span><span id=__span-8-20>
+</span><span id=__span-8-21><span class=n>vector_result</span> <span class=o>=</span> <span class=n>vectorized_compute</span><span class=p>()</span>
+</span><span id=__span-8-22><span class=n>t3</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
+</span><span id=__span-8-23>
+</span><span id=__span-8-24><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;标量计算时间: </span><span class=si>{</span><span class=n>t2</span><span class=o>-</span><span class=n>t1</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2>s&quot;</span><span class=p>)</span>
+</span><span id=__span-8-25><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;向量计算时间: </span><span class=si>{</span><span class=n>t3</span><span class=o>-</span><span class=n>t2</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2>s&quot;</span><span class=p>)</span>
+</span><span id=__span-8-26><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;加速比: </span><span class=si>{</span><span class=p>(</span><span class=n>t2</span><span class=o>-</span><span class=n>t1</span><span class=p>)</span><span class=o>/</span><span class=p>(</span><span class=n>t3</span><span class=o>-</span><span class=n>t2</span><span class=p>)</span><span class=si>:</span><span class=s2>.1f</span><span class=si>}</span><span class=s2>x&quot;</span><span class=p>)</span>
+</span></code></pre></div></p> <h3 id=62>6.2 并行计算与多线程<a class=headerlink href=#62 title="Permanent link">&para;</a></h3> <p><strong>数值计算的并行化策略</strong>：</p> <pre class=mermaid><code>graph TB
     A[并行计算模式] --&gt; B[数据并行]
     A --&gt; C[任务并行]
     A --&gt; D[流水线并行]
@@ -338,100 +218,54 @@
     B --&gt; B1[矩阵分块]
     B --&gt; B2[数组分割]
     C --&gt; C1[独立任务分配]
-    D --&gt; D1[计算阶段重叠]</code></pre> <p><strong>多线程数值积分示例</strong>： <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1> 1</a></span>
-<span class=normal><a href=#__codelineno-9-2> 2</a></span>
-<span class=normal><a href=#__codelineno-9-3> 3</a></span>
-<span class=normal><a href=#__codelineno-9-4> 4</a></span>
-<span class=normal><a href=#__codelineno-9-5> 5</a></span>
-<span class=normal><a href=#__codelineno-9-6> 6</a></span>
-<span class=normal><a href=#__codelineno-9-7> 7</a></span>
-<span class=normal><a href=#__codelineno-9-8> 8</a></span>
-<span class=normal><a href=#__codelineno-9-9> 9</a></span>
-<span class=normal><a href=#__codelineno-9-10>10</a></span>
-<span class=normal><a href=#__codelineno-9-11>11</a></span>
-<span class=normal><a href=#__codelineno-9-12>12</a></span>
-<span class=normal><a href=#__codelineno-9-13>13</a></span>
-<span class=normal><a href=#__codelineno-9-14>14</a></span>
-<span class=normal><a href=#__codelineno-9-15>15</a></span>
-<span class=normal><a href=#__codelineno-9-16>16</a></span>
-<span class=normal><a href=#__codelineno-9-17>17</a></span>
-<span class=normal><a href=#__codelineno-9-18>18</a></span>
-<span class=normal><a href=#__codelineno-9-19>19</a></span>
-<span class=normal><a href=#__codelineno-9-20>20</a></span>
-<span class=normal><a href=#__codelineno-9-21>21</a></span>
-<span class=normal><a href=#__codelineno-9-22>22</a></span>
-<span class=normal><a href=#__codelineno-9-23>23</a></span>
-<span class=normal><a href=#__codelineno-9-24>24</a></span>
-<span class=normal><a href=#__codelineno-9-25>25</a></span>
-<span class=normal><a href=#__codelineno-9-26>26</a></span>
-<span class=normal><a href=#__codelineno-9-27>27</a></span>
-<span class=normal><a href=#__codelineno-9-28>28</a></span>
-<span class=normal><a href=#__codelineno-9-29>29</a></span>
-<span class=normal><a href=#__codelineno-9-30>30</a></span>
-<span class=normal><a href=#__codelineno-9-31>31</a></span>
-<span class=normal><a href=#__codelineno-9-32>32</a></span>
-<span class=normal><a href=#__codelineno-9-33>33</a></span>
-<span class=normal><a href=#__codelineno-9-34>34</a></span>
-<span class=normal><a href=#__codelineno-9-35>35</a></span>
-<span class=normal><a href=#__codelineno-9-36>36</a></span>
-<span class=normal><a href=#__codelineno-9-37>37</a></span>
-<span class=normal><a href=#__codelineno-9-38>38</a></span>
-<span class=normal><a href=#__codelineno-9-39>39</a></span>
-<span class=normal><a href=#__codelineno-9-40>40</a></span>
-<span class=normal><a href=#__codelineno-9-41>41</a></span>
-<span class=normal><a href=#__codelineno-9-42>42</a></span>
-<span class=normal><a href=#__codelineno-9-43>43</a></span>
-<span class=normal><a href=#__codelineno-9-44>44</a></span>
-<span class=normal><a href=#__codelineno-9-45>45</a></span>
-<span class=normal><a href=#__codelineno-9-46>46</a></span>
-<span class=normal><a href=#__codelineno-9-47>47</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a><span class=kn>import</span><span class=w> </span><span class=nn>threading</span>
-</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a><span class=kn>import</span><span class=w> </span><span class=nn>math</span>
-</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a>
-</span><span id=__span-9-4><a id=__codelineno-9-4 name=__codelineno-9-4></a><span class=k>class</span><span class=w> </span><span class=nc>ParallelIntegrator</span><span class=p>:</span>
-</span><span id=__span-9-5><a id=__codelineno-9-5 name=__codelineno-9-5></a>    <span class=k>def</span><span class=w> </span><span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>f</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>,</span> <span class=n>num_threads</span><span class=o>=</span><span class=mi>4</span><span class=p>):</span>
-</span><span id=__span-9-6><a id=__codelineno-9-6 name=__codelineno-9-6></a>        <span class=bp>self</span><span class=o>.</span><span class=n>f</span> <span class=o>=</span> <span class=n>f</span>
-</span><span id=__span-9-7><a id=__codelineno-9-7 name=__codelineno-9-7></a>        <span class=bp>self</span><span class=o>.</span><span class=n>a</span> <span class=o>=</span> <span class=n>a</span>
-</span><span id=__span-9-8><a id=__codelineno-9-8 name=__codelineno-9-8></a>        <span class=bp>self</span><span class=o>.</span><span class=n>b</span> <span class=o>=</span> <span class=n>b</span>
-</span><span id=__span-9-9><a id=__codelineno-9-9 name=__codelineno-9-9></a>        <span class=bp>self</span><span class=o>.</span><span class=n>num_threads</span> <span class=o>=</span> <span class=n>num_threads</span>
-</span><span id=__span-9-10><a id=__codelineno-9-10 name=__codelineno-9-10></a>        <span class=bp>self</span><span class=o>.</span><span class=n>results</span> <span class=o>=</span> <span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>*</span> <span class=n>num_threads</span>
-</span><span id=__span-9-11><a id=__codelineno-9-11 name=__codelineno-9-11></a>
-</span><span id=__span-9-12><a id=__codelineno-9-12 name=__codelineno-9-12></a>    <span class=k>def</span><span class=w> </span><span class=nf>integrate_segment</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>thread_id</span><span class=p>,</span> <span class=n>a_seg</span><span class=p>,</span> <span class=n>b_seg</span><span class=p>):</span>
-</span><span id=__span-9-13><a id=__codelineno-9-13 name=__codelineno-9-13></a><span class=w>        </span><span class=sd>&quot;&quot;&quot;每个线程计算一个区间的积分&quot;&quot;&quot;</span>
-</span><span id=__span-9-14><a id=__codelineno-9-14 name=__codelineno-9-14></a>        <span class=n>n</span> <span class=o>=</span> <span class=mi>1000</span>  <span class=c1># 每个线程的梯形数</span>
-</span><span id=__span-9-15><a id=__codelineno-9-15 name=__codelineno-9-15></a>        <span class=n>h</span> <span class=o>=</span> <span class=p>(</span><span class=n>b_seg</span> <span class=o>-</span> <span class=n>a_seg</span><span class=p>)</span> <span class=o>/</span> <span class=n>n</span>
-</span><span id=__span-9-16><a id=__codelineno-9-16 name=__codelineno-9-16></a>        <span class=n>result</span> <span class=o>=</span> <span class=mf>0.5</span> <span class=o>*</span> <span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>f</span><span class=p>(</span><span class=n>a_seg</span><span class=p>)</span> <span class=o>+</span> <span class=bp>self</span><span class=o>.</span><span class=n>f</span><span class=p>(</span><span class=n>b_seg</span><span class=p>))</span>
-</span><span id=__span-9-17><a id=__codelineno-9-17 name=__codelineno-9-17></a>
-</span><span id=__span-9-18><a id=__codelineno-9-18 name=__codelineno-9-18></a>        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>n</span><span class=p>):</span>
-</span><span id=__span-9-19><a id=__codelineno-9-19 name=__codelineno-9-19></a>            <span class=n>x</span> <span class=o>=</span> <span class=n>a_seg</span> <span class=o>+</span> <span class=n>i</span> <span class=o>*</span> <span class=n>h</span>
-</span><span id=__span-9-20><a id=__codelineno-9-20 name=__codelineno-9-20></a>            <span class=n>result</span> <span class=o>+=</span> <span class=bp>self</span><span class=o>.</span><span class=n>f</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
-</span><span id=__span-9-21><a id=__codelineno-9-21 name=__codelineno-9-21></a>
-</span><span id=__span-9-22><a id=__codelineno-9-22 name=__codelineno-9-22></a>        <span class=bp>self</span><span class=o>.</span><span class=n>results</span><span class=p>[</span><span class=n>thread_id</span><span class=p>]</span> <span class=o>=</span> <span class=n>result</span> <span class=o>*</span> <span class=n>h</span>
-</span><span id=__span-9-23><a id=__codelineno-9-23 name=__codelineno-9-23></a>
-</span><span id=__span-9-24><a id=__codelineno-9-24 name=__codelineno-9-24></a>    <span class=k>def</span><span class=w> </span><span class=nf>compute</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-</span><span id=__span-9-25><a id=__codelineno-9-25 name=__codelineno-9-25></a>        <span class=n>threads</span> <span class=o>=</span> <span class=p>[]</span>
-</span><span id=__span-9-26><a id=__codelineno-9-26 name=__codelineno-9-26></a>        <span class=n>segment_width</span> <span class=o>=</span> <span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>b</span> <span class=o>-</span> <span class=bp>self</span><span class=o>.</span><span class=n>a</span><span class=p>)</span> <span class=o>/</span> <span class=bp>self</span><span class=o>.</span><span class=n>num_threads</span>
-</span><span id=__span-9-27><a id=__codelineno-9-27 name=__codelineno-9-27></a>
-</span><span id=__span-9-28><a id=__codelineno-9-28 name=__codelineno-9-28></a>        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>num_threads</span><span class=p>):</span>
-</span><span id=__span-9-29><a id=__codelineno-9-29 name=__codelineno-9-29></a>            <span class=n>a_seg</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>a</span> <span class=o>+</span> <span class=n>i</span> <span class=o>*</span> <span class=n>segment_width</span>
-</span><span id=__span-9-30><a id=__codelineno-9-30 name=__codelineno-9-30></a>            <span class=n>b_seg</span> <span class=o>=</span> <span class=n>a_seg</span> <span class=o>+</span> <span class=n>segment_width</span>
-</span><span id=__span-9-31><a id=__codelineno-9-31 name=__codelineno-9-31></a>
-</span><span id=__span-9-32><a id=__codelineno-9-32 name=__codelineno-9-32></a>            <span class=n>thread</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span>
-</span><span id=__span-9-33><a id=__codelineno-9-33 name=__codelineno-9-33></a>                <span class=n>target</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>integrate_segment</span><span class=p>,</span> 
-</span><span id=__span-9-34><a id=__codelineno-9-34 name=__codelineno-9-34></a>                <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=n>i</span><span class=p>,</span> <span class=n>a_seg</span><span class=p>,</span> <span class=n>b_seg</span><span class=p>)</span>
-</span><span id=__span-9-35><a id=__codelineno-9-35 name=__codelineno-9-35></a>            <span class=p>)</span>
-</span><span id=__span-9-36><a id=__codelineno-9-36 name=__codelineno-9-36></a>            <span class=n>threads</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>thread</span><span class=p>)</span>
-</span><span id=__span-9-37><a id=__codelineno-9-37 name=__codelineno-9-37></a>            <span class=n>thread</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
-</span><span id=__span-9-38><a id=__codelineno-9-38 name=__codelineno-9-38></a>
-</span><span id=__span-9-39><a id=__codelineno-9-39 name=__codelineno-9-39></a>        <span class=k>for</span> <span class=n>thread</span> <span class=ow>in</span> <span class=n>threads</span><span class=p>:</span>
-</span><span id=__span-9-40><a id=__codelineno-9-40 name=__codelineno-9-40></a>            <span class=n>thread</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
-</span><span id=__span-9-41><a id=__codelineno-9-41 name=__codelineno-9-41></a>
-</span><span id=__span-9-42><a id=__codelineno-9-42 name=__codelineno-9-42></a>        <span class=k>return</span> <span class=nb>sum</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>results</span><span class=p>)</span>
-</span><span id=__span-9-43><a id=__codelineno-9-43 name=__codelineno-9-43></a>
-</span><span id=__span-9-44><a id=__codelineno-9-44 name=__codelineno-9-44></a><span class=c1># 测试并行积分</span>
-</span><span id=__span-9-45><a id=__codelineno-9-45 name=__codelineno-9-45></a><span class=n>integrator</span> <span class=o>=</span> <span class=n>ParallelIntegrator</span><span class=p>(</span><span class=n>math</span><span class=o>.</span><span class=n>sin</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=n>math</span><span class=o>.</span><span class=n>pi</span><span class=p>)</span>
-</span><span id=__span-9-46><a id=__codelineno-9-46 name=__codelineno-9-46></a><span class=n>result</span> <span class=o>=</span> <span class=n>integrator</span><span class=o>.</span><span class=n>compute</span><span class=p>()</span>
-</span><span id=__span-9-47><a id=__codelineno-9-47 name=__codelineno-9-47></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;并行积分结果: </span><span class=si>{</span><span class=n>result</span><span class=si>}</span><span class=s2>&quot;</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div></p> <h2 id=_7>七、数值计算在人工智能中的应用<a class=headerlink href=#_7 title="Permanent link">&para;</a></h2> <h3 id=71>7.1 深度学习中的数值计算<a class=headerlink href=#71 title="Permanent link">&para;</a></h3> <p>深度学习本质上是大规模的数值计算问题：</p> <p><strong>神经网络的前向传播</strong>： <pre class=mermaid><code>graph LR
+    D --&gt; D1[计算阶段重叠]</code></pre> <p><strong>多线程数值积分示例</strong>： <div class="language-python highlight"><pre><span></span><code><span id=__span-9-1><span class=kn>import</span><span class=w> </span><span class=nn>threading</span>
+</span><span id=__span-9-2><span class=kn>import</span><span class=w> </span><span class=nn>math</span>
+</span><span id=__span-9-3>
+</span><span id=__span-9-4><span class=k>class</span><span class=w> </span><span class=nc>ParallelIntegrator</span><span class=p>:</span>
+</span><span id=__span-9-5>    <span class=k>def</span><span class=w> </span><span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>f</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>,</span> <span class=n>num_threads</span><span class=o>=</span><span class=mi>4</span><span class=p>):</span>
+</span><span id=__span-9-6>        <span class=bp>self</span><span class=o>.</span><span class=n>f</span> <span class=o>=</span> <span class=n>f</span>
+</span><span id=__span-9-7>        <span class=bp>self</span><span class=o>.</span><span class=n>a</span> <span class=o>=</span> <span class=n>a</span>
+</span><span id=__span-9-8>        <span class=bp>self</span><span class=o>.</span><span class=n>b</span> <span class=o>=</span> <span class=n>b</span>
+</span><span id=__span-9-9>        <span class=bp>self</span><span class=o>.</span><span class=n>num_threads</span> <span class=o>=</span> <span class=n>num_threads</span>
+</span><span id=__span-9-10>        <span class=bp>self</span><span class=o>.</span><span class=n>results</span> <span class=o>=</span> <span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>*</span> <span class=n>num_threads</span>
+</span><span id=__span-9-11>
+</span><span id=__span-9-12>    <span class=k>def</span><span class=w> </span><span class=nf>integrate_segment</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>thread_id</span><span class=p>,</span> <span class=n>a_seg</span><span class=p>,</span> <span class=n>b_seg</span><span class=p>):</span>
+</span><span id=__span-9-13><span class=w>        </span><span class=sd>&quot;&quot;&quot;每个线程计算一个区间的积分&quot;&quot;&quot;</span>
+</span><span id=__span-9-14>        <span class=n>n</span> <span class=o>=</span> <span class=mi>1000</span>  <span class=c1># 每个线程的梯形数</span>
+</span><span id=__span-9-15>        <span class=n>h</span> <span class=o>=</span> <span class=p>(</span><span class=n>b_seg</span> <span class=o>-</span> <span class=n>a_seg</span><span class=p>)</span> <span class=o>/</span> <span class=n>n</span>
+</span><span id=__span-9-16>        <span class=n>result</span> <span class=o>=</span> <span class=mf>0.5</span> <span class=o>*</span> <span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>f</span><span class=p>(</span><span class=n>a_seg</span><span class=p>)</span> <span class=o>+</span> <span class=bp>self</span><span class=o>.</span><span class=n>f</span><span class=p>(</span><span class=n>b_seg</span><span class=p>))</span>
+</span><span id=__span-9-17>
+</span><span id=__span-9-18>        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>n</span><span class=p>):</span>
+</span><span id=__span-9-19>            <span class=n>x</span> <span class=o>=</span> <span class=n>a_seg</span> <span class=o>+</span> <span class=n>i</span> <span class=o>*</span> <span class=n>h</span>
+</span><span id=__span-9-20>            <span class=n>result</span> <span class=o>+=</span> <span class=bp>self</span><span class=o>.</span><span class=n>f</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span><span id=__span-9-21>
+</span><span id=__span-9-22>        <span class=bp>self</span><span class=o>.</span><span class=n>results</span><span class=p>[</span><span class=n>thread_id</span><span class=p>]</span> <span class=o>=</span> <span class=n>result</span> <span class=o>*</span> <span class=n>h</span>
+</span><span id=__span-9-23>
+</span><span id=__span-9-24>    <span class=k>def</span><span class=w> </span><span class=nf>compute</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span><span id=__span-9-25>        <span class=n>threads</span> <span class=o>=</span> <span class=p>[]</span>
+</span><span id=__span-9-26>        <span class=n>segment_width</span> <span class=o>=</span> <span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>b</span> <span class=o>-</span> <span class=bp>self</span><span class=o>.</span><span class=n>a</span><span class=p>)</span> <span class=o>/</span> <span class=bp>self</span><span class=o>.</span><span class=n>num_threads</span>
+</span><span id=__span-9-27>
+</span><span id=__span-9-28>        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>num_threads</span><span class=p>):</span>
+</span><span id=__span-9-29>            <span class=n>a_seg</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>a</span> <span class=o>+</span> <span class=n>i</span> <span class=o>*</span> <span class=n>segment_width</span>
+</span><span id=__span-9-30>            <span class=n>b_seg</span> <span class=o>=</span> <span class=n>a_seg</span> <span class=o>+</span> <span class=n>segment_width</span>
+</span><span id=__span-9-31>
+</span><span id=__span-9-32>            <span class=n>thread</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span>
+</span><span id=__span-9-33>                <span class=n>target</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>integrate_segment</span><span class=p>,</span> 
+</span><span id=__span-9-34>                <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=n>i</span><span class=p>,</span> <span class=n>a_seg</span><span class=p>,</span> <span class=n>b_seg</span><span class=p>)</span>
+</span><span id=__span-9-35>            <span class=p>)</span>
+</span><span id=__span-9-36>            <span class=n>threads</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>thread</span><span class=p>)</span>
+</span><span id=__span-9-37>            <span class=n>thread</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span><span id=__span-9-38>
+</span><span id=__span-9-39>        <span class=k>for</span> <span class=n>thread</span> <span class=ow>in</span> <span class=n>threads</span><span class=p>:</span>
+</span><span id=__span-9-40>            <span class=n>thread</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span><span id=__span-9-41>
+</span><span id=__span-9-42>        <span class=k>return</span> <span class=nb>sum</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>results</span><span class=p>)</span>
+</span><span id=__span-9-43>
+</span><span id=__span-9-44><span class=c1># 测试并行积分</span>
+</span><span id=__span-9-45><span class=n>integrator</span> <span class=o>=</span> <span class=n>ParallelIntegrator</span><span class=p>(</span><span class=n>math</span><span class=o>.</span><span class=n>sin</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=n>math</span><span class=o>.</span><span class=n>pi</span><span class=p>)</span>
+</span><span id=__span-9-46><span class=n>result</span> <span class=o>=</span> <span class=n>integrator</span><span class=o>.</span><span class=n>compute</span><span class=p>()</span>
+</span><span id=__span-9-47><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;并行积分结果: </span><span class=si>{</span><span class=n>result</span><span class=si>}</span><span class=s2>&quot;</span><span class=p>)</span>
+</span></code></pre></div></p> <h2 id=_7>七、数值计算在人工智能中的应用<a class=headerlink href=#_7 title="Permanent link">&para;</a></h2> <h3 id=71>7.1 深度学习中的数值计算<a class=headerlink href=#71 title="Permanent link">&para;</a></h3> <p>深度学习本质上是大规模的数值计算问题：</p> <p><strong>神经网络的前向传播</strong>： <pre class=mermaid><code>graph LR
     A[输入层] --&gt; B[隐藏层1]
     B --&gt; C[隐藏层2]
     C --&gt; D[输出层]
@@ -441,87 +275,48 @@
     B --&gt; B3[激活函数σ]
 
     style B1 fill:#e1f5fe
-    style B2 fill:#f3e5f5</code></pre></p> <p><strong>数学表示</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1>1</a></span>
-<span class=normal><a href=#__codelineno-10-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a>z⁽ˡ⁾ = W⁽ˡ⁾ · a⁽ˡ⁻¹⁾ + b⁽ˡ⁾
-</span><span id=__span-10-2><a id=__codelineno-10-2 name=__codelineno-10-2></a>a⁽ˡ⁾ = σ(z⁽ˡ⁾)
-</span></code></pre></div></td></tr></table></div></p> <h3 id=72>7.2 梯度下降算法的数值实现<a class=headerlink href=#72 title="Permanent link">&para;</a></h3> <p><strong>随机梯度下降的核心计算</strong>： <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1> 1</a></span>
-<span class=normal><a href=#__codelineno-11-2> 2</a></span>
-<span class=normal><a href=#__codelineno-11-3> 3</a></span>
-<span class=normal><a href=#__codelineno-11-4> 4</a></span>
-<span class=normal><a href=#__codelineno-11-5> 5</a></span>
-<span class=normal><a href=#__codelineno-11-6> 6</a></span>
-<span class=normal><a href=#__codelineno-11-7> 7</a></span>
-<span class=normal><a href=#__codelineno-11-8> 8</a></span>
-<span class=normal><a href=#__codelineno-11-9> 9</a></span>
-<span class=normal><a href=#__codelineno-11-10>10</a></span>
-<span class=normal><a href=#__codelineno-11-11>11</a></span>
-<span class=normal><a href=#__codelineno-11-12>12</a></span>
-<span class=normal><a href=#__codelineno-11-13>13</a></span>
-<span class=normal><a href=#__codelineno-11-14>14</a></span>
-<span class=normal><a href=#__codelineno-11-15>15</a></span>
-<span class=normal><a href=#__codelineno-11-16>16</a></span>
-<span class=normal><a href=#__codelineno-11-17>17</a></span>
-<span class=normal><a href=#__codelineno-11-18>18</a></span>
-<span class=normal><a href=#__codelineno-11-19>19</a></span>
-<span class=normal><a href=#__codelineno-11-20>20</a></span>
-<span class=normal><a href=#__codelineno-11-21>21</a></span>
-<span class=normal><a href=#__codelineno-11-22>22</a></span>
-<span class=normal><a href=#__codelineno-11-23>23</a></span>
-<span class=normal><a href=#__codelineno-11-24>24</a></span>
-<span class=normal><a href=#__codelineno-11-25>25</a></span>
-<span class=normal><a href=#__codelineno-11-26>26</a></span>
-<span class=normal><a href=#__codelineno-11-27>27</a></span>
-<span class=normal><a href=#__codelineno-11-28>28</a></span>
-<span class=normal><a href=#__codelineno-11-29>29</a></span>
-<span class=normal><a href=#__codelineno-11-30>30</a></span>
-<span class=normal><a href=#__codelineno-11-31>31</a></span>
-<span class=normal><a href=#__codelineno-11-32>32</a></span>
-<span class=normal><a href=#__codelineno-11-33>33</a></span>
-<span class=normal><a href=#__codelineno-11-34>34</a></span>
-<span class=normal><a href=#__codelineno-11-35>35</a></span>
-<span class=normal><a href=#__codelineno-11-36>36</a></span>
-<span class=normal><a href=#__codelineno-11-37>37</a></span>
-<span class=normal><a href=#__codelineno-11-38>38</a></span>
-<span class=normal><a href=#__codelineno-11-39>39</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a><span class=kn>import</span><span class=w> </span><span class=nn>numpy</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=nn>np</span>
-</span><span id=__span-11-2><a id=__codelineno-11-2 name=__codelineno-11-2></a>
-</span><span id=__span-11-3><a id=__codelineno-11-3 name=__codelineno-11-3></a><span class=k>class</span><span class=w> </span><span class=nc>SGD</span><span class=p>:</span>
-</span><span id=__span-11-4><a id=__codelineno-11-4 name=__codelineno-11-4></a>    <span class=k>def</span><span class=w> </span><span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>learning_rate</span><span class=o>=</span><span class=mf>0.01</span><span class=p>):</span>
-</span><span id=__span-11-5><a id=__codelineno-11-5 name=__codelineno-11-5></a>        <span class=bp>self</span><span class=o>.</span><span class=n>lr</span> <span class=o>=</span> <span class=n>learning_rate</span>
-</span><span id=__span-11-6><a id=__codelineno-11-6 name=__codelineno-11-6></a>
-</span><span id=__span-11-7><a id=__codelineno-11-7 name=__codelineno-11-7></a>    <span class=k>def</span><span class=w> </span><span class=nf>update</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>params</span><span class=p>,</span> <span class=n>grads</span><span class=p>):</span>
-</span><span id=__span-11-8><a id=__codelineno-11-8 name=__codelineno-11-8></a><span class=w>        </span><span class=sd>&quot;&quot;&quot;参数更新：θ = θ - η·∇J(θ)&quot;&quot;&quot;</span>
-</span><span id=__span-11-9><a id=__codelineno-11-9 name=__codelineno-11-9></a>        <span class=k>for</span> <span class=n>key</span> <span class=ow>in</span> <span class=n>params</span><span class=p>:</span>
-</span><span id=__span-11-10><a id=__codelineno-11-10 name=__codelineno-11-10></a>            <span class=n>params</span><span class=p>[</span><span class=n>key</span><span class=p>]</span> <span class=o>-=</span> <span class=bp>self</span><span class=o>.</span><span class=n>lr</span> <span class=o>*</span> <span class=n>grads</span><span class=p>[</span><span class=n>key</span><span class=p>]</span>
-</span><span id=__span-11-11><a id=__codelineno-11-11 name=__codelineno-11-11></a>
-</span><span id=__span-11-12><a id=__codelineno-11-12 name=__codelineno-11-12></a><span class=k>def</span><span class=w> </span><span class=nf>numerical_gradient</span><span class=p>(</span><span class=n>f</span><span class=p>,</span> <span class=n>x</span><span class=p>):</span>
-</span><span id=__span-11-13><a id=__codelineno-11-13 name=__codelineno-11-13></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;数值梯度计算&quot;&quot;&quot;</span>
-</span><span id=__span-11-14><a id=__codelineno-11-14 name=__codelineno-11-14></a>    <span class=n>h</span> <span class=o>=</span> <span class=mf>1e-4</span>
-</span><span id=__span-11-15><a id=__codelineno-11-15 name=__codelineno-11-15></a>    <span class=n>grad</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros_like</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
-</span><span id=__span-11-16><a id=__codelineno-11-16 name=__codelineno-11-16></a>
-</span><span id=__span-11-17><a id=__codelineno-11-17 name=__codelineno-11-17></a>    <span class=k>for</span> <span class=n>idx</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>x</span><span class=o>.</span><span class=n>size</span><span class=p>):</span>
-</span><span id=__span-11-18><a id=__codelineno-11-18 name=__codelineno-11-18></a>        <span class=n>tmp_val</span> <span class=o>=</span> <span class=n>x</span><span class=p>[</span><span class=n>idx</span><span class=p>]</span>
-</span><span id=__span-11-19><a id=__codelineno-11-19 name=__codelineno-11-19></a>
-</span><span id=__span-11-20><a id=__codelineno-11-20 name=__codelineno-11-20></a>        <span class=c1># f(x+h)</span>
-</span><span id=__span-11-21><a id=__codelineno-11-21 name=__codelineno-11-21></a>        <span class=n>x</span><span class=p>[</span><span class=n>idx</span><span class=p>]</span> <span class=o>=</span> <span class=n>tmp_val</span> <span class=o>+</span> <span class=n>h</span>
-</span><span id=__span-11-22><a id=__codelineno-11-22 name=__codelineno-11-22></a>        <span class=n>fxh1</span> <span class=o>=</span> <span class=n>f</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
-</span><span id=__span-11-23><a id=__codelineno-11-23 name=__codelineno-11-23></a>
-</span><span id=__span-11-24><a id=__codelineno-11-24 name=__codelineno-11-24></a>        <span class=c1># f(x-h)  </span>
-</span><span id=__span-11-25><a id=__codelineno-11-25 name=__codelineno-11-25></a>        <span class=n>x</span><span class=p>[</span><span class=n>idx</span><span class=p>]</span> <span class=o>=</span> <span class=n>tmp_val</span> <span class=o>-</span> <span class=n>h</span>
-</span><span id=__span-11-26><a id=__codelineno-11-26 name=__codelineno-11-26></a>        <span class=n>fxh2</span> <span class=o>=</span> <span class=n>f</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
-</span><span id=__span-11-27><a id=__codelineno-11-27 name=__codelineno-11-27></a>
-</span><span id=__span-11-28><a id=__codelineno-11-28 name=__codelineno-11-28></a>        <span class=n>grad</span><span class=p>[</span><span class=n>idx</span><span class=p>]</span> <span class=o>=</span> <span class=p>(</span><span class=n>fxh1</span> <span class=o>-</span> <span class=n>fxh2</span><span class=p>)</span> <span class=o>/</span> <span class=p>(</span><span class=mi>2</span> <span class=o>*</span> <span class=n>h</span><span class=p>)</span>
-</span><span id=__span-11-29><a id=__codelineno-11-29 name=__codelineno-11-29></a>        <span class=n>x</span><span class=p>[</span><span class=n>idx</span><span class=p>]</span> <span class=o>=</span> <span class=n>tmp_val</span>  <span class=c1># 恢复值</span>
-</span><span id=__span-11-30><a id=__codelineno-11-30 name=__codelineno-11-30></a>
-</span><span id=__span-11-31><a id=__codelineno-11-31 name=__codelineno-11-31></a>    <span class=k>return</span> <span class=n>grad</span>
-</span><span id=__span-11-32><a id=__codelineno-11-32 name=__codelineno-11-32></a>
-</span><span id=__span-11-33><a id=__codelineno-11-33 name=__codelineno-11-33></a><span class=c1># 测试梯度计算</span>
-</span><span id=__span-11-34><a id=__codelineno-11-34 name=__codelineno-11-34></a><span class=k>def</span><span class=w> </span><span class=nf>quadratic_function</span><span class=p>(</span><span class=n>x</span><span class=p>):</span>
-</span><span id=__span-11-35><a id=__codelineno-11-35 name=__codelineno-11-35></a>    <span class=k>return</span> <span class=n>x</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>**</span><span class=mi>2</span> <span class=o>+</span> <span class=n>x</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=o>**</span><span class=mi>2</span>
-</span><span id=__span-11-36><a id=__codelineno-11-36 name=__codelineno-11-36></a>
-</span><span id=__span-11-37><a id=__codelineno-11-37 name=__codelineno-11-37></a><span class=n>x</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=mf>3.0</span><span class=p>,</span> <span class=mf>4.0</span><span class=p>])</span>
-</span><span id=__span-11-38><a id=__codelineno-11-38 name=__codelineno-11-38></a><span class=n>grad</span> <span class=o>=</span> <span class=n>numerical_gradient</span><span class=p>(</span><span class=n>quadratic_function</span><span class=p>,</span> <span class=n>x</span><span class=p>)</span>
-</span><span id=__span-11-39><a id=__codelineno-11-39 name=__codelineno-11-39></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;梯度: </span><span class=si>{</span><span class=n>grad</span><span class=si>}</span><span class=s2>&quot;</span><span class=p>)</span>  <span class=c1># 应该接近[6, 8]</span>
-</span></code></pre></div></td></tr></table></div></p> <h2 id=_8>八、数值计算库与工具链<a class=headerlink href=#_8 title="Permanent link">&para;</a></h2> <h3 id=81>8.1 科学计算生态系统<a class=headerlink href=#81 title="Permanent link">&para;</a></h3> <p>现代数值计算依赖于完整的工具链：</p> <pre class=mermaid><code>graph TB
+    style B2 fill:#f3e5f5</code></pre></p> <p><strong>数学表示</strong>： <div class="language-text highlight"><pre><span></span><code><span id=__span-10-1>z⁽ˡ⁾ = W⁽ˡ⁾ · a⁽ˡ⁻¹⁾ + b⁽ˡ⁾
+</span><span id=__span-10-2>a⁽ˡ⁾ = σ(z⁽ˡ⁾)
+</span></code></pre></div></p> <h3 id=72>7.2 梯度下降算法的数值实现<a class=headerlink href=#72 title="Permanent link">&para;</a></h3> <p><strong>随机梯度下降的核心计算</strong>： <div class="language-python highlight"><pre><span></span><code><span id=__span-11-1><span class=kn>import</span><span class=w> </span><span class=nn>numpy</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=nn>np</span>
+</span><span id=__span-11-2>
+</span><span id=__span-11-3><span class=k>class</span><span class=w> </span><span class=nc>SGD</span><span class=p>:</span>
+</span><span id=__span-11-4>    <span class=k>def</span><span class=w> </span><span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>learning_rate</span><span class=o>=</span><span class=mf>0.01</span><span class=p>):</span>
+</span><span id=__span-11-5>        <span class=bp>self</span><span class=o>.</span><span class=n>lr</span> <span class=o>=</span> <span class=n>learning_rate</span>
+</span><span id=__span-11-6>
+</span><span id=__span-11-7>    <span class=k>def</span><span class=w> </span><span class=nf>update</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>params</span><span class=p>,</span> <span class=n>grads</span><span class=p>):</span>
+</span><span id=__span-11-8><span class=w>        </span><span class=sd>&quot;&quot;&quot;参数更新：θ = θ - η·∇J(θ)&quot;&quot;&quot;</span>
+</span><span id=__span-11-9>        <span class=k>for</span> <span class=n>key</span> <span class=ow>in</span> <span class=n>params</span><span class=p>:</span>
+</span><span id=__span-11-10>            <span class=n>params</span><span class=p>[</span><span class=n>key</span><span class=p>]</span> <span class=o>-=</span> <span class=bp>self</span><span class=o>.</span><span class=n>lr</span> <span class=o>*</span> <span class=n>grads</span><span class=p>[</span><span class=n>key</span><span class=p>]</span>
+</span><span id=__span-11-11>
+</span><span id=__span-11-12><span class=k>def</span><span class=w> </span><span class=nf>numerical_gradient</span><span class=p>(</span><span class=n>f</span><span class=p>,</span> <span class=n>x</span><span class=p>):</span>
+</span><span id=__span-11-13><span class=w>    </span><span class=sd>&quot;&quot;&quot;数值梯度计算&quot;&quot;&quot;</span>
+</span><span id=__span-11-14>    <span class=n>h</span> <span class=o>=</span> <span class=mf>1e-4</span>
+</span><span id=__span-11-15>    <span class=n>grad</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros_like</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span><span id=__span-11-16>
+</span><span id=__span-11-17>    <span class=k>for</span> <span class=n>idx</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>x</span><span class=o>.</span><span class=n>size</span><span class=p>):</span>
+</span><span id=__span-11-18>        <span class=n>tmp_val</span> <span class=o>=</span> <span class=n>x</span><span class=p>[</span><span class=n>idx</span><span class=p>]</span>
+</span><span id=__span-11-19>
+</span><span id=__span-11-20>        <span class=c1># f(x+h)</span>
+</span><span id=__span-11-21>        <span class=n>x</span><span class=p>[</span><span class=n>idx</span><span class=p>]</span> <span class=o>=</span> <span class=n>tmp_val</span> <span class=o>+</span> <span class=n>h</span>
+</span><span id=__span-11-22>        <span class=n>fxh1</span> <span class=o>=</span> <span class=n>f</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span><span id=__span-11-23>
+</span><span id=__span-11-24>        <span class=c1># f(x-h)  </span>
+</span><span id=__span-11-25>        <span class=n>x</span><span class=p>[</span><span class=n>idx</span><span class=p>]</span> <span class=o>=</span> <span class=n>tmp_val</span> <span class=o>-</span> <span class=n>h</span>
+</span><span id=__span-11-26>        <span class=n>fxh2</span> <span class=o>=</span> <span class=n>f</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span><span id=__span-11-27>
+</span><span id=__span-11-28>        <span class=n>grad</span><span class=p>[</span><span class=n>idx</span><span class=p>]</span> <span class=o>=</span> <span class=p>(</span><span class=n>fxh1</span> <span class=o>-</span> <span class=n>fxh2</span><span class=p>)</span> <span class=o>/</span> <span class=p>(</span><span class=mi>2</span> <span class=o>*</span> <span class=n>h</span><span class=p>)</span>
+</span><span id=__span-11-29>        <span class=n>x</span><span class=p>[</span><span class=n>idx</span><span class=p>]</span> <span class=o>=</span> <span class=n>tmp_val</span>  <span class=c1># 恢复值</span>
+</span><span id=__span-11-30>
+</span><span id=__span-11-31>    <span class=k>return</span> <span class=n>grad</span>
+</span><span id=__span-11-32>
+</span><span id=__span-11-33><span class=c1># 测试梯度计算</span>
+</span><span id=__span-11-34><span class=k>def</span><span class=w> </span><span class=nf>quadratic_function</span><span class=p>(</span><span class=n>x</span><span class=p>):</span>
+</span><span id=__span-11-35>    <span class=k>return</span> <span class=n>x</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>**</span><span class=mi>2</span> <span class=o>+</span> <span class=n>x</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=o>**</span><span class=mi>2</span>
+</span><span id=__span-11-36>
+</span><span id=__span-11-37><span class=n>x</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=mf>3.0</span><span class=p>,</span> <span class=mf>4.0</span><span class=p>])</span>
+</span><span id=__span-11-38><span class=n>grad</span> <span class=o>=</span> <span class=n>numerical_gradient</span><span class=p>(</span><span class=n>quadratic_function</span><span class=p>,</span> <span class=n>x</span><span class=p>)</span>
+</span><span id=__span-11-39><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;梯度: </span><span class=si>{</span><span class=n>grad</span><span class=si>}</span><span class=s2>&quot;</span><span class=p>)</span>  <span class=c1># 应该接近[6, 8]</span>
+</span></code></pre></div></p> <h2 id=_8>八、数值计算库与工具链<a class=headerlink href=#_8 title="Permanent link">&para;</a></h2> <h3 id=81>8.1 科学计算生态系统<a class=headerlink href=#81 title="Permanent link">&para;</a></h3> <p>现代数值计算依赖于完整的工具链：</p> <pre class=mermaid><code>graph TB
     A[数值计算生态] --&gt; B[基础库]
     A --&gt; C[高级库]
     A --&gt; D[可视化工具]
@@ -541,165 +336,88 @@
 
     E --&gt; E1[Dask]
     E --&gt; E2[MPI]
-    E --&gt; E3[Apache Spark]</code></pre> <h3 id=82-numpy>8.2 NumPy核心功能深度解析<a class=headerlink href=#82-numpy title="Permanent link">&para;</a></h3> <p><strong>NumPy数组的内存布局</strong>： <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1> 1</a></span>
-<span class=normal><a href=#__codelineno-12-2> 2</a></span>
-<span class=normal><a href=#__codelineno-12-3> 3</a></span>
-<span class=normal><a href=#__codelineno-12-4> 4</a></span>
-<span class=normal><a href=#__codelineno-12-5> 5</a></span>
-<span class=normal><a href=#__codelineno-12-6> 6</a></span>
-<span class=normal><a href=#__codelineno-12-7> 7</a></span>
-<span class=normal><a href=#__codelineno-12-8> 8</a></span>
-<span class=normal><a href=#__codelineno-12-9> 9</a></span>
-<span class=normal><a href=#__codelineno-12-10>10</a></span>
-<span class=normal><a href=#__codelineno-12-11>11</a></span>
-<span class=normal><a href=#__codelineno-12-12>12</a></span>
-<span class=normal><a href=#__codelineno-12-13>13</a></span>
-<span class=normal><a href=#__codelineno-12-14>14</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><a id=__codelineno-12-1 name=__codelineno-12-1></a><span class=kn>import</span><span class=w> </span><span class=nn>numpy</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=nn>np</span>
-</span><span id=__span-12-2><a id=__codelineno-12-2 name=__codelineno-12-2></a>
-</span><span id=__span-12-3><a id=__codelineno-12-3 name=__codelineno-12-3></a><span class=c1># 创建数组并查看内存信息</span>
-</span><span id=__span-12-4><a id=__codelineno-12-4 name=__codelineno-12-4></a><span class=n>arr</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>],</span> <span class=p>[</span><span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>]])</span>
-</span><span id=__span-12-5><a id=__codelineno-12-5 name=__codelineno-12-5></a><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;数组形状:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>shape</span><span class=p>)</span>
-</span><span id=__span-12-6><a id=__codelineno-12-6 name=__codelineno-12-6></a><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;数组维度:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>ndim</span><span class=p>)</span>
-</span><span id=__span-12-7><a id=__codelineno-12-7 name=__codelineno-12-7></a><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;数组大小:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>size</span><span class=p>)</span>
-</span><span id=__span-12-8><a id=__codelineno-12-8 name=__codelineno-12-8></a><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;数据类型:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>dtype</span><span class=p>)</span>
-</span><span id=__span-12-9><a id=__codelineno-12-9 name=__codelineno-12-9></a><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;内存占用:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>nbytes</span><span class=p>,</span> <span class=s2>&quot;bytes&quot;</span><span class=p>)</span>
-</span><span id=__span-12-10><a id=__codelineno-12-10 name=__codelineno-12-10></a>
-</span><span id=__span-12-11><a id=__codelineno-12-11 name=__codelineno-12-11></a><span class=c1># 内存布局分析</span>
-</span><span id=__span-12-12><a id=__codelineno-12-12 name=__codelineno-12-12></a><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;步长(stride):&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>strides</span><span class=p>)</span>  <span class=c1># 每个维度移动的字节数</span>
-</span><span id=__span-12-13><a id=__codelineno-12-13 name=__codelineno-12-13></a><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;C连续:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>flags</span><span class=p>[</span><span class=s1>&#39;C_CONTIGUOUS&#39;</span><span class=p>])</span>
-</span><span id=__span-12-14><a id=__codelineno-12-14 name=__codelineno-12-14></a><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;F连续:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>flags</span><span class=p>[</span><span class=s1>&#39;F_CONTIGUOUS&#39;</span><span class=p>])</span>
-</span></code></pre></div></td></tr></table></div></p> <p><strong>广播机制的工作原理</strong>： <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1> 1</a></span>
-<span class=normal><a href=#__codelineno-13-2> 2</a></span>
-<span class=normal><a href=#__codelineno-13-3> 3</a></span>
-<span class=normal><a href=#__codelineno-13-4> 4</a></span>
-<span class=normal><a href=#__codelineno-13-5> 5</a></span>
-<span class=normal><a href=#__codelineno-13-6> 6</a></span>
-<span class=normal><a href=#__codelineno-13-7> 7</a></span>
-<span class=normal><a href=#__codelineno-13-8> 8</a></span>
-<span class=normal><a href=#__codelineno-13-9> 9</a></span>
-<span class=normal><a href=#__codelineno-13-10>10</a></span>
-<span class=normal><a href=#__codelineno-13-11>11</a></span>
-<span class=normal><a href=#__codelineno-13-12>12</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><a id=__codelineno-13-1 name=__codelineno-13-1></a><span class=c1># 广播示例</span>
-</span><span id=__span-13-2><a id=__codelineno-13-2 name=__codelineno-13-2></a><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>]])</span>  <span class=c1># 形状: (1, 3)</span>
-</span><span id=__span-13-3><a id=__codelineno-13-3 name=__codelineno-13-3></a><span class=n>b</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>10</span><span class=p>],</span> <span class=p>[</span><span class=mi>20</span><span class=p>]])</span> <span class=c1># 形状: (2, 1)</span>
-</span><span id=__span-13-4><a id=__codelineno-13-4 name=__codelineno-13-4></a>
-</span><span id=__span-13-5><a id=__codelineno-13-5 name=__codelineno-13-5></a><span class=c1># 广播规则：从尾部维度开始匹配</span>
-</span><span id=__span-13-6><a id=__codelineno-13-6 name=__codelineno-13-6></a><span class=n>result</span> <span class=o>=</span> <span class=n>a</span> <span class=o>+</span> <span class=n>b</span>  <span class=c1># 形状: (2, 3)</span>
-</span><span id=__span-13-7><a id=__codelineno-13-7 name=__codelineno-13-7></a><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;广播结果:</span><span class=se>\n</span><span class=s2>&quot;</span><span class=p>,</span> <span class=n>result</span><span class=p>)</span>
-</span><span id=__span-13-8><a id=__codelineno-13-8 name=__codelineno-13-8></a><span class=sd>&quot;&quot;&quot;</span>
-</span><span id=__span-13-9><a id=__codelineno-13-9 name=__codelineno-13-9></a><span class=sd>输出:</span>
-</span><span id=__span-13-10><a id=__codelineno-13-10 name=__codelineno-13-10></a><span class=sd>[[11 12 13]</span>
-</span><span id=__span-13-11><a id=__codelineno-13-11 name=__codelineno-13-11></a><span class=sd> [21 22 23]]</span>
-</span><span id=__span-13-12><a id=__codelineno-13-12 name=__codelineno-13-12></a><span class=sd>&quot;&quot;&quot;</span>
-</span></code></pre></div></td></tr></table></div></p> <h2 id=_9>九、数值计算的实践应用<a class=headerlink href=#_9 title="Permanent link">&para;</a></h2> <h3 id=91>9.1 金融数值计算<a class=headerlink href=#91 title="Permanent link">&para;</a></h3> <p><strong>Black-Scholes期权定价模型</strong>： <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
-<span class=normal><a href=#__codelineno-14-2> 2</a></span>
-<span class=normal><a href=#__codelineno-14-3> 3</a></span>
-<span class=normal><a href=#__codelineno-14-4> 4</a></span>
-<span class=normal><a href=#__codelineno-14-5> 5</a></span>
-<span class=normal><a href=#__codelineno-14-6> 6</a></span>
-<span class=normal><a href=#__codelineno-14-7> 7</a></span>
-<span class=normal><a href=#__codelineno-14-8> 8</a></span>
-<span class=normal><a href=#__codelineno-14-9> 9</a></span>
-<span class=normal><a href=#__codelineno-14-10>10</a></span>
-<span class=normal><a href=#__codelineno-14-11>11</a></span>
-<span class=normal><a href=#__codelineno-14-12>12</a></span>
-<span class=normal><a href=#__codelineno-14-13>13</a></span>
-<span class=normal><a href=#__codelineno-14-14>14</a></span>
-<span class=normal><a href=#__codelineno-14-15>15</a></span>
-<span class=normal><a href=#__codelineno-14-16>16</a></span>
-<span class=normal><a href=#__codelineno-14-17>17</a></span>
-<span class=normal><a href=#__codelineno-14-18>18</a></span>
-<span class=normal><a href=#__codelineno-14-19>19</a></span>
-<span class=normal><a href=#__codelineno-14-20>20</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=kn>import</span><span class=w> </span><span class=nn>numpy</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=nn>np</span>
-</span><span id=__span-14-2><a id=__codelineno-14-2 name=__codelineno-14-2></a><span class=kn>from</span><span class=w> </span><span class=nn>scipy.stats</span><span class=w> </span><span class=kn>import</span> <span class=n>norm</span>
-</span><span id=__span-14-3><a id=__codelineno-14-3 name=__codelineno-14-3></a>
-</span><span id=__span-14-4><a id=__codelineno-14-4 name=__codelineno-14-4></a><span class=k>def</span><span class=w> </span><span class=nf>black_scholes_call</span><span class=p>(</span><span class=n>S</span><span class=p>,</span> <span class=n>K</span><span class=p>,</span> <span class=n>T</span><span class=p>,</span> <span class=n>r</span><span class=p>,</span> <span class=n>sigma</span><span class=p>):</span>
-</span><span id=__span-14-5><a id=__codelineno-14-5 name=__codelineno-14-5></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;欧式看涨期权定价&quot;&quot;&quot;</span>
-</span><span id=__span-14-6><a id=__codelineno-14-6 name=__codelineno-14-6></a>    <span class=n>d1</span> <span class=o>=</span> <span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>S</span> <span class=o>/</span> <span class=n>K</span><span class=p>)</span> <span class=o>+</span> <span class=p>(</span><span class=n>r</span> <span class=o>+</span> <span class=mf>0.5</span> <span class=o>*</span> <span class=n>sigma</span><span class=o>**</span><span class=mi>2</span><span class=p>)</span> <span class=o>*</span> <span class=n>T</span><span class=p>)</span> <span class=o>/</span> <span class=p>(</span><span class=n>sigma</span> <span class=o>*</span> <span class=n>np</span><span class=o>.</span><span class=n>sqrt</span><span class=p>(</span><span class=n>T</span><span class=p>))</span>
-</span><span id=__span-14-7><a id=__codelineno-14-7 name=__codelineno-14-7></a>    <span class=n>d2</span> <span class=o>=</span> <span class=n>d1</span> <span class=o>-</span> <span class=n>sigma</span> <span class=o>*</span> <span class=n>np</span><span class=o>.</span><span class=n>sqrt</span><span class=p>(</span><span class=n>T</span><span class=p>)</span>
-</span><span id=__span-14-8><a id=__codelineno-14-8 name=__codelineno-14-8></a>
-</span><span id=__span-14-9><a id=__codelineno-14-9 name=__codelineno-14-9></a>    <span class=n>call_price</span> <span class=o>=</span> <span class=n>S</span> <span class=o>*</span> <span class=n>norm</span><span class=o>.</span><span class=n>cdf</span><span class=p>(</span><span class=n>d1</span><span class=p>)</span> <span class=o>-</span> <span class=n>K</span> <span class=o>*</span> <span class=n>np</span><span class=o>.</span><span class=n>exp</span><span class=p>(</span><span class=o>-</span><span class=n>r</span> <span class=o>*</span> <span class=n>T</span><span class=p>)</span> <span class=o>*</span> <span class=n>norm</span><span class=o>.</span><span class=n>cdf</span><span class=p>(</span><span class=n>d2</span><span class=p>)</span>
-</span><span id=__span-14-10><a id=__codelineno-14-10 name=__codelineno-14-10></a>    <span class=k>return</span> <span class=n>call_price</span>
-</span><span id=__span-14-11><a id=__codelineno-14-11 name=__codelineno-14-11></a>
-</span><span id=__span-14-12><a id=__codelineno-14-12 name=__codelineno-14-12></a><span class=c1># 示例计算</span>
-</span><span id=__span-14-13><a id=__codelineno-14-13 name=__codelineno-14-13></a><span class=n>S</span> <span class=o>=</span> <span class=mi>100</span>  <span class=c1># 标的资产价格</span>
-</span><span id=__span-14-14><a id=__codelineno-14-14 name=__codelineno-14-14></a><span class=n>K</span> <span class=o>=</span> <span class=mi>105</span>  <span class=c1># 行权价</span>
-</span><span id=__span-14-15><a id=__codelineno-14-15 name=__codelineno-14-15></a><span class=n>T</span> <span class=o>=</span> <span class=mf>0.25</span> <span class=c1># 到期时间（年）</span>
-</span><span id=__span-14-16><a id=__codelineno-14-16 name=__codelineno-14-16></a><span class=n>r</span> <span class=o>=</span> <span class=mf>0.05</span> <span class=c1># 无风险利率</span>
-</span><span id=__span-14-17><a id=__codelineno-14-17 name=__codelineno-14-17></a><span class=n>sigma</span> <span class=o>=</span> <span class=mf>0.2</span>  <span class=c1># 波动率</span>
-</span><span id=__span-14-18><a id=__codelineno-14-18 name=__codelineno-14-18></a>
-</span><span id=__span-14-19><a id=__codelineno-14-19 name=__codelineno-14-19></a><span class=n>price</span> <span class=o>=</span> <span class=n>black_scholes_call</span><span class=p>(</span><span class=n>S</span><span class=p>,</span> <span class=n>K</span><span class=p>,</span> <span class=n>T</span><span class=p>,</span> <span class=n>r</span><span class=p>,</span> <span class=n>sigma</span><span class=p>)</span>
-</span><span id=__span-14-20><a id=__codelineno-14-20 name=__codelineno-14-20></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;看涨期权价格: </span><span class=si>{</span><span class=n>price</span><span class=si>:</span><span class=s2>.2f</span><span class=si>}</span><span class=s2>&quot;</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div></p> <h3 id=92>9.2 工程数值模拟<a class=headerlink href=#92 title="Permanent link">&para;</a></h3> <p><strong>有限元法求解热传导方程</strong>： <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
-<span class=normal><a href=#__codelineno-15-2> 2</a></span>
-<span class=normal><a href=#__codelineno-15-3> 3</a></span>
-<span class=normal><a href=#__codelineno-15-4> 4</a></span>
-<span class=normal><a href=#__codelineno-15-5> 5</a></span>
-<span class=normal><a href=#__codelineno-15-6> 6</a></span>
-<span class=normal><a href=#__codelineno-15-7> 7</a></span>
-<span class=normal><a href=#__codelineno-15-8> 8</a></span>
-<span class=normal><a href=#__codelineno-15-9> 9</a></span>
-<span class=normal><a href=#__codelineno-15-10>10</a></span>
-<span class=normal><a href=#__codelineno-15-11>11</a></span>
-<span class=normal><a href=#__codelineno-15-12>12</a></span>
-<span class=normal><a href=#__codelineno-15-13>13</a></span>
-<span class=normal><a href=#__codelineno-15-14>14</a></span>
-<span class=normal><a href=#__codelineno-15-15>15</a></span>
-<span class=normal><a href=#__codelineno-15-16>16</a></span>
-<span class=normal><a href=#__codelineno-15-17>17</a></span>
-<span class=normal><a href=#__codelineno-15-18>18</a></span>
-<span class=normal><a href=#__codelineno-15-19>19</a></span>
-<span class=normal><a href=#__codelineno-15-20>20</a></span>
-<span class=normal><a href=#__codelineno-15-21>21</a></span>
-<span class=normal><a href=#__codelineno-15-22>22</a></span>
-<span class=normal><a href=#__codelineno-15-23>23</a></span>
-<span class=normal><a href=#__codelineno-15-24>24</a></span>
-<span class=normal><a href=#__codelineno-15-25>25</a></span>
-<span class=normal><a href=#__codelineno-15-26>26</a></span>
-<span class=normal><a href=#__codelineno-15-27>27</a></span>
-<span class=normal><a href=#__codelineno-15-28>28</a></span>
-<span class=normal><a href=#__codelineno-15-29>29</a></span>
-<span class=normal><a href=#__codelineno-15-30>30</a></span>
-<span class=normal><a href=#__codelineno-15-31>31</a></span>
-<span class=normal><a href=#__codelineno-15-32>32</a></span>
-<span class=normal><a href=#__codelineno-15-33>33</a></span>
-<span class=normal><a href=#__codelineno-15-34>34</a></span>
-<span class=normal><a href=#__codelineno-15-35>35</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=kn>import</span><span class=w> </span><span class=nn>numpy</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=nn>np</span>
-</span><span id=__span-15-2><a id=__codelineno-15-2 name=__codelineno-15-2></a>
-</span><span id=__span-15-3><a id=__codelineno-15-3 name=__codelineno-15-3></a><span class=k>def</span><span class=w> </span><span class=nf>finite_element_heat</span><span class=p>():</span>
-</span><span id=__span-15-4><a id=__codelineno-15-4 name=__codelineno-15-4></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;一维热传导方程的有限元求解&quot;&quot;&quot;</span>
-</span><span id=__span-15-5><a id=__codelineno-15-5 name=__codelineno-15-5></a>    <span class=c1># 网格划分</span>
-</span><span id=__span-15-6><a id=__codelineno-15-6 name=__codelineno-15-6></a>    <span class=n>n_nodes</span> <span class=o>=</span> <span class=mi>11</span>
-</span><span id=__span-15-7><a id=__codelineno-15-7 name=__codelineno-15-7></a>    <span class=n>L</span> <span class=o>=</span> <span class=mf>1.0</span>  <span class=c1># 杆长度</span>
-</span><span id=__span-15-8><a id=__codelineno-15-8 name=__codelineno-15-8></a>    <span class=n>nodes</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>linspace</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>L</span><span class=p>,</span> <span class=n>n_nodes</span><span class=p>)</span>
-</span><span id=__span-15-9><a id=__codelineno-15-9 name=__codelineno-15-9></a>
-</span><span id=__span-15-10><a id=__codelineno-15-10 name=__codelineno-15-10></a>    <span class=c1># 刚度矩阵组装</span>
-</span><span id=__span-15-11><a id=__codelineno-15-11 name=__codelineno-15-11></a>    <span class=n>K</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>((</span><span class=n>n_nodes</span><span class=p>,</span> <span class=n>n_nodes</span><span class=p>))</span>
-</span><span id=__span-15-12><a id=__codelineno-15-12 name=__codelineno-15-12></a>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n_nodes</span> <span class=o>-</span> <span class=mi>1</span><span class=p>):</span>
-</span><span id=__span-15-13><a id=__codelineno-15-13 name=__codelineno-15-13></a>        <span class=n>h</span> <span class=o>=</span> <span class=n>nodes</span><span class=p>[</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span> <span class=o>-</span> <span class=n>nodes</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
-</span><span id=__span-15-14><a id=__codelineno-15-14 name=__codelineno-15-14></a>        <span class=n>K</span><span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>i</span><span class=p>]</span> <span class=o>+=</span> <span class=mi>1</span><span class=o>/</span><span class=n>h</span>
-</span><span id=__span-15-15><a id=__codelineno-15-15 name=__codelineno-15-15></a>        <span class=n>K</span><span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span> <span class=o>+=</span> <span class=o>-</span><span class=mi>1</span><span class=o>/</span><span class=n>h</span>
-</span><span id=__span-15-16><a id=__codelineno-15-16 name=__codelineno-15-16></a>        <span class=n>K</span><span class=p>[</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>i</span><span class=p>]</span> <span class=o>+=</span> <span class=o>-</span><span class=mi>1</span><span class=o>/</span><span class=n>h</span>
-</span><span id=__span-15-17><a id=__codelineno-15-17 name=__codelineno-15-17></a>        <span class=n>K</span><span class=p>[</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span> <span class=o>+=</span> <span class=mi>1</span><span class=o>/</span><span class=n>h</span>
-</span><span id=__span-15-18><a id=__codelineno-15-18 name=__codelineno-15-18></a>
-</span><span id=__span-15-19><a id=__codelineno-15-19 name=__codelineno-15-19></a>    <span class=c1># 边界条件处理（两端固定温度）</span>
-</span><span id=__span-15-20><a id=__codelineno-15-20 name=__codelineno-15-20></a>    <span class=n>K</span><span class=p>[</span><span class=mi>0</span><span class=p>,:]</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>K</span><span class=p>[</span><span class=mi>0</span><span class=p>,</span><span class=mi>0</span><span class=p>]</span> <span class=o>=</span> <span class=mi>1</span>
-</span><span id=__span-15-21><a id=__codelineno-15-21 name=__codelineno-15-21></a>    <span class=n>K</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>,:]</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>K</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=mi>1</span>
-</span><span id=__span-15-22><a id=__codelineno-15-22 name=__codelineno-15-22></a>
-</span><span id=__span-15-23><a id=__codelineno-15-23 name=__codelineno-15-23></a>    <span class=c1># 载荷向量</span>
-</span><span id=__span-15-24><a id=__codelineno-15-24 name=__codelineno-15-24></a>    <span class=n>F</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>(</span><span class=n>n_nodes</span><span class=p>)</span>
-</span><span id=__span-15-25><a id=__codelineno-15-25 name=__codelineno-15-25></a>    <span class=n>F</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>=</span> <span class=mi>100</span>  <span class=c1># 左端温度100°C</span>
-</span><span id=__span-15-26><a id=__codelineno-15-26 name=__codelineno-15-26></a>    <span class=n>F</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=mi>0</span>   <span class=c1># 右端温度0°C</span>
-</span><span id=__span-15-27><a id=__codelineno-15-27 name=__codelineno-15-27></a>
-</span><span id=__span-15-28><a id=__codelineno-15-28 name=__codelineno-15-28></a>    <span class=c1># 求解线性方程组</span>
-</span><span id=__span-15-29><a id=__codelineno-15-29 name=__codelineno-15-29></a>    <span class=n>T</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>linalg</span><span class=o>.</span><span class=n>solve</span><span class=p>(</span><span class=n>K</span><span class=p>,</span> <span class=n>F</span><span class=p>)</span>
-</span><span id=__span-15-30><a id=__codelineno-15-30 name=__codelineno-15-30></a>    <span class=k>return</span> <span class=n>nodes</span><span class=p>,</span> <span class=n>T</span>
-</span><span id=__span-15-31><a id=__codelineno-15-31 name=__codelineno-15-31></a>
-</span><span id=__span-15-32><a id=__codelineno-15-32 name=__codelineno-15-32></a><span class=n>nodes</span><span class=p>,</span> <span class=n>temperatures</span> <span class=o>=</span> <span class=n>finite_element_heat</span><span class=p>()</span>
-</span><span id=__span-15-33><a id=__codelineno-15-33 name=__codelineno-15-33></a><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;节点温度分布:&quot;</span><span class=p>)</span>
-</span><span id=__span-15-34><a id=__codelineno-15-34 name=__codelineno-15-34></a><span class=k>for</span> <span class=n>i</span><span class=p>,</span> <span class=p>(</span><span class=n>node</span><span class=p>,</span> <span class=n>temp</span><span class=p>)</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=nb>zip</span><span class=p>(</span><span class=n>nodes</span><span class=p>,</span> <span class=n>temperatures</span><span class=p>)):</span>
-</span><span id=__span-15-35><a id=__codelineno-15-35 name=__codelineno-15-35></a>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;节点</span><span class=si>{</span><span class=n>i</span><span class=si>}</span><span class=s2>: x=</span><span class=si>{</span><span class=n>node</span><span class=si>:</span><span class=s2>.2f</span><span class=si>}</span><span class=s2>, T=</span><span class=si>{</span><span class=n>temp</span><span class=si>:</span><span class=s2>.2f</span><span class=si>}</span><span class=s2>°C&quot;</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div></p> <h2 id=_10>十、数值计算的未来趋势<a class=headerlink href=#_10 title="Permanent link">&para;</a></h2> <h3 id=101>10.1 量子数值计算<a class=headerlink href=#101 title="Permanent link">&para;</a></h3> <p>量子计算将彻底改变数值计算的方式：</p> <pre class=mermaid><code>graph LR
+    E --&gt; E3[Apache Spark]</code></pre> <h3 id=82-numpy>8.2 NumPy核心功能深度解析<a class=headerlink href=#82-numpy title="Permanent link">&para;</a></h3> <p><strong>NumPy数组的内存布局</strong>： <div class="language-python highlight"><pre><span></span><code><span id=__span-12-1><span class=kn>import</span><span class=w> </span><span class=nn>numpy</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=nn>np</span>
+</span><span id=__span-12-2>
+</span><span id=__span-12-3><span class=c1># 创建数组并查看内存信息</span>
+</span><span id=__span-12-4><span class=n>arr</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>],</span> <span class=p>[</span><span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>]])</span>
+</span><span id=__span-12-5><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;数组形状:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>shape</span><span class=p>)</span>
+</span><span id=__span-12-6><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;数组维度:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>ndim</span><span class=p>)</span>
+</span><span id=__span-12-7><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;数组大小:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>size</span><span class=p>)</span>
+</span><span id=__span-12-8><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;数据类型:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>dtype</span><span class=p>)</span>
+</span><span id=__span-12-9><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;内存占用:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>nbytes</span><span class=p>,</span> <span class=s2>&quot;bytes&quot;</span><span class=p>)</span>
+</span><span id=__span-12-10>
+</span><span id=__span-12-11><span class=c1># 内存布局分析</span>
+</span><span id=__span-12-12><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;步长(stride):&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>strides</span><span class=p>)</span>  <span class=c1># 每个维度移动的字节数</span>
+</span><span id=__span-12-13><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;C连续:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>flags</span><span class=p>[</span><span class=s1>&#39;C_CONTIGUOUS&#39;</span><span class=p>])</span>
+</span><span id=__span-12-14><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;F连续:&quot;</span><span class=p>,</span> <span class=n>arr</span><span class=o>.</span><span class=n>flags</span><span class=p>[</span><span class=s1>&#39;F_CONTIGUOUS&#39;</span><span class=p>])</span>
+</span></code></pre></div></p> <p><strong>广播机制的工作原理</strong>： <div class="language-python highlight"><pre><span></span><code><span id=__span-13-1><span class=c1># 广播示例</span>
+</span><span id=__span-13-2><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>]])</span>  <span class=c1># 形状: (1, 3)</span>
+</span><span id=__span-13-3><span class=n>b</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>10</span><span class=p>],</span> <span class=p>[</span><span class=mi>20</span><span class=p>]])</span> <span class=c1># 形状: (2, 1)</span>
+</span><span id=__span-13-4>
+</span><span id=__span-13-5><span class=c1># 广播规则：从尾部维度开始匹配</span>
+</span><span id=__span-13-6><span class=n>result</span> <span class=o>=</span> <span class=n>a</span> <span class=o>+</span> <span class=n>b</span>  <span class=c1># 形状: (2, 3)</span>
+</span><span id=__span-13-7><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;广播结果:</span><span class=se>\n</span><span class=s2>&quot;</span><span class=p>,</span> <span class=n>result</span><span class=p>)</span>
+</span><span id=__span-13-8><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-13-9><span class=sd>输出:</span>
+</span><span id=__span-13-10><span class=sd>[[11 12 13]</span>
+</span><span id=__span-13-11><span class=sd> [21 22 23]]</span>
+</span><span id=__span-13-12><span class=sd>&quot;&quot;&quot;</span>
+</span></code></pre></div></p> <h2 id=_9>九、数值计算的实践应用<a class=headerlink href=#_9 title="Permanent link">&para;</a></h2> <h3 id=91>9.1 金融数值计算<a class=headerlink href=#91 title="Permanent link">&para;</a></h3> <p><strong>Black-Scholes期权定价模型</strong>： <div class="language-python highlight"><pre><span></span><code><span id=__span-14-1><span class=kn>import</span><span class=w> </span><span class=nn>numpy</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=nn>np</span>
+</span><span id=__span-14-2><span class=kn>from</span><span class=w> </span><span class=nn>scipy.stats</span><span class=w> </span><span class=kn>import</span> <span class=n>norm</span>
+</span><span id=__span-14-3>
+</span><span id=__span-14-4><span class=k>def</span><span class=w> </span><span class=nf>black_scholes_call</span><span class=p>(</span><span class=n>S</span><span class=p>,</span> <span class=n>K</span><span class=p>,</span> <span class=n>T</span><span class=p>,</span> <span class=n>r</span><span class=p>,</span> <span class=n>sigma</span><span class=p>):</span>
+</span><span id=__span-14-5><span class=w>    </span><span class=sd>&quot;&quot;&quot;欧式看涨期权定价&quot;&quot;&quot;</span>
+</span><span id=__span-14-6>    <span class=n>d1</span> <span class=o>=</span> <span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>S</span> <span class=o>/</span> <span class=n>K</span><span class=p>)</span> <span class=o>+</span> <span class=p>(</span><span class=n>r</span> <span class=o>+</span> <span class=mf>0.5</span> <span class=o>*</span> <span class=n>sigma</span><span class=o>**</span><span class=mi>2</span><span class=p>)</span> <span class=o>*</span> <span class=n>T</span><span class=p>)</span> <span class=o>/</span> <span class=p>(</span><span class=n>sigma</span> <span class=o>*</span> <span class=n>np</span><span class=o>.</span><span class=n>sqrt</span><span class=p>(</span><span class=n>T</span><span class=p>))</span>
+</span><span id=__span-14-7>    <span class=n>d2</span> <span class=o>=</span> <span class=n>d1</span> <span class=o>-</span> <span class=n>sigma</span> <span class=o>*</span> <span class=n>np</span><span class=o>.</span><span class=n>sqrt</span><span class=p>(</span><span class=n>T</span><span class=p>)</span>
+</span><span id=__span-14-8>
+</span><span id=__span-14-9>    <span class=n>call_price</span> <span class=o>=</span> <span class=n>S</span> <span class=o>*</span> <span class=n>norm</span><span class=o>.</span><span class=n>cdf</span><span class=p>(</span><span class=n>d1</span><span class=p>)</span> <span class=o>-</span> <span class=n>K</span> <span class=o>*</span> <span class=n>np</span><span class=o>.</span><span class=n>exp</span><span class=p>(</span><span class=o>-</span><span class=n>r</span> <span class=o>*</span> <span class=n>T</span><span class=p>)</span> <span class=o>*</span> <span class=n>norm</span><span class=o>.</span><span class=n>cdf</span><span class=p>(</span><span class=n>d2</span><span class=p>)</span>
+</span><span id=__span-14-10>    <span class=k>return</span> <span class=n>call_price</span>
+</span><span id=__span-14-11>
+</span><span id=__span-14-12><span class=c1># 示例计算</span>
+</span><span id=__span-14-13><span class=n>S</span> <span class=o>=</span> <span class=mi>100</span>  <span class=c1># 标的资产价格</span>
+</span><span id=__span-14-14><span class=n>K</span> <span class=o>=</span> <span class=mi>105</span>  <span class=c1># 行权价</span>
+</span><span id=__span-14-15><span class=n>T</span> <span class=o>=</span> <span class=mf>0.25</span> <span class=c1># 到期时间（年）</span>
+</span><span id=__span-14-16><span class=n>r</span> <span class=o>=</span> <span class=mf>0.05</span> <span class=c1># 无风险利率</span>
+</span><span id=__span-14-17><span class=n>sigma</span> <span class=o>=</span> <span class=mf>0.2</span>  <span class=c1># 波动率</span>
+</span><span id=__span-14-18>
+</span><span id=__span-14-19><span class=n>price</span> <span class=o>=</span> <span class=n>black_scholes_call</span><span class=p>(</span><span class=n>S</span><span class=p>,</span> <span class=n>K</span><span class=p>,</span> <span class=n>T</span><span class=p>,</span> <span class=n>r</span><span class=p>,</span> <span class=n>sigma</span><span class=p>)</span>
+</span><span id=__span-14-20><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;看涨期权价格: </span><span class=si>{</span><span class=n>price</span><span class=si>:</span><span class=s2>.2f</span><span class=si>}</span><span class=s2>&quot;</span><span class=p>)</span>
+</span></code></pre></div></p> <h3 id=92>9.2 工程数值模拟<a class=headerlink href=#92 title="Permanent link">&para;</a></h3> <p><strong>有限元法求解热传导方程</strong>： <div class="language-python highlight"><pre><span></span><code><span id=__span-15-1><span class=kn>import</span><span class=w> </span><span class=nn>numpy</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=nn>np</span>
+</span><span id=__span-15-2>
+</span><span id=__span-15-3><span class=k>def</span><span class=w> </span><span class=nf>finite_element_heat</span><span class=p>():</span>
+</span><span id=__span-15-4><span class=w>    </span><span class=sd>&quot;&quot;&quot;一维热传导方程的有限元求解&quot;&quot;&quot;</span>
+</span><span id=__span-15-5>    <span class=c1># 网格划分</span>
+</span><span id=__span-15-6>    <span class=n>n_nodes</span> <span class=o>=</span> <span class=mi>11</span>
+</span><span id=__span-15-7>    <span class=n>L</span> <span class=o>=</span> <span class=mf>1.0</span>  <span class=c1># 杆长度</span>
+</span><span id=__span-15-8>    <span class=n>nodes</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>linspace</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>L</span><span class=p>,</span> <span class=n>n_nodes</span><span class=p>)</span>
+</span><span id=__span-15-9>
+</span><span id=__span-15-10>    <span class=c1># 刚度矩阵组装</span>
+</span><span id=__span-15-11>    <span class=n>K</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>((</span><span class=n>n_nodes</span><span class=p>,</span> <span class=n>n_nodes</span><span class=p>))</span>
+</span><span id=__span-15-12>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n_nodes</span> <span class=o>-</span> <span class=mi>1</span><span class=p>):</span>
+</span><span id=__span-15-13>        <span class=n>h</span> <span class=o>=</span> <span class=n>nodes</span><span class=p>[</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span> <span class=o>-</span> <span class=n>nodes</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
+</span><span id=__span-15-14>        <span class=n>K</span><span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>i</span><span class=p>]</span> <span class=o>+=</span> <span class=mi>1</span><span class=o>/</span><span class=n>h</span>
+</span><span id=__span-15-15>        <span class=n>K</span><span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span> <span class=o>+=</span> <span class=o>-</span><span class=mi>1</span><span class=o>/</span><span class=n>h</span>
+</span><span id=__span-15-16>        <span class=n>K</span><span class=p>[</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>i</span><span class=p>]</span> <span class=o>+=</span> <span class=o>-</span><span class=mi>1</span><span class=o>/</span><span class=n>h</span>
+</span><span id=__span-15-17>        <span class=n>K</span><span class=p>[</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span> <span class=o>+=</span> <span class=mi>1</span><span class=o>/</span><span class=n>h</span>
+</span><span id=__span-15-18>
+</span><span id=__span-15-19>    <span class=c1># 边界条件处理（两端固定温度）</span>
+</span><span id=__span-15-20>    <span class=n>K</span><span class=p>[</span><span class=mi>0</span><span class=p>,:]</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>K</span><span class=p>[</span><span class=mi>0</span><span class=p>,</span><span class=mi>0</span><span class=p>]</span> <span class=o>=</span> <span class=mi>1</span>
+</span><span id=__span-15-21>    <span class=n>K</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>,:]</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>K</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=mi>1</span>
+</span><span id=__span-15-22>
+</span><span id=__span-15-23>    <span class=c1># 载荷向量</span>
+</span><span id=__span-15-24>    <span class=n>F</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>(</span><span class=n>n_nodes</span><span class=p>)</span>
+</span><span id=__span-15-25>    <span class=n>F</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>=</span> <span class=mi>100</span>  <span class=c1># 左端温度100°C</span>
+</span><span id=__span-15-26>    <span class=n>F</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=mi>0</span>   <span class=c1># 右端温度0°C</span>
+</span><span id=__span-15-27>
+</span><span id=__span-15-28>    <span class=c1># 求解线性方程组</span>
+</span><span id=__span-15-29>    <span class=n>T</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>linalg</span><span class=o>.</span><span class=n>solve</span><span class=p>(</span><span class=n>K</span><span class=p>,</span> <span class=n>F</span><span class=p>)</span>
+</span><span id=__span-15-30>    <span class=k>return</span> <span class=n>nodes</span><span class=p>,</span> <span class=n>T</span>
+</span><span id=__span-15-31>
+</span><span id=__span-15-32><span class=n>nodes</span><span class=p>,</span> <span class=n>temperatures</span> <span class=o>=</span> <span class=n>finite_element_heat</span><span class=p>()</span>
+</span><span id=__span-15-33><span class=nb>print</span><span class=p>(</span><span class=s2>&quot;节点温度分布:&quot;</span><span class=p>)</span>
+</span><span id=__span-15-34><span class=k>for</span> <span class=n>i</span><span class=p>,</span> <span class=p>(</span><span class=n>node</span><span class=p>,</span> <span class=n>temp</span><span class=p>)</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=nb>zip</span><span class=p>(</span><span class=n>nodes</span><span class=p>,</span> <span class=n>temperatures</span><span class=p>)):</span>
+</span><span id=__span-15-35>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;节点</span><span class=si>{</span><span class=n>i</span><span class=si>}</span><span class=s2>: x=</span><span class=si>{</span><span class=n>node</span><span class=si>:</span><span class=s2>.2f</span><span class=si>}</span><span class=s2>, T=</span><span class=si>{</span><span class=n>temp</span><span class=si>:</span><span class=s2>.2f</span><span class=si>}</span><span class=s2>°C&quot;</span><span class=p>)</span>
+</span></code></pre></div></p> <h2 id=_10>十、数值计算的未来趋势<a class=headerlink href=#_10 title="Permanent link">&para;</a></h2> <h3 id=101>10.1 量子数值计算<a class=headerlink href=#101 title="Permanent link">&para;</a></h3> <p>量子计算将彻底改变数值计算的方式：</p> <pre class=mermaid><code>graph LR
     A[经典计算] --&gt; B[位: 0或1]
     C[量子计算] --&gt; D[量子位: 0和1的叠加]
 

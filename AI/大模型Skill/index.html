@@ -11,12 +11,10 @@
     style D fill:#d5e8f9,stroke:#3498db,color:#333
     style E fill:#d5e8f9,stroke:#3498db,color:#333
     style F fill:#d5e8f9,stroke:#3498db,color:#333
-    style G fill:#d5e8f9,stroke:#3498db,color:#333</code></pre> <hr> <h2 id=skill-prompt>二、Skill 和 Prompt 有什么区别？<a class=headerlink href=#skill-prompt title="Permanent link">&para;</a></h2> <p>这是很多人会混淆的地方。</p> <p>我经常听到有人说："我写个 Prompt 不就行了，干嘛还要 Skill？"</p> <p>好问题。我们来看一个对比：</p> <table> <thead> <tr> <th>维度</th> <th>Prompt</th> <th>Skill</th> </tr> </thead> <tbody> <tr> <td><strong>本质</strong></td> <td>一次性的指令</td> <td>可复用的能力包</td> </tr> <tr> <td><strong>范围</strong></td> <td>通常解决一个具体问题</td> <td>覆盖一整类任务</td> </tr> <tr> <td><strong>工具</strong></td> <td>不能调用外部工具</td> <td>可以绑定工具和 API</td> </tr> <tr> <td><strong>流程</strong></td> <td>单轮对话为主</td> <td>支持多步骤、多轮交互</td> </tr> <tr> <td><strong>复用性</strong></td> <td>用完即弃</td> <td>随时调用，跨会话复用</td> </tr> <tr> <td><strong>维护性</strong></td> <td>改了就没了</td> <td>版本管理、迭代升级</td> </tr> </tbody> </table> <p>再打个比方：<strong>Prompt 像是临时工的口头指令</strong>，"小王，帮我把这份表格整理一下"。而 <strong>Skill 像是正式员工的标准作业流程（SOP）</strong></p> <hr> <h2 id=skill_1>三、Skill 的内部结构长什么样？<a class=headerlink href=#skill_1 title="Permanent link">&para;</a></h2> <p>一个完整的 Skill，通常包含以下几个核心部分。我们逐个拆解。</p> <h3 id=31-metadata>3.1 元信息（Metadata）<a class=headerlink href=#31-metadata title="Permanent link">&para;</a></h3> <p>就像身份证上的基本信息，它告诉系统这个 Skill 叫什么、能干什么、什么时候该用它。</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1>1</a></span>
-<span class=normal><a href=#__codelineno-0-2>2</a></span>
-<span class=normal><a href=#__codelineno-0-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>名称：code-reviewer
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a>描述：审查代码中的潜在问题，包括安全性、性能和可维护性
-</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a>触发条件：当用户提交代码变更或请求代码审查时
-</span></code></pre></div></td></tr></table></div> <p>这部分看似简单，但它非常关键——<strong>模型就是靠这些信息来决定"什么时候该激活哪个 Skill"的。</strong> 描述写得越精准，模型调用的准确率就越高。</p> <h3 id=32-instructions>3.2 指令（Instructions）<a class=headerlink href=#32-instructions title="Permanent link">&para;</a></h3> <p>这是 Skill 的核心大脑，它定义了模型在执行这个 Skill 时应该遵循的行为准则。</p> <p>比如一个"代码审查"Skill 的指令可能是：</p> <ul> <li>审查代码变更时，重点关注安全性、性能和可测试性</li> <li>每个问题必须给出具体的文件路径和行号</li> <li>严重程度分为：Critical / Warning / Info 三级</li> <li>不要对未修改的代码提出建议</li> </ul> <p><strong>好的指令，是具体而非笼统的。</strong> "注意安全"不如"检查是否存在 SQL 注入风险"。</p> <h3 id=33-tools>3.3 工具（Tools）<a class=headerlink href=#33-tools title="Permanent link">&para;</a></h3> <p>这是 Skill 的手脚。没有工具的 Skill，就像没有武器的战士——有想法但执行不了。</p> <p>一个 Skill 可以绑定多种工具：</p> <table> <thead> <tr> <th>工具类型</th> <th>作用</th> <th>例子</th> </tr> </thead> <tbody> <tr> <td><strong>文件读取</strong></td> <td>读取代码和文档</td> <td>Read、Glob</td> </tr> <tr> <td><strong>文件搜索</strong></td> <td>在代码库中查找内容</td> <td>Grep</td> </tr> <tr> <td><strong>文件编辑</strong></td> <td>修改代码</td> <td>Edit</td> </tr> <tr> <td><strong>命令执行</strong></td> <td>运行终端命令</td> <td>Bash</td> </tr> <tr> <td><strong>网络搜索</strong></td> <td>获取最新信息</td> <td>WebSearch</td> </tr> <tr> <td><strong>网页抓取</strong></td> <td>读取网页内容</td> <td>WebFetch</td> </tr> </tbody> </table> <pre class=mermaid><code>graph TB
+    style G fill:#d5e8f9,stroke:#3498db,color:#333</code></pre> <hr> <h2 id=skill-prompt>二、Skill 和 Prompt 有什么区别？<a class=headerlink href=#skill-prompt title="Permanent link">&para;</a></h2> <p>这是很多人会混淆的地方。</p> <p>我经常听到有人说："我写个 Prompt 不就行了，干嘛还要 Skill？"</p> <p>好问题。我们来看一个对比：</p> <table> <thead> <tr> <th>维度</th> <th>Prompt</th> <th>Skill</th> </tr> </thead> <tbody> <tr> <td><strong>本质</strong></td> <td>一次性的指令</td> <td>可复用的能力包</td> </tr> <tr> <td><strong>范围</strong></td> <td>通常解决一个具体问题</td> <td>覆盖一整类任务</td> </tr> <tr> <td><strong>工具</strong></td> <td>不能调用外部工具</td> <td>可以绑定工具和 API</td> </tr> <tr> <td><strong>流程</strong></td> <td>单轮对话为主</td> <td>支持多步骤、多轮交互</td> </tr> <tr> <td><strong>复用性</strong></td> <td>用完即弃</td> <td>随时调用，跨会话复用</td> </tr> <tr> <td><strong>维护性</strong></td> <td>改了就没了</td> <td>版本管理、迭代升级</td> </tr> </tbody> </table> <p>再打个比方：<strong>Prompt 像是临时工的口头指令</strong>，"小王，帮我把这份表格整理一下"。而 <strong>Skill 像是正式员工的标准作业流程（SOP）</strong></p> <hr> <h2 id=skill_1>三、Skill 的内部结构长什么样？<a class=headerlink href=#skill_1 title="Permanent link">&para;</a></h2> <p>一个完整的 Skill，通常包含以下几个核心部分。我们逐个拆解。</p> <h3 id=31-metadata>3.1 元信息（Metadata）<a class=headerlink href=#31-metadata title="Permanent link">&para;</a></h3> <p>就像身份证上的基本信息，它告诉系统这个 Skill 叫什么、能干什么、什么时候该用它。</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-0-1>名称：code-reviewer
+</span><span id=__span-0-2>描述：审查代码中的潜在问题，包括安全性、性能和可维护性
+</span><span id=__span-0-3>触发条件：当用户提交代码变更或请求代码审查时
+</span></code></pre></div> <p>这部分看似简单，但它非常关键——<strong>模型就是靠这些信息来决定"什么时候该激活哪个 Skill"的。</strong> 描述写得越精准，模型调用的准确率就越高。</p> <h3 id=32-instructions>3.2 指令（Instructions）<a class=headerlink href=#32-instructions title="Permanent link">&para;</a></h3> <p>这是 Skill 的核心大脑，它定义了模型在执行这个 Skill 时应该遵循的行为准则。</p> <p>比如一个"代码审查"Skill 的指令可能是：</p> <ul> <li>审查代码变更时，重点关注安全性、性能和可测试性</li> <li>每个问题必须给出具体的文件路径和行号</li> <li>严重程度分为：Critical / Warning / Info 三级</li> <li>不要对未修改的代码提出建议</li> </ul> <p><strong>好的指令，是具体而非笼统的。</strong> "注意安全"不如"检查是否存在 SQL 注入风险"。</p> <h3 id=33-tools>3.3 工具（Tools）<a class=headerlink href=#33-tools title="Permanent link">&para;</a></h3> <p>这是 Skill 的手脚。没有工具的 Skill，就像没有武器的战士——有想法但执行不了。</p> <p>一个 Skill 可以绑定多种工具：</p> <table> <thead> <tr> <th>工具类型</th> <th>作用</th> <th>例子</th> </tr> </thead> <tbody> <tr> <td><strong>文件读取</strong></td> <td>读取代码和文档</td> <td>Read、Glob</td> </tr> <tr> <td><strong>文件搜索</strong></td> <td>在代码库中查找内容</td> <td>Grep</td> </tr> <tr> <td><strong>文件编辑</strong></td> <td>修改代码</td> <td>Edit</td> </tr> <tr> <td><strong>命令执行</strong></td> <td>运行终端命令</td> <td>Bash</td> </tr> <tr> <td><strong>网络搜索</strong></td> <td>获取最新信息</td> <td>WebSearch</td> </tr> <tr> <td><strong>网页抓取</strong></td> <td>读取网页内容</td> <td>WebFetch</td> </tr> </tbody> </table> <pre class=mermaid><code>graph TB
     SK[Skill: code-reviewer] --&gt; T1[Read&lt;br/&gt;读取代码]
     SK --&gt; T2[Grep&lt;br/&gt;搜索问题模式]
     SK --&gt; T3[Bash&lt;br/&gt;运行测试]
@@ -59,77 +57,43 @@
     S-&gt;&gt;T: Bash - 运行测试
     T--&gt;&gt;S: 2个测试失败
     S-&gt;&gt;M: 汇总审查结果
-    M-&gt;&gt;U: 输出结构化审查报告</code></pre> <p>注意看，整个过程模型<strong>不是靠猜</strong>，而是<strong>靠工具去验证</strong>。这就是 Skill 比 Prompt 强大的根本原因——它有"手"有"脚"，能真正去验证和执行。</p> <h3 id=_3>阶段四：验证——确保结果靠谱<a class=headerlink href=#_3 title="Permanent link">&para;</a></h3> <p>执行完了不等于做对了。好的 Skill 会有自检环节：</p> <ul> <li>代码改动后能不能编译通过？</li> <li>测试用例有没有失败？</li> <li>输出格式是否符合预期？</li> </ul> <p><strong>没有验证的输出，就是没有质检的产品。</strong></p> <h3 id=_4>阶段五：输出——结构化交付<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <p>最后，Skill 会把结果以结构化的方式交付给你。而不是给你一坨文字让你自己去整理。</p> <p>比如代码审查的结果可能是：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span>
-<span class=normal><a href=#__codelineno-1-2>2</a></span>
-<span class=normal><a href=#__codelineno-1-3>3</a></span>
-<span class=normal><a href=#__codelineno-1-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a>🔍 审查结果摘要
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a>├── 🔴 Critical (1): SQL注入风险 - src/api/user.py:42
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>├── 🟡 Warning (2): 性能问题 - 大循环内查询数据库
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a>└── 🟢 Info (1): 建议补充单元测试
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=skill_4>五、从零开始：手把手教你创建一个 Skill<a class=headerlink href=#skill_4 title="Permanent link">&para;</a></h2> <p>理论说了这么多，该动手了。</p> <p>我们来创建一个实战 Skill：<strong>Git 提交助手</strong>——帮你自动分析代码变更、生成规范的 commit message、并完成提交。</p> <h3 id=step-1-skill>Step 1：想清楚这个 Skill 要干什么<a class=headerlink href=#step-1-skill title="Permanent link">&para;</a></h3> <p>在动手写之前，先回答三个问题：</p> <ol> <li><strong>触发场景</strong>：什么时候需要这个 Skill？ → 用户想提交代码时</li> <li><strong>可用工具</strong>：需要什么能力？ → 读代码（Read）、看变更（Bash/git）、写文件（Edit）</li> <li><strong>输出标准</strong>：最终交付什么？ → 规范的 commit message + 成功的 git commit</li> </ol> <h3 id=step-2-skill>Step 2：编写 Skill 文件<a class=headerlink href=#step-2-skill title="Permanent link">&para;</a></h3> <p>一个 Skill 文件通常是 Markdown 格式（比如 <code>SKILL.md</code>），结构如下：</p> <div class="language-markdown highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1> 1</a></span>
-<span class=normal><a href=#__codelineno-2-2> 2</a></span>
-<span class=normal><a href=#__codelineno-2-3> 3</a></span>
-<span class=normal><a href=#__codelineno-2-4> 4</a></span>
-<span class=normal><a href=#__codelineno-2-5> 5</a></span>
-<span class=normal><a href=#__codelineno-2-6> 6</a></span>
-<span class=normal><a href=#__codelineno-2-7> 7</a></span>
-<span class=normal><a href=#__codelineno-2-8> 8</a></span>
-<span class=normal><a href=#__codelineno-2-9> 9</a></span>
-<span class=normal><a href=#__codelineno-2-10>10</a></span>
-<span class=normal><a href=#__codelineno-2-11>11</a></span>
-<span class=normal><a href=#__codelineno-2-12>12</a></span>
-<span class=normal><a href=#__codelineno-2-13>13</a></span>
-<span class=normal><a href=#__codelineno-2-14>14</a></span>
-<span class=normal><a href=#__codelineno-2-15>15</a></span>
-<span class=normal><a href=#__codelineno-2-16>16</a></span>
-<span class=normal><a href=#__codelineno-2-17>17</a></span>
-<span class=normal><a href=#__codelineno-2-18>18</a></span>
-<span class=normal><a href=#__codelineno-2-19>19</a></span>
-<span class=normal><a href=#__codelineno-2-20>20</a></span>
-<span class=normal><a href=#__codelineno-2-21>21</a></span>
-<span class=normal><a href=#__codelineno-2-22>22</a></span>
-<span class=normal><a href=#__codelineno-2-23>23</a></span>
-<span class=normal><a href=#__codelineno-2-24>24</a></span>
-<span class=normal><a href=#__codelineno-2-25>25</a></span>
-<span class=normal><a href=#__codelineno-2-26>26</a></span>
-<span class=normal><a href=#__codelineno-2-27>27</a></span>
-<span class=normal><a href=#__codelineno-2-28>28</a></span>
-<span class=normal><a href=#__codelineno-2-29>29</a></span>
-<span class=normal><a href=#__codelineno-2-30>30</a></span>
-<span class=normal><a href=#__codelineno-2-31>31</a></span>
-<span class=normal><a href=#__codelineno-2-32>32</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a>---
-</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a>name: git-committer
-</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a>description: 分析代码变更并生成规范的 Git 提交
-</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a>tools:
-</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a><span class=w>  </span><span class=k>-</span><span class=w> </span>Bash
-</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6></a><span class=w>  </span><span class=k>-</span><span class=w> </span>Read
-</span><span id=__span-2-7><a id=__codelineno-2-7 name=__codelineno-2-7></a><span class=w>  </span><span class=k>-</span><span class=w> </span>Glob
-</span><span id=__span-2-8><a id=__codelineno-2-8 name=__codelineno-2-8></a><span class=gu>  - Grep</span>
-</span><span id=__span-2-9><a id=__codelineno-2-9 name=__codelineno-2-9></a><span class=gu>---</span>
-</span><span id=__span-2-10><a id=__codelineno-2-10 name=__codelineno-2-10></a>
-</span><span id=__span-2-11><a id=__codelineno-2-11 name=__codelineno-2-11></a><span class=gh># Git 提交助手</span>
-</span><span id=__span-2-12><a id=__codelineno-2-12 name=__codelineno-2-12></a>
-</span><span id=__span-2-13><a id=__codelineno-2-13 name=__codelineno-2-13></a><span class=gu>## 指令</span>
-</span><span id=__span-2-14><a id=__codelineno-2-14 name=__codelineno-2-14></a>
-</span><span id=__span-2-15><a id=__codelineno-2-15 name=__codelineno-2-15></a>当用户请求提交代码时，按以下步骤执行：
-</span><span id=__span-2-16><a id=__codelineno-2-16 name=__codelineno-2-16></a>
-</span><span id=__span-2-17><a id=__codelineno-2-17 name=__codelineno-2-17></a><span class=k>1.</span> 运行 <span class=sb>`git status`</span> 查看未跟踪和已修改的文件
-</span><span id=__span-2-18><a id=__codelineno-2-18 name=__codelineno-2-18></a><span class=k>2.</span> 运行 <span class=sb>`git diff`</span> 查看暂存和未暂存的变更内容
-</span><span id=__span-2-19><a id=__codelineno-2-19 name=__codelineno-2-19></a><span class=k>3.</span> 运行 <span class=sb>`git log --oneline -5`</span> 查看最近的提交记录，了解项目的提交风格
-</span><span id=__span-2-20><a id=__codelineno-2-20 name=__codelineno-2-20></a><span class=k>4.</span> 分析所有变更，归纳变更的类型（新功能/修复/重构/文档/测试等）
-</span><span id=__span-2-21><a id=__codelineno-2-21 name=__codelineno-2-21></a><span class=k>5.</span> 起草一条 commit message，遵循以下规范：
-</span><span id=__span-2-22><a id=__codelineno-2-22 name=__codelineno-2-22></a><span class=w>   </span><span class=k>-</span><span class=w> </span>使用祈使句（如 &quot;add feature&quot; 而非 &quot;added feature&quot;）
-</span><span id=__span-2-23><a id=__codelineno-2-23 name=__codelineno-2-23></a><span class=w>   </span><span class=k>-</span><span class=w> </span>第一行不超过 50 个字符
-</span><span id=__span-2-24><a id=__codelineno-2-24 name=__codelineno-2-24></a><span class=w>   </span><span class=k>-</span><span class=w> </span>如需详细说明，空一行后补充正文
-</span><span id=__span-2-25><a id=__codelineno-2-25 name=__codelineno-2-25></a><span class=k>6.</span> 将相关文件添加到暂存区
-</span><span id=__span-2-26><a id=__codelineno-2-26 name=__codelineno-2-26></a><span class=k>7.</span> 执行 git commit
-</span><span id=__span-2-27><a id=__codelineno-2-27 name=__codelineno-2-27></a>
-</span><span id=__span-2-28><a id=__codelineno-2-28 name=__codelineno-2-28></a><span class=gu>## 规则</span>
-</span><span id=__span-2-29><a id=__codelineno-2-29 name=__codelineno-2-29></a>
-</span><span id=__span-2-30><a id=__codelineno-2-30 name=__codelineno-2-30></a><span class=k>-</span><span class=w> </span>不要提交可能包含密钥的文件（.env、credentials.json 等）
-</span><span id=__span-2-31><a id=__codelineno-2-31 name=__codelineno-2-31></a><span class=k>-</span><span class=w> </span>commit message 要关注&quot;为什么&quot;而非&quot;做了什么&quot;
-</span><span id=__span-2-32><a id=__codelineno-2-32 name=__codelineno-2-32></a><span class=k>-</span><span class=w> </span>如果没有实际变更，不要创建空提交
-</span></code></pre></div></td></tr></table></div> <h3 id=step-3>Step 3：测试和调优<a class=headerlink href=#step-3 title="Permanent link">&para;</a></h3> <p>Skill 写完之后，一定要测试。测试不是随便试试，而是要<strong>覆盖关键场景</strong>：</p> <table> <thead> <tr> <th>测试场景</th> <th>验证要点</th> </tr> </thead> <tbody> <tr> <td>有多个文件变更</td> <td>commit message 是否准确概括了所有变更</td> </tr> <tr> <td>只修改了文档</td> <td>是否识别为 docs 类型</td> </tr> <tr> <td>包含敏感文件</td> <td>是否正确拒绝提交 .env 等文件</td> </tr> <tr> <td>没有变更</td> <td>是否正确提示"没有可提交的变更"</td> </tr> </tbody> </table> <h3 id=step-4>Step 4：迭代优化<a class=headerlink href=#step-4 title="Permanent link">&para;</a></h3> <p>根据测试结果，逐步优化 Skill 的指令。常见的优化方向：</p> <ul> <li><strong>更具体的规则</strong>：把"分析变更"细化为"按文件类型分组分析变更"</li> <li><strong>更多的边界条件</strong>：增加"如果暂存区为空，先提示用户选择文件"</li> <li><strong>更好的输出格式</strong>：增加"提交成功后显示 git log 确认"</li> </ul> <pre class=mermaid><code>flowchart LR
+    M-&gt;&gt;U: 输出结构化审查报告</code></pre> <p>注意看，整个过程模型<strong>不是靠猜</strong>，而是<strong>靠工具去验证</strong>。这就是 Skill 比 Prompt 强大的根本原因——它有"手"有"脚"，能真正去验证和执行。</p> <h3 id=_3>阶段四：验证——确保结果靠谱<a class=headerlink href=#_3 title="Permanent link">&para;</a></h3> <p>执行完了不等于做对了。好的 Skill 会有自检环节：</p> <ul> <li>代码改动后能不能编译通过？</li> <li>测试用例有没有失败？</li> <li>输出格式是否符合预期？</li> </ul> <p><strong>没有验证的输出，就是没有质检的产品。</strong></p> <h3 id=_4>阶段五：输出——结构化交付<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <p>最后，Skill 会把结果以结构化的方式交付给你。而不是给你一坨文字让你自己去整理。</p> <p>比如代码审查的结果可能是：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-1-1>🔍 审查结果摘要
+</span><span id=__span-1-2>├── 🔴 Critical (1): SQL注入风险 - src/api/user.py:42
+</span><span id=__span-1-3>├── 🟡 Warning (2): 性能问题 - 大循环内查询数据库
+</span><span id=__span-1-4>└── 🟢 Info (1): 建议补充单元测试
+</span></code></pre></div> <hr> <h2 id=skill_4>五、从零开始：手把手教你创建一个 Skill<a class=headerlink href=#skill_4 title="Permanent link">&para;</a></h2> <p>理论说了这么多，该动手了。</p> <p>我们来创建一个实战 Skill：<strong>Git 提交助手</strong>——帮你自动分析代码变更、生成规范的 commit message、并完成提交。</p> <h3 id=step-1-skill>Step 1：想清楚这个 Skill 要干什么<a class=headerlink href=#step-1-skill title="Permanent link">&para;</a></h3> <p>在动手写之前，先回答三个问题：</p> <ol> <li><strong>触发场景</strong>：什么时候需要这个 Skill？ → 用户想提交代码时</li> <li><strong>可用工具</strong>：需要什么能力？ → 读代码（Read）、看变更（Bash/git）、写文件（Edit）</li> <li><strong>输出标准</strong>：最终交付什么？ → 规范的 commit message + 成功的 git commit</li> </ol> <h3 id=step-2-skill>Step 2：编写 Skill 文件<a class=headerlink href=#step-2-skill title="Permanent link">&para;</a></h3> <p>一个 Skill 文件通常是 Markdown 格式（比如 <code>SKILL.md</code>），结构如下：</p> <div class="language-markdown highlight"><pre><span></span><code><span id=__span-2-1>---
+</span><span id=__span-2-2>name: git-committer
+</span><span id=__span-2-3>description: 分析代码变更并生成规范的 Git 提交
+</span><span id=__span-2-4>tools:
+</span><span id=__span-2-5><span class=w>  </span><span class=k>-</span><span class=w> </span>Bash
+</span><span id=__span-2-6><span class=w>  </span><span class=k>-</span><span class=w> </span>Read
+</span><span id=__span-2-7><span class=w>  </span><span class=k>-</span><span class=w> </span>Glob
+</span><span id=__span-2-8><span class=gu>  - Grep</span>
+</span><span id=__span-2-9><span class=gu>---</span>
+</span><span id=__span-2-10>
+</span><span id=__span-2-11><span class=gh># Git 提交助手</span>
+</span><span id=__span-2-12>
+</span><span id=__span-2-13><span class=gu>## 指令</span>
+</span><span id=__span-2-14>
+</span><span id=__span-2-15>当用户请求提交代码时，按以下步骤执行：
+</span><span id=__span-2-16>
+</span><span id=__span-2-17><span class=k>1.</span> 运行 <span class=sb>`git status`</span> 查看未跟踪和已修改的文件
+</span><span id=__span-2-18><span class=k>2.</span> 运行 <span class=sb>`git diff`</span> 查看暂存和未暂存的变更内容
+</span><span id=__span-2-19><span class=k>3.</span> 运行 <span class=sb>`git log --oneline -5`</span> 查看最近的提交记录，了解项目的提交风格
+</span><span id=__span-2-20><span class=k>4.</span> 分析所有变更，归纳变更的类型（新功能/修复/重构/文档/测试等）
+</span><span id=__span-2-21><span class=k>5.</span> 起草一条 commit message，遵循以下规范：
+</span><span id=__span-2-22><span class=w>   </span><span class=k>-</span><span class=w> </span>使用祈使句（如 &quot;add feature&quot; 而非 &quot;added feature&quot;）
+</span><span id=__span-2-23><span class=w>   </span><span class=k>-</span><span class=w> </span>第一行不超过 50 个字符
+</span><span id=__span-2-24><span class=w>   </span><span class=k>-</span><span class=w> </span>如需详细说明，空一行后补充正文
+</span><span id=__span-2-25><span class=k>6.</span> 将相关文件添加到暂存区
+</span><span id=__span-2-26><span class=k>7.</span> 执行 git commit
+</span><span id=__span-2-27>
+</span><span id=__span-2-28><span class=gu>## 规则</span>
+</span><span id=__span-2-29>
+</span><span id=__span-2-30><span class=k>-</span><span class=w> </span>不要提交可能包含密钥的文件（.env、credentials.json 等）
+</span><span id=__span-2-31><span class=k>-</span><span class=w> </span>commit message 要关注&quot;为什么&quot;而非&quot;做了什么&quot;
+</span><span id=__span-2-32><span class=k>-</span><span class=w> </span>如果没有实际变更，不要创建空提交
+</span></code></pre></div> <h3 id=step-3>Step 3：测试和调优<a class=headerlink href=#step-3 title="Permanent link">&para;</a></h3> <p>Skill 写完之后，一定要测试。测试不是随便试试，而是要<strong>覆盖关键场景</strong>：</p> <table> <thead> <tr> <th>测试场景</th> <th>验证要点</th> </tr> </thead> <tbody> <tr> <td>有多个文件变更</td> <td>commit message 是否准确概括了所有变更</td> </tr> <tr> <td>只修改了文档</td> <td>是否识别为 docs 类型</td> </tr> <tr> <td>包含敏感文件</td> <td>是否正确拒绝提交 .env 等文件</td> </tr> <tr> <td>没有变更</td> <td>是否正确提示"没有可提交的变更"</td> </tr> </tbody> </table> <h3 id=step-4>Step 4：迭代优化<a class=headerlink href=#step-4 title="Permanent link">&para;</a></h3> <p>根据测试结果，逐步优化 Skill 的指令。常见的优化方向：</p> <ul> <li><strong>更具体的规则</strong>：把"分析变更"细化为"按文件类型分组分析变更"</li> <li><strong>更多的边界条件</strong>：增加"如果暂存区为空，先提示用户选择文件"</li> <li><strong>更好的输出格式</strong>：增加"提交成功后显示 git log 确认"</li> </ul> <pre class=mermaid><code>flowchart LR
     A[编写Skill] --&gt; B[测试验证]
     B --&gt; C{结果满意?}
     C --&gt;|否| D[分析问题]
@@ -166,18 +130,13 @@
     架构
       层级越权
       循环依赖
-      接口设计不合理</code></pre> <h3 id=62-skill>6.2 任务执行 Skill<a class=headerlink href=#62-skill title="Permanent link">&para;</a></h3> <p>这种 Skill 的核心是<strong>按步骤完成复杂任务</strong>，像项目管理一样把大任务拆成小任务，逐一执行。</p> <p>它的特点是有一个"任务清单"（Todo List），每完成一项就打钩，确保不遗漏：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1>1</a></span>
-<span class=normal><a href=#__codelineno-3-2>2</a></span>
-<span class=normal><a href=#__codelineno-3-3>3</a></span>
-<span class=normal><a href=#__codelineno-3-4>4</a></span>
-<span class=normal><a href=#__codelineno-3-5>5</a></span>
-<span class=normal><a href=#__codelineno-3-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a>☐ 分析现有代码结构
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>☐ 设计新的缓存层
-</span><span id=__span-3-3><a id=__codelineno-3-3 name=__codelineno-3-3></a>☐ 实现缓存逻辑
-</span><span id=__span-3-4><a id=__codelineno-3-4 name=__codelineno-3-4></a>☐ 编写单元测试
-</span><span id=__span-3-5><a id=__codelineno-3-5 name=__codelineno-3-5></a>☐ 更新相关文档
-</span><span id=__span-3-6><a id=__codelineno-3-6 name=__codelineno-3-6></a>☑ 运行测试确保通过
-</span></code></pre></div></td></tr></table></div> <h3 id=63-skill>6.3 搜索研究 Skill<a class=headerlink href=#63-skill title="Permanent link">&para;</a></h3> <p>当你需要深入研究一个技术问题、查找某个 API 的用法、或者调研一个新框架时，这种 Skill 就派上用场了。</p> <p>它会： 1. 把你的问题拆解成多个搜索关键词 2. 并行搜索多个来源 3. 抓取和阅读搜索结果 4. 综合分析后给出答案</p> <p><strong>关键在于"综合"——</strong> 不是简单地把搜索结果丢给你，而是经过理解、对比、提炼后的输出。</p> <h3 id=64-skill>6.4 文档生成 Skill<a class=headerlink href=#64-skill title="Permanent link">&para;</a></h3> <p>这种 Skill 可以自动读取代码、理解逻辑，然后生成文档。但好的文档 Skill 不会逐行翻译代码，而是：</p> <ul> <li><strong>先理解架构</strong>：这个模块在整体中的位置和作用</li> <li><strong>再提炼接口</strong>：对外暴露了什么能力</li> <li><strong>最后补充细节</strong>：关键逻辑的说明</li> </ul> <h3 id=65-skill>6.5 设计规划 Skill<a class=headerlink href=#65-skill title="Permanent link">&para;</a></h3> <p>这是一种"思考型"Skill，它不直接写代码，而是帮你理清思路、制定方案。</p> <pre class=mermaid><code>graph TB
+      接口设计不合理</code></pre> <h3 id=62-skill>6.2 任务执行 Skill<a class=headerlink href=#62-skill title="Permanent link">&para;</a></h3> <p>这种 Skill 的核心是<strong>按步骤完成复杂任务</strong>，像项目管理一样把大任务拆成小任务，逐一执行。</p> <p>它的特点是有一个"任务清单"（Todo List），每完成一项就打钩，确保不遗漏：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-3-1>☐ 分析现有代码结构
+</span><span id=__span-3-2>☐ 设计新的缓存层
+</span><span id=__span-3-3>☐ 实现缓存逻辑
+</span><span id=__span-3-4>☐ 编写单元测试
+</span><span id=__span-3-5>☐ 更新相关文档
+</span><span id=__span-3-6>☑ 运行测试确保通过
+</span></code></pre></div> <h3 id=63-skill>6.3 搜索研究 Skill<a class=headerlink href=#63-skill title="Permanent link">&para;</a></h3> <p>当你需要深入研究一个技术问题、查找某个 API 的用法、或者调研一个新框架时，这种 Skill 就派上用场了。</p> <p>它会： 1. 把你的问题拆解成多个搜索关键词 2. 并行搜索多个来源 3. 抓取和阅读搜索结果 4. 综合分析后给出答案</p> <p><strong>关键在于"综合"——</strong> 不是简单地把搜索结果丢给你，而是经过理解、对比、提炼后的输出。</p> <h3 id=64-skill>6.4 文档生成 Skill<a class=headerlink href=#64-skill title="Permanent link">&para;</a></h3> <p>这种 Skill 可以自动读取代码、理解逻辑，然后生成文档。但好的文档 Skill 不会逐行翻译代码，而是：</p> <ul> <li><strong>先理解架构</strong>：这个模块在整体中的位置和作用</li> <li><strong>再提炼接口</strong>：对外暴露了什么能力</li> <li><strong>最后补充细节</strong>：关键逻辑的说明</li> </ul> <h3 id=65-skill>6.5 设计规划 Skill<a class=headerlink href=#65-skill title="Permanent link">&para;</a></h3> <p>这是一种"思考型"Skill，它不直接写代码，而是帮你理清思路、制定方案。</p> <pre class=mermaid><code>graph TB
     A[用户需求] --&gt; B[需求分析]
     B --&gt; C[技术调研]
     C --&gt; D[方案设计]

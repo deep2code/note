@@ -48,87 +48,52 @@
     B --&gt;|200 OK&lt;br/&gt;Allow: OPTIONS, DESCRIBE...| A
 
     style A fill:#e3f2fd
-    style B fill:#c8e6c9</code></pre> <p><strong>OPTIONS（探测能力）</strong> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1>1</a></span>
-<span class=normal><a href=#__codelineno-0-2>2</a></span>
-<span class=normal><a href=#__codelineno-0-3>3</a></span>
-<span class=normal><a href=#__codelineno-0-4>4</a></span>
-<span class=normal><a href=#__codelineno-0-5>5</a></span>
-<span class=normal><a href=#__codelineno-0-6>6</a></span>
-<span class=normal><a href=#__codelineno-0-7>7</a></span>
-<span class=normal><a href=#__codelineno-0-8>8</a></span>
-<span class=normal><a href=#__codelineno-0-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>客户端发送：
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a>OPTIONS rtsp://192.168.1.100:554/stream1 RTSP/1.0
-</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a>CSeq: 1
-</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a>User-Agent: MyClient/1.0
-</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a>
-</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a>服务器响应：
-</span><span id=__span-0-7><a id=__codelineno-0-7 name=__codelineno-0-7></a>RTSP/1.0 200 OK
-</span><span id=__span-0-8><a id=__codelineno-0-8 name=__codelineno-0-8></a>CSeq: 1
-</span><span id=__span-0-9><a id=__codelineno-0-9 name=__codelineno-0-9></a>Public: OPTIONS, DESCRIBE, SETUP, PLAY, PAUSE, TEARDOWN, SET_PARAMETER, GET_PARAMETER
-</span></code></pre></div></td></tr></table></div></p> <p>这个方法看似简单，但非常有用——它让客户端知道服务器支持哪些操作，实现“协议版本协商”。</p> <h4 id=_3>第二类：会话建立<a class=headerlink href=#_3 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>graph LR
+    style B fill:#c8e6c9</code></pre> <p><strong>OPTIONS（探测能力）</strong> <div class="language-text highlight"><pre><span></span><code><span id=__span-0-1>客户端发送：
+</span><span id=__span-0-2>OPTIONS rtsp://192.168.1.100:554/stream1 RTSP/1.0
+</span><span id=__span-0-3>CSeq: 1
+</span><span id=__span-0-4>User-Agent: MyClient/1.0
+</span><span id=__span-0-5>
+</span><span id=__span-0-6>服务器响应：
+</span><span id=__span-0-7>RTSP/1.0 200 OK
+</span><span id=__span-0-8>CSeq: 1
+</span><span id=__span-0-9>Public: OPTIONS, DESCRIBE, SETUP, PLAY, PAUSE, TEARDOWN, SET_PARAMETER, GET_PARAMETER
+</span></code></pre></div></p> <p>这个方法看似简单，但非常有用——它让客户端知道服务器支持哪些操作，实现“协议版本协商”。</p> <h4 id=_3>第二类：会话建立<a class=headerlink href=#_3 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>graph LR
     A["客户端"] --&gt;|DESCRIBE| B["服务器"]
     B --&gt;|200 OK&lt;br/&gt;SDP| A
     A --&gt;|SETUP| B
     B --&gt;|200 OK&lt;br/&gt;Session| A
 
     style A fill:#e3f2fd
-    style B fill:#c8e6c9</code></pre> <p><strong>DESCRIBE（获取媒体描述）</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1> 1</a></span>
-<span class=normal><a href=#__codelineno-1-2> 2</a></span>
-<span class=normal><a href=#__codelineno-1-3> 3</a></span>
-<span class=normal><a href=#__codelineno-1-4> 4</a></span>
-<span class=normal><a href=#__codelineno-1-5> 5</a></span>
-<span class=normal><a href=#__codelineno-1-6> 6</a></span>
-<span class=normal><a href=#__codelineno-1-7> 7</a></span>
-<span class=normal><a href=#__codelineno-1-8> 8</a></span>
-<span class=normal><a href=#__codelineno-1-9> 9</a></span>
-<span class=normal><a href=#__codelineno-1-10>10</a></span>
-<span class=normal><a href=#__codelineno-1-11>11</a></span>
-<span class=normal><a href=#__codelineno-1-12>12</a></span>
-<span class=normal><a href=#__codelineno-1-13>13</a></span>
-<span class=normal><a href=#__codelineno-1-14>14</a></span>
-<span class=normal><a href=#__codelineno-1-15>15</a></span>
-<span class=normal><a href=#__codelineno-1-16>16</a></span>
-<span class=normal><a href=#__codelineno-1-17>17</a></span>
-<span class=normal><a href=#__codelineno-1-18>18</a></span>
-<span class=normal><a href=#__codelineno-1-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a>客户端发送：
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a>DESCRIBE rtsp://192.168.1.100:554/stream1 RTSP/1.0
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>CSeq: 2
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a>Accept: application/sdp
-</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a>
-</span><span id=__span-1-6><a id=__codelineno-1-6 name=__codelineno-1-6></a>服务器响应：
-</span><span id=__span-1-7><a id=__codelineno-1-7 name=__codelineno-1-7></a>RTSP/1.0 200 OK
-</span><span id=__span-1-8><a id=__codelineno-1-8 name=__codelineno-1-8></a>CSeq: 2
-</span><span id=__span-1-9><a id=__codelineno-1-9 name=__codelineno-1-9></a>Content-Length: 458
-</span><span id=__span-1-10><a id=__codelineno-1-10 name=__codelineno-1-10></a>Content-Type: application/sdp
-</span><span id=__span-1-11><a id=__codelineno-1-11 name=__codelineno-1-11></a>
-</span><span id=__span-1-12><a id=__codelineno-1-12 name=__codelineno-1-12></a>v=0
-</span><span id=__span-1-13><a id=__codelineno-1-13 name=__codelineno-1-13></a>o=- 1234567890 1234567890 IN IP4 192.168.1.100
-</span><span id=__span-1-14><a id=__codelineno-1-14 name=__codelineno-1-14></a>s=Live Stream
-</span><span id=__span-1-15><a id=__codelineno-1-15 name=__codelineno-1-15></a>c=IN IP4 0.0.0.0
-</span><span id=__span-1-16><a id=__codelineno-1-16 name=__codelineno-1-16></a>t=0 0
-</span><span id=__span-1-17><a id=__codelineno-1-17 name=__codelineno-1-17></a>m=video 0 RTP/AVP 96
-</span><span id=__span-1-18><a id=__codelineno-1-18 name=__codelineno-1-18></a>a=rtpmap:96 H264/90000
-</span><span id=__span-1-19><a id=__codelineno-1-19 name=__codelineno-1-19></a>a=fmtp:96 packetization-mode=1;profile-level-id=42001E;sprop-parameter-sets=
-</span></code></pre></div></td></tr></table></div> <p>这个SDP（Session Description Protocol）描述了： - 视频编码格式：H264 - 负载类型：96 - 时钟频率：90000Hz - 其他媒体信息：分辨率、帧率等</p> <p><strong>SETUP（建立会话）</strong></p> <p>这是最重要的方法！它会建立客户端和服务器之间的会话关系，并协商传输参数。</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1> 1</a></span>
-<span class=normal><a href=#__codelineno-2-2> 2</a></span>
-<span class=normal><a href=#__codelineno-2-3> 3</a></span>
-<span class=normal><a href=#__codelineno-2-4> 4</a></span>
-<span class=normal><a href=#__codelineno-2-5> 5</a></span>
-<span class=normal><a href=#__codelineno-2-6> 6</a></span>
-<span class=normal><a href=#__codelineno-2-7> 7</a></span>
-<span class=normal><a href=#__codelineno-2-8> 8</a></span>
-<span class=normal><a href=#__codelineno-2-9> 9</a></span>
-<span class=normal><a href=#__codelineno-2-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a>客户端发送：
-</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a>SETUP rtsp://192.168.1.100:554/stream1/trackID=0 RTSP/1.0
-</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a>CSeq: 3
-</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a>Transport: RTP/AVP;unicast;client_port=8000-8001
-</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a>
-</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6></a>服务器响应：
-</span><span id=__span-2-7><a id=__codelineno-2-7 name=__codelineno-2-7></a>RTSP/1.0 200 OK
-</span><span id=__span-2-8><a id=__codelineno-2-8 name=__codelineno-2-8></a>CSeq: 3
-</span><span id=__span-2-9><a id=__codelineno-2-9 name=__codelineno-2-9></a>Session: 12345678
-</span><span id=__span-2-10><a id=__codelineno-2-10 name=__codelineno-2-10></a>Transport: RTP/AVP;unicast;server_port=8002-8003;client_port=8000-8001
-</span></code></pre></div></td></tr></table></div> <p>关键参数解析： - <strong>client_port=8000-8001</strong>：客户端告诉服务器“我在8000端口等RTP数据，8001端口等RTCP” - <strong>server_port=8002-8003</strong>：服务器告诉客户端“我会从8002端口发RTP，8003端口发RTCP” - <strong>Session: 12345678</strong>：会话ID，后续所有请求都需要带上这个ID</p> <h4 id=_4>第三类：播放控制<a class=headerlink href=#_4 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>graph LR
+    style B fill:#c8e6c9</code></pre> <p><strong>DESCRIBE（获取媒体描述）</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-1-1>客户端发送：
+</span><span id=__span-1-2>DESCRIBE rtsp://192.168.1.100:554/stream1 RTSP/1.0
+</span><span id=__span-1-3>CSeq: 2
+</span><span id=__span-1-4>Accept: application/sdp
+</span><span id=__span-1-5>
+</span><span id=__span-1-6>服务器响应：
+</span><span id=__span-1-7>RTSP/1.0 200 OK
+</span><span id=__span-1-8>CSeq: 2
+</span><span id=__span-1-9>Content-Length: 458
+</span><span id=__span-1-10>Content-Type: application/sdp
+</span><span id=__span-1-11>
+</span><span id=__span-1-12>v=0
+</span><span id=__span-1-13>o=- 1234567890 1234567890 IN IP4 192.168.1.100
+</span><span id=__span-1-14>s=Live Stream
+</span><span id=__span-1-15>c=IN IP4 0.0.0.0
+</span><span id=__span-1-16>t=0 0
+</span><span id=__span-1-17>m=video 0 RTP/AVP 96
+</span><span id=__span-1-18>a=rtpmap:96 H264/90000
+</span><span id=__span-1-19>a=fmtp:96 packetization-mode=1;profile-level-id=42001E;sprop-parameter-sets=
+</span></code></pre></div> <p>这个SDP（Session Description Protocol）描述了： - 视频编码格式：H264 - 负载类型：96 - 时钟频率：90000Hz - 其他媒体信息：分辨率、帧率等</p> <p><strong>SETUP（建立会话）</strong></p> <p>这是最重要的方法！它会建立客户端和服务器之间的会话关系，并协商传输参数。</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-2-1>客户端发送：
+</span><span id=__span-2-2>SETUP rtsp://192.168.1.100:554/stream1/trackID=0 RTSP/1.0
+</span><span id=__span-2-3>CSeq: 3
+</span><span id=__span-2-4>Transport: RTP/AVP;unicast;client_port=8000-8001
+</span><span id=__span-2-5>
+</span><span id=__span-2-6>服务器响应：
+</span><span id=__span-2-7>RTSP/1.0 200 OK
+</span><span id=__span-2-8>CSeq: 3
+</span><span id=__span-2-9>Session: 12345678
+</span><span id=__span-2-10>Transport: RTP/AVP;unicast;server_port=8002-8003;client_port=8000-8001
+</span></code></pre></div> <p>关键参数解析： - <strong>client_port=8000-8001</strong>：客户端告诉服务器“我在8000端口等RTP数据，8001端口等RTCP” - <strong>server_port=8002-8003</strong>：服务器告诉客户端“我会从8002端口发RTP，8003端口发RTCP” - <strong>Session: 12345678</strong>：会话ID，后续所有请求都需要带上这个ID</p> <h4 id=_4>第三类：播放控制<a class=headerlink href=#_4 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>graph LR
     A["PLAY"] --&gt;|"开始播放"| B["服务器"]
     B --&gt;|"RTP数据流"| A
     A --&gt;|"PAUSE"| B
@@ -137,62 +102,36 @@
     B --&gt;|"会话结束"| A
 
     style A fill:#e3f2fd
-    style B fill:#c8e6c9</code></pre> <p><strong>PLAY（开始播放）</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1> 1</a></span>
-<span class=normal><a href=#__codelineno-3-2> 2</a></span>
-<span class=normal><a href=#__codelineno-3-3> 3</a></span>
-<span class=normal><a href=#__codelineno-3-4> 4</a></span>
-<span class=normal><a href=#__codelineno-3-5> 5</a></span>
-<span class=normal><a href=#__codelineno-3-6> 6</a></span>
-<span class=normal><a href=#__codelineno-3-7> 7</a></span>
-<span class=normal><a href=#__codelineno-3-8> 8</a></span>
-<span class=normal><a href=#__codelineno-3-9> 9</a></span>
-<span class=normal><a href=#__codelineno-3-10>10</a></span>
-<span class=normal><a href=#__codelineno-3-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a>客户端发送：
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>PLAY rtsp://192.168.1.100:554/stream1 RTSP/1.0
-</span><span id=__span-3-3><a id=__codelineno-3-3 name=__codelineno-3-3></a>CSeq: 4
-</span><span id=__span-3-4><a id=__codelineno-3-4 name=__codelineno-3-4></a>Session: 12345678
-</span><span id=__span-3-5><a id=__codelineno-3-5 name=__codelineno-3-5></a>Range: npt=0.000-
-</span><span id=__span-3-6><a id=__codelineno-3-6 name=__codelineno-3-6></a>
-</span><span id=__span-3-7><a id=__codelineno-3-7 name=__codelineno-3-7></a>服务器响应：
-</span><span id=__span-3-8><a id=__codelineno-3-8 name=__codelineno-3-8></a>RTSP/1.0 200 OK
-</span><span id=__span-3-9><a id=__codelineno-3-9 name=__codelineno-3-9></a>CSeq: 4
-</span><span id=__span-3-10><a id=__codelineno-3-10 name=__codelineno-3-10></a>Session: 12345678
-</span><span id=__span-3-11><a id=__codelineno-3-11 name=__codelineno-3-11></a>RTP-Info: url=rtsp://192.168.1.100:554/stream1/trackID=0;seq=12345;rtptime=123456
-</span></code></pre></div></td></tr></table></div> <p>关键参数： - <strong>Range: npt=0.000-</strong>：从0秒开始播放。npt（Network Play Time）可以支持多种格式，如： - <code>npt=0-</code>：从0秒播放到结束 - <code>npt=10.5-30</code>：从10.5秒播放到30秒 - <code>npt=now-</code>：从当前位置开始 - <strong>RTP-Info</strong>：包含了RTP流的关键信息（序列号、时间戳），用于同步</p> <p><strong>PAUSE（暂停）</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1> 1</a></span>
-<span class=normal><a href=#__codelineno-4-2> 2</a></span>
-<span class=normal><a href=#__codelineno-4-3> 3</a></span>
-<span class=normal><a href=#__codelineno-4-4> 4</a></span>
-<span class=normal><a href=#__codelineno-4-5> 5</a></span>
-<span class=normal><a href=#__codelineno-4-6> 6</a></span>
-<span class=normal><a href=#__codelineno-4-7> 7</a></span>
-<span class=normal><a href=#__codelineno-4-8> 8</a></span>
-<span class=normal><a href=#__codelineno-4-9> 9</a></span>
-<span class=normal><a href=#__codelineno-4-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a>客户端发送：
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a>PAUSE rtsp://192.168.1.100:554/stream1 RTSP/1.0
-</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a>CSeq: 5
-</span><span id=__span-4-4><a id=__codelineno-4-4 name=__codelineno-4-4></a>Session: 12345678
-</span><span id=__span-4-5><a id=__codelineno-4-5 name=__codelineno-4-5></a>
-</span><span id=__span-4-6><a id=__codelineno-4-6 name=__codelineno-4-6></a>服务器响应：
-</span><span id=__span-4-7><a id=__codelineno-4-7 name=__codelineno-4-7></a>RTSP/1.0 200 OK
-</span><span id=__span-4-8><a id=__codelineno-4-8 name=__codelineno-4-8></a>CSeq: 5
-</span><span id=__span-4-9><a id=__codelineno-4-9 name=__codelineno-4-9></a>Session: 12345678
-</span><span id=__span-4-10><a id=__codelineno-4-10 name=__codelineno-4-10></a>Range: npt=10.500-
-</span></code></pre></div></td></tr></table></div> <p>��意：暂停后服务器会返回当前的时间点，下次PLAY可以接着播放。</p> <p><strong>TEARDOWN（关闭会话）</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1>1</a></span>
-<span class=normal><a href=#__codelineno-5-2>2</a></span>
-<span class=normal><a href=#__codelineno-5-3>3</a></span>
-<span class=normal><a href=#__codelineno-5-4>4</a></span>
-<span class=normal><a href=#__codelineno-5-5>5</a></span>
-<span class=normal><a href=#__codelineno-5-6>6</a></span>
-<span class=normal><a href=#__codelineno-5-7>7</a></span>
-<span class=normal><a href=#__codelineno-5-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a>客户端发送：
-</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a>TEARDOWN rtsp://192.168.1.100:554/stream1 RTSP/1.0
-</span><span id=__span-5-3><a id=__codelineno-5-3 name=__codelineno-5-3></a>CSeq: 6
-</span><span id=__span-5-4><a id=__codelineno-5-4 name=__codelineno-5-4></a>Session: 12345678
-</span><span id=__span-5-5><a id=__codelineno-5-5 name=__codelineno-5-5></a>
-</span><span id=__span-5-6><a id=__codelineno-5-6 name=__codelineno-5-6></a>服务器响应：
-</span><span id=__span-5-7><a id=__codelineno-5-7 name=__codelineno-5-7></a>RTSP/1.0 200 OK
-</span><span id=__span-5-8><a id=__codelineno-5-8 name=__codelineno-5-8></a>CSeq: 6
-</span></code></pre></div></td></tr></table></div> <p>这是会话的终点，调用后服务器会释放所有资源。</p> <h3 id=32-rtsp>3.2 RTSP状态机——协议的“心跳”<a class=headerlink href=#32-rtsp title="Permanent link">&para;</a></h3> <p>RTSP是一个有状态的协议。服务器会维护每个客户端会话的状态。状态转换图如下：</p> <pre class=mermaid><code>stateDiagram-v2
+    style B fill:#c8e6c9</code></pre> <p><strong>PLAY（开始播放）</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-3-1>客户端发送：
+</span><span id=__span-3-2>PLAY rtsp://192.168.1.100:554/stream1 RTSP/1.0
+</span><span id=__span-3-3>CSeq: 4
+</span><span id=__span-3-4>Session: 12345678
+</span><span id=__span-3-5>Range: npt=0.000-
+</span><span id=__span-3-6>
+</span><span id=__span-3-7>服务器响应：
+</span><span id=__span-3-8>RTSP/1.0 200 OK
+</span><span id=__span-3-9>CSeq: 4
+</span><span id=__span-3-10>Session: 12345678
+</span><span id=__span-3-11>RTP-Info: url=rtsp://192.168.1.100:554/stream1/trackID=0;seq=12345;rtptime=123456
+</span></code></pre></div> <p>关键参数： - <strong>Range: npt=0.000-</strong>：从0秒开始播放。npt（Network Play Time）可以支持多种格式，如： - <code>npt=0-</code>：从0秒播放到结束 - <code>npt=10.5-30</code>：从10.5秒播放到30秒 - <code>npt=now-</code>：从当前位置开始 - <strong>RTP-Info</strong>：包含了RTP流的关键信息（序列号、时间戳），用于同步</p> <p><strong>PAUSE（暂停）</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-4-1>客户端发送：
+</span><span id=__span-4-2>PAUSE rtsp://192.168.1.100:554/stream1 RTSP/1.0
+</span><span id=__span-4-3>CSeq: 5
+</span><span id=__span-4-4>Session: 12345678
+</span><span id=__span-4-5>
+</span><span id=__span-4-6>服务器响应：
+</span><span id=__span-4-7>RTSP/1.0 200 OK
+</span><span id=__span-4-8>CSeq: 5
+</span><span id=__span-4-9>Session: 12345678
+</span><span id=__span-4-10>Range: npt=10.500-
+</span></code></pre></div> <p>��意：暂停后服务器会返回当前的时间点，下次PLAY可以接着播放。</p> <p><strong>TEARDOWN（关闭会话）</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-5-1>客户端发送：
+</span><span id=__span-5-2>TEARDOWN rtsp://192.168.1.100:554/stream1 RTSP/1.0
+</span><span id=__span-5-3>CSeq: 6
+</span><span id=__span-5-4>Session: 12345678
+</span><span id=__span-5-5>
+</span><span id=__span-5-6>服务器响应：
+</span><span id=__span-5-7>RTSP/1.0 200 OK
+</span><span id=__span-5-8>CSeq: 6
+</span></code></pre></div> <p>这是会话的终点，调用后服务器会释放所有资源。</p> <h3 id=32-rtsp>3.2 RTSP状态机——协议的“心跳”<a class=headerlink href=#32-rtsp title="Permanent link">&para;</a></h3> <p>RTSP是一个有状态的协议。服务器会维护每个客户端会话的状态。状态转换图如下：</p> <pre class=mermaid><code>stateDiagram-v2
     [*] --&gt; Init: 收到第一个请求
     Init --&gt; Ready: SETUP成功
     Ready --&gt; Playing: PLAY成功
@@ -278,25 +217,17 @@
     style B fill:#ffcdd2
     style C fill:#c8e6c9
     style D fill:#fff9c4
-    style E fill:#e1bee7</code></pre> <h3 id=52-rtsp-url>5.2 摄像头RTSP URL格式<a class=headerlink href=#52-rtsp-url title="Permanent link">&para;</a></h3> <p>不同厂家的RTSP URL格式略有不同：</p> <table> <thead> <tr> <th>厂商</th> <th>URL格式</th> <th>示例</th> </tr> </thead> <tbody> <tr> <td><strong>海康威视</strong></td> <td><code>/h264/ch{1-4}/main/av_stream</code></td> <td><code>rtsp://admin:12345@192.168.1.64:554/h264/main/av_stream</code></td> </tr> <tr> <td><strong>大华</strong></td> <td><code>/cam/realmonitor?channel=1&amp;subtype=0</code></td> <td><code>rtsp://admin:admin@192.168.1.65:554/cam/realmonitor?channel=1&amp;subtype=0</code></td> </tr> <tr> <td><strong>宇视</strong></td> <td><code>/media.amp</code></td> <td><code>rtsp://192.168.1.66:554/media.amp</code></td> </tr> <tr> <td><strong>ONVIF标准</strong></td> <td><code>/onvif/media?profile=0</code></td> <td><code>rtsp://192.168.1.67:554/onvif/media?profile=0</code></td> </tr> </tbody> </table> <h3 id=53-ffmpegrtsp>5.3 使用FFmpeg进行RTSP推拉流<a class=headerlink href=#53-ffmpegrtsp title="Permanent link">&para;</a></h3> <p><strong>拉取RTSP流并保存：</strong></p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span>
-<span class=normal><a href=#__codelineno-6-2>2</a></span>
-<span class=normal><a href=#__codelineno-6-3>3</a></span>
-<span class=normal><a href=#__codelineno-6-4>4</a></span>
-<span class=normal><a href=#__codelineno-6-5>5</a></span>
-<span class=normal><a href=#__codelineno-6-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a>ffmpeg<span class=w> </span>-i<span class=w> </span>rtsp://admin:12345@192.168.1.64:554/h264/main/av_stream<span class=w> </span><span class=se>\</span>
-</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a><span class=w>       </span>-c<span class=w> </span>copy<span class=w> </span><span class=se>\</span>
-</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a><span class=w>       </span>-f<span class=w> </span>segment<span class=w> </span><span class=se>\</span>
-</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a><span class=w>       </span>-segment_time<span class=w> </span><span class=m>300</span><span class=w> </span><span class=se>\</span>
-</span><span id=__span-6-5><a id=__codelineno-6-5 name=__codelineno-6-5></a><span class=w>       </span>-segment_format<span class=w> </span>mkv<span class=w> </span><span class=se>\</span>
-</span><span id=__span-6-6><a id=__codelineno-6-6 name=__codelineno-6-6></a><span class=w>       </span>output_%03d.mkv
-</span></code></pre></div></td></tr></table></div> <p><strong>推送RTSP流：</strong></p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1>1</a></span>
-<span class=normal><a href=#__codelineno-7-2>2</a></span>
-<span class=normal><a href=#__codelineno-7-3>3</a></span>
-<span class=normal><a href=#__codelineno-7-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a>ffmpeg<span class=w> </span>-re<span class=w> </span>-i<span class=w> </span>input.mp4<span class=w> </span><span class=se>\</span>
-</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a><span class=w>       </span>-c:v<span class=w> </span>libx264<span class=w> </span>-preset<span class=w> </span>veryfast<span class=w> </span><span class=se>\</span>
-</span><span id=__span-7-3><a id=__codelineno-7-3 name=__codelineno-7-3></a><span class=w>       </span>-f<span class=w> </span>rtsp<span class=w> </span>-rtsp_transport<span class=w> </span>tcp<span class=w> </span><span class=se>\</span>
-</span><span id=__span-7-4><a id=__codelineno-7-4 name=__codelineno-7-4></a><span class=w>       </span>rtsp://192.168.1.100:554/live/stream
-</span></code></pre></div></td></tr></table></div> <h3 id=54>5.4 常见错误码与解决方案<a class=headerlink href=#54 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>错误码</th> <th>含义</th> <th>常见原因</th> <th>解决方案</th> </tr> </thead> <tbody> <tr> <td><strong>404</strong></td> <td>资源未找到</td> <td>URL路径错误</td> <td>检查URL格式和通道号</td> </tr> <tr> <td><strong>455</strong></td> <td>方法不可用</td> <td>状态机错误</td> <td>检查是否按正确顺序调用</td> </tr> <tr> <td><strong>461</strong></td> <td>不支持的传输</td> <td>传输方式错误</td> <td>尝试TCP/UDP切换</td> </tr> <tr> <td><strong>401</strong></td> <td>未认证</td> <td>用户名/密码错误</td> <td>检查认证信息</td> </tr> <tr> <td><strong>503</strong></td> <td>服务不可用</td> <td>达到最大连接数</td> <td>检查并发限制</td> </tr> </tbody> </table> <hr> <h2 id=rtsp-vs>第六章：RTSP vs 其他流媒体协议<a class=headerlink href=#rtsp-vs title="Permanent link">&para;</a></h2> <h3 id=61>6.1 协议全景对比<a class=headerlink href=#61 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>协议</th> <th>推出时间</th> <th>传输层</th> <th>控制方式</th> <th>延迟</th> <th>适用场景</th> </tr> </thead> <tbody> <tr> <td><strong>RTSP</strong></td> <td>1998</td> <td>TCP+UDP</td> <td>PLAY/PAUSE</td> <td>1-3秒</td> <td>视频监控、点播</td> </tr> <tr> <td><strong>RTMP</strong></td> <td>2007</td> <td>TCP</td> <td>基于TCP块</td> <td>3-5秒</td> <td>直播推流（抖音/快手）</td> </tr> <tr> <td><strong>HLS</strong></td> <td>2009</td> <td>HTTP</td> <td>HTTP请求</td> <td>5-10秒</td> <td>苹果生态、CDN分发</td> </tr> <tr> <td><strong>WebRTC</strong></td> <td>2011</td> <td>UDP</td> <td>P2P直连</td> <td>&lt;500ms</td> <td>实时互动、会议</td> </tr> <tr> <td><strong>SRT</strong></td> <td>2017</td> <td>UDP</td> <td>ARQ+ECC</td> <td>2秒级</td> <td>专业广电、跨国传输</td> </tr> </tbody> </table> <pre class=mermaid><code>graph TD
+    style E fill:#e1bee7</code></pre> <h3 id=52-rtsp-url>5.2 摄像头RTSP URL格式<a class=headerlink href=#52-rtsp-url title="Permanent link">&para;</a></h3> <p>不同厂家的RTSP URL格式略有不同：</p> <table> <thead> <tr> <th>厂商</th> <th>URL格式</th> <th>示例</th> </tr> </thead> <tbody> <tr> <td><strong>海康威视</strong></td> <td><code>/h264/ch{1-4}/main/av_stream</code></td> <td><code>rtsp://admin:12345@192.168.1.64:554/h264/main/av_stream</code></td> </tr> <tr> <td><strong>大华</strong></td> <td><code>/cam/realmonitor?channel=1&amp;subtype=0</code></td> <td><code>rtsp://admin:admin@192.168.1.65:554/cam/realmonitor?channel=1&amp;subtype=0</code></td> </tr> <tr> <td><strong>宇视</strong></td> <td><code>/media.amp</code></td> <td><code>rtsp://192.168.1.66:554/media.amp</code></td> </tr> <tr> <td><strong>ONVIF标准</strong></td> <td><code>/onvif/media?profile=0</code></td> <td><code>rtsp://192.168.1.67:554/onvif/media?profile=0</code></td> </tr> </tbody> </table> <h3 id=53-ffmpegrtsp>5.3 使用FFmpeg进行RTSP推拉流<a class=headerlink href=#53-ffmpegrtsp title="Permanent link">&para;</a></h3> <p><strong>拉取RTSP流并保存：</strong></p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-6-1>ffmpeg<span class=w> </span>-i<span class=w> </span>rtsp://admin:12345@192.168.1.64:554/h264/main/av_stream<span class=w> </span><span class=se>\</span>
+</span><span id=__span-6-2><span class=w>       </span>-c<span class=w> </span>copy<span class=w> </span><span class=se>\</span>
+</span><span id=__span-6-3><span class=w>       </span>-f<span class=w> </span>segment<span class=w> </span><span class=se>\</span>
+</span><span id=__span-6-4><span class=w>       </span>-segment_time<span class=w> </span><span class=m>300</span><span class=w> </span><span class=se>\</span>
+</span><span id=__span-6-5><span class=w>       </span>-segment_format<span class=w> </span>mkv<span class=w> </span><span class=se>\</span>
+</span><span id=__span-6-6><span class=w>       </span>output_%03d.mkv
+</span></code></pre></div> <p><strong>推送RTSP流：</strong></p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-7-1>ffmpeg<span class=w> </span>-re<span class=w> </span>-i<span class=w> </span>input.mp4<span class=w> </span><span class=se>\</span>
+</span><span id=__span-7-2><span class=w>       </span>-c:v<span class=w> </span>libx264<span class=w> </span>-preset<span class=w> </span>veryfast<span class=w> </span><span class=se>\</span>
+</span><span id=__span-7-3><span class=w>       </span>-f<span class=w> </span>rtsp<span class=w> </span>-rtsp_transport<span class=w> </span>tcp<span class=w> </span><span class=se>\</span>
+</span><span id=__span-7-4><span class=w>       </span>rtsp://192.168.1.100:554/live/stream
+</span></code></pre></div> <h3 id=54>5.4 常见错误码与解决方案<a class=headerlink href=#54 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>错误码</th> <th>含义</th> <th>常见原因</th> <th>解决方案</th> </tr> </thead> <tbody> <tr> <td><strong>404</strong></td> <td>资源未找到</td> <td>URL路径错误</td> <td>检查URL格式和通道号</td> </tr> <tr> <td><strong>455</strong></td> <td>方法不可用</td> <td>状态机错误</td> <td>检查是否按正确顺序调用</td> </tr> <tr> <td><strong>461</strong></td> <td>不支持的传输</td> <td>传输方式错误</td> <td>尝试TCP/UDP切换</td> </tr> <tr> <td><strong>401</strong></td> <td>未认证</td> <td>用户名/密码错误</td> <td>检查认证信息</td> </tr> <tr> <td><strong>503</strong></td> <td>服务不可用</td> <td>达到最大连接数</td> <td>检查并发限制</td> </tr> </tbody> </table> <hr> <h2 id=rtsp-vs>第六章：RTSP vs 其他流媒体协议<a class=headerlink href=#rtsp-vs title="Permanent link">&para;</a></h2> <h3 id=61>6.1 协议全景对比<a class=headerlink href=#61 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>协议</th> <th>推出时间</th> <th>传输层</th> <th>控制方式</th> <th>延迟</th> <th>适用场景</th> </tr> </thead> <tbody> <tr> <td><strong>RTSP</strong></td> <td>1998</td> <td>TCP+UDP</td> <td>PLAY/PAUSE</td> <td>1-3秒</td> <td>视频监控、点播</td> </tr> <tr> <td><strong>RTMP</strong></td> <td>2007</td> <td>TCP</td> <td>基于TCP块</td> <td>3-5秒</td> <td>直播推流（抖音/快手）</td> </tr> <tr> <td><strong>HLS</strong></td> <td>2009</td> <td>HTTP</td> <td>HTTP请求</td> <td>5-10秒</td> <td>苹果生态、CDN分发</td> </tr> <tr> <td><strong>WebRTC</strong></td> <td>2011</td> <td>UDP</td> <td>P2P直连</td> <td>&lt;500ms</td> <td>实时互动、会议</td> </tr> <tr> <td><strong>SRT</strong></td> <td>2017</td> <td>UDP</td> <td>ARQ+ECC</td> <td>2秒级</td> <td>专业广电、跨国传输</td> </tr> </tbody> </table> <pre class=mermaid><code>graph TD
     A["选择流媒体协议"] --&gt; B{延迟要求?}
     B --&gt;|低延迟&lt;1s| C["WebRTC / SRT"]
     B --&gt;|中延迟1-5s| D["RTSP / RTMP"]
@@ -316,20 +247,14 @@
     style C2 fill:#c8e6c9
     style C3 fill:#c8e6c9
     style D4 fill:#fff9c4
-    style D5 fill:#fff9c4</code></pre> <h3 id=62-rtsp>6.2 RTSP的核心优势<a class=headerlink href=#62-rtsp title="Permanent link">&para;</a></h3> <ol> <li><strong>低延迟</strong>：相比HLS的10秒+延迟，RTSP可以做到1-3秒</li> <li><strong>支持控制</strong>：PLAY/PAUSE/SEEK功能完善，用户体验好</li> <li><strong>广泛兼容</strong>：几乎所有摄像头、NVR都支持RTSP</li> <li><strong>TCP/UDP可选</strong>：可以根据网络环境选择可靠的TCP或高效的UDP</li> </ol> <h3 id=63-rtsp>6.3 RTSP的局限性<a class=headerlink href=#63-rtsp title="Permanent link">&para;</a></h3> <ol> <li><strong>需要防火墙放行</strong>：554端口经常被企业防火墙阻断</li> <li><strong>无CDN友好性</strong>：不如HLS容易被CDN缓存和分发</li> <li><strong>无DRM支持</strong>：版权保护需要额外方案</li> <li><strong>复杂度高</strong>：需要维护RTP/RTCP多通道</li> </ol> <hr> <h2 id=rtsp_4>第七章：安全考量——RTSP的安全机制<a class=headerlink href=#rtsp_4 title="Permanent link">&para;</a></h2> <h3 id=71>7.1 认证机制<a class=headerlink href=#71 title="Permanent link">&para;</a></h3> <p>RTSP支持两种认证方式：</p> <p><strong>Basic认证（基础认证）</strong> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a>Authorization: Basic YWRtaW46MTIzNDU=
-</span></code></pre></div></td></tr></table></div> Base64编码的用户名:密码，简单但不安全。</p> <p><strong>Digest认证（摘要认证）</strong> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1>1</a></span>
-<span class=normal><a href=#__codelineno-9-2>2</a></span>
-<span class=normal><a href=#__codelineno-9-3>3</a></span>
-<span class=normal><a href=#__codelineno-9-4>4</a></span>
-<span class=normal><a href=#__codelineno-9-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a>Authorization: Digest username=&quot;admin&quot;, 
-</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a>                     realm=&quot;rtsp&quot;, 
-</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a>                     nonce=&quot;abc123&quot;, 
-</span><span id=__span-9-4><a id=__codelineno-9-4 name=__codelineno-9-4></a>                     uri=&quot;rtsp://...&quot;, 
-</span><span id=__span-9-5><a id=__codelineno-9-5 name=__codelineno-9-5></a>                     response=&quot;xyz789&quot;
-</span></code></pre></div></td></tr></table></div> 基于MD5挑战-响应机制，更安全。</p> <h3 id=72-tlsrtsps>7.2 TLS加密（RTSPS）<a class=headerlink href=#72-tlsrtsps title="Permanent link">&para;</a></h3> <p>RTSP 2.0（RFC 7822）增加了TLS支持：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a>rtsps://192.168.1.100:443/live/stream
-</span></code></pre></div></td></tr></table></div> <p>这会建立加密通道，防止： - 窃听（Eavesdropping） - 篡改（Tampering） - 伪造（Forgery）</p> <h3 id=73>7.3 防攻击建议<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <ol> <li><strong>强制认证</strong>：关闭匿名访问</li> <li><strong>端口限制</strong>：仅允许必要的IP访问RTSP端口</li> <li><strong>速率限制</strong>：防止DDoS攻击</li> <li><strong>定期更新</strong>：使用最新固件版本</li> <li><strong>网络隔离</strong>：RTSP服务放在DMZ或内网</li> </ol> <hr> <h2 id=rtsp_5>第八章：深入原理——为什么RTSP如此设计？<a class=headerlink href=#rtsp_5 title="Permanent link">&para;</a></h2> <h3 id=81>8.1 设计哲学<a class=headerlink href=#81 title="Permanent link">&para;</a></h3> <p>RTSP的设计遵循了几个核心原则：</p> <ol> <li><strong>媒体无关性</strong>：只控制流，不关心是H264、MJPEG还是H265</li> <li><strong>会话独立性</strong>：每个SETUP创建独立会话，互不干扰</li> <li><strong>传输透明性</strong>：支持RTP over TCP、RTP over UDP、RTP over RTSP（ interleaved）四种模式</li> <li><strong>状态可恢复性</strong>：网络中断后可以恢复会话</li> </ol> <h3 id=82>8.2 时间戳的深层含义<a class=headerlink href=#82 title="Permanent link">&para;</a></h3> <p>RTP时间戳是理解实时流的关键：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1>1</a></span>
-<span class=normal><a href=#__codelineno-11-2>2</a></span>
-<span class=normal><a href=#__codelineno-11-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a>时间戳增量 = (采样频率 / 帧率)
-</span><span id=__span-11-2><a id=__codelineno-11-2 name=__codelineno-11-2></a>            = 90000 / 30
-</span><span id=__span-11-3><a id=__codelineno-11-3 name=__codelineno-11-3></a>            = 3000
-</span></code></pre></div></td></tr></table></div> <p>对于H.264/AVC（采样频率90000Hz，30fps）： - 每帧的时间戳增量是3000 - 如果某一帧时间戳是270000，下一帧就是273000 - 播放时按照时间戳而非序列号排序</p> <h3 id=83-rtp>8.3 RTP负载类型的动态协商<a class=headerlink href=#83-rtp title="Permanent link">&para;</a></h3> <p>负载类型（Payload Type）不是固定的，而是在SETUP时协商确定：</p> <table> <thead> <tr> <th>PT值</th> <th>编码</th> <th>时钟频率</th> </tr> </thead> <tbody> <tr> <td>0</td> <td>PCMU</td> <td>8000 Hz</td> </tr> <tr> <td>26</td> <td>JPEG</td> <td>90000 Hz</td> </tr> <tr> <td>96</td> <td>H264</td> <td>90000 Hz</td> </tr> <tr> <td>97</td> <td>MP4V-ES</td> <td>90000 Hz</td> </tr> <tr> <td>98</td> <td>H265</td> <td>90000 Hz</td> </tr> </tbody> </table> <hr> <h2 id=rtsp_6>结语：RTSP的未来<a class=headerlink href=#rtsp_6 title="Permanent link">&para;</a></h2> <p>RTSP诞生于1998年，在流媒体protocol领域算是“元老”了。25年后的今天：</p> <ul> <li><strong>视频监控</strong>：RTSP仍是事实标准，几乎所有IPC/NVR都支持</li> <li><strong>直播领域</strong>：RTMP正在被SRT和WebRTC蚕食</li> <li><strong>Web领域</strong>：WebRTC+HLS占据主导</li> </ul> <p>但RTSP的“控制+传输”分离架构，依然是流媒体系统设计的典范。它验证了一个真理：</p> <blockquote> <p><strong>在实时性和可控性之间找到平衡，是流媒体协议永恒的命题。</strong></p> </blockquote> <p>下一次，当你用VLC播放网络摄像头，或者在NVR上添加新设备时，请记住：</p> <blockquote> <p>那背后是一次完整的RTSP握手——OPTIONS探测、DESCRIBE获取描述、SETUP建立会话、然后才是PLAY开始播放。</p> </blockquote> <p>这就是RTSP，一个看似简单却内涵深厚的协议。</p> <hr> <p>**</p> <hr> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> </div> <div class=md-social> <a href=https://github.com/deep2code target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://linkedin.com/in/deep2code target=_blank rel=noopener title=linkedin.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg> </a> <a href=https://twitter.com/deep2code target=_blank rel=noopener title=twitter.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.select", "content.code.annotate", "content.tabs.link", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script> <script src=../../assets/javascripts/bundle.79ae519e.min.js></script> <script src=https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js></script> <script src=../../assets/js/code-block.js></script> <script src=../../assets/js/custom.js></script> </body> </html>
+    style D5 fill:#fff9c4</code></pre> <h3 id=62-rtsp>6.2 RTSP的核心优势<a class=headerlink href=#62-rtsp title="Permanent link">&para;</a></h3> <ol> <li><strong>低延迟</strong>：相比HLS的10秒+延迟，RTSP可以做到1-3秒</li> <li><strong>支持控制</strong>：PLAY/PAUSE/SEEK功能完善，用户体验好</li> <li><strong>广泛兼容</strong>：几乎所有摄像头、NVR都支持RTSP</li> <li><strong>TCP/UDP可选</strong>：可以根据网络环境选择可靠的TCP或高效的UDP</li> </ol> <h3 id=63-rtsp>6.3 RTSP的局限性<a class=headerlink href=#63-rtsp title="Permanent link">&para;</a></h3> <ol> <li><strong>需要防火墙放行</strong>：554端口经常被企业防火墙阻断</li> <li><strong>无CDN友好性</strong>：不如HLS容易被CDN缓存和分发</li> <li><strong>无DRM支持</strong>：版权保护需要额外方案</li> <li><strong>复杂度高</strong>：需要维护RTP/RTCP多通道</li> </ol> <hr> <h2 id=rtsp_4>第七章：安全考量——RTSP的安全机制<a class=headerlink href=#rtsp_4 title="Permanent link">&para;</a></h2> <h3 id=71>7.1 认证机制<a class=headerlink href=#71 title="Permanent link">&para;</a></h3> <p>RTSP支持两种认证方式：</p> <p><strong>Basic认证（基础认证）</strong> <div class="language-text highlight"><pre><span></span><code><span id=__span-8-1>Authorization: Basic YWRtaW46MTIzNDU=
+</span></code></pre></div> Base64编码的用户名:密码，简单但不安全。</p> <p><strong>Digest认证（摘要认证）</strong> <div class="language-text highlight"><pre><span></span><code><span id=__span-9-1>Authorization: Digest username=&quot;admin&quot;, 
+</span><span id=__span-9-2>                     realm=&quot;rtsp&quot;, 
+</span><span id=__span-9-3>                     nonce=&quot;abc123&quot;, 
+</span><span id=__span-9-4>                     uri=&quot;rtsp://...&quot;, 
+</span><span id=__span-9-5>                     response=&quot;xyz789&quot;
+</span></code></pre></div> 基于MD5挑战-响应机制，更安全。</p> <h3 id=72-tlsrtsps>7.2 TLS加密（RTSPS）<a class=headerlink href=#72-tlsrtsps title="Permanent link">&para;</a></h3> <p>RTSP 2.0（RFC 7822）增加了TLS支持：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-10-1>rtsps://192.168.1.100:443/live/stream
+</span></code></pre></div> <p>这会建立加密通道，防止： - 窃听（Eavesdropping） - 篡改（Tampering） - 伪造（Forgery）</p> <h3 id=73>7.3 防攻击建议<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <ol> <li><strong>强制认证</strong>：关闭匿名访问</li> <li><strong>端口限制</strong>：仅允许必要的IP访问RTSP端口</li> <li><strong>速率限制</strong>：防止DDoS攻击</li> <li><strong>定期更新</strong>：使用最新固件版本</li> <li><strong>网络隔离</strong>：RTSP服务放在DMZ或内网</li> </ol> <hr> <h2 id=rtsp_5>第八章：深入原理——为什么RTSP如此设计？<a class=headerlink href=#rtsp_5 title="Permanent link">&para;</a></h2> <h3 id=81>8.1 设计哲学<a class=headerlink href=#81 title="Permanent link">&para;</a></h3> <p>RTSP的设计遵循了几个核心原则：</p> <ol> <li><strong>媒体无关性</strong>：只控制流，不关心是H264、MJPEG还是H265</li> <li><strong>会话独立性</strong>：每个SETUP创建独立会话，互不干扰</li> <li><strong>传输透明性</strong>：支持RTP over TCP、RTP over UDP、RTP over RTSP（ interleaved）四种模式</li> <li><strong>状态可恢复性</strong>：网络中断后可以恢复会话</li> </ol> <h3 id=82>8.2 时间戳的深层含义<a class=headerlink href=#82 title="Permanent link">&para;</a></h3> <p>RTP时间戳是理解实时流的关键：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-11-1>时间戳增量 = (采样频率 / 帧率)
+</span><span id=__span-11-2>            = 90000 / 30
+</span><span id=__span-11-3>            = 3000
+</span></code></pre></div> <p>对于H.264/AVC（采样频率90000Hz，30fps）： - 每帧的时间戳增量是3000 - 如果某一帧时间戳是270000，下一帧就是273000 - 播放时按照时间戳而非序列号排序</p> <h3 id=83-rtp>8.3 RTP负载类型的动态协商<a class=headerlink href=#83-rtp title="Permanent link">&para;</a></h3> <p>负载类型（Payload Type）不是固定的，而是在SETUP时协商确定：</p> <table> <thead> <tr> <th>PT值</th> <th>编码</th> <th>时钟频率</th> </tr> </thead> <tbody> <tr> <td>0</td> <td>PCMU</td> <td>8000 Hz</td> </tr> <tr> <td>26</td> <td>JPEG</td> <td>90000 Hz</td> </tr> <tr> <td>96</td> <td>H264</td> <td>90000 Hz</td> </tr> <tr> <td>97</td> <td>MP4V-ES</td> <td>90000 Hz</td> </tr> <tr> <td>98</td> <td>H265</td> <td>90000 Hz</td> </tr> </tbody> </table> <hr> <h2 id=rtsp_6>结语：RTSP的未来<a class=headerlink href=#rtsp_6 title="Permanent link">&para;</a></h2> <p>RTSP诞生于1998年，在流媒体protocol领域算是“元老”了。25年后的今天：</p> <ul> <li><strong>视频监控</strong>：RTSP仍是事实标准，几乎所有IPC/NVR都支持</li> <li><strong>直播领域</strong>：RTMP正在被SRT和WebRTC蚕食</li> <li><strong>Web领域</strong>：WebRTC+HLS占据主导</li> </ul> <p>但RTSP的“控制+传输”分离架构，依然是流媒体系统设计的典范。它验证了一个真理：</p> <blockquote> <p><strong>在实时性和可控性之间找到平衡，是流媒体协议永恒的命题。</strong></p> </blockquote> <p>下一次，当你用VLC播放网络摄像头，或者在NVR上添加新设备时，请记住：</p> <blockquote> <p>那背后是一次完整的RTSP握手——OPTIONS探测、DESCRIBE获取描述、SETUP建立会话、然后才是PLAY开始播放。</p> </blockquote> <p>这就是RTSP，一个看似简单却内涵深厚的协议。</p> <hr> <p>**</p> <hr> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> </div> <div class=md-social> <a href=https://github.com/deep2code target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://linkedin.com/in/deep2code target=_blank rel=noopener title=linkedin.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg> </a> <a href=https://twitter.com/deep2code target=_blank rel=noopener title=twitter.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.select", "content.code.annotate", "content.tabs.link", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script> <script src=../../assets/javascripts/bundle.79ae519e.min.js></script> <script src=https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js></script> <script src=../../assets/js/code-block.js></script> <script src=../../assets/js/custom.js></script> </body> </html>

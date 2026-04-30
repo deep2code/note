@@ -84,26 +84,17 @@
     style H fill:#bbdefb
     style I fill:#bbdefb
     style J fill:#bbdefb
-    style K fill:#ffcdd2</code></pre> <h3 id=53>5.3 进阶技巧<a class=headerlink href=#53 title="Permanent link">&para;</a></h3> <p><strong>技巧一：Few-shot Learning（少样本学习）</strong></p> <p>直接给模型举例子，让它模仿：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1> 1</a></span>
-<span class=normal><a href=#__codelineno-0-2> 2</a></span>
-<span class=normal><a href=#__codelineno-0-3> 3</a></span>
-<span class=normal><a href=#__codelineno-0-4> 4</a></span>
-<span class=normal><a href=#__codelineno-0-5> 5</a></span>
-<span class=normal><a href=#__codelineno-0-6> 6</a></span>
-<span class=normal><a href=#__codelineno-0-7> 7</a></span>
-<span class=normal><a href=#__codelineno-0-8> 8</a></span>
-<span class=normal><a href=#__codelineno-0-9> 9</a></span>
-<span class=normal><a href=#__codelineno-0-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>请判断以下评论的情感是正面还是负面。
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a>
-</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a>评论：&quot;这个产品太棒了，非常满意！&quot;
-</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a>情感：正面
-</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a>
-</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a>评论：&quot;体验很差，不会再买&quot;
-</span><span id=__span-0-7><a id=__codelineno-0-7 name=__codelineno-0-7></a>情感：负面
-</span><span id=__span-0-8><a id=__codelineno-0-8 name=__codelineno-0-8></a>
-</span><span id=__span-0-9><a id=__codelineno-0-9 name=__codelineno-0-9></a>评论：&quot;还可以，一般般吧&quot;
-</span><span id=__span-0-10><a id=__codelineno-0-10 name=__codelineno-0-10></a>情感：
-</span></code></pre></div></td></tr></table></div> <p><strong>技巧二：思维链（Chain of Thought）</strong></p> <p>让模型"一步步思考"：</p> <blockquote> <p>"请一步步计算：25 × 4 + 17 = ?，展示你的计算过程。"</p> </blockquote> <p><strong>技巧三：分步处理复杂任务</strong> 未来的大模型将不只是"听说读写"，还能<strong>看图、看视频、听声音</strong>，成为真正的多模态助手。</p> <p><strong>2. 长上下文</strong> 上下文窗口将越来越长，模型能够处理整本书、整部电影的内容。</p> <p><strong>3. 自主Agent</strong> 从"回答问题"到"自主执行"，AI Agent将能够帮你自动完成复杂任务。</p> <p><strong>4. 个性化定制</strong> 每个人都可以拥有自己的"AI助手"，它了解你的习惯和偏好。</p> <h3 id=72>7.2 我们应该如何应对？<a class=headerlink href=#72 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>flowchart TD
+    style K fill:#ffcdd2</code></pre> <h3 id=53>5.3 进阶技巧<a class=headerlink href=#53 title="Permanent link">&para;</a></h3> <p><strong>技巧一：Few-shot Learning（少样本学习）</strong></p> <p>直接给模型举例子，让它模仿：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-0-1>请判断以下评论的情感是正面还是负面。
+</span><span id=__span-0-2>
+</span><span id=__span-0-3>评论：&quot;这个产品太棒了，非常满意！&quot;
+</span><span id=__span-0-4>情感：正面
+</span><span id=__span-0-5>
+</span><span id=__span-0-6>评论：&quot;体验很差，不会再买&quot;
+</span><span id=__span-0-7>情感：负面
+</span><span id=__span-0-8>
+</span><span id=__span-0-9>评论：&quot;还可以，一般般吧&quot;
+</span><span id=__span-0-10>情感：
+</span></code></pre></div> <p><strong>技巧二：思维链（Chain of Thought）</strong></p> <p>让模型"一步步思考"：</p> <blockquote> <p>"请一步步计算：25 × 4 + 17 = ?，展示你的计算过程。"</p> </blockquote> <p><strong>技巧三：分步处理复杂任务</strong> 未来的大模型将不只是"听说读写"，还能<strong>看图、看视频、听声音</strong>，成为真正的多模态助手。</p> <p><strong>2. 长上下文</strong> 上下文窗口将越来越长，模型能够处理整本书、整部电影的内容。</p> <p><strong>3. 自主Agent</strong> 从"回答问题"到"自主执行"，AI Agent将能够帮你自动完成复杂任务。</p> <p><strong>4. 个性化定制</strong> 每个人都可以拥有自己的"AI助手"，它了解你的习惯和偏好。</p> <h3 id=72>7.2 我们应该如何应对？<a class=headerlink href=#72 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>flowchart TD
     A[面对AI浪潮] --&gt; B[不必焦虑]
     A --&gt; C[但要行动]
 

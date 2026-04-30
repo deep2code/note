@@ -98,89 +98,50 @@
     V--&gt;&gt;D: 返回 Top-K 结果
     D-&gt;&gt;L: 用户问题 + 检索到的文档
     L--&gt;&gt;D: 基于文档生成回答
-    D--&gt;&gt;U: 回答</code></pre> <p><strong>Dify 知识库支持的文件格式</strong>： - TXT、Markdown、PDF、DOCX - CSV、Excel - 网页（通过 URL 抓取） - Notion 同步 - 飞书文档同步</p> <p><strong>关键配置项</strong>：</p> <table> <thead> <tr> <th>配置</th> <th>说明</th> <th>建议</th> </tr> </thead> <tbody> <tr> <td>切片方式</td> <td>自动 / 自定义</td> <td>短文档用自动，长文档用自定义</td> </tr> <tr> <td>切片长度</td> <td>每个文本块的 Token 数</td> <td>500-1000 较合适</td> </tr> <tr> <td>重叠长度</td> <td>相邻块之间的重叠</td> <td>切片长度的 10%-20%</td> </tr> <tr> <td>检索模式</td> <td>向量检索 / 全文检索 / 混合检索</td> <td>混合检索效果最好</td> </tr> <tr> <td>Top K</td> <td>检索返回的文档片段数</td> <td>3-5 为宜</td> </tr> <tr> <td>Score 阈值</td> <td>相似度最低门槛</td> <td>0.5-0.7 之间</td> </tr> </tbody> </table> <p><strong>一个小技巧</strong>：知识库效果不好时，先检查切片质量。切片太大，检索不精准；切片太小，上下文丢失。</p> <h3 id=53>5.3 模型管理<a class=headerlink href=#53 title="Permanent link">&para;</a></h3> <p>Dify 最大的便利之一：<strong>一个平台管理所有模型</strong>。</p> <p>你不需要在 OpenAI、Anthropic、DeepSeek 之间反复切换，只需要在 Dify 的"设置-模型供应商"中配置好 API Key，之后在应用中直接选择模型即可。</p> <p><strong>支持的模型供应商（部分）</strong>：</p> <table> <thead> <tr> <th>供应商</th> <th>代表模型</th> <th>特点</th> </tr> </thead> <tbody> <tr> <td>OpenAI</td> <td>GPT-4o、GPT-4o-mini</td> <td>综合最强</td> </tr> <tr> <td>Anthropic</td> <td>Claude 3.5 Sonnet</td> <td>长文本、推理优</td> </tr> <tr> <td>DeepSeek</td> <td>DeepSeek-V3、DeepSeek-R1</td> <td>性价比极高</td> </tr> <tr> <td>阿里云</td> <td>通义千问-Max</td> <td>中文能力强</td> </tr> <tr> <td>Google</td> <td>Gemini 2.0 Pro</td> <td>多模态强</td> </tr> <tr> <td>Ollama</td> <td>本地模型</td> <td>数据不出本机</td> </tr> </tbody> </table> <p><strong>配置方法</strong>：进入"设置" → "模型供应商" → 找到对应供应商 → 填入 API Key → 保存。之后在应用的 LLM 节点中就能选择该供应商的模型了。</p> <h3 id=54-api>5.4 API 即服务<a class=headerlink href=#54-api title="Permanent link">&para;</a></h3> <p>你在 Dify 上搭建的应用，会自动获得一个 REST API。这意味着：</p> <ul> <li>前端页面可以直接调用</li> <li>其他系统可以集成</li> <li>可以作为微服务使用</li> </ul> <p><strong>调用示例</strong>：</p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1> 1</a></span>
-<span class=normal><a href=#__codelineno-0-2> 2</a></span>
-<span class=normal><a href=#__codelineno-0-3> 3</a></span>
-<span class=normal><a href=#__codelineno-0-4> 4</a></span>
-<span class=normal><a href=#__codelineno-0-5> 5</a></span>
-<span class=normal><a href=#__codelineno-0-6> 6</a></span>
-<span class=normal><a href=#__codelineno-0-7> 7</a></span>
-<span class=normal><a href=#__codelineno-0-8> 8</a></span>
-<span class=normal><a href=#__codelineno-0-9> 9</a></span>
-<span class=normal><a href=#__codelineno-0-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>curl<span class=w> </span>-X<span class=w> </span>POST<span class=w> </span><span class=s1>&#39;https://api.dify.ai/v1/chat-messages&#39;</span><span class=w> </span><span class=se>\</span>
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a><span class=w>  </span>-H<span class=w> </span><span class=s1>&#39;Authorization: Bearer {api_key}&#39;</span><span class=w> </span><span class=se>\</span>
-</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a><span class=w>  </span>-H<span class=w> </span><span class=s1>&#39;Content-Type: application/json&#39;</span><span class=w> </span><span class=se>\</span>
-</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a><span class=w>  </span>-d<span class=w> </span><span class=s1>&#39;{</span>
-</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a><span class=s1>    &quot;inputs&quot;: {},</span>
-</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a><span class=s1>    &quot;query&quot;: &quot;你好，请介绍一下你们的产品&quot;,</span>
-</span><span id=__span-0-7><a id=__codelineno-0-7 name=__codelineno-0-7></a><span class=s1>    &quot;response_mode&quot;: &quot;blocking&quot;,</span>
-</span><span id=__span-0-8><a id=__codelineno-0-8 name=__codelineno-0-8></a><span class=s1>    &quot;conversation_id&quot;: &quot;&quot;,</span>
-</span><span id=__span-0-9><a id=__codelineno-0-9 name=__codelineno-0-9></a><span class=s1>    &quot;user&quot;: &quot;user-123&quot;</span>
-</span><span id=__span-0-10><a id=__codelineno-0-10 name=__codelineno-0-10></a><span class=s1>  }&#39;</span>
-</span></code></pre></div></td></tr></table></div> <p>Dify 还提供多种 SDK：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span>
-<span class=normal><a href=#__codelineno-1-2>2</a></span>
-<span class=normal><a href=#__codelineno-1-3>3</a></span>
-<span class=normal><a href=#__codelineno-1-4>4</a></span>
-<span class=normal><a href=#__codelineno-1-5>5</a></span>
-<span class=normal><a href=#__codelineno-1-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=c1># Python SDK</span>
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a><span class=kn>from</span><span class=w> </span><span class=nn>dify_client</span><span class=w> </span><span class=kn>import</span> <span class=n>DifyClient</span>
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a><span class=n>client</span> <span class=o>=</span> <span class=n>DifyClient</span><span class=p>(</span><span class=n>api_key</span><span class=o>=</span><span class=s2>&quot;your-api-key&quot;</span><span class=p>)</span>
-</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a><span class=n>result</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=n>chat</span><span class=p>(</span><span class=n>query</span><span class=o>=</span><span class=s2>&quot;你好&quot;</span><span class=p>,</span> <span class=n>user</span><span class=o>=</span><span class=s2>&quot;user-123&quot;</span><span class=p>)</span>
-</span><span id=__span-1-6><a id=__codelineno-1-6 name=__codelineno-1-6></a><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=_6>六、动手实操——从部署到搭建第一个应用<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <h3 id=61-dify>6.1 部署 Dify<a class=headerlink href=#61-dify title="Permanent link">&para;</a></h3> <p>你有两种选择：</p> <p><strong>方案 A：使用 Dify 云端版（最快上手）</strong></p> <p>直接访问 https://cloud.dify.ai ，注册即可使用。免费额度足够学习和测试。</p> <p><strong>方案 B：本地 Docker 部署（数据完全自主）</strong></p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1> 1</a></span>
-<span class=normal><a href=#__codelineno-2-2> 2</a></span>
-<span class=normal><a href=#__codelineno-2-3> 3</a></span>
-<span class=normal><a href=#__codelineno-2-4> 4</a></span>
-<span class=normal><a href=#__codelineno-2-5> 5</a></span>
-<span class=normal><a href=#__codelineno-2-6> 6</a></span>
-<span class=normal><a href=#__codelineno-2-7> 7</a></span>
-<span class=normal><a href=#__codelineno-2-8> 8</a></span>
-<span class=normal><a href=#__codelineno-2-9> 9</a></span>
-<span class=normal><a href=#__codelineno-2-10>10</a></span>
-<span class=normal><a href=#__codelineno-2-11>11</a></span>
-<span class=normal><a href=#__codelineno-2-12>12</a></span>
-<span class=normal><a href=#__codelineno-2-13>13</a></span>
-<span class=normal><a href=#__codelineno-2-14>14</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=c1># 1. 克隆仓库</span>
-</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a>git<span class=w> </span>clone<span class=w> </span>https://github.com/langgenius/dify.git
-</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a>
-</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a><span class=c1># 2. 进入 docker 目录</span>
-</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a><span class=nb>cd</span><span class=w> </span>dify/docker
-</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6></a>
-</span><span id=__span-2-7><a id=__codelineno-2-7 name=__codelineno-2-7></a><span class=c1># 3. 复制环境变量配置</span>
-</span><span id=__span-2-8><a id=__codelineno-2-8 name=__codelineno-2-8></a>cp<span class=w> </span>.env.example<span class=w> </span>.env
-</span><span id=__span-2-9><a id=__codelineno-2-9 name=__codelineno-2-9></a>
-</span><span id=__span-2-10><a id=__codelineno-2-10 name=__codelineno-2-10></a><span class=c1># 4. 启动服务</span>
-</span><span id=__span-2-11><a id=__codelineno-2-11 name=__codelineno-2-11></a>docker<span class=w> </span>compose<span class=w> </span>up<span class=w> </span>-d
-</span><span id=__span-2-12><a id=__codelineno-2-12 name=__codelineno-2-12></a>
-</span><span id=__span-2-13><a id=__codelineno-2-13 name=__codelineno-2-13></a><span class=c1># 5. 查看服务状态</span>
-</span><span id=__span-2-14><a id=__codelineno-2-14 name=__codelineno-2-14></a>docker<span class=w> </span>compose<span class=w> </span>ps
-</span></code></pre></div></td></tr></table></div> <p>启动成功后，访问 http://localhost/install 进行初始化设置，创建管理员账号。</p> <p><strong>最低配置要求</strong>：</p> <table> <thead> <tr> <th>项目</th> <th>最低要求</th> <th>推荐配置</th> </tr> </thead> <tbody> <tr> <td>CPU</td> <td>2 核</td> <td>4 核+</td> </tr> <tr> <td>内存</td> <td>4 GB</td> <td>8 GB+</td> </tr> <tr> <td>磁盘</td> <td>20 GB</td> <td>50 GB+</td> </tr> <tr> <td>Docker</td> <td>20.10+</td> <td>最新版</td> </tr> <tr> <td>Docker Compose</td> <td>2.0+</td> <td>最新版</td> </tr> </tbody> </table> <h3 id=62>6.2 配置模型<a class=headerlink href=#62 title="Permanent link">&para;</a></h3> <p>部署完成后，第一件事是配置模型：</p> <ol> <li>点击右上角头像 → "设置"</li> <li>选择 "模型供应商"</li> <li>找到你想用的供应商（比如 OpenAI）</li> <li>填入 API Key</li> <li>保存</li> </ol> <p><strong>推荐入门组合</strong>： - 对话：GPT-4o-mini 或 DeepSeek-V3（便宜好用） - 推理：GPT-4o 或 DeepSeek-R1 - 嵌入（知识库用）：text-embedding-3-small</p> <h3 id=63-ai>6.3 搭建第一个应用：AI 客服助手<a class=headerlink href=#63-ai title="Permanent link">&para;</a></h3> <p>我们来搭一个最实用的场景——<strong>基于产品文档的 AI 客服</strong>。</p> <p><strong>第一步：创建应用</strong></p> <ol> <li>点击"创建应用"</li> <li>选择"聊天助手"</li> <li>填写应用名称："智能客服助手"</li> </ol> <p><strong>第二步：编写提示词</strong></p> <p>在"编排"页面的"提示词"区域写入：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1> 1</a></span>
-<span class=normal><a href=#__codelineno-3-2> 2</a></span>
-<span class=normal><a href=#__codelineno-3-3> 3</a></span>
-<span class=normal><a href=#__codelineno-3-4> 4</a></span>
-<span class=normal><a href=#__codelineno-3-5> 5</a></span>
-<span class=normal><a href=#__codelineno-3-6> 6</a></span>
-<span class=normal><a href=#__codelineno-3-7> 7</a></span>
-<span class=normal><a href=#__codelineno-3-8> 8</a></span>
-<span class=normal><a href=#__codelineno-3-9> 9</a></span>
-<span class=normal><a href=#__codelineno-3-10>10</a></span>
-<span class=normal><a href=#__codelineno-3-11>11</a></span>
-<span class=normal><a href=#__codelineno-3-12>12</a></span>
-<span class=normal><a href=#__codelineno-3-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a>你是「极客商城」的智能客服，负责回答用户关于产品、订单、售后的问题。
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>
-</span><span id=__span-3-3><a id=__codelineno-3-3 name=__codelineno-3-3></a>## 你的工作原则
-</span><span id=__span-3-4><a id=__codelineno-3-4 name=__codelineno-3-4></a>1. 只回答与极客商城相关的问题，不回答无关问题
-</span><span id=__span-3-5><a id=__codelineno-3-5 name=__codelineno-3-5></a>2. 优先基于知识库中的信息回答
-</span><span id=__span-3-6><a id=__codelineno-3-6 name=__codelineno-3-6></a>3. 如果知识库中没有相关信息，诚实告知用户，不要编造
-</span><span id=__span-3-7><a id=__codelineno-3-7 name=__codelineno-3-7></a>4. 回答简洁明了，不要啰嗦
-</span><span id=__span-3-8><a id=__codelineno-3-8 name=__codelineno-3-8></a>5. 如果用户情绪激动，先安抚再解答
-</span><span id=__span-3-9><a id=__codelineno-3-9 name=__codelineno-3-9></a>
-</span><span id=__span-3-10><a id=__codelineno-3-10 name=__codelineno-3-10></a>## 回答格式
-</span><span id=__span-3-11><a id=__codelineno-3-11 name=__codelineno-3-11></a>- 产品问题：给出产品名称、价格、核心特点
-</span><span id=__span-3-12><a id=__codelineno-3-12 name=__codelineno-3-12></a>- 订单问题：先确认订单号，再查询
-</span><span id=__span-3-13><a id=__codelineno-3-13 name=__codelineno-3-13></a>- 售后问题：说明退货/换货流程和时效
-</span></code></pre></div></td></tr></table></div> <p><strong>第三步：创建知识库</strong></p> <ol> <li>进入"知识库"页面</li> <li>点击"创建知识库"</li> <li>上传你的产品文档（PDF、TXT、Markdown 都行）</li> <li>选择分段设置：</li> <li>分段方式：自动</li> <li>索引方式：高质量</li> <li>检索模式：混合检索</li> <li>等待索引完成</li> </ol> <p><strong>第四步：关联知识库</strong></p> <p>回到应用编排页面： 1. 在"上下文"区域点击"添加" 2. 选择刚创建的知识库 3. 保存</p> <p><strong>第五步：测试</strong></p> <p>在右侧的"预览"区域输入问题测试： - "你们有什么手机推荐？" - "怎么退货？" - "订单怎么查？"</p> <p>如果回答正确，恭喜你，第一个 AI 应用就完成了！</p> <p><strong>第六步：发布</strong></p> <p>点击右上角"发布"，你的应用就可以通过以下方式使用： - Web 应用链接（直接分享给用户） - API 接口（集成到你的系统） - 嵌入式聊天组件（嵌入到网页）</p> <p>整个过程，<strong>不超过 30 分钟</strong>。</p> <hr> <h2 id=chatflow>七、进阶实操——搭一个带条件分支的 Chatflow<a class=headerlink href=#chatflow title="Permanent link">&para;</a></h2> <p>简单聊天助手不够用？我们来做一个更复杂的——<strong>智能客服 Chatflow</strong>，能根据用户意图走不同处理分支。</p> <h3 id=_7>整体流程<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    D--&gt;&gt;U: 回答</code></pre> <p><strong>Dify 知识库支持的文件格式</strong>： - TXT、Markdown、PDF、DOCX - CSV、Excel - 网页（通过 URL 抓取） - Notion 同步 - 飞书文档同步</p> <p><strong>关键配置项</strong>：</p> <table> <thead> <tr> <th>配置</th> <th>说明</th> <th>建议</th> </tr> </thead> <tbody> <tr> <td>切片方式</td> <td>自动 / 自定义</td> <td>短文档用自动，长文档用自定义</td> </tr> <tr> <td>切片长度</td> <td>每个文本块的 Token 数</td> <td>500-1000 较合适</td> </tr> <tr> <td>重叠长度</td> <td>相邻块之间的重叠</td> <td>切片长度的 10%-20%</td> </tr> <tr> <td>检索模式</td> <td>向量检索 / 全文检索 / 混合检索</td> <td>混合检索效果最好</td> </tr> <tr> <td>Top K</td> <td>检索返回的文档片段数</td> <td>3-5 为宜</td> </tr> <tr> <td>Score 阈值</td> <td>相似度最低门槛</td> <td>0.5-0.7 之间</td> </tr> </tbody> </table> <p><strong>一个小技巧</strong>：知识库效果不好时，先检查切片质量。切片太大，检索不精准；切片太小，上下文丢失。</p> <h3 id=53>5.3 模型管理<a class=headerlink href=#53 title="Permanent link">&para;</a></h3> <p>Dify 最大的便利之一：<strong>一个平台管理所有模型</strong>。</p> <p>你不需要在 OpenAI、Anthropic、DeepSeek 之间反复切换，只需要在 Dify 的"设置-模型供应商"中配置好 API Key，之后在应用中直接选择模型即可。</p> <p><strong>支持的模型供应商（部分）</strong>：</p> <table> <thead> <tr> <th>供应商</th> <th>代表模型</th> <th>特点</th> </tr> </thead> <tbody> <tr> <td>OpenAI</td> <td>GPT-4o、GPT-4o-mini</td> <td>综合最强</td> </tr> <tr> <td>Anthropic</td> <td>Claude 3.5 Sonnet</td> <td>长文本、推理优</td> </tr> <tr> <td>DeepSeek</td> <td>DeepSeek-V3、DeepSeek-R1</td> <td>性价比极高</td> </tr> <tr> <td>阿里云</td> <td>通义千问-Max</td> <td>中文能力强</td> </tr> <tr> <td>Google</td> <td>Gemini 2.0 Pro</td> <td>多模态强</td> </tr> <tr> <td>Ollama</td> <td>本地模型</td> <td>数据不出本机</td> </tr> </tbody> </table> <p><strong>配置方法</strong>：进入"设置" → "模型供应商" → 找到对应供应商 → 填入 API Key → 保存。之后在应用的 LLM 节点中就能选择该供应商的模型了。</p> <h3 id=54-api>5.4 API 即服务<a class=headerlink href=#54-api title="Permanent link">&para;</a></h3> <p>你在 Dify 上搭建的应用，会自动获得一个 REST API。这意味着：</p> <ul> <li>前端页面可以直接调用</li> <li>其他系统可以集成</li> <li>可以作为微服务使用</li> </ul> <p><strong>调用示例</strong>：</p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-0-1>curl<span class=w> </span>-X<span class=w> </span>POST<span class=w> </span><span class=s1>&#39;https://api.dify.ai/v1/chat-messages&#39;</span><span class=w> </span><span class=se>\</span>
+</span><span id=__span-0-2><span class=w>  </span>-H<span class=w> </span><span class=s1>&#39;Authorization: Bearer {api_key}&#39;</span><span class=w> </span><span class=se>\</span>
+</span><span id=__span-0-3><span class=w>  </span>-H<span class=w> </span><span class=s1>&#39;Content-Type: application/json&#39;</span><span class=w> </span><span class=se>\</span>
+</span><span id=__span-0-4><span class=w>  </span>-d<span class=w> </span><span class=s1>&#39;{</span>
+</span><span id=__span-0-5><span class=s1>    &quot;inputs&quot;: {},</span>
+</span><span id=__span-0-6><span class=s1>    &quot;query&quot;: &quot;你好，请介绍一下你们的产品&quot;,</span>
+</span><span id=__span-0-7><span class=s1>    &quot;response_mode&quot;: &quot;blocking&quot;,</span>
+</span><span id=__span-0-8><span class=s1>    &quot;conversation_id&quot;: &quot;&quot;,</span>
+</span><span id=__span-0-9><span class=s1>    &quot;user&quot;: &quot;user-123&quot;</span>
+</span><span id=__span-0-10><span class=s1>  }&#39;</span>
+</span></code></pre></div> <p>Dify 还提供多种 SDK：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-1-1><span class=c1># Python SDK</span>
+</span><span id=__span-1-2><span class=kn>from</span><span class=w> </span><span class=nn>dify_client</span><span class=w> </span><span class=kn>import</span> <span class=n>DifyClient</span>
+</span><span id=__span-1-3>
+</span><span id=__span-1-4><span class=n>client</span> <span class=o>=</span> <span class=n>DifyClient</span><span class=p>(</span><span class=n>api_key</span><span class=o>=</span><span class=s2>&quot;your-api-key&quot;</span><span class=p>)</span>
+</span><span id=__span-1-5><span class=n>result</span> <span class=o>=</span> <span class=n>client</span><span class=o>.</span><span class=n>chat</span><span class=p>(</span><span class=n>query</span><span class=o>=</span><span class=s2>&quot;你好&quot;</span><span class=p>,</span> <span class=n>user</span><span class=o>=</span><span class=s2>&quot;user-123&quot;</span><span class=p>)</span>
+</span><span id=__span-1-6><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=p>)</span>
+</span></code></pre></div> <hr> <h2 id=_6>六、动手实操——从部署到搭建第一个应用<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <h3 id=61-dify>6.1 部署 Dify<a class=headerlink href=#61-dify title="Permanent link">&para;</a></h3> <p>你有两种选择：</p> <p><strong>方案 A：使用 Dify 云端版（最快上手）</strong></p> <p>直接访问 https://cloud.dify.ai ，注册即可使用。免费额度足够学习和测试。</p> <p><strong>方案 B：本地 Docker 部署（数据完全自主）</strong></p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-2-1><span class=c1># 1. 克隆仓库</span>
+</span><span id=__span-2-2>git<span class=w> </span>clone<span class=w> </span>https://github.com/langgenius/dify.git
+</span><span id=__span-2-3>
+</span><span id=__span-2-4><span class=c1># 2. 进入 docker 目录</span>
+</span><span id=__span-2-5><span class=nb>cd</span><span class=w> </span>dify/docker
+</span><span id=__span-2-6>
+</span><span id=__span-2-7><span class=c1># 3. 复制环境变量配置</span>
+</span><span id=__span-2-8>cp<span class=w> </span>.env.example<span class=w> </span>.env
+</span><span id=__span-2-9>
+</span><span id=__span-2-10><span class=c1># 4. 启动服务</span>
+</span><span id=__span-2-11>docker<span class=w> </span>compose<span class=w> </span>up<span class=w> </span>-d
+</span><span id=__span-2-12>
+</span><span id=__span-2-13><span class=c1># 5. 查看服务状态</span>
+</span><span id=__span-2-14>docker<span class=w> </span>compose<span class=w> </span>ps
+</span></code></pre></div> <p>启动成功后，访问 http://localhost/install 进行初始化设置，创建管理员账号。</p> <p><strong>最低配置要求</strong>：</p> <table> <thead> <tr> <th>项目</th> <th>最低要求</th> <th>推荐配置</th> </tr> </thead> <tbody> <tr> <td>CPU</td> <td>2 核</td> <td>4 核+</td> </tr> <tr> <td>内存</td> <td>4 GB</td> <td>8 GB+</td> </tr> <tr> <td>磁盘</td> <td>20 GB</td> <td>50 GB+</td> </tr> <tr> <td>Docker</td> <td>20.10+</td> <td>最新版</td> </tr> <tr> <td>Docker Compose</td> <td>2.0+</td> <td>最新版</td> </tr> </tbody> </table> <h3 id=62>6.2 配置模型<a class=headerlink href=#62 title="Permanent link">&para;</a></h3> <p>部署完成后，第一件事是配置模型：</p> <ol> <li>点击右上角头像 → "设置"</li> <li>选择 "模型供应商"</li> <li>找到你想用的供应商（比如 OpenAI）</li> <li>填入 API Key</li> <li>保存</li> </ol> <p><strong>推荐入门组合</strong>： - 对话：GPT-4o-mini 或 DeepSeek-V3（便宜好用） - 推理：GPT-4o 或 DeepSeek-R1 - 嵌入（知识库用）：text-embedding-3-small</p> <h3 id=63-ai>6.3 搭建第一个应用：AI 客服助手<a class=headerlink href=#63-ai title="Permanent link">&para;</a></h3> <p>我们来搭一个最实用的场景——<strong>基于产品文档的 AI 客服</strong>。</p> <p><strong>第一步：创建应用</strong></p> <ol> <li>点击"创建应用"</li> <li>选择"聊天助手"</li> <li>填写应用名称："智能客服助手"</li> </ol> <p><strong>第二步：编写提示词</strong></p> <p>在"编排"页面的"提示词"区域写入：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-3-1>你是「极客商城」的智能客服，负责回答用户关于产品、订单、售后的问题。
+</span><span id=__span-3-2>
+</span><span id=__span-3-3>## 你的工作原则
+</span><span id=__span-3-4>1. 只回答与极客商城相关的问题，不回答无关问题
+</span><span id=__span-3-5>2. 优先基于知识库中的信息回答
+</span><span id=__span-3-6>3. 如果知识库中没有相关信息，诚实告知用户，不要编造
+</span><span id=__span-3-7>4. 回答简洁明了，不要啰嗦
+</span><span id=__span-3-8>5. 如果用户情绪激动，先安抚再解答
+</span><span id=__span-3-9>
+</span><span id=__span-3-10>## 回答格式
+</span><span id=__span-3-11>- 产品问题：给出产品名称、价格、核心特点
+</span><span id=__span-3-12>- 订单问题：先确认订单号，再查询
+</span><span id=__span-3-13>- 售后问题：说明退货/换货流程和时效
+</span></code></pre></div> <p><strong>第三步：创建知识库</strong></p> <ol> <li>进入"知识库"页面</li> <li>点击"创建知识库"</li> <li>上传你的产品文档（PDF、TXT、Markdown 都行）</li> <li>选择分段设置：</li> <li>分段方式：自动</li> <li>索引方式：高质量</li> <li>检索模式：混合检索</li> <li>等待索引完成</li> </ol> <p><strong>第四步：关联知识库</strong></p> <p>回到应用编排页面： 1. 在"上下文"区域点击"添加" 2. 选择刚创建的知识库 3. 保存</p> <p><strong>第五步：测试</strong></p> <p>在右侧的"预览"区域输入问题测试： - "你们有什么手机推荐？" - "怎么退货？" - "订单怎么查？"</p> <p>如果回答正确，恭喜你，第一个 AI 应用就完成了！</p> <p><strong>第六步：发布</strong></p> <p>点击右上角"发布"，你的应用就可以通过以下方式使用： - Web 应用链接（直接分享给用户） - API 接口（集成到你的系统） - 嵌入式聊天组件（嵌入到网页）</p> <p>整个过程，<strong>不超过 30 分钟</strong>。</p> <hr> <h2 id=chatflow>七、进阶实操——搭一个带条件分支的 Chatflow<a class=headerlink href=#chatflow title="Permanent link">&para;</a></h2> <p>简单聊天助手不够用？我们来做一个更复杂的——<strong>智能客服 Chatflow</strong>，能根据用户意图走不同处理分支。</p> <h3 id=_7>整体流程<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
     A[用户输入] --&gt; B[问题分类器]
     B --&gt;|产品咨询| C[知识库检索&lt;br&gt;产品文档]
     B --&gt;|订单查询| D[HTTP 请求&lt;br&gt;查询订单API]
@@ -200,50 +161,30 @@
     C --&gt; D[End&lt;br&gt;输出：翻译结果]
 
     style A fill:#ff922b,color:#fff
-    style D fill:#51cf66,color:#fff</code></pre> <h3 id=_10>逐步搭建<a class=headerlink href=#_10 title="Permanent link">&para;</a></h3> <p><strong>第一步：创建 Workflow 应用</strong></p> <ol> <li>创建应用 → 选择"Workflow"</li> <li>进入编排画布</li> </ol> <p><strong>第二步：配置 Start 节点</strong></p> <p>添加输入变量： - 变量名：<code>source_text</code> - 类型：段落文本 - 标签：原文</p> <p><strong>第三步：添加 LLM 翻译节点</strong></p> <ul> <li>拖入 LLM 节点</li> <li>选择模型：GPT-4o-mini</li> <li>提示词：</li> </ul> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
-<span class=normal><a href=#__codelineno-4-2>2</a></span>
-<span class=normal><a href=#__codelineno-4-3>3</a></span>
-<span class=normal><a href=#__codelineno-4-4>4</a></span>
-<span class=normal><a href=#__codelineno-4-5>5</a></span>
-<span class=normal><a href=#__codelineno-4-6>6</a></span>
-<span class=normal><a href=#__codelineno-4-7>7</a></span>
-<span class=normal><a href=#__codelineno-4-8>8</a></span>
-<span class=normal><a href=#__codelineno-4-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a>你是一位专业的英中翻译。请将以下文本翻译为中文，保持原文的语气和格式。
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a>
-</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a>原文：
-</span><span id=__span-4-4><a id=__codelineno-4-4 name=__codelineno-4-4></a>{{#start.source_text#}}
-</span><span id=__span-4-5><a id=__codelineno-4-5 name=__codelineno-4-5></a>
-</span><span id=__span-4-6><a id=__codelineno-4-6 name=__codelineno-4-6></a>要求：
-</span><span id=__span-4-7><a id=__codelineno-4-7 name=__codelineno-4-7></a>1. 准确翻译，不遗漏内容
-</span><span id=__span-4-8><a id=__codelineno-4-8 name=__codelineno-4-8></a>2. 保持专业术语的准确性
-</span><span id=__span-4-9><a id=__codelineno-4-9 name=__codelineno-4-9></a>3. 保留原文的 Markdown 格式
-</span></code></pre></div></td></tr></table></div> <p><strong>第四步：添加 Code 格式化节点</strong></p> <ul> <li>拖入 Code 节点</li> <li>语言选择 Python</li> <li>代码：</li> </ul> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1>1</a></span>
-<span class=normal><a href=#__codelineno-5-2>2</a></span>
-<span class=normal><a href=#__codelineno-5-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=k>def</span><span class=w> </span><span class=nf>main</span><span class=p>(</span><span class=n>translation</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>dict</span><span class=p>:</span>
-</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a>    <span class=n>formatted</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&quot;## 翻译结果</span><span class=se>\n\n</span><span class=si>{</span><span class=n>translation</span><span class=si>}</span><span class=se>\n\n</span><span class=s2>---</span><span class=se>\n</span><span class=s2>*由 AI 自动翻译*&quot;</span>
-</span><span id=__span-5-3><a id=__codelineno-5-3 name=__codelineno-5-3></a>    <span class=k>return</span> <span class=p>{</span><span class=s2>&quot;result&quot;</span><span class=p>:</span> <span class=n>formatted</span><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <p><strong>第五步：配置 End 节点</strong></p> <p>添加输出变量： - 变量名：<code>result</code> - 值：引用 Code 节点的输出 <code>{{#code.result#}}</code></p> <p><strong>第六步：测试并发布</strong></p> <p>输入一段英文文本测试翻译效果，满意后发布。</p> <hr> <h2 id=dify_3>九、Dify 的生态与扩展<a class=headerlink href=#dify_3 title="Permanent link">&para;</a></h2> <p>Dify 不仅仅是一个工具，它还在构建一个生态。</p> <h3 id=91>9.1 插件市场<a class=headerlink href=#91 title="Permanent link">&para;</a></h3> <p>Dify 在 2025 年推出了插件市场（Marketplace），社区开发者可以贡献和安装插件：</p> <ul> <li><strong>模型插件</strong>：接入更多模型供应商</li> <li><strong>工具插件</strong>：扩展 Agent 的工具能力</li> <li><strong>Agent 策略插件</strong>：自定义 Agent 的推理策略</li> <li><strong>扩展插件</strong>：检索不精准，噪音多 → 缩小切片长度</li> <li><strong>切片太小</strong>：上下文缺失，答案不完整 → 增大切片长度或重叠</li> <li><strong>文档质量差</strong>：表格、图片没处理好 → 预处理文档，转成 Markdown</li> <li><strong>检索模式不对</strong>：纯向量检索不够 → 试试混合检索</li> </ul> <h3 id=2>2. 模型选择别贪贵<a class=headerlink href=#2 title="Permanent link">&para;</a></h3> <p>不是所有场景都需要 GPT-4o：</p> <ul> <li><strong>简单问答</strong>：GPT-4o-mini 或 DeepSeek-V3 就够</li> <li><strong>知识库问答</strong>：中等模型 + 好的知识库 &gt; 强模型 + 差的知识库</li> <li><strong>复杂推理</strong>：才需要 GPT-4o 或 DeepSeek-R1</li> </ul> <h3 id=3>3. 提示词要结构化<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <p>写提示词不是写散文，要像写需求文档一样结构化：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1> 1</a></span>
-<span class=normal><a href=#__codelineno-6-2> 2</a></span>
-<span class=normal><a href=#__codelineno-6-3> 3</a></span>
-<span class=normal><a href=#__codelineno-6-4> 4</a></span>
-<span class=normal><a href=#__codelineno-6-5> 5</a></span>
-<span class=normal><a href=#__codelineno-6-6> 6</a></span>
-<span class=normal><a href=#__codelineno-6-7> 7</a></span>
-<span class=normal><a href=#__codelineno-6-8> 8</a></span>
-<span class=normal><a href=#__codelineno-6-9> 9</a></span>
-<span class=normal><a href=#__codelineno-6-10>10</a></span>
-<span class=normal><a href=#__codelineno-6-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a>❌ 帮我回答用户的问题
-</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a>
-</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a>✅ 你是XX公司的客服。
-</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a>    ## 工作原则
-</span><span id=__span-6-5><a id=__codelineno-6-5 name=__codelineno-6-5></a>    1. ...
-</span><span id=__span-6-6><a id=__codelineno-6-6 name=__codelineno-6-6></a>    2. ...
-</span><span id=__span-6-7><a id=__codelineno-6-7 name=__codelineno-6-7></a>    ## 回答格式
-</span><span id=__span-6-8><a id=__codelineno-6-8 name=__codelineno-6-8></a>    - 场景A：...
-</span><span id=__span-6-9><a id=__codelineno-6-9 name=__codelineno-6-9></a>    - 场景B：...
-</span><span id=__span-6-10><a id=__codelineno-6-10 name=__codelineno-6-10></a>    ## 禁止事项
-</span><span id=__span-6-11><a id=__codelineno-6-11 name=__codelineno-6-11></a>    1. ...
-</span></code></pre></div></td></tr></table></div> <h3 id=4-workflow-vs-chatflow>4. Workflow vs Chatflow 别选错<a class=headerlink href=#4-workflow-vs-chatflow title="Permanent link">&para;</a></h3> <p>一个简单判断： - <strong>需要跟用户多轮对话</strong> → Chatflow - <strong>输入数据、输出结果，中间不需要人参与</strong> → Workflow</p> <p>选错了会很难受：Workflow 没有会话记忆，Chatflow 输入输出不能自定义。</p> <h3 id=5-token>5. 注意 Token 消耗<a class=headerlink href=#5-token title="Permanent link">&para;</a></h3> <p>工作流中的每个 LLM 节点都会消耗 Token。一个 5 节点的 Workflow，跑一次可能是 5 次 API 调用。调试时建议用便宜模型，上线后再切强模型。</p> <h3 id=6>6. 善用"变量引用"<a class=headerlink href=#6 title="Permanent link">&para;</a></h3> <p>Dify 节点之间通过变量传递数据。引用格式是 <code>{{#节点名.变量名#}}</code>，比如：</p> <ul> <li><code>{{#start.query#}}</code> — 用户输入</li> <li><code>{{#llm_1.text#}}</code> — LLM 节点的输出</li> <li><code>{{#code_1.result#}}</code> — Code 节点的输出</li> </ul> <p>理解变量引用是编排复杂工作流的关键。</p> <hr> <h2 id=_11>十一、一个完整的学习路径<a class=headerlink href=#_11 title="Permanent link">&para;</a></h2> <pre class=mermaid><code>graph TD
+    style D fill:#51cf66,color:#fff</code></pre> <h3 id=_10>逐步搭建<a class=headerlink href=#_10 title="Permanent link">&para;</a></h3> <p><strong>第一步：创建 Workflow 应用</strong></p> <ol> <li>创建应用 → 选择"Workflow"</li> <li>进入编排画布</li> </ol> <p><strong>第二步：配置 Start 节点</strong></p> <p>添加输入变量： - 变量名：<code>source_text</code> - 类型：段落文本 - 标签：原文</p> <p><strong>第三步：添加 LLM 翻译节点</strong></p> <ul> <li>拖入 LLM 节点</li> <li>选择模型：GPT-4o-mini</li> <li>提示词：</li> </ul> <div class="language-text highlight"><pre><span></span><code><span id=__span-4-1>你是一位专业的英中翻译。请将以下文本翻译为中文，保持原文的语气和格式。
+</span><span id=__span-4-2>
+</span><span id=__span-4-3>原文：
+</span><span id=__span-4-4>{{#start.source_text#}}
+</span><span id=__span-4-5>
+</span><span id=__span-4-6>要求：
+</span><span id=__span-4-7>1. 准确翻译，不遗漏内容
+</span><span id=__span-4-8>2. 保持专业术语的准确性
+</span><span id=__span-4-9>3. 保留原文的 Markdown 格式
+</span></code></pre></div> <p><strong>第四步：添加 Code 格式化节点</strong></p> <ul> <li>拖入 Code 节点</li> <li>语言选择 Python</li> <li>代码：</li> </ul> <div class="language-python highlight"><pre><span></span><code><span id=__span-5-1><span class=k>def</span><span class=w> </span><span class=nf>main</span><span class=p>(</span><span class=n>translation</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>dict</span><span class=p>:</span>
+</span><span id=__span-5-2>    <span class=n>formatted</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&quot;## 翻译结果</span><span class=se>\n\n</span><span class=si>{</span><span class=n>translation</span><span class=si>}</span><span class=se>\n\n</span><span class=s2>---</span><span class=se>\n</span><span class=s2>*由 AI 自动翻译*&quot;</span>
+</span><span id=__span-5-3>    <span class=k>return</span> <span class=p>{</span><span class=s2>&quot;result&quot;</span><span class=p>:</span> <span class=n>formatted</span><span class=p>}</span>
+</span></code></pre></div> <p><strong>第五步：配置 End 节点</strong></p> <p>添加输出变量： - 变量名：<code>result</code> - 值：引用 Code 节点的输出 <code>{{#code.result#}}</code></p> <p><strong>第六步：测试并发布</strong></p> <p>输入一段英文文本测试翻译效果，满意后发布。</p> <hr> <h2 id=dify_3>九、Dify 的生态与扩展<a class=headerlink href=#dify_3 title="Permanent link">&para;</a></h2> <p>Dify 不仅仅是一个工具，它还在构建一个生态。</p> <h3 id=91>9.1 插件市场<a class=headerlink href=#91 title="Permanent link">&para;</a></h3> <p>Dify 在 2025 年推出了插件市场（Marketplace），社区开发者可以贡献和安装插件：</p> <ul> <li><strong>模型插件</strong>：接入更多模型供应商</li> <li><strong>工具插件</strong>：扩展 Agent 的工具能力</li> <li><strong>Agent 策略插件</strong>：自定义 Agent 的推理策略</li> <li><strong>扩展插件</strong>：检索不精准，噪音多 → 缩小切片长度</li> <li><strong>切片太小</strong>：上下文缺失，答案不完整 → 增大切片长度或重叠</li> <li><strong>文档质量差</strong>：表格、图片没处理好 → 预处理文档，转成 Markdown</li> <li><strong>检索模式不对</strong>：纯向量检索不够 → 试试混合检索</li> </ul> <h3 id=2>2. 模型选择别贪贵<a class=headerlink href=#2 title="Permanent link">&para;</a></h3> <p>不是所有场景都需要 GPT-4o：</p> <ul> <li><strong>简单问答</strong>：GPT-4o-mini 或 DeepSeek-V3 就够</li> <li><strong>知识库问答</strong>：中等模型 + 好的知识库 &gt; 强模型 + 差的知识库</li> <li><strong>复杂推理</strong>：才需要 GPT-4o 或 DeepSeek-R1</li> </ul> <h3 id=3>3. 提示词要结构化<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <p>写提示词不是写散文，要像写需求文档一样结构化：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-6-1>❌ 帮我回答用户的问题
+</span><span id=__span-6-2>
+</span><span id=__span-6-3>✅ 你是XX公司的客服。
+</span><span id=__span-6-4>    ## 工作原则
+</span><span id=__span-6-5>    1. ...
+</span><span id=__span-6-6>    2. ...
+</span><span id=__span-6-7>    ## 回答格式
+</span><span id=__span-6-8>    - 场景A：...
+</span><span id=__span-6-9>    - 场景B：...
+</span><span id=__span-6-10>    ## 禁止事项
+</span><span id=__span-6-11>    1. ...
+</span></code></pre></div> <h3 id=4-workflow-vs-chatflow>4. Workflow vs Chatflow 别选错<a class=headerlink href=#4-workflow-vs-chatflow title="Permanent link">&para;</a></h3> <p>一个简单判断： - <strong>需要跟用户多轮对话</strong> → Chatflow - <strong>输入数据、输出结果，中间不需要人参与</strong> → Workflow</p> <p>选错了会很难受：Workflow 没有会话记忆，Chatflow 输入输出不能自定义。</p> <h3 id=5-token>5. 注意 Token 消耗<a class=headerlink href=#5-token title="Permanent link">&para;</a></h3> <p>工作流中的每个 LLM 节点都会消耗 Token。一个 5 节点的 Workflow，跑一次可能是 5 次 API 调用。调试时建议用便宜模型，上线后再切强模型。</p> <h3 id=6>6. 善用"变量引用"<a class=headerlink href=#6 title="Permanent link">&para;</a></h3> <p>Dify 节点之间通过变量传递数据。引用格式是 <code>{{#节点名.变量名#}}</code>，比如：</p> <ul> <li><code>{{#start.query#}}</code> — 用户输入</li> <li><code>{{#llm_1.text#}}</code> — LLM 节点的输出</li> <li><code>{{#code_1.result#}}</code> — Code 节点的输出</li> </ul> <p>理解变量引用是编排复杂工作流的关键。</p> <hr> <h2 id=_11>十一、一个完整的学习路径<a class=headerlink href=#_11 title="Permanent link">&para;</a></h2> <pre class=mermaid><code>graph TD
     A[第一周：入门] --&gt; A1[部署 Dify]
     A1 --&gt; A2[配置模型]
     A2 --&gt; A3[搭建第一个 Chatbot]

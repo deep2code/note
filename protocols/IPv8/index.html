@@ -13,18 +13,13 @@
     end
     style A fill:#ffcccc
     style B fill:#ccffcc
-    style C fill:#ccccff</code></pre> <p>为什么是64位，而不是IPv6的128位？</p> <p>IPv8的设计者认为，128位地址空间虽然"无限"，但带来了不必要的复杂性：更长的报文头、更高的处理开销、更难以人类阅读和记忆。64位提供了18,446,744,073,709,551,616（约1.8×10¹⁹）个唯一地址，这足以满足任何规模的组织需求，同时保持报文头的紧凑性。</p> <h3 id=22-rrrrnnnn>2.2 地址格式：r.r.r.r.n.n.n.n<a class=headerlink href=#22-rrrrnnnn title="Permanent link">&para;</a></h3> <p>IPv8地址采用一种优雅的分层结构：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1>1</a></span>
-<span class=normal><a href=#__codelineno-0-2>2</a></span>
-<span class=normal><a href=#__codelineno-0-3>3</a></span>
-<span class=normal><a href=#__codelineno-0-4>4</a></span>
-<span class=normal><a href=#__codelineno-0-5>5</a></span>
-<span class=normal><a href=#__codelineno-0-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>+--------------------------------------------------+
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a>|              IPv8 地址格式 (64位)                 |
-</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a>+--------------------------------------------------+
-</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a>|  r.r.r.r (32位)  |  n.n.n.n (32位)               |
-</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a>|  ASN路由前缀      |  主机地址                      |
-</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a>+--------------------------------------------------+
-</span></code></pre></div></td></tr></table></div> <p>用Mermaid图表表示：</p> <pre class=mermaid><code>block-beta
+    style C fill:#ccccff</code></pre> <p>为什么是64位，而不是IPv6的128位？</p> <p>IPv8的设计者认为，128位地址空间虽然"无限"，但带来了不必要的复杂性：更长的报文头、更高的处理开销、更难以人类阅读和记忆。64位提供了18,446,744,073,709,551,616（约1.8×10¹⁹）个唯一地址，这足以满足任何规模的组织需求，同时保持报文头的紧凑性。</p> <h3 id=22-rrrrnnnn>2.2 地址格式：r.r.r.r.n.n.n.n<a class=headerlink href=#22-rrrrnnnn title="Permanent link">&para;</a></h3> <p>IPv8地址采用一种优雅的分层结构：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-0-1>+--------------------------------------------------+
+</span><span id=__span-0-2>|              IPv8 地址格式 (64位)                 |
+</span><span id=__span-0-3>+--------------------------------------------------+
+</span><span id=__span-0-4>|  r.r.r.r (32位)  |  n.n.n.n (32位)               |
+</span><span id=__span-0-5>|  ASN路由前缀      |  主机地址                      |
+</span><span id=__span-0-6>+--------------------------------------------------+
+</span></code></pre></div> <p>用Mermaid图表表示：</p> <pre class=mermaid><code>block-beta
     columns 8
     block:asn:4
         r1["r (8位)"]
@@ -282,16 +277,12 @@
     style OSPF fill:#ffcccc
     style EIGRP fill:#ffcccc
     style CF fill:#ccffcc
-    style CF2 fill:#ccffcc</code></pre> <p>CF的地理组件设置了物理下限——没有路径可以看起来比光速沿大圆距离允许的速度更快。测量到比物理允许更快的路径会立即被标记为CF异常。</p> <p>CF是一个开放的版本化算法。CFv1是强制基线。未来版本可能通过IETF流程添加碳成本、抖动、时间、应用层延迟信号。</p> <hr> <h2 id=_5>第七部分：过渡与兼容性<a class=headerlink href=#_5 title="Permanent link">&para;</a></h2> <h3 id=71-ipv4>7.1 IPv4作为真子集<a class=headerlink href=#71-ipv4 title="Permanent link">&para;</a></h3> <p>IPv8的向后兼容策略是其最具争议的也是最具创新性的方面：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span>
-<span class=normal><a href=#__codelineno-1-2>2</a></span>
-<span class=normal><a href=#__codelineno-1-3>3</a></span>
-<span class=normal><a href=#__codelineno-1-4>4</a></span>
-<span class=normal><a href=#__codelineno-1-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a>IPv8地址 r.r.r.r = 0.0.0.0 → 就是IPv4地址
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a>使用标准IPv4规则处理
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>无需修改IPv4设备
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a>无需修改IPv4应用
-</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a>无需修改IPv4内部网络
-</span></code></pre></div></td></tr></table></div> <pre class=mermaid><code>flowchart TB
+    style CF2 fill:#ccffcc</code></pre> <p>CF的地理组件设置了物理下限——没有路径可以看起来比光速沿大圆距离允许的速度更快。测量到比物理允许更快的路径会立即被标记为CF异常。</p> <p>CF是一个开放的版本化算法。CFv1是强制基线。未来版本可能通过IETF流程添加碳成本、抖动、时间、应用层延迟信号。</p> <hr> <h2 id=_5>第七部分：过渡与兼容性<a class=headerlink href=#_5 title="Permanent link">&para;</a></h2> <h3 id=71-ipv4>7.1 IPv4作为真子集<a class=headerlink href=#71-ipv4 title="Permanent link">&para;</a></h3> <p>IPv8的向后兼容策略是其最具争议的也是最具创新性的方面：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-1-1>IPv8地址 r.r.r.r = 0.0.0.0 → 就是IPv4地址
+</span><span id=__span-1-2>使用标准IPv4规则处理
+</span><span id=__span-1-3>无需修改IPv4设备
+</span><span id=__span-1-4>无需修改IPv4应用
+</span><span id=__span-1-5>无需修改IPv4内部网络
+</span></code></pre></div> <pre class=mermaid><code>flowchart TB
     subgraph "IPv8兼容性模型"
         A[纯IPv4设备&lt;br/&gt;0.0.0.0.n.n.n.n] --&gt;|透明处理| B[IPv8网络]
         C[IPv8原生设备&lt;br/&gt;ASN.n.n.n.n] --&gt;|原生支持| B
