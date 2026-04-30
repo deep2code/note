@@ -16,62 +16,41 @@
         LLM--&gt;&gt;A: 生成最终响应
     end
 
-    A--&gt;&gt;U: 返回结果</code></pre> <p>在这个流程中，Agent会自动判断是否需要调用工具，如果需要就自动调用，然后结合工具返回的结果生成最终的回答。这就是所谓的"Agent Loop"——Agent会自动循环处理工具调用，直到任务完成。</p> <h2 id=_2>三、环境准备与安装<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <p>好了，现在开始动手吧！首先，我们需要安装Agents SDK。</p> <h3 id=31-python>3.1 安装Python包<a class=headerlink href=#31-python title="Permanent link">&para;</a></h3> <p>Agents SDK是一个Python包，所以你需要确保已经安装了Python环境（建议Python 3.10及以上版本）。安装非常简单，只需要一行命令：</p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>pip<span class=w> </span>install<span class=w> </span>openai-agents
-</span></code></pre></div></td></tr></table></div> <p>如果你使用Poetry作为包管理工具，也可以这样：</p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a>poetry<span class=w> </span>add<span class=w> </span>openai-agents
-</span></code></pre></div></td></tr></table></div> <p>如果你想体验最新功能，也可以安装预览版：</p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a>pip<span class=w> </span>install<span class=w> </span>openai-agents<span class=w> </span>--pre
-</span></code></pre></div></td></tr></table></div> <h3 id=32-api>3.2 配置API密钥<a class=headerlink href=#32-api title="Permanent link">&para;</a></h3> <p>安装完成后，你需要配置OpenAI的API密钥。Agents SDK支持多种配置方式：</p> <p><strong>方式一：环境变量（推荐）</strong></p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=nb>export</span><span class=w> </span><span class=nv>OPENAI_API_KEY</span><span class=o>=</span>sk-your-api-key-here
-</span></code></pre></div></td></tr></table></div> <p><strong>方式二：在代码中设置</strong></p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
-<span class=normal><a href=#__codelineno-4-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a><span class=kn>import</span><span class=w> </span><span class=nn>os</span>
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a><span class=n>os</span><span class=o>.</span><span class=n>environ</span><span class=p>[</span><span class=s2>&quot;OPENAI_API_KEY&quot;</span><span class=p>]</span> <span class=o>=</span> <span class=s2>&quot;sk-your-api-key-here&quot;</span>
-</span></code></pre></div></td></tr></table></div> <p><strong>方式三：使用OPENAI_BASE_URL（针对兼容OpenAI API的自定义端点）</strong></p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1>1</a></span>
-<span class=normal><a href=#__codelineno-5-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=nb>export</span><span class=w> </span><span class=nv>OPENAI_API_KEY</span><span class=o>=</span>your-api-key
-</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a><span class=nb>export</span><span class=w> </span><span class=nv>OPENAI_BASE_URL</span><span class=o>=</span>https://your-custom-endpoint.com/v1
-</span></code></pre></div></td></tr></table></div> <p>获取API Key的方式很简单：访问 <a href=https://platform.openai.com>platform.openai.com</a>，注册账号后在API Keys页面创建即可。</p> <blockquote> <p>⚠️ <strong>温馨提示</strong>：<em>API Key一定要妥善保管，不要暴露在代码仓库中。使用环境变量是最安全的做法。</em></p> </blockquote> <h2 id=agenthello-world>四、第一个Agent：Hello World<a class=headerlink href=#agenthello-world title="Permanent link">&para;</a></h2> <p>现在，让我们创建我们的第一个Agent！这是一个最简单的例子，但我们可以通过它理解整个SDK的工作方式。</p> <h3 id=41>4.1 最简单的代码<a class=headerlink href=#41 title="Permanent link">&para;</a></h3> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1> 1</a></span>
-<span class=normal><a href=#__codelineno-6-2> 2</a></span>
-<span class=normal><a href=#__codelineno-6-3> 3</a></span>
-<span class=normal><a href=#__codelineno-6-4> 4</a></span>
-<span class=normal><a href=#__codelineno-6-5> 5</a></span>
-<span class=normal><a href=#__codelineno-6-6> 6</a></span>
-<span class=normal><a href=#__codelineno-6-7> 7</a></span>
-<span class=normal><a href=#__codelineno-6-8> 8</a></span>
-<span class=normal><a href=#__codelineno-6-9> 9</a></span>
-<span class=normal><a href=#__codelineno-6-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
-</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a>
-</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a><span class=c1># 创建一个最简单的Agent</span>
-</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;Assistant&quot;</span><span class=p>,</span> <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;You are a helpful assistant&quot;</span><span class=p>)</span>
-</span><span id=__span-6-5><a id=__codelineno-6-5 name=__codelineno-6-5></a>
-</span><span id=__span-6-6><a id=__codelineno-6-6 name=__codelineno-6-6></a><span class=c1># 运行Agent</span>
-</span><span id=__span-6-7><a id=__codelineno-6-7 name=__codelineno-6-7></a><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;Write a haiku about recursion in programming.&quot;</span><span class=p>)</span>
-</span><span id=__span-6-8><a id=__codelineno-6-8 name=__codelineno-6-8></a>
-</span><span id=__span-6-9><a id=__codelineno-6-9 name=__codelineno-6-9></a><span class=c1># 打印结果</span>
-</span><span id=__span-6-10><a id=__codelineno-6-10 name=__codelineno-6-10></a><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <p>运行这段代码，你会看到类似这样的输出：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1>1</a></span>
-<span class=normal><a href=#__codelineno-7-2>2</a></span>
-<span class=normal><a href=#__codelineno-7-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a>Code within the code,
-</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a>Functions calling themselves,
-</span><span id=__span-7-3><a id=__codelineno-7-3 name=__codelineno-7-3></a>Infinite loop&#39;s dance.
-</span></code></pre></div></td></tr></table></div> <p>是不是很酷？我们只用了不到10行代码，就创建了一个能够与用户对话的AI Agent！</p> <h3 id=42>4.2 代码解析<a class=headerlink href=#42 title="Permanent link">&para;</a></h3> <p>让我们拆解这段代码，看看每一部分做了什么：</p> <p><strong>第一步：导入模块</strong></p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
-</span></code></pre></div></td></tr></table></div> <p>这里我们从agents包导入了两个核心类：Agent（智能体）和Runner（运行器）。</p> <p><strong>第二步：创建Agent实例</strong></p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;Assistant&quot;</span><span class=p>,</span> <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;You are a helpful assistant&quot;</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <p>创建Agent时，我们只需要两个参数： - <code>name</code>: 智能体的名字，用于标识 - <code>instructions</code>: 智能体的指令，相当于系统提示词（System Prompt）</p> <p><strong>第三步：运行Agent</strong></p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;Write a haiku about recursion in programming.&quot;</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <p>Runner是我们运行Agent的入口。<code>run_sync</code>是同步运行方式，会阻塞到结果返回。还有异步方式<code>run_async</code>，我们后面会讲到。</p> <p><strong>第四步：获取结果</strong></p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <p>result包含了很多信息，<code>final_output</code>是我们最关心的——智能体返回的最终文本。</p> <h3 id=43>4.3 异步运行方式<a class=headerlink href=#43 title="Permanent link">&para;</a></h3> <p>在生产环境中，我们通常更倾向于使用异步方式，以获得更好的性能：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1>1</a></span>
-<span class=normal><a href=#__codelineno-12-2>2</a></span>
-<span class=normal><a href=#__codelineno-12-3>3</a></span>
-<span class=normal><a href=#__codelineno-12-4>4</a></span>
-<span class=normal><a href=#__codelineno-12-5>5</a></span>
-<span class=normal><a href=#__codelineno-12-6>6</a></span>
-<span class=normal><a href=#__codelineno-12-7>7</a></span>
-<span class=normal><a href=#__codelineno-12-8>8</a></span>
-<span class=normal><a href=#__codelineno-12-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><a id=__codelineno-12-1 name=__codelineno-12-1></a><span class=kn>import</span><span class=w> </span><span class=nn>asyncio</span>
-</span><span id=__span-12-2><a id=__codelineno-12-2 name=__codelineno-12-2></a><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
-</span><span id=__span-12-3><a id=__codelineno-12-3 name=__codelineno-12-3></a>
-</span><span id=__span-12-4><a id=__codelineno-12-4 name=__codelineno-12-4></a><span class=k>async</span> <span class=k>def</span><span class=w> </span><span class=nf>main</span><span class=p>():</span>
-</span><span id=__span-12-5><a id=__codelineno-12-5 name=__codelineno-12-5></a>    <span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;Assistant&quot;</span><span class=p>,</span> <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;You are a helpful assistant&quot;</span><span class=p>)</span>
-</span><span id=__span-12-6><a id=__codelineno-12-6 name=__codelineno-12-6></a>    <span class=n>result</span> <span class=o>=</span> <span class=k>await</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;What is the meaning of life?&quot;</span><span class=p>)</span>
-</span><span id=__span-12-7><a id=__codelineno-12-7 name=__codelineno-12-7></a>    <span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
-</span><span id=__span-12-8><a id=__codelineno-12-8 name=__codelineno-12-8></a>
-</span><span id=__span-12-9><a id=__codelineno-12-9 name=__codelineno-12-9></a><span class=n>asyncio</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>())</span>
-</span></code></pre></div></td></tr></table></div> <p>这里我们使用<code>Runner.run()</code>，它是一个async方法。我们可以通过<code>asyncio.run()</code>来运行异步函数。</p> <h2 id=agent>五、深入Agent配置<a class=headerlink href=#agent title="Permanent link">&para;</a></h2> <p>现在我们了解了最基础的Agent。但实际上，Agent可以配置的内容远不止name和instructions。让我详细介绍一下Agent的完整配置。</p> <h3 id=50-sdk>5.0 SDK整体架构<a class=headerlink href=#50-sdk title="Permanent link">&para;</a></h3> <p>在深入配置之前，让我们先看一下SDK的整体架构，这样能更好地理解各个组件之间的关系：</p> <pre class=mermaid><code>graph TB
+    A--&gt;&gt;U: 返回结果</code></pre> <p>在这个流程中，Agent会自动判断是否需要调用工具，如果需要就自动调用，然后结合工具返回的结果生成最终的回答。这就是所谓的"Agent Loop"——Agent会自动循环处理工具调用，直到任务完成。</p> <h2 id=_2>三、环境准备与安装<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <p>好了，现在开始动手吧！首先，我们需要安装Agents SDK。</p> <h3 id=31-python>3.1 安装Python包<a class=headerlink href=#31-python title="Permanent link">&para;</a></h3> <p>Agents SDK是一个Python包，所以你需要确保已经安装了Python环境（建议Python 3.10及以上版本）。安装非常简单，只需要一行命令：</p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-0-1>pip<span class=w> </span>install<span class=w> </span>openai-agents
+</span></code></pre></div> <p>如果你使用Poetry作为包管理工具，也可以这样：</p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-1-1>poetry<span class=w> </span>add<span class=w> </span>openai-agents
+</span></code></pre></div> <p>如果你想体验最新功能，也可以安装预览版：</p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-2-1>pip<span class=w> </span>install<span class=w> </span>openai-agents<span class=w> </span>--pre
+</span></code></pre></div> <h3 id=32-api>3.2 配置API密钥<a class=headerlink href=#32-api title="Permanent link">&para;</a></h3> <p>安装完成后，你需要配置OpenAI的API密钥。Agents SDK支持多种配置方式：</p> <p><strong>方式一：环境变量（推荐）</strong></p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-3-1><span class=nb>export</span><span class=w> </span><span class=nv>OPENAI_API_KEY</span><span class=o>=</span>sk-your-api-key-here
+</span></code></pre></div> <p><strong>方式二：在代码中设置</strong></p> <div class="language-python highlight"><pre><span></span><code><span id=__span-4-1><span class=kn>import</span><span class=w> </span><span class=nn>os</span>
+</span><span id=__span-4-2><span class=n>os</span><span class=o>.</span><span class=n>environ</span><span class=p>[</span><span class=s2>&quot;OPENAI_API_KEY&quot;</span><span class=p>]</span> <span class=o>=</span> <span class=s2>&quot;sk-your-api-key-here&quot;</span>
+</span></code></pre></div> <p><strong>方式三：使用OPENAI_BASE_URL（针对兼容OpenAI API的自定义端点）</strong></p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-5-1><span class=nb>export</span><span class=w> </span><span class=nv>OPENAI_API_KEY</span><span class=o>=</span>your-api-key
+</span><span id=__span-5-2><span class=nb>export</span><span class=w> </span><span class=nv>OPENAI_BASE_URL</span><span class=o>=</span>https://your-custom-endpoint.com/v1
+</span></code></pre></div> <p>获取API Key的方式很简单：访问 <a href=https://platform.openai.com>platform.openai.com</a>，注册账号后在API Keys页面创建即可。</p> <blockquote> <p>⚠️ <strong>温馨提示</strong>：<em>API Key一定要妥善保管，不要暴露在代码仓库中。使用环境变量是最安全的做法。</em></p> </blockquote> <h2 id=agenthello-world>四、第一个Agent：Hello World<a class=headerlink href=#agenthello-world title="Permanent link">&para;</a></h2> <p>现在，让我们创建我们的第一个Agent！这是一个最简单的例子，但我们可以通过它理解整个SDK的工作方式。</p> <h3 id=41>4.1 最简单的代码<a class=headerlink href=#41 title="Permanent link">&para;</a></h3> <div class="language-python highlight"><pre><span></span><code><span id=__span-6-1><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
+</span><span id=__span-6-2>
+</span><span id=__span-6-3><span class=c1># 创建一个最简单的Agent</span>
+</span><span id=__span-6-4><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;Assistant&quot;</span><span class=p>,</span> <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;You are a helpful assistant&quot;</span><span class=p>)</span>
+</span><span id=__span-6-5>
+</span><span id=__span-6-6><span class=c1># 运行Agent</span>
+</span><span id=__span-6-7><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;Write a haiku about recursion in programming.&quot;</span><span class=p>)</span>
+</span><span id=__span-6-8>
+</span><span id=__span-6-9><span class=c1># 打印结果</span>
+</span><span id=__span-6-10><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
+</span></code></pre></div> <p>运行这段代码，你会看到类似这样的输出：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-7-1>Code within the code,
+</span><span id=__span-7-2>Functions calling themselves,
+</span><span id=__span-7-3>Infinite loop&#39;s dance.
+</span></code></pre></div> <p>是不是很酷？我们只用了不到10行代码，就创建了一个能够与用户对话的AI Agent！</p> <h3 id=42>4.2 代码解析<a class=headerlink href=#42 title="Permanent link">&para;</a></h3> <p>让我们拆解这段代码，看看每一部分做了什么：</p> <p><strong>第一步：导入模块</strong></p> <div class="language-python highlight"><pre><span></span><code><span id=__span-8-1><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
+</span></code></pre></div> <p>这里我们从agents包导入了两个核心类：Agent（智能体）和Runner（运行器）。</p> <p><strong>第二步：创建Agent实例</strong></p> <div class="language-python highlight"><pre><span></span><code><span id=__span-9-1><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;Assistant&quot;</span><span class=p>,</span> <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;You are a helpful assistant&quot;</span><span class=p>)</span>
+</span></code></pre></div> <p>创建Agent时，我们只需要两个参数： - <code>name</code>: 智能体的名字，用于标识 - <code>instructions</code>: 智能体的指令，相当于系统提示词（System Prompt）</p> <p><strong>第三步：运行Agent</strong></p> <div class="language-python highlight"><pre><span></span><code><span id=__span-10-1><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;Write a haiku about recursion in programming.&quot;</span><span class=p>)</span>
+</span></code></pre></div> <p>Runner是我们运行Agent的入口。<code>run_sync</code>是同步运行方式，会阻塞到结果返回。还有异步方式<code>run_async</code>，我们后面会讲到。</p> <p><strong>第四步：获取结果</strong></p> <div class="language-python highlight"><pre><span></span><code><span id=__span-11-1><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
+</span></code></pre></div> <p>result包含了很多信息，<code>final_output</code>是我们最关心的——智能体返回的最终文本。</p> <h3 id=43>4.3 异步运行方式<a class=headerlink href=#43 title="Permanent link">&para;</a></h3> <p>在生产环境中，我们通常更倾向于使用异步方式，以获得更好的性能：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-12-1><span class=kn>import</span><span class=w> </span><span class=nn>asyncio</span>
+</span><span id=__span-12-2><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
+</span><span id=__span-12-3>
+</span><span id=__span-12-4><span class=k>async</span> <span class=k>def</span><span class=w> </span><span class=nf>main</span><span class=p>():</span>
+</span><span id=__span-12-5>    <span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;Assistant&quot;</span><span class=p>,</span> <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;You are a helpful assistant&quot;</span><span class=p>)</span>
+</span><span id=__span-12-6>    <span class=n>result</span> <span class=o>=</span> <span class=k>await</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;What is the meaning of life?&quot;</span><span class=p>)</span>
+</span><span id=__span-12-7>    <span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
+</span><span id=__span-12-8>
+</span><span id=__span-12-9><span class=n>asyncio</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>())</span>
+</span></code></pre></div> <p>这里我们使用<code>Runner.run()</code>，它是一个async方法。我们可以通过<code>asyncio.run()</code>来运行异步函数。</p> <h2 id=agent>五、深入Agent配置<a class=headerlink href=#agent title="Permanent link">&para;</a></h2> <p>现在我们了解了最基础的Agent。但实际上，Agent可以配置的内容远不止name和instructions。让我详细介绍一下Agent的完整配置。</p> <h3 id=50-sdk>5.0 SDK整体架构<a class=headerlink href=#50-sdk title="Permanent link">&para;</a></h3> <p>在深入配置之前，让我们先看一下SDK的整体架构，这样能更好地理解各个组件之间的关系：</p> <pre class=mermaid><code>graph TB
     subgraph "SDK核心"
         R["Runner&lt;br/&gt;运行器"] --&gt; A["Agent&lt;br/&gt;智能体"]
         A --&gt; T["Tools&lt;br/&gt;工具系统"]
@@ -92,111 +71,61 @@
 
     style SDK核心 fill:#e1f5fe
     style AI能力 fill:#fff3e0
-    style 开发者 fill:#e8f5e8</code></pre> <p>如上图所示，开发者通过编写自定义函数来定义Tools和检查逻辑，然后创建Agent实例，最后通过Runner来运行Agent。Agent在执行过程中会调用OpenAI API来完成推理，并可以根据配置进行任务转移和安全检查。</p> <h3 id=51-agent>5.1 Agent的所有配置参数<a class=headerlink href=#51-agent title="Permanent link">&para;</a></h3> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1> 1</a></span>
-<span class=normal><a href=#__codelineno-13-2> 2</a></span>
-<span class=normal><a href=#__codelineno-13-3> 3</a></span>
-<span class=normal><a href=#__codelineno-13-4> 4</a></span>
-<span class=normal><a href=#__codelineno-13-5> 5</a></span>
-<span class=normal><a href=#__codelineno-13-6> 6</a></span>
-<span class=normal><a href=#__codelineno-13-7> 7</a></span>
-<span class=normal><a href=#__codelineno-13-8> 8</a></span>
-<span class=normal><a href=#__codelineno-13-9> 9</a></span>
-<span class=normal><a href=#__codelineno-13-10>10</a></span>
-<span class=normal><a href=#__codelineno-13-11>11</a></span>
-<span class=normal><a href=#__codelineno-13-12>12</a></span>
-<span class=normal><a href=#__codelineno-13-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><a id=__codelineno-13-1 name=__codelineno-13-1></a><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
-</span><span id=__span-13-2><a id=__codelineno-13-2 name=__codelineno-13-2></a>    <span class=c1># 必填参数</span>
-</span><span id=__span-13-3><a id=__codelineno-13-3 name=__codelineno-13-3></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;数学辅导老师&quot;</span><span class=p>,</span>
-</span><span id=__span-13-4><a id=__codelineno-13-4 name=__codelineno-13-4></a>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一位耐心的数学老师，帮助学生解决数学问题。&quot;</span><span class=p>,</span>
-</span><span id=__span-13-5><a id=__codelineno-13-5 name=__codelineno-13-5></a>
-</span><span id=__span-13-6><a id=__codelineno-13-6 name=__codelineno-13-6></a>    <span class=c1># 可选参数</span>
-</span><span id=__span-13-7><a id=__codelineno-13-7 name=__codelineno-13-7></a>    <span class=n>model</span><span class=o>=</span><span class=s2>&quot;gpt-4o&quot;</span><span class=p>,</span>                    <span class=c1># 使用的模型，默认gpt-4o</span>
-</span><span id=__span-13-8><a id=__codelineno-13-8 name=__codelineno-13-8></a>    <span class=n>tools</span><span class=o>=</span><span class=p>[],</span>                          <span class=c1># 可用工具列表</span>
-</span><span id=__span-13-9><a id=__codelineno-13-9 name=__codelineno-13-9></a>    <span class=n>handoffs</span><span class=o>=</span><span class=p>[],</span>                      <span class=c1># 可交接的其他智能体</span>
-</span><span id=__span-13-10><a id=__codelineno-13-10 name=__codelineno-13-10></a>    <span class=n>input_guardrails</span><span class=o>=</span><span class=p>[],</span>              <span class=c1># 输入安全护栏</span>
-</span><span id=__span-13-11><a id=__codelineno-13-11 name=__codelineno-13-11></a>    <span class=n>output_guardrails</span><span class=o>=</span><span class=p>[],</span>            <span class=c1># 输出安全护栏</span>
-</span><span id=__span-13-12><a id=__codelineno-13-12 name=__codelineno-13-12></a>    <span class=n>output_type</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span>                 <span class=c1># 输出结构模型</span>
-</span><span id=__span-13-13><a id=__codelineno-13-13 name=__codelineno-13-13></a><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <p>让我逐一解释这些参数：</p> <table> <thead> <tr> <th>参数</th> <th>类型</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><code>name</code></td> <td>str</td> <td>智能体名称，必填</td> </tr> <tr> <td><code>instructions</code></td> <td>str</td> <td>智能体指令/系统提示词，必填</td> </tr> <tr> <td><code>model</code></td> <td>str</td> <td>使用的模型，默认为"gpt-4o"</td> </tr> <tr> <td><code>tools</code></td> <td>list[Tool]</td> <td>工具列表，默认为空</td> </tr> <tr> <td><code>handoffs</code></td> <td>list[Agent]</td> <td>可交接的智能体列表</td> </tr> <tr> <td><code>input_guardrails</code></td> <td>list[InputGuardrail]</td> <td>输入安全护栏</td> </tr> <tr> <td><code>output_guardrails</code></td> <td>list[OutputGuardrail]</td> <td>输出安全护栏</td> </tr> <tr> <td><code>output_type</code></td> <td>Type[BaseModel]</td> <td>输出结构模型（Pydantic模型类）</td> </tr> </tbody> </table> <h3 id=52-agent>5.2 为Agent添加工具<a class=headerlink href=#52-agent title="Permanent link">&para;</a></h3> <p>Agent最强大的地方在于它可以调用工具（Tools）。你只需要定义一个Python函数，SDK会自动将其转换为Agent可以调用的工具。</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
-<span class=normal><a href=#__codelineno-14-2> 2</a></span>
-<span class=normal><a href=#__codelineno-14-3> 3</a></span>
-<span class=normal><a href=#__codelineno-14-4> 4</a></span>
-<span class=normal><a href=#__codelineno-14-5> 5</a></span>
-<span class=normal><a href=#__codelineno-14-6> 6</a></span>
-<span class=normal><a href=#__codelineno-14-7> 7</a></span>
-<span class=normal><a href=#__codelineno-14-8> 8</a></span>
-<span class=normal><a href=#__codelineno-14-9> 9</a></span>
-<span class=normal><a href=#__codelineno-14-10>10</a></span>
-<span class=normal><a href=#__codelineno-14-11>11</a></span>
-<span class=normal><a href=#__codelineno-14-12>12</a></span>
-<span class=normal><a href=#__codelineno-14-13>13</a></span>
-<span class=normal><a href=#__codelineno-14-14>14</a></span>
-<span class=normal><a href=#__codelineno-14-15>15</a></span>
-<span class=normal><a href=#__codelineno-14-16>16</a></span>
-<span class=normal><a href=#__codelineno-14-17>17</a></span>
-<span class=normal><a href=#__codelineno-14-18>18</a></span>
-<span class=normal><a href=#__codelineno-14-19>19</a></span>
-<span class=normal><a href=#__codelineno-14-20>20</a></span>
-<span class=normal><a href=#__codelineno-14-21>21</a></span>
-<span class=normal><a href=#__codelineno-14-22>22</a></span>
-<span class=normal><a href=#__codelineno-14-23>23</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>function_tool</span>
-</span><span id=__span-14-2><a id=__codelineno-14-2 name=__codelineno-14-2></a>
-</span><span id=__span-14-3><a id=__codelineno-14-3 name=__codelineno-14-3></a><span class=nd>@function_tool</span>
-</span><span id=__span-14-4><a id=__codelineno-14-4 name=__codelineno-14-4></a><span class=k>def</span><span class=w> </span><span class=nf>calculate</span><span class=p>(</span><span class=n>expression</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
-</span><span id=__span-14-5><a id=__codelineno-14-5 name=__codelineno-14-5></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;计算数学表达式的值&quot;&quot;&quot;</span>
-</span><span id=__span-14-6><a id=__codelineno-14-6 name=__codelineno-14-6></a>    <span class=c1># 这是一个简单的计算器实现</span>
-</span><span id=__span-14-7><a id=__codelineno-14-7 name=__codelineno-14-7></a>    <span class=c1># 实际项目中你可以调用计算API</span>
-</span><span id=__span-14-8><a id=__codelineno-14-8 name=__codelineno-14-8></a>    <span class=k>try</span><span class=p>:</span>
-</span><span id=__span-14-9><a id=__codelineno-14-9 name=__codelineno-14-9></a>        <span class=n>result</span> <span class=o>=</span> <span class=nb>eval</span><span class=p>(</span><span class=n>expression</span><span class=p>)</span>
-</span><span id=__span-14-10><a id=__codelineno-14-10 name=__codelineno-14-10></a>        <span class=k>return</span> <span class=nb>str</span><span class=p>(</span><span class=n>result</span><span class=p>)</span>
-</span><span id=__span-14-11><a id=__codelineno-14-11 name=__codelineno-14-11></a>    <span class=k>except</span> <span class=ne>Exception</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
-</span><span id=__span-14-12><a id=__codelineno-14-12 name=__codelineno-14-12></a>        <span class=k>return</span> <span class=sa>f</span><span class=s2>&quot;计算错误: </span><span class=si>{</span><span class=nb>str</span><span class=p>(</span><span class=n>e</span><span class=p>)</span><span class=si>}</span><span class=s2>&quot;</span>
-</span><span id=__span-14-13><a id=__codelineno-14-13 name=__codelineno-14-13></a>
-</span><span id=__span-14-14><a id=__codelineno-14-14 name=__codelineno-14-14></a><span class=c1># 创建带有工具的Agent</span>
-</span><span id=__span-14-15><a id=__codelineno-14-15 name=__codelineno-14-15></a><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
-</span><span id=__span-14-16><a id=__codelineno-14-16 name=__codelineno-14-16></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;数学助手&quot;</span><span class=p>,</span>
-</span><span id=__span-14-17><a id=__codelineno-14-17 name=__codelineno-14-17></a>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一个数学助手，帮助用户进行数学计算。&quot;</span><span class=p>,</span>
-</span><span id=__span-14-18><a id=__codelineno-14-18 name=__codelineno-14-18></a>    <span class=n>tools</span><span class=o>=</span><span class=p>[</span><span class=n>calculate</span><span class=p>]</span>
-</span><span id=__span-14-19><a id=__codelineno-14-19 name=__codelineno-14-19></a><span class=p>)</span>
-</span><span id=__span-14-20><a id=__codelineno-14-20 name=__codelineno-14-20></a>
-</span><span id=__span-14-21><a id=__codelineno-14-21 name=__codelineno-14-21></a><span class=c1># 运行Agent</span>
-</span><span id=__span-14-22><a id=__codelineno-14-22 name=__codelineno-14-22></a><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;计算 125 * 17 的结果&quot;</span><span class=p>)</span>
-</span><span id=__span-14-23><a id=__codelineno-14-23 name=__codelineno-14-23></a><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <p>运行结果：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><a id=__codelineno-15-1 name=__codelineno-15-1></a>125乘以17等于2125。我通过计算器工具验证了这个结果。
-</span></code></pre></div></td></tr></table></div> <blockquote> <p>🔑 <em>关键点</em>：只需要给函数加上<code>@function_tool</code>装饰器，SDK会自动：1. 使用函数的文档字符串生成工具描述 2. 使用函数参数生成工具的模式定义 3. 处理函数调用的执行和返回</p> </blockquote> <h3 id=53-lambdatool>5.3 使用LambdaTool更灵活地定义工具<a class=headerlink href=#53-lambdatool title="Permanent link">&para;</a></h3> <p>如果你不想用装饰器，也可以直接使用LambdaTool：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1> 1</a></span>
-<span class=normal><a href=#__codelineno-16-2> 2</a></span>
-<span class=normal><a href=#__codelineno-16-3> 3</a></span>
-<span class=normal><a href=#__codelineno-16-4> 4</a></span>
-<span class=normal><a href=#__codelineno-16-5> 5</a></span>
-<span class=normal><a href=#__codelineno-16-6> 6</a></span>
-<span class=normal><a href=#__codelineno-16-7> 7</a></span>
-<span class=normal><a href=#__codelineno-16-8> 8</a></span>
-<span class=normal><a href=#__codelineno-16-9> 9</a></span>
-<span class=normal><a href=#__codelineno-16-10>10</a></span>
-<span class=normal><a href=#__codelineno-16-11>11</a></span>
-<span class=normal><a href=#__codelineno-16-12>12</a></span>
-<span class=normal><a href=#__codelineno-16-13>13</a></span>
-<span class=normal><a href=#__codelineno-16-14>14</a></span>
-<span class=normal><a href=#__codelineno-16-15>15</a></span>
-<span class=normal><a href=#__codelineno-16-16>16</a></span>
-<span class=normal><a href=#__codelineno-16-17>17</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><a id=__codelineno-16-1 name=__codelineno-16-1></a><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>LambdaTool</span>
-</span><span id=__span-16-2><a id=__codelineno-16-2 name=__codelineno-16-2></a>
-</span><span id=__span-16-3><a id=__codelineno-16-3 name=__codelineno-16-3></a><span class=c1># 使用LambdaTool定义工具</span>
-</span><span id=__span-16-4><a id=__codelineno-16-4 name=__codelineno-16-4></a><span class=n>天气查询工具</span> <span class=o>=</span> <span class=n>LambdaTool</span><span class=o>.</span><span class=n>from_function</span><span class=p>(</span>
-</span><span id=__span-16-5><a id=__codelineno-16-5 name=__codelineno-16-5></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;查询天气&quot;</span><span class=p>,</span>
-</span><span id=__span-16-6><a id=__codelineno-16-6 name=__codelineno-16-6></a>    <span class=n>description</span><span class=o>=</span><span class=s2>&quot;查询指定城市的天气情况&quot;</span><span class=p>,</span>
-</span><span id=__span-16-7><a id=__codelineno-16-7 name=__codelineno-16-7></a>    <span class=n>function</span><span class=o>=</span><span class=k>lambda</span> <span class=n>city</span><span class=p>:</span> <span class=sa>f</span><span class=s2>&quot;</span><span class=si>{</span><span class=n>city</span><span class=si>}</span><span class=s2>今天天气晴朗，25度&quot;</span>
-</span><span id=__span-16-8><a id=__codelineno-16-8 name=__codelineno-16-8></a><span class=p>)</span>
-</span><span id=__span-16-9><a id=__codelineno-16-9 name=__codelineno-16-9></a>
-</span><span id=__span-16-10><a id=__codelineno-16-10 name=__codelineno-16-10></a><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
-</span><span id=__span-16-11><a id=__codelineno-16-11 name=__codelineno-16-11></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;天气助手&quot;</span><span class=p>,</span>
-</span><span id=__span-16-12><a id=__codelineno-16-12 name=__codelineno-16-12></a>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一个天气助手，用工具查询天气信息并告知用户。&quot;</span><span class=p>,</span>
-</span><span id=__span-16-13><a id=__codelineno-16-13 name=__codelineno-16-13></a>    <span class=n>tools</span><span class=o>=</span><span class=p>[</span><span class=n>天气查询工具</span><span class=p>]</span>
-</span><span id=__span-16-14><a id=__codelineno-16-14 name=__codelineno-16-14></a><span class=p>)</span>
-</span><span id=__span-16-15><a id=__codelineno-16-15 name=__codelineno-16-15></a>
-</span><span id=__span-16-16><a id=__codelineno-16-16 name=__codelineno-16-16></a><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;北京今天天气怎么样？&quot;</span><span class=p>)</span>
-</span><span id=__span-16-17><a id=__codelineno-16-17 name=__codelineno-16-17></a><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <h2 id=_3>六、安全护栏：保障输出安全可靠<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <p>安全护栏（Guardrails）是Agents SDK的另一个核心功能。它用于验证智能体的输入和输出，确保内容安全合规。</p> <h3 id=61>6.1 什么是安全护栏？<a class=headerlink href=#61 title="Permanent link">&para;</a></h3> <p>简单来说，安全护栏是一种检查机制，可以在智能体处理输入之前（或返回输出之前）进行验证。如果验证不通过，智能体的执行会被阻止或触发特定的处理逻辑。</p> <p>下面这张图展示了安全护栏的工作位置和流程：</p> <pre class=mermaid><code>flowchart LR
+    style 开发者 fill:#e8f5e8</code></pre> <p>如上图所示，开发者通过编写自定义函数来定义Tools和检查逻辑，然后创建Agent实例，最后通过Runner来运行Agent。Agent在执行过程中会调用OpenAI API来完成推理，并可以根据配置进行任务转移和安全检查。</p> <h3 id=51-agent>5.1 Agent的所有配置参数<a class=headerlink href=#51-agent title="Permanent link">&para;</a></h3> <div class="language-python highlight"><pre><span></span><code><span id=__span-13-1><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
+</span><span id=__span-13-2>    <span class=c1># 必填参数</span>
+</span><span id=__span-13-3>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;数学辅导老师&quot;</span><span class=p>,</span>
+</span><span id=__span-13-4>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一位耐心的数学老师，帮助学生解决数学问题。&quot;</span><span class=p>,</span>
+</span><span id=__span-13-5>
+</span><span id=__span-13-6>    <span class=c1># 可选参数</span>
+</span><span id=__span-13-7>    <span class=n>model</span><span class=o>=</span><span class=s2>&quot;gpt-4o&quot;</span><span class=p>,</span>                    <span class=c1># 使用的模型，默认gpt-4o</span>
+</span><span id=__span-13-8>    <span class=n>tools</span><span class=o>=</span><span class=p>[],</span>                          <span class=c1># 可用工具列表</span>
+</span><span id=__span-13-9>    <span class=n>handoffs</span><span class=o>=</span><span class=p>[],</span>                      <span class=c1># 可交接的其他智能体</span>
+</span><span id=__span-13-10>    <span class=n>input_guardrails</span><span class=o>=</span><span class=p>[],</span>              <span class=c1># 输入安全护栏</span>
+</span><span id=__span-13-11>    <span class=n>output_guardrails</span><span class=o>=</span><span class=p>[],</span>            <span class=c1># 输出安全护栏</span>
+</span><span id=__span-13-12>    <span class=n>output_type</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span>                 <span class=c1># 输出结构模型</span>
+</span><span id=__span-13-13><span class=p>)</span>
+</span></code></pre></div> <p>让我逐一解释这些参数：</p> <table> <thead> <tr> <th>参数</th> <th>类型</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><code>name</code></td> <td>str</td> <td>智能体名称，必填</td> </tr> <tr> <td><code>instructions</code></td> <td>str</td> <td>智能体指令/系统提示词，必填</td> </tr> <tr> <td><code>model</code></td> <td>str</td> <td>使用的模型，默认为"gpt-4o"</td> </tr> <tr> <td><code>tools</code></td> <td>list[Tool]</td> <td>工具列表，默认为空</td> </tr> <tr> <td><code>handoffs</code></td> <td>list[Agent]</td> <td>可交接的智能体列表</td> </tr> <tr> <td><code>input_guardrails</code></td> <td>list[InputGuardrail]</td> <td>输入安全护栏</td> </tr> <tr> <td><code>output_guardrails</code></td> <td>list[OutputGuardrail]</td> <td>输出安全护栏</td> </tr> <tr> <td><code>output_type</code></td> <td>Type[BaseModel]</td> <td>输出结构模型（Pydantic模型类）</td> </tr> </tbody> </table> <h3 id=52-agent>5.2 为Agent添加工具<a class=headerlink href=#52-agent title="Permanent link">&para;</a></h3> <p>Agent最强大的地方在于它可以调用工具（Tools）。你只需要定义一个Python函数，SDK会自动将其转换为Agent可以调用的工具。</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-14-1><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>function_tool</span>
+</span><span id=__span-14-2>
+</span><span id=__span-14-3><span class=nd>@function_tool</span>
+</span><span id=__span-14-4><span class=k>def</span><span class=w> </span><span class=nf>calculate</span><span class=p>(</span><span class=n>expression</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
+</span><span id=__span-14-5><span class=w>    </span><span class=sd>&quot;&quot;&quot;计算数学表达式的值&quot;&quot;&quot;</span>
+</span><span id=__span-14-6>    <span class=c1># 这是一个简单的计算器实现</span>
+</span><span id=__span-14-7>    <span class=c1># 实际项目中你可以调用计算API</span>
+</span><span id=__span-14-8>    <span class=k>try</span><span class=p>:</span>
+</span><span id=__span-14-9>        <span class=n>result</span> <span class=o>=</span> <span class=nb>eval</span><span class=p>(</span><span class=n>expression</span><span class=p>)</span>
+</span><span id=__span-14-10>        <span class=k>return</span> <span class=nb>str</span><span class=p>(</span><span class=n>result</span><span class=p>)</span>
+</span><span id=__span-14-11>    <span class=k>except</span> <span class=ne>Exception</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span><span id=__span-14-12>        <span class=k>return</span> <span class=sa>f</span><span class=s2>&quot;计算错误: </span><span class=si>{</span><span class=nb>str</span><span class=p>(</span><span class=n>e</span><span class=p>)</span><span class=si>}</span><span class=s2>&quot;</span>
+</span><span id=__span-14-13>
+</span><span id=__span-14-14><span class=c1># 创建带有工具的Agent</span>
+</span><span id=__span-14-15><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
+</span><span id=__span-14-16>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;数学助手&quot;</span><span class=p>,</span>
+</span><span id=__span-14-17>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一个数学助手，帮助用户进行数学计算。&quot;</span><span class=p>,</span>
+</span><span id=__span-14-18>    <span class=n>tools</span><span class=o>=</span><span class=p>[</span><span class=n>calculate</span><span class=p>]</span>
+</span><span id=__span-14-19><span class=p>)</span>
+</span><span id=__span-14-20>
+</span><span id=__span-14-21><span class=c1># 运行Agent</span>
+</span><span id=__span-14-22><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;计算 125 * 17 的结果&quot;</span><span class=p>)</span>
+</span><span id=__span-14-23><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
+</span></code></pre></div> <p>运行结果：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-15-1>125乘以17等于2125。我通过计算器工具验证了这个结果。
+</span></code></pre></div> <blockquote> <p>🔑 <em>关键点</em>：只需要给函数加上<code>@function_tool</code>装饰器，SDK会自动：1. 使用函数的文档字符串生成工具描述 2. 使用函数参数生成工具的模式定义 3. 处理函数调用的执行和返回</p> </blockquote> <h3 id=53-lambdatool>5.3 使用LambdaTool更灵活地定义工具<a class=headerlink href=#53-lambdatool title="Permanent link">&para;</a></h3> <p>如果你不想用装饰器，也可以直接使用LambdaTool：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-16-1><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>LambdaTool</span>
+</span><span id=__span-16-2>
+</span><span id=__span-16-3><span class=c1># 使用LambdaTool定义工具</span>
+</span><span id=__span-16-4><span class=n>天气查询工具</span> <span class=o>=</span> <span class=n>LambdaTool</span><span class=o>.</span><span class=n>from_function</span><span class=p>(</span>
+</span><span id=__span-16-5>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;查询天气&quot;</span><span class=p>,</span>
+</span><span id=__span-16-6>    <span class=n>description</span><span class=o>=</span><span class=s2>&quot;查询指定城市的天气情况&quot;</span><span class=p>,</span>
+</span><span id=__span-16-7>    <span class=n>function</span><span class=o>=</span><span class=k>lambda</span> <span class=n>city</span><span class=p>:</span> <span class=sa>f</span><span class=s2>&quot;</span><span class=si>{</span><span class=n>city</span><span class=si>}</span><span class=s2>今天天气晴朗，25度&quot;</span>
+</span><span id=__span-16-8><span class=p>)</span>
+</span><span id=__span-16-9>
+</span><span id=__span-16-10><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
+</span><span id=__span-16-11>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;天气助手&quot;</span><span class=p>,</span>
+</span><span id=__span-16-12>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一个天气助手，用工具查询天气信息并告知用户。&quot;</span><span class=p>,</span>
+</span><span id=__span-16-13>    <span class=n>tools</span><span class=o>=</span><span class=p>[</span><span class=n>天气查询工具</span><span class=p>]</span>
+</span><span id=__span-16-14><span class=p>)</span>
+</span><span id=__span-16-15>
+</span><span id=__span-16-16><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;北京今天天气怎么样？&quot;</span><span class=p>)</span>
+</span><span id=__span-16-17><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
+</span></code></pre></div> <h2 id=_3>六、安全护栏：保障输出安全可靠<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <p>安全护栏（Guardrails）是Agents SDK的另一个核心功能。它用于验证智能体的输入和输出，确保内容安全合规。</p> <h3 id=61>6.1 什么是安全护栏？<a class=headerlink href=#61 title="Permanent link">&para;</a></h3> <p>简单来说，安全护栏是一种检查机制，可以在智能体处理输入之前（或返回输出之前）进行验证。如果验证不通过，智能体的执行会被阻止或触发特定的处理逻辑。</p> <p>下面这张图展示了安全护栏的工作位置和流程：</p> <pre class=mermaid><code>flowchart LR
     subgraph "输入检查"
         I1[用户输入] --&gt; I2{验证通过?}
         I2 --&gt;|是| A[执行Agent]
@@ -211,447 +140,236 @@
     end
 
     I3 -.-&gt; O3
-    O4 -.-&gt; O3</code></pre> <p>如上图所示： - <strong>输入护栏</strong> 在Agent处理输入之前拦截，检查通过才允许继续执行 - <strong>输出护栏</strong> 在返回结果之前检查输出内容，确保安全合规</p> <p>如果护栏验证失败（triggered），可以通过设置<code>tripwire_triggered=True</code>来阻止Agent继续执行或返回修改后的响应。</p> <h3 id=62>6.2 输入安全护栏示例<a class=headerlink href=#62 title="Permanent link">&para;</a></h3> <p>让我们看一个实际的例子：创建一个作业帮助机器人，但只在用户询问作业相关问题时才激活。</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1> 1</a></span>
-<span class=normal><a href=#__codelineno-17-2> 2</a></span>
-<span class=normal><a href=#__codelineno-17-3> 3</a></span>
-<span class=normal><a href=#__codelineno-17-4> 4</a></span>
-<span class=normal><a href=#__codelineno-17-5> 5</a></span>
-<span class=normal><a href=#__codelineno-17-6> 6</a></span>
-<span class=normal><a href=#__codelineno-17-7> 7</a></span>
-<span class=normal><a href=#__codelineno-17-8> 8</a></span>
-<span class=normal><a href=#__codelineno-17-9> 9</a></span>
-<span class=normal><a href=#__codelineno-17-10>10</a></span>
-<span class=normal><a href=#__codelineno-17-11>11</a></span>
-<span class=normal><a href=#__codelineno-17-12>12</a></span>
-<span class=normal><a href=#__codelineno-17-13>13</a></span>
-<span class=normal><a href=#__codelineno-17-14>14</a></span>
-<span class=normal><a href=#__codelineno-17-15>15</a></span>
-<span class=normal><a href=#__codelineno-17-16>16</a></span>
-<span class=normal><a href=#__codelineno-17-17>17</a></span>
-<span class=normal><a href=#__codelineno-17-18>18</a></span>
-<span class=normal><a href=#__codelineno-17-19>19</a></span>
-<span class=normal><a href=#__codelineno-17-20>20</a></span>
-<span class=normal><a href=#__codelineno-17-21>21</a></span>
-<span class=normal><a href=#__codelineno-17-22>22</a></span>
-<span class=normal><a href=#__codelineno-17-23>23</a></span>
-<span class=normal><a href=#__codelineno-17-24>24</a></span>
-<span class=normal><a href=#__codelineno-17-25>25</a></span>
-<span class=normal><a href=#__codelineno-17-26>26</a></span>
-<span class=normal><a href=#__codelineno-17-27>27</a></span>
-<span class=normal><a href=#__codelineno-17-28>28</a></span>
-<span class=normal><a href=#__codelineno-17-29>29</a></span>
-<span class=normal><a href=#__codelineno-17-30>30</a></span>
-<span class=normal><a href=#__codelineno-17-31>31</a></span>
-<span class=normal><a href=#__codelineno-17-32>32</a></span>
-<span class=normal><a href=#__codelineno-17-33>33</a></span>
-<span class=normal><a href=#__codelineno-17-34>34</a></span>
-<span class=normal><a href=#__codelineno-17-35>35</a></span>
-<span class=normal><a href=#__codelineno-17-36>36</a></span>
-<span class=normal><a href=#__codelineno-17-37>37</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><a id=__codelineno-17-1 name=__codelineno-17-1></a><span class=kn>from</span><span class=w> </span><span class=nn>pydantic</span><span class=w> </span><span class=kn>import</span> <span class=n>BaseModel</span>
-</span><span id=__span-17-2><a id=__codelineno-17-2 name=__codelineno-17-2></a><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span><span class=p>,</span> <span class=n>GuardrailFunctionOutput</span><span class=p>,</span> <span class=n>InputGuardrail</span>
-</span><span id=__span-17-3><a id=__codelineno-17-3 name=__codelineno-17-3></a>
-</span><span id=__span-17-4><a id=__codelineno-17-4 name=__codelineno-17-4></a><span class=c1># 第一步：定义输出模型</span>
-</span><span id=__span-17-5><a id=__codelineno-17-5 name=__codelineno-17-5></a><span class=k>class</span><span class=w> </span><span class=nc>HomeworkOutput</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
-</span><span id=__span-17-6><a id=__codelineno-17-6 name=__codelineno-17-6></a>    <span class=n>is_homework</span><span class=p>:</span> <span class=nb>bool</span>
-</span><span id=__span-17-7><a id=__codelineno-17-7 name=__codelineno-17-7></a>    <span class=n>reasoning</span><span class=p>:</span> <span class=nb>str</span>
-</span><span id=__span-17-8><a id=__codelineno-17-8 name=__codelineno-17-8></a>
-</span><span id=__span-17-9><a id=__codelineno-17-9 name=__codelineno-17-9></a><span class=c1># 第二步：创建护栏检查Agent</span>
-</span><span id=__span-17-10><a id=__codelineno-17-10 name=__codelineno-17-10></a><span class=n>guardrail_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
-</span><span id=__span-17-11><a id=__codelineno-17-11 name=__codelineno-17-11></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;作业检查员&quot;</span><span class=p>,</span>
-</span><span id=__span-17-12><a id=__codelineno-17-12 name=__codelineno-17-12></a>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;判断用户的问题是否与学校作业相关。&quot;</span><span class=p>,</span>
-</span><span id=__span-17-13><a id=__codelineno-17-13 name=__codelineno-17-13></a>    <span class=n>output_type</span><span class=o>=</span><span class=n>HomeworkOutput</span>
-</span><span id=__span-17-14><a id=__codelineno-17-14 name=__codelineno-17-14></a><span class=p>)</span>
-</span><span id=__span-17-15><a id=__codelineno-17-15 name=__codelineno-17-15></a>
-</span><span id=__span-17-16><a id=__codelineno-17-16 name=__codelineno-17-16></a><span class=c1># 第三步：定义护栏函数</span>
-</span><span id=__span-17-17><a id=__codelineno-17-17 name=__codelineno-17-17></a><span class=k>async</span> <span class=k>def</span><span class=w> </span><span class=nf>homework_guardrail</span><span class=p>(</span><span class=n>ctx</span><span class=p>,</span> <span class=n>agent</span><span class=p>,</span> <span class=n>input_data</span><span class=p>):</span>
-</span><span id=__span-17-18><a id=__codelineno-17-18 name=__codelineno-17-18></a>    <span class=n>result</span> <span class=o>=</span> <span class=k>await</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>guardrail_agent</span><span class=p>,</span> <span class=n>input_data</span><span class=p>,</span> <span class=n>context</span><span class=o>=</span><span class=n>ctx</span><span class=o>.</span><span class=n>context</span><span class=p>)</span>
-</span><span id=__span-17-19><a id=__codelineno-17-19 name=__codelineno-17-19></a>    <span class=n>final_output</span> <span class=o>=</span> <span class=n>result</span><span class=o>.</span><span class=n>final_output_as</span><span class=p>(</span><span class=n>HomeworkOutput</span><span class=p>)</span>
-</span><span id=__span-17-20><a id=__codelineno-17-20 name=__codelineno-17-20></a>
-</span><span id=__span-17-21><a id=__codelineno-17-21 name=__codelineno-17-21></a>    <span class=k>return</span> <span class=n>GuardrailFunctionOutput</span><span class=p>(</span>
-</span><span id=__span-17-22><a id=__codelineno-17-22 name=__codelineno-17-22></a>        <span class=n>output_info</span><span class=o>=</span><span class=n>final_output</span><span class=p>,</span>
-</span><span id=__span-17-23><a id=__codelineno-17-23 name=__codelineno-17-23></a>        <span class=n>tripwire_triggered</span><span class=o>=</span><span class=ow>not</span> <span class=n>final_output</span><span class=o>.</span><span class=n>is_homework</span><span class=p>,</span>
-</span><span id=__span-17-24><a id=__codelineno-17-24 name=__codelineno-17-24></a>    <span class=p>)</span>
-</span><span id=__span-17-25><a id=__codelineno-17-25 name=__codelineno-17-25></a>
-</span><span id=__span-17-26><a id=__codelineno-17-26 name=__codelineno-17-26></a><span class=c1># 第四步：创建主智能体，配置输入护栏</span>
-</span><span id=__span-17-27><a id=__codelineno-17-27 name=__codelineno-17-27></a><span class=n>triage_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
-</span><span id=__span-17-28><a id=__codelineno-17-28 name=__codelineno-17-28></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;分诊机器人&quot;</span><span class=p>,</span>
-</span><span id=__span-17-29><a id=__codelineno-17-29 name=__codelineno-17-29></a>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一个帮助学生解答作业问题的机器人。&quot;</span><span class=p>,</span>
-</span><span id=__span-17-30><a id=__codelineno-17-30 name=__codelineno-17-30></a>    <span class=n>input_guardrails</span><span class=o>=</span><span class=p>[</span>
-</span><span id=__span-17-31><a id=__codelineno-17-31 name=__codelineno-17-31></a>        <span class=n>InputGuardrail</span><span class=p>(</span><span class=n>guardrail_function</span><span class=o>=</span><span class=n>homework_guardrail</span><span class=p>)</span>
-</span><span id=__span-17-32><a id=__codelineno-17-32 name=__codelineno-17-32></a>    <span class=p>]</span>
-</span><span id=__span-17-33><a id=__codelineno-17-33 name=__codelineno-17-33></a><span class=p>)</span>
-</span><span id=__span-17-34><a id=__codelineno-17-34 name=__codelineno-17-34></a>
-</span><span id=__span-17-35><a id=__codelineno-17-35 name=__codelineno-17-35></a><span class=c1># 测试</span>
-</span><span id=__span-17-36><a id=__codelineno-17-36 name=__codelineno-17-36></a><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>triage_agent</span><span class=p>,</span> <span class=s2>&quot;请帮我解答这道数学题：2+2等于几？&quot;</span><span class=p>)</span>
-</span><span id=__span-17-37><a id=__codelineno-17-37 name=__codelineno-17-37></a><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <p>运行结果会根据输入有所不同。如果不是作业相关问题，护栏会触发，阻止智能体继续执行。</p> <h3 id=63>6.3 输出安全护栏<a class=headerlink href=#63 title="Permanent link">&para;</a></h3> <p>除了输入护栏，还有输出护栏，用于在返回结果前检查输出内容：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-18-1> 1</a></span>
-<span class=normal><a href=#__codelineno-18-2> 2</a></span>
-<span class=normal><a href=#__codelineno-18-3> 3</a></span>
-<span class=normal><a href=#__codelineno-18-4> 4</a></span>
-<span class=normal><a href=#__codelineno-18-5> 5</a></span>
-<span class=normal><a href=#__codelineno-18-6> 6</a></span>
-<span class=normal><a href=#__codelineno-18-7> 7</a></span>
-<span class=normal><a href=#__codelineno-18-8> 8</a></span>
-<span class=normal><a href=#__codelineno-18-9> 9</a></span>
-<span class=normal><a href=#__codelineno-18-10>10</a></span>
-<span class=normal><a href=#__codelineno-18-11>11</a></span>
-<span class=normal><a href=#__codelineno-18-12>12</a></span>
-<span class=normal><a href=#__codelineno-18-13>13</a></span>
-<span class=normal><a href=#__codelineno-18-14>14</a></span>
-<span class=normal><a href=#__codelineno-18-15>15</a></span>
-<span class=normal><a href=#__codelineno-18-16>16</a></span>
-<span class=normal><a href=#__codelineno-18-17>17</a></span>
-<span class=normal><a href=#__codelineno-18-18>18</a></span>
-<span class=normal><a href=#__codelineno-18-19>19</a></span>
-<span class=normal><a href=#__codelineno-18-20>20</a></span>
-<span class=normal><a href=#__codelineno-18-21>21</a></span>
-<span class=normal><a href=#__codelineno-18-22>22</a></span>
-<span class=normal><a href=#__codelineno-18-23>23</a></span>
-<span class=normal><a href=#__codelineno-18-24>24</a></span>
-<span class=normal><a href=#__codelineno-18-25>25</a></span>
-<span class=normal><a href=#__codelineno-18-26>26</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-18-1><a id=__codelineno-18-1 name=__codelineno-18-1></a><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>OutputGuardrail</span><span class=p>,</span> <span class=n>GuardrailFunctionOutput</span>
-</span><span id=__span-18-2><a id=__codelineno-18-2 name=__codelineno-18-2></a>
-</span><span id=__span-18-3><a id=__codelineno-18-3 name=__codelineno-18-3></a><span class=c1># 定义输出护栏函数</span>
-</span><span id=__span-18-4><a id=__codelineno-18-4 name=__codelineno-18-4></a><span class=k>async</span> <span class=k>def</span><span class=w> </span><span class=nf>output_guardrail</span><span class=p>(</span><span class=n>ctx</span><span class=p>,</span> <span class=n>agent</span><span class=p>,</span> <span class=n>input_data</span><span class=p>,</span> <span class=n>response</span><span class=p>):</span>
-</span><span id=__span-18-5><a id=__codelineno-18-5 name=__codelineno-18-5></a>    <span class=c1># 检查输出是否包含敏感词</span>
-</span><span id=__span-18-6><a id=__codelineno-18-6 name=__codelineno-18-6></a>    <span class=n>sensitive_words</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&quot;暴力&quot;</span><span class=p>,</span> <span class=s2>&quot;赌博&quot;</span><span class=p>,</span> <span class=s2>&quot;诈骗&quot;</span><span class=p>]</span>
-</span><span id=__span-18-7><a id=__codelineno-18-7 name=__codelineno-18-7></a>    <span class=k>for</span> <span class=n>word</span> <span class=ow>in</span> <span class=n>sensitive_words</span><span class=p>:</span>
-</span><span id=__span-18-8><a id=__codelineno-18-8 name=__codelineno-18-8></a>        <span class=k>if</span> <span class=n>word</span> <span class=ow>in</span> <span class=n>response</span><span class=p>:</span>
-</span><span id=__span-18-9><a id=__codelineno-18-9 name=__codelineno-18-9></a>            <span class=k>return</span> <span class=n>GuardrailFunctionOutput</span><span class=p>(</span>
-</span><span id=__span-18-10><a id=__codelineno-18-10 name=__codelineno-18-10></a>                <span class=n>output_info</span><span class=o>=</span><span class=p>{</span><span class=s2>&quot;flagged&quot;</span><span class=p>:</span> <span class=kc>True</span><span class=p>,</span> <span class=s2>&quot;word&quot;</span><span class=p>:</span> <span class=n>word</span><span class=p>},</span>
-</span><span id=__span-18-11><a id=__codelineno-18-11 name=__codelineno-18-11></a>                <span class=n>tripwire_triggered</span><span class=o>=</span><span class=kc>True</span>
-</span><span id=__span-18-12><a id=__codelineno-18-12 name=__codelineno-18-12></a>            <span class=p>)</span>
-</span><span id=__span-18-13><a id=__codelineno-18-13 name=__codelineno-18-13></a>
-</span><span id=__span-18-14><a id=__codelineno-18-14 name=__codelineno-18-14></a>    <span class=k>return</span> <span class=n>GuardrailFunctionOutput</span><span class=p>(</span>
-</span><span id=__span-18-15><a id=__codelineno-18-15 name=__codelineno-18-15></a>        <span class=n>output_info</span><span class=o>=</span><span class=p>{</span><span class=s2>&quot;flagged&quot;</span><span class=p>:</span> <span class=kc>False</span><span class=p>},</span>
-</span><span id=__span-18-16><a id=__codelineno-18-16 name=__codelineno-18-16></a>        <span class=n>tripwire_triggered</span><span class=o>=</span><span class=kc>False</span>
-</span><span id=__span-18-17><a id=__codelineno-18-17 name=__codelineno-18-17></a>    <span class=p>)</span>
-</span><span id=__span-18-18><a id=__codelineno-18-18 name=__codelineno-18-18></a>
-</span><span id=__span-18-19><a id=__codelineno-18-19 name=__codelineno-18-19></a><span class=c1># 配置输出护栏</span>
-</span><span id=__span-18-20><a id=__codelineno-18-20 name=__codelineno-18-20></a><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
-</span><span id=__span-18-21><a id=__codelineno-18-21 name=__codelineno-18-21></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;安全助手&quot;</span><span class=p>,</span>
-</span><span id=__span-18-22><a id=__codelineno-18-22 name=__codelineno-18-22></a>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是 一个友好的助手。&quot;</span><span class=p>,</span>
-</span><span id=__span-18-23><a id=__codelineno-18-23 name=__codelineno-18-23></a>    <span class=n>output_guardrails</span><span class=o>=</span><span class=p>[</span>
-</span><span id=__span-18-24><a id=__codelineno-18-24 name=__codelineno-18-24></a>        <span class=n>OutputGuardrail</span><span class=p>(</span><span class=n>guardrail_function</span><span class=o>=</span><span class=n>output_guardrail</span><span class=p>)</span>
-</span><span id=__span-18-25><a id=__codelineno-18-25 name=__codelineno-18-25></a>    <span class=p>]</span>
-</span><span id=__span-18-26><a id=__codelineno-18-26 name=__codelineno-18-26></a><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <h2 id=agent_1>七、任务转移：多Agent协作<a class=headerlink href=#agent_1 title="Permanent link">&para;</a></h2> <p>任务转移（Handoffs）是Agents SDK最强大的特性之一。它允许一个Agent将任务���派给另一个Agent，实现多Agent协作。</p> <h3 id=71>7.1 什么时候使用任务转移？<a class=headerlink href=#71 title="Permanent link">&para;</a></h3> <p>想象这样一个场景：你去医院看病，分诊护士会根据你的症状把你分配到不同的科室。任务转移就是类似的概念——Agent会根据用户的需求，将其分配给最专业的“专家Agent”。</p> <h3 id=72-agent>7.2 多Agent协作示例<a class=headerlink href=#72-agent title="Permanent link">&para;</a></h3> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-19-1> 1</a></span>
-<span class=normal><a href=#__codelineno-19-2> 2</a></span>
-<span class=normal><a href=#__codelineno-19-3> 3</a></span>
-<span class=normal><a href=#__codelineno-19-4> 4</a></span>
-<span class=normal><a href=#__codelineno-19-5> 5</a></span>
-<span class=normal><a href=#__codelineno-19-6> 6</a></span>
-<span class=normal><a href=#__codelineno-19-7> 7</a></span>
-<span class=normal><a href=#__codelineno-19-8> 8</a></span>
-<span class=normal><a href=#__codelineno-19-9> 9</a></span>
-<span class=normal><a href=#__codelineno-19-10>10</a></span>
-<span class=normal><a href=#__codelineno-19-11>11</a></span>
-<span class=normal><a href=#__codelineno-19-12>12</a></span>
-<span class=normal><a href=#__codelineno-19-13>13</a></span>
-<span class=normal><a href=#__codelineno-19-14>14</a></span>
-<span class=normal><a href=#__codelineno-19-15>15</a></span>
-<span class=normal><a href=#__codelineno-19-16>16</a></span>
-<span class=normal><a href=#__codelineno-19-17>17</a></span>
-<span class=normal><a href=#__codelineno-19-18>18</a></span>
-<span class=normal><a href=#__codelineno-19-19>19</a></span>
-<span class=normal><a href=#__codelineno-19-20>20</a></span>
-<span class=normal><a href=#__codelineno-19-21>21</a></span>
-<span class=normal><a href=#__codelineno-19-22>22</a></span>
-<span class=normal><a href=#__codelineno-19-23>23</a></span>
-<span class=normal><a href=#__codelineno-19-24>24</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-19-1><a id=__codelineno-19-1 name=__codelineno-19-1></a><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
-</span><span id=__span-19-2><a id=__codelineno-19-2 name=__codelineno-19-2></a>
-</span><span id=__span-19-3><a id=__codelineno-19-3 name=__codelineno-19-3></a><span class=c1># 创建数学专家Agent</span>
-</span><span id=__span-19-4><a id=__codelineno-19-4 name=__codelineno-19-4></a><span class=n>math_tutor_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
-</span><span id=__span-19-5><a id=__codelineno-19-5 name=__codelineno-19-5></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;数学老师&quot;</span><span class=p>,</span>
-</span><span id=__span-19-6><a id=__codelineno-19-6 name=__codelineno-19-6></a>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一位数学老师，帮助学生解决数学问题。在解答时要逐步解释你的推理过程。&quot;</span>
-</span><span id=__span-19-7><a id=__codelineno-19-7 name=__codelineno-19-7></a><span class=p>)</span>
-</span><span id=__span-19-8><a id=__codelineno-19-8 name=__codelineno-19-8></a>
-</span><span id=__span-19-9><a id=__codelineno-19-9 name=__codelineno-19-9></a><span class=c1># 创建历史老师Agent</span>
-</span><span id=__span-19-10><a id=__codelineno-19-10 name=__codelineno-19-10></a><span class=n>history_tutor_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
-</span><span id=__span-19-11><a id=__codelineno-19-11 name=__codelineno-19-11></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;历史老师&quot;</span><span class=p>,</span>
-</span><span id=__span-19-12><a id=__codelineno-19-12 name=__codelineno-19-12></a>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一位历史老师，帮助学生了解历史事件和人物。用生动的方式讲述历史故事。&quot;</span>
-</span><span id=__span-19-13><a id=__codelineno-19-13 name=__codelineno-19-13></a><span class=p>)</span>
-</span><span id=__span-19-14><a id=__codelineno-19-14 name=__codelineno-19-14></a>
-</span><span id=__span-19-15><a id=__codelineno-19-15 name=__codelineno-19-15></a><span class=c1># 创建分诊Agent</span>
-</span><span id=__span-19-16><a id=__codelineno-19-16 name=__codelineno-19-16></a><span class=n>triage_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
-</span><span id=__span-19-17><a id=__codelineno-19-17 name=__codelineno-19-17></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;分诊老师&quot;</span><span class=p>,</span>
-</span><span id=__span-19-18><a id=__codelineno-19-18 name=__codelineno-19-18></a>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;根据学生的问题，将其分配给最合适的老师。&quot;</span><span class=p>,</span>
-</span><span id=__span-19-19><a id=__codelineno-19-19 name=__codelineno-19-19></a>    <span class=n>handoffs</span><span class=o>=</span><span class=p>[</span><span class=n>history_tutor_agent</span><span class=p>,</span> <span class=n>math_tutor_agent</span><span class=p>]</span>
-</span><span id=__span-19-20><a id=__codelineno-19-20 name=__codelineno-19-20></a><span class=p>)</span>
-</span><span id=__span-19-21><a id=__codelineno-19-21 name=__codelineno-19-21></a>
-</span><span id=__span-19-22><a id=__codelineno-19-22 name=__codelineno-19-22></a><span class=c1># 运行</span>
-</span><span id=__span-19-23><a id=__codelineno-19-23 name=__codelineno-19-23></a><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>triage_agent</span><span class=p>,</span> <span class=s2>&quot;谁是美国第一任总统？&quot;</span><span class=p>)</span>
-</span><span id=__span-19-24><a id=__codelineno-19-24 name=__codelineno-19-24></a><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <p>运行结果会由历史老师Agent来回答，因为它更适合回答历史问题。</p> <h3 id=73>7.3 交接的内部机制<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <p>当你配置了handoffs后，Agent会自动获得一个工具，允许它将对话转移到其他Agent。这个转移是“无缝”的——上下文信息会被保留，转移后的Agent能够看到之前的对话历史。</p> <pre class=mermaid><code>flowchart TD
+    O4 -.-&gt; O3</code></pre> <p>如上图所示： - <strong>输入护栏</strong> 在Agent处理输入之前拦截，检查通过才允许继续执行 - <strong>输出护栏</strong> 在返回结果之前检查输出内容，确保安全合规</p> <p>如果护栏验证失败（triggered），可以通过设置<code>tripwire_triggered=True</code>来阻止Agent继续执行或返回修改后的响应。</p> <h3 id=62>6.2 输入安全护栏示例<a class=headerlink href=#62 title="Permanent link">&para;</a></h3> <p>让我们看一个实际的例子：创建一个作业帮助机器人，但只在用户询问作业相关问题时才激活。</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-17-1><span class=kn>from</span><span class=w> </span><span class=nn>pydantic</span><span class=w> </span><span class=kn>import</span> <span class=n>BaseModel</span>
+</span><span id=__span-17-2><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span><span class=p>,</span> <span class=n>GuardrailFunctionOutput</span><span class=p>,</span> <span class=n>InputGuardrail</span>
+</span><span id=__span-17-3>
+</span><span id=__span-17-4><span class=c1># 第一步：定义输出模型</span>
+</span><span id=__span-17-5><span class=k>class</span><span class=w> </span><span class=nc>HomeworkOutput</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span><span id=__span-17-6>    <span class=n>is_homework</span><span class=p>:</span> <span class=nb>bool</span>
+</span><span id=__span-17-7>    <span class=n>reasoning</span><span class=p>:</span> <span class=nb>str</span>
+</span><span id=__span-17-8>
+</span><span id=__span-17-9><span class=c1># 第二步：创建护栏检查Agent</span>
+</span><span id=__span-17-10><span class=n>guardrail_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
+</span><span id=__span-17-11>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;作业检查员&quot;</span><span class=p>,</span>
+</span><span id=__span-17-12>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;判断用户的问题是否与学校作业相关。&quot;</span><span class=p>,</span>
+</span><span id=__span-17-13>    <span class=n>output_type</span><span class=o>=</span><span class=n>HomeworkOutput</span>
+</span><span id=__span-17-14><span class=p>)</span>
+</span><span id=__span-17-15>
+</span><span id=__span-17-16><span class=c1># 第三步：定义护栏函数</span>
+</span><span id=__span-17-17><span class=k>async</span> <span class=k>def</span><span class=w> </span><span class=nf>homework_guardrail</span><span class=p>(</span><span class=n>ctx</span><span class=p>,</span> <span class=n>agent</span><span class=p>,</span> <span class=n>input_data</span><span class=p>):</span>
+</span><span id=__span-17-18>    <span class=n>result</span> <span class=o>=</span> <span class=k>await</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>guardrail_agent</span><span class=p>,</span> <span class=n>input_data</span><span class=p>,</span> <span class=n>context</span><span class=o>=</span><span class=n>ctx</span><span class=o>.</span><span class=n>context</span><span class=p>)</span>
+</span><span id=__span-17-19>    <span class=n>final_output</span> <span class=o>=</span> <span class=n>result</span><span class=o>.</span><span class=n>final_output_as</span><span class=p>(</span><span class=n>HomeworkOutput</span><span class=p>)</span>
+</span><span id=__span-17-20>
+</span><span id=__span-17-21>    <span class=k>return</span> <span class=n>GuardrailFunctionOutput</span><span class=p>(</span>
+</span><span id=__span-17-22>        <span class=n>output_info</span><span class=o>=</span><span class=n>final_output</span><span class=p>,</span>
+</span><span id=__span-17-23>        <span class=n>tripwire_triggered</span><span class=o>=</span><span class=ow>not</span> <span class=n>final_output</span><span class=o>.</span><span class=n>is_homework</span><span class=p>,</span>
+</span><span id=__span-17-24>    <span class=p>)</span>
+</span><span id=__span-17-25>
+</span><span id=__span-17-26><span class=c1># 第四步：创建主智能体，配置输入护栏</span>
+</span><span id=__span-17-27><span class=n>triage_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
+</span><span id=__span-17-28>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;分诊机器人&quot;</span><span class=p>,</span>
+</span><span id=__span-17-29>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一个帮助学生解答作业问题的机器人。&quot;</span><span class=p>,</span>
+</span><span id=__span-17-30>    <span class=n>input_guardrails</span><span class=o>=</span><span class=p>[</span>
+</span><span id=__span-17-31>        <span class=n>InputGuardrail</span><span class=p>(</span><span class=n>guardrail_function</span><span class=o>=</span><span class=n>homework_guardrail</span><span class=p>)</span>
+</span><span id=__span-17-32>    <span class=p>]</span>
+</span><span id=__span-17-33><span class=p>)</span>
+</span><span id=__span-17-34>
+</span><span id=__span-17-35><span class=c1># 测试</span>
+</span><span id=__span-17-36><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>triage_agent</span><span class=p>,</span> <span class=s2>&quot;请帮我解答这道数学题：2+2等于几？&quot;</span><span class=p>)</span>
+</span><span id=__span-17-37><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
+</span></code></pre></div> <p>运行结果会根据输入有所不同。如果不是作业相关问题，护栏会触发，阻止智能体继续执行。</p> <h3 id=63>6.3 输出安全护栏<a class=headerlink href=#63 title="Permanent link">&para;</a></h3> <p>除了输入护栏，还有输出护栏，用于在返回结果前检查输出内容：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-18-1><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>OutputGuardrail</span><span class=p>,</span> <span class=n>GuardrailFunctionOutput</span>
+</span><span id=__span-18-2>
+</span><span id=__span-18-3><span class=c1># 定义输出护栏函数</span>
+</span><span id=__span-18-4><span class=k>async</span> <span class=k>def</span><span class=w> </span><span class=nf>output_guardrail</span><span class=p>(</span><span class=n>ctx</span><span class=p>,</span> <span class=n>agent</span><span class=p>,</span> <span class=n>input_data</span><span class=p>,</span> <span class=n>response</span><span class=p>):</span>
+</span><span id=__span-18-5>    <span class=c1># 检查输出是否包含敏感词</span>
+</span><span id=__span-18-6>    <span class=n>sensitive_words</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&quot;暴力&quot;</span><span class=p>,</span> <span class=s2>&quot;赌博&quot;</span><span class=p>,</span> <span class=s2>&quot;诈骗&quot;</span><span class=p>]</span>
+</span><span id=__span-18-7>    <span class=k>for</span> <span class=n>word</span> <span class=ow>in</span> <span class=n>sensitive_words</span><span class=p>:</span>
+</span><span id=__span-18-8>        <span class=k>if</span> <span class=n>word</span> <span class=ow>in</span> <span class=n>response</span><span class=p>:</span>
+</span><span id=__span-18-9>            <span class=k>return</span> <span class=n>GuardrailFunctionOutput</span><span class=p>(</span>
+</span><span id=__span-18-10>                <span class=n>output_info</span><span class=o>=</span><span class=p>{</span><span class=s2>&quot;flagged&quot;</span><span class=p>:</span> <span class=kc>True</span><span class=p>,</span> <span class=s2>&quot;word&quot;</span><span class=p>:</span> <span class=n>word</span><span class=p>},</span>
+</span><span id=__span-18-11>                <span class=n>tripwire_triggered</span><span class=o>=</span><span class=kc>True</span>
+</span><span id=__span-18-12>            <span class=p>)</span>
+</span><span id=__span-18-13>
+</span><span id=__span-18-14>    <span class=k>return</span> <span class=n>GuardrailFunctionOutput</span><span class=p>(</span>
+</span><span id=__span-18-15>        <span class=n>output_info</span><span class=o>=</span><span class=p>{</span><span class=s2>&quot;flagged&quot;</span><span class=p>:</span> <span class=kc>False</span><span class=p>},</span>
+</span><span id=__span-18-16>        <span class=n>tripwire_triggered</span><span class=o>=</span><span class=kc>False</span>
+</span><span id=__span-18-17>    <span class=p>)</span>
+</span><span id=__span-18-18>
+</span><span id=__span-18-19><span class=c1># 配置输出护栏</span>
+</span><span id=__span-18-20><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
+</span><span id=__span-18-21>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;安全助手&quot;</span><span class=p>,</span>
+</span><span id=__span-18-22>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是 一个友好的助手。&quot;</span><span class=p>,</span>
+</span><span id=__span-18-23>    <span class=n>output_guardrails</span><span class=o>=</span><span class=p>[</span>
+</span><span id=__span-18-24>        <span class=n>OutputGuardrail</span><span class=p>(</span><span class=n>guardrail_function</span><span class=o>=</span><span class=n>output_guardrail</span><span class=p>)</span>
+</span><span id=__span-18-25>    <span class=p>]</span>
+</span><span id=__span-18-26><span class=p>)</span>
+</span></code></pre></div> <h2 id=agent_1>七、任务转移：多Agent协作<a class=headerlink href=#agent_1 title="Permanent link">&para;</a></h2> <p>任务转移（Handoffs）是Agents SDK最强大的特性之一。它允许一个Agent将任务���派给另一个Agent，实现多Agent协作。</p> <h3 id=71>7.1 什么时候使用任务转移？<a class=headerlink href=#71 title="Permanent link">&para;</a></h3> <p>想象这样一个场景：你去医院看病，分诊护士会根据你的症状把你分配到不同的科室。任务转移就是类似的概念——Agent会根据用户的需求，将其分配给最专业的“专家Agent”。</p> <h3 id=72-agent>7.2 多Agent协作示例<a class=headerlink href=#72-agent title="Permanent link">&para;</a></h3> <div class="language-python highlight"><pre><span></span><code><span id=__span-19-1><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
+</span><span id=__span-19-2>
+</span><span id=__span-19-3><span class=c1># 创建数学专家Agent</span>
+</span><span id=__span-19-4><span class=n>math_tutor_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
+</span><span id=__span-19-5>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;数学老师&quot;</span><span class=p>,</span>
+</span><span id=__span-19-6>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一位数学老师，帮助学生解决数学问题。在解答时要逐步解释你的推理过程。&quot;</span>
+</span><span id=__span-19-7><span class=p>)</span>
+</span><span id=__span-19-8>
+</span><span id=__span-19-9><span class=c1># 创建历史老师Agent</span>
+</span><span id=__span-19-10><span class=n>history_tutor_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
+</span><span id=__span-19-11>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;历史老师&quot;</span><span class=p>,</span>
+</span><span id=__span-19-12>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一位历史老师，帮助学生了解历史事件和人物。用生动的方式讲述历史故事。&quot;</span>
+</span><span id=__span-19-13><span class=p>)</span>
+</span><span id=__span-19-14>
+</span><span id=__span-19-15><span class=c1># 创建分诊Agent</span>
+</span><span id=__span-19-16><span class=n>triage_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
+</span><span id=__span-19-17>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;分诊老师&quot;</span><span class=p>,</span>
+</span><span id=__span-19-18>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;根据学生的问题，将其分配给最合适的老师。&quot;</span><span class=p>,</span>
+</span><span id=__span-19-19>    <span class=n>handoffs</span><span class=o>=</span><span class=p>[</span><span class=n>history_tutor_agent</span><span class=p>,</span> <span class=n>math_tutor_agent</span><span class=p>]</span>
+</span><span id=__span-19-20><span class=p>)</span>
+</span><span id=__span-19-21>
+</span><span id=__span-19-22><span class=c1># 运行</span>
+</span><span id=__span-19-23><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>triage_agent</span><span class=p>,</span> <span class=s2>&quot;谁是美国第一任总统？&quot;</span><span class=p>)</span>
+</span><span id=__span-19-24><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>
+</span></code></pre></div> <p>运行结果会由历史老师Agent来回答，因为它更适合回答历史问题。</p> <h3 id=73>7.3 交接的内部机制<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <p>当你配置了handoffs后，Agent会自动获得一个工具，允许它将对话转移到其他Agent。这个转移是“无缝”的——上下文信息会被保留，转移后的Agent能够看到之前的对话历史。</p> <pre class=mermaid><code>flowchart TD
     A[用户提问] --&gt; B{分诊Agent判断}
     B --&gt;|数学问题| C[数学老师Agent]
     B --&gt;|历史问题| D[历史老师Agent]
     B --&gt;|其他| E[通用回复]
     C --&gt; F[返回答案]
     D --&gt; F
-    E --&gt; F</code></pre> <p>上图展示了任务转移的流程：分诊Agent首先分析用户问题，然后决定将任务转移给哪个专业Agent。</p> <h2 id=runner>八、Runner详解：运行与结果处理<a class=headerlink href=#runner title="Permanent link">&para;</a></h2> <p>Runner是我们运行Agent的入口，它提供了多种运行方式。</p> <h3 id=81>8.1 运行方式对比<a class=headerlink href=#81 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>方法</th> <th>说明</th> <th>适用场景</th> </tr> </thead> <tbody> <tr> <td><code>Runner.run_sync()</code></td> <td>同步运行</td> <td>简单脚本、快速原型</td> </tr> <tr> <td><code>Runner.run()</code></td> <td>异步运行</td> <td>生产环境</td> </tr> <tr> <td><code>Runner.run_streamed()</code></td> <td>流式输出</td> <td>需要实时显示输出</td> </tr> </tbody> </table> <h3 id=82>8.2 处理运行结果<a class=headerlink href=#82 title="Permanent link">&para;</a></h3> <p>Runner.run()返回一个Result对象，它包含丰富的信息：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-20-1> 1</a></span>
-<span class=normal><a href=#__codelineno-20-2> 2</a></span>
-<span class=normal><a href=#__codelineno-20-3> 3</a></span>
-<span class=normal><a href=#__codelineno-20-4> 4</a></span>
-<span class=normal><a href=#__codelineno-20-5> 5</a></span>
-<span class=normal><a href=#__codelineno-20-6> 6</a></span>
-<span class=normal><a href=#__codelineno-20-7> 7</a></span>
-<span class=normal><a href=#__codelineno-20-8> 8</a></span>
-<span class=normal><a href=#__codelineno-20-9> 9</a></span>
-<span class=normal><a href=#__codelineno-20-10>10</a></span>
-<span class=normal><a href=#__codelineno-20-11>11</a></span>
-<span class=normal><a href=#__codelineno-20-12>12</a></span>
-<span class=normal><a href=#__codelineno-20-13>13</a></span>
-<span class=normal><a href=#__codelineno-20-14>14</a></span>
-<span class=normal><a href=#__codelineno-20-15>15</a></span>
-<span class=normal><a href=#__codelineno-20-16>16</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-20-1><a id=__codelineno-20-1 name=__codelineno-20-1></a><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
-</span><span id=__span-20-2><a id=__codelineno-20-2 name=__codelineno-20-2></a>
-</span><span id=__span-20-3><a id=__codelineno-20-3 name=__codelineno-20-3></a><span class=k>async</span> <span class=k>def</span><span class=w> </span><span class=nf>main</span><span class=p>():</span>
-</span><span id=__span-20-4><a id=__codelineno-20-4 name=__codelineno-20-4></a>    <span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;助手&quot;</span><span class=p>,</span> <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一个乐于助人的助手。&quot;</span><span class=p>)</span>
-</span><span id=__span-20-5><a id=__codelineno-20-5 name=__codelineno-20-5></a>    <span class=n>result</span> <span class=o>=</span> <span class=k>await</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;请介绍一下你自己&quot;</span><span class=p>)</span>
-</span><span id=__span-20-6><a id=__codelineno-20-6 name=__codelineno-20-6></a>
-</span><span id=__span-20-7><a id=__codelineno-20-7 name=__codelineno-20-7></a>    <span class=c1># 各种属性</span>
-</span><span id=__span-20-8><a id=__codelineno-20-8 name=__codelineno-20-8></a>    <span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>              <span class=c1># 最终输出文本</span>
-</span><span id=__span-20-9><a id=__codelineno-20-9 name=__codelineno-20-9></a>    <span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>last_agent</span><span class=p>)</span>              <span class=c1># 最后一个处理的Agent</span>
-</span><span id=__span-20-10><a id=__codelineno-20-10 name=__codelineno-20-10></a>    <span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>input_items</span><span class=p>)</span>            <span class=c1># 输入项列表</span>
-</span><span id=__span-20-11><a id=__codelineno-20-11 name=__codelineno-20-11></a>    <span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>output_items</span><span class=p>)</span>         <span class=c1># 输出项列表</span>
-</span><span id=__span-20-12><a id=__codelineno-20-12 name=__codelineno-20-12></a>
-</span><span id=__span-20-13><a id=__codelineno-20-13 name=__codelineno-20-13></a>    <span class=c1># 如果配置了output_type，可以这样获取结构化输出</span>
-</span><span id=__span-20-14><a id=__codelineno-20-14 name=__codelineno-20-14></a>    <span class=c1># result.final_output_as(YourModel)</span>
-</span><span id=__span-20-15><a id=__codelineno-20-15 name=__codelineno-20-15></a>
-</span><span id=__span-20-16><a id=__codelineno-20-16 name=__codelineno-20-16></a><span class=n>asyncio</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>())</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=83>8.3 流式输出<a class=headerlink href=#83 title="Permanent link">&para;</a></h3> <p>如果你需要实时显示Agent的输出，可以使用流式输出：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-21-1> 1</a></span>
-<span class=normal><a href=#__codelineno-21-2> 2</a></span>
-<span class=normal><a href=#__codelineno-21-3> 3</a></span>
-<span class=normal><a href=#__codelineno-21-4> 4</a></span>
-<span class=normal><a href=#__codelineno-21-5> 5</a></span>
-<span class=normal><a href=#__codelineno-21-6> 6</a></span>
-<span class=normal><a href=#__codelineno-21-7> 7</a></span>
-<span class=normal><a href=#__codelineno-21-8> 8</a></span>
-<span class=normal><a href=#__codelineno-21-9> 9</a></span>
-<span class=normal><a href=#__codelineno-21-10>10</a></span>
-<span class=normal><a href=#__codelineno-21-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-21-1><a id=__codelineno-21-1 name=__codelineno-21-1></a><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
-</span><span id=__span-21-2><a id=__codelineno-21-2 name=__codelineno-21-2></a>
-</span><span id=__span-21-3><a id=__codelineno-21-3 name=__codelineno-21-3></a><span class=k>async</span> <span class=k>def</span><span class=w> </span><span class=nf>main</span><span class=p>():</span>
-</span><span id=__span-21-4><a id=__codelineno-21-4 name=__codelineno-21-4></a>    <span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;助手&quot;</span><span class=p>,</span> <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;写一首关于春天的诗&quot;</span><span class=p>)</span>
-</span><span id=__span-21-5><a id=__codelineno-21-5 name=__codelineno-21-5></a>
-</span><span id=__span-21-6><a id=__codelineno-21-6 name=__codelineno-21-6></a>    <span class=c1># 使用流式输出</span>
-</span><span id=__span-21-7><a id=__codelineno-21-7 name=__codelineno-21-7></a>    <span class=k>async</span> <span class=k>for</span> <span class=n>event</span> <span class=ow>in</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_streamed</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;请写一首关于春天的诗&quot;</span><span class=p>):</span>
-</span><span id=__span-21-8><a id=__codelineno-21-8 name=__codelineno-21-8></a>        <span class=k>if</span> <span class=n>event</span><span class=o>.</span><span class=n>type</span> <span class=o>==</span> <span class=s2>&quot;agent_delta&quot;</span><span class=p>:</span>
-</span><span id=__span-21-9><a id=__codelineno-21-9 name=__codelineno-21-9></a>            <span class=nb>print</span><span class=p>(</span><span class=n>event</span><span class=o>.</span><span class=n>data</span><span class=o>.</span><span class=n>delta</span><span class=p>,</span> <span class=n>end</span><span class=o>=</span><span class=s2>&quot;&quot;</span><span class=p>,</span> <span class=n>flush</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
-</span><span id=__span-21-10><a id=__codelineno-21-10 name=__codelineno-21-10></a>
-</span><span id=__span-21-11><a id=__codelineno-21-11 name=__codelineno-21-11></a><span class=n>asyncio</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>())</span>
-</span></code></pre></div></td></tr></table></div> <p>这样就可以实时显示Agent的输出，营造更好的用户体验。</p> <h2 id=_4>九、完整实战案例：智能客服机器人<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <p>好了，现在我们已经学习了Agents SDK的核心概念。让我来实战一下，创建一个智能客服机器人！</p> <h3 id=91>9.1 需求分析<a class=headerlink href=#91 title="Permanent link">&para;</a></h3> <p>我们要创建一个智能客服机��人��它应该： 1. 能够判断用户的问题是关于产品还是技术问题 2. 能够调用内部API查询订单状态 3. 能够调用内部API查询技术文档 4. 能够在回答问题前进行安全检查</p> <h3 id=92>9.2 完整代码<a class=headerlink href=#92 title="Permanent link">&para;</a></h3> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-22-1> 1</a></span>
-<span class=normal><a href=#__codelineno-22-2> 2</a></span>
-<span class=normal><a href=#__codelineno-22-3> 3</a></span>
-<span class=normal><a href=#__codelineno-22-4> 4</a></span>
-<span class=normal><a href=#__codelineno-22-5> 5</a></span>
-<span class=normal><a href=#__codelineno-22-6> 6</a></span>
-<span class=normal><a href=#__codelineno-22-7> 7</a></span>
-<span class=normal><a href=#__codelineno-22-8> 8</a></span>
-<span class=normal><a href=#__codelineno-22-9> 9</a></span>
-<span class=normal><a href=#__codelineno-22-10>10</a></span>
-<span class=normal><a href=#__codelineno-22-11>11</a></span>
-<span class=normal><a href=#__codelineno-22-12>12</a></span>
-<span class=normal><a href=#__codelineno-22-13>13</a></span>
-<span class=normal><a href=#__codelineno-22-14>14</a></span>
-<span class=normal><a href=#__codelineno-22-15>15</a></span>
-<span class=normal><a href=#__codelineno-22-16>16</a></span>
-<span class=normal><a href=#__codelineno-22-17>17</a></span>
-<span class=normal><a href=#__codelineno-22-18>18</a></span>
-<span class=normal><a href=#__codelineno-22-19>19</a></span>
-<span class=normal><a href=#__codelineno-22-20>20</a></span>
-<span class=normal><a href=#__codelineno-22-21>21</a></span>
-<span class=normal><a href=#__codelineno-22-22>22</a></span>
-<span class=normal><a href=#__codelineno-22-23>23</a></span>
-<span class=normal><a href=#__codelineno-22-24>24</a></span>
-<span class=normal><a href=#__codelineno-22-25>25</a></span>
-<span class=normal><a href=#__codelineno-22-26>26</a></span>
-<span class=normal><a href=#__codelineno-22-27>27</a></span>
-<span class=normal><a href=#__codelineno-22-28>28</a></span>
-<span class=normal><a href=#__codelineno-22-29>29</a></span>
-<span class=normal><a href=#__codelineno-22-30>30</a></span>
-<span class=normal><a href=#__codelineno-22-31>31</a></span>
-<span class=normal><a href=#__codelineno-22-32>32</a></span>
-<span class=normal><a href=#__codelineno-22-33>33</a></span>
-<span class=normal><a href=#__codelineno-22-34>34</a></span>
-<span class=normal><a href=#__codelineno-22-35>35</a></span>
-<span class=normal><a href=#__codelineno-22-36>36</a></span>
-<span class=normal><a href=#__codelineno-22-37>37</a></span>
-<span class=normal><a href=#__codelineno-22-38>38</a></span>
-<span class=normal><a href=#__codelineno-22-39>39</a></span>
-<span class=normal><a href=#__codelineno-22-40>40</a></span>
-<span class=normal><a href=#__codelineno-22-41>41</a></span>
-<span class=normal><a href=#__codelineno-22-42>42</a></span>
-<span class=normal><a href=#__codelineno-22-43>43</a></span>
-<span class=normal><a href=#__codelineno-22-44>44</a></span>
-<span class=normal><a href=#__codelineno-22-45>45</a></span>
-<span class=normal><a href=#__codelineno-22-46>46</a></span>
-<span class=normal><a href=#__codelineno-22-47>47</a></span>
-<span class=normal><a href=#__codelineno-22-48>48</a></span>
-<span class=normal><a href=#__codelineno-22-49>49</a></span>
-<span class=normal><a href=#__codelineno-22-50>50</a></span>
-<span class=normal><a href=#__codelineno-22-51>51</a></span>
-<span class=normal><a href=#__codelineno-22-52>52</a></span>
-<span class=normal><a href=#__codelineno-22-53>53</a></span>
-<span class=normal><a href=#__codelineno-22-54>54</a></span>
-<span class=normal><a href=#__codelineno-22-55>55</a></span>
-<span class=normal><a href=#__codelineno-22-56>56</a></span>
-<span class=normal><a href=#__codelineno-22-57>57</a></span>
-<span class=normal><a href=#__codelineno-22-58>58</a></span>
-<span class=normal><a href=#__codelineno-22-59>59</a></span>
-<span class=normal><a href=#__codelineno-22-60>60</a></span>
-<span class=normal><a href=#__codelineno-22-61>61</a></span>
-<span class=normal><a href=#__codelineno-22-62>62</a></span>
-<span class=normal><a href=#__codelineno-22-63>63</a></span>
-<span class=normal><a href=#__codelineno-22-64>64</a></span>
-<span class=normal><a href=#__codelineno-22-65>65</a></span>
-<span class=normal><a href=#__codelineno-22-66>66</a></span>
-<span class=normal><a href=#__codelineno-22-67>67</a></span>
-<span class=normal><a href=#__codelineno-22-68>68</a></span>
-<span class=normal><a href=#__codelineno-22-69>69</a></span>
-<span class=normal><a href=#__codelineno-22-70>70</a></span>
-<span class=normal><a href=#__codelineno-22-71>71</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-22-1><a id=__codelineno-22-1 name=__codelineno-22-1></a><span class=kn>import</span><span class=w> </span><span class=nn>asyncio</span>
-</span><span id=__span-22-2><a id=__codelineno-22-2 name=__codelineno-22-2></a><span class=kn>from</span><span class=w> </span><span class=nn>pydantic</span><span class=w> </span><span class=kn>import</span> <span class=n>BaseModel</span>
-</span><span id=__span-22-3><a id=__codelineno-22-3 name=__codelineno-22-3></a><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=p>(</span>
-</span><span id=__span-22-4><a id=__codelineno-22-4 name=__codelineno-22-4></a>    <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span><span class=p>,</span> <span class=n>function_tool</span><span class=p>,</span> 
-</span><span id=__span-22-5><a id=__codelineno-22-5 name=__codelineno-22-5></a>    <span class=n>InputGuardrail</span><span class=p>,</span> <span class=n>GuardrailFunctionOutput</span>
-</span><span id=__span-22-6><a id=__codelineno-22-6 name=__codelineno-22-6></a><span class=p>)</span>
-</span><span id=__span-22-7><a id=__codelineno-22-7 name=__codelineno-22-7></a>
-</span><span id=__span-22-8><a id=__codelineno-22-8 name=__codelineno-22-8></a><span class=c1># ============ 第一步：定义工具函数 ============</span>
-</span><span id=__span-22-9><a id=__codelineno-22-9 name=__codelineno-22-9></a>
-</span><span id=__span-22-10><a id=__codelineno-22-10 name=__codelineno-22-10></a><span class=nd>@function_tool</span>
-</span><span id=__span-22-11><a id=__codelineno-22-11 name=__codelineno-22-11></a><span class=k>def</span><span class=w> </span><span class=nf>get_order_status</span><span class=p>(</span><span class=n>order_id</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
-</span><span id=__span-22-12><a id=__codelineno-22-12 name=__codelineno-22-12></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;查询订单状态&quot;&quot;&quot;</span>
-</span><span id=__span-22-13><a id=__codelineno-22-13 name=__codelineno-22-13></a>    <span class=c1># 模拟API调用</span>
-</span><span id=__span-22-14><a id=__codelineno-22-14 name=__codelineno-22-14></a>    <span class=n>orders</span> <span class=o>=</span> <span class=p>{</span>
-</span><span id=__span-22-15><a id=__codelineno-22-15 name=__codelineno-22-15></a>        <span class=s2>&quot;1001&quot;</span><span class=p>:</span> <span class=s2>&quot;已发货，预计明天送达&quot;</span><span class=p>,</span>
-</span><span id=__span-22-16><a id=__codelineno-22-16 name=__codelineno-22-16></a>        <span class=s2>&quot;1002&quot;</span><span class=p>:</span> <span class=s2>&quot;处理中，预计3天后发货&quot;</span><span class=p>,</span>
-</span><span id=__span-22-17><a id=__codelineno-22-17 name=__codelineno-22-17></a>        <span class=s2>&quot;1003&quot;</span><span class=p>:</span> <span class=s2>&quot;已签收&quot;</span>
-</span><span id=__span-22-18><a id=__codelineno-22-18 name=__codelineno-22-18></a>    <span class=p>}</span>
-</span><span id=__span-22-19><a id=__codelineno-22-19 name=__codelineno-22-19></a>    <span class=k>return</span> <span class=n>orders</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>order_id</span><span class=p>,</span> <span class=s2>&quot;未找到该订单&quot;</span><span class=p>)</span>
-</span><span id=__span-22-20><a id=__codelineno-22-20 name=__codelineno-22-20></a>
-</span><span id=__span-22-21><a id=__codelineno-22-21 name=__codelineno-22-21></a><span class=nd>@function_tool</span>
-</span><span id=__span-22-22><a id=__codelineno-22-22 name=__codelineno-22-22></a><span class=k>def</span><span class=w> </span><span class=nf>get_tech_docs</span><span class=p>(</span><span class=n>keyword</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
-</span><span id=__span-22-23><a id=__codelineno-22-23 name=__codelineno-22-23></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;查询技术文档&quot;&quot;&quot;</span>
-</span><span id=__span-22-24><a id=__codelineno-22-24 name=__codelineno-22-24></a>    <span class=c1># 模拟文档查询</span>
-</span><span id=__span-22-25><a id=__codelineno-22-25 name=__codelineno-22-25></a>    <span class=n>docs</span> <span class=o>=</span> <span class=p>{</span>
-</span><span id=__span-22-26><a id=__codelineno-22-26 name=__codelineno-22-26></a>        <span class=s2>&quot;api&quot;</span><span class=p>:</span> <span class=s2>&quot;我们的API文档在 https://docs.example.com/api&quot;</span><span class=p>,</span>
-</span><span id=__span-22-27><a id=__codelineno-22-27 name=__codelineno-22-27></a>        <span class=s2>&quot;sdk&quot;</span><span class=p>:</span> <span class=s2>&quot;SDK安装指南：pip install our-sdk&quot;</span><span class=p>,</span>
-</span><span id=__span-22-28><a id=__codelineno-22-28 name=__codelineno-22-28></a>        <span class=s2>&quot;auth&quot;</span><span class=p>:</span> <span class=s2>&quot;认证方式：使用API Key进行认证&quot;</span>
-</span><span id=__span-22-29><a id=__codelineno-22-29 name=__codelineno-22-29></a>    <span class=p>}</span>
-</span><span id=__span-22-30><a id=__codelineno-22-30 name=__codelineno-22-30></a>    <span class=k>return</span> <span class=n>docs</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>keyword</span><span class=p>,</span> <span class=s2>&quot;未找到相关文档&quot;</span><span class=p>)</span>
-</span><span id=__span-22-31><a id=__codelineno-22-31 name=__codelineno-22-31></a>
-</span><span id=__span-22-32><a id=__codelineno-22-32 name=__codelineno-22-32></a><span class=c1># ============ 第二步：定义Agent ============</span>
-</span><span id=__span-22-33><a id=__codelineno-22-33 name=__codelineno-22-33></a>
-</span><span id=__span-22-34><a id=__codelineno-22-34 name=__codelineno-22-34></a><span class=c1># 产品客服Agent</span>
-</span><span id=__span-22-35><a id=__codelineno-22-35 name=__codelineno-22-35></a><span class=n>product_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
-</span><span id=__span-22-36><a id=__codelineno-22-36 name=__codelineno-22-36></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;产品客服&quot;</span><span class=p>,</span>
-</span><span id=__span-22-37><a id=__codelineno-22-37 name=__codelineno-22-37></a>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一个贴心的产品客服，帮助用户解答产品相关问题和查询订单。&quot;</span><span class=p>,</span>
-</span><span id=__span-22-38><a id=__codelineno-22-38 name=__codelineno-22-38></a>    <span class=n>tools</span><span class=o>=</span><span class=p>[</span><span class=n>get_order_status</span><span class=p>]</span>
-</span><span id=__span-22-39><a id=__codelineno-22-39 name=__codelineno-22-39></a><span class=p>)</span>
-</span><span id=__span-22-40><a id=__codelineno-22-40 name=__codelineno-22-40></a>
-</span><span id=__span-22-41><a id=__codelineno-22-41 name=__codelineno-22-41></a><span class=c1># 技术客服Agent</span>
-</span><span id=__span-22-42><a id=__codelineno-22-42 name=__codelineno-22-42></a><span class=n>tech_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
-</span><span id=__span-22-43><a id=__codelineno-22-43 name=__codelineno-22-43></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;技术客服&quot;</span><span class=p>,</span>
-</span><span id=__span-22-44><a id=__codelineno-22-44 name=__codelineno-22-44></a>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一个专业的技术客服，帮助用户解决技术问题和查询文档。&quot;</span><span class=p>,</span>
-</span><span id=__span-22-45><a id=__codelineno-22-45 name=__codelineno-22-45></a>    <span class=n>tools</span><span class=o>=</span><span class=p>[</span><span class=n>get_tech_docs</span><span class=p>]</span>
-</span><span id=__span-22-46><a id=__codelineno-22-46 name=__codelineno-22-46></a><span class=p>)</span>
-</span><span id=__span-22-47><a id=__codelineno-22-47 name=__codelineno-22-47></a>
-</span><span id=__span-22-48><a id=__codelineno-22-48 name=__codelineno-22-48></a><span class=c1># 分诊Agent</span>
-</span><span id=__span-22-49><a id=__codelineno-22-49 name=__codelineno-22-49></a><span class=n>triage_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
-</span><span id=__span-22-50><a id=__codelineno-22-50 name=__codelineno-22-50></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;智能客服&quot;</span><span class=p>,</span>
-</span><span id=__span-22-51><a id=__codelineno-22-51 name=__codelineno-22-51></a>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是客服中心的分诊员，根据用户的问题类型，将其分配给合适的客服。&quot;</span><span class=p>,</span>
-</span><span id=__span-22-52><a id=__codelineno-22-52 name=__codelineno-22-52></a>    <span class=n>handoffs</span><span class=o>=</span><span class=p>[</span><span class=n>product_agent</span><span class=p>,</span> <span class=n>tech_agent</span><span class=p>]</span>
-</span><span id=__span-22-53><a id=__codelineno-22-53 name=__codelineno-22-53></a><span class=p>)</span>
-</span><span id=__span-22-54><a id=__codelineno-22-54 name=__codelineno-22-54></a>
-</span><span id=__span-22-55><a id=__codelineno-22-55 name=__codelineno-22-55></a><span class=c1># ============ 第三步：运行 ============</span>
-</span><span id=__span-22-56><a id=__codelineno-22-56 name=__codelineno-22-56></a>
-</span><span id=__span-22-57><a id=__codelineno-22-57 name=__codelineno-22-57></a><span class=k>async</span> <span class=k>def</span><span class=w> </span><span class=nf>main</span><span class=p>():</span>
-</span><span id=__span-22-58><a id=__codelineno-22-58 name=__codelineno-22-58></a>    <span class=nb>print</span><span class=p>(</span><span class=s2>&quot;=== 智能客服系统 ===&quot;</span><span class=p>)</span>
-</span><span id=__span-22-59><a id=__codelineno-22-59 name=__codelineno-22-59></a>    <span class=nb>print</span><span class=p>(</span><span class=s2>&quot;请提出您的问题（输入&#39;退出&#39;结束）</span><span class=se>\n</span><span class=s2>&quot;</span><span class=p>)</span>
-</span><span id=__span-22-60><a id=__codelineno-22-60 name=__codelineno-22-60></a>
-</span><span id=__span-22-61><a id=__codelineno-22-61 name=__codelineno-22-61></a>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
-</span><span id=__span-22-62><a id=__codelineno-22-62 name=__codelineno-22-62></a>        <span class=n>user_input</span> <span class=o>=</span> <span class=nb>input</span><span class=p>(</span><span class=s2>&quot;您: &quot;</span><span class=p>)</span><span class=o>.</span><span class=n>strip</span><span class=p>()</span>
-</span><span id=__span-22-63><a id=__codelineno-22-63 name=__codelineno-22-63></a>        <span class=k>if</span> <span class=n>user_input</span> <span class=ow>in</span> <span class=p>[</span><span class=s2>&quot;退出&quot;</span><span class=p>,</span> <span class=s2>&quot;exit&quot;</span><span class=p>,</span> <span class=s2>&quot;quit&quot;</span><span class=p>]:</span>
-</span><span id=__span-22-64><a id=__codelineno-22-64 name=__codelineno-22-64></a>            <span class=nb>print</span><span class=p>(</span><span class=s2>&quot;感谢使用，再见！&quot;</span><span class=p>)</span>
-</span><span id=__span-22-65><a id=__codelineno-22-65 name=__codelineno-22-65></a>            <span class=k>break</span>
-</span><span id=__span-22-66><a id=__codelineno-22-66 name=__codelineno-22-66></a>
-</span><span id=__span-22-67><a id=__codelineno-22-67 name=__codelineno-22-67></a>        <span class=n>result</span> <span class=o>=</span> <span class=k>await</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>triage_agent</span><span class=p>,</span> <span class=n>user_input</span><span class=p>)</span>
-</span><span id=__span-22-68><a id=__codelineno-22-68 name=__codelineno-22-68></a>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;客服: </span><span class=si>{</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=si>}</span><span class=se>\n</span><span class=s2>&quot;</span><span class=p>)</span>
-</span><span id=__span-22-69><a id=__codelineno-22-69 name=__codelineno-22-69></a>
-</span><span id=__span-22-70><a id=__codelineno-22-70 name=__codelineno-22-70></a><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&quot;__main__&quot;</span><span class=p>:</span>
-</span><span id=__span-22-71><a id=__codelineno-22-71 name=__codelineno-22-71></a>    <span class=n>asyncio</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>())</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=93>9.3 运行效果<a class=headerlink href=#93 title="Permanent link">&para;</a></h3> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-23-1> 1</a></span>
-<span class=normal><a href=#__codelineno-23-2> 2</a></span>
-<span class=normal><a href=#__codelineno-23-3> 3</a></span>
-<span class=normal><a href=#__codelineno-23-4> 4</a></span>
-<span class=normal><a href=#__codelineno-23-5> 5</a></span>
-<span class=normal><a href=#__codelineno-23-6> 6</a></span>
-<span class=normal><a href=#__codelineno-23-7> 7</a></span>
-<span class=normal><a href=#__codelineno-23-8> 8</a></span>
-<span class=normal><a href=#__codelineno-23-9> 9</a></span>
-<span class=normal><a href=#__codelineno-23-10>10</a></span>
-<span class=normal><a href=#__codelineno-23-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-23-1><a id=__codelineno-23-1 name=__codelineno-23-1></a>=== 智能客服系统 ===
-</span><span id=__span-23-2><a id=__codelineno-23-2 name=__codelineno-23-2></a>请提出您的问题（输入&#39;退出&#39;结束）
-</span><span id=__span-23-3><a id=__codelineno-23-3 name=__codelineno-23-3></a>
-</span><span id=__span-23-4><a id=__codelineno-23-4 name=__codelineno-23-4></a>您: 我的订单1001到哪里了？
-</span><span id=__span-23-5><a id=__codelineno-23-5 name=__codelineno-23-5></a>客服: 您好！我来帮您查询一下订单1001的状态。
-</span><span id=__span-23-6><a id=__codelineno-23-6 name=__codelineno-23-6></a>根据查询结果，您的订单已发货，预计明天送达。请注意查收！
-</span><span id=__span-23-7><a id=__codelineno-23-7 name=__codelineno-23-7></a>
-</span><span id=__span-23-8><a id=__codelineno-23-8 name=__codelineno-23-8></a>您: 如何使用你们的API？
-</span><span id=__span-23-9><a id=__codelineno-23-9 name=__codelineno-23-9></a>客服: 您好！关于API使用问题，我帮您查询了技术文档。
-</span><span id=__span-23-10><a id=__codelineno-23-10 name=__codelineno-23-10></a>我们的API文档在 https://docs.example.com/api
-</span><span id=__span-23-11><a id=__codelineno-23-11 name=__codelineno-23-11></a>如有更多问题，欢迎继续咨询！
-</span></code></pre></div></td></tr></table></div> <h2 id=_5>十、进阶功能一览<a class=headerlink href=#_5 title="Permanent link">&para;</a></h2> <p>除了上面介绍的核心功能，Agents SDK还有更多强大的特性：</p> <h3 id=101>10.1 追踪与调试<a class=headerlink href=#101 title="Permanent link">&para;</a></h3> <p>Agents SDK内置了强大的追踪功能，可以追踪Agent的每一步操作：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-24-1>1</a></span>
-<span class=normal><a href=#__codelineno-24-2>2</a></span>
-<span class=normal><a href=#__codelineno-24-3>3</a></span>
-<span class=normal><a href=#__codelineno-24-4>4</a></span>
-<span class=normal><a href=#__codelineno-24-5>5</a></span>
-<span class=normal><a href=#__codelineno-24-6>6</a></span>
-<span class=normal><a href=#__codelineno-24-7>7</a></span>
-<span class=normal><a href=#__codelineno-24-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-24-1><a id=__codelineno-24-1 name=__codelineno-24-1></a><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
-</span><span id=__span-24-2><a id=__codelineno-24-2 name=__codelineno-24-2></a><span class=kn>from</span><span class=w> </span><span class=nn>agents.tracing</span><span class=w> </span><span class=kn>import</span> <span class=n>tracing_enabled</span>
-</span><span id=__span-24-3><a id=__codelineno-24-3 name=__codelineno-24-3></a>
-</span><span id=__span-24-4><a id=__codelineno-24-4 name=__codelineno-24-4></a><span class=c1># 启用追踪</span>
-</span><span id=__span-24-5><a id=__codelineno-24-5 name=__codelineno-24-5></a><span class=n>tracing_enabled</span><span class=p>(</span><span class=kc>True</span><span class=p>)</span>
-</span><span id=__span-24-6><a id=__codelineno-24-6 name=__codelineno-24-6></a>
-</span><span id=__span-24-7><a id=__codelineno-24-7 name=__codelineno-24-7></a><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;助手&quot;</span><span class=p>,</span> <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你现在是一个助手&quot;</span><span class=p>)</span>
-</span><span id=__span-24-8><a id=__codelineno-24-8 name=__codelineno-24-8></a><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;你好&quot;</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <p>你可以在 <a href=https://smith.langchain.com/ >LangSmith</a> 中查看完整的追踪日志，非常适合调试和优化Agent。</p> <h3 id=102>10.2 人在回路中<a class=headerlink href=#102 title="Permanent link">&para;</a></h3> <p>Agents SDK支持在关键步骤引入人工介入：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-25-1>1</a></span>
-<span class=normal><a href=#__codelineno-25-2>2</a></span>
-<span class=normal><a href=#__codelineno-25-3>3</a></span>
-<span class=normal><a href=#__codelineno-25-4>4</a></span>
-<span class=normal><a href=#__codelineno-25-5>5</a></span>
-<span class=normal><a href=#__codelineno-25-6>6</a></span>
-<span class=normal><a href=#__codelineno-25-7>7</a></span>
-<span class=normal><a href=#__codelineno-25-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-25-1><a id=__codelineno-25-1 name=__codelineno-25-1></a><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>HumanInTheLoop</span>
-</span><span id=__span-25-2><a id=__codelineno-25-2 name=__codelineno-25-2></a>
-</span><span id=__span-25-3><a id=__codelineno-25-3 name=__codelineno-25-3></a><span class=c1># 配置人在回路中</span>
-</span><span id=__span-25-4><a id=__codelineno-25-4 name=__codelineno-25-4></a><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
-</span><span id=__span-25-5><a id=__codelineno-25-5 name=__codelineno-25-5></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;审批助手&quot;</span><span class=p>,</span>
-</span><span id=__span-25-6><a id=__codelineno-25-6 name=__codelineno-25-6></a>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是审批助手&quot;</span><span class=p>,</span>
-</span><span id=__span-25-7><a id=__codelineno-25-7 name=__codelineno-25-7></a>    <span class=n>handoff_tools</span><span class=o>=</span><span class=p>[</span><span class=n>HumanInTheLoop</span><span class=p>(</span><span class=n>approval_required</span><span class=o>=</span><span class=kc>True</span><span class=p>)]</span>
-</span><span id=__span-25-8><a id=__codelineno-25-8 name=__codelineno-25-8></a><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <p>这样Agent在执行特定操作前需要人工确认。</p> <h3 id=103>10.3 沙盒环境<a class=headerlink href=#103 title="Permanent link">&para;</a></h3> <p>对于需要安全的工具执行环境，SDK提供了沙盒功能：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-26-1>1</a></span>
-<span class=normal><a href=#__codelineno-26-2>2</a></span>
-<span class=normal><a href=#__codelineno-26-3>3</a></span>
-<span class=normal><a href=#__codelineno-26-4>4</a></span>
-<span class=normal><a href=#__codelineno-26-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-26-1><a id=__codelineno-26-1 name=__codelineno-26-1></a><span class=kn>from</span><span class=w> </span><span class=nn>agents.sandbox</span><span class=w> </span><span class=kn>import</span> <span class=n>Sandbox</span>
-</span><span id=__span-26-2><a id=__codelineno-26-2 name=__codelineno-26-2></a>
-</span><span id=__span-26-3><a id=__codelineno-26-3 name=__codelineno-26-3></a><span class=c1># 在沙盒中运行</span>
-</span><span id=__span-26-4><a id=__codelineno-26-4 name=__codelineno-26-4></a><span class=k>with</span> <span class=n>Sandbox</span><span class=p>()</span> <span class=k>as</span> <span class=n>sandbox</span><span class=p>:</span>
-</span><span id=__span-26-5><a id=__codelineno-26-5 name=__codelineno-26-5></a>    <span class=n>result</span> <span class=o>=</span> <span class=n>sandbox</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;执行这个代码&quot;</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=104-mcp>10.4 MCP集成<a class=headerlink href=#104-mcp title="Permanent link">&para;</a></h3> <p>Agents SDK还支持MCP（Model Context Protocol）服务集成：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-27-1>1</a></span>
-<span class=normal><a href=#__codelineno-27-2>2</a></span>
-<span class=normal><a href=#__codelineno-27-3>3</a></span>
-<span class=normal><a href=#__codelineno-27-4>4</a></span>
-<span class=normal><a href=#__codelineno-27-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-27-1><a id=__codelineno-27-1 name=__codelineno-27-1></a><span class=kn>from</span><span class=w> </span><span class=nn>agents.mcp</span><span class=w> </span><span class=kn>import</span> <span class=n>MCPTool</span>
-</span><span id=__span-27-2><a id=__codelineno-27-2 name=__codelineno-27-2></a>
-</span><span id=__span-27-3><a id=__codelineno-27-3 name=__codelineno-27-3></a><span class=c1># 添加MCP工具</span>
-</span><span id=__span-27-4><a id=__codelineno-27-4 name=__codelineno-27-4></a><span class=n>mcp_tool</span> <span class=o>=</span> <span class=n>MCPTool</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;file_reader&quot;</span><span class=p>,</span> <span class=n>command</span><span class=o>=</span><span class=s2>&quot;npx -y @modelcontextprotocol/server-filesystem .&quot;</span><span class=p>)</span>
-</span><span id=__span-27-5><a id=__codelineno-27-5 name=__codelineno-27-5></a><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;助手&quot;</span><span class=p>,</span> <span class=n>tools</span><span class=o>=</span><span class=p>[</span><span class=n>mcp_tool</span><span class=p>])</span>
-</span></code></pre></div></td></tr></table></div> <h2 id=_6>十一、常见问题与最佳实践<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <h3 id=110>11.0 常见问题排查流程<a class=headerlink href=#110 title="Permanent link">&para;</a></h3> <p>当你遇到问题时，可以按照以下流程来排查：</p> <pre class=mermaid><code>flowchart TD
+    E --&gt; F</code></pre> <p>上图展示了任务转移的流程：分诊Agent首先分析用户问题，然后决定将任务转移给哪个专业Agent。</p> <h2 id=runner>八、Runner详解：运行与结果处理<a class=headerlink href=#runner title="Permanent link">&para;</a></h2> <p>Runner是我们运行Agent的入口，它提供了多种运行方式。</p> <h3 id=81>8.1 运行方式对比<a class=headerlink href=#81 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>方法</th> <th>说明</th> <th>适用场景</th> </tr> </thead> <tbody> <tr> <td><code>Runner.run_sync()</code></td> <td>同步运行</td> <td>简单脚本、快速原型</td> </tr> <tr> <td><code>Runner.run()</code></td> <td>异步运行</td> <td>生产环境</td> </tr> <tr> <td><code>Runner.run_streamed()</code></td> <td>流式输出</td> <td>需要实时显示输出</td> </tr> </tbody> </table> <h3 id=82>8.2 处理运行结果<a class=headerlink href=#82 title="Permanent link">&para;</a></h3> <p>Runner.run()返回一个Result对象，它包含丰富的信息：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-20-1><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
+</span><span id=__span-20-2>
+</span><span id=__span-20-3><span class=k>async</span> <span class=k>def</span><span class=w> </span><span class=nf>main</span><span class=p>():</span>
+</span><span id=__span-20-4>    <span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;助手&quot;</span><span class=p>,</span> <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一个乐于助人的助手。&quot;</span><span class=p>)</span>
+</span><span id=__span-20-5>    <span class=n>result</span> <span class=o>=</span> <span class=k>await</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;请介绍一下你自己&quot;</span><span class=p>)</span>
+</span><span id=__span-20-6>
+</span><span id=__span-20-7>    <span class=c1># 各种属性</span>
+</span><span id=__span-20-8>    <span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=p>)</span>              <span class=c1># 最终输出文本</span>
+</span><span id=__span-20-9>    <span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>last_agent</span><span class=p>)</span>              <span class=c1># 最后一个处理的Agent</span>
+</span><span id=__span-20-10>    <span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>input_items</span><span class=p>)</span>            <span class=c1># 输入项列表</span>
+</span><span id=__span-20-11>    <span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=o>.</span><span class=n>output_items</span><span class=p>)</span>         <span class=c1># 输出项列表</span>
+</span><span id=__span-20-12>
+</span><span id=__span-20-13>    <span class=c1># 如果配置了output_type，可以这样获取结构化输出</span>
+</span><span id=__span-20-14>    <span class=c1># result.final_output_as(YourModel)</span>
+</span><span id=__span-20-15>
+</span><span id=__span-20-16><span class=n>asyncio</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>())</span>
+</span></code></pre></div> <h3 id=83>8.3 流式输出<a class=headerlink href=#83 title="Permanent link">&para;</a></h3> <p>如果你需要实时显示Agent的输出，可以使用流式输出：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-21-1><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
+</span><span id=__span-21-2>
+</span><span id=__span-21-3><span class=k>async</span> <span class=k>def</span><span class=w> </span><span class=nf>main</span><span class=p>():</span>
+</span><span id=__span-21-4>    <span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;助手&quot;</span><span class=p>,</span> <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;写一首关于春天的诗&quot;</span><span class=p>)</span>
+</span><span id=__span-21-5>
+</span><span id=__span-21-6>    <span class=c1># 使用流式输出</span>
+</span><span id=__span-21-7>    <span class=k>async</span> <span class=k>for</span> <span class=n>event</span> <span class=ow>in</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_streamed</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;请写一首关于春天的诗&quot;</span><span class=p>):</span>
+</span><span id=__span-21-8>        <span class=k>if</span> <span class=n>event</span><span class=o>.</span><span class=n>type</span> <span class=o>==</span> <span class=s2>&quot;agent_delta&quot;</span><span class=p>:</span>
+</span><span id=__span-21-9>            <span class=nb>print</span><span class=p>(</span><span class=n>event</span><span class=o>.</span><span class=n>data</span><span class=o>.</span><span class=n>delta</span><span class=p>,</span> <span class=n>end</span><span class=o>=</span><span class=s2>&quot;&quot;</span><span class=p>,</span> <span class=n>flush</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span><span id=__span-21-10>
+</span><span id=__span-21-11><span class=n>asyncio</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>())</span>
+</span></code></pre></div> <p>这样就可以实时显示Agent的输出，营造更好的用户体验。</p> <h2 id=_4>九、完整实战案例：智能客服机器人<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <p>好了，现在我们已经学习了Agents SDK的核心概念。让我来实战一下，创建一个智能客服机器人！</p> <h3 id=91>9.1 需求分析<a class=headerlink href=#91 title="Permanent link">&para;</a></h3> <p>我们要创建一个智能客服机��人��它应该： 1. 能够判断用户的问题是关于产品还是技术问题 2. 能够调用内部API查询订单状态 3. 能够调用内部API查询技术文档 4. 能够在回答问题前进行安全检查</p> <h3 id=92>9.2 完整代码<a class=headerlink href=#92 title="Permanent link">&para;</a></h3> <div class="language-python highlight"><pre><span></span><code><span id=__span-22-1><span class=kn>import</span><span class=w> </span><span class=nn>asyncio</span>
+</span><span id=__span-22-2><span class=kn>from</span><span class=w> </span><span class=nn>pydantic</span><span class=w> </span><span class=kn>import</span> <span class=n>BaseModel</span>
+</span><span id=__span-22-3><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=p>(</span>
+</span><span id=__span-22-4>    <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span><span class=p>,</span> <span class=n>function_tool</span><span class=p>,</span> 
+</span><span id=__span-22-5>    <span class=n>InputGuardrail</span><span class=p>,</span> <span class=n>GuardrailFunctionOutput</span>
+</span><span id=__span-22-6><span class=p>)</span>
+</span><span id=__span-22-7>
+</span><span id=__span-22-8><span class=c1># ============ 第一步：定义工具函数 ============</span>
+</span><span id=__span-22-9>
+</span><span id=__span-22-10><span class=nd>@function_tool</span>
+</span><span id=__span-22-11><span class=k>def</span><span class=w> </span><span class=nf>get_order_status</span><span class=p>(</span><span class=n>order_id</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
+</span><span id=__span-22-12><span class=w>    </span><span class=sd>&quot;&quot;&quot;查询订单状态&quot;&quot;&quot;</span>
+</span><span id=__span-22-13>    <span class=c1># 模拟API调用</span>
+</span><span id=__span-22-14>    <span class=n>orders</span> <span class=o>=</span> <span class=p>{</span>
+</span><span id=__span-22-15>        <span class=s2>&quot;1001&quot;</span><span class=p>:</span> <span class=s2>&quot;已发货，预计明天送达&quot;</span><span class=p>,</span>
+</span><span id=__span-22-16>        <span class=s2>&quot;1002&quot;</span><span class=p>:</span> <span class=s2>&quot;处理中，预计3天后发货&quot;</span><span class=p>,</span>
+</span><span id=__span-22-17>        <span class=s2>&quot;1003&quot;</span><span class=p>:</span> <span class=s2>&quot;已签收&quot;</span>
+</span><span id=__span-22-18>    <span class=p>}</span>
+</span><span id=__span-22-19>    <span class=k>return</span> <span class=n>orders</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>order_id</span><span class=p>,</span> <span class=s2>&quot;未找到该订单&quot;</span><span class=p>)</span>
+</span><span id=__span-22-20>
+</span><span id=__span-22-21><span class=nd>@function_tool</span>
+</span><span id=__span-22-22><span class=k>def</span><span class=w> </span><span class=nf>get_tech_docs</span><span class=p>(</span><span class=n>keyword</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
+</span><span id=__span-22-23><span class=w>    </span><span class=sd>&quot;&quot;&quot;查询技术文档&quot;&quot;&quot;</span>
+</span><span id=__span-22-24>    <span class=c1># 模拟文档查询</span>
+</span><span id=__span-22-25>    <span class=n>docs</span> <span class=o>=</span> <span class=p>{</span>
+</span><span id=__span-22-26>        <span class=s2>&quot;api&quot;</span><span class=p>:</span> <span class=s2>&quot;我们的API文档在 https://docs.example.com/api&quot;</span><span class=p>,</span>
+</span><span id=__span-22-27>        <span class=s2>&quot;sdk&quot;</span><span class=p>:</span> <span class=s2>&quot;SDK安装指南：pip install our-sdk&quot;</span><span class=p>,</span>
+</span><span id=__span-22-28>        <span class=s2>&quot;auth&quot;</span><span class=p>:</span> <span class=s2>&quot;认证方式：使用API Key进行认证&quot;</span>
+</span><span id=__span-22-29>    <span class=p>}</span>
+</span><span id=__span-22-30>    <span class=k>return</span> <span class=n>docs</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>keyword</span><span class=p>,</span> <span class=s2>&quot;未找到相关文档&quot;</span><span class=p>)</span>
+</span><span id=__span-22-31>
+</span><span id=__span-22-32><span class=c1># ============ 第二步：定义Agent ============</span>
+</span><span id=__span-22-33>
+</span><span id=__span-22-34><span class=c1># 产品客服Agent</span>
+</span><span id=__span-22-35><span class=n>product_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
+</span><span id=__span-22-36>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;产品客服&quot;</span><span class=p>,</span>
+</span><span id=__span-22-37>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一个贴心的产品客服，帮助用户解答产品相关问题和查询订单。&quot;</span><span class=p>,</span>
+</span><span id=__span-22-38>    <span class=n>tools</span><span class=o>=</span><span class=p>[</span><span class=n>get_order_status</span><span class=p>]</span>
+</span><span id=__span-22-39><span class=p>)</span>
+</span><span id=__span-22-40>
+</span><span id=__span-22-41><span class=c1># 技术客服Agent</span>
+</span><span id=__span-22-42><span class=n>tech_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
+</span><span id=__span-22-43>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;技术客服&quot;</span><span class=p>,</span>
+</span><span id=__span-22-44>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是一个专业的技术客服，帮助用户解决技术问题和查询文档。&quot;</span><span class=p>,</span>
+</span><span id=__span-22-45>    <span class=n>tools</span><span class=o>=</span><span class=p>[</span><span class=n>get_tech_docs</span><span class=p>]</span>
+</span><span id=__span-22-46><span class=p>)</span>
+</span><span id=__span-22-47>
+</span><span id=__span-22-48><span class=c1># 分诊Agent</span>
+</span><span id=__span-22-49><span class=n>triage_agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
+</span><span id=__span-22-50>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;智能客服&quot;</span><span class=p>,</span>
+</span><span id=__span-22-51>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是客服中心的分诊员，根据用户的问题类型，将其分配给合适的客服。&quot;</span><span class=p>,</span>
+</span><span id=__span-22-52>    <span class=n>handoffs</span><span class=o>=</span><span class=p>[</span><span class=n>product_agent</span><span class=p>,</span> <span class=n>tech_agent</span><span class=p>]</span>
+</span><span id=__span-22-53><span class=p>)</span>
+</span><span id=__span-22-54>
+</span><span id=__span-22-55><span class=c1># ============ 第三步：运行 ============</span>
+</span><span id=__span-22-56>
+</span><span id=__span-22-57><span class=k>async</span> <span class=k>def</span><span class=w> </span><span class=nf>main</span><span class=p>():</span>
+</span><span id=__span-22-58>    <span class=nb>print</span><span class=p>(</span><span class=s2>&quot;=== 智能客服系统 ===&quot;</span><span class=p>)</span>
+</span><span id=__span-22-59>    <span class=nb>print</span><span class=p>(</span><span class=s2>&quot;请提出您的问题（输入&#39;退出&#39;结束）</span><span class=se>\n</span><span class=s2>&quot;</span><span class=p>)</span>
+</span><span id=__span-22-60>
+</span><span id=__span-22-61>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span><span id=__span-22-62>        <span class=n>user_input</span> <span class=o>=</span> <span class=nb>input</span><span class=p>(</span><span class=s2>&quot;您: &quot;</span><span class=p>)</span><span class=o>.</span><span class=n>strip</span><span class=p>()</span>
+</span><span id=__span-22-63>        <span class=k>if</span> <span class=n>user_input</span> <span class=ow>in</span> <span class=p>[</span><span class=s2>&quot;退出&quot;</span><span class=p>,</span> <span class=s2>&quot;exit&quot;</span><span class=p>,</span> <span class=s2>&quot;quit&quot;</span><span class=p>]:</span>
+</span><span id=__span-22-64>            <span class=nb>print</span><span class=p>(</span><span class=s2>&quot;感谢使用，再见！&quot;</span><span class=p>)</span>
+</span><span id=__span-22-65>            <span class=k>break</span>
+</span><span id=__span-22-66>
+</span><span id=__span-22-67>        <span class=n>result</span> <span class=o>=</span> <span class=k>await</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>triage_agent</span><span class=p>,</span> <span class=n>user_input</span><span class=p>)</span>
+</span><span id=__span-22-68>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;客服: </span><span class=si>{</span><span class=n>result</span><span class=o>.</span><span class=n>final_output</span><span class=si>}</span><span class=se>\n</span><span class=s2>&quot;</span><span class=p>)</span>
+</span><span id=__span-22-69>
+</span><span id=__span-22-70><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&quot;__main__&quot;</span><span class=p>:</span>
+</span><span id=__span-22-71>    <span class=n>asyncio</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>())</span>
+</span></code></pre></div> <h3 id=93>9.3 运行效果<a class=headerlink href=#93 title="Permanent link">&para;</a></h3> <div class="language-text highlight"><pre><span></span><code><span id=__span-23-1>=== 智能客服系统 ===
+</span><span id=__span-23-2>请提出您的问题（输入&#39;退出&#39;结束）
+</span><span id=__span-23-3>
+</span><span id=__span-23-4>您: 我的订单1001到哪里了？
+</span><span id=__span-23-5>客服: 您好！我来帮您查询一下订单1001的状态。
+</span><span id=__span-23-6>根据查询结果，您的订单已发货，预计明天送达。请注意查收！
+</span><span id=__span-23-7>
+</span><span id=__span-23-8>您: 如何使用你们的API？
+</span><span id=__span-23-9>客服: 您好！关于API使用问题，我帮您查询了技术文档。
+</span><span id=__span-23-10>我们的API文档在 https://docs.example.com/api
+</span><span id=__span-23-11>如有更多问题，欢迎继续咨询！
+</span></code></pre></div> <h2 id=_5>十、进阶功能一览<a class=headerlink href=#_5 title="Permanent link">&para;</a></h2> <p>除了上面介绍的核心功能，Agents SDK还有更多强大的特性：</p> <h3 id=101>10.1 追踪与调试<a class=headerlink href=#101 title="Permanent link">&para;</a></h3> <p>Agents SDK内置了强大的追踪功能，可以追踪Agent的每一步操作：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-24-1><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>Agent</span><span class=p>,</span> <span class=n>Runner</span>
+</span><span id=__span-24-2><span class=kn>from</span><span class=w> </span><span class=nn>agents.tracing</span><span class=w> </span><span class=kn>import</span> <span class=n>tracing_enabled</span>
+</span><span id=__span-24-3>
+</span><span id=__span-24-4><span class=c1># 启用追踪</span>
+</span><span id=__span-24-5><span class=n>tracing_enabled</span><span class=p>(</span><span class=kc>True</span><span class=p>)</span>
+</span><span id=__span-24-6>
+</span><span id=__span-24-7><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;助手&quot;</span><span class=p>,</span> <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你现在是一个助手&quot;</span><span class=p>)</span>
+</span><span id=__span-24-8><span class=n>result</span> <span class=o>=</span> <span class=n>Runner</span><span class=o>.</span><span class=n>run_sync</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;你好&quot;</span><span class=p>)</span>
+</span></code></pre></div> <p>你可以在 <a href=https://smith.langchain.com/ >LangSmith</a> 中查看完整的追踪日志，非常适合调试和优化Agent。</p> <h3 id=102>10.2 人在回路中<a class=headerlink href=#102 title="Permanent link">&para;</a></h3> <p>Agents SDK支持在关键步骤引入人工介入：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-25-1><span class=kn>from</span><span class=w> </span><span class=nn>agents</span><span class=w> </span><span class=kn>import</span> <span class=n>HumanInTheLoop</span>
+</span><span id=__span-25-2>
+</span><span id=__span-25-3><span class=c1># 配置人在回路中</span>
+</span><span id=__span-25-4><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span>
+</span><span id=__span-25-5>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;审批助手&quot;</span><span class=p>,</span>
+</span><span id=__span-25-6>    <span class=n>instructions</span><span class=o>=</span><span class=s2>&quot;你是审批助手&quot;</span><span class=p>,</span>
+</span><span id=__span-25-7>    <span class=n>handoff_tools</span><span class=o>=</span><span class=p>[</span><span class=n>HumanInTheLoop</span><span class=p>(</span><span class=n>approval_required</span><span class=o>=</span><span class=kc>True</span><span class=p>)]</span>
+</span><span id=__span-25-8><span class=p>)</span>
+</span></code></pre></div> <p>这样Agent在执行特定操作前需要人工确认。</p> <h3 id=103>10.3 沙盒环境<a class=headerlink href=#103 title="Permanent link">&para;</a></h3> <p>对于需要安全的工具执行环境，SDK提供了沙盒功能：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-26-1><span class=kn>from</span><span class=w> </span><span class=nn>agents.sandbox</span><span class=w> </span><span class=kn>import</span> <span class=n>Sandbox</span>
+</span><span id=__span-26-2>
+</span><span id=__span-26-3><span class=c1># 在沙盒中运行</span>
+</span><span id=__span-26-4><span class=k>with</span> <span class=n>Sandbox</span><span class=p>()</span> <span class=k>as</span> <span class=n>sandbox</span><span class=p>:</span>
+</span><span id=__span-26-5>    <span class=n>result</span> <span class=o>=</span> <span class=n>sandbox</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>agent</span><span class=p>,</span> <span class=s2>&quot;执行这个代码&quot;</span><span class=p>)</span>
+</span></code></pre></div> <h3 id=104-mcp>10.4 MCP集成<a class=headerlink href=#104-mcp title="Permanent link">&para;</a></h3> <p>Agents SDK还支持MCP（Model Context Protocol）服务集成：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-27-1><span class=kn>from</span><span class=w> </span><span class=nn>agents.mcp</span><span class=w> </span><span class=kn>import</span> <span class=n>MCPTool</span>
+</span><span id=__span-27-2>
+</span><span id=__span-27-3><span class=c1># 添加MCP工具</span>
+</span><span id=__span-27-4><span class=n>mcp_tool</span> <span class=o>=</span> <span class=n>MCPTool</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;file_reader&quot;</span><span class=p>,</span> <span class=n>command</span><span class=o>=</span><span class=s2>&quot;npx -y @modelcontextprotocol/server-filesystem .&quot;</span><span class=p>)</span>
+</span><span id=__span-27-5><span class=n>agent</span> <span class=o>=</span> <span class=n>Agent</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&quot;助手&quot;</span><span class=p>,</span> <span class=n>tools</span><span class=o>=</span><span class=p>[</span><span class=n>mcp_tool</span><span class=p>])</span>
+</span></code></pre></div> <h2 id=_6>十一、常见问题与最佳实践<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <h3 id=110>11.0 常见问题排查流程<a class=headerlink href=#110 title="Permanent link">&para;</a></h3> <p>当你遇到问题时，可以按照以下流程来排查：</p> <pre class=mermaid><code>flowchart TD
     A[Agent行为异常] --&gt; B{有错误信息?}
 
     B --&gt;|有| C[查看错误信息]

@@ -21,28 +21,18 @@
     发卡银行-&gt;&gt;银联: 返回授权结果
     银联-&gt;&gt;收单机构: 返回结果
     收单机构-&gt;&gt;POS机: 交易成功
-    POS机-&gt;&gt;持卡人: 打印签购单</code></pre> <h4 id=_4>银行卡的分类<a class=headerlink href=#_4 title="Permanent link">&para;</a></h4> <p><strong>按功能分：</strong> - <strong>借记卡</strong>：先存款后消费，不能透支 - <strong>信用卡</strong>：可以先消费后还款，银行给予一定信用额度 - <strong>准贷记卡</strong>：兼具借记卡和信用卡特点</p> <p><strong>按信息存储方式分：</strong> - <strong>磁条卡</strong>：信息存储在磁条中，安全性较低 - <strong>IC卡（芯片卡）</strong>：信息存储在芯片中，安全性高 - <strong>复合卡</strong>：同时具有磁条和芯片</p> <h4 id=_5>银行卡支付的关键技术<a class=headerlink href=#_5 title="Permanent link">&para;</a></h4> <p><strong>1. 卡号编码规则（ISO 7812标准）</strong></p> <p>银行卡号通常是16位，遵循特定的编码规则：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1> 1</a></span>
-<span class=normal><a href=#__codelineno-0-2> 2</a></span>
-<span class=normal><a href=#__codelineno-0-3> 3</a></span>
-<span class=normal><a href=#__codelineno-0-4> 4</a></span>
-<span class=normal><a href=#__codelineno-0-5> 5</a></span>
-<span class=normal><a href=#__codelineno-0-6> 6</a></span>
-<span class=normal><a href=#__codelineno-0-7> 7</a></span>
-<span class=normal><a href=#__codelineno-0-8> 8</a></span>
-<span class=normal><a href=#__codelineno-0-9> 9</a></span>
-<span class=normal><a href=#__codelineno-0-10>10</a></span>
-<span class=normal><a href=#__codelineno-0-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>举例：6225 8888 1234 5678
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a>
-</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a>前6位（BIN号）：622588
-</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a>- 识别发卡银行和卡种
-</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a>- 由银联分配
-</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a>
-</span><span id=__span-0-7><a id=__codelineno-0-7 name=__codelineno-0-7></a>中间位：88123456
-</span><span id=__span-0-8><a id=__codelineno-0-8 name=__codelineno-0-8></a>- 银行自定义的账户标识
-</span><span id=__span-0-9><a id=__codelineno-0-9 name=__codelineno-0-9></a>
-</span><span id=__span-0-10><a id=__codelineno-0-10 name=__codelineno-0-10></a>最后1位：校验码
-</span><span id=__span-0-11><a id=__codelineno-0-11 name=__codelineno-0-11></a>- 根据Luhn算法计算得出
-</span></code></pre></div></td></tr></table></div> <p><strong>2. 安全验证机制</strong></p> <p>银行卡支付的安全验证主要通过以下方式：</p> <ul> <li><strong>密码验证</strong>：持卡人输入6位密码</li> <li><strong>签名验证</strong>：核对签购单上的签名</li> <li><strong>CVV/CVC验证</strong>：卡片背面的3位数字（线上支付）</li> <li><strong>3D Secure验证</strong>：发卡行的二次验证（线上支付）</li> </ul> <hr> <h2 id=_6>三、电子支付时代：网银与第三方支付<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <h3 id=31>3.1 网上银行：支付的网络化<a class=headerlink href=#31 title="Permanent link">&para;</a></h3> <p>网上银行让用户可以通过互联网完成转账、支付等操作，实现了"足不出户办理银行业务"。</p> <p><strong>网银支付的核心流程：</strong></p> <pre class=mermaid><code>flowchart TD
+    POS机-&gt;&gt;持卡人: 打印签购单</code></pre> <h4 id=_4>银行卡的分类<a class=headerlink href=#_4 title="Permanent link">&para;</a></h4> <p><strong>按功能分：</strong> - <strong>借记卡</strong>：先存款后消费，不能透支 - <strong>信用卡</strong>：可以先消费后还款，银行给予一定信用额度 - <strong>准贷记卡</strong>：兼具借记卡和信用卡特点</p> <p><strong>按信息存储方式分：</strong> - <strong>磁条卡</strong>：信息存储在磁条中，安全性较低 - <strong>IC卡（芯片卡）</strong>：信息存储在芯片中，安全性高 - <strong>复合卡</strong>：同时具有磁条和芯片</p> <h4 id=_5>银行卡支付的关键技术<a class=headerlink href=#_5 title="Permanent link">&para;</a></h4> <p><strong>1. 卡号编码规则（ISO 7812标准）</strong></p> <p>银行卡号通常是16位，遵循特定的编码规则：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-0-1>举例：6225 8888 1234 5678
+</span><span id=__span-0-2>
+</span><span id=__span-0-3>前6位（BIN号）：622588
+</span><span id=__span-0-4>- 识别发卡银行和卡种
+</span><span id=__span-0-5>- 由银联分配
+</span><span id=__span-0-6>
+</span><span id=__span-0-7>中间位：88123456
+</span><span id=__span-0-8>- 银行自定义的账户标识
+</span><span id=__span-0-9>
+</span><span id=__span-0-10>最后1位：校验码
+</span><span id=__span-0-11>- 根据Luhn算法计算得出
+</span></code></pre></div> <p><strong>2. 安全验证机制</strong></p> <p>银行卡支付的安全验证主要通过以下方式：</p> <ul> <li><strong>密码验证</strong>：持卡人输入6位密码</li> <li><strong>签名验证</strong>：核对签购单上的签名</li> <li><strong>CVV/CVC验证</strong>：卡片背面的3位数字（线上支付）</li> <li><strong>3D Secure验证</strong>：发卡行的二次验证（线上支付）</li> </ul> <hr> <h2 id=_6>三、电子支付时代：网银与第三方支付<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <h3 id=31>3.1 网上银行：支付的网络化<a class=headerlink href=#31 title="Permanent link">&para;</a></h3> <p>网上银行让用户可以通过互联网完成转账、支付等操作，实现了"足不出户办理银行业务"。</p> <p><strong>网银支付的核心流程：</strong></p> <pre class=mermaid><code>flowchart TD
     A[用户访问商户网站] --&gt; B[选择网银支付]
     B --&gt; C[跳转到银行网银页面]
     C --&gt; D[输入账号密码/U盾验证]
@@ -65,20 +55,14 @@
     Note over 支付宝: 资金暂存
     卖家-&gt;&gt;买家: 发货
     买家-&gt;&gt;支付宝: 确认收货
-    支付宝-&gt;&gt;卖家: 打款到卖家账户</code></pre> <p><strong>第三方支付的账户体系：</strong></p> <p>第三方支付建立了自己的账户体系，用户在支付机构开设虚拟账户：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span>
-<span class=normal><a href=#__codelineno-1-2>2</a></span>
-<span class=normal><a href=#__codelineno-1-3>3</a></span>
-<span class=normal><a href=#__codelineno-1-4>4</a></span>
-<span class=normal><a href=#__codelineno-1-5>5</a></span>
-<span class=normal><a href=#__codelineno-1-6>6</a></span>
-<span class=normal><a href=#__codelineno-1-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a>用户A在支付宝的账户
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a>├── 余额账户：100.00元
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>├── 余额宝账户：1000.00元
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a>├── 银行卡绑定：
-</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a>│   ├── 工商银行(尾号1234)
-</span><span id=__span-1-6><a id=__codelineno-1-6 name=__codelineno-1-6></a>│   └── 招商银行(尾号5678)
-</span><span id=__span-1-7><a id=__codelineno-1-7 name=__codelineno-1-7></a>└── 花呗额度：5000.00元
-</span></code></pre></div></td></tr></table></div> <h3 id=33>3.3 中国支付清算体系<a class=headerlink href=#33 title="Permanent link">&para;</a></h3> <p>中国的支付清算体系是一个复杂的网络，涉及多个参与方：</p> <pre class=mermaid><code>graph TB
+    支付宝-&gt;&gt;卖家: 打款到卖家账户</code></pre> <p><strong>第三方支付的账户体系：</strong></p> <p>第三方支付建立了自己的账户体系，用户在支付机构开设虚拟账户：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-1-1>用户A在支付宝的账户
+</span><span id=__span-1-2>├── 余额账户：100.00元
+</span><span id=__span-1-3>├── 余额宝账户：1000.00元
+</span><span id=__span-1-4>├── 银行卡绑定：
+</span><span id=__span-1-5>│   ├── 工商银行(尾号1234)
+</span><span id=__span-1-6>│   └── 招商银行(尾号5678)
+</span><span id=__span-1-7>└── 花呗额度：5000.00元
+</span></code></pre></div> <h3 id=33>3.3 中国支付清算体系<a class=headerlink href=#33 title="Permanent link">&para;</a></h3> <p>中国的支付清算体系是一个复杂的网络，涉及多个参与方：</p> <pre class=mermaid><code>graph TB
     subgraph 用户层
         A[个人用户]
         B[企业用户]
@@ -112,30 +96,19 @@
     C &amp; D &amp; E --&gt; I
     I --&gt; F &amp; G &amp; H
     F &amp; G &amp; H --&gt; L
-    L --&gt; M</code></pre> <p><strong>网联的作用：</strong></p> <p>2017年，网联平台正式上线，要求第三方支付机构的网络支付业务必须通过网联处理。这解决了什么问题？</p> <ul> <li><strong>断直连</strong>：此前，支付机构可以直接与各银行对接，资金流向不透明</li> <li><strong>资金监控</strong>：所有交易都必须经过网联，央行可以实时监控</li> <li><strong>风险防范</strong>：防止支付机构挪用备付金、洗钱等风险</li> </ul> <hr> <h2 id=nfc>四、移动支付革命：扫码与NFC<a class=headerlink href=#nfc title="Permanent link">&para;</a></h2> <h3 id=41>4.1 扫码支付：中国的创新名片<a class=headerlink href=#41 title="Permanent link">&para;</a></h3> <p>扫码支付是中国移动支付的代表形式，它巧妙地利用了智能手机的普及和二维码技术，创造了一种便捷、低成本的支付方式。</p> <h4 id=_7>二维码的技术原理<a class=headerlink href=#_7 title="Permanent link">&para;</a></h4> <p>二维码是在二维空间上记录信息的条码技术。与传统的一维码相比，它可以存储更多信息，包括汉字、网址等。</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1> 1</a></span>
-<span class=normal><a href=#__codelineno-2-2> 2</a></span>
-<span class=normal><a href=#__codelineno-2-3> 3</a></span>
-<span class=normal><a href=#__codelineno-2-4> 4</a></span>
-<span class=normal><a href=#__codelineno-2-5> 5</a></span>
-<span class=normal><a href=#__codelineno-2-6> 6</a></span>
-<span class=normal><a href=#__codelineno-2-7> 7</a></span>
-<span class=normal><a href=#__codelineno-2-8> 8</a></span>
-<span class=normal><a href=#__codelineno-2-9> 9</a></span>
-<span class=normal><a href=#__codelineno-2-10>10</a></span>
-<span class=normal><a href=#__codelineno-2-11>11</a></span>
-<span class=normal><a href=#__codelineno-2-12>12</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a>二维码的结构示意：
-</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a>┌─────────────────────┐
-</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a>│ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ │ ← 定位图形
-</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a>│ ▓▓    ▓▓    ▓▓    ▓▓ │
-</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a>│ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ │ ← 功能图形
-</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6></a>│                      │
-</span><span id=__span-2-7><a id=__codelineno-2-7 name=__codelineno-2-7></a>│    数据区域         │ ← 存储实际数据
-</span><span id=__span-2-8><a id=__codelineno-2-8 name=__codelineno-2-8></a>│    ████████████     │
-</span><span id=__span-2-9><a id=__codelineno-2-9 name=__codelineno-2-9></a>│                      │
-</span><span id=__span-2-10><a id=__codelineno-2-10 name=__codelineno-2-10></a>│ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ │
-</span><span id=__span-2-11><a id=__codelineno-2-11 name=__codelineno-2-11></a>│ ▓▓    ▓▓    ▓▓    ▓▓ │
-</span><span id=__span-2-12><a id=__codelineno-2-12 name=__codelineno-2-12></a>└─────────────────────┘
-</span></code></pre></div></td></tr></table></div> <p>二维码的编码容量： - 数字：最多7089字符 - 字母：最多4296字符 - 汉字：最多984个（UTF-8编码）</p> <h4 id=_8>扫码支付的两种模式<a class=headerlink href=#_8 title="Permanent link">&para;</a></h4> <p><strong>模式一：主扫（用户扫商家）</strong></p> <pre class=mermaid><code>sequenceDiagram
+    L --&gt; M</code></pre> <p><strong>网联的作用：</strong></p> <p>2017年，网联平台正式上线，要求第三方支付机构的网络支付业务必须通过网联处理。这解决了什么问题？</p> <ul> <li><strong>断直连</strong>：此前，支付机构可以直接与各银行对接，资金流向不透明</li> <li><strong>资金监控</strong>：所有交易都必须经过网联，央行可以实时监控</li> <li><strong>风险防范</strong>：防止支付机构挪用备付金、洗钱等风险</li> </ul> <hr> <h2 id=nfc>四、移动支付革命：扫码与NFC<a class=headerlink href=#nfc title="Permanent link">&para;</a></h2> <h3 id=41>4.1 扫码支付：中国的创新名片<a class=headerlink href=#41 title="Permanent link">&para;</a></h3> <p>扫码支付是中国移动支付的代表形式，它巧妙地利用了智能手机的普及和二维码技术，创造了一种便捷、低成本的支付方式。</p> <h4 id=_7>二维码的技术原理<a class=headerlink href=#_7 title="Permanent link">&para;</a></h4> <p>二维码是在二维空间上记录信息的条码技术。与传统的一维码相比，它可以存储更多信息，包括汉字、网址等。</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-2-1>二维码的结构示意：
+</span><span id=__span-2-2>┌─────────────────────┐
+</span><span id=__span-2-3>│ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ │ ← 定位图形
+</span><span id=__span-2-4>│ ▓▓    ▓▓    ▓▓    ▓▓ │
+</span><span id=__span-2-5>│ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ │ ← 功能图形
+</span><span id=__span-2-6>│                      │
+</span><span id=__span-2-7>│    数据区域         │ ← 存储实际数据
+</span><span id=__span-2-8>│    ████████████     │
+</span><span id=__span-2-9>│                      │
+</span><span id=__span-2-10>│ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ ▓▓ │
+</span><span id=__span-2-11>│ ▓▓    ▓▓    ▓▓    ▓▓ │
+</span><span id=__span-2-12>└─────────────────────┘
+</span></code></pre></div> <p>二维码的编码容量： - 数字：最多7089字符 - 字母：最多4296字符 - 汉字：最多984个（UTF-8编码）</p> <h4 id=_8>扫码支付的两种模式<a class=headerlink href=#_8 title="Permanent link">&para;</a></h4> <p><strong>模式一：主扫（用户扫商家）</strong></p> <pre class=mermaid><code>sequenceDiagram
     participant 用户手机
     participant 商家二维码
     participant 支付平台
@@ -201,26 +174,17 @@
       电话银行身份验证
     静脉识别
       部分银行ATM
-      高安全场景</code></pre> <p><strong>刷脸支付的技术原理：</strong></p> <p>刷脸支付不是简单地"看一眼就付钱"，它包含复杂的技术流程：</p> <ol> <li><strong>人脸检测</strong>：从图像中定位人脸位置</li> <li><strong>特征提取</strong>：提取人脸的关键特征点（通常128-512个）</li> <li><strong>活体检测</strong>：确保是真人而非照片/视频（通过眨眼、点头等动作）</li> <li><strong>特征比对</strong>：与数据库中的特征进行匹配</li> <li><strong>支付授权</strong>：匹配成功后完成支付</li> </ol> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1> 1</a></span>
-<span class=normal><a href=#__codelineno-3-2> 2</a></span>
-<span class=normal><a href=#__codelineno-3-3> 3</a></span>
-<span class=normal><a href=#__codelineno-3-4> 4</a></span>
-<span class=normal><a href=#__codelineno-3-5> 5</a></span>
-<span class=normal><a href=#__codelineno-3-6> 6</a></span>
-<span class=normal><a href=#__codelineno-3-7> 7</a></span>
-<span class=normal><a href=#__codelineno-3-8> 8</a></span>
-<span class=normal><a href=#__codelineno-3-9> 9</a></span>
-<span class=normal><a href=#__codelineno-3-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a>人脸特征提取示例：
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>
-</span><span id=__span-3-3><a id=__codelineno-3-3 name=__codelineno-3-3></a>原始图像          特征点标记           特征向量
-</span><span id=__span-3-4><a id=__codelineno-3-4 name=__codelineno-3-4></a>┌─────────┐      ┌─────────┐
-</span><span id=__span-3-5><a id=__codelineno-3-5 name=__codelineno-3-5></a>│  (o o)  │  →   │  ● ● ●  │   →   [0.12, 0.34, 0.56, ...]
-</span><span id=__span-3-6><a id=__codelineno-3-6 name=__codelineno-3-6></a>│    △    │      │  ● △ ●  │       共128-512维向量
-</span><span id=__span-3-7><a id=__codelineno-3-7 name=__codelineno-3-7></a>│   ───   │      │  ●───●  │
-</span><span id=__span-3-8><a id=__codelineno-3-8 name=__codelineno-3-8></a>└─────────┘      └─────────┘
-</span><span id=__span-3-9><a id=__codelineno-3-9 name=__codelineno-3-9></a>
-</span><span id=__span-3-10><a id=__codelineno-3-10 name=__codelineno-3-10></a>特征点：眼角、鼻尖、嘴角、眉毛等关键位置
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=_10>五、支付系统架构：技术实现的核心<a class=headerlink href=#_10 title="Permanent link">&para;</a></h2> <h3 id=51>5.1 支付系统的整体架构<a class=headerlink href=#51 title="Permanent link">&para;</a></h3> <p>一个完整的支付系统，通常包含以下核心模块：</p> <pre class=mermaid><code>graph TB
+      高安全场景</code></pre> <p><strong>刷脸支付的技术原理：</strong></p> <p>刷脸支付不是简单地"看一眼就付钱"，它包含复杂的技术流程：</p> <ol> <li><strong>人脸检测</strong>：从图像中定位人脸位置</li> <li><strong>特征提取</strong>：提取人脸的关键特征点（通常128-512个）</li> <li><strong>活体检测</strong>：确保是真人而非照片/视频（通过眨眼、点头等动作）</li> <li><strong>特征比对</strong>：与数据库中的特征进行匹配</li> <li><strong>支付授权</strong>：匹配成功后完成支付</li> </ol> <div class="language-text highlight"><pre><span></span><code><span id=__span-3-1>人脸特征提取示例：
+</span><span id=__span-3-2>
+</span><span id=__span-3-3>原始图像          特征点标记           特征向量
+</span><span id=__span-3-4>┌─────────┐      ┌─────────┐
+</span><span id=__span-3-5>│  (o o)  │  →   │  ● ● ●  │   →   [0.12, 0.34, 0.56, ...]
+</span><span id=__span-3-6>│    △    │      │  ● △ ●  │       共128-512维向量
+</span><span id=__span-3-7>│   ───   │      │  ●───●  │
+</span><span id=__span-3-8>└─────────┘      └─────────┘
+</span><span id=__span-3-9>
+</span><span id=__span-3-10>特征点：眼角、鼻尖、嘴角、眉毛等关键位置
+</span></code></pre></div> <hr> <h2 id=_10>五、支付系统架构：技术实现的核心<a class=headerlink href=#_10 title="Permanent link">&para;</a></h2> <h3 id=51>5.1 支付系统的整体架构<a class=headerlink href=#51 title="Permanent link">&para;</a></h3> <p>一个完整的支付系统，通常包含以下核心模块：</p> <pre class=mermaid><code>graph TB
     subgraph 接入层
         A1[APP SDK]
         A2[H5/小程序]
@@ -260,100 +224,55 @@
     B1 --&gt; B2 &amp; B3 &amp; B4
     B2 &amp; B3 &amp; B4 --&gt; C1
     C1 --&gt; C2 &amp; C3 &amp; C4
-    C1 --&gt; D1 &amp; D2 &amp; D3 &amp; D4</code></pre> <h3 id=52>5.2 支付核心的数据模型<a class=headerlink href=#52 title="Permanent link">&para;</a></h3> <p>支付系统需要管理多种核心数据：</p> <p><strong>1. 账户模型</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1> 1</a></span>
-<span class=normal><a href=#__codelineno-4-2> 2</a></span>
-<span class=normal><a href=#__codelineno-4-3> 3</a></span>
-<span class=normal><a href=#__codelineno-4-4> 4</a></span>
-<span class=normal><a href=#__codelineno-4-5> 5</a></span>
-<span class=normal><a href=#__codelineno-4-6> 6</a></span>
-<span class=normal><a href=#__codelineno-4-7> 7</a></span>
-<span class=normal><a href=#__codelineno-4-8> 8</a></span>
-<span class=normal><a href=#__codelineno-4-9> 9</a></span>
-<span class=normal><a href=#__codelineno-4-10>10</a></span>
-<span class=normal><a href=#__codelineno-4-11>11</a></span>
-<span class=normal><a href=#__codelineno-4-12>12</a></span>
-<span class=normal><a href=#__codelineno-4-13>13</a></span>
-<span class=normal><a href=#__codelineno-4-14>14</a></span>
-<span class=normal><a href=#__codelineno-4-15>15</a></span>
-<span class=normal><a href=#__codelineno-4-16>16</a></span>
-<span class=normal><a href=#__codelineno-4-17>17</a></span>
-<span class=normal><a href=#__codelineno-4-18>18</a></span>
-<span class=normal><a href=#__codelineno-4-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a>账户表(account)
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a>├── account_id        -- 账户ID（主键）
-</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a>├── user_id           -- 用户ID
-</span><span id=__span-4-4><a id=__codelineno-4-4 name=__codelineno-4-4></a>├── account_type      -- 账户类型（余额/红包/积分）
-</span><span id=__span-4-5><a id=__codelineno-4-5 name=__codelineno-4-5></a>├── currency          -- 币种
-</span><span id=__span-4-6><a id=__codelineno-4-6 name=__codelineno-4-6></a>├── balance           -- 余额
-</span><span id=__span-4-7><a id=__codelineno-4-7 name=__codelineno-4-7></a>├── frozen_amount     -- 冻结金额
-</span><span id=__span-4-8><a id=__codelineno-4-8 name=__codelineno-4-8></a>├── status            -- 状态（正常/冻结/注销）
-</span><span id=__span-4-9><a id=__codelineno-4-9 name=__codelineno-4-9></a>└── created_at        -- 创建时间
-</span><span id=__span-4-10><a id=__codelineno-4-10 name=__codelineno-4-10></a>
-</span><span id=__span-4-11><a id=__codelineno-4-11 name=__codelineno-4-11></a>账户流水表(account_journal)
-</span><span id=__span-4-12><a id=__codelineno-4-12 name=__codelineno-4-12></a>├── journal_id        -- 流水ID
-</span><span id=__span-4-13><a id=__codelineno-4-13 name=__codelineno-4-13></a>├── account_id        -- 账户ID
-</span><span id=__span-4-14><a id=__codelineno-4-14 name=__codelineno-4-14></a>├── trans_id          -- 交易ID
-</span><span id=__span-4-15><a id=__codelineno-4-15 name=__codelineno-4-15></a>├── amount            -- 变动金额
-</span><span id=__span-4-16><a id=__codelineno-4-16 name=__codelineno-4-16></a>├── balance_before    -- 变动前余额
-</span><span id=__span-4-17><a id=__codelineno-4-17 name=__codelineno-4-17></a>├── balance_after     -- 变动后余额
-</span><span id=__span-4-18><a id=__codelineno-4-18 name=__codelineno-4-18></a>├── direction         -- 方向（收入/支出）
-</span><span id=__span-4-19><a id=__codelineno-4-19 name=__codelineno-4-19></a>└── created_at        -- 时间
-</span></code></pre></div></td></tr></table></div> <p><strong>2. 交易模型</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1> 1</a></span>
-<span class=normal><a href=#__codelineno-5-2> 2</a></span>
-<span class=normal><a href=#__codelineno-5-3> 3</a></span>
-<span class=normal><a href=#__codelineno-5-4> 4</a></span>
-<span class=normal><a href=#__codelineno-5-5> 5</a></span>
-<span class=normal><a href=#__codelineno-5-6> 6</a></span>
-<span class=normal><a href=#__codelineno-5-7> 7</a></span>
-<span class=normal><a href=#__codelineno-5-8> 8</a></span>
-<span class=normal><a href=#__codelineno-5-9> 9</a></span>
-<span class=normal><a href=#__codelineno-5-10>10</a></span>
-<span class=normal><a href=#__codelineno-5-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a>交易表(transaction)
-</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a>├── trans_id          -- 交易流水号（全局唯一）
-</span><span id=__span-5-3><a id=__codelineno-5-3 name=__codelineno-5-3></a>├── order_id          -- 关联订单号
-</span><span id=__span-5-4><a id=__codelineno-5-4 name=__codelineno-5-4></a>├── payer_id          -- 付款人
-</span><span id=__span-5-5><a id=__codelineno-5-5 name=__codelineno-5-5></a>├── payee_id          -- 收款人
-</span><span id=__span-5-6><a id=__codelineno-5-6 name=__codelineno-5-6></a>├── amount            -- 交易金额
-</span><span id=__span-5-7><a id=__codelineno-5-7 name=__codelineno-5-7></a>├── currency          -- 币种
-</span><span id=__span-5-8><a id=__codelineno-5-8 name=__codelineno-5-8></a>├── status            -- 状态（待支付/成功/失败）
-</span><span id=__span-5-9><a id=__codelineno-5-9 name=__codelineno-5-9></a>├── channel           -- 渠道（支付宝/微信/银行卡）
-</span><span id=__span-5-10><a id=__codelineno-5-10 name=__codelineno-5-10></a>├── scene             -- 场景（商品购买/转账/充值）
-</span><span id=__span-5-11><a id=__codelineno-5-11 name=__codelineno-5-11></a>└── created_at        -- 创建时间
-</span></code></pre></div></td></tr></table></div> <h3 id=53>5.3 支付系统的关键设计<a class=headerlink href=#53 title="Permanent link">&para;</a></h3> <p><strong>1. 幂等性设计</strong></p> <p>支付系统必须保证幂等性，即同一个请求执行多次与执行一次的效果相同。这是防止重复扣款的关键。</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1> 1</a></span>
-<span class=normal><a href=#__codelineno-6-2> 2</a></span>
-<span class=normal><a href=#__codelineno-6-3> 3</a></span>
-<span class=normal><a href=#__codelineno-6-4> 4</a></span>
-<span class=normal><a href=#__codelineno-6-5> 5</a></span>
-<span class=normal><a href=#__codelineno-6-6> 6</a></span>
-<span class=normal><a href=#__codelineno-6-7> 7</a></span>
-<span class=normal><a href=#__codelineno-6-8> 8</a></span>
-<span class=normal><a href=#__codelineno-6-9> 9</a></span>
-<span class=normal><a href=#__codelineno-6-10>10</a></span>
-<span class=normal><a href=#__codelineno-6-11>11</a></span>
-<span class=normal><a href=#__codelineno-6-12>12</a></span>
-<span class=normal><a href=#__codelineno-6-13>13</a></span>
-<span class=normal><a href=#__codelineno-6-14>14</a></span>
-<span class=normal><a href=#__codelineno-6-15>15</a></span>
-<span class=normal><a href=#__codelineno-6-16>16</a></span>
-<span class=normal><a href=#__codelineno-6-17>17</a></span>
-<span class=normal><a href=#__codelineno-6-18>18</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a>实现幂等性的方法：
-</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a>
-</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a>1. 唯一流水号
-</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a>   - 每个交易请求携带唯一的trans_id
-</span><span id=__span-6-5><a id=__codelineno-6-5 name=__codelineno-6-5></a>   - 系统根据trans_id判断是否已处理
-</span><span id=__span-6-6><a id=__codelineno-6-6 name=__codelineno-6-6></a>
-</span><span id=__span-6-7><a id=__codelineno-6-7 name=__codelineno-6-7></a>2. 状态机约束
-</span><span id=__span-6-8><a id=__codelineno-6-8 name=__codelineno-6-8></a>   - 交易状态只能单向流转
-</span><span id=__span-6-9><a id=__codelineno-6-9 name=__codelineno-6-9></a>   - 已成功的交易不能再次成功
-</span><span id=__span-6-10><a id=__codelineno-6-10 name=__codelineno-6-10></a>
-</span><span id=__span-6-11><a id=__codelineno-6-11 name=__codelineno-6-11></a>状态流转：
-</span><span id=__span-6-12><a id=__codelineno-6-12 name=__codelineno-6-12></a>┌─────────┐    ┌─────────┐    ┌─────────┐
-</span><span id=__span-6-13><a id=__codelineno-6-13 name=__codelineno-6-13></a>│  创建   │ →  │  处理中  │ →  │  成功   │
-</span><span id=__span-6-14><a id=__codelineno-6-14 name=__codelineno-6-14></a>└─────────┘    └─────────┘    └─────────┘
-</span><span id=__span-6-15><a id=__codelineno-6-15 name=__codelineno-6-15></a>                    ↓
-</span><span id=__span-6-16><a id=__codelineno-6-16 name=__codelineno-6-16></a>               ┌─────────┐
-</span><span id=__span-6-17><a id=__codelineno-6-17 name=__codelineno-6-17></a>               │  失败   │
-</span><span id=__span-6-18><a id=__codelineno-6-18 name=__codelineno-6-18></a>               └─────────┘
-</span></code></pre></div></td></tr></table></div> <p><strong>2. 分布式事务处理</strong></p> <p>支付涉及多个账户和系统，需要保证数据一致性。常用方案：</p> <pre class=mermaid><code>graph LR
+    C1 --&gt; D1 &amp; D2 &amp; D3 &amp; D4</code></pre> <h3 id=52>5.2 支付核心的数据模型<a class=headerlink href=#52 title="Permanent link">&para;</a></h3> <p>支付系统需要管理多种核心数据：</p> <p><strong>1. 账户模型</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-4-1>账户表(account)
+</span><span id=__span-4-2>├── account_id        -- 账户ID（主键）
+</span><span id=__span-4-3>├── user_id           -- 用户ID
+</span><span id=__span-4-4>├── account_type      -- 账户类型（余额/红包/积分）
+</span><span id=__span-4-5>├── currency          -- 币种
+</span><span id=__span-4-6>├── balance           -- 余额
+</span><span id=__span-4-7>├── frozen_amount     -- 冻结金额
+</span><span id=__span-4-8>├── status            -- 状态（正常/冻结/注销）
+</span><span id=__span-4-9>└── created_at        -- 创建时间
+</span><span id=__span-4-10>
+</span><span id=__span-4-11>账户流水表(account_journal)
+</span><span id=__span-4-12>├── journal_id        -- 流水ID
+</span><span id=__span-4-13>├── account_id        -- 账户ID
+</span><span id=__span-4-14>├── trans_id          -- 交易ID
+</span><span id=__span-4-15>├── amount            -- 变动金额
+</span><span id=__span-4-16>├── balance_before    -- 变动前余额
+</span><span id=__span-4-17>├── balance_after     -- 变动后余额
+</span><span id=__span-4-18>├── direction         -- 方向（收入/支出）
+</span><span id=__span-4-19>└── created_at        -- 时间
+</span></code></pre></div> <p><strong>2. 交易模型</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-5-1>交易表(transaction)
+</span><span id=__span-5-2>├── trans_id          -- 交易流水号（全局唯一）
+</span><span id=__span-5-3>├── order_id          -- 关联订单号
+</span><span id=__span-5-4>├── payer_id          -- 付款人
+</span><span id=__span-5-5>├── payee_id          -- 收款人
+</span><span id=__span-5-6>├── amount            -- 交易金额
+</span><span id=__span-5-7>├── currency          -- 币种
+</span><span id=__span-5-8>├── status            -- 状态（待支付/成功/失败）
+</span><span id=__span-5-9>├── channel           -- 渠道（支付宝/微信/银行卡）
+</span><span id=__span-5-10>├── scene             -- 场景（商品购买/转账/充值）
+</span><span id=__span-5-11>└── created_at        -- 创建时间
+</span></code></pre></div> <h3 id=53>5.3 支付系统的关键设计<a class=headerlink href=#53 title="Permanent link">&para;</a></h3> <p><strong>1. 幂等性设计</strong></p> <p>支付系统必须保证幂等性，即同一个请求执行多次与执行一次的效果相同。这是防止重复扣款的关键。</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-6-1>实现幂等性的方法：
+</span><span id=__span-6-2>
+</span><span id=__span-6-3>1. 唯一流水号
+</span><span id=__span-6-4>   - 每个交易请求携带唯一的trans_id
+</span><span id=__span-6-5>   - 系统根据trans_id判断是否已处理
+</span><span id=__span-6-6>
+</span><span id=__span-6-7>2. 状态机约束
+</span><span id=__span-6-8>   - 交易状态只能单向流转
+</span><span id=__span-6-9>   - 已成功的交易不能再次成功
+</span><span id=__span-6-10>
+</span><span id=__span-6-11>状态流转：
+</span><span id=__span-6-12>┌─────────┐    ┌─────────┐    ┌─────────┐
+</span><span id=__span-6-13>│  创建   │ →  │  处理中  │ →  │  成功   │
+</span><span id=__span-6-14>└─────────┘    └─────────┘    └─────────┘
+</span><span id=__span-6-15>                    ↓
+</span><span id=__span-6-16>               ┌─────────┐
+</span><span id=__span-6-17>               │  失败   │
+</span><span id=__span-6-18>               └─────────┘
+</span></code></pre></div> <p><strong>2. 分布式事务处理</strong></p> <p>支付涉及多个账户和系统，需要保证数据一致性。常用方案：</p> <pre class=mermaid><code>graph LR
     A[分布式事务方案] --&gt; B[2PC/XA]
     A --&gt; C[TCC]
     A --&gt; D[本地消息表]
@@ -362,83 +281,46 @@
     B --&gt; B1[强一致性&lt;br/&gt;性能差]
     C --&gt; C1[最终一致性&lt;br/&gt;开发成本高]
     D --&gt; D1[最终一致性&lt;br/&gt;实现简单]
-    E --&gt; E1[最终一致性&lt;br/&gt;依赖消息队列]</code></pre> <p><strong>TCC模式详解：</strong></p> <p>TCC（Try-Confirm-Cancel）是一种柔性事务方案：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1> 1</a></span>
-<span class=normal><a href=#__codelineno-7-2> 2</a></span>
-<span class=normal><a href=#__codelineno-7-3> 3</a></span>
-<span class=normal><a href=#__codelineno-7-4> 4</a></span>
-<span class=normal><a href=#__codelineno-7-5> 5</a></span>
-<span class=normal><a href=#__codelineno-7-6> 6</a></span>
-<span class=normal><a href=#__codelineno-7-7> 7</a></span>
-<span class=normal><a href=#__codelineno-7-8> 8</a></span>
-<span class=normal><a href=#__codelineno-7-9> 9</a></span>
-<span class=normal><a href=#__codelineno-7-10>10</a></span>
-<span class=normal><a href=#__codelineno-7-11>11</a></span>
-<span class=normal><a href=#__codelineno-7-12>12</a></span>
-<span class=normal><a href=#__codelineno-7-13>13</a></span>
-<span class=normal><a href=#__codelineno-7-14>14</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a>以转账场景为例：
-</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a>
-</span><span id=__span-7-3><a id=__codelineno-7-3 name=__codelineno-7-3></a>Try阶段（尝试）
-</span><span id=__span-7-4><a id=__codelineno-7-4 name=__codelineno-7-4></a>- 检查账户A余额是否充足
-</span><span id=__span-7-5><a id=__codelineno-7-5 name=__codelineno-7-5></a>- 冻结账户A 100元
-</span><span id=__span-7-6><a id=__codelineno-7-6 name=__codelineno-7-6></a>- 预增加账户B 100元（待确认）
-</span><span id=__span-7-7><a id=__codelineno-7-7 name=__codelineno-7-7></a>
-</span><span id=__span-7-8><a id=__codelineno-7-8 name=__codelineno-7-8></a>Confirm阶段（确认）
-</span><span id=__span-7-9><a id=__codelineno-7-9 name=__codelineno-7-9></a>- 扣减账户A冻结的100元
-</span><span id=__span-7-10><a id=__codelineno-7-10 name=__codelineno-7-10></a>- 将账户B预增的100元变为正常余额
-</span><span id=__span-7-11><a id=__codelineno-7-11 name=__codelineno-7-11></a>
-</span><span id=__span-7-12><a id=__codelineno-7-12 name=__codelineno-7-12></a>Cancel阶段（取消）
-</span><span id=__span-7-13><a id=__codelineno-7-13 name=__codelineno-7-13></a>- 解冻账户A的100元
-</span><span id=__span-7-14><a id=__codelineno-7-14 name=__codelineno-7-14></a>- 删除账户B的预增记录
-</span></code></pre></div></td></tr></table></div> <p><strong>3. 高可用设计</strong></p> <p>支付系统对可用性要求极高，通常要求99.99%以上：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1> 1</a></span>
-<span class=normal><a href=#__codelineno-8-2> 2</a></span>
-<span class=normal><a href=#__codelineno-8-3> 3</a></span>
-<span class=normal><a href=#__codelineno-8-4> 4</a></span>
-<span class=normal><a href=#__codelineno-8-5> 5</a></span>
-<span class=normal><a href=#__codelineno-8-6> 6</a></span>
-<span class=normal><a href=#__codelineno-8-7> 7</a></span>
-<span class=normal><a href=#__codelineno-8-8> 8</a></span>
-<span class=normal><a href=#__codelineno-8-9> 9</a></span>
-<span class=normal><a href=#__codelineno-8-10>10</a></span>
-<span class=normal><a href=#__codelineno-8-11>11</a></span>
-<span class=normal><a href=#__codelineno-8-12>12</a></span>
-<span class=normal><a href=#__codelineno-8-13>13</a></span>
-<span class=normal><a href=#__codelineno-8-14>14</a></span>
-<span class=normal><a href=#__codelineno-8-15>15</a></span>
-<span class=normal><a href=#__codelineno-8-16>16</a></span>
-<span class=normal><a href=#__codelineno-8-17>17</a></span>
-<span class=normal><a href=#__codelineno-8-18>18</a></span>
-<span class=normal><a href=#__codelineno-8-19>19</a></span>
-<span class=normal><a href=#__codelineno-8-20>20</a></span>
-<span class=normal><a href=#__codelineno-8-21>21</a></span>
-<span class=normal><a href=#__codelineno-8-22>22</a></span>
-<span class=normal><a href=#__codelineno-8-23>23</a></span>
-<span class=normal><a href=#__codelineno-8-24>24</a></span>
-<span class=normal><a href=#__codelineno-8-25>25</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a>高可用架构设计：
-</span><span id=__span-8-2><a id=__codelineno-8-2 name=__codelineno-8-2></a>
-</span><span id=__span-8-3><a id=__codelineno-8-3 name=__codelineno-8-3></a>                    ┌─────────────────┐
-</span><span id=__span-8-4><a id=__codelineno-8-4 name=__codelineno-8-4></a>                    │   负载均衡 LB    │
-</span><span id=__span-8-5><a id=__codelineno-8-5 name=__codelineno-8-5></a>                    └────────┬────────┘
-</span><span id=__span-8-6><a id=__codelineno-8-6 name=__codelineno-8-6></a>                             │
-</span><span id=__span-8-7><a id=__codelineno-8-7 name=__codelineno-8-7></a>              ┌──────────────┼──────────────┐
-</span><span id=__span-8-8><a id=__codelineno-8-8 name=__codelineno-8-8></a>              ↓              ↓              ↓
-</span><span id=__span-8-9><a id=__codelineno-8-9 name=__codelineno-8-9></a>        ┌─────────┐    ┌─────────┐    ┌─────────┐
-</span><span id=__span-8-10><a id=__codelineno-8-10 name=__codelineno-8-10></a>        │ 服务节点1 │    │ 服务节点2 │    │ 服务节点3 │
-</span><span id=__span-8-11><a id=__codelineno-8-11 name=__codelineno-8-11></a>        └────┬────┘    └────┬────┘    └────┬────┘
-</span><span id=__span-8-12><a id=__codelineno-8-12 name=__codelineno-8-12></a>             │              │              │
-</span><span id=__span-8-13><a id=__codelineno-8-13 name=__codelineno-8-13></a>              └──────────────┼──────────────┘
-</span><span id=__span-8-14><a id=__codelineno-8-14 name=__codelineno-8-14></a>                             │
-</span><span id=__span-8-15><a id=__codelineno-8-15 name=__codelineno-8-15></a>              ┌──────────────┼──────────────┐
-</span><span id=__span-8-16><a id=__codelineno-8-16 name=__codelineno-8-16></a>              ↓              ↓              ↓
-</span><span id=__span-8-17><a id=__codelineno-8-17 name=__codelineno-8-17></a>        ┌─────────┐    ┌─────────┐    ┌─────────┐
-</span><span id=__span-8-18><a id=__codelineno-8-18 name=__codelineno-8-18></a>        │ 数据库主 │ ←→ │ 数据库从1│    │ 数据库从2│
-</span><span id=__span-8-19><a id=__codelineno-8-19 name=__codelineno-8-19></a>        └─────────┘    └─────────┘    └─────────┘
-</span><span id=__span-8-20><a id=__codelineno-8-20 name=__codelineno-8-20></a>
-</span><span id=__span-8-21><a id=__codelineno-8-21 name=__codelineno-8-21></a>容灾策略：
-</span><span id=__span-8-22><a id=__codelineno-8-22 name=__codelineno-8-22></a>- 多机房部署
-</span><span id=__span-8-23><a id=__codelineno-8-23 name=__codelineno-8-23></a>- 数据主从同步
-</span><span id=__span-8-24><a id=__codelineno-8-24 name=__codelineno-8-24></a>- 故障自动切换
-</span><span id=__span-8-25><a id=__codelineno-8-25 name=__codelineno-8-25></a>- 灰度发布
-</span></code></pre></div></td></tr></table></div> <h3 id=54>5.4 支付系统的安全架构<a class=headerlink href=#54 title="Permanent link">&para;</a></h3> <p>支付系统面临多种安全威胁，需要建立多层防御体系：</p> <pre class=mermaid><code>graph TB
+    E --&gt; E1[最终一致性&lt;br/&gt;依赖消息队列]</code></pre> <p><strong>TCC模式详解：</strong></p> <p>TCC（Try-Confirm-Cancel）是一种柔性事务方案：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-7-1>以转账场景为例：
+</span><span id=__span-7-2>
+</span><span id=__span-7-3>Try阶段（尝试）
+</span><span id=__span-7-4>- 检查账户A余额是否充足
+</span><span id=__span-7-5>- 冻结账户A 100元
+</span><span id=__span-7-6>- 预增加账户B 100元（待确认）
+</span><span id=__span-7-7>
+</span><span id=__span-7-8>Confirm阶段（确认）
+</span><span id=__span-7-9>- 扣减账户A冻结的100元
+</span><span id=__span-7-10>- 将账户B预增的100元变为正常余额
+</span><span id=__span-7-11>
+</span><span id=__span-7-12>Cancel阶段（取消）
+</span><span id=__span-7-13>- 解冻账户A的100元
+</span><span id=__span-7-14>- 删除账户B的预增记录
+</span></code></pre></div> <p><strong>3. 高可用设计</strong></p> <p>支付系统对可用性要求极高，通常要求99.99%以上：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-8-1>高可用架构设计：
+</span><span id=__span-8-2>
+</span><span id=__span-8-3>                    ┌─────────────────┐
+</span><span id=__span-8-4>                    │   负载均衡 LB    │
+</span><span id=__span-8-5>                    └────────┬────────┘
+</span><span id=__span-8-6>                             │
+</span><span id=__span-8-7>              ┌──────────────┼──────────────┐
+</span><span id=__span-8-8>              ↓              ↓              ↓
+</span><span id=__span-8-9>        ┌─────────┐    ┌─────────┐    ┌─────────┐
+</span><span id=__span-8-10>        │ 服务节点1 │    │ 服务节点2 │    │ 服务节点3 │
+</span><span id=__span-8-11>        └────┬────┘    └────┬────┘    └────┬────┘
+</span><span id=__span-8-12>             │              │              │
+</span><span id=__span-8-13>              └──────────────┼──────────────┘
+</span><span id=__span-8-14>                             │
+</span><span id=__span-8-15>              ┌──────────────┼──────────────┐
+</span><span id=__span-8-16>              ↓              ↓              ↓
+</span><span id=__span-8-17>        ┌─────────┐    ┌─────────┐    ┌─────────┐
+</span><span id=__span-8-18>        │ 数据库主 │ ←→ │ 数据库从1│    │ 数据库从2│
+</span><span id=__span-8-19>        └─────────┘    └─────────┘    └─────────┘
+</span><span id=__span-8-20>
+</span><span id=__span-8-21>容灾策略：
+</span><span id=__span-8-22>- 多机房部署
+</span><span id=__span-8-23>- 数据主从同步
+</span><span id=__span-8-24>- 故障自动切换
+</span><span id=__span-8-25>- 灰度发布
+</span></code></pre></div> <h3 id=54>5.4 支付系统的安全架构<a class=headerlink href=#54 title="Permanent link">&para;</a></h3> <p>支付系统面临多种安全威胁，需要建立多层防御体系：</p> <pre class=mermaid><code>graph TB
     subgraph 网络安全
         A1[DDoS防护]
         A2[WAF防火墙]
@@ -491,93 +373,51 @@
     I --&gt; J{验证通过?}
     J --&gt;|是| F
     J --&gt;|否| H
-    H --&gt; K[人工审核]</code></pre> <p><strong>风控特征示例：</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1> 1</a></span>
-<span class=normal><a href=#__codelineno-9-2> 2</a></span>
-<span class=normal><a href=#__codelineno-9-3> 3</a></span>
-<span class=normal><a href=#__codelineno-9-4> 4</a></span>
-<span class=normal><a href=#__codelineno-9-5> 5</a></span>
-<span class=normal><a href=#__codelineno-9-6> 6</a></span>
-<span class=normal><a href=#__codelineno-9-7> 7</a></span>
-<span class=normal><a href=#__codelineno-9-8> 8</a></span>
-<span class=normal><a href=#__codelineno-9-9> 9</a></span>
-<span class=normal><a href=#__codelineno-9-10>10</a></span>
-<span class=normal><a href=#__codelineno-9-11>11</a></span>
-<span class=normal><a href=#__codelineno-9-12>12</a></span>
-<span class=normal><a href=#__codelineno-9-13>13</a></span>
-<span class=normal><a href=#__codelineno-9-14>14</a></span>
-<span class=normal><a href=#__codelineno-9-15>15</a></span>
-<span class=normal><a href=#__codelineno-9-16>16</a></span>
-<span class=normal><a href=#__codelineno-9-17>17</a></span>
-<span class=normal><a href=#__codelineno-9-18>18</a></span>
-<span class=normal><a href=#__codelineno-9-19>19</a></span>
-<span class=normal><a href=#__codelineno-9-20>20</a></span>
-<span class=normal><a href=#__codelineno-9-21>21</a></span>
-<span class=normal><a href=#__codelineno-9-22>22</a></span>
-<span class=normal><a href=#__codelineno-9-23>23</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a>用户特征：
-</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a>- 注册时长：365天
-</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a>- 历史交易次数：128次
-</span><span id=__span-9-4><a id=__codelineno-9-4 name=__codelineno-9-4></a>- 历史交易金额：52,300元
-</span><span id=__span-9-5><a id=__codelineno-9-5 name=__codelineno-9-5></a>- 账户等级：金卡会员
-</span><span id=__span-9-6><a id=__codelineno-9-6 name=__codelineno-9-6></a>
-</span><span id=__span-9-7><a id=__codelineno-9-7 name=__codelineno-9-7></a>设备特征：
-</span><span id=__span-9-8><a id=__codelineno-9-8 name=__codelineno-9-8></a>- 设备指纹：a1b2c3d4e5f6
-</span><span id=__span-9-9><a id=__codelineno-9-9 name=__codelineno-9-9></a>- 常用设备：是
-</span><span id=__span-9-10><a id=__codelineno-9-10 name=__codelineno-9-10></a>- Root/越狱：否
-</span><span id=__span-9-11><a id=__codelineno-9-11 name=__codelineno-9-11></a>- 模拟器：否
-</span><span id=__span-9-12><a id=__codelineno-9-12 name=__codelineno-9-12></a>
-</span><span id=__span-9-13><a id=__codelineno-9-13 name=__codelineno-9-13></a>交易特征：
-</span><span id=__span-9-14><a id=__codelineno-9-14 name=__codelineno-9-14></a>- 交易金额：5,000元
-</span><span id=__span-9-15><a id=__codelineno-9-15 name=__codelineno-9-15></a>- 交易时间：14:30（工作日）
-</span><span id=__span-9-16><a id=__codelineno-9-16 name=__codelineno-9-16></a>- 收款方：新收款人
-</span><span id=__span-9-17><a id=__codelineno-9-17 name=__codelineno-9-17></a>- 交易地点：常用城市
-</span><span id=__span-9-18><a id=__codelineno-9-18 name=__codelineno-9-18></a>
-</span><span id=__span-9-19><a id=__codelineno-9-19 name=__codelineno-9-19></a>行为特征：
-</span><span id=__span-9-20><a id=__codelineno-9-20 name=__codelineno-9-20></a>- 操作间隔：正常
-</span><span id=__span-9-21><a id=__codelineno-9-21 name=__codelineno-9-21></a>- 输入速度：正常
-</span><span id=__span-9-22><a id=__codelineno-9-22 name=__codelineno-9-22></a>- 网络环境：WiFi
-</span><span id=__span-9-23><a id=__codelineno-9-23 name=__codelineno-9-23></a>- IP归属地：与常用地址一致
-</span></code></pre></div></td></tr></table></div> <h3 id=63>6.3 风控规则示例<a class=headerlink href=#63 title="Permanent link">&para;</a></h3> <p>风控系统使用多种规则来判断风险：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1> 1</a></span>
-<span class=normal><a href=#__codelineno-10-2> 2</a></span>
-<span class=normal><a href=#__codelineno-10-3> 3</a></span>
-<span class=normal><a href=#__codelineno-10-4> 4</a></span>
-<span class=normal><a href=#__codelineno-10-5> 5</a></span>
-<span class=normal><a href=#__codelineno-10-6> 6</a></span>
-<span class=normal><a href=#__codelineno-10-7> 7</a></span>
-<span class=normal><a href=#__codelineno-10-8> 8</a></span>
-<span class=normal><a href=#__codelineno-10-9> 9</a></span>
-<span class=normal><a href=#__codelineno-10-10>10</a></span>
-<span class=normal><a href=#__codelineno-10-11>11</a></span>
-<span class=normal><a href=#__codelineno-10-12>12</a></span>
-<span class=normal><a href=#__codelineno-10-13>13</a></span>
-<span class=normal><a href=#__codelineno-10-14>14</a></span>
-<span class=normal><a href=#__codelineno-10-15>15</a></span>
-<span class=normal><a href=#__codelineno-10-16>16</a></span>
-<span class=normal><a href=#__codelineno-10-17>17</a></span>
-<span class=normal><a href=#__codelineno-10-18>18</a></span>
-<span class=normal><a href=#__codelineno-10-19>19</a></span>
-<span class=normal><a href=#__codelineno-10-20>20</a></span>
-<span class=normal><a href=#__codelineno-10-21>21</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a>规则1：大额交易验证
-</span><span id=__span-10-2><a id=__codelineno-10-2 name=__codelineno-10-2></a>IF 交易金额 &gt; 5000元
-</span><span id=__span-10-3><a id=__codelineno-10-3 name=__codelineno-10-3></a>THEN 要求短信验证码
-</span><span id=__span-10-4><a id=__codelineno-10-4 name=__codelineno-10-4></a>
-</span><span id=__span-10-5><a id=__codelineno-10-5 name=__codelineno-10-5></a>规则2：异地登录预警
-</span><span id=__span-10-6><a id=__codelineno-10-6 name=__codelineno-10-6></a>IF 登录地点 != 常用地点
-</span><span id=__span-10-7><a id=__codelineno-10-7 name=__codelineno-10-7></a>AND 登录地点 != 上次登录地点
-</span><span id=__span-10-8><a id=__codelineno-10-8 name=__codelineno-10-8></a>THEN 触发安全提醒
-</span><span id=__span-10-9><a id=__codelineno-10-9 name=__codelineno-10-9></a>
-</span><span id=__span-10-10><a id=__codelineno-10-10 name=__codelineno-10-10></a>规则3：新设备限制
-</span><span id=__span-10-11><a id=__codelineno-10-11 name=__codelineno-10-11></a>IF 设备是新设备
-</span><span id=__span-10-12><a id=__codelineno-10-12 name=__codelineno-10-12></a>AND 交易金额 &gt; 1000元
-</span><span id=__span-10-13><a id=__codelineno-10-13 name=__codelineno-10-13></a>THEN 要求人脸验证
-</span><span id=__span-10-14><a id=__codelineno-10-14 name=__codelineno-10-14></a>
-</span><span id=__span-10-15><a id=__codelineno-10-15 name=__codelineno-10-15></a>规则4：频率限制
-</span><span id=__span-10-16><a id=__codelineno-10-16 name=__codelineno-10-16></a>IF 1小时内交易次数 &gt; 5次
-</span><span id=__span-10-17><a id=__codelineno-10-17 name=__codelineno-10-17></a>THEN 拦截并触发人工审核
-</span><span id=__span-10-18><a id=__codelineno-10-18 name=__codelineno-10-18></a>
-</span><span id=__span-10-19><a id=__codelineno-10-19 name=__codelineno-10-19></a>规则5：黑名单拦截
-</span><span id=__span-10-20><a id=__codelineno-10-20 name=__codelineno-10-20></a>IF 收款方在黑名单
-</span><span id=__span-10-21><a id=__codelineno-10-21 name=__codelineno-10-21></a>THEN 直接拦截
-</span></code></pre></div></td></tr></table></div> <h3 id=64>6.4 机器学习在风控中的应用<a class=headerlink href=#64 title="Permanent link">&para;</a></h3> <p>传统规则引擎存在局限性，机器学习可以更好地识别复杂模式：</p> <pre class=mermaid><code>graph TB
+    H --&gt; K[人工审核]</code></pre> <p><strong>风控特征示例：</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-9-1>用户特征：
+</span><span id=__span-9-2>- 注册时长：365天
+</span><span id=__span-9-3>- 历史交易次数：128次
+</span><span id=__span-9-4>- 历史交易金额：52,300元
+</span><span id=__span-9-5>- 账户等级：金卡会员
+</span><span id=__span-9-6>
+</span><span id=__span-9-7>设备特征：
+</span><span id=__span-9-8>- 设备指纹：a1b2c3d4e5f6
+</span><span id=__span-9-9>- 常用设备：是
+</span><span id=__span-9-10>- Root/越狱：否
+</span><span id=__span-9-11>- 模拟器：否
+</span><span id=__span-9-12>
+</span><span id=__span-9-13>交易特征：
+</span><span id=__span-9-14>- 交易金额：5,000元
+</span><span id=__span-9-15>- 交易时间：14:30（工作日）
+</span><span id=__span-9-16>- 收款方：新收款人
+</span><span id=__span-9-17>- 交易地点：常用城市
+</span><span id=__span-9-18>
+</span><span id=__span-9-19>行为特征：
+</span><span id=__span-9-20>- 操作间隔：正常
+</span><span id=__span-9-21>- 输入速度：正常
+</span><span id=__span-9-22>- 网络环境：WiFi
+</span><span id=__span-9-23>- IP归属地：与常用地址一致
+</span></code></pre></div> <h3 id=63>6.3 风控规则示例<a class=headerlink href=#63 title="Permanent link">&para;</a></h3> <p>风控系统使用多种规则来判断风险：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-10-1>规则1：大额交易验证
+</span><span id=__span-10-2>IF 交易金额 &gt; 5000元
+</span><span id=__span-10-3>THEN 要求短信验证码
+</span><span id=__span-10-4>
+</span><span id=__span-10-5>规则2：异地登录预警
+</span><span id=__span-10-6>IF 登录地点 != 常用地点
+</span><span id=__span-10-7>AND 登录地点 != 上次登录地点
+</span><span id=__span-10-8>THEN 触发安全提醒
+</span><span id=__span-10-9>
+</span><span id=__span-10-10>规则3：新设备限制
+</span><span id=__span-10-11>IF 设备是新设备
+</span><span id=__span-10-12>AND 交易金额 &gt; 1000元
+</span><span id=__span-10-13>THEN 要求人脸验证
+</span><span id=__span-10-14>
+</span><span id=__span-10-15>规则4：频率限制
+</span><span id=__span-10-16>IF 1小时内交易次数 &gt; 5次
+</span><span id=__span-10-17>THEN 拦截并触发人工审核
+</span><span id=__span-10-18>
+</span><span id=__span-10-19>规则5：黑名单拦截
+</span><span id=__span-10-20>IF 收款方在黑名单
+</span><span id=__span-10-21>THEN 直接拦截
+</span></code></pre></div> <h3 id=64>6.4 机器学习在风控中的应用<a class=headerlink href=#64 title="Permanent link">&para;</a></h3> <p>传统规则引擎存在局限性，机器学习可以更好地识别复杂模式：</p> <pre class=mermaid><code>graph TB
     A[历史交易数据] --&gt; B[特征工程]
     B --&gt; C[模型训练]
     C --&gt; D[风控模型]
@@ -602,21 +442,15 @@
         C1[资金划拨]
         C2[账户余额更新]
         C3[结算对账]
-    end</code></pre> <p><strong>举例说明：</strong></p> <blockquote> <p>小明用支付宝（绑定招行卡）在淘宝商家（工行账户）购买了一台手机5000元。</p> </blockquote> <p><strong>清算过程：</strong> 1. 支付宝记录：小明应付5000元，淘宝商家应收5000元 2. 支付宝通知网联清算信息 3. 网联计算：招行应付5000元，工行应收5000元 4. 网联通知招行和工行确认</p> <p><strong>结算过程：</strong> 1. 招行从小明账户扣除5000元 2. 招行将5000元划转到其在央行的清算账户 3. 央行将5000元从招行清算账户划转到工行清算账户 4. 工行将5000元记入淘宝商家账户</p> <h3 id=72>7.2 批量清算与实时清算<a class=headerlink href=#72 title="Permanent link">&para;</a></h3> <p>清算有两种模式：</p> <p><strong>批量清算：</strong> 积累一定时间或数量的交易后，统一处理</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1>1</a></span>
-<span class=normal><a href=#__codelineno-11-2>2</a></span>
-<span class=normal><a href=#__codelineno-11-3>3</a></span>
-<span class=normal><a href=#__codelineno-11-4>4</a></span>
-<span class=normal><a href=#__codelineno-11-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a>批量清算时间窗口：
-</span><span id=__span-11-2><a id=__codelineno-11-2 name=__codelineno-11-2></a>T日 23:00  收集所有交易
-</span><span id=__span-11-3><a id=__codelineno-11-3 name=__codelineno-11-3></a>T日 23:30  进行清算计算
-</span><span id=__span-11-4><a id=__codelineno-11-4 name=__codelineno-11-4></a>T+1日 00:00  生成清算文件
-</span><span id=__span-11-5><a id=__codelineno-11-5 name=__codelineno-11-5></a>T+1日 01:00  发送给参与机构
-</span></code></pre></div></td></tr></table></div> <p><strong>实时清算：</strong> 每笔交易实时处理</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1>1</a></span>
-<span class=normal><a href=#__codelineno-12-2>2</a></span>
-<span class=normal><a href=#__codelineno-12-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><a id=__codelineno-12-1 name=__codelineno-12-1></a>实时清算流程：
-</span><span id=__span-12-2><a id=__codelineno-12-2 name=__codelineno-12-2></a>交易发生 → 立即清算 → 即时结算
-</span><span id=__span-12-3><a id=__codelineno-12-3 name=__codelineno-12-3></a>（适用于大额支付、紧急支付）
-</span></code></pre></div></td></tr></table></div> <h3 id=73>7.3 对账系统<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <p>对账是确保各方数据一致的关键环节：</p> <pre class=mermaid><code>graph TB
+    end</code></pre> <p><strong>举例说明：</strong></p> <blockquote> <p>小明用支付宝（绑定招行卡）在淘宝商家（工行账户）购买了一台手机5000元。</p> </blockquote> <p><strong>清算过程：</strong> 1. 支付宝记录：小明应付5000元，淘宝商家应收5000元 2. 支付宝通知网联清算信息 3. 网联计算：招行应付5000元，工行应收5000元 4. 网联通知招行和工行确认</p> <p><strong>结算过程：</strong> 1. 招行从小明账户扣除5000元 2. 招行将5000元划转到其在央行的清算账户 3. 央行将5000元从招行清算账户划转到工行清算账户 4. 工行将5000元记入淘宝商家账户</p> <h3 id=72>7.2 批量清算与实时清算<a class=headerlink href=#72 title="Permanent link">&para;</a></h3> <p>清算有两种模式：</p> <p><strong>批量清算：</strong> 积累一定时间或数量的交易后，统一处理</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-11-1>批量清算时间窗口：
+</span><span id=__span-11-2>T日 23:00  收集所有交易
+</span><span id=__span-11-3>T日 23:30  进行清算计算
+</span><span id=__span-11-4>T+1日 00:00  生成清算文件
+</span><span id=__span-11-5>T+1日 01:00  发送给参与机构
+</span></code></pre></div> <p><strong>实时清算：</strong> 每笔交易实时处理</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-12-1>实时清算流程：
+</span><span id=__span-12-2>交易发生 → 立即清算 → 即时结算
+</span><span id=__span-12-3>（适用于大额支付、紧急支付）
+</span></code></pre></div> <h3 id=73>7.3 对账系统<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <p>对账是确保各方数据一致的关键环节：</p> <pre class=mermaid><code>graph TB
     subgraph 内部对账
         A1[业务系统数据]
         A2[支付系统数据]
@@ -635,30 +469,19 @@
         C1 -.-&gt;|核对| C2
     end
 
-    A1 --&gt; A2 --&gt; B1 --&gt; B2 --&gt; C1 --&gt; C2</code></pre> <p><strong>对账差异处理：</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1> 1</a></span>
-<span class=normal><a href=#__codelineno-13-2> 2</a></span>
-<span class=normal><a href=#__codelineno-13-3> 3</a></span>
-<span class=normal><a href=#__codelineno-13-4> 4</a></span>
-<span class=normal><a href=#__codelineno-13-5> 5</a></span>
-<span class=normal><a href=#__codelineno-13-6> 6</a></span>
-<span class=normal><a href=#__codelineno-13-7> 7</a></span>
-<span class=normal><a href=#__codelineno-13-8> 8</a></span>
-<span class=normal><a href=#__codelineno-13-9> 9</a></span>
-<span class=normal><a href=#__codelineno-13-10>10</a></span>
-<span class=normal><a href=#__codelineno-13-11>11</a></span>
-<span class=normal><a href=#__codelineno-13-12>12</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><a id=__codelineno-13-1 name=__codelineno-13-1></a>对账差异类型：
-</span><span id=__span-13-2><a id=__codelineno-13-2 name=__codelineno-13-2></a>1. 长款：我方有记录，对方无记录
-</span><span id=__span-13-3><a id=__codelineno-13-3 name=__codelineno-13-3></a>   - 可能原因：对方处理失败、数据丢失
-</span><span id=__span-13-4><a id=__codelineno-13-4 name=__codelineno-13-4></a>   - 处理：联系对方核实，补录或冲正
-</span><span id=__span-13-5><a id=__codelineno-13-5 name=__codelineno-13-5></a>
-</span><span id=__span-13-6><a id=__codelineno-13-6 name=__codelineno-13-6></a>2. 短款：我方无记录，对方有记录
-</span><span id=__span-13-7><a id=__codelineno-13-7 name=__codelineno-13-7></a>   - 可能原因：我方处理失败、数据丢失
-</span><span id=__span-13-8><a id=__codelineno-13-8 name=__codelineno-13-8></a>   - 处理：核实交易真实性，补录或退回
-</span><span id=__span-13-9><a id=__codelineno-13-9 name=__codelineno-13-9></a>
-</span><span id=__span-13-10><a id=__codelineno-13-10 name=__codelineno-13-10></a>3. 金额不一致：双方记录金额不同
-</span><span id=__span-13-11><a id=__codelineno-13-11 name=__codelineno-13-11></a>   - 可能原因：计算错误、费率差异
-</span><span id=__span-13-12><a id=__codelineno-13-12 name=__codelineno-13-12></a>   - 处理：逐笔核实，调整差异
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=_13>八、新兴支付技术：面向未来<a class=headerlink href=#_13 title="Permanent link">&para;</a></h2> <h3 id=81-cbdc>8.1 数字货币：央行数字货币（CBDC）<a class=headerlink href=#81-cbdc title="Permanent link">&para;</a></h3> <p>央行数字货币（Central Bank Digital Currency）是由央行发行的数字化法币。</p> <p><strong>数字人民币的特点：</strong></p> <pre class=mermaid><code>graph TB
+    A1 --&gt; A2 --&gt; B1 --&gt; B2 --&gt; C1 --&gt; C2</code></pre> <p><strong>对账差异处理：</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-13-1>对账差异类型：
+</span><span id=__span-13-2>1. 长款：我方有记录，对方无记录
+</span><span id=__span-13-3>   - 可能原因：对方处理失败、数据丢失
+</span><span id=__span-13-4>   - 处理：联系对方核实，补录或冲正
+</span><span id=__span-13-5>
+</span><span id=__span-13-6>2. 短款：我方无记录，对方有记录
+</span><span id=__span-13-7>   - 可能原因：我方处理失败、数据丢失
+</span><span id=__span-13-8>   - 处理：核实交易真实性，补录或退回
+</span><span id=__span-13-9>
+</span><span id=__span-13-10>3. 金额不一致：双方记录金额不同
+</span><span id=__span-13-11>   - 可能原因：计算错误、费率差异
+</span><span id=__span-13-12>   - 处理：逐笔核实，调整差异
+</span></code></pre></div> <hr> <h2 id=_13>八、新兴支付技术：面向未来<a class=headerlink href=#_13 title="Permanent link">&para;</a></h2> <h3 id=81-cbdc>8.1 数字货币：央行数字货币（CBDC）<a class=headerlink href=#81-cbdc title="Permanent link">&para;</a></h3> <p>央行数字货币（Central Bank Digital Currency）是由央行发行的数字化法币。</p> <p><strong>数字人民币的特点：</strong></p> <pre class=mermaid><code>graph TB
     A[数字人民币] --&gt; B[法偿性]
     A --&gt; C[双层运营体系]
     A --&gt; D[可控匿名]
@@ -685,26 +508,17 @@
 
     Note over 商户,央行数字货币系统: 兑回
     商户-&gt;&gt;央行数字货币系统: 申请兑回
-    央行数字货币系统-&gt;&gt;商户银行账户: 存入资金</code></pre> <h3 id=82>8.2 跨境支付：走向全球化<a class=headerlink href=#82 title="Permanent link">&para;</a></h3> <p>跨境支付面临更多挑战：多币种、多时区、多法规。</p> <p><strong>传统跨境支付的问题：</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
-<span class=normal><a href=#__codelineno-14-2> 2</a></span>
-<span class=normal><a href=#__codelineno-14-3> 3</a></span>
-<span class=normal><a href=#__codelineno-14-4> 4</a></span>
-<span class=normal><a href=#__codelineno-14-5> 5</a></span>
-<span class=normal><a href=#__codelineno-14-6> 6</a></span>
-<span class=normal><a href=#__codelineno-14-7> 7</a></span>
-<span class=normal><a href=#__codelineno-14-8> 8</a></span>
-<span class=normal><a href=#__codelineno-14-9> 9</a></span>
-<span class=normal><a href=#__codelineno-14-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><a id=__codelineno-14-1 name=__codelineno-14-1></a>传统SWIFT跨境支付流程：
-</span><span id=__span-14-2><a id=__codelineno-14-2 name=__codelineno-14-2></a>
-</span><span id=__span-14-3><a id=__codelineno-14-3 name=__codelineno-14-3></a>汇款人 → 汇款银行 → SWIFT → 中间银行1
-</span><span id=__span-14-4><a id=__codelineno-14-4 name=__codelineno-14-4></a>→ 中间银行2 → 收款银行 → 收款人
-</span><span id=__span-14-5><a id=__codelineno-14-5 name=__codelineno-14-5></a>
-</span><span id=__span-14-6><a id=__codelineno-14-6 name=__codelineno-14-6></a>问题：
-</span><span id=__span-14-7><a id=__codelineno-14-7 name=__codelineno-14-7></a>- 链路长，时效差（1-5天）
-</span><span id=__span-14-8><a id=__codelineno-14-8 name=__codelineno-14-8></a>- 费用高（每笔15-50美元）
-</span><span id=__span-14-9><a id=__codelineno-14-9 name=__codelineno-14-9></a>- 信息不透明
-</span><span id=__span-14-10><a id=__codelineno-14-10 name=__codelineno-14-10></a>- 汇率损失
-</span></code></pre></div></td></tr></table></div> <p><strong>新兴跨境支付技术：</strong></p> <pre class=mermaid><code>graph TB
+    央行数字货币系统-&gt;&gt;商户银行账户: 存入资金</code></pre> <h3 id=82>8.2 跨境支付：走向全球化<a class=headerlink href=#82 title="Permanent link">&para;</a></h3> <p>跨境支付面临更多挑战：多币种、多时区、多法规。</p> <p><strong>传统跨境支付的问题：</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-14-1>传统SWIFT跨境支付流程：
+</span><span id=__span-14-2>
+</span><span id=__span-14-3>汇款人 → 汇款银行 → SWIFT → 中间银行1
+</span><span id=__span-14-4>→ 中间银行2 → 收款银行 → 收款人
+</span><span id=__span-14-5>
+</span><span id=__span-14-6>问题：
+</span><span id=__span-14-7>- 链路长，时效差（1-5天）
+</span><span id=__span-14-8>- 费用高（每笔15-50美元）
+</span><span id=__span-14-9>- 信息不透明
+</span><span id=__span-14-10>- 汇率损失
+</span></code></pre></div> <p><strong>新兴跨境支付技术：</strong></p> <pre class=mermaid><code>graph TB
     A[跨境支付创新] --&gt; B[区块链跨境支付]
     A --&gt; C[央行数字货币桥]
     A --&gt; D[即时跨境支付网络]
@@ -715,20 +529,14 @@
 
     B1 --&gt; E[成本降低50%以上&lt;br/&gt;时效提升至分钟级]
     C1 --&gt; F[预计成本降低80%&lt;br/&gt;时效提升至秒级]
-    D1 --&gt; G[已有ISO 20022标准&lt;br/&gt;逐步推广中]</code></pre> <p><strong>多边央行数字货币桥（mBridge）：</strong></p> <p>这是一个由中国人民银行、香港金管局、泰国央行、阿联酋央行等共同参与的项目，旨在实现跨境数字货币支付：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1>1</a></span>
-<span class=normal><a href=#__codelineno-15-2>2</a></span>
-<span class=normal><a href=#__codelineno-15-3>3</a></span>
-<span class=normal><a href=#__codelineno-15-4>4</a></span>
-<span class=normal><a href=#__codelineno-15-5>5</a></span>
-<span class=normal><a href=#__codelineno-15-6>6</a></span>
-<span class=normal><a href=#__codelineno-15-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><a id=__codelineno-15-1 name=__codelineno-15-1></a>传统模式：
-</span><span id=__span-15-2><a id=__codelineno-15-2 name=__codelineno-15-2></a>A国银行 → A国央行 → 代理行 → SWIFT → 代理行 → B国央行 → B国银行
-</span><span id=__span-15-3><a id=__codelineno-15-3 name=__codelineno-15-3></a>（6个环节，T+1到T+5）
-</span><span id=__span-15-4><a id=__codelineno-15-4 name=__codelineno-15-4></a>
-</span><span id=__span-15-5><a id=__codelineno-15-5 name=__codelineno-15-5></a>mBridge模式：
-</span><span id=__span-15-6><a id=__codelineno-15-6 name=__codelineno-15-6></a>A国银行 → A国央行 → mBridge平台 → B国央行 → B国银行
-</span><span id=__span-15-7><a id=__codelineno-15-7 name=__codelineno-15-7></a>（4个环节，实时）
-</span></code></pre></div></td></tr></table></div> <h3 id=83-api>8.3 开放银行：银行服务的API化<a class=headerlink href=#83-api title="Permanent link">&para;</a></h3> <p>开放银行（Open Banking）理念是将银行的服务封装成API，开放给第三方开发者调用：</p> <pre class=mermaid><code>graph LR
+    D1 --&gt; G[已有ISO 20022标准&lt;br/&gt;逐步推广中]</code></pre> <p><strong>多边央行数字货币桥（mBridge）：</strong></p> <p>这是一个由中国人民银行、香港金管局、泰国央行、阿联酋央行等共同参与的项目，旨在实现跨境数字货币支付：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-15-1>传统模式：
+</span><span id=__span-15-2>A国银行 → A国央行 → 代理行 → SWIFT → 代理行 → B国央行 → B国银行
+</span><span id=__span-15-3>（6个环节，T+1到T+5）
+</span><span id=__span-15-4>
+</span><span id=__span-15-5>mBridge模式：
+</span><span id=__span-15-6>A国银行 → A国央行 → mBridge平台 → B国央行 → B国银行
+</span><span id=__span-15-7>（4个环节，实时）
+</span></code></pre></div> <h3 id=83-api>8.3 开放银行：银行服务的API化<a class=headerlink href=#83-api title="Permanent link">&para;</a></h3> <p>开放银行（Open Banking）理念是将银行的服务封装成API，开放给第三方开发者调用：</p> <pre class=mermaid><code>graph LR
     subgraph 银行
         A1[账户服务]
         A2[支付服务]
@@ -746,56 +554,32 @@
     end
 
     A1 &amp; A2 &amp; A3 --&gt; B
-    B --&gt; C1 &amp; C2 &amp; C3</code></pre> <p><strong>开放银行API示例：</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1> 1</a></span>
-<span class=normal><a href=#__codelineno-16-2> 2</a></span>
-<span class=normal><a href=#__codelineno-16-3> 3</a></span>
-<span class=normal><a href=#__codelineno-16-4> 4</a></span>
-<span class=normal><a href=#__codelineno-16-5> 5</a></span>
-<span class=normal><a href=#__codelineno-16-6> 6</a></span>
-<span class=normal><a href=#__codelineno-16-7> 7</a></span>
-<span class=normal><a href=#__codelineno-16-8> 8</a></span>
-<span class=normal><a href=#__codelineno-16-9> 9</a></span>
-<span class=normal><a href=#__codelineno-16-10>10</a></span>
-<span class=normal><a href=#__codelineno-16-11>11</a></span>
-<span class=normal><a href=#__codelineno-16-12>12</a></span>
-<span class=normal><a href=#__codelineno-16-13>13</a></span>
-<span class=normal><a href=#__codelineno-16-14>14</a></span>
-<span class=normal><a href=#__codelineno-16-15>15</a></span>
-<span class=normal><a href=#__codelineno-16-16>16</a></span>
-<span class=normal><a href=#__codelineno-16-17>17</a></span>
-<span class=normal><a href=#__codelineno-16-18>18</a></span>
-<span class=normal><a href=#__codelineno-16-19>19</a></span>
-<span class=normal><a href=#__codelineno-16-20>20</a></span>
-<span class=normal><a href=#__codelineno-16-21>21</a></span>
-<span class=normal><a href=#__codelineno-16-22>22</a></span>
-<span class=normal><a href=#__codelineno-16-23>23</a></span>
-<span class=normal><a href=#__codelineno-16-24>24</a></span>
-<span class=normal><a href=#__codelineno-16-25>25</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><a id=__codelineno-16-1 name=__codelineno-16-1></a>获取账户余额
-</span><span id=__span-16-2><a id=__codelineno-16-2 name=__codelineno-16-2></a>GET /api/v1/accounts/{account_id}/balance
-</span><span id=__span-16-3><a id=__codelineno-16-3 name=__codelineno-16-3></a>Authorization: Bearer {access_token}
-</span><span id=__span-16-4><a id=__codelineno-16-4 name=__codelineno-16-4></a>
-</span><span id=__span-16-5><a id=__codelineno-16-5 name=__codelineno-16-5></a>Response:
-</span><span id=__span-16-6><a id=__codelineno-16-6 name=__codelineno-16-6></a>{
-</span><span id=__span-16-7><a id=__codelineno-16-7 name=__codelineno-16-7></a>  &quot;account_id&quot;: &quot;6225****5678&quot;,
-</span><span id=__span-16-8><a id=__codelineno-16-8 name=__codelineno-16-8></a>  &quot;currency&quot;: &quot;CNY&quot;,
-</span><span id=__span-16-9><a id=__codelineno-16-9 name=__codelineno-16-9></a>  &quot;available_balance&quot;: 10000.00,
-</span><span id=__span-16-10><a id=__codelineno-16-10 name=__codelineno-16-10></a>  &quot;current_balance&quot;: 10500.00,
-</span><span id=__span-16-11><a id=__codelineno-16-11 name=__codelineno-16-11></a>  &quot;frozen_amount&quot;: 500.00
-</span><span id=__span-16-12><a id=__codelineno-16-12 name=__codelineno-16-12></a>}
-</span><span id=__span-16-13><a id=__codelineno-16-13 name=__codelineno-16-13></a>
-</span><span id=__span-16-14><a id=__codelineno-16-14 name=__codelineno-16-14></a>发起转账
-</span><span id=__span-16-15><a id=__codelineno-16-15 name=__codelineno-16-15></a>POST /api/v1/transfers
-</span><span id=__span-16-16><a id=__codelineno-16-16 name=__codelineno-16-16></a>Authorization: Bearer {access_token}
-</span><span id=__span-16-17><a id=__codelineno-16-17 name=__codelineno-16-17></a>
-</span><span id=__span-16-18><a id=__codelineno-16-18 name=__codelineno-16-18></a>Request:
-</span><span id=__span-16-19><a id=__codelineno-16-19 name=__codelineno-16-19></a>{
-</span><span id=__span-16-20><a id=__codelineno-16-20 name=__codelineno-16-20></a>  &quot;from_account&quot;: &quot;6225****5678&quot;,
-</span><span id=__span-16-21><a id=__codelineno-16-21 name=__codelineno-16-21></a>  &quot;to_account&quot;: &quot;6228****1234&quot;,
-</span><span id=__span-16-22><a id=__codelineno-16-22 name=__codelineno-16-22></a>  &quot;amount&quot;: 1000.00,
-</span><span id=__span-16-23><a id=__codelineno-16-23 name=__codelineno-16-23></a>  &quot;currency&quot;: &quot;CNY&quot;,
-</span><span id=__span-16-24><a id=__codelineno-16-24 name=__codelineno-16-24></a>  &quot;purpose&quot;: &quot;还款&quot;
-</span><span id=__span-16-25><a id=__codelineno-16-25 name=__codelineno-16-25></a>}
-</span></code></pre></div></td></tr></table></div> <h3 id=84>8.4 嵌入式金融：支付无处不在<a class=headerlink href=#84 title="Permanent link">&para;</a></h3> <p>嵌入式金融是指将金融服务嵌入到非金融场景中：</p> <pre class=mermaid><code>mindmap
+    B --&gt; C1 &amp; C2 &amp; C3</code></pre> <p><strong>开放银行API示例：</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-16-1>获取账户余额
+</span><span id=__span-16-2>GET /api/v1/accounts/{account_id}/balance
+</span><span id=__span-16-3>Authorization: Bearer {access_token}
+</span><span id=__span-16-4>
+</span><span id=__span-16-5>Response:
+</span><span id=__span-16-6>{
+</span><span id=__span-16-7>  &quot;account_id&quot;: &quot;6225****5678&quot;,
+</span><span id=__span-16-8>  &quot;currency&quot;: &quot;CNY&quot;,
+</span><span id=__span-16-9>  &quot;available_balance&quot;: 10000.00,
+</span><span id=__span-16-10>  &quot;current_balance&quot;: 10500.00,
+</span><span id=__span-16-11>  &quot;frozen_amount&quot;: 500.00
+</span><span id=__span-16-12>}
+</span><span id=__span-16-13>
+</span><span id=__span-16-14>发起转账
+</span><span id=__span-16-15>POST /api/v1/transfers
+</span><span id=__span-16-16>Authorization: Bearer {access_token}
+</span><span id=__span-16-17>
+</span><span id=__span-16-18>Request:
+</span><span id=__span-16-19>{
+</span><span id=__span-16-20>  &quot;from_account&quot;: &quot;6225****5678&quot;,
+</span><span id=__span-16-21>  &quot;to_account&quot;: &quot;6228****1234&quot;,
+</span><span id=__span-16-22>  &quot;amount&quot;: 1000.00,
+</span><span id=__span-16-23>  &quot;currency&quot;: &quot;CNY&quot;,
+</span><span id=__span-16-24>  &quot;purpose&quot;: &quot;还款&quot;
+</span><span id=__span-16-25>}
+</span></code></pre></div> <h3 id=84>8.4 嵌入式金融：支付无处不在<a class=headerlink href=#84 title="Permanent link">&para;</a></h3> <p>嵌入式金融是指将金融服务嵌入到非金融场景中：</p> <pre class=mermaid><code>mindmap
   root((嵌入式金融))
     电商场景
       分期付款
@@ -812,36 +596,22 @@
     企业场景
       SaaS内嵌支付
       供应链金融
-      工资代发</code></pre> <p><strong>无感支付示例：</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1> 1</a></span>
-<span class=normal><a href=#__codelineno-17-2> 2</a></span>
-<span class=normal><a href=#__codelineno-17-3> 3</a></span>
-<span class=normal><a href=#__codelineno-17-4> 4</a></span>
-<span class=normal><a href=#__codelineno-17-5> 5</a></span>
-<span class=normal><a href=#__codelineno-17-6> 6</a></span>
-<span class=normal><a href=#__codelineno-17-7> 7</a></span>
-<span class=normal><a href=#__codelineno-17-8> 8</a></span>
-<span class=normal><a href=#__codelineno-17-9> 9</a></span>
-<span class=normal><a href=#__codelineno-17-10>10</a></span>
-<span class=normal><a href=#__codelineno-17-11>11</a></span>
-<span class=normal><a href=#__codelineno-17-12>12</a></span>
-<span class=normal><a href=#__codelineno-17-13>13</a></span>
-<span class=normal><a href=#__codelineno-17-14>14</a></span>
-<span class=normal><a href=#__codelineno-17-15>15</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><a id=__codelineno-17-1 name=__codelineno-17-1></a>高速公路ETC支付流程：
-</span><span id=__span-17-2><a id=__codelineno-17-2 name=__codelineno-17-2></a>
-</span><span id=__span-17-3><a id=__codelineno-17-3 name=__codelineno-17-3></a>1. 车辆进入高速
-</span><span id=__span-17-4><a id=__codelineno-17-4 name=__codelineno-17-4></a>   - ETC天线识别OBU设备
-</span><span id=__span-17-5><a id=__codelineno-17-5 name=__codelineno-17-5></a>   - 记录入口信息
-</span><span id=__span-17-6><a id=__codelineno-17-6 name=__codelineno-17-6></a>
-</span><span id=__span-17-7><a id=__codelineno-17-7 name=__codelineno-17-7></a>2. 车辆离开高速
-</span><span id=__span-17-8><a id=__codelineno-17-8 name=__codelineno-17-8></a>   - ETC天线再次识别
-</span><span id=__span-17-9><a id=__codelineno-17-9 name=__codelineno-17-9></a>   - 计算通行费
-</span><span id=__span-17-10><a id=__codelineno-17-10 name=__codelineno-17-10></a>
-</span><span id=__span-17-11><a id=__codelineno-17-11 name=__codelineno-17-11></a>3. 自动扣费
-</span><span id=__span-17-12><a id=__codelineno-17-12 name=__codelineno-17-12></a>   - 从绑定账户自动扣款
-</span><span id=__span-17-13><a id=__codelineno-17-13 name=__codelineno-17-13></a>   - 推送扣费通知
-</span><span id=__span-17-14><a id=__codelineno-17-14 name=__codelineno-17-14></a>
-</span><span id=__span-17-15><a id=__codelineno-17-15 name=__codelineno-17-15></a>全程无需停车，无需操作，真正&quot;无感&quot;
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=_14>九、支付合规：不可逾越的红线<a class=headerlink href=#_14 title="Permanent link">&para;</a></h2> <h3 id=91>9.1 支付行业的主要法规<a class=headerlink href=#91 title="Permanent link">&para;</a></h3> <p>在中国从事支付业务，必须严格遵守相关法规：</p> <pre class=mermaid><code>timeline
+      工资代发</code></pre> <p><strong>无感支付示例：</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-17-1>高速公路ETC支付流程：
+</span><span id=__span-17-2>
+</span><span id=__span-17-3>1. 车辆进入高速
+</span><span id=__span-17-4>   - ETC天线识别OBU设备
+</span><span id=__span-17-5>   - 记录入口信息
+</span><span id=__span-17-6>
+</span><span id=__span-17-7>2. 车辆离开高速
+</span><span id=__span-17-8>   - ETC天线再次识别
+</span><span id=__span-17-9>   - 计算通行费
+</span><span id=__span-17-10>
+</span><span id=__span-17-11>3. 自动扣费
+</span><span id=__span-17-12>   - 从绑定账户自动扣款
+</span><span id=__span-17-13>   - 推送扣费通知
+</span><span id=__span-17-14>
+</span><span id=__span-17-15>全程无需停车，无需操作，真正&quot;无感&quot;
+</span></code></pre></div> <hr> <h2 id=_14>九、支付合规：不可逾越的红线<a class=headerlink href=#_14 title="Permanent link">&para;</a></h2> <h3 id=91>9.1 支付行业的主要法规<a class=headerlink href=#91 title="Permanent link">&para;</a></h3> <p>在中国从事支付业务，必须严格遵守相关法规：</p> <pre class=mermaid><code>timeline
     title 中国支付行业法规演进
     2010 : 非金融机构支付服务管理办法
          : 支付业务许可证制度建立
@@ -854,81 +624,45 @@
     2020 : 电子商务法实施
          : 规范电商支付
     2021 : 非银行支付机构条例
-         : 分类监管，重罚违规</code></pre> <h3 id=92>9.2 支付牌照<a class=headerlink href=#92 title="Permanent link">&para;</a></h3> <p>在中国，从事支付业务必须获得支付牌照：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-18-1> 1</a></span>
-<span class=normal><a href=#__codelineno-18-2> 2</a></span>
-<span class=normal><a href=#__codelineno-18-3> 3</a></span>
-<span class=normal><a href=#__codelineno-18-4> 4</a></span>
-<span class=normal><a href=#__codelineno-18-5> 5</a></span>
-<span class=normal><a href=#__codelineno-18-6> 6</a></span>
-<span class=normal><a href=#__codelineno-18-7> 7</a></span>
-<span class=normal><a href=#__codelineno-18-8> 8</a></span>
-<span class=normal><a href=#__codelineno-18-9> 9</a></span>
-<span class=normal><a href=#__codelineno-18-10>10</a></span>
-<span class=normal><a href=#__codelineno-18-11>11</a></span>
-<span class=normal><a href=#__codelineno-18-12>12</a></span>
-<span class=normal><a href=#__codelineno-18-13>13</a></span>
-<span class=normal><a href=#__codelineno-18-14>14</a></span>
-<span class=normal><a href=#__codelineno-18-15>15</a></span>
-<span class=normal><a href=#__codelineno-18-16>16</a></span>
-<span class=normal><a href=#__codelineno-18-17>17</a></span>
-<span class=normal><a href=#__codelineno-18-18>18</a></span>
-<span class=normal><a href=#__codelineno-18-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-18-1><a id=__codelineno-18-1 name=__codelineno-18-1></a>支付牌照类型：
-</span><span id=__span-18-2><a id=__codelineno-18-2 name=__codelineno-18-2></a>
-</span><span id=__span-18-3><a id=__codelineno-18-3 name=__codelineno-18-3></a>┌─────────────────────────────────────┐
-</span><span id=__span-18-4><a id=__codelineno-18-4 name=__codelineno-18-4></a>│           支付业务许可证              │
-</span><span id=__span-18-5><a id=__codelineno-18-5 name=__codelineno-18-5></a>├─────────────────────────────────────┤
-</span><span id=__span-18-6><a id=__codelineno-18-6 name=__codelineno-18-6></a>│ 1. 储值账户运营（预付卡发行）          │
-</span><span id=__span-18-7><a id=__codelineno-18-7 name=__codelineno-18-7></a>│    - 单用途预付卡                    │
-</span><span id=__span-18-8><a id=__codelineno-18-8 name=__codelineno-18-8></a>│    - 多用途预付卡                    │
-</span><span id=__span-18-9><a id=__codelineno-18-9 name=__codelineno-18-9></a>│                                     │
-</span><span id=__span-18-10><a id=__codelineno-18-10 name=__codelineno-18-10></a>│ 2. 支付交易处理                      │
-</span><span id=__span-18-11><a id=__codelineno-18-11 name=__codelineno-18-11></a>│    - 网络支付（互联网支付）           │
-</span><span id=__span-18-12><a id=__codelineno-18-12 name=__codelineno-18-12></a>│    - 移动电话支付                    │
-</span><span id=__span-18-13><a id=__codelineno-18-13 name=__codelineno-18-13></a>│    - 固定电话支付                    │
-</span><span id=__span-18-14><a id=__codelineno-18-14 name=__codelineno-18-14></a>│    - 数字电视支付                    │
-</span><span id=__span-18-15><a id=__codelineno-18-15 name=__codelineno-18-15></a>│                                     │
-</span><span id=__span-18-16><a id=__codelineno-18-16 name=__codelineno-18-16></a>│ 3. 银行卡收单                        │
-</span><span id=__span-18-17><a id=__codelineno-18-17 name=__codelineno-18-17></a>│    - 实体卡收单                      │
-</span><span id=__span-18-18><a id=__codelineno-18-18 name=__codelineno-18-18></a>│    - 网络收单                       │
-</span><span id=__span-18-19><a id=__codelineno-18-19 name=__codelineno-18-19></a>└─────────────────────────────────────┘
-</span></code></pre></div></td></tr></table></div> <h3 id=93>9.3 反洗钱要求<a class=headerlink href=#93 title="Permanent link">&para;</a></h3> <p>支付机构必须履行反洗钱义务：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-19-1> 1</a></span>
-<span class=normal><a href=#__codelineno-19-2> 2</a></span>
-<span class=normal><a href=#__codelineno-19-3> 3</a></span>
-<span class=normal><a href=#__codelineno-19-4> 4</a></span>
-<span class=normal><a href=#__codelineno-19-5> 5</a></span>
-<span class=normal><a href=#__codelineno-19-6> 6</a></span>
-<span class=normal><a href=#__codelineno-19-7> 7</a></span>
-<span class=normal><a href=#__codelineno-19-8> 8</a></span>
-<span class=normal><a href=#__codelineno-19-9> 9</a></span>
-<span class=normal><a href=#__codelineno-19-10>10</a></span>
-<span class=normal><a href=#__codelineno-19-11>11</a></span>
-<span class=normal><a href=#__codelineno-19-12>12</a></span>
-<span class=normal><a href=#__codelineno-19-13>13</a></span>
-<span class=normal><a href=#__codelineno-19-14>14</a></span>
-<span class=normal><a href=#__codelineno-19-15>15</a></span>
-<span class=normal><a href=#__codelineno-19-16>16</a></span>
-<span class=normal><a href=#__codelineno-19-17>17</a></span>
-<span class=normal><a href=#__codelineno-19-18>18</a></span>
-<span class=normal><a href=#__codelineno-19-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-19-1><a id=__codelineno-19-1 name=__codelineno-19-1></a>反洗钱工作要求：
-</span><span id=__span-19-2><a id=__codelineno-19-2 name=__codelineno-19-2></a>
-</span><span id=__span-19-3><a id=__codelineno-19-3 name=__codelineno-19-3></a>1. 客户身份识别
-</span><span id=__span-19-4><a id=__codelineno-19-4 name=__codelineno-19-4></a>   - 实名认证
-</span><span id=__span-19-5><a id=__codelineno-19-5 name=__codelineno-19-5></a>   - 受益所有人识别
-</span><span id=__span-19-6><a id=__codelineno-19-6 name=__codelineno-19-6></a>   - 风险等级划分
-</span><span id=__span-19-7><a id=__codelineno-19-7 name=__codelineno-19-7></a>
-</span><span id=__span-19-8><a id=__codelineno-19-8 name=__codelineno-19-8></a>2. 大额和可疑交易报告
-</span><span id=__span-19-9><a id=__codelineno-19-9 name=__codelineno-19-9></a>   - 单笔或当日累计人民币5万元以上
-</span><span id=__span-19-10><a id=__codelineno-19-10 name=__codelineno-19-10></a>   - 或外币等值1万美元以上
-</span><span id=__span-19-11><a id=__codelineno-19-11 name=__codelineno-19-11></a>   - 需向反洗钱监测中心报告
-</span><span id=__span-19-12><a id=__codelineno-19-12 name=__codelineno-19-12></a>
-</span><span id=__span-19-13><a id=__codelineno-19-13 name=__codelineno-19-13></a>3. 客户资料和交易记录保存
-</span><span id=__span-19-14><a id=__codelineno-19-14 name=__codelineno-19-14></a>   - 客户身份资料保存5年
-</span><span id=__span-19-15><a id=__codelineno-19-15 name=__codelineno-19-15></a>   - 交易记录保存5年
-</span><span id=__span-19-16><a id=__codelineno-19-16 name=__codelineno-19-16></a>
-</span><span id=__span-19-17><a id=__codelineno-19-17 name=__codelineno-19-17></a>4. 黑名单监控
-</span><span id=__span-19-18><a id=__codelineno-19-18 name=__codelineno-19-18></a>   - 联合国制裁名单
-</span><span id=__span-19-19><a id=__codelineno-19-19 name=__codelineno-19-19></a>   - 公安部发布的恐怖活动组织名单
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=_15>十、结语：支付的未来在哪里？<a class=headerlink href=#_15 title="Permanent link">&para;</a></h2> <p>回顾支付技术的发展历程，我们可以看到清晰的演进脉络：</p> <pre class=mermaid><code>timeline
+         : 分类监管，重罚违规</code></pre> <h3 id=92>9.2 支付牌照<a class=headerlink href=#92 title="Permanent link">&para;</a></h3> <p>在中国，从事支付业务必须获得支付牌照：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-18-1>支付牌照类型：
+</span><span id=__span-18-2>
+</span><span id=__span-18-3>┌─────────────────────────────────────┐
+</span><span id=__span-18-4>│           支付业务许可证              │
+</span><span id=__span-18-5>├─────────────────────────────────────┤
+</span><span id=__span-18-6>│ 1. 储值账户运营（预付卡发行）          │
+</span><span id=__span-18-7>│    - 单用途预付卡                    │
+</span><span id=__span-18-8>│    - 多用途预付卡                    │
+</span><span id=__span-18-9>│                                     │
+</span><span id=__span-18-10>│ 2. 支付交易处理                      │
+</span><span id=__span-18-11>│    - 网络支付（互联网支付）           │
+</span><span id=__span-18-12>│    - 移动电话支付                    │
+</span><span id=__span-18-13>│    - 固定电话支付                    │
+</span><span id=__span-18-14>│    - 数字电视支付                    │
+</span><span id=__span-18-15>│                                     │
+</span><span id=__span-18-16>│ 3. 银行卡收单                        │
+</span><span id=__span-18-17>│    - 实体卡收单                      │
+</span><span id=__span-18-18>│    - 网络收单                       │
+</span><span id=__span-18-19>└─────────────────────────────────────┘
+</span></code></pre></div> <h3 id=93>9.3 反洗钱要求<a class=headerlink href=#93 title="Permanent link">&para;</a></h3> <p>支付机构必须履行反洗钱义务：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-19-1>反洗钱工作要求：
+</span><span id=__span-19-2>
+</span><span id=__span-19-3>1. 客户身份识别
+</span><span id=__span-19-4>   - 实名认证
+</span><span id=__span-19-5>   - 受益所有人识别
+</span><span id=__span-19-6>   - 风险等级划分
+</span><span id=__span-19-7>
+</span><span id=__span-19-8>2. 大额和可疑交易报告
+</span><span id=__span-19-9>   - 单笔或当日累计人民币5万元以上
+</span><span id=__span-19-10>   - 或外币等值1万美元以上
+</span><span id=__span-19-11>   - 需向反洗钱监测中心报告
+</span><span id=__span-19-12>
+</span><span id=__span-19-13>3. 客户资料和交易记录保存
+</span><span id=__span-19-14>   - 客户身份资料保存5年
+</span><span id=__span-19-15>   - 交易记录保存5年
+</span><span id=__span-19-16>
+</span><span id=__span-19-17>4. 黑名单监控
+</span><span id=__span-19-18>   - 联合国制裁名单
+</span><span id=__span-19-19>   - 公安部发布的恐怖活动组织名单
+</span></code></pre></div> <hr> <h2 id=_15>十、结语：支付的未来在哪里？<a class=headerlink href=#_15 title="Permanent link">&para;</a></h2> <p>回顾支付技术的发展历程，我们可以看到清晰的演进脉络：</p> <pre class=mermaid><code>timeline
     title 支付技术演进历程
     section 实物支付时代
         公元前6000年 : 贝壳货币

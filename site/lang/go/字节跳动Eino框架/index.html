@@ -24,111 +24,60 @@
       编译期检查配置
       运行期捕获异常
       降级策略设计
-      重试机制实现</code></pre> <h3 id=102>10.2 代码组织建议<a class=headerlink href=#102 title="Permanent link">&para;</a></h3> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1> 1</a></span>
-<span class=normal><a href=#__codelineno-0-2> 2</a></span>
-<span class=normal><a href=#__codelineno-0-3> 3</a></span>
-<span class=normal><a href=#__codelineno-0-4> 4</a></span>
-<span class=normal><a href=#__codelineno-0-5> 5</a></span>
-<span class=normal><a href=#__codelineno-0-6> 6</a></span>
-<span class=normal><a href=#__codelineno-0-7> 7</a></span>
-<span class=normal><a href=#__codelineno-0-8> 8</a></span>
-<span class=normal><a href=#__codelineno-0-9> 9</a></span>
-<span class=normal><a href=#__codelineno-0-10>10</a></span>
-<span class=normal><a href=#__codelineno-0-11>11</a></span>
-<span class=normal><a href=#__codelineno-0-12>12</a></span>
-<span class=normal><a href=#__codelineno-0-13>13</a></span>
-<span class=normal><a href=#__codelineno-0-14>14</a></span>
-<span class=normal><a href=#__codelineno-0-15>15</a></span>
-<span class=normal><a href=#__codelineno-0-16>16</a></span>
-<span class=normal><a href=#__codelineno-0-17>17</a></span>
-<span class=normal><a href=#__codelineno-0-18>18</a></span>
-<span class=normal><a href=#__codelineno-0-19>19</a></span>
-<span class=normal><a href=#__codelineno-0-20>20</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>my-ai-app/
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a>├── cmd/
-</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a>│   └── server/
-</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a>│       └── main.go          # 入口
-</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a>├── internal/
-</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a>│   ├── agents/              # Agent定义
-</span><span id=__span-0-7><a id=__codelineno-0-7 name=__codelineno-0-7></a>│   │   ├── customer_service.go
-</span><span id=__span-0-8><a id=__codelineno-0-8 name=__codelineno-0-8></a>│   │   └── code_review.go
-</span><span id=__span-0-9><a id=__codelineno-0-9 name=__codelineno-0-9></a>│   ├── components/          # 组件实现
-</span><span id=__span-0-10><a id=__codelineno-0-10 name=__codelineno-0-10></a>│   │   ├── models.go        # 模型配置
-</span><span id=__span-0-11><a id=__codelineno-0-11 name=__codelineno-0-11></a>│   │   ├── tools.go         # 工具定义
-</span><span id=__span-0-12><a id=__codelineno-0-12 name=__codelineno-0-12></a>│   │   └── retrievers.go    # 检索器
-</span><span id=__span-0-13><a id=__codelineno-0-13 name=__codelineno-0-13></a>│   ├── graph/               # 图编排
-</span><span id=__span-0-14><a id=__codelineno-0-14 name=__codelineno-0-14></a>│   │   └── builder.go       # Graph构建逻辑
-</span><span id=__span-0-15><a id=__codelineno-0-15 name=__codelineno-0-15></a>│   └── service/             # 业务服务
-</span><span id=__span-0-16><a id=__codelineno-0-16 name=__codelineno-0-16></a>│       └── ai_service.go    # 对外服务接口
-</span><span id=__span-0-17><a id=__codelineno-0-17 name=__codelineno-0-17></a>├── configs/
-</span><span id=__span-0-18><a id=__codelineno-0-18 name=__codelineno-0-18></a>│   └── config.yaml          # 配置文件
-</span><span id=__span-0-19><a id=__codelineno-0-19 name=__codelineno-0-19></a>└── tests/                   # 测试
-</span><span id=__span-0-20><a id=__codelineno-0-20 name=__codelineno-0-20></a>    └── agents_test.go
-</span></code></pre></div></td></tr></table></div> <h3 id=103>10.3 常见坑与解决方案<a class=headerlink href=#103 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>坑</th> <th>原因</th> <th>解决方案</th> </tr> </thead> <tbody> <tr> <td><strong>编译报错类型不匹配</strong></td> <td>上下游泛型类型不一致</td> <td>检查Graph定义的Input/Output泛型参数</td> </tr> <tr> <td><strong>Graph运行死循环</strong></td> <td>分支条件设置错误</td> <td>设置WithMaxRunSteps，检查分支逻辑</td> </tr> <tr> <td><strong>Stream未关闭导致泄漏</strong></td> <td>忘记defer stream.Close()</td> <td>始终使用defer关闭Stream</td> </tr> <tr> <td><strong>State数据混乱</strong></td> <td>StatePreHandler/PostHandler逻辑错误</td> <td>仔细检查State读写时机</td> </tr> <tr> <td><strong>Callback不生效</strong></td> <td>未正确注入Context</td> <td>使用context.WithValue注入Callback</td> </tr> <tr> <td><strong>工具调用不执行</strong></td> <td>ToolsNode未正确配置或模型不支持</td> <td>检查模型是否支持Function Calling</td> </tr> <tr> <td><strong>首字延迟高</strong></td> <td>分支判断等待完整输出</td> <td>使用StreamGraphBranch实现首包路由</td> </tr> </tbody> </table> <h3 id=104>10.4 性能优化建议<a class=headerlink href=#104 title="Permanent link">&para;</a></h3> <div class="language-go highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1> 1</a></span>
-<span class=normal><a href=#__codelineno-1-2> 2</a></span>
-<span class=normal><a href=#__codelineno-1-3> 3</a></span>
-<span class=normal><a href=#__codelineno-1-4> 4</a></span>
-<span class=normal><a href=#__codelineno-1-5> 5</a></span>
-<span class=normal><a href=#__codelineno-1-6> 6</a></span>
-<span class=normal><a href=#__codelineno-1-7> 7</a></span>
-<span class=normal><a href=#__codelineno-1-8> 8</a></span>
-<span class=normal><a href=#__codelineno-1-9> 9</a></span>
-<span class=normal><a href=#__codelineno-1-10>10</a></span>
-<span class=normal><a href=#__codelineno-1-11>11</a></span>
-<span class=normal><a href=#__codelineno-1-12>12</a></span>
-<span class=normal><a href=#__codelineno-1-13>13</a></span>
-<span class=normal><a href=#__codelineno-1-14>14</a></span>
-<span class=normal><a href=#__codelineno-1-15>15</a></span>
-<span class=normal><a href=#__codelineno-1-16>16</a></span>
-<span class=normal><a href=#__codelineno-1-17>17</a></span>
-<span class=normal><a href=#__codelineno-1-18>18</a></span>
-<span class=normal><a href=#__codelineno-1-19>19</a></span>
-<span class=normal><a href=#__codelineno-1-20>20</a></span>
-<span class=normal><a href=#__codelineno-1-21>21</a></span>
-<span class=normal><a href=#__codelineno-1-22>22</a></span>
-<span class=normal><a href=#__codelineno-1-23>23</a></span>
-<span class=normal><a href=#__codelineno-1-24>24</a></span>
-<span class=normal><a href=#__codelineno-1-25>25</a></span>
-<span class=normal><a href=#__codelineno-1-26>26</a></span>
-<span class=normal><a href=#__codelineno-1-27>27</a></span>
-<span class=normal><a href=#__codelineno-1-28>28</a></span>
-<span class=normal><a href=#__codelineno-1-29>29</a></span>
-<span class=normal><a href=#__codelineno-1-30>30</a></span>
-<span class=normal><a href=#__codelineno-1-31>31</a></span>
-<span class=normal><a href=#__codelineno-1-32>32</a></span>
-<span class=normal><a href=#__codelineno-1-33>33</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=c1>// 1. 设置合理的超时</span>
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a><span class=nx>ctx</span><span class=p>,</span><span class=w> </span><span class=nx>cancel</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>context</span><span class=p>.</span><span class=nx>WithTimeout</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span><span class=w> </span><span class=mi>30</span><span class=o>*</span><span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a><span class=k>defer</span><span class=w> </span><span class=nx>cancel</span><span class=p>()</span>
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a>
-</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a><span class=c1>// 2. 复用编译后的Runnable（编译只做一次）</span>
-</span><span id=__span-1-6><a id=__codelineno-1-6 name=__codelineno-1-6></a><span class=kd>var</span><span class=w> </span><span class=nx>agent</span><span class=w> </span><span class=o>*</span><span class=nx>compose</span><span class=p>.</span><span class=nx>Runnable</span>
-</span><span id=__span-1-7><a id=__codelineno-1-7 name=__codelineno-1-7></a>
-</span><span id=__span-1-8><a id=__codelineno-1-8 name=__codelineno-1-8></a><span class=kd>func</span><span class=w> </span><span class=nx>init</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-1-9><a id=__codelineno-1-9 name=__codelineno-1-9></a><span class=w>    </span><span class=c1>// 程序启动时编译，运行时直接使用</span>
-</span><span id=__span-1-10><a id=__codelineno-1-10 name=__codelineno-1-10></a><span class=w>    </span><span class=nx>agent</span><span class=p>,</span><span class=w> </span><span class=nx>_</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>buildAndCompileGraph</span><span class=p>()</span>
-</span><span id=__span-1-11><a id=__codelineno-1-11 name=__codelineno-1-11></a><span class=p>}</span>
-</span><span id=__span-1-12><a id=__codelineno-1-12 name=__codelineno-1-12></a>
-</span><span id=__span-1-13><a id=__codelineno-1-13 name=__codelineno-1-13></a><span class=c1>// 3. 并发调用安全</span>
-</span><span id=__span-1-14><a id=__codelineno-1-14 name=__codelineno-1-14></a><span class=kd>func</span><span class=w> </span><span class=nx>handleRequest</span><span class=p>(</span><span class=nx>ctx</span><span class=w> </span><span class=nx>context</span><span class=p>.</span><span class=nx>Context</span><span class=p>,</span><span class=w> </span><span class=nx>input</span><span class=w> </span><span class=p>[]</span><span class=o>*</span><span class=nx>schema</span><span class=p>.</span><span class=nx>Message</span><span class=p>)</span><span class=w> </span><span class=kt>error</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-1-15><a id=__codelineno-1-15 name=__codelineno-1-15></a><span class=w>    </span><span class=c1>// agent是并发安全的，可直接并发调用</span>
-</span><span id=__span-1-16><a id=__codelineno-1-16 name=__codelineno-1-16></a><span class=w>    </span><span class=nx>stream</span><span class=p>,</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>agent</span><span class=p>.</span><span class=nx>Stream</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span><span class=w> </span><span class=nx>input</span><span class=p>)</span>
-</span><span id=__span-1-17><a id=__codelineno-1-17 name=__codelineno-1-17></a><span class=w>    </span><span class=c1>// ...</span>
-</span><span id=__span-1-18><a id=__codelineno-1-18 name=__codelineno-1-18></a><span class=p>}</span>
-</span><span id=__span-1-19><a id=__codelineno-1-19 name=__codelineno-1-19></a>
-</span><span id=__span-1-20><a id=__codelineno-1-20 name=__codelineno-1-20></a><span class=c1>// 4. 监控Token消耗</span>
-</span><span id=__span-1-21><a id=__codelineno-1-21 name=__codelineno-1-21></a><span class=kn>import</span><span class=w> </span><span class=s>&quot;github.com/cloudwego/eino/callbacks&quot;</span>
-</span><span id=__span-1-22><a id=__codelineno-1-22 name=__codelineno-1-22></a>
-</span><span id=__span-1-23><a id=__codelineno-1-23 name=__codelineno-1-23></a><span class=c1>// 在Callback中统计</span>
-</span><span id=__span-1-24><a id=__codelineno-1-24 name=__codelineno-1-24></a><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>m</span><span class=w> </span><span class=o>*</span><span class=nx>MyCallback</span><span class=p>)</span><span class=w> </span><span class=nx>OnEnd</span><span class=p>(</span><span class=nx>ctx</span><span class=w> </span><span class=nx>context</span><span class=p>.</span><span class=nx>Context</span><span class=p>,</span><span class=w> </span><span class=nx>info</span><span class=w> </span><span class=o>*</span><span class=nx>compose</span><span class=p>.</span><span class=nx>CallbackInfo</span><span class=p>)</span><span class=w> </span><span class=nx>context</span><span class=p>.</span><span class=nx>Context</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-1-25><a id=__codelineno-1-25 name=__codelineno-1-25></a><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=nx>msg</span><span class=p>,</span><span class=w> </span><span class=nx>ok</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>info</span><span class=p>.</span><span class=nx>Output</span><span class=p>.(</span><span class=o>*</span><span class=nx>schema</span><span class=p>.</span><span class=nx>Message</span><span class=p>);</span><span class=w> </span><span class=nx>ok</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-1-26><a id=__codelineno-1-26 name=__codelineno-1-26></a><span class=w>        </span><span class=nx>tokenUsage</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>msg</span><span class=p>.</span><span class=nx>TokenUsage</span>
-</span><span id=__span-1-27><a id=__codelineno-1-27 name=__codelineno-1-27></a><span class=w>        </span><span class=nx>log</span><span class=p>.</span><span class=nx>Printf</span><span class=p>(</span><span class=s>&quot;Token使用: Prompt=%d, Completion=%d, Total=%d&quot;</span><span class=p>,</span>
-</span><span id=__span-1-28><a id=__codelineno-1-28 name=__codelineno-1-28></a><span class=w>            </span><span class=nx>tokenUsage</span><span class=p>.</span><span class=nx>PromptTokens</span><span class=p>,</span>
-</span><span id=__span-1-29><a id=__codelineno-1-29 name=__codelineno-1-29></a><span class=w>            </span><span class=nx>tokenUsage</span><span class=p>.</span><span class=nx>CompletionTokens</span><span class=p>,</span>
-</span><span id=__span-1-30><a id=__codelineno-1-30 name=__codelineno-1-30></a><span class=w>            </span><span class=nx>tokenUsage</span><span class=p>.</span><span class=nx>TotalTokens</span><span class=p>)</span>
-</span><span id=__span-1-31><a id=__codelineno-1-31 name=__codelineno-1-31></a><span class=w>    </span><span class=p>}</span>
-</span><span id=__span-1-32><a id=__codelineno-1-32 name=__codelineno-1-32></a><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=nx>ctx</span>
-</span><span id=__span-1-33><a id=__codelineno-1-33 name=__codelineno-1-33></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=_2>十一、学习路径与资源<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <h3 id=111>11.1 从零到精通的路径<a class=headerlink href=#111 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>flowchart LR
+      重试机制实现</code></pre> <h3 id=102>10.2 代码组织建议<a class=headerlink href=#102 title="Permanent link">&para;</a></h3> <div class="language-text highlight"><pre><span></span><code><span id=__span-0-1>my-ai-app/
+</span><span id=__span-0-2>├── cmd/
+</span><span id=__span-0-3>│   └── server/
+</span><span id=__span-0-4>│       └── main.go          # 入口
+</span><span id=__span-0-5>├── internal/
+</span><span id=__span-0-6>│   ├── agents/              # Agent定义
+</span><span id=__span-0-7>│   │   ├── customer_service.go
+</span><span id=__span-0-8>│   │   └── code_review.go
+</span><span id=__span-0-9>│   ├── components/          # 组件实现
+</span><span id=__span-0-10>│   │   ├── models.go        # 模型配置
+</span><span id=__span-0-11>│   │   ├── tools.go         # 工具定义
+</span><span id=__span-0-12>│   │   └── retrievers.go    # 检索器
+</span><span id=__span-0-13>│   ├── graph/               # 图编排
+</span><span id=__span-0-14>│   │   └── builder.go       # Graph构建逻辑
+</span><span id=__span-0-15>│   └── service/             # 业务服务
+</span><span id=__span-0-16>│       └── ai_service.go    # 对外服务接口
+</span><span id=__span-0-17>├── configs/
+</span><span id=__span-0-18>│   └── config.yaml          # 配置文件
+</span><span id=__span-0-19>└── tests/                   # 测试
+</span><span id=__span-0-20>    └── agents_test.go
+</span></code></pre></div> <h3 id=103>10.3 常见坑与解决方案<a class=headerlink href=#103 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>坑</th> <th>原因</th> <th>解决方案</th> </tr> </thead> <tbody> <tr> <td><strong>编译报错类型不匹配</strong></td> <td>上下游泛型类型不一致</td> <td>检查Graph定义的Input/Output泛型参数</td> </tr> <tr> <td><strong>Graph运行死循环</strong></td> <td>分支条件设置错误</td> <td>设置WithMaxRunSteps，检查分支逻辑</td> </tr> <tr> <td><strong>Stream未关闭导致泄漏</strong></td> <td>忘记defer stream.Close()</td> <td>始终使用defer关闭Stream</td> </tr> <tr> <td><strong>State数据混乱</strong></td> <td>StatePreHandler/PostHandler逻辑错误</td> <td>仔细检查State读写时机</td> </tr> <tr> <td><strong>Callback不生效</strong></td> <td>未正确注入Context</td> <td>使用context.WithValue注入Callback</td> </tr> <tr> <td><strong>工具调用不执行</strong></td> <td>ToolsNode未正确配置或模型不支持</td> <td>检查模型是否支持Function Calling</td> </tr> <tr> <td><strong>首字延迟高</strong></td> <td>分支判断等待完整输出</td> <td>使用StreamGraphBranch实现首包路由</td> </tr> </tbody> </table> <h3 id=104>10.4 性能优化建议<a class=headerlink href=#104 title="Permanent link">&para;</a></h3> <div class="language-go highlight"><pre><span></span><code><span id=__span-1-1><span class=c1>// 1. 设置合理的超时</span>
+</span><span id=__span-1-2><span class=nx>ctx</span><span class=p>,</span><span class=w> </span><span class=nx>cancel</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>context</span><span class=p>.</span><span class=nx>WithTimeout</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span><span class=w> </span><span class=mi>30</span><span class=o>*</span><span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span><span id=__span-1-3><span class=k>defer</span><span class=w> </span><span class=nx>cancel</span><span class=p>()</span>
+</span><span id=__span-1-4>
+</span><span id=__span-1-5><span class=c1>// 2. 复用编译后的Runnable（编译只做一次）</span>
+</span><span id=__span-1-6><span class=kd>var</span><span class=w> </span><span class=nx>agent</span><span class=w> </span><span class=o>*</span><span class=nx>compose</span><span class=p>.</span><span class=nx>Runnable</span>
+</span><span id=__span-1-7>
+</span><span id=__span-1-8><span class=kd>func</span><span class=w> </span><span class=nx>init</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-1-9><span class=w>    </span><span class=c1>// 程序启动时编译，运行时直接使用</span>
+</span><span id=__span-1-10><span class=w>    </span><span class=nx>agent</span><span class=p>,</span><span class=w> </span><span class=nx>_</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>buildAndCompileGraph</span><span class=p>()</span>
+</span><span id=__span-1-11><span class=p>}</span>
+</span><span id=__span-1-12>
+</span><span id=__span-1-13><span class=c1>// 3. 并发调用安全</span>
+</span><span id=__span-1-14><span class=kd>func</span><span class=w> </span><span class=nx>handleRequest</span><span class=p>(</span><span class=nx>ctx</span><span class=w> </span><span class=nx>context</span><span class=p>.</span><span class=nx>Context</span><span class=p>,</span><span class=w> </span><span class=nx>input</span><span class=w> </span><span class=p>[]</span><span class=o>*</span><span class=nx>schema</span><span class=p>.</span><span class=nx>Message</span><span class=p>)</span><span class=w> </span><span class=kt>error</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-1-15><span class=w>    </span><span class=c1>// agent是并发安全的，可直接并发调用</span>
+</span><span id=__span-1-16><span class=w>    </span><span class=nx>stream</span><span class=p>,</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>agent</span><span class=p>.</span><span class=nx>Stream</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span><span class=w> </span><span class=nx>input</span><span class=p>)</span>
+</span><span id=__span-1-17><span class=w>    </span><span class=c1>// ...</span>
+</span><span id=__span-1-18><span class=p>}</span>
+</span><span id=__span-1-19>
+</span><span id=__span-1-20><span class=c1>// 4. 监控Token消耗</span>
+</span><span id=__span-1-21><span class=kn>import</span><span class=w> </span><span class=s>&quot;github.com/cloudwego/eino/callbacks&quot;</span>
+</span><span id=__span-1-22>
+</span><span id=__span-1-23><span class=c1>// 在Callback中统计</span>
+</span><span id=__span-1-24><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>m</span><span class=w> </span><span class=o>*</span><span class=nx>MyCallback</span><span class=p>)</span><span class=w> </span><span class=nx>OnEnd</span><span class=p>(</span><span class=nx>ctx</span><span class=w> </span><span class=nx>context</span><span class=p>.</span><span class=nx>Context</span><span class=p>,</span><span class=w> </span><span class=nx>info</span><span class=w> </span><span class=o>*</span><span class=nx>compose</span><span class=p>.</span><span class=nx>CallbackInfo</span><span class=p>)</span><span class=w> </span><span class=nx>context</span><span class=p>.</span><span class=nx>Context</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-1-25><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=nx>msg</span><span class=p>,</span><span class=w> </span><span class=nx>ok</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>info</span><span class=p>.</span><span class=nx>Output</span><span class=p>.(</span><span class=o>*</span><span class=nx>schema</span><span class=p>.</span><span class=nx>Message</span><span class=p>);</span><span class=w> </span><span class=nx>ok</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-1-26><span class=w>        </span><span class=nx>tokenUsage</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>msg</span><span class=p>.</span><span class=nx>TokenUsage</span>
+</span><span id=__span-1-27><span class=w>        </span><span class=nx>log</span><span class=p>.</span><span class=nx>Printf</span><span class=p>(</span><span class=s>&quot;Token使用: Prompt=%d, Completion=%d, Total=%d&quot;</span><span class=p>,</span>
+</span><span id=__span-1-28><span class=w>            </span><span class=nx>tokenUsage</span><span class=p>.</span><span class=nx>PromptTokens</span><span class=p>,</span>
+</span><span id=__span-1-29><span class=w>            </span><span class=nx>tokenUsage</span><span class=p>.</span><span class=nx>CompletionTokens</span><span class=p>,</span>
+</span><span id=__span-1-30><span class=w>            </span><span class=nx>tokenUsage</span><span class=p>.</span><span class=nx>TotalTokens</span><span class=p>)</span>
+</span><span id=__span-1-31><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-1-32><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=nx>ctx</span>
+</span><span id=__span-1-33><span class=p>}</span>
+</span></code></pre></div> <hr> <h2 id=_2>十一、学习路径与资源<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <h3 id=111>11.1 从零到精通的路径<a class=headerlink href=#111 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>flowchart LR
     A[Day 1-3&lt;br/&gt;入门基础] --&gt; B[Day 4-7&lt;br/&gt;实战练习]
     B --&gt; C[Week 2&lt;br/&gt;深入学习]
     C --&gt; D[Week 3-4&lt;br/&gt;项目实战]
@@ -144,118 +93,64 @@
     style B fill:#fff4e1
     style C fill:#ffe6e6
     style D fill:#e6ffe6
-    style E fill:#ffcc99</code></pre> <h3 id=112>11.2 官方资源<a class=headerlink href=#112 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>资源</th> <th>链接</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><strong>官方文档</strong></td> <td>https://www.cloudwego.io/zh/docs/eino/</td> <td>完整文档</td> </tr> <tr> <td><strong>GitHub</strong></td> <td>https://github.com/cloudwego/eino</td> <td>源代码</td> </tr> <tr> <td><strong>示例代码</strong></td> <td>GitHub examples目录</td> <td>官方示例</td> </tr> <tr> <td><strong>扩展组件</strong></td> <td>https://github.com/cloudwego/eino-ext</td> <td>官方扩展</td> </tr> <tr> <td><strong>快速开始</strong></td> <td><code>go get github.com/cloudwego/eino</code></td> <td>一行命令安装</td> </tr> </tbody> </table> <h3 id=113-hello-world>11.3 Hello World快速开始<a class=headerlink href=#113-hello-world title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span>
-<span class=normal><a href=#__codelineno-2-2>2</a></span>
-<span class=normal><a href=#__codelineno-2-3>3</a></span>
-<span class=normal><a href=#__codelineno-2-4>4</a></span>
-<span class=normal><a href=#__codelineno-2-5>5</a></span>
-<span class=normal><a href=#__codelineno-2-6>6</a></span>
-<span class=normal><a href=#__codelineno-2-7>7</a></span>
-<span class=normal><a href=#__codelineno-2-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=c1># 1. 创建Go项目</span>
-</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a>mkdir<span class=w> </span>eino-demo<span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=nb>cd</span><span class=w> </span>eino-demo
-</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a>go<span class=w> </span>mod<span class=w> </span>init<span class=w> </span>eino-demo
-</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a>
-</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a><span class=c1># 2. 安装Eino</span>
-</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6></a>go<span class=w> </span>get<span class=w> </span>github.com/cloudwego/eino
-</span><span id=__span-2-7><a id=__codelineno-2-7 name=__codelineno-2-7></a>
-</span><span id=__span-2-8><a id=__codelineno-2-8 name=__codelineno-2-8></a><span class=c1># 3. 创建main.go</span>
-</span></code></pre></div></td></tr></table></div> <div class="language-go highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1> 1</a></span>
-<span class=normal><a href=#__codelineno-3-2> 2</a></span>
-<span class=normal><a href=#__codelineno-3-3> 3</a></span>
-<span class=normal><a href=#__codelineno-3-4> 4</a></span>
-<span class=normal><a href=#__codelineno-3-5> 5</a></span>
-<span class=normal><a href=#__codelineno-3-6> 6</a></span>
-<span class=normal><a href=#__codelineno-3-7> 7</a></span>
-<span class=normal><a href=#__codelineno-3-8> 8</a></span>
-<span class=normal><a href=#__codelineno-3-9> 9</a></span>
-<span class=normal><a href=#__codelineno-3-10>10</a></span>
-<span class=normal><a href=#__codelineno-3-11>11</a></span>
-<span class=normal><a href=#__codelineno-3-12>12</a></span>
-<span class=normal><a href=#__codelineno-3-13>13</a></span>
-<span class=normal><a href=#__codelineno-3-14>14</a></span>
-<span class=normal><a href=#__codelineno-3-15>15</a></span>
-<span class=normal><a href=#__codelineno-3-16>16</a></span>
-<span class=normal><a href=#__codelineno-3-17>17</a></span>
-<span class=normal><a href=#__codelineno-3-18>18</a></span>
-<span class=normal><a href=#__codelineno-3-19>19</a></span>
-<span class=normal><a href=#__codelineno-3-20>20</a></span>
-<span class=normal><a href=#__codelineno-3-21>21</a></span>
-<span class=normal><a href=#__codelineno-3-22>22</a></span>
-<span class=normal><a href=#__codelineno-3-23>23</a></span>
-<span class=normal><a href=#__codelineno-3-24>24</a></span>
-<span class=normal><a href=#__codelineno-3-25>25</a></span>
-<span class=normal><a href=#__codelineno-3-26>26</a></span>
-<span class=normal><a href=#__codelineno-3-27>27</a></span>
-<span class=normal><a href=#__codelineno-3-28>28</a></span>
-<span class=normal><a href=#__codelineno-3-29>29</a></span>
-<span class=normal><a href=#__codelineno-3-30>30</a></span>
-<span class=normal><a href=#__codelineno-3-31>31</a></span>
-<span class=normal><a href=#__codelineno-3-32>32</a></span>
-<span class=normal><a href=#__codelineno-3-33>33</a></span>
-<span class=normal><a href=#__codelineno-3-34>34</a></span>
-<span class=normal><a href=#__codelineno-3-35>35</a></span>
-<span class=normal><a href=#__codelineno-3-36>36</a></span>
-<span class=normal><a href=#__codelineno-3-37>37</a></span>
-<span class=normal><a href=#__codelineno-3-38>38</a></span>
-<span class=normal><a href=#__codelineno-3-39>39</a></span>
-<span class=normal><a href=#__codelineno-3-40>40</a></span>
-<span class=normal><a href=#__codelineno-3-41>41</a></span>
-<span class=normal><a href=#__codelineno-3-42>42</a></span>
-<span class=normal><a href=#__codelineno-3-43>43</a></span>
-<span class=normal><a href=#__codelineno-3-44>44</a></span>
-<span class=normal><a href=#__codelineno-3-45>45</a></span>
-<span class=normal><a href=#__codelineno-3-46>46</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=kn>package</span><span class=w> </span><span class=nx>main</span>
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>
-</span><span id=__span-3-3><a id=__codelineno-3-3 name=__codelineno-3-3></a><span class=kn>import</span><span class=w> </span><span class=p>(</span>
-</span><span id=__span-3-4><a id=__codelineno-3-4 name=__codelineno-3-4></a><span class=w>    </span><span class=s>&quot;context&quot;</span>
-</span><span id=__span-3-5><a id=__codelineno-3-5 name=__codelineno-3-5></a><span class=w>    </span><span class=s>&quot;fmt&quot;</span>
-</span><span id=__span-3-6><a id=__codelineno-3-6 name=__codelineno-3-6></a><span class=w>    </span><span class=s>&quot;os&quot;</span>
-</span><span id=__span-3-7><a id=__codelineno-3-7 name=__codelineno-3-7></a>
-</span><span id=__span-3-8><a id=__codelineno-3-8 name=__codelineno-3-8></a><span class=w>    </span><span class=s>&quot;github.com/cloudwego/eino/components/prompt&quot;</span>
-</span><span id=__span-3-9><a id=__codelineno-3-9 name=__codelineno-3-9></a><span class=w>    </span><span class=s>&quot;github.com/cloudwego/eino/components/model&quot;</span>
-</span><span id=__span-3-10><a id=__codelineno-3-10 name=__codelineno-3-10></a><span class=w>    </span><span class=s>&quot;github.com/cloudwego/eino/compose&quot;</span>
-</span><span id=__span-3-11><a id=__codelineno-3-11 name=__codelineno-3-11></a><span class=w>    </span><span class=s>&quot;github.com/cloudwego/eino/schema&quot;</span>
-</span><span id=__span-3-12><a id=__codelineno-3-12 name=__codelineno-3-12></a><span class=w>    </span><span class=s>&quot;github.com/cloudwego/eino-ext/components/model/openai&quot;</span>
-</span><span id=__span-3-13><a id=__codelineno-3-13 name=__codelineno-3-13></a><span class=p>)</span>
-</span><span id=__span-3-14><a id=__codelineno-3-14 name=__codelineno-3-14></a>
-</span><span id=__span-3-15><a id=__codelineno-3-15 name=__codelineno-3-15></a><span class=kd>func</span><span class=w> </span><span class=nx>main</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-3-16><a id=__codelineno-3-16 name=__codelineno-3-16></a><span class=w>    </span><span class=nx>ctx</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>context</span><span class=p>.</span><span class=nx>Background</span><span class=p>()</span>
-</span><span id=__span-3-17><a id=__codelineno-3-17 name=__codelineno-3-17></a>
-</span><span id=__span-3-18><a id=__codelineno-3-18 name=__codelineno-3-18></a><span class=w>    </span><span class=c1>// 1. 创建ChatModel</span>
-</span><span id=__span-3-19><a id=__codelineno-3-19 name=__codelineno-3-19></a><span class=w>    </span><span class=nx>chatModel</span><span class=p>,</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>openai</span><span class=p>.</span><span class=nx>NewChatModel</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span><span class=w> </span><span class=o>&amp;</span><span class=nx>openai</span><span class=p>.</span><span class=nx>Config</span><span class=p>{</span>
-</span><span id=__span-3-20><a id=__codelineno-3-20 name=__codelineno-3-20></a><span class=w>        </span><span class=nx>APIKey</span><span class=p>:</span><span class=w>  </span><span class=nx>os</span><span class=p>.</span><span class=nx>Getenv</span><span class=p>(</span><span class=s>&quot;OPENAI_API_KEY&quot;</span><span class=p>),</span>
-</span><span id=__span-3-21><a id=__codelineno-3-21 name=__codelineno-3-21></a><span class=w>        </span><span class=nx>Model</span><span class=p>:</span><span class=w>   </span><span class=s>&quot;gpt-3.5-turbo&quot;</span><span class=p>,</span>
-</span><span id=__span-3-22><a id=__codelineno-3-22 name=__codelineno-3-22></a><span class=w>    </span><span class=p>})</span>
-</span><span id=__span-3-23><a id=__codelineno-3-23 name=__codelineno-3-23></a><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=kc>nil</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-3-24><a id=__codelineno-3-24 name=__codelineno-3-24></a><span class=w>        </span><span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
-</span><span id=__span-3-25><a id=__codelineno-3-25 name=__codelineno-3-25></a><span class=w>    </span><span class=p>}</span>
-</span><span id=__span-3-26><a id=__codelineno-3-26 name=__codelineno-3-26></a>
-</span><span id=__span-3-27><a id=__codelineno-3-27 name=__codelineno-3-27></a><span class=w>    </span><span class=c1>// 2. 创建Chain</span>
-</span><span id=__span-3-28><a id=__codelineno-3-28 name=__codelineno-3-28></a><span class=w>    </span><span class=nx>chain</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>compose</span><span class=p>.</span><span class=nx>NewChain</span><span class=p>[[]</span><span class=o>*</span><span class=nx>schema</span><span class=p>.</span><span class=nx>Message</span><span class=p>,</span><span class=w> </span><span class=o>*</span><span class=nx>schema</span><span class=p>.</span><span class=nx>Message</span><span class=p>]()</span>
-</span><span id=__span-3-29><a id=__codelineno-3-29 name=__codelineno-3-29></a><span class=w>    </span><span class=nx>chain</span><span class=p>.</span><span class=nx>AppendChatModel</span><span class=p>(</span><span class=nx>chatModel</span><span class=p>)</span>
-</span><span id=__span-3-30><a id=__codelineno-3-30 name=__codelineno-3-30></a>
-</span><span id=__span-3-31><a id=__codelineno-3-31 name=__codelineno-3-31></a><span class=w>    </span><span class=c1>// 3. 编译</span>
-</span><span id=__span-3-32><a id=__codelineno-3-32 name=__codelineno-3-32></a><span class=w>    </span><span class=nx>runnable</span><span class=p>,</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>chain</span><span class=p>.</span><span class=nx>Compile</span><span class=p>(</span><span class=nx>ctx</span><span class=p>)</span>
-</span><span id=__span-3-33><a id=__codelineno-3-33 name=__codelineno-3-33></a><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=kc>nil</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-3-34><a id=__codelineno-3-34 name=__codelineno-3-34></a><span class=w>        </span><span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
-</span><span id=__span-3-35><a id=__codelineno-3-35 name=__codelineno-3-35></a><span class=w>    </span><span class=p>}</span>
-</span><span id=__span-3-36><a id=__codelineno-3-36 name=__codelineno-3-36></a>
-</span><span id=__span-3-37><a id=__codelineno-3-37 name=__codelineno-3-37></a><span class=w>    </span><span class=c1>// 4. 运行</span>
-</span><span id=__span-3-38><a id=__codelineno-3-38 name=__codelineno-3-38></a><span class=w>    </span><span class=nx>result</span><span class=p>,</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>runnable</span><span class=p>.</span><span class=nx>Invoke</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span><span class=w> </span><span class=p>[]</span><span class=o>*</span><span class=nx>schema</span><span class=p>.</span><span class=nx>Message</span><span class=p>{</span>
-</span><span id=__span-3-39><a id=__codelineno-3-39 name=__codelineno-3-39></a><span class=w>        </span><span class=nx>schema</span><span class=p>.</span><span class=nx>UserMessage</span><span class=p>(</span><span class=s>&quot;你好，请用一句话介绍Eino框架&quot;</span><span class=p>),</span>
-</span><span id=__span-3-40><a id=__codelineno-3-40 name=__codelineno-3-40></a><span class=w>    </span><span class=p>})</span>
-</span><span id=__span-3-41><a id=__codelineno-3-41 name=__codelineno-3-41></a><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=kc>nil</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-3-42><a id=__codelineno-3-42 name=__codelineno-3-42></a><span class=w>        </span><span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
-</span><span id=__span-3-43><a id=__codelineno-3-43 name=__codelineno-3-43></a><span class=w>    </span><span class=p>}</span>
-</span><span id=__span-3-44><a id=__codelineno-3-44 name=__codelineno-3-44></a>
-</span><span id=__span-3-45><a id=__codelineno-3-45 name=__codelineno-3-45></a><span class=w>    </span><span class=nx>fmt</span><span class=p>.</span><span class=nx>Println</span><span class=p>(</span><span class=nx>result</span><span class=p>.</span><span class=nx>Content</span><span class=p>)</span>
-</span><span id=__span-3-46><a id=__codelineno-3-46 name=__codelineno-3-46></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
-<span class=normal><a href=#__codelineno-4-2>2</a></span>
-<span class=normal><a href=#__codelineno-4-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a><span class=c1># 4. 运行</span>
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a><span class=nb>export</span><span class=w> </span><span class=nv>OPENAI_API_KEY</span><span class=o>=</span><span class=s2>&quot;your-key&quot;</span>
-</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a>go<span class=w> </span>run<span class=w> </span>main.go
-</span></code></pre></div></td></tr></table></div> <hr> <pre class=mermaid><code>mindmap
+    style E fill:#ffcc99</code></pre> <h3 id=112>11.2 官方资源<a class=headerlink href=#112 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>资源</th> <th>链接</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td><strong>官方文档</strong></td> <td>https://www.cloudwego.io/zh/docs/eino/</td> <td>完整文档</td> </tr> <tr> <td><strong>GitHub</strong></td> <td>https://github.com/cloudwego/eino</td> <td>源代码</td> </tr> <tr> <td><strong>示例代码</strong></td> <td>GitHub examples目录</td> <td>官方示例</td> </tr> <tr> <td><strong>扩展组件</strong></td> <td>https://github.com/cloudwego/eino-ext</td> <td>官方扩展</td> </tr> <tr> <td><strong>快速开始</strong></td> <td><code>go get github.com/cloudwego/eino</code></td> <td>一行命令安装</td> </tr> </tbody> </table> <h3 id=113-hello-world>11.3 Hello World快速开始<a class=headerlink href=#113-hello-world title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-2-1><span class=c1># 1. 创建Go项目</span>
+</span><span id=__span-2-2>mkdir<span class=w> </span>eino-demo<span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=nb>cd</span><span class=w> </span>eino-demo
+</span><span id=__span-2-3>go<span class=w> </span>mod<span class=w> </span>init<span class=w> </span>eino-demo
+</span><span id=__span-2-4>
+</span><span id=__span-2-5><span class=c1># 2. 安装Eino</span>
+</span><span id=__span-2-6>go<span class=w> </span>get<span class=w> </span>github.com/cloudwego/eino
+</span><span id=__span-2-7>
+</span><span id=__span-2-8><span class=c1># 3. 创建main.go</span>
+</span></code></pre></div> <div class="language-go highlight"><pre><span></span><code><span id=__span-3-1><span class=kn>package</span><span class=w> </span><span class=nx>main</span>
+</span><span id=__span-3-2>
+</span><span id=__span-3-3><span class=kn>import</span><span class=w> </span><span class=p>(</span>
+</span><span id=__span-3-4><span class=w>    </span><span class=s>&quot;context&quot;</span>
+</span><span id=__span-3-5><span class=w>    </span><span class=s>&quot;fmt&quot;</span>
+</span><span id=__span-3-6><span class=w>    </span><span class=s>&quot;os&quot;</span>
+</span><span id=__span-3-7>
+</span><span id=__span-3-8><span class=w>    </span><span class=s>&quot;github.com/cloudwego/eino/components/prompt&quot;</span>
+</span><span id=__span-3-9><span class=w>    </span><span class=s>&quot;github.com/cloudwego/eino/components/model&quot;</span>
+</span><span id=__span-3-10><span class=w>    </span><span class=s>&quot;github.com/cloudwego/eino/compose&quot;</span>
+</span><span id=__span-3-11><span class=w>    </span><span class=s>&quot;github.com/cloudwego/eino/schema&quot;</span>
+</span><span id=__span-3-12><span class=w>    </span><span class=s>&quot;github.com/cloudwego/eino-ext/components/model/openai&quot;</span>
+</span><span id=__span-3-13><span class=p>)</span>
+</span><span id=__span-3-14>
+</span><span id=__span-3-15><span class=kd>func</span><span class=w> </span><span class=nx>main</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-3-16><span class=w>    </span><span class=nx>ctx</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>context</span><span class=p>.</span><span class=nx>Background</span><span class=p>()</span>
+</span><span id=__span-3-17>
+</span><span id=__span-3-18><span class=w>    </span><span class=c1>// 1. 创建ChatModel</span>
+</span><span id=__span-3-19><span class=w>    </span><span class=nx>chatModel</span><span class=p>,</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>openai</span><span class=p>.</span><span class=nx>NewChatModel</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span><span class=w> </span><span class=o>&amp;</span><span class=nx>openai</span><span class=p>.</span><span class=nx>Config</span><span class=p>{</span>
+</span><span id=__span-3-20><span class=w>        </span><span class=nx>APIKey</span><span class=p>:</span><span class=w>  </span><span class=nx>os</span><span class=p>.</span><span class=nx>Getenv</span><span class=p>(</span><span class=s>&quot;OPENAI_API_KEY&quot;</span><span class=p>),</span>
+</span><span id=__span-3-21><span class=w>        </span><span class=nx>Model</span><span class=p>:</span><span class=w>   </span><span class=s>&quot;gpt-3.5-turbo&quot;</span><span class=p>,</span>
+</span><span id=__span-3-22><span class=w>    </span><span class=p>})</span>
+</span><span id=__span-3-23><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=kc>nil</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-3-24><span class=w>        </span><span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+</span><span id=__span-3-25><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-3-26>
+</span><span id=__span-3-27><span class=w>    </span><span class=c1>// 2. 创建Chain</span>
+</span><span id=__span-3-28><span class=w>    </span><span class=nx>chain</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>compose</span><span class=p>.</span><span class=nx>NewChain</span><span class=p>[[]</span><span class=o>*</span><span class=nx>schema</span><span class=p>.</span><span class=nx>Message</span><span class=p>,</span><span class=w> </span><span class=o>*</span><span class=nx>schema</span><span class=p>.</span><span class=nx>Message</span><span class=p>]()</span>
+</span><span id=__span-3-29><span class=w>    </span><span class=nx>chain</span><span class=p>.</span><span class=nx>AppendChatModel</span><span class=p>(</span><span class=nx>chatModel</span><span class=p>)</span>
+</span><span id=__span-3-30>
+</span><span id=__span-3-31><span class=w>    </span><span class=c1>// 3. 编译</span>
+</span><span id=__span-3-32><span class=w>    </span><span class=nx>runnable</span><span class=p>,</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>chain</span><span class=p>.</span><span class=nx>Compile</span><span class=p>(</span><span class=nx>ctx</span><span class=p>)</span>
+</span><span id=__span-3-33><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=kc>nil</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-3-34><span class=w>        </span><span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+</span><span id=__span-3-35><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-3-36>
+</span><span id=__span-3-37><span class=w>    </span><span class=c1>// 4. 运行</span>
+</span><span id=__span-3-38><span class=w>    </span><span class=nx>result</span><span class=p>,</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>runnable</span><span class=p>.</span><span class=nx>Invoke</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span><span class=w> </span><span class=p>[]</span><span class=o>*</span><span class=nx>schema</span><span class=p>.</span><span class=nx>Message</span><span class=p>{</span>
+</span><span id=__span-3-39><span class=w>        </span><span class=nx>schema</span><span class=p>.</span><span class=nx>UserMessage</span><span class=p>(</span><span class=s>&quot;你好，请用一句话介绍Eino框架&quot;</span><span class=p>),</span>
+</span><span id=__span-3-40><span class=w>    </span><span class=p>})</span>
+</span><span id=__span-3-41><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=nx>err</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=kc>nil</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-3-42><span class=w>        </span><span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+</span><span id=__span-3-43><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-3-44>
+</span><span id=__span-3-45><span class=w>    </span><span class=nx>fmt</span><span class=p>.</span><span class=nx>Println</span><span class=p>(</span><span class=nx>result</span><span class=p>.</span><span class=nx>Content</span><span class=p>)</span>
+</span><span id=__span-3-46><span class=p>}</span>
+</span></code></pre></div> <div class="language-bash highlight"><pre><span></span><code><span id=__span-4-1><span class=c1># 4. 运行</span>
+</span><span id=__span-4-2><span class=nb>export</span><span class=w> </span><span class=nv>OPENAI_API_KEY</span><span class=o>=</span><span class=s2>&quot;your-key&quot;</span>
+</span><span id=__span-4-3>go<span class=w> </span>run<span class=w> </span>main.go
+</span></code></pre></div> <hr> <pre class=mermaid><code>mindmap
   root((Eino框架))
     内核
       Go强类型

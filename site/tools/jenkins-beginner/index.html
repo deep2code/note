@@ -21,107 +21,63 @@
     C4 --&gt; D1
 
     style CI fill:#fff3e0
-    style CD fill:#e8f5e9</code></pre> <ul> <li><strong>CI（持续集成）</strong>：开发者频繁提交代码，自动编译+测试，尽早发现问题</li> <li><strong>CD（持续交付）</strong>：测试通过的代码自动部署，随时可以发布上线</li> </ul> <h3 id=jenkins_2>Jenkins能做什么？<a class=headerlink href=#jenkins_2 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>场景</th> <th>没有Jenkins</th> <th>有Jenkins</th> </tr> </thead> <tbody> <tr> <td>代码提交后</td> <td>手动编译打包</td> <td>自动触发构建</td> </tr> <tr> <td>运行测试</td> <td>手动执行测试脚本</td> <td>自动运行并报告结果</td> </tr> <tr> <td>部署上线</td> <td>SSH登录服务器操作</td> <td>一键或自动部署</td> </tr> <tr> <td>构建失败</td> <td>可能很久才发现</td> <td>即时通知（邮件/钉钉/飞书）</td> </tr> <tr> <td>多人协作</td> <td>"我本地可以啊"</td> <td>统一环境，问题无处遁形</td> </tr> </tbody> </table> <hr> <h2 id=jenkins_3>二、安装Jenkins<a class=headerlink href=#jenkins_3 title="Permanent link">&para;</a></h2> <p>Jenkins是Java写的，所以需要JDK环境。别慌，我一步步来。</p> <h3 id=_4>环境准备<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>组件</th> <th>要求</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>JDK</td> <td>11或17</td> <td>Jenkins 2.400+需要JDK 11+</td> </tr> <tr> <td>内存</td> <td>至少512MB</td> <td>推荐1GB+</td> </tr> <tr> <td>磁盘</td> <td>至少1GB</td> <td>推荐10GB+（插件和构建记录会占空间）</td> </tr> </tbody> </table> <h3 id=docker>方式一：Docker安装（推荐新手！）<a class=headerlink href=#docker title="Permanent link">&para;</a></h3> <p>最简单的方式，一条命令搞定：</p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1> 1</a></span>
-<span class=normal><a href=#__codelineno-0-2> 2</a></span>
-<span class=normal><a href=#__codelineno-0-3> 3</a></span>
-<span class=normal><a href=#__codelineno-0-4> 4</a></span>
-<span class=normal><a href=#__codelineno-0-5> 5</a></span>
-<span class=normal><a href=#__codelineno-0-6> 6</a></span>
-<span class=normal><a href=#__codelineno-0-7> 7</a></span>
-<span class=normal><a href=#__codelineno-0-8> 8</a></span>
-<span class=normal><a href=#__codelineno-0-9> 9</a></span>
-<span class=normal><a href=#__codelineno-0-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=c1># 拉取Jenkins镜像</span>
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a>docker<span class=w> </span>pull<span class=w> </span>jenkins/jenkins:lts
-</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a>
-</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a><span class=c1># 启动Jenkins容器</span>
-</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a>docker<span class=w> </span>run<span class=w> </span>-d<span class=w> </span><span class=se>\</span>
-</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a><span class=w>  </span>--name<span class=w> </span>jenkins<span class=w> </span><span class=se>\</span>
-</span><span id=__span-0-7><a id=__codelineno-0-7 name=__codelineno-0-7></a><span class=w>  </span>-p<span class=w> </span><span class=m>8080</span>:8080<span class=w> </span><span class=se>\</span>
-</span><span id=__span-0-8><a id=__codelineno-0-8 name=__codelineno-0-8></a><span class=w>  </span>-p<span class=w> </span><span class=m>50000</span>:50000<span class=w> </span><span class=se>\</span>
-</span><span id=__span-0-9><a id=__codelineno-0-9 name=__codelineno-0-9></a><span class=w>  </span>-v<span class=w> </span>jenkins_home:/var/jenkins_home<span class=w> </span><span class=se>\</span>
-</span><span id=__span-0-10><a id=__codelineno-0-10 name=__codelineno-0-10></a><span class=w>  </span>jenkins/jenkins:lts
-</span></code></pre></div></td></tr></table></div> <p>参数解释：</p> <pre class=mermaid><code>graph TD
+    style CD fill:#e8f5e9</code></pre> <ul> <li><strong>CI（持续集成）</strong>：开发者频繁提交代码，自动编译+测试，尽早发现问题</li> <li><strong>CD（持续交付）</strong>：测试通过的代码自动部署，随时可以发布上线</li> </ul> <h3 id=jenkins_2>Jenkins能做什么？<a class=headerlink href=#jenkins_2 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>场景</th> <th>没有Jenkins</th> <th>有Jenkins</th> </tr> </thead> <tbody> <tr> <td>代码提交后</td> <td>手动编译打包</td> <td>自动触发构建</td> </tr> <tr> <td>运行测试</td> <td>手动执行测试脚本</td> <td>自动运行并报告结果</td> </tr> <tr> <td>部署上线</td> <td>SSH登录服务器操作</td> <td>一键或自动部署</td> </tr> <tr> <td>构建失败</td> <td>可能很久才发现</td> <td>即时通知（邮件/钉钉/飞书）</td> </tr> <tr> <td>多人协作</td> <td>"我本地可以啊"</td> <td>统一环境，问题无处遁形</td> </tr> </tbody> </table> <hr> <h2 id=jenkins_3>二、安装Jenkins<a class=headerlink href=#jenkins_3 title="Permanent link">&para;</a></h2> <p>Jenkins是Java写的，所以需要JDK环境。别慌，我一步步来。</p> <h3 id=_4>环境准备<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>组件</th> <th>要求</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>JDK</td> <td>11或17</td> <td>Jenkins 2.400+需要JDK 11+</td> </tr> <tr> <td>内存</td> <td>至少512MB</td> <td>推荐1GB+</td> </tr> <tr> <td>磁盘</td> <td>至少1GB</td> <td>推荐10GB+（插件和构建记录会占空间）</td> </tr> </tbody> </table> <h3 id=docker>方式一：Docker安装（推荐新手！）<a class=headerlink href=#docker title="Permanent link">&para;</a></h3> <p>最简单的方式，一条命令搞定：</p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-0-1><span class=c1># 拉取Jenkins镜像</span>
+</span><span id=__span-0-2>docker<span class=w> </span>pull<span class=w> </span>jenkins/jenkins:lts
+</span><span id=__span-0-3>
+</span><span id=__span-0-4><span class=c1># 启动Jenkins容器</span>
+</span><span id=__span-0-5>docker<span class=w> </span>run<span class=w> </span>-d<span class=w> </span><span class=se>\</span>
+</span><span id=__span-0-6><span class=w>  </span>--name<span class=w> </span>jenkins<span class=w> </span><span class=se>\</span>
+</span><span id=__span-0-7><span class=w>  </span>-p<span class=w> </span><span class=m>8080</span>:8080<span class=w> </span><span class=se>\</span>
+</span><span id=__span-0-8><span class=w>  </span>-p<span class=w> </span><span class=m>50000</span>:50000<span class=w> </span><span class=se>\</span>
+</span><span id=__span-0-9><span class=w>  </span>-v<span class=w> </span>jenkins_home:/var/jenkins_home<span class=w> </span><span class=se>\</span>
+</span><span id=__span-0-10><span class=w>  </span>jenkins/jenkins:lts
+</span></code></pre></div> <p>参数解释：</p> <pre class=mermaid><code>graph TD
     A["docker run -d"] --&gt;|后台运行| B["--name jenkins"]
     B --&gt;|容器命名| C["-p 8080:8080"]
     C --&gt;|端口映射: Web界面| D["-p 50000:50000"]
     D --&gt;|端口映射: Agent通信| E["-v jenkins_home:/var/jenkins_home"]
     E --&gt;|数据持久化| F["jenkins/jenkins:lts"]
-    F --&gt;|使用LTS稳定版镜像|</code></pre> <h3 id=ubuntudebian>方式二：直接安装（Ubuntu/Debian）<a class=headerlink href=#ubuntudebian title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1> 1</a></span>
-<span class=normal><a href=#__codelineno-1-2> 2</a></span>
-<span class=normal><a href=#__codelineno-1-3> 3</a></span>
-<span class=normal><a href=#__codelineno-1-4> 4</a></span>
-<span class=normal><a href=#__codelineno-1-5> 5</a></span>
-<span class=normal><a href=#__codelineno-1-6> 6</a></span>
-<span class=normal><a href=#__codelineno-1-7> 7</a></span>
-<span class=normal><a href=#__codelineno-1-8> 8</a></span>
-<span class=normal><a href=#__codelineno-1-9> 9</a></span>
-<span class=normal><a href=#__codelineno-1-10>10</a></span>
-<span class=normal><a href=#__codelineno-1-11>11</a></span>
-<span class=normal><a href=#__codelineno-1-12>12</a></span>
-<span class=normal><a href=#__codelineno-1-13>13</a></span>
-<span class=normal><a href=#__codelineno-1-14>14</a></span>
-<span class=normal><a href=#__codelineno-1-15>15</a></span>
-<span class=normal><a href=#__codelineno-1-16>16</a></span>
-<span class=normal><a href=#__codelineno-1-17>17</a></span>
-<span class=normal><a href=#__codelineno-1-18>18</a></span>
-<span class=normal><a href=#__codelineno-1-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=c1># 第1步：安装JDK</span>
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a>sudo<span class=w> </span>apt<span class=w> </span>update
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>openjdk-17-jdk<span class=w> </span>-y
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a>
-</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a><span class=c1># 第2步：添加Jenkins仓库</span>
-</span><span id=__span-1-6><a id=__codelineno-1-6 name=__codelineno-1-6></a>curl<span class=w> </span>-fsSL<span class=w> </span>https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key<span class=w> </span><span class=p>|</span><span class=w> </span><span class=se>\</span>
-</span><span id=__span-1-7><a id=__codelineno-1-7 name=__codelineno-1-7></a><span class=w>  </span>sudo<span class=w> </span>tee<span class=w> </span>/usr/share/keyrings/jenkins-keyring.asc<span class=w> </span>&gt;<span class=w> </span>/dev/null
-</span><span id=__span-1-8><a id=__codelineno-1-8 name=__codelineno-1-8></a>
-</span><span id=__span-1-9><a id=__codelineno-1-9 name=__codelineno-1-9></a><span class=nb>echo</span><span class=w> </span>deb<span class=w> </span><span class=o>[</span>signed-by<span class=o>=</span>/usr/share/keyrings/jenkins-keyring.asc<span class=o>]</span><span class=w> </span><span class=se>\</span>
-</span><span id=__span-1-10><a id=__codelineno-1-10 name=__codelineno-1-10></a><span class=w>  </span>https://pkg.jenkins.io/debian-stable<span class=w> </span>binary/<span class=w> </span><span class=p>|</span><span class=w> </span><span class=se>\</span>
-</span><span id=__span-1-11><a id=__codelineno-1-11 name=__codelineno-1-11></a><span class=w>  </span>sudo<span class=w> </span>tee<span class=w> </span>/etc/apt/sources.list.d/jenkins.list<span class=w> </span>&gt;<span class=w> </span>/dev/null
-</span><span id=__span-1-12><a id=__codelineno-1-12 name=__codelineno-1-12></a>
-</span><span id=__span-1-13><a id=__codelineno-1-13 name=__codelineno-1-13></a><span class=c1># 第3步：安装Jenkins</span>
-</span><span id=__span-1-14><a id=__codelineno-1-14 name=__codelineno-1-14></a>sudo<span class=w> </span>apt<span class=w> </span>update
-</span><span id=__span-1-15><a id=__codelineno-1-15 name=__codelineno-1-15></a>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>jenkins<span class=w> </span>-y
-</span><span id=__span-1-16><a id=__codelineno-1-16 name=__codelineno-1-16></a>
-</span><span id=__span-1-17><a id=__codelineno-1-17 name=__codelineno-1-17></a><span class=c1># 第4步：启动Jenkins</span>
-</span><span id=__span-1-18><a id=__codelineno-1-18 name=__codelineno-1-18></a>sudo<span class=w> </span>systemctl<span class=w> </span>start<span class=w> </span>jenkins
-</span><span id=__span-1-19><a id=__codelineno-1-19 name=__codelineno-1-19></a>sudo<span class=w> </span>systemctl<span class=w> </span><span class=nb>enable</span><span class=w> </span>jenkins<span class=w>  </span><span class=c1># 开机自启</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=macos>方式三：macOS<a class=headerlink href=#macos title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span>
-<span class=normal><a href=#__codelineno-2-2>2</a></span>
-<span class=normal><a href=#__codelineno-2-3>3</a></span>
-<span class=normal><a href=#__codelineno-2-4>4</a></span>
-<span class=normal><a href=#__codelineno-2-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=c1># 用Homebrew安装</span>
-</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a>brew<span class=w> </span>install<span class=w> </span>jenkins-lts
-</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a>
-</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a><span class=c1># 启动服务</span>
-</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a>brew<span class=w> </span>services<span class=w> </span>start<span class=w> </span>jenkins-lts
-</span></code></pre></div></td></tr></table></div> <h3 id=windows>方式四：Windows<a class=headerlink href=#windows title="Permanent link">&para;</a></h3> <ol> <li>下载安装包：访问 https://www.jenkins.io/download/</li> <li>双击安装，一路Next</li> <li>安装完成后自动启动服务</li> </ol> <h3 id=_5>验证安装<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1>1</a></span>
-<span class=normal><a href=#__codelineno-3-2>2</a></span>
-<span class=normal><a href=#__codelineno-3-3>3</a></span>
-<span class=normal><a href=#__codelineno-3-4>4</a></span>
-<span class=normal><a href=#__codelineno-3-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=c1># 检查Jenkins是否在运行</span>
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>curl<span class=w> </span>-s<span class=w> </span>http://localhost:8080/cli/version
-</span><span id=__span-3-3><a id=__codelineno-3-3 name=__codelineno-3-3></a>
-</span><span id=__span-3-4><a id=__codelineno-3-4 name=__codelineno-3-4></a><span class=c1># 应该返回类似：</span>
-</span><span id=__span-3-5><a id=__codelineno-3-5 name=__codelineno-3-5></a><span class=c1># Jenkins 2.426.3</span>
-</span></code></pre></div></td></tr></table></div> <p>浏览器访问 <code>http://localhost:8080</code>，看到Jenkins的解锁页面就说明成功了！</p> <hr> <h2 id=_6>三、首次启动配置<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <h3 id=31-jenkins>3.1 解锁Jenkins<a class=headerlink href=#31-jenkins title="Permanent link">&para;</a></h3> <p>首次访问会看到这个页面：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
-<span class=normal><a href=#__codelineno-4-2>2</a></span>
-<span class=normal><a href=#__codelineno-4-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a>=========================================
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a>Jenkins Unlock
-</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a>=========================================
-</span></code></pre></div></td></tr></table></div> <p>它要求你输入管理员密码。密码在哪？看页面上写的路径：</p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1>1</a></span>
-<span class=normal><a href=#__codelineno-5-2>2</a></span>
-<span class=normal><a href=#__codelineno-5-3>3</a></span>
-<span class=normal><a href=#__codelineno-5-4>4</a></span>
-<span class=normal><a href=#__codelineno-5-5>5</a></span>
-<span class=normal><a href=#__codelineno-5-6>6</a></span>
-<span class=normal><a href=#__codelineno-5-7>7</a></span>
-<span class=normal><a href=#__codelineno-5-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=c1># Docker安装的</span>
-</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a>docker<span class=w> </span><span class=nb>exec</span><span class=w> </span>jenkins<span class=w> </span>cat<span class=w> </span>/var/jenkins_home/secrets/initialAdminPassword
-</span><span id=__span-5-3><a id=__codelineno-5-3 name=__codelineno-5-3></a>
-</span><span id=__span-5-4><a id=__codelineno-5-4 name=__codelineno-5-4></a><span class=c1># 直接安装的（Ubuntu）</span>
-</span><span id=__span-5-5><a id=__codelineno-5-5 name=__codelineno-5-5></a>sudo<span class=w> </span>cat<span class=w> </span>/var/lib/jenkins/secrets/initialAdminPassword
-</span><span id=__span-5-6><a id=__codelineno-5-6 name=__codelineno-5-6></a>
-</span><span id=__span-5-7><a id=__codelineno-5-7 name=__codelineno-5-7></a><span class=c1># macOS</span>
-</span><span id=__span-5-8><a id=__codelineno-5-8 name=__codelineno-5-8></a>cat<span class=w> </span>~/.jenkins/secrets/initialAdminPassword
-</span></code></pre></div></td></tr></table></div> <p>复制那串字符，粘贴到页面上，点继续。</p> <h3 id=32>3.2 安装插件<a class=headerlink href=#32 title="Permanent link">&para;</a></h3> <p>Jenkins会让你选择插件安装方式：</p> <pre class=mermaid><code>graph TD
+    F --&gt;|使用LTS稳定版镜像|</code></pre> <h3 id=ubuntudebian>方式二：直接安装（Ubuntu/Debian）<a class=headerlink href=#ubuntudebian title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-1-1><span class=c1># 第1步：安装JDK</span>
+</span><span id=__span-1-2>sudo<span class=w> </span>apt<span class=w> </span>update
+</span><span id=__span-1-3>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>openjdk-17-jdk<span class=w> </span>-y
+</span><span id=__span-1-4>
+</span><span id=__span-1-5><span class=c1># 第2步：添加Jenkins仓库</span>
+</span><span id=__span-1-6>curl<span class=w> </span>-fsSL<span class=w> </span>https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key<span class=w> </span><span class=p>|</span><span class=w> </span><span class=se>\</span>
+</span><span id=__span-1-7><span class=w>  </span>sudo<span class=w> </span>tee<span class=w> </span>/usr/share/keyrings/jenkins-keyring.asc<span class=w> </span>&gt;<span class=w> </span>/dev/null
+</span><span id=__span-1-8>
+</span><span id=__span-1-9><span class=nb>echo</span><span class=w> </span>deb<span class=w> </span><span class=o>[</span>signed-by<span class=o>=</span>/usr/share/keyrings/jenkins-keyring.asc<span class=o>]</span><span class=w> </span><span class=se>\</span>
+</span><span id=__span-1-10><span class=w>  </span>https://pkg.jenkins.io/debian-stable<span class=w> </span>binary/<span class=w> </span><span class=p>|</span><span class=w> </span><span class=se>\</span>
+</span><span id=__span-1-11><span class=w>  </span>sudo<span class=w> </span>tee<span class=w> </span>/etc/apt/sources.list.d/jenkins.list<span class=w> </span>&gt;<span class=w> </span>/dev/null
+</span><span id=__span-1-12>
+</span><span id=__span-1-13><span class=c1># 第3步：安装Jenkins</span>
+</span><span id=__span-1-14>sudo<span class=w> </span>apt<span class=w> </span>update
+</span><span id=__span-1-15>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>jenkins<span class=w> </span>-y
+</span><span id=__span-1-16>
+</span><span id=__span-1-17><span class=c1># 第4步：启动Jenkins</span>
+</span><span id=__span-1-18>sudo<span class=w> </span>systemctl<span class=w> </span>start<span class=w> </span>jenkins
+</span><span id=__span-1-19>sudo<span class=w> </span>systemctl<span class=w> </span><span class=nb>enable</span><span class=w> </span>jenkins<span class=w>  </span><span class=c1># 开机自启</span>
+</span></code></pre></div> <h3 id=macos>方式三：macOS<a class=headerlink href=#macos title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-2-1><span class=c1># 用Homebrew安装</span>
+</span><span id=__span-2-2>brew<span class=w> </span>install<span class=w> </span>jenkins-lts
+</span><span id=__span-2-3>
+</span><span id=__span-2-4><span class=c1># 启动服务</span>
+</span><span id=__span-2-5>brew<span class=w> </span>services<span class=w> </span>start<span class=w> </span>jenkins-lts
+</span></code></pre></div> <h3 id=windows>方式四：Windows<a class=headerlink href=#windows title="Permanent link">&para;</a></h3> <ol> <li>下载安装包：访问 https://www.jenkins.io/download/</li> <li>双击安装，一路Next</li> <li>安装完成后自动启动服务</li> </ol> <h3 id=_5>验证安装<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-3-1><span class=c1># 检查Jenkins是否在运行</span>
+</span><span id=__span-3-2>curl<span class=w> </span>-s<span class=w> </span>http://localhost:8080/cli/version
+</span><span id=__span-3-3>
+</span><span id=__span-3-4><span class=c1># 应该返回类似：</span>
+</span><span id=__span-3-5><span class=c1># Jenkins 2.426.3</span>
+</span></code></pre></div> <p>浏览器访问 <code>http://localhost:8080</code>，看到Jenkins的解锁页面就说明成功了！</p> <hr> <h2 id=_6>三、首次启动配置<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <h3 id=31-jenkins>3.1 解锁Jenkins<a class=headerlink href=#31-jenkins title="Permanent link">&para;</a></h3> <p>首次访问会看到这个页面：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-4-1>=========================================
+</span><span id=__span-4-2>Jenkins Unlock
+</span><span id=__span-4-3>=========================================
+</span></code></pre></div> <p>它要求你输入管理员密码。密码在哪？看页面上写的路径：</p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-5-1><span class=c1># Docker安装的</span>
+</span><span id=__span-5-2>docker<span class=w> </span><span class=nb>exec</span><span class=w> </span>jenkins<span class=w> </span>cat<span class=w> </span>/var/jenkins_home/secrets/initialAdminPassword
+</span><span id=__span-5-3>
+</span><span id=__span-5-4><span class=c1># 直接安装的（Ubuntu）</span>
+</span><span id=__span-5-5>sudo<span class=w> </span>cat<span class=w> </span>/var/lib/jenkins/secrets/initialAdminPassword
+</span><span id=__span-5-6>
+</span><span id=__span-5-7><span class=c1># macOS</span>
+</span><span id=__span-5-8>cat<span class=w> </span>~/.jenkins/secrets/initialAdminPassword
+</span></code></pre></div> <p>复制那串字符，粘贴到页面上，点继续。</p> <h3 id=32>3.2 安装插件<a class=headerlink href=#32 title="Permanent link">&para;</a></h3> <p>Jenkins会让你选择插件安装方式：</p> <pre class=mermaid><code>graph TD
     A[插件安装选择] --&gt; B["安装推荐的插件&lt;br/&gt;（推荐新手选这个）"]
     A --&gt; C["选择插件来安装&lt;br/&gt;（老手选这个）"]
 
@@ -132,14 +88,11 @@
     F --&gt; G[后续可随时补充]
 
     style B fill:#c8e6c9
-    style C fill:#fff9c4</code></pre> <p><strong>强烈建议新手选"安装推荐的插件"</strong>。它会自动安装以下核心插件：</p> <table> <thead> <tr> <th>插件</th> <th>作用</th> </tr> </thead> <tbody> <tr> <td>Git Plugin</td> <td>从Git仓库拉取代码</td> </tr> <tr> <td>Pipeline</td> <td>支持流水线即代码</td> </tr> <tr> <td>Credentials Binding</td> <td>安全管理密码和密钥</td> </tr> <tr> <td>Docker Pipeline</td> <td>支持Docker操作</td> </tr> <tr> <td>JUnit Plugin</td> <td>展示测试报告</td> </tr> </tbody> </table> <p>安装过程需要几分钟，耐心等待。如果个别插件安装失败，不用紧张，后面可以重试。</p> <h3 id=33>3.3 创建管理员账户<a class=headerlink href=#33 title="Permanent link">&para;</a></h3> <p>插件安装完成后，创建你的管理员账户：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span>
-<span class=normal><a href=#__codelineno-6-2>2</a></span>
-<span class=normal><a href=#__codelineno-6-3>3</a></span>
-<span class=normal><a href=#__codelineno-6-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a>用户名：admin
-</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a>密码：    ******（设个自己记得住的）
-</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a>全名：    管理员
-</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a>邮箱：    admin@example.com
-</span></code></pre></div></td></tr></table></div> <h3 id=34-jenkins-url>3.4 配置Jenkins URL<a class=headerlink href=#34-jenkins-url title="Permanent link">&para;</a></h3> <p>一般默认 <code>http://localhost:8080</code> 就行。如果是远程服务器，改成实际地址。</p> <p><strong>点"保存并完成"，Jenkins就配置好了！</strong></p> <hr> <h2 id=jenkins_4>四、认识Jenkins界面<a class=headerlink href=#jenkins_4 title="Permanent link">&para;</a></h2> <p>进入Jenkins主页，你会看到：</p> <pre class=mermaid><code>graph TD
+    style C fill:#fff9c4</code></pre> <p><strong>强烈建议新手选"安装推荐的插件"</strong>。它会自动安装以下核心插件：</p> <table> <thead> <tr> <th>插件</th> <th>作用</th> </tr> </thead> <tbody> <tr> <td>Git Plugin</td> <td>从Git仓库拉取代码</td> </tr> <tr> <td>Pipeline</td> <td>支持流水线即代码</td> </tr> <tr> <td>Credentials Binding</td> <td>安全管理密码和密钥</td> </tr> <tr> <td>Docker Pipeline</td> <td>支持Docker操作</td> </tr> <tr> <td>JUnit Plugin</td> <td>展示测试报告</td> </tr> </tbody> </table> <p>安装过程需要几分钟，耐心等待。如果个别插件安装失败，不用紧张，后面可以重试。</p> <h3 id=33>3.3 创建管理员账户<a class=headerlink href=#33 title="Permanent link">&para;</a></h3> <p>插件安装完成后，创建你的管理员账户：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-6-1>用户名：admin
+</span><span id=__span-6-2>密码：    ******（设个自己记得住的）
+</span><span id=__span-6-3>全名：    管理员
+</span><span id=__span-6-4>邮箱：    admin@example.com
+</span></code></pre></div> <h3 id=34-jenkins-url>3.4 配置Jenkins URL<a class=headerlink href=#34-jenkins-url title="Permanent link">&para;</a></h3> <p>一般默认 <code>http://localhost:8080</code> 就行。如果是远程服务器，改成实际地址。</p> <p><strong>点"保存并完成"，Jenkins就配置好了！</strong></p> <hr> <h2 id=jenkins_4>四、认识Jenkins界面<a class=headerlink href=#jenkins_4 title="Permanent link">&para;</a></h2> <p>进入Jenkins主页，你会看到：</p> <pre class=mermaid><code>graph TD
     subgraph Jenkins主界面
         A[左侧导航栏] --&gt; A1[新建Item&lt;br/&gt;创建任务]
         A --&gt; A2[People&lt;br/&gt;用户管理]
@@ -154,26 +107,18 @@
     end
 
     style A1 fill:#e3f2fd
-    style A4 fill:#fff3e0</code></pre> <h3 id=_7>几个核心概念<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <p>在动手之前，先搞清楚Jenkins的几个核心术语：</p> <table> <thead> <tr> <th>术语</th> <th>解释</th> <th>类比</th> </tr> </thead> <tbody> <tr> <td><strong>Item/Job</strong></td> <td>一个任务/项目</td> <td>一个奶茶配方</td> </tr> <tr> <td><strong>Build</strong></td> <td>一次构建执行</td> <td>按配方做了一杯奶茶</td> </tr> <tr> <td><strong>Pipeline</strong></td> <td>流水线（用代码定义构建流程）</td> <td>全自动奶茶生产线</td> </tr> <tr> <td><strong>Stage</strong></td> <td>流水线中的一个阶段</td> <td>制作奶茶的一个步骤</td> </tr> <tr> <td><strong>Step</strong></td> <td>阶段中的一个具体操作</td> <td>具体动作（加糖、加冰）</td> </tr> <tr> <td><strong>Workspace</strong></td> <td>构建时的工作目录</td> <td>制作台</td> </tr> <tr> <td><strong>Artifact</strong></td> <td>构建产物</td> <td>做好的那杯奶茶</td> </tr> </tbody> </table> <hr> <h2 id=job>五、创建第一个Job：自由风格项目<a class=headerlink href=#job title="Permanent link">&para;</a></h2> <p>先从最简单的开始——<strong>自由风格项目（Freestyle Project）</strong>。</p> <h3 id=51>5.1 创建任务<a class=headerlink href=#51 title="Permanent link">&para;</a></h3> <ol> <li>点击"新建Item"</li> <li>输入任务名称：<code>my-first-job</code></li> <li>选择"Freestyle project"</li> <li>点击"确定"</li> </ol> <h3 id=52>5.2 配置源码管理<a class=headerlink href=#52 title="Permanent link">&para;</a></h3> <p>找到"源码管理"（Source Code Management）部分：</p> <p><strong>如果你用的是Git：</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1>1</a></span>
-<span class=normal><a href=#__codelineno-7-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a>Repository URL:  https://github.com/你的用户名/你的仓库.git
-</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a>Branch:          */main
-</span></code></pre></div></td></tr></table></div> <p><strong>如果是私有仓库</strong>，还需要添加凭证（Credentials）：</p> <ol> <li>点击"添加" -&gt; "Jenkins"</li> <li>选择"Username with password"</li> <li>填入Git用户名和密码（或Personal Access Token）</li> <li>点"添加"</li> </ol> <p><strong>如果暂时没有Git仓库</strong>，可以先选"None"，我们后面用Pipeline来演示。</p> <h3 id=53>5.3 配置构建步骤<a class=headerlink href=#53 title="Permanent link">&para;</a></h3> <p>找到"构建"（Build Steps）部分：</p> <ol> <li>点击"增加构建步骤"</li> <li>选择"执行shell"（Linux/Mac）或"执行Windows批处理命令"</li> <li>输入：</li> </ol> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1>1</a></span>
-<span class=normal><a href=#__codelineno-8-2>2</a></span>
-<span class=normal><a href=#__codelineno-8-3>3</a></span>
-<span class=normal><a href=#__codelineno-8-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;========== 开始构建 ==========&quot;</span>
-</span><span id=__span-8-2><a id=__codelineno-8-2 name=__codelineno-8-2></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;当前目录: </span><span class=k>$(</span><span class=nb>pwd</span><span class=k>)</span><span class=s2>&quot;</span>
-</span><span id=__span-8-3><a id=__codelineno-8-3 name=__codelineno-8-3></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;当前时间: </span><span class=k>$(</span>date<span class=k>)</span><span class=s2>&quot;</span>
-</span><span id=__span-8-4><a id=__codelineno-8-4 name=__codelineno-8-4></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;========== 构建完成 ==========&quot;</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=54>5.4 保存并运行<a class=headerlink href=#54 title="Permanent link">&para;</a></h3> <ol> <li>点击"保存"</li> <li>回到任务页面</li> <li>点击左侧"立即构建"（Build Now）</li> </ol> <h3 id=55>5.5 查看构建结果<a class=headerlink href=#55 title="Permanent link">&para;</a></h3> <p>构建开始后：</p> <ol> <li>左下角"Build History"会出现 <code>#1</code></li> <li>点击 <code>#1</code></li> <li>点击"控制台输出"（Console Output）</li> </ol> <p>你会看到：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1>1</a></span>
-<span class=normal><a href=#__codelineno-9-2>2</a></span>
-<span class=normal><a href=#__codelineno-9-3>3</a></span>
-<span class=normal><a href=#__codelineno-9-4>4</a></span>
-<span class=normal><a href=#__codelineno-9-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a>========== 开始构建 ==========
-</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a>当前目录: /var/jenkins_home/workspace/my-first-job
-</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a>当前时间: 2024-01-15 10:30:00
-</span><span id=__span-9-4><a id=__codelineno-9-4 name=__codelineno-9-4></a>========== 构建完成 ==========
-</span><span id=__span-9-5><a id=__codelineno-9-5 name=__codelineno-9-5></a>Finished: SUCCESS
-</span></code></pre></div></td></tr></table></div> <p>恭喜！你的第一个Jenkins构建成功了！</p> <hr> <h2 id=pipeline>六、Pipeline：流水线才是正道<a class=headerlink href=#pipeline title="Permanent link">&para;</a></h2> <p>自由风格项目虽然简单，但不够灵活。<strong>Pipeline（流水线）</strong> 才是Jenkins的精髓。</p> <h3 id=61-pipeline>6.1 为什么要用Pipeline？<a class=headerlink href=#61-pipeline title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
+    style A4 fill:#fff3e0</code></pre> <h3 id=_7>几个核心概念<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <p>在动手之前，先搞清楚Jenkins的几个核心术语：</p> <table> <thead> <tr> <th>术语</th> <th>解释</th> <th>类比</th> </tr> </thead> <tbody> <tr> <td><strong>Item/Job</strong></td> <td>一个任务/项目</td> <td>一个奶茶配方</td> </tr> <tr> <td><strong>Build</strong></td> <td>一次构建执行</td> <td>按配方做了一杯奶茶</td> </tr> <tr> <td><strong>Pipeline</strong></td> <td>流水线（用代码定义构建流程）</td> <td>全自动奶茶生产线</td> </tr> <tr> <td><strong>Stage</strong></td> <td>流水线中的一个阶段</td> <td>制作奶茶的一个步骤</td> </tr> <tr> <td><strong>Step</strong></td> <td>阶段中的一个具体操作</td> <td>具体动作（加糖、加冰）</td> </tr> <tr> <td><strong>Workspace</strong></td> <td>构建时的工作目录</td> <td>制作台</td> </tr> <tr> <td><strong>Artifact</strong></td> <td>构建产物</td> <td>做好的那杯奶茶</td> </tr> </tbody> </table> <hr> <h2 id=job>五、创建第一个Job：自由风格项目<a class=headerlink href=#job title="Permanent link">&para;</a></h2> <p>先从最简单的开始——<strong>自由风格项目（Freestyle Project）</strong>。</p> <h3 id=51>5.1 创建任务<a class=headerlink href=#51 title="Permanent link">&para;</a></h3> <ol> <li>点击"新建Item"</li> <li>输入任务名称：<code>my-first-job</code></li> <li>选择"Freestyle project"</li> <li>点击"确定"</li> </ol> <h3 id=52>5.2 配置源码管理<a class=headerlink href=#52 title="Permanent link">&para;</a></h3> <p>找到"源码管理"（Source Code Management）部分：</p> <p><strong>如果你用的是Git：</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-7-1>Repository URL:  https://github.com/你的用户名/你的仓库.git
+</span><span id=__span-7-2>Branch:          */main
+</span></code></pre></div> <p><strong>如果是私有仓库</strong>，还需要添加凭证（Credentials）：</p> <ol> <li>点击"添加" -&gt; "Jenkins"</li> <li>选择"Username with password"</li> <li>填入Git用户名和密码（或Personal Access Token）</li> <li>点"添加"</li> </ol> <p><strong>如果暂时没有Git仓库</strong>，可以先选"None"，我们后面用Pipeline来演示。</p> <h3 id=53>5.3 配置构建步骤<a class=headerlink href=#53 title="Permanent link">&para;</a></h3> <p>找到"构建"（Build Steps）部分：</p> <ol> <li>点击"增加构建步骤"</li> <li>选择"执行shell"（Linux/Mac）或"执行Windows批处理命令"</li> <li>输入：</li> </ol> <div class="language-bash highlight"><pre><span></span><code><span id=__span-8-1><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;========== 开始构建 ==========&quot;</span>
+</span><span id=__span-8-2><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;当前目录: </span><span class=k>$(</span><span class=nb>pwd</span><span class=k>)</span><span class=s2>&quot;</span>
+</span><span id=__span-8-3><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;当前时间: </span><span class=k>$(</span>date<span class=k>)</span><span class=s2>&quot;</span>
+</span><span id=__span-8-4><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;========== 构建完成 ==========&quot;</span>
+</span></code></pre></div> <h3 id=54>5.4 保存并运行<a class=headerlink href=#54 title="Permanent link">&para;</a></h3> <ol> <li>点击"保存"</li> <li>回到任务页面</li> <li>点击左侧"立即构建"（Build Now）</li> </ol> <h3 id=55>5.5 查看构建结果<a class=headerlink href=#55 title="Permanent link">&para;</a></h3> <p>构建开始后：</p> <ol> <li>左下角"Build History"会出现 <code>#1</code></li> <li>点击 <code>#1</code></li> <li>点击"控制台输出"（Console Output）</li> </ol> <p>你会看到：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-9-1>========== 开始构建 ==========
+</span><span id=__span-9-2>当前目录: /var/jenkins_home/workspace/my-first-job
+</span><span id=__span-9-3>当前时间: 2024-01-15 10:30:00
+</span><span id=__span-9-4>========== 构建完成 ==========
+</span><span id=__span-9-5>Finished: SUCCESS
+</span></code></pre></div> <p>恭喜！你的第一个Jenkins构建成功了！</p> <hr> <h2 id=pipeline>六、Pipeline：流水线才是正道<a class=headerlink href=#pipeline title="Permanent link">&para;</a></h2> <p>自由风格项目虽然简单，但不够灵活。<strong>Pipeline（流水线）</strong> 才是Jenkins的精髓。</p> <h3 id=61-pipeline>6.1 为什么要用Pipeline？<a class=headerlink href=#61-pipeline title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
     subgraph 自由风格
         F1[配置全靠点] --&gt; F2[不好版本管理]
         F2 --&gt; F3[复杂流程难维护]
@@ -185,64 +130,36 @@
     end
 
     style P3 fill:#c8e6c9
-    style F3 fill:#ffcdd2</code></pre> <p><strong>Pipeline的核心优势：</strong> - 代码即配置，跟项目一起管理 - 支持复杂的条件判断、循环、并行 - 可以暂停、等待人工确认 - 可视化显示构建阶段</p> <h3 id=62-pipeline>6.2 创建Pipeline项目<a class=headerlink href=#62-pipeline title="Permanent link">&para;</a></h3> <ol> <li>点击"新建Item"</li> <li>输入名称：<code>my-pipeline</code></li> <li>选择"Pipeline"</li> <li>点击"确定"</li> </ol> <h3 id=63-pipeline>6.3 第一个Pipeline脚本<a class=headerlink href=#63-pipeline title="Permanent link">&para;</a></h3> <p>在"Pipeline"部分，选择"Pipeline script"，输入：</p> <div class="language-groovy highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1> 1</a></span>
-<span class=normal><a href=#__codelineno-10-2> 2</a></span>
-<span class=normal><a href=#__codelineno-10-3> 3</a></span>
-<span class=normal><a href=#__codelineno-10-4> 4</a></span>
-<span class=normal><a href=#__codelineno-10-5> 5</a></span>
-<span class=normal><a href=#__codelineno-10-6> 6</a></span>
-<span class=normal><a href=#__codelineno-10-7> 7</a></span>
-<span class=normal><a href=#__codelineno-10-8> 8</a></span>
-<span class=normal><a href=#__codelineno-10-9> 9</a></span>
-<span class=normal><a href=#__codelineno-10-10>10</a></span>
-<span class=normal><a href=#__codelineno-10-11>11</a></span>
-<span class=normal><a href=#__codelineno-10-12>12</a></span>
-<span class=normal><a href=#__codelineno-10-13>13</a></span>
-<span class=normal><a href=#__codelineno-10-14>14</a></span>
-<span class=normal><a href=#__codelineno-10-15>15</a></span>
-<span class=normal><a href=#__codelineno-10-16>16</a></span>
-<span class=normal><a href=#__codelineno-10-17>17</a></span>
-<span class=normal><a href=#__codelineno-10-18>18</a></span>
-<span class=normal><a href=#__codelineno-10-19>19</a></span>
-<span class=normal><a href=#__codelineno-10-20>20</a></span>
-<span class=normal><a href=#__codelineno-10-21>21</a></span>
-<span class=normal><a href=#__codelineno-10-22>22</a></span>
-<span class=normal><a href=#__codelineno-10-23>23</a></span>
-<span class=normal><a href=#__codelineno-10-24>24</a></span>
-<span class=normal><a href=#__codelineno-10-25>25</a></span>
-<span class=normal><a href=#__codelineno-10-26>26</a></span>
-<span class=normal><a href=#__codelineno-10-27>27</a></span>
-<span class=normal><a href=#__codelineno-10-28>28</a></span>
-<span class=normal><a href=#__codelineno-10-29>29</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a><span class=n>pipeline</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-10-2><a id=__codelineno-10-2 name=__codelineno-10-2></a><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span>
-</span><span id=__span-10-3><a id=__codelineno-10-3 name=__codelineno-10-3></a>
-</span><span id=__span-10-4><a id=__codelineno-10-4 name=__codelineno-10-4></a><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-10-5><a id=__codelineno-10-5 name=__codelineno-10-5></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;准备&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-10-6><a id=__codelineno-10-6 name=__codelineno-10-6></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-10-7><a id=__codelineno-10-7 name=__codelineno-10-7></a><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;你好，Jenkins Pipeline！&#39;</span>
-</span><span id=__span-10-8><a id=__codelineno-10-8 name=__codelineno-10-8></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-10-9><a id=__codelineno-10-9 name=__codelineno-10-9></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-10-10><a id=__codelineno-10-10 name=__codelineno-10-10></a>
-</span><span id=__span-10-11><a id=__codelineno-10-11 name=__codelineno-10-11></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;编译&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-10-12><a id=__codelineno-10-12 name=__codelineno-10-12></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-10-13><a id=__codelineno-10-13 name=__codelineno-10-13></a><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;正在编译项目...&#39;</span>
-</span><span id=__span-10-14><a id=__codelineno-10-14 name=__codelineno-10-14></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-10-15><a id=__codelineno-10-15 name=__codelineno-10-15></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-10-16><a id=__codelineno-10-16 name=__codelineno-10-16></a>
-</span><span id=__span-10-17><a id=__codelineno-10-17 name=__codelineno-10-17></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-10-18><a id=__codelineno-10-18 name=__codelineno-10-18></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-10-19><a id=__codelineno-10-19 name=__codelineno-10-19></a><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;正在运行测试...&#39;</span>
-</span><span id=__span-10-20><a id=__codelineno-10-20 name=__codelineno-10-20></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-10-21><a id=__codelineno-10-21 name=__codelineno-10-21></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-10-22><a id=__codelineno-10-22 name=__codelineno-10-22></a>
-</span><span id=__span-10-23><a id=__codelineno-10-23 name=__codelineno-10-23></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;部署&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-10-24><a id=__codelineno-10-24 name=__codelineno-10-24></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-10-25><a id=__codelineno-10-25 name=__codelineno-10-25></a><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;正在部署到服务器...&#39;</span>
-</span><span id=__span-10-26><a id=__codelineno-10-26 name=__codelineno-10-26></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-10-27><a id=__codelineno-10-27 name=__codelineno-10-27></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-10-28><a id=__codelineno-10-28 name=__codelineno-10-28></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-10-29><a id=__codelineno-10-29 name=__codelineno-10-29></a><span class=o>}</span>
-</span></code></pre></div></td></tr></table></div> <p>保存并运行，你会看到阶段视图（Stage View）：</p> <pre class=mermaid><code>graph LR
+    style F3 fill:#ffcdd2</code></pre> <p><strong>Pipeline的核心优势：</strong> - 代码即配置，跟项目一起管理 - 支持复杂的条件判断、循环、并行 - 可以暂停、等待人工确认 - 可视化显示构建阶段</p> <h3 id=62-pipeline>6.2 创建Pipeline项目<a class=headerlink href=#62-pipeline title="Permanent link">&para;</a></h3> <ol> <li>点击"新建Item"</li> <li>输入名称：<code>my-pipeline</code></li> <li>选择"Pipeline"</li> <li>点击"确定"</li> </ol> <h3 id=63-pipeline>6.3 第一个Pipeline脚本<a class=headerlink href=#63-pipeline title="Permanent link">&para;</a></h3> <p>在"Pipeline"部分，选择"Pipeline script"，输入：</p> <div class="language-groovy highlight"><pre><span></span><code><span id=__span-10-1><span class=n>pipeline</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-10-2><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span>
+</span><span id=__span-10-3>
+</span><span id=__span-10-4><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-10-5><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;准备&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-10-6><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-10-7><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;你好，Jenkins Pipeline！&#39;</span>
+</span><span id=__span-10-8><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-10-9><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-10-10>
+</span><span id=__span-10-11><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;编译&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-10-12><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-10-13><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;正在编译项目...&#39;</span>
+</span><span id=__span-10-14><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-10-15><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-10-16>
+</span><span id=__span-10-17><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-10-18><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-10-19><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;正在运行测试...&#39;</span>
+</span><span id=__span-10-20><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-10-21><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-10-22>
+</span><span id=__span-10-23><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;部署&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-10-24><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-10-25><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;正在部署到服务器...&#39;</span>
+</span><span id=__span-10-26><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-10-27><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-10-28><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-10-29><span class=o>}</span>
+</span></code></pre></div> <p>保存并运行，你会看到阶段视图（Stage View）：</p> <pre class=mermaid><code>graph LR
     A["准备&lt;br/&gt;✓"] --&gt; B["编译&lt;br/&gt;✓"]
     B --&gt; C["测试&lt;br/&gt;✓"]
     C --&gt; D["部署&lt;br/&gt;✓"]
@@ -250,245 +167,128 @@
     style A fill:#c8e6c9
     style B fill:#c8e6c9
     style C fill:#c8e6c9
-    style D fill:#c8e6c9</code></pre> <p>每个阶段都变成绿色了，太棒了！</p> <h3 id=64-pipeline>6.4 Pipeline语法详解<a class=headerlink href=#64-pipeline title="Permanent link">&para;</a></h3> <p>来逐行理解这个脚本：</p> <div class="language-groovy highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1> 1</a></span>
-<span class=normal><a href=#__codelineno-11-2> 2</a></span>
-<span class=normal><a href=#__codelineno-11-3> 3</a></span>
-<span class=normal><a href=#__codelineno-11-4> 4</a></span>
-<span class=normal><a href=#__codelineno-11-5> 5</a></span>
-<span class=normal><a href=#__codelineno-11-6> 6</a></span>
-<span class=normal><a href=#__codelineno-11-7> 7</a></span>
-<span class=normal><a href=#__codelineno-11-8> 8</a></span>
-<span class=normal><a href=#__codelineno-11-9> 9</a></span>
-<span class=normal><a href=#__codelineno-11-10>10</a></span>
-<span class=normal><a href=#__codelineno-11-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a><span class=n>pipeline</span><span class=w> </span><span class=o>{</span><span class=w>                    </span><span class=c1>// ① 声明式Pipeline的固定写法</span>
-</span><span id=__span-11-2><a id=__codelineno-11-2 name=__codelineno-11-2></a><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span><span class=w>                 </span><span class=c1>// ② 在任意可用节点上运行</span>
-</span><span id=__span-11-3><a id=__codelineno-11-3 name=__codelineno-11-3></a>
-</span><span id=__span-11-4><a id=__codelineno-11-4 name=__codelineno-11-4></a><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span><span class=w>                  </span><span class=c1>// ③ 所有阶段的容器</span>
-</span><span id=__span-11-5><a id=__codelineno-11-5 name=__codelineno-11-5></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;准备&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span><span class=w>       </span><span class=c1>// ④ 定义一个阶段</span>
-</span><span id=__span-11-6><a id=__codelineno-11-6 name=__codelineno-11-6></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span><span class=w>           </span><span class=c1>// ⑤ 阶段内的步骤</span>
-</span><span id=__span-11-7><a id=__codelineno-11-7 name=__codelineno-11-7></a><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;...&#39;</span><span class=w>    </span><span class=c1>// ⑥ 具体操作</span>
-</span><span id=__span-11-8><a id=__codelineno-11-8 name=__codelineno-11-8></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-11-9><a id=__codelineno-11-9 name=__codelineno-11-9></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-11-10><a id=__codelineno-11-10 name=__codelineno-11-10></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-11-11><a id=__codelineno-11-11 name=__codelineno-11-11></a><span class=o>}</span>
-</span></code></pre></div></td></tr></table></div> <p><strong>完整的声明式Pipeline结构：</strong></p> <div class="language-groovy highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1> 1</a></span>
-<span class=normal><a href=#__codelineno-12-2> 2</a></span>
-<span class=normal><a href=#__codelineno-12-3> 3</a></span>
-<span class=normal><a href=#__codelineno-12-4> 4</a></span>
-<span class=normal><a href=#__codelineno-12-5> 5</a></span>
-<span class=normal><a href=#__codelineno-12-6> 6</a></span>
-<span class=normal><a href=#__codelineno-12-7> 7</a></span>
-<span class=normal><a href=#__codelineno-12-8> 8</a></span>
-<span class=normal><a href=#__codelineno-12-9> 9</a></span>
-<span class=normal><a href=#__codelineno-12-10>10</a></span>
-<span class=normal><a href=#__codelineno-12-11>11</a></span>
-<span class=normal><a href=#__codelineno-12-12>12</a></span>
-<span class=normal><a href=#__codelineno-12-13>13</a></span>
-<span class=normal><a href=#__codelineno-12-14>14</a></span>
-<span class=normal><a href=#__codelineno-12-15>15</a></span>
-<span class=normal><a href=#__codelineno-12-16>16</a></span>
-<span class=normal><a href=#__codelineno-12-17>17</a></span>
-<span class=normal><a href=#__codelineno-12-18>18</a></span>
-<span class=normal><a href=#__codelineno-12-19>19</a></span>
-<span class=normal><a href=#__codelineno-12-20>20</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><a id=__codelineno-12-1 name=__codelineno-12-1></a><span class=n>pipeline</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-12-2><a id=__codelineno-12-2 name=__codelineno-12-2></a><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span><span class=w>                    </span><span class=c1>// 在哪个节点运行</span>
-</span><span id=__span-12-3><a id=__codelineno-12-3 name=__codelineno-12-3></a>
-</span><span id=__span-12-4><a id=__codelineno-12-4 name=__codelineno-12-4></a><span class=w>    </span><span class=n>environment</span><span class=w> </span><span class=o>{</span><span class=w>                </span><span class=c1>// 环境变量</span>
-</span><span id=__span-12-5><a id=__codelineno-12-5 name=__codelineno-12-5></a><span class=w>        </span><span class=n>PROJECT</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;my-app&#39;</span>
-</span><span id=__span-12-6><a id=__codelineno-12-6 name=__codelineno-12-6></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-12-7><a id=__codelineno-12-7 name=__codelineno-12-7></a>
-</span><span id=__span-12-8><a id=__codelineno-12-8 name=__codelineno-12-8></a><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span><span class=w>                     </span><span class=c1>// 构建阶段</span>
-</span><span id=__span-12-9><a id=__codelineno-12-9 name=__codelineno-12-9></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;准备&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span>
-</span><span id=__span-12-10><a id=__codelineno-12-10 name=__codelineno-12-10></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;编译&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span>
-</span><span id=__span-12-11><a id=__codelineno-12-11 name=__codelineno-12-11></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span>
-</span><span id=__span-12-12><a id=__codelineno-12-12 name=__codelineno-12-12></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;部署&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span>
-</span><span id=__span-12-13><a id=__codelineno-12-13 name=__codelineno-12-13></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-12-14><a id=__codelineno-12-14 name=__codelineno-12-14></a>
-</span><span id=__span-12-15><a id=__codelineno-12-15 name=__codelineno-12-15></a><span class=w>    </span><span class=n>post</span><span class=w> </span><span class=o>{</span><span class=w>                       </span><span class=c1>// 构建后的动作</span>
-</span><span id=__span-12-16><a id=__codelineno-12-16 name=__codelineno-12-16></a><span class=w>        </span><span class=n>always</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span><span class=w>           </span><span class=c1>// 无论成功失败都执行</span>
-</span><span id=__span-12-17><a id=__codelineno-12-17 name=__codelineno-12-17></a><span class=w>        </span><span class=n>success</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span><span class=w>          </span><span class=c1>// 成功时执行</span>
-</span><span id=__span-12-18><a id=__codelineno-12-18 name=__codelineno-12-18></a><span class=w>        </span><span class=n>failure</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span><span class=w>          </span><span class=c1>// 失败时执行</span>
-</span><span id=__span-12-19><a id=__codelineno-12-19 name=__codelineno-12-19></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-12-20><a id=__codelineno-12-20 name=__codelineno-12-20></a><span class=o>}</span>
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=java>七、实战：Java项目完整流水线<a class=headerlink href=#java title="Permanent link">&para;</a></h2> <p>现在来做一个真正能用的Pipeline——构建一个Java Maven项目。</p> <h3 id=71>7.1 准备工作<a class=headerlink href=#71 title="Permanent link">&para;</a></h3> <p>确保Jenkins安装了以下插件： - <strong>Maven Integration Plugin</strong> - <strong>Git Plugin</strong>（通常已安装）</p> <p>在"Manage Jenkins" -&gt; "全局工具配置"中配置：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1>1</a></span>
-<span class=normal><a href=#__codelineno-13-2>2</a></span>
-<span class=normal><a href=#__codelineno-13-3>3</a></span>
-<span class=normal><a href=#__codelineno-13-4>4</a></span>
-<span class=normal><a href=#__codelineno-13-5>5</a></span>
-<span class=normal><a href=#__codelineno-13-6>6</a></span>
-<span class=normal><a href=#__codelineno-13-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><a id=__codelineno-13-1 name=__codelineno-13-1></a>Maven:
-</span><span id=__span-13-2><a id=__codelineno-13-2 name=__codelineno-13-2></a>  名称: Maven
-</span><span id=__span-13-3><a id=__codelineno-13-3 name=__codelineno-13-3></a>  自动安装: 勾选
-</span><span id=__span-13-4><a id=__codelineno-13-4 name=__codelineno-13-4></a>
-</span><span id=__span-13-5><a id=__codelineno-13-5 name=__codelineno-13-5></a>JDK:
-</span><span id=__span-13-6><a id=__codelineno-13-6 name=__codelineno-13-6></a>  名称: JDK17
-</span><span id=__span-13-7><a id=__codelineno-13-7 name=__codelineno-13-7></a>  自动安装: 勾选
-</span></code></pre></div></td></tr></table></div> <h3 id=72-pipeline>7.2 完整Pipeline脚本<a class=headerlink href=#72-pipeline title="Permanent link">&para;</a></h3> <div class="language-groovy highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
-<span class=normal><a href=#__codelineno-14-2> 2</a></span>
-<span class=normal><a href=#__codelineno-14-3> 3</a></span>
-<span class=normal><a href=#__codelineno-14-4> 4</a></span>
-<span class=normal><a href=#__codelineno-14-5> 5</a></span>
-<span class=normal><a href=#__codelineno-14-6> 6</a></span>
-<span class=normal><a href=#__codelineno-14-7> 7</a></span>
-<span class=normal><a href=#__codelineno-14-8> 8</a></span>
-<span class=normal><a href=#__codelineno-14-9> 9</a></span>
-<span class=normal><a href=#__codelineno-14-10>10</a></span>
-<span class=normal><a href=#__codelineno-14-11>11</a></span>
-<span class=normal><a href=#__codelineno-14-12>12</a></span>
-<span class=normal><a href=#__codelineno-14-13>13</a></span>
-<span class=normal><a href=#__codelineno-14-14>14</a></span>
-<span class=normal><a href=#__codelineno-14-15>15</a></span>
-<span class=normal><a href=#__codelineno-14-16>16</a></span>
-<span class=normal><a href=#__codelineno-14-17>17</a></span>
-<span class=normal><a href=#__codelineno-14-18>18</a></span>
-<span class=normal><a href=#__codelineno-14-19>19</a></span>
-<span class=normal><a href=#__codelineno-14-20>20</a></span>
-<span class=normal><a href=#__codelineno-14-21>21</a></span>
-<span class=normal><a href=#__codelineno-14-22>22</a></span>
-<span class=normal><a href=#__codelineno-14-23>23</a></span>
-<span class=normal><a href=#__codelineno-14-24>24</a></span>
-<span class=normal><a href=#__codelineno-14-25>25</a></span>
-<span class=normal><a href=#__codelineno-14-26>26</a></span>
-<span class=normal><a href=#__codelineno-14-27>27</a></span>
-<span class=normal><a href=#__codelineno-14-28>28</a></span>
-<span class=normal><a href=#__codelineno-14-29>29</a></span>
-<span class=normal><a href=#__codelineno-14-30>30</a></span>
-<span class=normal><a href=#__codelineno-14-31>31</a></span>
-<span class=normal><a href=#__codelineno-14-32>32</a></span>
-<span class=normal><a href=#__codelineno-14-33>33</a></span>
-<span class=normal><a href=#__codelineno-14-34>34</a></span>
-<span class=normal><a href=#__codelineno-14-35>35</a></span>
-<span class=normal><a href=#__codelineno-14-36>36</a></span>
-<span class=normal><a href=#__codelineno-14-37>37</a></span>
-<span class=normal><a href=#__codelineno-14-38>38</a></span>
-<span class=normal><a href=#__codelineno-14-39>39</a></span>
-<span class=normal><a href=#__codelineno-14-40>40</a></span>
-<span class=normal><a href=#__codelineno-14-41>41</a></span>
-<span class=normal><a href=#__codelineno-14-42>42</a></span>
-<span class=normal><a href=#__codelineno-14-43>43</a></span>
-<span class=normal><a href=#__codelineno-14-44>44</a></span>
-<span class=normal><a href=#__codelineno-14-45>45</a></span>
-<span class=normal><a href=#__codelineno-14-46>46</a></span>
-<span class=normal><a href=#__codelineno-14-47>47</a></span>
-<span class=normal><a href=#__codelineno-14-48>48</a></span>
-<span class=normal><a href=#__codelineno-14-49>49</a></span>
-<span class=normal><a href=#__codelineno-14-50>50</a></span>
-<span class=normal><a href=#__codelineno-14-51>51</a></span>
-<span class=normal><a href=#__codelineno-14-52>52</a></span>
-<span class=normal><a href=#__codelineno-14-53>53</a></span>
-<span class=normal><a href=#__codelineno-14-54>54</a></span>
-<span class=normal><a href=#__codelineno-14-55>55</a></span>
-<span class=normal><a href=#__codelineno-14-56>56</a></span>
-<span class=normal><a href=#__codelineno-14-57>57</a></span>
-<span class=normal><a href=#__codelineno-14-58>58</a></span>
-<span class=normal><a href=#__codelineno-14-59>59</a></span>
-<span class=normal><a href=#__codelineno-14-60>60</a></span>
-<span class=normal><a href=#__codelineno-14-61>61</a></span>
-<span class=normal><a href=#__codelineno-14-62>62</a></span>
-<span class=normal><a href=#__codelineno-14-63>63</a></span>
-<span class=normal><a href=#__codelineno-14-64>64</a></span>
-<span class=normal><a href=#__codelineno-14-65>65</a></span>
-<span class=normal><a href=#__codelineno-14-66>66</a></span>
-<span class=normal><a href=#__codelineno-14-67>67</a></span>
-<span class=normal><a href=#__codelineno-14-68>68</a></span>
-<span class=normal><a href=#__codelineno-14-69>69</a></span>
-<span class=normal><a href=#__codelineno-14-70>70</a></span>
-<span class=normal><a href=#__codelineno-14-71>71</a></span>
-<span class=normal><a href=#__codelineno-14-72>72</a></span>
-<span class=normal><a href=#__codelineno-14-73>73</a></span>
-<span class=normal><a href=#__codelineno-14-74>74</a></span>
-<span class=normal><a href=#__codelineno-14-75>75</a></span>
-<span class=normal><a href=#__codelineno-14-76>76</a></span>
-<span class=normal><a href=#__codelineno-14-77>77</a></span>
-<span class=normal><a href=#__codelineno-14-78>78</a></span>
-<span class=normal><a href=#__codelineno-14-79>79</a></span>
-<span class=normal><a href=#__codelineno-14-80>80</a></span>
-<span class=normal><a href=#__codelineno-14-81>81</a></span>
-<span class=normal><a href=#__codelineno-14-82>82</a></span>
-<span class=normal><a href=#__codelineno-14-83>83</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=n>pipeline</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-2><a id=__codelineno-14-2 name=__codelineno-14-2></a><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span>
-</span><span id=__span-14-3><a id=__codelineno-14-3 name=__codelineno-14-3></a>
-</span><span id=__span-14-4><a id=__codelineno-14-4 name=__codelineno-14-4></a><span class=w>    </span><span class=c1>// 定义工具版本</span>
-</span><span id=__span-14-5><a id=__codelineno-14-5 name=__codelineno-14-5></a><span class=w>    </span><span class=n>tools</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-6><a id=__codelineno-14-6 name=__codelineno-14-6></a><span class=w>        </span><span class=n>maven</span><span class=w> </span><span class=s1>&#39;Maven&#39;</span>
-</span><span id=__span-14-7><a id=__codelineno-14-7 name=__codelineno-14-7></a><span class=w>        </span><span class=n>jdk</span><span class=w> </span><span class=s1>&#39;JDK17&#39;</span>
-</span><span id=__span-14-8><a id=__codelineno-14-8 name=__codelineno-14-8></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-14-9><a id=__codelineno-14-9 name=__codelineno-14-9></a>
-</span><span id=__span-14-10><a id=__codelineno-14-10 name=__codelineno-14-10></a><span class=w>    </span><span class=c1>// 环境变量</span>
-</span><span id=__span-14-11><a id=__codelineno-14-11 name=__codelineno-14-11></a><span class=w>    </span><span class=n>environment</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-12><a id=__codelineno-14-12 name=__codelineno-14-12></a><span class=w>        </span><span class=n>PROJECT_NAME</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;my-java-app&#39;</span>
-</span><span id=__span-14-13><a id=__codelineno-14-13 name=__codelineno-14-13></a><span class=w>        </span><span class=n>DEPLOY_SERVER</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;user@192.168.1.100&#39;</span>
-</span><span id=__span-14-14><a id=__codelineno-14-14 name=__codelineno-14-14></a><span class=w>        </span><span class=n>JAR_NAME</span><span class=w>     </span><span class=o>=</span><span class=w> </span><span class=s2>&quot;${PROJECT_NAME}.jar&quot;</span>
-</span><span id=__span-14-15><a id=__codelineno-14-15 name=__codelineno-14-15></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-14-16><a id=__codelineno-14-16 name=__codelineno-14-16></a>
-</span><span id=__span-14-17><a id=__codelineno-14-17 name=__codelineno-14-17></a><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-18><a id=__codelineno-14-18 name=__codelineno-14-18></a><span class=w>        </span><span class=c1>// 阶段1：拉取代码</span>
-</span><span id=__span-14-19><a id=__codelineno-14-19 name=__codelineno-14-19></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;拉取代码&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-20><a id=__codelineno-14-20 name=__codelineno-14-20></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-21><a id=__codelineno-14-21 name=__codelineno-14-21></a><span class=w>                </span><span class=n>git</span><span class=w> </span><span class=nl>branch:</span><span class=w> </span><span class=s1>&#39;main&#39;</span><span class=o>,</span>
-</span><span id=__span-14-22><a id=__codelineno-14-22 name=__codelineno-14-22></a><span class=w>                    </span><span class=nl>url:</span><span class=w> </span><span class=s1>&#39;https://github.com/yourname/my-java-app.git&#39;</span>
-</span><span id=__span-14-23><a id=__codelineno-14-23 name=__codelineno-14-23></a><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s2>&quot;代码拉取成功，当前分支: main&quot;</span>
-</span><span id=__span-14-24><a id=__codelineno-14-24 name=__codelineno-14-24></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-14-25><a id=__codelineno-14-25 name=__codelineno-14-25></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-14-26><a id=__codelineno-14-26 name=__codelineno-14-26></a>
-</span><span id=__span-14-27><a id=__codelineno-14-27 name=__codelineno-14-27></a><span class=w>        </span><span class=c1>// 阶段2：编译打包</span>
-</span><span id=__span-14-28><a id=__codelineno-14-28 name=__codelineno-14-28></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;编译打包&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-29><a id=__codelineno-14-29 name=__codelineno-14-29></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-30><a id=__codelineno-14-30 name=__codelineno-14-30></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mvn clean package -DskipTests&#39;</span>
-</span><span id=__span-14-31><a id=__codelineno-14-31 name=__codelineno-14-31></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-14-32><a id=__codelineno-14-32 name=__codelineno-14-32></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-14-33><a id=__codelineno-14-33 name=__codelineno-14-33></a>
-</span><span id=__span-14-34><a id=__codelineno-14-34 name=__codelineno-14-34></a><span class=w>        </span><span class=c1>// 阶段3：运行单元测试</span>
-</span><span id=__span-14-35><a id=__codelineno-14-35 name=__codelineno-14-35></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;单元测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-36><a id=__codelineno-14-36 name=__codelineno-14-36></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-37><a id=__codelineno-14-37 name=__codelineno-14-37></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mvn test&#39;</span>
-</span><span id=__span-14-38><a id=__codelineno-14-38 name=__codelineno-14-38></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-14-39><a id=__codelineno-14-39 name=__codelineno-14-39></a><span class=w>            </span><span class=n>post</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-40><a id=__codelineno-14-40 name=__codelineno-14-40></a><span class=w>                </span><span class=n>always</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-41><a id=__codelineno-14-41 name=__codelineno-14-41></a><span class=w>                    </span><span class=c1>// 展示测试报告</span>
-</span><span id=__span-14-42><a id=__codelineno-14-42 name=__codelineno-14-42></a><span class=w>                    </span><span class=n>junit</span><span class=w> </span><span class=s1>&#39;target/surefire-reports/*.xml&#39;</span>
-</span><span id=__span-14-43><a id=__codelineno-14-43 name=__codelineno-14-43></a><span class=w>                </span><span class=o>}</span>
-</span><span id=__span-14-44><a id=__codelineno-14-44 name=__codelineno-14-44></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-14-45><a id=__codelineno-14-45 name=__codelineno-14-45></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-14-46><a id=__codelineno-14-46 name=__codelineno-14-46></a>
-</span><span id=__span-14-47><a id=__codelineno-14-47 name=__codelineno-14-47></a><span class=w>        </span><span class=c1>// 阶段4：代码质量检查</span>
-</span><span id=__span-14-48><a id=__codelineno-14-48 name=__codelineno-14-48></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;代码检查&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-49><a id=__codelineno-14-49 name=__codelineno-14-49></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-50><a id=__codelineno-14-50 name=__codelineno-14-50></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mvn checkstyle:check&#39;</span>
-</span><span id=__span-14-51><a id=__codelineno-14-51 name=__codelineno-14-51></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-14-52><a id=__codelineno-14-52 name=__codelineno-14-52></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-14-53><a id=__codelineno-14-53 name=__codelineno-14-53></a>
-</span><span id=__span-14-54><a id=__codelineno-14-54 name=__codelineno-14-54></a><span class=w>        </span><span class=c1>// 阶段5：部署到服务器</span>
-</span><span id=__span-14-55><a id=__codelineno-14-55 name=__codelineno-14-55></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;部署&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-56><a id=__codelineno-14-56 name=__codelineno-14-56></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-57><a id=__codelineno-14-57 name=__codelineno-14-57></a><span class=w>                </span><span class=c1>// 停止旧服务</span>
-</span><span id=__span-14-58><a id=__codelineno-14-58 name=__codelineno-14-58></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s2>&quot;ssh ${DEPLOY_SERVER} &#39;kill -9 \\$(pgrep -f ${JAR_NAME}) || true&#39;&quot;</span>
-</span><span id=__span-14-59><a id=__codelineno-14-59 name=__codelineno-14-59></a>
-</span><span id=__span-14-60><a id=__codelineno-14-60 name=__codelineno-14-60></a><span class=w>                </span><span class=c1>// 上传新版本</span>
-</span><span id=__span-14-61><a id=__codelineno-14-61 name=__codelineno-14-61></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s2>&quot;scp target/${JAR_NAME} ${DEPLOY_SERVER}:/opt/app/&quot;</span>
-</span><span id=__span-14-62><a id=__codelineno-14-62 name=__codelineno-14-62></a>
-</span><span id=__span-14-63><a id=__codelineno-14-63 name=__codelineno-14-63></a><span class=w>                </span><span class=c1>// 启动新服务</span>
-</span><span id=__span-14-64><a id=__codelineno-14-64 name=__codelineno-14-64></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s2>&quot;ssh ${DEPLOY_SERVER} &#39;nohup java -jar /opt/app/${JAR_NAME} &gt; /dev/null 2&gt;&amp;1 &amp;&#39;&quot;</span>
-</span><span id=__span-14-65><a id=__codelineno-14-65 name=__codelineno-14-65></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-14-66><a id=__codelineno-14-66 name=__codelineno-14-66></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-14-67><a id=__codelineno-14-67 name=__codelineno-14-67></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-14-68><a id=__codelineno-14-68 name=__codelineno-14-68></a>
-</span><span id=__span-14-69><a id=__codelineno-14-69 name=__codelineno-14-69></a><span class=w>    </span><span class=c1>// 构建后处理</span>
-</span><span id=__span-14-70><a id=__codelineno-14-70 name=__codelineno-14-70></a><span class=w>    </span><span class=n>post</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-71><a id=__codelineno-14-71 name=__codelineno-14-71></a><span class=w>        </span><span class=n>success</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-72><a id=__codelineno-14-72 name=__codelineno-14-72></a><span class=w>            </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;部署成功！&#39;</span>
-</span><span id=__span-14-73><a id=__codelineno-14-73 name=__codelineno-14-73></a><span class=w>            </span><span class=c1>// 可以发通知：邮件、钉钉、飞书等</span>
-</span><span id=__span-14-74><a id=__codelineno-14-74 name=__codelineno-14-74></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-14-75><a id=__codelineno-14-75 name=__codelineno-14-75></a><span class=w>        </span><span class=n>failure</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-76><a id=__codelineno-14-76 name=__codelineno-14-76></a><span class=w>            </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;部署失败，请检查日志！&#39;</span>
-</span><span id=__span-14-77><a id=__codelineno-14-77 name=__codelineno-14-77></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-14-78><a id=__codelineno-14-78 name=__codelineno-14-78></a><span class=w>        </span><span class=n>always</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-14-79><a id=__codelineno-14-79 name=__codelineno-14-79></a><span class=w>            </span><span class=c1>// 清理工作空间</span>
-</span><span id=__span-14-80><a id=__codelineno-14-80 name=__codelineno-14-80></a><span class=w>            </span><span class=n>cleanWs</span><span class=o>()</span>
-</span><span id=__span-14-81><a id=__codelineno-14-81 name=__codelineno-14-81></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-14-82><a id=__codelineno-14-82 name=__codelineno-14-82></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-14-83><a id=__codelineno-14-83 name=__codelineno-14-83></a><span class=o>}</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=73>7.3 流水线全流程图<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    style D fill:#c8e6c9</code></pre> <p>每个阶段都变成绿色了，太棒了！</p> <h3 id=64-pipeline>6.4 Pipeline语法详解<a class=headerlink href=#64-pipeline title="Permanent link">&para;</a></h3> <p>来逐行理解这个脚本：</p> <div class="language-groovy highlight"><pre><span></span><code><span id=__span-11-1><span class=n>pipeline</span><span class=w> </span><span class=o>{</span><span class=w>                    </span><span class=c1>// ① 声明式Pipeline的固定写法</span>
+</span><span id=__span-11-2><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span><span class=w>                 </span><span class=c1>// ② 在任意可用节点上运行</span>
+</span><span id=__span-11-3>
+</span><span id=__span-11-4><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span><span class=w>                  </span><span class=c1>// ③ 所有阶段的容器</span>
+</span><span id=__span-11-5><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;准备&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span><span class=w>       </span><span class=c1>// ④ 定义一个阶段</span>
+</span><span id=__span-11-6><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span><span class=w>           </span><span class=c1>// ⑤ 阶段内的步骤</span>
+</span><span id=__span-11-7><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;...&#39;</span><span class=w>    </span><span class=c1>// ⑥ 具体操作</span>
+</span><span id=__span-11-8><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-11-9><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-11-10><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-11-11><span class=o>}</span>
+</span></code></pre></div> <p><strong>完整的声明式Pipeline结构：</strong></p> <div class="language-groovy highlight"><pre><span></span><code><span id=__span-12-1><span class=n>pipeline</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-12-2><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span><span class=w>                    </span><span class=c1>// 在哪个节点运行</span>
+</span><span id=__span-12-3>
+</span><span id=__span-12-4><span class=w>    </span><span class=n>environment</span><span class=w> </span><span class=o>{</span><span class=w>                </span><span class=c1>// 环境变量</span>
+</span><span id=__span-12-5><span class=w>        </span><span class=n>PROJECT</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;my-app&#39;</span>
+</span><span id=__span-12-6><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-12-7>
+</span><span id=__span-12-8><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span><span class=w>                     </span><span class=c1>// 构建阶段</span>
+</span><span id=__span-12-9><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;准备&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span>
+</span><span id=__span-12-10><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;编译&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span>
+</span><span id=__span-12-11><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span>
+</span><span id=__span-12-12><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;部署&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span>
+</span><span id=__span-12-13><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-12-14>
+</span><span id=__span-12-15><span class=w>    </span><span class=n>post</span><span class=w> </span><span class=o>{</span><span class=w>                       </span><span class=c1>// 构建后的动作</span>
+</span><span id=__span-12-16><span class=w>        </span><span class=n>always</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span><span class=w>           </span><span class=c1>// 无论成功失败都执行</span>
+</span><span id=__span-12-17><span class=w>        </span><span class=n>success</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span><span class=w>          </span><span class=c1>// 成功时执行</span>
+</span><span id=__span-12-18><span class=w>        </span><span class=n>failure</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=o>...</span><span class=w> </span><span class=o>}</span><span class=w>          </span><span class=c1>// 失败时执行</span>
+</span><span id=__span-12-19><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-12-20><span class=o>}</span>
+</span></code></pre></div> <hr> <h2 id=java>七、实战：Java项目完整流水线<a class=headerlink href=#java title="Permanent link">&para;</a></h2> <p>现在来做一个真正能用的Pipeline——构建一个Java Maven项目。</p> <h3 id=71>7.1 准备工作<a class=headerlink href=#71 title="Permanent link">&para;</a></h3> <p>确保Jenkins安装了以下插件： - <strong>Maven Integration Plugin</strong> - <strong>Git Plugin</strong>（通常已安装）</p> <p>在"Manage Jenkins" -&gt; "全局工具配置"中配置：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-13-1>Maven:
+</span><span id=__span-13-2>  名称: Maven
+</span><span id=__span-13-3>  自动安装: 勾选
+</span><span id=__span-13-4>
+</span><span id=__span-13-5>JDK:
+</span><span id=__span-13-6>  名称: JDK17
+</span><span id=__span-13-7>  自动安装: 勾选
+</span></code></pre></div> <h3 id=72-pipeline>7.2 完整Pipeline脚本<a class=headerlink href=#72-pipeline title="Permanent link">&para;</a></h3> <div class="language-groovy highlight"><pre><span></span><code><span id=__span-14-1><span class=n>pipeline</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-2><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span>
+</span><span id=__span-14-3>
+</span><span id=__span-14-4><span class=w>    </span><span class=c1>// 定义工具版本</span>
+</span><span id=__span-14-5><span class=w>    </span><span class=n>tools</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-6><span class=w>        </span><span class=n>maven</span><span class=w> </span><span class=s1>&#39;Maven&#39;</span>
+</span><span id=__span-14-7><span class=w>        </span><span class=n>jdk</span><span class=w> </span><span class=s1>&#39;JDK17&#39;</span>
+</span><span id=__span-14-8><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-14-9>
+</span><span id=__span-14-10><span class=w>    </span><span class=c1>// 环境变量</span>
+</span><span id=__span-14-11><span class=w>    </span><span class=n>environment</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-12><span class=w>        </span><span class=n>PROJECT_NAME</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;my-java-app&#39;</span>
+</span><span id=__span-14-13><span class=w>        </span><span class=n>DEPLOY_SERVER</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;user@192.168.1.100&#39;</span>
+</span><span id=__span-14-14><span class=w>        </span><span class=n>JAR_NAME</span><span class=w>     </span><span class=o>=</span><span class=w> </span><span class=s2>&quot;${PROJECT_NAME}.jar&quot;</span>
+</span><span id=__span-14-15><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-14-16>
+</span><span id=__span-14-17><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-18><span class=w>        </span><span class=c1>// 阶段1：拉取代码</span>
+</span><span id=__span-14-19><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;拉取代码&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-20><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-21><span class=w>                </span><span class=n>git</span><span class=w> </span><span class=nl>branch:</span><span class=w> </span><span class=s1>&#39;main&#39;</span><span class=o>,</span>
+</span><span id=__span-14-22><span class=w>                    </span><span class=nl>url:</span><span class=w> </span><span class=s1>&#39;https://github.com/yourname/my-java-app.git&#39;</span>
+</span><span id=__span-14-23><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s2>&quot;代码拉取成功，当前分支: main&quot;</span>
+</span><span id=__span-14-24><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-14-25><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-14-26>
+</span><span id=__span-14-27><span class=w>        </span><span class=c1>// 阶段2：编译打包</span>
+</span><span id=__span-14-28><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;编译打包&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-29><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-30><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mvn clean package -DskipTests&#39;</span>
+</span><span id=__span-14-31><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-14-32><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-14-33>
+</span><span id=__span-14-34><span class=w>        </span><span class=c1>// 阶段3：运行单元测试</span>
+</span><span id=__span-14-35><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;单元测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-36><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-37><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mvn test&#39;</span>
+</span><span id=__span-14-38><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-14-39><span class=w>            </span><span class=n>post</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-40><span class=w>                </span><span class=n>always</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-41><span class=w>                    </span><span class=c1>// 展示测试报告</span>
+</span><span id=__span-14-42><span class=w>                    </span><span class=n>junit</span><span class=w> </span><span class=s1>&#39;target/surefire-reports/*.xml&#39;</span>
+</span><span id=__span-14-43><span class=w>                </span><span class=o>}</span>
+</span><span id=__span-14-44><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-14-45><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-14-46>
+</span><span id=__span-14-47><span class=w>        </span><span class=c1>// 阶段4：代码质量检查</span>
+</span><span id=__span-14-48><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;代码检查&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-49><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-50><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mvn checkstyle:check&#39;</span>
+</span><span id=__span-14-51><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-14-52><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-14-53>
+</span><span id=__span-14-54><span class=w>        </span><span class=c1>// 阶段5：部署到服务器</span>
+</span><span id=__span-14-55><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;部署&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-56><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-57><span class=w>                </span><span class=c1>// 停止旧服务</span>
+</span><span id=__span-14-58><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s2>&quot;ssh ${DEPLOY_SERVER} &#39;kill -9 \\$(pgrep -f ${JAR_NAME}) || true&#39;&quot;</span>
+</span><span id=__span-14-59>
+</span><span id=__span-14-60><span class=w>                </span><span class=c1>// 上传新版本</span>
+</span><span id=__span-14-61><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s2>&quot;scp target/${JAR_NAME} ${DEPLOY_SERVER}:/opt/app/&quot;</span>
+</span><span id=__span-14-62>
+</span><span id=__span-14-63><span class=w>                </span><span class=c1>// 启动新服务</span>
+</span><span id=__span-14-64><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s2>&quot;ssh ${DEPLOY_SERVER} &#39;nohup java -jar /opt/app/${JAR_NAME} &gt; /dev/null 2&gt;&amp;1 &amp;&#39;&quot;</span>
+</span><span id=__span-14-65><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-14-66><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-14-67><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-14-68>
+</span><span id=__span-14-69><span class=w>    </span><span class=c1>// 构建后处理</span>
+</span><span id=__span-14-70><span class=w>    </span><span class=n>post</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-71><span class=w>        </span><span class=n>success</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-72><span class=w>            </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;部署成功！&#39;</span>
+</span><span id=__span-14-73><span class=w>            </span><span class=c1>// 可以发通知：邮件、钉钉、飞书等</span>
+</span><span id=__span-14-74><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-14-75><span class=w>        </span><span class=n>failure</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-76><span class=w>            </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;部署失败，请检查日志！&#39;</span>
+</span><span id=__span-14-77><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-14-78><span class=w>        </span><span class=n>always</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-14-79><span class=w>            </span><span class=c1>// 清理工作空间</span>
+</span><span id=__span-14-80><span class=w>            </span><span class=n>cleanWs</span><span class=o>()</span>
+</span><span id=__span-14-81><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-14-82><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-14-83><span class=o>}</span>
+</span></code></pre></div> <h3 id=73>7.3 流水线全流程图<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
     A[开发者提交代码] --&gt; B[Jenkins检测到变更]
     B --&gt; C[拉取代码]
     C --&gt; D[编译打包]
@@ -505,122 +305,65 @@
 
     style H fill:#ffcdd2
     style L fill:#c8e6c9
-    style M fill:#fff9c4</code></pre> <hr> <h2 id=_8>八、实战：前端项目流水线<a class=headerlink href=#_8 title="Permanent link">&para;</a></h2> <p>前端项目的流水线有所不同，核心区别在于构建工具和部署方式。</p> <h3 id=81-nodejspipeline>8.1 Node.js前端项目Pipeline<a class=headerlink href=#81-nodejspipeline title="Permanent link">&para;</a></h3> <div class="language-groovy highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
-<span class=normal><a href=#__codelineno-15-2> 2</a></span>
-<span class=normal><a href=#__codelineno-15-3> 3</a></span>
-<span class=normal><a href=#__codelineno-15-4> 4</a></span>
-<span class=normal><a href=#__codelineno-15-5> 5</a></span>
-<span class=normal><a href=#__codelineno-15-6> 6</a></span>
-<span class=normal><a href=#__codelineno-15-7> 7</a></span>
-<span class=normal><a href=#__codelineno-15-8> 8</a></span>
-<span class=normal><a href=#__codelineno-15-9> 9</a></span>
-<span class=normal><a href=#__codelineno-15-10>10</a></span>
-<span class=normal><a href=#__codelineno-15-11>11</a></span>
-<span class=normal><a href=#__codelineno-15-12>12</a></span>
-<span class=normal><a href=#__codelineno-15-13>13</a></span>
-<span class=normal><a href=#__codelineno-15-14>14</a></span>
-<span class=normal><a href=#__codelineno-15-15>15</a></span>
-<span class=normal><a href=#__codelineno-15-16>16</a></span>
-<span class=normal><a href=#__codelineno-15-17>17</a></span>
-<span class=normal><a href=#__codelineno-15-18>18</a></span>
-<span class=normal><a href=#__codelineno-15-19>19</a></span>
-<span class=normal><a href=#__codelineno-15-20>20</a></span>
-<span class=normal><a href=#__codelineno-15-21>21</a></span>
-<span class=normal><a href=#__codelineno-15-22>22</a></span>
-<span class=normal><a href=#__codelineno-15-23>23</a></span>
-<span class=normal><a href=#__codelineno-15-24>24</a></span>
-<span class=normal><a href=#__codelineno-15-25>25</a></span>
-<span class=normal><a href=#__codelineno-15-26>26</a></span>
-<span class=normal><a href=#__codelineno-15-27>27</a></span>
-<span class=normal><a href=#__codelineno-15-28>28</a></span>
-<span class=normal><a href=#__codelineno-15-29>29</a></span>
-<span class=normal><a href=#__codelineno-15-30>30</a></span>
-<span class=normal><a href=#__codelineno-15-31>31</a></span>
-<span class=normal><a href=#__codelineno-15-32>32</a></span>
-<span class=normal><a href=#__codelineno-15-33>33</a></span>
-<span class=normal><a href=#__codelineno-15-34>34</a></span>
-<span class=normal><a href=#__codelineno-15-35>35</a></span>
-<span class=normal><a href=#__codelineno-15-36>36</a></span>
-<span class=normal><a href=#__codelineno-15-37>37</a></span>
-<span class=normal><a href=#__codelineno-15-38>38</a></span>
-<span class=normal><a href=#__codelineno-15-39>39</a></span>
-<span class=normal><a href=#__codelineno-15-40>40</a></span>
-<span class=normal><a href=#__codelineno-15-41>41</a></span>
-<span class=normal><a href=#__codelineno-15-42>42</a></span>
-<span class=normal><a href=#__codelineno-15-43>43</a></span>
-<span class=normal><a href=#__codelineno-15-44>44</a></span>
-<span class=normal><a href=#__codelineno-15-45>45</a></span>
-<span class=normal><a href=#__codelineno-15-46>46</a></span>
-<span class=normal><a href=#__codelineno-15-47>47</a></span>
-<span class=normal><a href=#__codelineno-15-48>48</a></span>
-<span class=normal><a href=#__codelineno-15-49>49</a></span>
-<span class=normal><a href=#__codelineno-15-50>50</a></span>
-<span class=normal><a href=#__codelineno-15-51>51</a></span>
-<span class=normal><a href=#__codelineno-15-52>52</a></span>
-<span class=normal><a href=#__codelineno-15-53>53</a></span>
-<span class=normal><a href=#__codelineno-15-54>54</a></span>
-<span class=normal><a href=#__codelineno-15-55>55</a></span>
-<span class=normal><a href=#__codelineno-15-56>56</a></span>
-<span class=normal><a href=#__codelineno-15-57>57</a></span>
-<span class=normal><a href=#__codelineno-15-58>58</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=n>pipeline</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-2><a id=__codelineno-15-2 name=__codelineno-15-2></a><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span>
-</span><span id=__span-15-3><a id=__codelineno-15-3 name=__codelineno-15-3></a>
-</span><span id=__span-15-4><a id=__codelineno-15-4 name=__codelineno-15-4></a><span class=w>    </span><span class=n>tools</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-5><a id=__codelineno-15-5 name=__codelineno-15-5></a><span class=w>        </span><span class=n>nodejs</span><span class=w> </span><span class=s1>&#39;NodeJS18&#39;</span>
-</span><span id=__span-15-6><a id=__codelineno-15-6 name=__codelineno-15-6></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-15-7><a id=__codelineno-15-7 name=__codelineno-15-7></a>
-</span><span id=__span-15-8><a id=__codelineno-15-8 name=__codelineno-15-8></a><span class=w>    </span><span class=n>environment</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-9><a id=__codelineno-15-9 name=__codelineno-15-9></a><span class=w>        </span><span class=n>DEPLOY_PATH</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;/var/www/my-frontend&#39;</span>
-</span><span id=__span-15-10><a id=__codelineno-15-10 name=__codelineno-15-10></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-15-11><a id=__codelineno-15-11 name=__codelineno-15-11></a>
-</span><span id=__span-15-12><a id=__codelineno-15-12 name=__codelineno-15-12></a><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-13><a id=__codelineno-15-13 name=__codelineno-15-13></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;拉取代码&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-14><a id=__codelineno-15-14 name=__codelineno-15-14></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-15><a id=__codelineno-15-15 name=__codelineno-15-15></a><span class=w>                </span><span class=n>git</span><span class=w> </span><span class=nl>branch:</span><span class=w> </span><span class=s1>&#39;main&#39;</span><span class=o>,</span>
-</span><span id=__span-15-16><a id=__codelineno-15-16 name=__codelineno-15-16></a><span class=w>                    </span><span class=nl>url:</span><span class=w> </span><span class=s1>&#39;https://github.com/yourname/my-frontend.git&#39;</span>
-</span><span id=__span-15-17><a id=__codelineno-15-17 name=__codelineno-15-17></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-15-18><a id=__codelineno-15-18 name=__codelineno-15-18></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-15-19><a id=__codelineno-15-19 name=__codelineno-15-19></a>
-</span><span id=__span-15-20><a id=__codelineno-15-20 name=__codelineno-15-20></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;安装依赖&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-21><a id=__codelineno-15-21 name=__codelineno-15-21></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-22><a id=__codelineno-15-22 name=__codelineno-15-22></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;npm install&#39;</span>
-</span><span id=__span-15-23><a id=__codelineno-15-23 name=__codelineno-15-23></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-15-24><a id=__codelineno-15-24 name=__codelineno-15-24></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-15-25><a id=__codelineno-15-25 name=__codelineno-15-25></a>
-</span><span id=__span-15-26><a id=__codelineno-15-26 name=__codelineno-15-26></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;代码检查&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-27><a id=__codelineno-15-27 name=__codelineno-15-27></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-28><a id=__codelineno-15-28 name=__codelineno-15-28></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;npm run lint&#39;</span>
-</span><span id=__span-15-29><a id=__codelineno-15-29 name=__codelineno-15-29></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-15-30><a id=__codelineno-15-30 name=__codelineno-15-30></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-15-31><a id=__codelineno-15-31 name=__codelineno-15-31></a>
-</span><span id=__span-15-32><a id=__codelineno-15-32 name=__codelineno-15-32></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;构建&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-33><a id=__codelineno-15-33 name=__codelineno-15-33></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-34><a id=__codelineno-15-34 name=__codelineno-15-34></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;npm run build&#39;</span>
-</span><span id=__span-15-35><a id=__codelineno-15-35 name=__codelineno-15-35></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-15-36><a id=__codelineno-15-36 name=__codelineno-15-36></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-15-37><a id=__codelineno-15-37 name=__codelineno-15-37></a>
-</span><span id=__span-15-38><a id=__codelineno-15-38 name=__codelineno-15-38></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;部署&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-39><a id=__codelineno-15-39 name=__codelineno-15-39></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-40><a id=__codelineno-15-40 name=__codelineno-15-40></a><span class=w>                </span><span class=c1>// 将构建产物复制到Nginx目录</span>
-</span><span id=__span-15-41><a id=__codelineno-15-41 name=__codelineno-15-41></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s2>&quot;rm -rf ${DEPLOY_PATH}/*&quot;</span>
-</span><span id=__span-15-42><a id=__codelineno-15-42 name=__codelineno-15-42></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s2>&quot;cp -r dist/* ${DEPLOY_PATH}/&quot;</span>
-</span><span id=__span-15-43><a id=__codelineno-15-43 name=__codelineno-15-43></a>
-</span><span id=__span-15-44><a id=__codelineno-15-44 name=__codelineno-15-44></a><span class=w>                </span><span class=c1>// 重启Nginx</span>
-</span><span id=__span-15-45><a id=__codelineno-15-45 name=__codelineno-15-45></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;sudo systemctl reload nginx&#39;</span>
-</span><span id=__span-15-46><a id=__codelineno-15-46 name=__codelineno-15-46></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-15-47><a id=__codelineno-15-47 name=__codelineno-15-47></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-15-48><a id=__codelineno-15-48 name=__codelineno-15-48></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-15-49><a id=__codelineno-15-49 name=__codelineno-15-49></a>
-</span><span id=__span-15-50><a id=__codelineno-15-50 name=__codelineno-15-50></a><span class=w>    </span><span class=n>post</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-51><a id=__codelineno-15-51 name=__codelineno-15-51></a><span class=w>        </span><span class=n>success</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-52><a id=__codelineno-15-52 name=__codelineno-15-52></a><span class=w>            </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;前端项目部署成功！&#39;</span>
-</span><span id=__span-15-53><a id=__codelineno-15-53 name=__codelineno-15-53></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-15-54><a id=__codelineno-15-54 name=__codelineno-15-54></a><span class=w>        </span><span class=n>failure</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-15-55><a id=__codelineno-15-55 name=__codelineno-15-55></a><span class=w>            </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;构建失败，请检查控制台输出！&#39;</span>
-</span><span id=__span-15-56><a id=__codelineno-15-56 name=__codelineno-15-56></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-15-57><a id=__codelineno-15-57 name=__codelineno-15-57></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-15-58><a id=__codelineno-15-58 name=__codelineno-15-58></a><span class=o>}</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=82>8.2 前后端流水线对比<a class=headerlink href=#82 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
+    style M fill:#fff9c4</code></pre> <hr> <h2 id=_8>八、实战：前端项目流水线<a class=headerlink href=#_8 title="Permanent link">&para;</a></h2> <p>前端项目的流水线有所不同，核心区别在于构建工具和部署方式。</p> <h3 id=81-nodejspipeline>8.1 Node.js前端项目Pipeline<a class=headerlink href=#81-nodejspipeline title="Permanent link">&para;</a></h3> <div class="language-groovy highlight"><pre><span></span><code><span id=__span-15-1><span class=n>pipeline</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-2><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span>
+</span><span id=__span-15-3>
+</span><span id=__span-15-4><span class=w>    </span><span class=n>tools</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-5><span class=w>        </span><span class=n>nodejs</span><span class=w> </span><span class=s1>&#39;NodeJS18&#39;</span>
+</span><span id=__span-15-6><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-15-7>
+</span><span id=__span-15-8><span class=w>    </span><span class=n>environment</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-9><span class=w>        </span><span class=n>DEPLOY_PATH</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;/var/www/my-frontend&#39;</span>
+</span><span id=__span-15-10><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-15-11>
+</span><span id=__span-15-12><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-13><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;拉取代码&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-14><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-15><span class=w>                </span><span class=n>git</span><span class=w> </span><span class=nl>branch:</span><span class=w> </span><span class=s1>&#39;main&#39;</span><span class=o>,</span>
+</span><span id=__span-15-16><span class=w>                    </span><span class=nl>url:</span><span class=w> </span><span class=s1>&#39;https://github.com/yourname/my-frontend.git&#39;</span>
+</span><span id=__span-15-17><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-15-18><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-15-19>
+</span><span id=__span-15-20><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;安装依赖&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-21><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-22><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;npm install&#39;</span>
+</span><span id=__span-15-23><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-15-24><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-15-25>
+</span><span id=__span-15-26><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;代码检查&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-27><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-28><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;npm run lint&#39;</span>
+</span><span id=__span-15-29><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-15-30><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-15-31>
+</span><span id=__span-15-32><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;构建&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-33><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-34><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;npm run build&#39;</span>
+</span><span id=__span-15-35><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-15-36><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-15-37>
+</span><span id=__span-15-38><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;部署&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-39><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-40><span class=w>                </span><span class=c1>// 将构建产物复制到Nginx目录</span>
+</span><span id=__span-15-41><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s2>&quot;rm -rf ${DEPLOY_PATH}/*&quot;</span>
+</span><span id=__span-15-42><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s2>&quot;cp -r dist/* ${DEPLOY_PATH}/&quot;</span>
+</span><span id=__span-15-43>
+</span><span id=__span-15-44><span class=w>                </span><span class=c1>// 重启Nginx</span>
+</span><span id=__span-15-45><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;sudo systemctl reload nginx&#39;</span>
+</span><span id=__span-15-46><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-15-47><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-15-48><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-15-49>
+</span><span id=__span-15-50><span class=w>    </span><span class=n>post</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-51><span class=w>        </span><span class=n>success</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-52><span class=w>            </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;前端项目部署成功！&#39;</span>
+</span><span id=__span-15-53><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-15-54><span class=w>        </span><span class=n>failure</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-15-55><span class=w>            </span><span class=n>echo</span><span class=w> </span><span class=s1>&#39;构建失败，请检查控制台输出！&#39;</span>
+</span><span id=__span-15-56><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-15-57><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-15-58><span class=o>}</span>
+</span></code></pre></div> <h3 id=82>8.2 前后端流水线对比<a class=headerlink href=#82 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
     subgraph 后端Java
         BA[拉取代码] --&gt; BB[Maven编译]
         BB --&gt; BC[单元测试]
@@ -649,263 +392,143 @@
     end
 
     style D2 fill:#c8e6c9
-    style D1 fill:#ffcdd2</code></pre> <h3 id=92>9.2 如何配置<a class=headerlink href=#92 title="Permanent link">&para;</a></h3> <ol> <li>在项目根目录创建 <code>Jenkinsfile</code> 文件</li> <li>提交到Git仓库</li> <li>在Jenkins任务配置中，Pipeline选择"Pipeline script from SCM"</li> </ol> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1>1</a></span>
-<span class=normal><a href=#__codelineno-16-2>2</a></span>
-<span class=normal><a href=#__codelineno-16-3>3</a></span>
-<span class=normal><a href=#__codelineno-16-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><a id=__codelineno-16-1 name=__codelineno-16-1></a>SCM:          Git
-</span><span id=__span-16-2><a id=__codelineno-16-2 name=__codelineno-16-2></a>Repository:   你的仓库地址
-</span><span id=__span-16-3><a id=__codelineno-16-3 name=__codelineno-16-3></a>分支:         */main
-</span><span id=__span-16-4><a id=__codelineno-16-4 name=__codelineno-16-4></a>脚本路径:     Jenkinsfile
-</span></code></pre></div></td></tr></table></div> <h3 id=93-jenkinsfile>9.3 Jenkinsfile最佳实践<a class=headerlink href=#93-jenkinsfile title="Permanent link">&para;</a></h3> <div class="language-groovy highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1> 1</a></span>
-<span class=normal><a href=#__codelineno-17-2> 2</a></span>
-<span class=normal><a href=#__codelineno-17-3> 3</a></span>
-<span class=normal><a href=#__codelineno-17-4> 4</a></span>
-<span class=normal><a href=#__codelineno-17-5> 5</a></span>
-<span class=normal><a href=#__codelineno-17-6> 6</a></span>
-<span class=normal><a href=#__codelineno-17-7> 7</a></span>
-<span class=normal><a href=#__codelineno-17-8> 8</a></span>
-<span class=normal><a href=#__codelineno-17-9> 9</a></span>
-<span class=normal><a href=#__codelineno-17-10>10</a></span>
-<span class=normal><a href=#__codelineno-17-11>11</a></span>
-<span class=normal><a href=#__codelineno-17-12>12</a></span>
-<span class=normal><a href=#__codelineno-17-13>13</a></span>
-<span class=normal><a href=#__codelineno-17-14>14</a></span>
-<span class=normal><a href=#__codelineno-17-15>15</a></span>
-<span class=normal><a href=#__codelineno-17-16>16</a></span>
-<span class=normal><a href=#__codelineno-17-17>17</a></span>
-<span class=normal><a href=#__codelineno-17-18>18</a></span>
-<span class=normal><a href=#__codelineno-17-19>19</a></span>
-<span class=normal><a href=#__codelineno-17-20>20</a></span>
-<span class=normal><a href=#__codelineno-17-21>21</a></span>
-<span class=normal><a href=#__codelineno-17-22>22</a></span>
-<span class=normal><a href=#__codelineno-17-23>23</a></span>
-<span class=normal><a href=#__codelineno-17-24>24</a></span>
-<span class=normal><a href=#__codelineno-17-25>25</a></span>
-<span class=normal><a href=#__codelineno-17-26>26</a></span>
-<span class=normal><a href=#__codelineno-17-27>27</a></span>
-<span class=normal><a href=#__codelineno-17-28>28</a></span>
-<span class=normal><a href=#__codelineno-17-29>29</a></span>
-<span class=normal><a href=#__codelineno-17-30>30</a></span>
-<span class=normal><a href=#__codelineno-17-31>31</a></span>
-<span class=normal><a href=#__codelineno-17-32>32</a></span>
-<span class=normal><a href=#__codelineno-17-33>33</a></span>
-<span class=normal><a href=#__codelineno-17-34>34</a></span>
-<span class=normal><a href=#__codelineno-17-35>35</a></span>
-<span class=normal><a href=#__codelineno-17-36>36</a></span>
-<span class=normal><a href=#__codelineno-17-37>37</a></span>
-<span class=normal><a href=#__codelineno-17-38>38</a></span>
-<span class=normal><a href=#__codelineno-17-39>39</a></span>
-<span class=normal><a href=#__codelineno-17-40>40</a></span>
-<span class=normal><a href=#__codelineno-17-41>41</a></span>
-<span class=normal><a href=#__codelineno-17-42>42</a></span>
-<span class=normal><a href=#__codelineno-17-43>43</a></span>
-<span class=normal><a href=#__codelineno-17-44>44</a></span>
-<span class=normal><a href=#__codelineno-17-45>45</a></span>
-<span class=normal><a href=#__codelineno-17-46>46</a></span>
-<span class=normal><a href=#__codelineno-17-47>47</a></span>
-<span class=normal><a href=#__codelineno-17-48>48</a></span>
-<span class=normal><a href=#__codelineno-17-49>49</a></span>
-<span class=normal><a href=#__codelineno-17-50>50</a></span>
-<span class=normal><a href=#__codelineno-17-51>51</a></span>
-<span class=normal><a href=#__codelineno-17-52>52</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><a id=__codelineno-17-1 name=__codelineno-17-1></a><span class=c1>// Jenkinsfile - 放在项目根目录</span>
-</span><span id=__span-17-2><a id=__codelineno-17-2 name=__codelineno-17-2></a>
-</span><span id=__span-17-3><a id=__codelineno-17-3 name=__codelineno-17-3></a><span class=n>pipeline</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-17-4><a id=__codelineno-17-4 name=__codelineno-17-4></a><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span>
-</span><span id=__span-17-5><a id=__codelineno-17-5 name=__codelineno-17-5></a>
-</span><span id=__span-17-6><a id=__codelineno-17-6 name=__codelineno-17-6></a><span class=w>    </span><span class=c1>// 使用参数让流水线更灵活</span>
-</span><span id=__span-17-7><a id=__codelineno-17-7 name=__codelineno-17-7></a><span class=w>    </span><span class=n>parameters</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-17-8><a id=__codelineno-17-8 name=__codelineno-17-8></a><span class=w>        </span><span class=n>choice</span><span class=o>(</span><span class=nl>name:</span><span class=w> </span><span class=s1>&#39;ENV&#39;</span><span class=o>,</span><span class=w> </span><span class=nl>choices:</span><span class=w> </span><span class=o>[</span><span class=s1>&#39;dev&#39;</span><span class=o>,</span><span class=w> </span><span class=s1>&#39;staging&#39;</span><span class=o>,</span><span class=w> </span><span class=s1>&#39;prod&#39;</span><span class=o>],</span><span class=w> </span>
-</span><span id=__span-17-9><a id=__codelineno-17-9 name=__codelineno-17-9></a><span class=w>               </span><span class=nl>description:</span><span class=w> </span><span class=s1>&#39;部署环境&#39;</span><span class=o>)</span>
-</span><span id=__span-17-10><a id=__codelineno-17-10 name=__codelineno-17-10></a><span class=w>        </span><span class=n>booleanParam</span><span class=o>(</span><span class=nl>name:</span><span class=w> </span><span class=s1>&#39;RUN_TESTS&#39;</span><span class=o>,</span><span class=w> </span><span class=nl>defaultValue:</span><span class=w> </span><span class=kc>true</span><span class=o>,</span><span class=w> </span>
-</span><span id=__span-17-11><a id=__codelineno-17-11 name=__codelineno-17-11></a><span class=w>                     </span><span class=nl>description:</span><span class=w> </span><span class=s1>&#39;是否运行测试&#39;</span><span class=o>)</span>
-</span><span id=__span-17-12><a id=__codelineno-17-12 name=__codelineno-17-12></a><span class=w>        </span><span class=n>string</span><span class=o>(</span><span class=nl>name:</span><span class=w> </span><span class=s1>&#39;VERSION&#39;</span><span class=o>,</span><span class=w> </span><span class=nl>defaultValue:</span><span class=w> </span><span class=s1>&#39;&#39;</span><span class=o>,</span><span class=w> </span>
-</span><span id=__span-17-13><a id=__codelineno-17-13 name=__codelineno-17-13></a><span class=w>               </span><span class=nl>description:</span><span class=w> </span><span class=s1>&#39;指定版本号（留空则自动）&#39;</span><span class=o>)</span>
-</span><span id=__span-17-14><a id=__codelineno-17-14 name=__codelineno-17-14></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-17-15><a id=__codelineno-17-15 name=__codelineno-17-15></a>
-</span><span id=__span-17-16><a id=__codelineno-17-16 name=__codelineno-17-16></a><span class=w>    </span><span class=n>environment</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-17-17><a id=__codelineno-17-17 name=__codelineno-17-17></a><span class=w>        </span><span class=c1>// 根据参数决定配置</span>
-</span><span id=__span-17-18><a id=__codelineno-17-18 name=__codelineno-17-18></a><span class=w>        </span><span class=n>APP_NAME</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;my-app&#39;</span>
-</span><span id=__span-17-19><a id=__codelineno-17-19 name=__codelineno-17-19></a><span class=w>        </span><span class=n>DOCKER_REGISTRY</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;registry.example.com&#39;</span>
-</span><span id=__span-17-20><a id=__codelineno-17-20 name=__codelineno-17-20></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-17-21><a id=__codelineno-17-21 name=__codelineno-17-21></a>
-</span><span id=__span-17-22><a id=__codelineno-17-22 name=__codelineno-17-22></a><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-17-23><a id=__codelineno-17-23 name=__codelineno-17-23></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;准备&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-17-24><a id=__codelineno-17-24 name=__codelineno-17-24></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-17-25><a id=__codelineno-17-25 name=__codelineno-17-25></a><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s2>&quot;部署环境: ${params.ENV}&quot;</span>
-</span><span id=__span-17-26><a id=__codelineno-17-26 name=__codelineno-17-26></a><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s2>&quot;是否测试: ${params.RUN_TESTS}&quot;</span>
-</span><span id=__span-17-27><a id=__codelineno-17-27 name=__codelineno-17-27></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-17-28><a id=__codelineno-17-28 name=__codelineno-17-28></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-17-29><a id=__codelineno-17-29 name=__codelineno-17-29></a>
-</span><span id=__span-17-30><a id=__codelineno-17-30 name=__codelineno-17-30></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;构建&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-17-31><a id=__codelineno-17-31 name=__codelineno-17-31></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-17-32><a id=__codelineno-17-32 name=__codelineno-17-32></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;make build&#39;</span>
-</span><span id=__span-17-33><a id=__codelineno-17-33 name=__codelineno-17-33></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-17-34><a id=__codelineno-17-34 name=__codelineno-17-34></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-17-35><a id=__codelineno-17-35 name=__codelineno-17-35></a>
-</span><span id=__span-17-36><a id=__codelineno-17-36 name=__codelineno-17-36></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-17-37><a id=__codelineno-17-37 name=__codelineno-17-37></a><span class=w>            </span><span class=n>when</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-17-38><a id=__codelineno-17-38 name=__codelineno-17-38></a><span class=w>                </span><span class=n>expression</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=n>params</span><span class=o>.</span><span class=na>RUN_TESTS</span><span class=w> </span><span class=o>}</span>
-</span><span id=__span-17-39><a id=__codelineno-17-39 name=__codelineno-17-39></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-17-40><a id=__codelineno-17-40 name=__codelineno-17-40></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-17-41><a id=__codelineno-17-41 name=__codelineno-17-41></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;make test&#39;</span>
-</span><span id=__span-17-42><a id=__codelineno-17-42 name=__codelineno-17-42></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-17-43><a id=__codelineno-17-43 name=__codelineno-17-43></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-17-44><a id=__codelineno-17-44 name=__codelineno-17-44></a>
-</span><span id=__span-17-45><a id=__codelineno-17-45 name=__codelineno-17-45></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;部署&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-17-46><a id=__codelineno-17-46 name=__codelineno-17-46></a><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-17-47><a id=__codelineno-17-47 name=__codelineno-17-47></a><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s2>&quot;部署到 ${params.ENV} 环境&quot;</span>
-</span><span id=__span-17-48><a id=__codelineno-17-48 name=__codelineno-17-48></a><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s2>&quot;make deploy ENV=${params.ENV}&quot;</span>
-</span><span id=__span-17-49><a id=__codelineno-17-49 name=__codelineno-17-49></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-17-50><a id=__codelineno-17-50 name=__codelineno-17-50></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-17-51><a id=__codelineno-17-51 name=__codelineno-17-51></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-17-52><a id=__codelineno-17-52 name=__codelineno-17-52></a><span class=o>}</span>
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=_9>十、构建通知：别再盯着屏幕等了<a class=headerlink href=#_9 title="Permanent link">&para;</a></h2> <p>构建完成后的通知，是Jenkins的"最后一公里"。</p> <h3 id=101>10.1 邮件通知<a class=headerlink href=#101 title="Permanent link">&para;</a></h3> <p><strong>第一步：配置SMTP</strong></p> <p>进入 "Manage Jenkins" -&gt; "系统配置"：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-18-1>1</a></span>
-<span class=normal><a href=#__codelineno-18-2>2</a></span>
-<span class=normal><a href=#__codelineno-18-3>3</a></span>
-<span class=normal><a href=#__codelineno-18-4>4</a></span>
-<span class=normal><a href=#__codelineno-18-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-18-1><a id=__codelineno-18-1 name=__codelineno-18-1></a>SMTP服务器:        smtp.gmail.com
-</span><span id=__span-18-2><a id=__codelineno-18-2 name=__codelineno-18-2></a>SMTP端口:          465
-</span><span id=__span-18-3><a id=__codelineno-18-3 name=__codelineno-18-3></a>使用SSL:           勾选
-</span><span id=__span-18-4><a id=__codelineno-18-4 name=__codelineno-18-4></a>发件人邮箱:        your-email@gmail.com
-</span><span id=__span-18-5><a id=__codelineno-18-5 name=__codelineno-18-5></a>用户名/密码:       你的邮箱和应用专用密码
-</span></code></pre></div></td></tr></table></div> <p><strong>第二步：Pipeline中使用</strong></p> <div class="language-groovy highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-19-1> 1</a></span>
-<span class=normal><a href=#__codelineno-19-2> 2</a></span>
-<span class=normal><a href=#__codelineno-19-3> 3</a></span>
-<span class=normal><a href=#__codelineno-19-4> 4</a></span>
-<span class=normal><a href=#__codelineno-19-5> 5</a></span>
-<span class=normal><a href=#__codelineno-19-6> 6</a></span>
-<span class=normal><a href=#__codelineno-19-7> 7</a></span>
-<span class=normal><a href=#__codelineno-19-8> 8</a></span>
-<span class=normal><a href=#__codelineno-19-9> 9</a></span>
-<span class=normal><a href=#__codelineno-19-10>10</a></span>
-<span class=normal><a href=#__codelineno-19-11>11</a></span>
-<span class=normal><a href=#__codelineno-19-12>12</a></span>
-<span class=normal><a href=#__codelineno-19-13>13</a></span>
-<span class=normal><a href=#__codelineno-19-14>14</a></span>
-<span class=normal><a href=#__codelineno-19-15>15</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-19-1><a id=__codelineno-19-1 name=__codelineno-19-1></a><span class=n>post</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-19-2><a id=__codelineno-19-2 name=__codelineno-19-2></a><span class=w>    </span><span class=n>failure</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-19-3><a id=__codelineno-19-3 name=__codelineno-19-3></a><span class=w>        </span><span class=n>mail</span><span class=w> </span><span class=nl>to:</span><span class=w> </span><span class=s1>&#39;team@example.com&#39;</span><span class=o>,</span>
-</span><span id=__span-19-4><a id=__codelineno-19-4 name=__codelineno-19-4></a><span class=w>             </span><span class=nl>subject:</span><span class=w> </span><span class=s2>&quot;构建失败: ${env.JOB_NAME} #${env.BUILD_NUMBER}&quot;</span><span class=o>,</span>
-</span><span id=__span-19-5><a id=__codelineno-19-5 name=__codelineno-19-5></a><span class=w>             </span><span class=nl>body:</span><span class=w> </span><span class=s2>&quot;&quot;&quot;</span>
-</span><span id=__span-19-6><a id=__codelineno-19-6 name=__codelineno-19-6></a><span class=s2>             构建失败！</span>
-</span><span id=__span-19-7><a id=__codelineno-19-7 name=__codelineno-19-7></a>
-</span><span id=__span-19-8><a id=__codelineno-19-8 name=__codelineno-19-8></a><span class=s2>             项目: ${env.JOB_NAME}</span>
-</span><span id=__span-19-9><a id=__codelineno-19-9 name=__codelineno-19-9></a><span class=s2>             编号: ${env.BUILD_NUMBER}</span>
-</span><span id=__span-19-10><a id=__codelineno-19-10 name=__codelineno-19-10></a><span class=s2>             地址: ${env.BUILD_URL}</span>
-</span><span id=__span-19-11><a id=__codelineno-19-11 name=__codelineno-19-11></a>
-</span><span id=__span-19-12><a id=__codelineno-19-12 name=__codelineno-19-12></a><span class=s2>             请尽快处理！</span>
-</span><span id=__span-19-13><a id=__codelineno-19-13 name=__codelineno-19-13></a><span class=s2>             &quot;&quot;&quot;</span>
-</span><span id=__span-19-14><a id=__codelineno-19-14 name=__codelineno-19-14></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-19-15><a id=__codelineno-19-15 name=__codelineno-19-15></a><span class=o>}</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=102>10.2 钉钉/飞书通知<a class=headerlink href=#102 title="Permanent link">&para;</a></h3> <p>安装对应插件后，在Pipeline中使用：</p> <div class="language-groovy highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-20-1> 1</a></span>
-<span class=normal><a href=#__codelineno-20-2> 2</a></span>
-<span class=normal><a href=#__codelineno-20-3> 3</a></span>
-<span class=normal><a href=#__codelineno-20-4> 4</a></span>
-<span class=normal><a href=#__codelineno-20-5> 5</a></span>
-<span class=normal><a href=#__codelineno-20-6> 6</a></span>
-<span class=normal><a href=#__codelineno-20-7> 7</a></span>
-<span class=normal><a href=#__codelineno-20-8> 8</a></span>
-<span class=normal><a href=#__codelineno-20-9> 9</a></span>
-<span class=normal><a href=#__codelineno-20-10>10</a></span>
-<span class=normal><a href=#__codelineno-20-11>11</a></span>
-<span class=normal><a href=#__codelineno-20-12>12</a></span>
-<span class=normal><a href=#__codelineno-20-13>13</a></span>
-<span class=normal><a href=#__codelineno-20-14>14</a></span>
-<span class=normal><a href=#__codelineno-20-15>15</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-20-1><a id=__codelineno-20-1 name=__codelineno-20-1></a><span class=n>post</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-20-2><a id=__codelineno-20-2 name=__codelineno-20-2></a><span class=w>    </span><span class=n>success</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-20-3><a id=__codelineno-20-3 name=__codelineno-20-3></a><span class=w>        </span><span class=n>dingtalk</span><span class=o>(</span>
-</span><span id=__span-20-4><a id=__codelineno-20-4 name=__codelineno-20-4></a><span class=w>            </span><span class=nl>robot:</span><span class=w> </span><span class=s1>&#39;my-robot&#39;</span><span class=o>,</span>
-</span><span id=__span-20-5><a id=__codelineno-20-5 name=__codelineno-20-5></a><span class=w>            </span><span class=nl>type:</span><span class=w> </span><span class=s1>&#39;MARKDOWN&#39;</span><span class=o>,</span>
-</span><span id=__span-20-6><a id=__codelineno-20-6 name=__codelineno-20-6></a><span class=w>            </span><span class=nl>title:</span><span class=w> </span><span class=s1>&#39;构建成功&#39;</span><span class=o>,</span>
-</span><span id=__span-20-7><a id=__codelineno-20-7 name=__codelineno-20-7></a><span class=w>            </span><span class=nl>text:</span><span class=w> </span><span class=o>[</span>
-</span><span id=__span-20-8><a id=__codelineno-20-8 name=__codelineno-20-8></a><span class=w>                </span><span class=s2>&quot;## 构建成功 ✅&quot;</span><span class=o>,</span>
-</span><span id=__span-20-9><a id=__codelineno-20-9 name=__codelineno-20-9></a><span class=w>                </span><span class=s2>&quot;- 项目: ${env.JOB_NAME}&quot;</span><span class=o>,</span>
-</span><span id=__span-20-10><a id=__codelineno-20-10 name=__codelineno-20-10></a><span class=w>                </span><span class=s2>&quot;- 编号: #${env.BUILD_NUMBER}&quot;</span><span class=o>,</span>
-</span><span id=__span-20-11><a id=__codelineno-20-11 name=__codelineno-20-11></a><span class=w>                </span><span class=s2>&quot;- 耗时: ${currentBuild.durationString}&quot;</span>
-</span><span id=__span-20-12><a id=__codelineno-20-12 name=__codelineno-20-12></a><span class=w>            </span><span class=o>]</span>
-</span><span id=__span-20-13><a id=__codelineno-20-13 name=__codelineno-20-13></a><span class=w>        </span><span class=o>)</span>
-</span><span id=__span-20-14><a id=__codelineno-20-14 name=__codelineno-20-14></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-20-15><a id=__codelineno-20-15 name=__codelineno-20-15></a><span class=o>}</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=103>10.3 通知方式对比<a class=headerlink href=#103 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    style D1 fill:#ffcdd2</code></pre> <h3 id=92>9.2 如何配置<a class=headerlink href=#92 title="Permanent link">&para;</a></h3> <ol> <li>在项目根目录创建 <code>Jenkinsfile</code> 文件</li> <li>提交到Git仓库</li> <li>在Jenkins任务配置中，Pipeline选择"Pipeline script from SCM"</li> </ol> <div class="language-text highlight"><pre><span></span><code><span id=__span-16-1>SCM:          Git
+</span><span id=__span-16-2>Repository:   你的仓库地址
+</span><span id=__span-16-3>分支:         */main
+</span><span id=__span-16-4>脚本路径:     Jenkinsfile
+</span></code></pre></div> <h3 id=93-jenkinsfile>9.3 Jenkinsfile最佳实践<a class=headerlink href=#93-jenkinsfile title="Permanent link">&para;</a></h3> <div class="language-groovy highlight"><pre><span></span><code><span id=__span-17-1><span class=c1>// Jenkinsfile - 放在项目根目录</span>
+</span><span id=__span-17-2>
+</span><span id=__span-17-3><span class=n>pipeline</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-17-4><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span>
+</span><span id=__span-17-5>
+</span><span id=__span-17-6><span class=w>    </span><span class=c1>// 使用参数让流水线更灵活</span>
+</span><span id=__span-17-7><span class=w>    </span><span class=n>parameters</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-17-8><span class=w>        </span><span class=n>choice</span><span class=o>(</span><span class=nl>name:</span><span class=w> </span><span class=s1>&#39;ENV&#39;</span><span class=o>,</span><span class=w> </span><span class=nl>choices:</span><span class=w> </span><span class=o>[</span><span class=s1>&#39;dev&#39;</span><span class=o>,</span><span class=w> </span><span class=s1>&#39;staging&#39;</span><span class=o>,</span><span class=w> </span><span class=s1>&#39;prod&#39;</span><span class=o>],</span><span class=w> </span>
+</span><span id=__span-17-9><span class=w>               </span><span class=nl>description:</span><span class=w> </span><span class=s1>&#39;部署环境&#39;</span><span class=o>)</span>
+</span><span id=__span-17-10><span class=w>        </span><span class=n>booleanParam</span><span class=o>(</span><span class=nl>name:</span><span class=w> </span><span class=s1>&#39;RUN_TESTS&#39;</span><span class=o>,</span><span class=w> </span><span class=nl>defaultValue:</span><span class=w> </span><span class=kc>true</span><span class=o>,</span><span class=w> </span>
+</span><span id=__span-17-11><span class=w>                     </span><span class=nl>description:</span><span class=w> </span><span class=s1>&#39;是否运行测试&#39;</span><span class=o>)</span>
+</span><span id=__span-17-12><span class=w>        </span><span class=n>string</span><span class=o>(</span><span class=nl>name:</span><span class=w> </span><span class=s1>&#39;VERSION&#39;</span><span class=o>,</span><span class=w> </span><span class=nl>defaultValue:</span><span class=w> </span><span class=s1>&#39;&#39;</span><span class=o>,</span><span class=w> </span>
+</span><span id=__span-17-13><span class=w>               </span><span class=nl>description:</span><span class=w> </span><span class=s1>&#39;指定版本号（留空则自动）&#39;</span><span class=o>)</span>
+</span><span id=__span-17-14><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-17-15>
+</span><span id=__span-17-16><span class=w>    </span><span class=n>environment</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-17-17><span class=w>        </span><span class=c1>// 根据参数决定配置</span>
+</span><span id=__span-17-18><span class=w>        </span><span class=n>APP_NAME</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;my-app&#39;</span>
+</span><span id=__span-17-19><span class=w>        </span><span class=n>DOCKER_REGISTRY</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;registry.example.com&#39;</span>
+</span><span id=__span-17-20><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-17-21>
+</span><span id=__span-17-22><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-17-23><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;准备&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-17-24><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-17-25><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s2>&quot;部署环境: ${params.ENV}&quot;</span>
+</span><span id=__span-17-26><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s2>&quot;是否测试: ${params.RUN_TESTS}&quot;</span>
+</span><span id=__span-17-27><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-17-28><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-17-29>
+</span><span id=__span-17-30><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;构建&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-17-31><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-17-32><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;make build&#39;</span>
+</span><span id=__span-17-33><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-17-34><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-17-35>
+</span><span id=__span-17-36><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-17-37><span class=w>            </span><span class=n>when</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-17-38><span class=w>                </span><span class=n>expression</span><span class=w> </span><span class=o>{</span><span class=w> </span><span class=n>params</span><span class=o>.</span><span class=na>RUN_TESTS</span><span class=w> </span><span class=o>}</span>
+</span><span id=__span-17-39><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-17-40><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-17-41><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;make test&#39;</span>
+</span><span id=__span-17-42><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-17-43><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-17-44>
+</span><span id=__span-17-45><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;部署&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-17-46><span class=w>            </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-17-47><span class=w>                </span><span class=n>echo</span><span class=w> </span><span class=s2>&quot;部署到 ${params.ENV} 环境&quot;</span>
+</span><span id=__span-17-48><span class=w>                </span><span class=n>sh</span><span class=w> </span><span class=s2>&quot;make deploy ENV=${params.ENV}&quot;</span>
+</span><span id=__span-17-49><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-17-50><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-17-51><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-17-52><span class=o>}</span>
+</span></code></pre></div> <hr> <h2 id=_9>十、构建通知：别再盯着屏幕等了<a class=headerlink href=#_9 title="Permanent link">&para;</a></h2> <p>构建完成后的通知，是Jenkins的"最后一公里"。</p> <h3 id=101>10.1 邮件通知<a class=headerlink href=#101 title="Permanent link">&para;</a></h3> <p><strong>第一步：配置SMTP</strong></p> <p>进入 "Manage Jenkins" -&gt; "系统配置"：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-18-1>SMTP服务器:        smtp.gmail.com
+</span><span id=__span-18-2>SMTP端口:          465
+</span><span id=__span-18-3>使用SSL:           勾选
+</span><span id=__span-18-4>发件人邮箱:        your-email@gmail.com
+</span><span id=__span-18-5>用户名/密码:       你的邮箱和应用专用密码
+</span></code></pre></div> <p><strong>第二步：Pipeline中使用</strong></p> <div class="language-groovy highlight"><pre><span></span><code><span id=__span-19-1><span class=n>post</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-19-2><span class=w>    </span><span class=n>failure</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-19-3><span class=w>        </span><span class=n>mail</span><span class=w> </span><span class=nl>to:</span><span class=w> </span><span class=s1>&#39;team@example.com&#39;</span><span class=o>,</span>
+</span><span id=__span-19-4><span class=w>             </span><span class=nl>subject:</span><span class=w> </span><span class=s2>&quot;构建失败: ${env.JOB_NAME} #${env.BUILD_NUMBER}&quot;</span><span class=o>,</span>
+</span><span id=__span-19-5><span class=w>             </span><span class=nl>body:</span><span class=w> </span><span class=s2>&quot;&quot;&quot;</span>
+</span><span id=__span-19-6><span class=s2>             构建失败！</span>
+</span><span id=__span-19-7>
+</span><span id=__span-19-8><span class=s2>             项目: ${env.JOB_NAME}</span>
+</span><span id=__span-19-9><span class=s2>             编号: ${env.BUILD_NUMBER}</span>
+</span><span id=__span-19-10><span class=s2>             地址: ${env.BUILD_URL}</span>
+</span><span id=__span-19-11>
+</span><span id=__span-19-12><span class=s2>             请尽快处理！</span>
+</span><span id=__span-19-13><span class=s2>             &quot;&quot;&quot;</span>
+</span><span id=__span-19-14><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-19-15><span class=o>}</span>
+</span></code></pre></div> <h3 id=102>10.2 钉钉/飞书通知<a class=headerlink href=#102 title="Permanent link">&para;</a></h3> <p>安装对应插件后，在Pipeline中使用：</p> <div class="language-groovy highlight"><pre><span></span><code><span id=__span-20-1><span class=n>post</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-20-2><span class=w>    </span><span class=n>success</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-20-3><span class=w>        </span><span class=n>dingtalk</span><span class=o>(</span>
+</span><span id=__span-20-4><span class=w>            </span><span class=nl>robot:</span><span class=w> </span><span class=s1>&#39;my-robot&#39;</span><span class=o>,</span>
+</span><span id=__span-20-5><span class=w>            </span><span class=nl>type:</span><span class=w> </span><span class=s1>&#39;MARKDOWN&#39;</span><span class=o>,</span>
+</span><span id=__span-20-6><span class=w>            </span><span class=nl>title:</span><span class=w> </span><span class=s1>&#39;构建成功&#39;</span><span class=o>,</span>
+</span><span id=__span-20-7><span class=w>            </span><span class=nl>text:</span><span class=w> </span><span class=o>[</span>
+</span><span id=__span-20-8><span class=w>                </span><span class=s2>&quot;## 构建成功 ✅&quot;</span><span class=o>,</span>
+</span><span id=__span-20-9><span class=w>                </span><span class=s2>&quot;- 项目: ${env.JOB_NAME}&quot;</span><span class=o>,</span>
+</span><span id=__span-20-10><span class=w>                </span><span class=s2>&quot;- 编号: #${env.BUILD_NUMBER}&quot;</span><span class=o>,</span>
+</span><span id=__span-20-11><span class=w>                </span><span class=s2>&quot;- 耗时: ${currentBuild.durationString}&quot;</span>
+</span><span id=__span-20-12><span class=w>            </span><span class=o>]</span>
+</span><span id=__span-20-13><span class=w>        </span><span class=o>)</span>
+</span><span id=__span-20-14><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-20-15><span class=o>}</span>
+</span></code></pre></div> <h3 id=103>10.3 通知方式对比<a class=headerlink href=#103 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
     subgraph 通知方式
         A[邮件通知] --&gt; A1[最基础&lt;br/&gt;适合正式通知]
         B[钉钉/飞书] --&gt; B1[最即时&lt;br/&gt;适合团队协作]
         C[企业微信] --&gt; C1[国内企业常用]
         D[Slack] --&gt; D1[海外团队常用]
         E[Webhook] --&gt; E1[万能方案&lt;br/&gt;可对接任意系统]
-    end</code></pre> <hr> <h2 id=_10>十一、常见问题排查<a class=headerlink href=#_10 title="Permanent link">&para;</a></h2> <h3 id=1>问题1：构建卡住不动<a class=headerlink href=#1 title="Permanent link">&para;</a></h3> <p><strong>症状</strong>：点"立即构建"后一直转圈</p> <p><strong>排查步骤</strong>：</p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-21-1> 1</a></span>
-<span class=normal><a href=#__codelineno-21-2> 2</a></span>
-<span class=normal><a href=#__codelineno-21-3> 3</a></span>
-<span class=normal><a href=#__codelineno-21-4> 4</a></span>
-<span class=normal><a href=#__codelineno-21-5> 5</a></span>
-<span class=normal><a href=#__codelineno-21-6> 6</a></span>
-<span class=normal><a href=#__codelineno-21-7> 7</a></span>
-<span class=normal><a href=#__codelineno-21-8> 8</a></span>
-<span class=normal><a href=#__codelineno-21-9> 9</a></span>
-<span class=normal><a href=#__codelineno-21-10>10</a></span>
-<span class=normal><a href=#__codelineno-21-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-21-1><a id=__codelineno-21-1 name=__codelineno-21-1></a><span class=c1># 1. 检查Jenkins是否在运行</span>
-</span><span id=__span-21-2><a id=__codelineno-21-2 name=__codelineno-21-2></a>docker<span class=w> </span>ps<span class=w> </span><span class=p>|</span><span class=w> </span>grep<span class=w> </span>jenkins
-</span><span id=__span-21-3><a id=__codelineno-21-3 name=__codelineno-21-3></a>
-</span><span id=__span-21-4><a id=__codelineno-21-4 name=__codelineno-21-4></a><span class=c1># 2. 查看Jenkins日志</span>
-</span><span id=__span-21-5><a id=__codelineno-21-5 name=__codelineno-21-5></a>docker<span class=w> </span>logs<span class=w> </span>jenkins<span class=w> </span>--tail<span class=w> </span><span class=m>100</span>
-</span><span id=__span-21-6><a id=__codelineno-21-6 name=__codelineno-21-6></a>
-</span><span id=__span-21-7><a id=__codelineno-21-7 name=__codelineno-21-7></a><span class=c1># 3. 检查磁盘空间</span>
-</span><span id=__span-21-8><a id=__codelineno-21-8 name=__codelineno-21-8></a>df<span class=w> </span>-h
-</span><span id=__span-21-9><a id=__codelineno-21-9 name=__codelineno-21-9></a>
-</span><span id=__span-21-10><a id=__codelineno-21-10 name=__codelineno-21-10></a><span class=c1># 4. 检查是否有僵死的构建进程</span>
-</span><span id=__span-21-11><a id=__codelineno-21-11 name=__codelineno-21-11></a><span class=c1># 在Jenkins管理页面 -&gt; 管理Jenkins -&gt; 安全地终止构建</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=2git>问题2：Git拉取代码失败<a class=headerlink href=#2git title="Permanent link">&para;</a></h3> <p><strong>症状</strong>：<code>Failed to connect to repository</code></p> <p><strong>排查步骤</strong>：</p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-22-1> 1</a></span>
-<span class=normal><a href=#__codelineno-22-2> 2</a></span>
-<span class=normal><a href=#__codelineno-22-3> 3</a></span>
-<span class=normal><a href=#__codelineno-22-4> 4</a></span>
-<span class=normal><a href=#__codelineno-22-5> 5</a></span>
-<span class=normal><a href=#__codelineno-22-6> 6</a></span>
-<span class=normal><a href=#__codelineno-22-7> 7</a></span>
-<span class=normal><a href=#__codelineno-22-8> 8</a></span>
-<span class=normal><a href=#__codelineno-22-9> 9</a></span>
-<span class=normal><a href=#__codelineno-22-10>10</a></span>
-<span class=normal><a href=#__codelineno-22-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-22-1><a id=__codelineno-22-1 name=__codelineno-22-1></a><span class=c1># 1. 测试网络连通性</span>
-</span><span id=__span-22-2><a id=__codelineno-22-2 name=__codelineno-22-2></a>ping<span class=w> </span>github.com
-</span><span id=__span-22-3><a id=__codelineno-22-3 name=__codelineno-22-3></a>
-</span><span id=__span-22-4><a id=__codelineno-22-4 name=__codelineno-22-4></a><span class=c1># 2. 测试Git访问</span>
-</span><span id=__span-22-5><a id=__codelineno-22-5 name=__codelineno-22-5></a>git<span class=w> </span>ls-remote<span class=w> </span>https://github.com/yourname/your-repo.git
-</span><span id=__span-22-6><a id=__codelineno-22-6 name=__codelineno-22-6></a>
-</span><span id=__span-22-7><a id=__codelineno-22-7 name=__codelineno-22-7></a><span class=c1># 3. 检查凭证配置</span>
-</span><span id=__span-22-8><a id=__codelineno-22-8 name=__codelineno-22-8></a><span class=c1># Manage Jenkins -&gt; Credentials -&gt; 查看是否有正确的凭证</span>
-</span><span id=__span-22-9><a id=__codelineno-22-9 name=__codelineno-22-9></a>
-</span><span id=__span-22-10><a id=__codelineno-22-10 name=__codelineno-22-10></a><span class=c1># 4. 如果是SSH方式，检查密钥配置</span>
-</span><span id=__span-22-11><a id=__codelineno-22-11 name=__codelineno-22-11></a>ssh<span class=w> </span>-T<span class=w> </span>git@github.com
-</span></code></pre></div></td></tr></table></div> <h3 id=3>问题3：权限不足<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <p><strong>症状</strong>：<code>Permission denied</code></p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-23-1>1</a></span>
-<span class=normal><a href=#__codelineno-23-2>2</a></span>
-<span class=normal><a href=#__codelineno-23-3>3</a></span>
-<span class=normal><a href=#__codelineno-23-4>4</a></span>
-<span class=normal><a href=#__codelineno-23-5>5</a></span>
-<span class=normal><a href=#__codelineno-23-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-23-1><a id=__codelineno-23-1 name=__codelineno-23-1></a><span class=c1># Jenkins用户权限问题</span>
-</span><span id=__span-23-2><a id=__codelineno-23-2 name=__codelineno-23-2></a>sudo<span class=w> </span>chown<span class=w> </span>-R<span class=w> </span>jenkins:jenkins<span class=w> </span>/var/lib/jenkins/workspace/
-</span><span id=__span-23-3><a id=__codelineno-23-3 name=__codelineno-23-3></a>
-</span><span id=__span-23-4><a id=__codelineno-23-4 name=__codelineno-23-4></a><span class=c1># Docker权限问题（把jenkins用户加入docker组）</span>
-</span><span id=__span-23-5><a id=__codelineno-23-5 name=__codelineno-23-5></a>sudo<span class=w> </span>usermod<span class=w> </span>-aG<span class=w> </span>docker<span class=w> </span>jenkins
-</span><span id=__span-23-6><a id=__codelineno-23-6 name=__codelineno-23-6></a>sudo<span class=w> </span>systemctl<span class=w> </span>restart<span class=w> </span>jenkins
-</span></code></pre></div></td></tr></table></div> <h3 id=4>问题4：磁盘空间不足<a class=headerlink href=#4 title="Permanent link">&para;</a></h3> <p><strong>症状</strong>：构建莫名失败，日志显示"No space left on device"</p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-24-1> 1</a></span>
-<span class=normal><a href=#__codelineno-24-2> 2</a></span>
-<span class=normal><a href=#__codelineno-24-3> 3</a></span>
-<span class=normal><a href=#__codelineno-24-4> 4</a></span>
-<span class=normal><a href=#__codelineno-24-5> 5</a></span>
-<span class=normal><a href=#__codelineno-24-6> 6</a></span>
-<span class=normal><a href=#__codelineno-24-7> 7</a></span>
-<span class=normal><a href=#__codelineno-24-8> 8</a></span>
-<span class=normal><a href=#__codelineno-24-9> 9</a></span>
-<span class=normal><a href=#__codelineno-24-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-24-1><a id=__codelineno-24-1 name=__codelineno-24-1></a><span class=c1># 查看Jenkins占用的磁盘</span>
-</span><span id=__span-24-2><a id=__codelineno-24-2 name=__codelineno-24-2></a>du<span class=w> </span>-sh<span class=w> </span>/var/lib/jenkins/
-</span><span id=__span-24-3><a id=__codelineno-24-3 name=__codelineno-24-3></a>
-</span><span id=__span-24-4><a id=__codelineno-24-4 name=__codelineno-24-4></a><span class=c1># 清理旧的构建记录</span>
-</span><span id=__span-24-5><a id=__codelineno-24-5 name=__codelineno-24-5></a><span class=c1># 在任务配置中 -&gt; 丢弃旧的构建 -&gt; 勾选</span>
-</span><span id=__span-24-6><a id=__codelineno-24-6 name=__codelineno-24-6></a><span class=c1># 设置保持构建的天数: 30</span>
-</span><span id=__span-24-7><a id=__codelineno-24-7 name=__codelineno-24-7></a><span class=c1># 设置保持构建的最大个数: 10</span>
-</span><span id=__span-24-8><a id=__codelineno-24-8 name=__codelineno-24-8></a>
-</span><span id=__span-24-9><a id=__codelineno-24-9 name=__codelineno-24-9></a><span class=c1># 手动清理工作空间</span>
-</span><span id=__span-24-10><a id=__codelineno-24-10 name=__codelineno-24-10></a><span class=c1># Manage Jenkins -&gt; 系统信息 -&gt; 工作空间清理</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=_11>问题排查万能流程<a class=headerlink href=#_11 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    end</code></pre> <hr> <h2 id=_10>十一、常见问题排查<a class=headerlink href=#_10 title="Permanent link">&para;</a></h2> <h3 id=1>问题1：构建卡住不动<a class=headerlink href=#1 title="Permanent link">&para;</a></h3> <p><strong>症状</strong>：点"立即构建"后一直转圈</p> <p><strong>排查步骤</strong>：</p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-21-1><span class=c1># 1. 检查Jenkins是否在运行</span>
+</span><span id=__span-21-2>docker<span class=w> </span>ps<span class=w> </span><span class=p>|</span><span class=w> </span>grep<span class=w> </span>jenkins
+</span><span id=__span-21-3>
+</span><span id=__span-21-4><span class=c1># 2. 查看Jenkins日志</span>
+</span><span id=__span-21-5>docker<span class=w> </span>logs<span class=w> </span>jenkins<span class=w> </span>--tail<span class=w> </span><span class=m>100</span>
+</span><span id=__span-21-6>
+</span><span id=__span-21-7><span class=c1># 3. 检查磁盘空间</span>
+</span><span id=__span-21-8>df<span class=w> </span>-h
+</span><span id=__span-21-9>
+</span><span id=__span-21-10><span class=c1># 4. 检查是否有僵死的构建进程</span>
+</span><span id=__span-21-11><span class=c1># 在Jenkins管理页面 -&gt; 管理Jenkins -&gt; 安全地终止构建</span>
+</span></code></pre></div> <h3 id=2git>问题2：Git拉取代码失败<a class=headerlink href=#2git title="Permanent link">&para;</a></h3> <p><strong>症状</strong>：<code>Failed to connect to repository</code></p> <p><strong>排查步骤</strong>：</p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-22-1><span class=c1># 1. 测试网络连通性</span>
+</span><span id=__span-22-2>ping<span class=w> </span>github.com
+</span><span id=__span-22-3>
+</span><span id=__span-22-4><span class=c1># 2. 测试Git访问</span>
+</span><span id=__span-22-5>git<span class=w> </span>ls-remote<span class=w> </span>https://github.com/yourname/your-repo.git
+</span><span id=__span-22-6>
+</span><span id=__span-22-7><span class=c1># 3. 检查凭证配置</span>
+</span><span id=__span-22-8><span class=c1># Manage Jenkins -&gt; Credentials -&gt; 查看是否有正确的凭证</span>
+</span><span id=__span-22-9>
+</span><span id=__span-22-10><span class=c1># 4. 如果是SSH方式，检查密钥配置</span>
+</span><span id=__span-22-11>ssh<span class=w> </span>-T<span class=w> </span>git@github.com
+</span></code></pre></div> <h3 id=3>问题3：权限不足<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <p><strong>症状</strong>：<code>Permission denied</code></p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-23-1><span class=c1># Jenkins用户权限问题</span>
+</span><span id=__span-23-2>sudo<span class=w> </span>chown<span class=w> </span>-R<span class=w> </span>jenkins:jenkins<span class=w> </span>/var/lib/jenkins/workspace/
+</span><span id=__span-23-3>
+</span><span id=__span-23-4><span class=c1># Docker权限问题（把jenkins用户加入docker组）</span>
+</span><span id=__span-23-5>sudo<span class=w> </span>usermod<span class=w> </span>-aG<span class=w> </span>docker<span class=w> </span>jenkins
+</span><span id=__span-23-6>sudo<span class=w> </span>systemctl<span class=w> </span>restart<span class=w> </span>jenkins
+</span></code></pre></div> <h3 id=4>问题4：磁盘空间不足<a class=headerlink href=#4 title="Permanent link">&para;</a></h3> <p><strong>症状</strong>：构建莫名失败，日志显示"No space left on device"</p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-24-1><span class=c1># 查看Jenkins占用的磁盘</span>
+</span><span id=__span-24-2>du<span class=w> </span>-sh<span class=w> </span>/var/lib/jenkins/
+</span><span id=__span-24-3>
+</span><span id=__span-24-4><span class=c1># 清理旧的构建记录</span>
+</span><span id=__span-24-5><span class=c1># 在任务配置中 -&gt; 丢弃旧的构建 -&gt; 勾选</span>
+</span><span id=__span-24-6><span class=c1># 设置保持构建的天数: 30</span>
+</span><span id=__span-24-7><span class=c1># 设置保持构建的最大个数: 10</span>
+</span><span id=__span-24-8>
+</span><span id=__span-24-9><span class=c1># 手动清理工作空间</span>
+</span><span id=__span-24-10><span class=c1># Manage Jenkins -&gt; 系统信息 -&gt; 工作空间清理</span>
+</span></code></pre></div> <h3 id=_11>问题排查万能流程<a class=headerlink href=#_11 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
     A[构建失败] --&gt; B[看控制台输出]
     B --&gt; C{能看懂报错?}
     C --&gt;|能| D[按提示修复]
@@ -920,56 +543,32 @@
     D --&gt; K[重新构建验证]
 
     style A fill:#ffcdd2
-    style K fill:#c8e6c9</code></pre> <hr> <h2 id=_12>十二、进阶技巧<a class=headerlink href=#_12 title="Permanent link">&para;</a></h2> <h3 id=121>12.1 并行构建加速<a class=headerlink href=#121 title="Permanent link">&para;</a></h3> <p>当有多个独立的测试任务时，可以并行执行来节省时间：</p> <div class="language-groovy highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-25-1> 1</a></span>
-<span class=normal><a href=#__codelineno-25-2> 2</a></span>
-<span class=normal><a href=#__codelineno-25-3> 3</a></span>
-<span class=normal><a href=#__codelineno-25-4> 4</a></span>
-<span class=normal><a href=#__codelineno-25-5> 5</a></span>
-<span class=normal><a href=#__codelineno-25-6> 6</a></span>
-<span class=normal><a href=#__codelineno-25-7> 7</a></span>
-<span class=normal><a href=#__codelineno-25-8> 8</a></span>
-<span class=normal><a href=#__codelineno-25-9> 9</a></span>
-<span class=normal><a href=#__codelineno-25-10>10</a></span>
-<span class=normal><a href=#__codelineno-25-11>11</a></span>
-<span class=normal><a href=#__codelineno-25-12>12</a></span>
-<span class=normal><a href=#__codelineno-25-13>13</a></span>
-<span class=normal><a href=#__codelineno-25-14>14</a></span>
-<span class=normal><a href=#__codelineno-25-15>15</a></span>
-<span class=normal><a href=#__codelineno-25-16>16</a></span>
-<span class=normal><a href=#__codelineno-25-17>17</a></span>
-<span class=normal><a href=#__codelineno-25-18>18</a></span>
-<span class=normal><a href=#__codelineno-25-19>19</a></span>
-<span class=normal><a href=#__codelineno-25-20>20</a></span>
-<span class=normal><a href=#__codelineno-25-21>21</a></span>
-<span class=normal><a href=#__codelineno-25-22>22</a></span>
-<span class=normal><a href=#__codelineno-25-23>23</a></span>
-<span class=normal><a href=#__codelineno-25-24>24</a></span>
-<span class=normal><a href=#__codelineno-25-25>25</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-25-1><a id=__codelineno-25-1 name=__codelineno-25-1></a><span class=n>pipeline</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-25-2><a id=__codelineno-25-2 name=__codelineno-25-2></a><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span>
-</span><span id=__span-25-3><a id=__codelineno-25-3 name=__codelineno-25-3></a>
-</span><span id=__span-25-4><a id=__codelineno-25-4 name=__codelineno-25-4></a><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-25-5><a id=__codelineno-25-5 name=__codelineno-25-5></a><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;并行测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-25-6><a id=__codelineno-25-6 name=__codelineno-25-6></a><span class=w>            </span><span class=n>parallel</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-25-7><a id=__codelineno-25-7 name=__codelineno-25-7></a><span class=w>                </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;单元测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-25-8><a id=__codelineno-25-8 name=__codelineno-25-8></a><span class=w>                    </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-25-9><a id=__codelineno-25-9 name=__codelineno-25-9></a><span class=w>                        </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mvn test&#39;</span>
-</span><span id=__span-25-10><a id=__codelineno-25-10 name=__codelineno-25-10></a><span class=w>                    </span><span class=o>}</span>
-</span><span id=__span-25-11><a id=__codelineno-25-11 name=__codelineno-25-11></a><span class=w>                </span><span class=o>}</span>
-</span><span id=__span-25-12><a id=__codelineno-25-12 name=__codelineno-25-12></a><span class=w>                </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;集成测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-25-13><a id=__codelineno-25-13 name=__codelineno-25-13></a><span class=w>                    </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-25-14><a id=__codelineno-25-14 name=__codelineno-25-14></a><span class=w>                        </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mvn verify -DskipUnitTests&#39;</span>
-</span><span id=__span-25-15><a id=__codelineno-25-15 name=__codelineno-25-15></a><span class=w>                    </span><span class=o>}</span>
-</span><span id=__span-25-16><a id=__codelineno-25-16 name=__codelineno-25-16></a><span class=w>                </span><span class=o>}</span>
-</span><span id=__span-25-17><a id=__codelineno-25-17 name=__codelineno-25-17></a><span class=w>                </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;UI测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-25-18><a id=__codelineno-25-18 name=__codelineno-25-18></a><span class=w>                    </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-25-19><a id=__codelineno-25-19 name=__codelineno-25-19></a><span class=w>                        </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;npm run e2e&#39;</span>
-</span><span id=__span-25-20><a id=__codelineno-25-20 name=__codelineno-25-20></a><span class=w>                    </span><span class=o>}</span>
-</span><span id=__span-25-21><a id=__codelineno-25-21 name=__codelineno-25-21></a><span class=w>                </span><span class=o>}</span>
-</span><span id=__span-25-22><a id=__codelineno-25-22 name=__codelineno-25-22></a><span class=w>            </span><span class=o>}</span>
-</span><span id=__span-25-23><a id=__codelineno-25-23 name=__codelineno-25-23></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-25-24><a id=__codelineno-25-24 name=__codelineno-25-24></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-25-25><a id=__codelineno-25-25 name=__codelineno-25-25></a><span class=o>}</span>
-</span></code></pre></div></td></tr></table></div> <p>并行 vs 串行对比：</p> <pre class=mermaid><code>gantt
+    style K fill:#c8e6c9</code></pre> <hr> <h2 id=_12>十二、进阶技巧<a class=headerlink href=#_12 title="Permanent link">&para;</a></h2> <h3 id=121>12.1 并行构建加速<a class=headerlink href=#121 title="Permanent link">&para;</a></h3> <p>当有多个独立的测试任务时，可以并行执行来节省时间：</p> <div class="language-groovy highlight"><pre><span></span><code><span id=__span-25-1><span class=n>pipeline</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-25-2><span class=w>    </span><span class=n>agent</span><span class=w> </span><span class=n>any</span>
+</span><span id=__span-25-3>
+</span><span id=__span-25-4><span class=w>    </span><span class=n>stages</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-25-5><span class=w>        </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;并行测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-25-6><span class=w>            </span><span class=n>parallel</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-25-7><span class=w>                </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;单元测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-25-8><span class=w>                    </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-25-9><span class=w>                        </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mvn test&#39;</span>
+</span><span id=__span-25-10><span class=w>                    </span><span class=o>}</span>
+</span><span id=__span-25-11><span class=w>                </span><span class=o>}</span>
+</span><span id=__span-25-12><span class=w>                </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;集成测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-25-13><span class=w>                    </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-25-14><span class=w>                        </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mvn verify -DskipUnitTests&#39;</span>
+</span><span id=__span-25-15><span class=w>                    </span><span class=o>}</span>
+</span><span id=__span-25-16><span class=w>                </span><span class=o>}</span>
+</span><span id=__span-25-17><span class=w>                </span><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;UI测试&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-25-18><span class=w>                    </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-25-19><span class=w>                        </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;npm run e2e&#39;</span>
+</span><span id=__span-25-20><span class=w>                    </span><span class=o>}</span>
+</span><span id=__span-25-21><span class=w>                </span><span class=o>}</span>
+</span><span id=__span-25-22><span class=w>            </span><span class=o>}</span>
+</span><span id=__span-25-23><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-25-24><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-25-25><span class=o>}</span>
+</span></code></pre></div> <p>并行 vs 串行对比：</p> <pre class=mermaid><code>gantt
     title 构建时间对比
     dateFormat X
     axisFormat %s秒
@@ -982,67 +581,39 @@
     section 并行执行
     单元测试     :b1, 0, 5
     集成测试     :b2, 0, 5
-    UI测试       :b3, 0, 6</code></pre> <h3 id=122>12.2 人工确认<a class=headerlink href=#122 title="Permanent link">&para;</a></h3> <p>在部署到生产环境前，加一道人工确认：</p> <div class="language-groovy highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-26-1> 1</a></span>
-<span class=normal><a href=#__codelineno-26-2> 2</a></span>
-<span class=normal><a href=#__codelineno-26-3> 3</a></span>
-<span class=normal><a href=#__codelineno-26-4> 4</a></span>
-<span class=normal><a href=#__codelineno-26-5> 5</a></span>
-<span class=normal><a href=#__codelineno-26-6> 6</a></span>
-<span class=normal><a href=#__codelineno-26-7> 7</a></span>
-<span class=normal><a href=#__codelineno-26-8> 8</a></span>
-<span class=normal><a href=#__codelineno-26-9> 9</a></span>
-<span class=normal><a href=#__codelineno-26-10>10</a></span>
-<span class=normal><a href=#__codelineno-26-11>11</a></span>
-<span class=normal><a href=#__codelineno-26-12>12</a></span>
-<span class=normal><a href=#__codelineno-26-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-26-1><a id=__codelineno-26-1 name=__codelineno-26-1></a><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;部署到生产&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-26-2><a id=__codelineno-26-2 name=__codelineno-26-2></a><span class=w>    </span><span class=n>input</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-26-3><a id=__codelineno-26-3 name=__codelineno-26-3></a><span class=w>        </span><span class=n>message</span><span class=w> </span><span class=s2>&quot;确认部署到生产环境？&quot;</span>
-</span><span id=__span-26-4><a id=__codelineno-26-4 name=__codelineno-26-4></a><span class=w>        </span><span class=n>ok</span><span class=w> </span><span class=s2>&quot;确认部署&quot;</span>
-</span><span id=__span-26-5><a id=__codelineno-26-5 name=__codelineno-26-5></a><span class=w>        </span><span class=n>parameters</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-26-6><a id=__codelineno-26-6 name=__codelineno-26-6></a><span class=w>            </span><span class=n>string</span><span class=o>(</span><span class=nl>name:</span><span class=w> </span><span class=s1>&#39;APPROVER&#39;</span><span class=o>,</span><span class=w> </span><span class=nl>description:</span><span class=w> </span><span class=s1>&#39;审批人&#39;</span><span class=o>)</span>
-</span><span id=__span-26-7><a id=__codelineno-26-7 name=__codelineno-26-7></a><span class=w>        </span><span class=o>}</span>
-</span><span id=__span-26-8><a id=__codelineno-26-8 name=__codelineno-26-8></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-26-9><a id=__codelineno-26-9 name=__codelineno-26-9></a><span class=w>    </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-26-10><a id=__codelineno-26-10 name=__codelineno-26-10></a><span class=w>        </span><span class=n>echo</span><span class=w> </span><span class=s2>&quot;由 ${APPROVER} 审批通过，开始部署...&quot;</span>
-</span><span id=__span-26-11><a id=__codelineno-26-11 name=__codelineno-26-11></a><span class=w>        </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;make deploy ENV=prod&#39;</span>
-</span><span id=__span-26-12><a id=__codelineno-26-12 name=__codelineno-26-12></a><span class=w>    </span><span class=o>}</span>
-</span><span id=__span-26-13><a id=__codelineno-26-13 name=__codelineno-26-13></a><span class=o>}</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=123>12.3 多分支流水线<a class=headerlink href=#123 title="Permanent link">&para;</a></h3> <p>Jenkins可以自动发现Git仓库中的所有分支，为每个分支创建Pipeline：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-27-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-27-1><a id=__codelineno-27-1 name=__codelineno-27-1></a>Manage Jenkins -&gt; 新建Item -&gt; Multibranch Pipeline
-</span></code></pre></div></td></tr></table></div> <p>配置好后，每次新建分支，Jenkins会自动： 1. 发现新分支 2. 扫描Jenkinsfile 3. 创建对应的Pipeline任务</p> <p>这对Git Flow工作流特别友好。</p> <hr> <h2 id=_13>十三、安全加固<a class=headerlink href=#_13 title="Permanent link">&para;</a></h2> <p>Jenkins默认配置比较开放，生产环境务必做好安全加固。</p> <h3 id=131>13.1 基础安全配置<a class=headerlink href=#131 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>配置项</th> <th>推荐设置</th> <th>路径</th> </tr> </thead> <tbody> <tr> <td>安全域</td> <td>Jenkins专有用户数据库</td> <td>Manage Jenkins -&gt; Security</td> </tr> <tr> <td>授权策略</td> <td>安全矩阵</td> <td>Manage Jenkins -&gt; Security</td> </tr> <tr> <td>CSRF防护</td> <td>开启</td> <td>默认已开启</td> </tr> <tr> <td>代理认证</td> <td>开启</td> <td>默认已开启</td> </tr> </tbody> </table> <h3 id=132>13.2 安全矩阵配置<a class=headerlink href=#132 title="Permanent link">&para;</a></h3> <p>进入 "Manage Jenkins" -&gt; "Security" -&gt; "授权策略" 选择"安全矩阵"：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-28-1>1</a></span>
-<span class=normal><a href=#__codelineno-28-2>2</a></span>
-<span class=normal><a href=#__codelineno-28-3>3</a></span>
-<span class=normal><a href=#__codelineno-28-4>4</a></span>
-<span class=normal><a href=#__codelineno-28-5>5</a></span>
-<span class=normal><a href=#__codelineno-28-6>6</a></span>
-<span class=normal><a href=#__codelineno-28-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-28-1><a id=__codelineno-28-1 name=__codelineno-28-1></a>Overall/Read:          匿名用户 ❌   登录用户 ✅
-</span><span id=__span-28-2><a id=__codelineno-28-2 name=__codelineno-28-2></a>Job/Read:              匿名用户 ❌   登录用户 ✅
-</span><span id=__span-28-3><a id=__codelineno-28-3 name=__codelineno-28-3></a>Job/Build:             匿名用户 ❌   开发者 ✅
-</span><span id=__span-28-4><a id=__codelineno-28-4 name=__codelineno-28-4></a>Job/Configure:         匿名用户 ❌   管理员 ✅
-</span><span id=__span-28-5><a id=__codelineno-28-5 name=__codelineno-28-5></a>Job/Create:            匿名用户 ❌   管理员 ✅
-</span><span id=__span-28-6><a id=__codelineno-28-6 name=__codelineno-28-6></a>Run/Update:            匿名用户 ❌   开发者 ✅
-</span><span id=__span-28-7><a id=__codelineno-28-7 name=__codelineno-28-7></a>SCM/Tag:               匿名用户 ❌   开发者 ✅
-</span></code></pre></div></td></tr></table></div> <h3 id=133>13.3 凭证管理<a class=headerlink href=#133 title="Permanent link">&para;</a></h3> <p><strong>永远不要在Pipeline里硬编码密码！</strong></p> <div class="language-groovy highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-29-1> 1</a></span>
-<span class=normal><a href=#__codelineno-29-2> 2</a></span>
-<span class=normal><a href=#__codelineno-29-3> 3</a></span>
-<span class=normal><a href=#__codelineno-29-4> 4</a></span>
-<span class=normal><a href=#__codelineno-29-5> 5</a></span>
-<span class=normal><a href=#__codelineno-29-6> 6</a></span>
-<span class=normal><a href=#__codelineno-29-7> 7</a></span>
-<span class=normal><a href=#__codelineno-29-8> 8</a></span>
-<span class=normal><a href=#__codelineno-29-9> 9</a></span>
-<span class=normal><a href=#__codelineno-29-10>10</a></span>
-<span class=normal><a href=#__codelineno-29-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-29-1><a id=__codelineno-29-1 name=__codelineno-29-1></a><span class=c1>// ❌ 错误做法</span>
-</span><span id=__span-29-2><a id=__codelineno-29-2 name=__codelineno-29-2></a><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mysql -u root -p123456 mydb &lt; data.sql&#39;</span>
-</span><span id=__span-29-3><a id=__codelineno-29-3 name=__codelineno-29-3></a>
-</span><span id=__span-29-4><a id=__codelineno-29-4 name=__codelineno-29-4></a><span class=c1>// ✅ 正确做法：用Credentials</span>
-</span><span id=__span-29-5><a id=__codelineno-29-5 name=__codelineno-29-5></a><span class=n>withCredentials</span><span class=o>([</span><span class=n>usernamePassword</span><span class=o>(</span>
-</span><span id=__span-29-6><a id=__codelineno-29-6 name=__codelineno-29-6></a><span class=w>    </span><span class=nl>credentialsId:</span><span class=w> </span><span class=s1>&#39;mysql-creds&#39;</span><span class=o>,</span>
-</span><span id=__span-29-7><a id=__codelineno-29-7 name=__codelineno-29-7></a><span class=w>    </span><span class=nl>usernameVariable:</span><span class=w> </span><span class=s1>&#39;DB_USER&#39;</span><span class=o>,</span>
-</span><span id=__span-29-8><a id=__codelineno-29-8 name=__codelineno-29-8></a><span class=w>    </span><span class=nl>passwordVariable:</span><span class=w> </span><span class=s1>&#39;DB_PASS&#39;</span>
-</span><span id=__span-29-9><a id=__codelineno-29-9 name=__codelineno-29-9></a><span class=o>)])</span><span class=w> </span><span class=o>{</span>
-</span><span id=__span-29-10><a id=__codelineno-29-10 name=__codelineno-29-10></a><span class=w>    </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mysql -u ${DB_USER} -p${DB_PASS} mydb &lt; data.sql&#39;</span>
-</span><span id=__span-29-11><a id=__codelineno-29-11 name=__codelineno-29-11></a><span class=o>}</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=134>13.4 安全体系全景<a class=headerlink href=#134 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    UI测试       :b3, 0, 6</code></pre> <h3 id=122>12.2 人工确认<a class=headerlink href=#122 title="Permanent link">&para;</a></h3> <p>在部署到生产环境前，加一道人工确认：</p> <div class="language-groovy highlight"><pre><span></span><code><span id=__span-26-1><span class=n>stage</span><span class=o>(</span><span class=s1>&#39;部署到生产&#39;</span><span class=o>)</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-26-2><span class=w>    </span><span class=n>input</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-26-3><span class=w>        </span><span class=n>message</span><span class=w> </span><span class=s2>&quot;确认部署到生产环境？&quot;</span>
+</span><span id=__span-26-4><span class=w>        </span><span class=n>ok</span><span class=w> </span><span class=s2>&quot;确认部署&quot;</span>
+</span><span id=__span-26-5><span class=w>        </span><span class=n>parameters</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-26-6><span class=w>            </span><span class=n>string</span><span class=o>(</span><span class=nl>name:</span><span class=w> </span><span class=s1>&#39;APPROVER&#39;</span><span class=o>,</span><span class=w> </span><span class=nl>description:</span><span class=w> </span><span class=s1>&#39;审批人&#39;</span><span class=o>)</span>
+</span><span id=__span-26-7><span class=w>        </span><span class=o>}</span>
+</span><span id=__span-26-8><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-26-9><span class=w>    </span><span class=n>steps</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-26-10><span class=w>        </span><span class=n>echo</span><span class=w> </span><span class=s2>&quot;由 ${APPROVER} 审批通过，开始部署...&quot;</span>
+</span><span id=__span-26-11><span class=w>        </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;make deploy ENV=prod&#39;</span>
+</span><span id=__span-26-12><span class=w>    </span><span class=o>}</span>
+</span><span id=__span-26-13><span class=o>}</span>
+</span></code></pre></div> <h3 id=123>12.3 多分支流水线<a class=headerlink href=#123 title="Permanent link">&para;</a></h3> <p>Jenkins可以自动发现Git仓库中的所有分支，为每个分支创建Pipeline：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-27-1>Manage Jenkins -&gt; 新建Item -&gt; Multibranch Pipeline
+</span></code></pre></div> <p>配置好后，每次新建分支，Jenkins会自动： 1. 发现新分支 2. 扫描Jenkinsfile 3. 创建对应的Pipeline任务</p> <p>这对Git Flow工作流特别友好。</p> <hr> <h2 id=_13>十三、安全加固<a class=headerlink href=#_13 title="Permanent link">&para;</a></h2> <p>Jenkins默认配置比较开放，生产环境务必做好安全加固。</p> <h3 id=131>13.1 基础安全配置<a class=headerlink href=#131 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>配置项</th> <th>推荐设置</th> <th>路径</th> </tr> </thead> <tbody> <tr> <td>安全域</td> <td>Jenkins专有用户数据库</td> <td>Manage Jenkins -&gt; Security</td> </tr> <tr> <td>授权策略</td> <td>安全矩阵</td> <td>Manage Jenkins -&gt; Security</td> </tr> <tr> <td>CSRF防护</td> <td>开启</td> <td>默认已开启</td> </tr> <tr> <td>代理认证</td> <td>开启</td> <td>默认已开启</td> </tr> </tbody> </table> <h3 id=132>13.2 安全矩阵配置<a class=headerlink href=#132 title="Permanent link">&para;</a></h3> <p>进入 "Manage Jenkins" -&gt; "Security" -&gt; "授权策略" 选择"安全矩阵"：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-28-1>Overall/Read:          匿名用户 ❌   登录用户 ✅
+</span><span id=__span-28-2>Job/Read:              匿名用户 ❌   登录用户 ✅
+</span><span id=__span-28-3>Job/Build:             匿名用户 ❌   开发者 ✅
+</span><span id=__span-28-4>Job/Configure:         匿名用户 ❌   管理员 ✅
+</span><span id=__span-28-5>Job/Create:            匿名用户 ❌   管理员 ✅
+</span><span id=__span-28-6>Run/Update:            匿名用户 ❌   开发者 ✅
+</span><span id=__span-28-7>SCM/Tag:               匿名用户 ❌   开发者 ✅
+</span></code></pre></div> <h3 id=133>13.3 凭证管理<a class=headerlink href=#133 title="Permanent link">&para;</a></h3> <p><strong>永远不要在Pipeline里硬编码密码！</strong></p> <div class="language-groovy highlight"><pre><span></span><code><span id=__span-29-1><span class=c1>// ❌ 错误做法</span>
+</span><span id=__span-29-2><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mysql -u root -p123456 mydb &lt; data.sql&#39;</span>
+</span><span id=__span-29-3>
+</span><span id=__span-29-4><span class=c1>// ✅ 正确做法：用Credentials</span>
+</span><span id=__span-29-5><span class=n>withCredentials</span><span class=o>([</span><span class=n>usernamePassword</span><span class=o>(</span>
+</span><span id=__span-29-6><span class=w>    </span><span class=nl>credentialsId:</span><span class=w> </span><span class=s1>&#39;mysql-creds&#39;</span><span class=o>,</span>
+</span><span id=__span-29-7><span class=w>    </span><span class=nl>usernameVariable:</span><span class=w> </span><span class=s1>&#39;DB_USER&#39;</span><span class=o>,</span>
+</span><span id=__span-29-8><span class=w>    </span><span class=nl>passwordVariable:</span><span class=w> </span><span class=s1>&#39;DB_PASS&#39;</span>
+</span><span id=__span-29-9><span class=o>)])</span><span class=w> </span><span class=o>{</span>
+</span><span id=__span-29-10><span class=w>    </span><span class=n>sh</span><span class=w> </span><span class=s1>&#39;mysql -u ${DB_USER} -p${DB_PASS} mydb &lt; data.sql&#39;</span>
+</span><span id=__span-29-11><span class=o>}</span>
+</span></code></pre></div> <h3 id=134>13.4 安全体系全景<a class=headerlink href=#134 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
     subgraph Jenkins安全体系
         A[用户认证] --&gt; A1[专有用户数据库]
         A --&gt; A2[LDAP集成]

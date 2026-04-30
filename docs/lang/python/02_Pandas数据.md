@@ -200,18 +200,18 @@ flowchart TB
     A[数据选择] --> B[选择列]
     A --> C[选择行]
     A --> D[选择单元格]
-    
-    B --> B1[df['col']]
-    B --> B2[df[['col1', 'col2']]]
+
+    B --> B1["df['col']"]
+    B --> B2["df[['col1', 'col2']]"]
     B --> B3[df.col_name]
-    
+
     C --> C1[df.loc索引标签]
     C --> C2[df.iloc位置]
-    C --> C3[df[布尔条件]]
-    
+    C --> C3["df[布尔条件]"]
+
     D --> D1[.at]
     D --> D2[.iat]
-    
+
     style C1 fill:#FF6B6B,color:#fff
     style C2 fill:#4ECDC4,color:#fff
 ```

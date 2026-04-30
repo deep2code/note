@@ -8,84 +8,49 @@
     E --&gt; H[高效无缝的团队协作]
 
     style A fill:#ffcdd2
-    style E fill:#c8e6c9</code></pre> <p><strong>Git的五大核心优势：</strong> - ✅ <strong>版本追踪</strong> - 记录每一次代码变更，永不丢失 - ✅ <strong>分支管理</strong> - 多人并行开发，互不干扰 - ✅ <strong>团队协作</strong> - 代码审查、合并请求，流程规范 - ✅ <strong>代码回退</strong> - 轻松撤销错误，降低风险 - ✅ <strong>备份安全</strong> - 分布式存储，数据永不丢失</p> <hr> <h2 id=git>🛠️ 第一步：安装和配置Git环境<a class=headerlink href=#git title="Permanent link">&para;</a></h2> <h3 id=_1>不同系统的安装方式（超级详细）<a class=headerlink href=#_1 title="Permanent link">&para;</a></h3> <p><strong>Windows系统（推荐Git for Windows）</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1>1</a></span>
-<span class=normal><a href=#__codelineno-0-2>2</a></span>
-<span class=normal><a href=#__codelineno-0-3>3</a></span>
-<span class=normal><a href=#__codelineno-0-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=c1># 1. 访问 https://git-scm.com/download/win 下载安装包</span>
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a><span class=c1># 2. 双击安装，一路点击&quot;下一步&quot;即可</span>
-</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a><span class=c1># 3. 安装完成后，在开始菜单找到&quot;Git Bash&quot;</span>
-</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a><span class=c1># 4. 输入命令验证安装：git --version</span>
-</span></code></pre></div></td></tr></table></div></p> <p><strong>macOS系统（两种方法任选其一）</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span>
-<span class=normal><a href=#__codelineno-1-2>2</a></span>
-<span class=normal><a href=#__codelineno-1-3>3</a></span>
-<span class=normal><a href=#__codelineno-1-4>4</a></span>
-<span class=normal><a href=#__codelineno-1-5>5</a></span>
-<span class=normal><a href=#__codelineno-1-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=c1># 方法1：使用Homebrew（强烈推荐）</span>
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a>/bin/bash<span class=w> </span>-c<span class=w> </span><span class=s2>&quot;</span><span class=k>$(</span>curl<span class=w> </span>-fsSL<span class=w> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class=k>)</span><span class=s2>&quot;</span>
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>brew<span class=w> </span>install<span class=w> </span>git
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a>
-</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a><span class=c1># 方法2：安装Xcode Command Line Tools</span>
-</span><span id=__span-1-6><a id=__codelineno-1-6 name=__codelineno-1-6></a>xcode-select<span class=w> </span>--install
-</span></code></pre></div></td></tr></table></div></p> <p><strong>Linux系统（以Ubuntu为例）</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span>
-<span class=normal><a href=#__codelineno-2-2>2</a></span>
-<span class=normal><a href=#__codelineno-2-3>3</a></span>
-<span class=normal><a href=#__codelineno-2-4>4</a></span>
-<span class=normal><a href=#__codelineno-2-5>5</a></span>
-<span class=normal><a href=#__codelineno-2-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=c1># Ubuntu/Debian系统</span>
-</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a>sudo<span class=w> </span>apt<span class=w> </span>update
-</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>git
-</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a>
-</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a><span class=c1># CentOS/RHEL系统  </span>
-</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6></a>sudo<span class=w> </span>yum<span class=w> </span>install<span class=w> </span>git
-</span></code></pre></div></td></tr></table></div></p> <h3 id=_2>验证安装是否成功<a class=headerlink href=#_2 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1>1</a></span>
-<span class=normal><a href=#__codelineno-3-2>2</a></span>
-<span class=normal><a href=#__codelineno-3-3>3</a></span>
-<span class=normal><a href=#__codelineno-3-4>4</a></span>
-<span class=normal><a href=#__codelineno-3-5>5</a></span>
-<span class=normal><a href=#__codelineno-3-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=c1># 检查Git版本</span>
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>git<span class=w> </span>--version
-</span><span id=__span-3-3><a id=__codelineno-3-3 name=__codelineno-3-3></a><span class=c1># 正确输出示例：git version 2.39.2</span>
-</span><span id=__span-3-4><a id=__codelineno-3-4 name=__codelineno-3-4></a>
-</span><span id=__span-3-5><a id=__codelineno-3-5 name=__codelineno-3-5></a><span class=c1># 查看Git配置信息</span>
-</span><span id=__span-3-6><a id=__codelineno-3-6 name=__codelineno-3-6></a>git<span class=w> </span>config<span class=w> </span>--list
-</span></code></pre></div></td></tr></table></div> <h3 id=_3>常见安装问题解决<a class=headerlink href=#_3 title="Permanent link">&para;</a></h3> <p><strong>问题1：git命令找不到</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
-<span class=normal><a href=#__codelineno-4-2>2</a></span>
-<span class=normal><a href=#__codelineno-4-3>3</a></span>
-<span class=normal><a href=#__codelineno-4-4>4</a></span>
-<span class=normal><a href=#__codelineno-4-5>5</a></span>
-<span class=normal><a href=#__codelineno-4-6>6</a></span>
-<span class=normal><a href=#__codelineno-4-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a><span class=c1># ❌ 错误提示</span>
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a>bash:<span class=w> </span>git:<span class=w> </span><span class=nb>command</span><span class=w> </span>not<span class=w> </span>found
-</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a>
-</span><span id=__span-4-4><a id=__codelineno-4-4 name=__codelineno-4-4></a><span class=c1># ✅ 解决方案</span>
-</span><span id=__span-4-5><a id=__codelineno-4-5 name=__codelineno-4-5></a><span class=c1># Windows：检查Git Bash是否安装正确</span>
-</span><span id=__span-4-6><a id=__codelineno-4-6 name=__codelineno-4-6></a><span class=c1># macOS/Linux：运行 which git 查看命令位置</span>
-</span><span id=__span-4-7><a id=__codelineno-4-7 name=__codelineno-4-7></a><span class=c1># 如果找不到，按照上述步骤重新安装</span>
-</span></code></pre></div></td></tr></table></div></p> <p><strong>问题2：权限问题</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1>1</a></span>
-<span class=normal><a href=#__codelineno-5-2>2</a></span>
-<span class=normal><a href=#__codelineno-5-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=c1># ❌ 错误提示：Permission denied</span>
-</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a><span class=c1># ✅ 解决方案：使用sudo权限安装</span>
-</span><span id=__span-5-3><a id=__codelineno-5-3 name=__codelineno-5-3></a>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>git<span class=w>  </span><span class=c1># Linux系统</span>
-</span></code></pre></div></td></tr></table></div></p> <h3 id=git_1>Git基本配置（这一步很重要！）<a class=headerlink href=#git_1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1> 1</a></span>
-<span class=normal><a href=#__codelineno-6-2> 2</a></span>
-<span class=normal><a href=#__codelineno-6-3> 3</a></span>
-<span class=normal><a href=#__codelineno-6-4> 4</a></span>
-<span class=normal><a href=#__codelineno-6-5> 5</a></span>
-<span class=normal><a href=#__codelineno-6-6> 6</a></span>
-<span class=normal><a href=#__codelineno-6-7> 7</a></span>
-<span class=normal><a href=#__codelineno-6-8> 8</a></span>
-<span class=normal><a href=#__codelineno-6-9> 9</a></span>
-<span class=normal><a href=#__codelineno-6-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a><span class=c1># 配置全局用户信息（必须设置）</span>
-</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>user.name<span class=w> </span><span class=s2>&quot;你的真实姓名&quot;</span>
-</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>user.email<span class=w> </span><span class=s2>&quot;你的常用邮箱&quot;</span>
-</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a>
-</span><span id=__span-6-5><a id=__codelineno-6-5 name=__codelineno-6-5></a><span class=c1># 配置默认文本编辑器</span>
-</span><span id=__span-6-6><a id=__codelineno-6-6 name=__codelineno-6-6></a>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>core.editor<span class=w> </span><span class=s2>&quot;code --wait&quot;</span><span class=w>  </span><span class=c1># VS Code用户</span>
-</span><span id=__span-6-7><a id=__codelineno-6-7 name=__codelineno-6-7></a>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>core.editor<span class=w> </span><span class=s2>&quot;vim&quot;</span><span class=w>          </span><span class=c1># Vim用户</span>
-</span><span id=__span-6-8><a id=__codelineno-6-8 name=__codelineno-6-8></a>
-</span><span id=__span-6-9><a id=__codelineno-6-9 name=__codelineno-6-9></a><span class=c1># 验证配置是否生效</span>
-</span><span id=__span-6-10><a id=__codelineno-6-10 name=__codelineno-6-10></a>git<span class=w> </span>config<span class=w> </span>--list
-</span></code></pre></div></td></tr></table></div> <p><strong>为什么要配置用户信息？</strong> - 每次提交代码时都会记录作者信息 - 团队成员可以清楚知道每行代码是谁写的 - 这是Git的基本要求，不配置无法提交代码</p> <hr> <h2 id=3git>📁 核心概念：3分钟搞懂Git工作原理<a class=headerlink href=#3git title="Permanent link">&para;</a></h2> <p>很多初学者觉得Git很难，其实是因为没有理解它的核心概念。让我们用生活中的例子来理解：</p> <h3 id=git_2>Git工作流程（像存钱罐一样简单）<a class=headerlink href=#git_2 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
+    style E fill:#c8e6c9</code></pre> <p><strong>Git的五大核心优势：</strong> - ✅ <strong>版本追踪</strong> - 记录每一次代码变更，永不丢失 - ✅ <strong>分支管理</strong> - 多人并行开发，互不干扰 - ✅ <strong>团队协作</strong> - 代码审查、合并请求，流程规范 - ✅ <strong>代码回退</strong> - 轻松撤销错误，降低风险 - ✅ <strong>备份安全</strong> - 分布式存储，数据永不丢失</p> <hr> <h2 id=git>🛠️ 第一步：安装和配置Git环境<a class=headerlink href=#git title="Permanent link">&para;</a></h2> <h3 id=_1>不同系统的安装方式（超级详细）<a class=headerlink href=#_1 title="Permanent link">&para;</a></h3> <p><strong>Windows系统（推荐Git for Windows）</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-0-1><span class=c1># 1. 访问 https://git-scm.com/download/win 下载安装包</span>
+</span><span id=__span-0-2><span class=c1># 2. 双击安装，一路点击&quot;下一步&quot;即可</span>
+</span><span id=__span-0-3><span class=c1># 3. 安装完成后，在开始菜单找到&quot;Git Bash&quot;</span>
+</span><span id=__span-0-4><span class=c1># 4. 输入命令验证安装：git --version</span>
+</span></code></pre></div></p> <p><strong>macOS系统（两种方法任选其一）</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-1-1><span class=c1># 方法1：使用Homebrew（强烈推荐）</span>
+</span><span id=__span-1-2>/bin/bash<span class=w> </span>-c<span class=w> </span><span class=s2>&quot;</span><span class=k>$(</span>curl<span class=w> </span>-fsSL<span class=w> </span>https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class=k>)</span><span class=s2>&quot;</span>
+</span><span id=__span-1-3>brew<span class=w> </span>install<span class=w> </span>git
+</span><span id=__span-1-4>
+</span><span id=__span-1-5><span class=c1># 方法2：安装Xcode Command Line Tools</span>
+</span><span id=__span-1-6>xcode-select<span class=w> </span>--install
+</span></code></pre></div></p> <p><strong>Linux系统（以Ubuntu为例）</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-2-1><span class=c1># Ubuntu/Debian系统</span>
+</span><span id=__span-2-2>sudo<span class=w> </span>apt<span class=w> </span>update
+</span><span id=__span-2-3>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>git
+</span><span id=__span-2-4>
+</span><span id=__span-2-5><span class=c1># CentOS/RHEL系统  </span>
+</span><span id=__span-2-6>sudo<span class=w> </span>yum<span class=w> </span>install<span class=w> </span>git
+</span></code></pre></div></p> <h3 id=_2>验证安装是否成功<a class=headerlink href=#_2 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-3-1><span class=c1># 检查Git版本</span>
+</span><span id=__span-3-2>git<span class=w> </span>--version
+</span><span id=__span-3-3><span class=c1># 正确输出示例：git version 2.39.2</span>
+</span><span id=__span-3-4>
+</span><span id=__span-3-5><span class=c1># 查看Git配置信息</span>
+</span><span id=__span-3-6>git<span class=w> </span>config<span class=w> </span>--list
+</span></code></pre></div> <h3 id=_3>常见安装问题解决<a class=headerlink href=#_3 title="Permanent link">&para;</a></h3> <p><strong>问题1：git命令找不到</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-4-1><span class=c1># ❌ 错误提示</span>
+</span><span id=__span-4-2>bash:<span class=w> </span>git:<span class=w> </span><span class=nb>command</span><span class=w> </span>not<span class=w> </span>found
+</span><span id=__span-4-3>
+</span><span id=__span-4-4><span class=c1># ✅ 解决方案</span>
+</span><span id=__span-4-5><span class=c1># Windows：检查Git Bash是否安装正确</span>
+</span><span id=__span-4-6><span class=c1># macOS/Linux：运行 which git 查看命令位置</span>
+</span><span id=__span-4-7><span class=c1># 如果找不到，按照上述步骤重新安装</span>
+</span></code></pre></div></p> <p><strong>问题2：权限问题</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-5-1><span class=c1># ❌ 错误提示：Permission denied</span>
+</span><span id=__span-5-2><span class=c1># ✅ 解决方案：使用sudo权限安装</span>
+</span><span id=__span-5-3>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>git<span class=w>  </span><span class=c1># Linux系统</span>
+</span></code></pre></div></p> <h3 id=git_1>Git基本配置（这一步很重要！）<a class=headerlink href=#git_1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-6-1><span class=c1># 配置全局用户信息（必须设置）</span>
+</span><span id=__span-6-2>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>user.name<span class=w> </span><span class=s2>&quot;你的真实姓名&quot;</span>
+</span><span id=__span-6-3>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>user.email<span class=w> </span><span class=s2>&quot;你的常用邮箱&quot;</span>
+</span><span id=__span-6-4>
+</span><span id=__span-6-5><span class=c1># 配置默认文本编辑器</span>
+</span><span id=__span-6-6>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>core.editor<span class=w> </span><span class=s2>&quot;code --wait&quot;</span><span class=w>  </span><span class=c1># VS Code用户</span>
+</span><span id=__span-6-7>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>core.editor<span class=w> </span><span class=s2>&quot;vim&quot;</span><span class=w>          </span><span class=c1># Vim用户</span>
+</span><span id=__span-6-8>
+</span><span id=__span-6-9><span class=c1># 验证配置是否生效</span>
+</span><span id=__span-6-10>git<span class=w> </span>config<span class=w> </span>--list
+</span></code></pre></div> <p><strong>为什么要配置用户信息？</strong> - 每次提交代码时都会记录作者信息 - 团队成员可以清楚知道每行代码是谁写的 - 这是Git的基本要求，不配置无法提交代码</p> <hr> <h2 id=3git>📁 核心概念：3分钟搞懂Git工作原理<a class=headerlink href=#3git title="Permanent link">&para;</a></h2> <p>很多初学者觉得Git很难，其实是因为没有理解它的核心概念。让我们用生活中的例子来理解：</p> <h3 id=git_2>Git工作流程（像存钱罐一样简单）<a class=headerlink href=#git_2 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
     A[💼 工作区] --&gt; B[📦 暂存区]
     B --&gt; C[🏠 本地仓库]
     C --&gt; D[☁️ 远程仓库]
@@ -95,138 +60,76 @@
     style A fill:#e1f5fe
     style B fill:#c8e6c9
     style C fill:#fff3e0
-    style D fill:#fce4ec</code></pre> <h3 id=_4>四区域详细解释<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <p><strong>1. 工作区 (Working Directory)</strong> - 就是你电脑上看到的项目文件夹 - 所有的代码文件都在这里编辑 - 相当于你的"工作桌面"</p> <p><strong>2. 暂存区 (Staging Area)</strong> - 准备提交的文件临时存放区 - 可以挑选部分修改进行提交 - 相当于"购物车"，选好商品再结账</p> <p><strong>3. 本地仓库 (Local Repository)</strong> - 存储完整版本历史的地方 - 位于项目根目录的隐藏文件夹<code>.git</code> - 相当于你的"私人保险柜"</p> <p><strong>4. 远程仓库 (Remote Repository)</strong> - GitHub、GitLab等平台上的仓库 - 团队协作和备份的中心 - 相当于"银行金库"，大家共享</p> <hr> <h2 id=git_3>🚀 实战开始：创建你的第一个Git项目<a class=headerlink href=#git_3 title="Permanent link">&para;</a></h2> <h3 id=1>方法1：初始化新项目（从零开始）<a class=headerlink href=#1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1> 1</a></span>
-<span class=normal><a href=#__codelineno-7-2> 2</a></span>
-<span class=normal><a href=#__codelineno-7-3> 3</a></span>
-<span class=normal><a href=#__codelineno-7-4> 4</a></span>
-<span class=normal><a href=#__codelineno-7-5> 5</a></span>
-<span class=normal><a href=#__codelineno-7-6> 6</a></span>
-<span class=normal><a href=#__codelineno-7-7> 7</a></span>
-<span class=normal><a href=#__codelineno-7-8> 8</a></span>
-<span class=normal><a href=#__codelineno-7-9> 9</a></span>
-<span class=normal><a href=#__codelineno-7-10>10</a></span>
-<span class=normal><a href=#__codelineno-7-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=c1># 1. 创建项目文件夹</span>
-</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a>mkdir<span class=w> </span>my-awesome-project
-</span><span id=__span-7-3><a id=__codelineno-7-3 name=__codelineno-7-3></a><span class=nb>cd</span><span class=w> </span>my-awesome-project
-</span><span id=__span-7-4><a id=__codelineno-7-4 name=__codelineno-7-4></a>
-</span><span id=__span-7-5><a id=__codelineno-7-5 name=__codelineno-7-5></a><span class=c1># 2. 初始化Git仓库</span>
-</span><span id=__span-7-6><a id=__codelineno-7-6 name=__codelineno-7-6></a>git<span class=w> </span>init
-</span><span id=__span-7-7><a id=__codelineno-7-7 name=__codelineno-7-7></a><span class=c1># 输出：Initialized empty Git repository in /path/to/my-awesome-project/.git/</span>
-</span><span id=__span-7-8><a id=__codelineno-7-8 name=__codelineno-7-8></a>
-</span><span id=__span-7-9><a id=__codelineno-7-9 name=__codelineno-7-9></a><span class=c1># 3. 查看仓库状态</span>
-</span><span id=__span-7-10><a id=__codelineno-7-10 name=__codelineno-7-10></a>git<span class=w> </span>status
-</span><span id=__span-7-11><a id=__codelineno-7-11 name=__codelineno-7-11></a><span class=c1># 输出：On branch main，No commits yet</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=2>方法2：克隆现有项目（学习他人代码）<a class=headerlink href=#2 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1>1</a></span>
-<span class=normal><a href=#__codelineno-8-2>2</a></span>
-<span class=normal><a href=#__codelineno-8-3>3</a></span>
-<span class=normal><a href=#__codelineno-8-4>4</a></span>
-<span class=normal><a href=#__codelineno-8-5>5</a></span>
-<span class=normal><a href=#__codelineno-8-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a><span class=c1># 克隆GitHub上的开源项目</span>
-</span><span id=__span-8-2><a id=__codelineno-8-2 name=__codelineno-8-2></a>git<span class=w> </span>clone<span class=w> </span>https://github.com/username/cool-project.git
-</span><span id=__span-8-3><a id=__codelineno-8-3 name=__codelineno-8-3></a><span class=nb>cd</span><span class=w> </span>cool-project
-</span><span id=__span-8-4><a id=__codelineno-8-4 name=__codelineno-8-4></a>
-</span><span id=__span-8-5><a id=__codelineno-8-5 name=__codelineno-8-5></a><span class=c1># 或者使用SSH方式（更安全）</span>
-</span><span id=__span-8-6><a id=__codelineno-8-6 name=__codelineno-8-6></a>git<span class=w> </span>clone<span class=w> </span>git@github.com:username/cool-project.git
-</span></code></pre></div></td></tr></table></div> <h3 id=_5>常见错误：在错误目录初始化<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1> 1</a></span>
-<span class=normal><a href=#__codelineno-9-2> 2</a></span>
-<span class=normal><a href=#__codelineno-9-3> 3</a></span>
-<span class=normal><a href=#__codelineno-9-4> 4</a></span>
-<span class=normal><a href=#__codelineno-9-5> 5</a></span>
-<span class=normal><a href=#__codelineno-9-6> 6</a></span>
-<span class=normal><a href=#__codelineno-9-7> 7</a></span>
-<span class=normal><a href=#__codelineno-9-8> 8</a></span>
-<span class=normal><a href=#__codelineno-9-9> 9</a></span>
-<span class=normal><a href=#__codelineno-9-10>10</a></span>
-<span class=normal><a href=#__codelineno-9-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a><span class=c1># ❌ 危险操作：在系统根目录初始化</span>
-</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a><span class=nb>cd</span><span class=w> </span>/
-</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a>git<span class=w> </span>init<span class=w>  </span><span class=c1># 这会在整个系统创建.git文件夹！</span>
-</span><span id=__span-9-4><a id=__codelineno-9-4 name=__codelineno-9-4></a>
-</span><span id=__span-9-5><a id=__codelineno-9-5 name=__codelineno-9-5></a><span class=c1># ✅ 正确做法：在专门的项目目录</span>
-</span><span id=__span-9-6><a id=__codelineno-9-6 name=__codelineno-9-6></a><span class=nb>cd</span><span class=w> </span>~/Documents/projects/my-app
-</span><span id=__span-9-7><a id=__codelineno-9-7 name=__codelineno-9-7></a>git<span class=w> </span>init
-</span><span id=__span-9-8><a id=__codelineno-9-8 name=__codelineno-9-8></a>
-</span><span id=__span-9-9><a id=__codelineno-9-9 name=__codelineno-9-9></a><span class=c1># ✅ 检查当前目录</span>
-</span><span id=__span-9-10><a id=__codelineno-9-10 name=__codelineno-9-10></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;当前目录：&quot;</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=nb>pwd</span>
-</span><span id=__span-9-11><a id=__codelineno-9-11 name=__codelineno-9-11></a>ls<span class=w> </span>-la<span class=w> </span><span class=p>|</span><span class=w> </span>grep<span class=w> </span>.git<span class=w>  </span><span class=c1># 检查是否已有.git文件夹</span>
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=git_4>📝 Git基本操作：添加和提交更改<a class=headerlink href=#git_4 title="Permanent link">&para;</a></h2> <h3 id=_6>完整的日常工作流程<a class=headerlink href=#_6 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1> 1</a></span>
-<span class=normal><a href=#__codelineno-10-2> 2</a></span>
-<span class=normal><a href=#__codelineno-10-3> 3</a></span>
-<span class=normal><a href=#__codelineno-10-4> 4</a></span>
-<span class=normal><a href=#__codelineno-10-5> 5</a></span>
-<span class=normal><a href=#__codelineno-10-6> 6</a></span>
-<span class=normal><a href=#__codelineno-10-7> 7</a></span>
-<span class=normal><a href=#__codelineno-10-8> 8</a></span>
-<span class=normal><a href=#__codelineno-10-9> 9</a></span>
-<span class=normal><a href=#__codelineno-10-10>10</a></span>
-<span class=normal><a href=#__codelineno-10-11>11</a></span>
-<span class=normal><a href=#__codelineno-10-12>12</a></span>
-<span class=normal><a href=#__codelineno-10-13>13</a></span>
-<span class=normal><a href=#__codelineno-10-14>14</a></span>
-<span class=normal><a href=#__codelineno-10-15>15</a></span>
-<span class=normal><a href=#__codelineno-10-16>16</a></span>
-<span class=normal><a href=#__codelineno-10-17>17</a></span>
-<span class=normal><a href=#__codelineno-10-18>18</a></span>
-<span class=normal><a href=#__codelineno-10-19>19</a></span>
-<span class=normal><a href=#__codelineno-10-20>20</a></span>
-<span class=normal><a href=#__codelineno-10-21>21</a></span>
-<span class=normal><a href=#__codelineno-10-22>22</a></span>
-<span class=normal><a href=#__codelineno-10-23>23</a></span>
-<span class=normal><a href=#__codelineno-10-24>24</a></span>
-<span class=normal><a href=#__codelineno-10-25>25</a></span>
-<span class=normal><a href=#__codelineno-10-26>26</a></span>
-<span class=normal><a href=#__codelineno-10-27>27</a></span>
-<span class=normal><a href=#__codelineno-10-28>28</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a><span class=c1># 场景：开发一个新功能</span>
-</span><span id=__span-10-2><a id=__codelineno-10-2 name=__codelineno-10-2></a>
-</span><span id=__span-10-3><a id=__codelineno-10-3 name=__codelineno-10-3></a><span class=c1># 1. 创建新文件或修改现有文件</span>
-</span><span id=__span-10-4><a id=__codelineno-10-4 name=__codelineno-10-4></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;# 我的第一个项目&quot;</span><span class=w> </span>&gt;<span class=w> </span>README.md
-</span><span id=__span-10-5><a id=__codelineno-10-5 name=__codelineno-10-5></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;print(&#39;Hello, Git!&#39;)&quot;</span><span class=w> </span>&gt;<span class=w> </span>main.py
-</span><span id=__span-10-6><a id=__codelineno-10-6 name=__codelineno-10-6></a>
-</span><span id=__span-10-7><a id=__codelineno-10-7 name=__codelineno-10-7></a><span class=c1># 2. 查看当前状态</span>
-</span><span id=__span-10-8><a id=__codelineno-10-8 name=__codelineno-10-8></a>git<span class=w> </span>status
-</span><span id=__span-10-9><a id=__codelineno-10-9 name=__codelineno-10-9></a><span class=c1># 输出：</span>
-</span><span id=__span-10-10><a id=__codelineno-10-10 name=__codelineno-10-10></a><span class=c1># Untracked files:</span>
-</span><span id=__span-10-11><a id=__codelineno-10-11 name=__codelineno-10-11></a><span class=c1>#   README.md</span>
-</span><span id=__span-10-12><a id=__codelineno-10-12 name=__codelineno-10-12></a><span class=c1>#   main.py</span>
-</span><span id=__span-10-13><a id=__codelineno-10-13 name=__codelineno-10-13></a>
-</span><span id=__span-10-14><a id=__codelineno-10-14 name=__codelineno-10-14></a><span class=c1># 3. 添加文件到暂存区</span>
-</span><span id=__span-10-15><a id=__codelineno-10-15 name=__codelineno-10-15></a>git<span class=w> </span>add<span class=w> </span>README.md<span class=w> </span>main.py
-</span><span id=__span-10-16><a id=__codelineno-10-16 name=__codelineno-10-16></a><span class=c1># 或者添加所有更改：git add .</span>
-</span><span id=__span-10-17><a id=__codelineno-10-17 name=__codelineno-10-17></a>
-</span><span id=__span-10-18><a id=__codelineno-10-18 name=__codelineno-10-18></a><span class=c1># 4. 再次查看状态</span>
-</span><span id=__span-10-19><a id=__codelineno-10-19 name=__codelineno-10-19></a>git<span class=w> </span>status<span class=w>  </span>
-</span><span id=__span-10-20><a id=__codelineno-10-20 name=__codelineno-10-20></a><span class=c1># 输出：Changes to be committed: new file: README.md, new file: main.py</span>
-</span><span id=__span-10-21><a id=__codelineno-10-21 name=__codelineno-10-21></a>
-</span><span id=__span-10-22><a id=__codelineno-10-22 name=__codelineno-10-22></a><span class=c1># 5. 提交更改（附上有意义的提交信息）</span>
-</span><span id=__span-10-23><a id=__codelineno-10-23 name=__codelineno-10-23></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;feat: 初始化项目结构和Hello World功能&quot;</span>
-</span><span id=__span-10-24><a id=__codelineno-10-24 name=__codelineno-10-24></a><span class=c1># 输出：[main (root-commit) abc1234] feat: 初始化项目...</span>
-</span><span id=__span-10-25><a id=__codelineno-10-25 name=__codelineno-10-25></a>
-</span><span id=__span-10-26><a id=__codelineno-10-26 name=__codelineno-10-26></a><span class=c1># 6. 查看提交历史</span>
-</span><span id=__span-10-27><a id=__codelineno-10-27 name=__codelineno-10-27></a>git<span class=w> </span>log
-</span><span id=__span-10-28><a id=__codelineno-10-28 name=__codelineno-10-28></a><span class=c1># 显示所有提交记录，包括作者、时间、提交信息</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=_7>提交信息规范（专业习惯从小养成）<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <p><strong>❌ 不好的提交信息：</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1>1</a></span>
-<span class=normal><a href=#__codelineno-11-2>2</a></span>
-<span class=normal><a href=#__codelineno-11-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;fix&quot;</span><span class=w>        </span><span class=c1># 太模糊</span>
-</span><span id=__span-11-2><a id=__codelineno-11-2 name=__codelineno-11-2></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;update&quot;</span><span class=w>     </span><span class=c1># 没有具体内容</span>
-</span><span id=__span-11-3><a id=__codelineno-11-3 name=__codelineno-11-3></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;asdf&quot;</span><span class=w>       </span><span class=c1># 毫无意义</span>
-</span></code></pre></div></td></tr></table></div></p> <p><strong>✅ 好的提交信息：</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1>1</a></span>
-<span class=normal><a href=#__codelineno-12-2>2</a></span>
-<span class=normal><a href=#__codelineno-12-3>3</a></span>
-<span class=normal><a href=#__codelineno-12-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><a id=__codelineno-12-1 name=__codelineno-12-1></a><span class=c1># 使用约定式提交格式</span>
-</span><span id=__span-12-2><a id=__codelineno-12-2 name=__codelineno-12-2></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;feat: 添加用户登录功能&quot;</span>
-</span><span id=__span-12-3><a id=__codelineno-12-3 name=__codelineno-12-3></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;fix: 修复密码验证逻辑错误&quot;</span>
-</span><span id=__span-12-4><a id=__codelineno-12-4 name=__codelineno-12-4></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;docs: 更新API接口文档&quot;</span>
-</span></code></pre></div></td></tr></table></div></p> <p><strong>更规范的多行提交信息：</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1>1</a></span>
-<span class=normal><a href=#__codelineno-13-2>2</a></span>
-<span class=normal><a href=#__codelineno-13-3>3</a></span>
-<span class=normal><a href=#__codelineno-13-4>4</a></span>
-<span class=normal><a href=#__codelineno-13-5>5</a></span>
-<span class=normal><a href=#__codelineno-13-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><a id=__codelineno-13-1 name=__codelineno-13-1></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;feat: 实现完整的用户注册流程</span>
-</span><span id=__span-13-2><a id=__codelineno-13-2 name=__codelineno-13-2></a>
-</span><span id=__span-13-3><a id=__codelineno-13-3 name=__codelineno-13-3></a><span class=s2>- 添加手机号验证码注册</span>
-</span><span id=__span-13-4><a id=__codelineno-13-4 name=__codelineno-13-4></a><span class=s2>- 实现密码强度实时验证  </span>
-</span><span id=__span-13-5><a id=__codelineno-13-5 name=__codelineno-13-5></a><span class=s2>- 完善错误提示和用户体验</span>
-</span><span id=__span-13-6><a id=__codelineno-13-6 name=__codelineno-13-6></a><span class=s2>- 添加注册成功后的跳转逻辑&quot;</span>
-</span></code></pre></div></td></tr></table></div></p> <p><strong>常用提交类型前缀：</strong> - <code>feat:</code> - 新功能 - <code>fix:</code> - 修复bug<br> - <code>docs:</code> - 文档更新 - <code>style:</code> - 代码格式调整 - <code>refactor:</code> - 代码重构 - <code>test:</code> - 测试相关 - <code>chore:</code> - 构建工具变动</p> <hr> <h2 id=git_5>🌿 分支管理：Git的真正超能力<a class=headerlink href=#git_5 title="Permanent link">&para;</a></h2> <p>分支是Git最强大的功能之一，让你可以： - 同时开发多个功能而不互相干扰 - 实验新想法而不会影响主代码 - 安全地修复bug而不破坏现有功能</p> <h3 id=git_6>Git分支模型图解<a class=headerlink href=#git_6 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
+    style D fill:#fce4ec</code></pre> <h3 id=_4>四区域详细解释<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <p><strong>1. 工作区 (Working Directory)</strong> - 就是你电脑上看到的项目文件夹 - 所有的代码文件都在这里编辑 - 相当于你的"工作桌面"</p> <p><strong>2. 暂存区 (Staging Area)</strong> - 准备提交的文件临时存放区 - 可以挑选部分修改进行提交 - 相当于"购物车"，选好商品再结账</p> <p><strong>3. 本地仓库 (Local Repository)</strong> - 存储完整版本历史的地方 - 位于项目根目录的隐藏文件夹<code>.git</code> - 相当于你的"私人保险柜"</p> <p><strong>4. 远程仓库 (Remote Repository)</strong> - GitHub、GitLab等平台上的仓库 - 团队协作和备份的中心 - 相当于"银行金库"，大家共享</p> <hr> <h2 id=git_3>🚀 实战开始：创建你的第一个Git项目<a class=headerlink href=#git_3 title="Permanent link">&para;</a></h2> <h3 id=1>方法1：初始化新项目（从零开始）<a class=headerlink href=#1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-7-1><span class=c1># 1. 创建项目文件夹</span>
+</span><span id=__span-7-2>mkdir<span class=w> </span>my-awesome-project
+</span><span id=__span-7-3><span class=nb>cd</span><span class=w> </span>my-awesome-project
+</span><span id=__span-7-4>
+</span><span id=__span-7-5><span class=c1># 2. 初始化Git仓库</span>
+</span><span id=__span-7-6>git<span class=w> </span>init
+</span><span id=__span-7-7><span class=c1># 输出：Initialized empty Git repository in /path/to/my-awesome-project/.git/</span>
+</span><span id=__span-7-8>
+</span><span id=__span-7-9><span class=c1># 3. 查看仓库状态</span>
+</span><span id=__span-7-10>git<span class=w> </span>status
+</span><span id=__span-7-11><span class=c1># 输出：On branch main，No commits yet</span>
+</span></code></pre></div> <h3 id=2>方法2：克隆现有项目（学习他人代码）<a class=headerlink href=#2 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-8-1><span class=c1># 克隆GitHub上的开源项目</span>
+</span><span id=__span-8-2>git<span class=w> </span>clone<span class=w> </span>https://github.com/username/cool-project.git
+</span><span id=__span-8-3><span class=nb>cd</span><span class=w> </span>cool-project
+</span><span id=__span-8-4>
+</span><span id=__span-8-5><span class=c1># 或者使用SSH方式（更安全）</span>
+</span><span id=__span-8-6>git<span class=w> </span>clone<span class=w> </span>git@github.com:username/cool-project.git
+</span></code></pre></div> <h3 id=_5>常见错误：在错误目录初始化<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-9-1><span class=c1># ❌ 危险操作：在系统根目录初始化</span>
+</span><span id=__span-9-2><span class=nb>cd</span><span class=w> </span>/
+</span><span id=__span-9-3>git<span class=w> </span>init<span class=w>  </span><span class=c1># 这会在整个系统创建.git文件夹！</span>
+</span><span id=__span-9-4>
+</span><span id=__span-9-5><span class=c1># ✅ 正确做法：在专门的项目目录</span>
+</span><span id=__span-9-6><span class=nb>cd</span><span class=w> </span>~/Documents/projects/my-app
+</span><span id=__span-9-7>git<span class=w> </span>init
+</span><span id=__span-9-8>
+</span><span id=__span-9-9><span class=c1># ✅ 检查当前目录</span>
+</span><span id=__span-9-10><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;当前目录：&quot;</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=nb>pwd</span>
+</span><span id=__span-9-11>ls<span class=w> </span>-la<span class=w> </span><span class=p>|</span><span class=w> </span>grep<span class=w> </span>.git<span class=w>  </span><span class=c1># 检查是否已有.git文件夹</span>
+</span></code></pre></div> <hr> <h2 id=git_4>📝 Git基本操作：添加和提交更改<a class=headerlink href=#git_4 title="Permanent link">&para;</a></h2> <h3 id=_6>完整的日常工作流程<a class=headerlink href=#_6 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-10-1><span class=c1># 场景：开发一个新功能</span>
+</span><span id=__span-10-2>
+</span><span id=__span-10-3><span class=c1># 1. 创建新文件或修改现有文件</span>
+</span><span id=__span-10-4><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;# 我的第一个项目&quot;</span><span class=w> </span>&gt;<span class=w> </span>README.md
+</span><span id=__span-10-5><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;print(&#39;Hello, Git!&#39;)&quot;</span><span class=w> </span>&gt;<span class=w> </span>main.py
+</span><span id=__span-10-6>
+</span><span id=__span-10-7><span class=c1># 2. 查看当前状态</span>
+</span><span id=__span-10-8>git<span class=w> </span>status
+</span><span id=__span-10-9><span class=c1># 输出：</span>
+</span><span id=__span-10-10><span class=c1># Untracked files:</span>
+</span><span id=__span-10-11><span class=c1>#   README.md</span>
+</span><span id=__span-10-12><span class=c1>#   main.py</span>
+</span><span id=__span-10-13>
+</span><span id=__span-10-14><span class=c1># 3. 添加文件到暂存区</span>
+</span><span id=__span-10-15>git<span class=w> </span>add<span class=w> </span>README.md<span class=w> </span>main.py
+</span><span id=__span-10-16><span class=c1># 或者添加所有更改：git add .</span>
+</span><span id=__span-10-17>
+</span><span id=__span-10-18><span class=c1># 4. 再次查看状态</span>
+</span><span id=__span-10-19>git<span class=w> </span>status<span class=w>  </span>
+</span><span id=__span-10-20><span class=c1># 输出：Changes to be committed: new file: README.md, new file: main.py</span>
+</span><span id=__span-10-21>
+</span><span id=__span-10-22><span class=c1># 5. 提交更改（附上有意义的提交信息）</span>
+</span><span id=__span-10-23>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;feat: 初始化项目结构和Hello World功能&quot;</span>
+</span><span id=__span-10-24><span class=c1># 输出：[main (root-commit) abc1234] feat: 初始化项目...</span>
+</span><span id=__span-10-25>
+</span><span id=__span-10-26><span class=c1># 6. 查看提交历史</span>
+</span><span id=__span-10-27>git<span class=w> </span>log
+</span><span id=__span-10-28><span class=c1># 显示所有提交记录，包括作者、时间、提交信息</span>
+</span></code></pre></div> <h3 id=_7>提交信息规范（专业习惯从小养成）<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <p><strong>❌ 不好的提交信息：</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-11-1>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;fix&quot;</span><span class=w>        </span><span class=c1># 太模糊</span>
+</span><span id=__span-11-2>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;update&quot;</span><span class=w>     </span><span class=c1># 没有具体内容</span>
+</span><span id=__span-11-3>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;asdf&quot;</span><span class=w>       </span><span class=c1># 毫无意义</span>
+</span></code></pre></div></p> <p><strong>✅ 好的提交信息：</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-12-1><span class=c1># 使用约定式提交格式</span>
+</span><span id=__span-12-2>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;feat: 添加用户登录功能&quot;</span>
+</span><span id=__span-12-3>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;fix: 修复密码验证逻辑错误&quot;</span>
+</span><span id=__span-12-4>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;docs: 更新API接口文档&quot;</span>
+</span></code></pre></div></p> <p><strong>更规范的多行提交信息：</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-13-1>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;feat: 实现完整的用户注册流程</span>
+</span><span id=__span-13-2>
+</span><span id=__span-13-3><span class=s2>- 添加手机号验证码注册</span>
+</span><span id=__span-13-4><span class=s2>- 实现密码强度实时验证  </span>
+</span><span id=__span-13-5><span class=s2>- 完善错误提示和用户体验</span>
+</span><span id=__span-13-6><span class=s2>- 添加注册成功后的跳转逻辑&quot;</span>
+</span></code></pre></div></p> <p><strong>常用提交类型前缀：</strong> - <code>feat:</code> - 新功能 - <code>fix:</code> - 修复bug<br> - <code>docs:</code> - 文档更新 - <code>style:</code> - 代码格式调整 - <code>refactor:</code> - 代码重构 - <code>test:</code> - 测试相关 - <code>chore:</code> - 构建工具变动</p> <hr> <h2 id=git_5>🌿 分支管理：Git的真正超能力<a class=headerlink href=#git_5 title="Permanent link">&para;</a></h2> <p>分支是Git最强大的功能之一，让你可以： - 同时开发多个功能而不互相干扰 - 实验新想法而不会影响主代码 - 安全地修复bug而不破坏现有功能</p> <h3 id=git_6>Git分支模型图解<a class=headerlink href=#git_6 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
     A[🚀 main主分支] --&gt; B[开发新功能]
     B --&gt; C[创建feature分支]
     C --&gt; D[在分支上安心开发]
@@ -240,336 +143,177 @@
 
     style A fill:#4caf50
     style C fill:#2196f3
-    style H fill:#ff9800</code></pre> <h3 id=_8>分支操作完整示例<a class=headerlink href=#_8 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
-<span class=normal><a href=#__codelineno-14-2> 2</a></span>
-<span class=normal><a href=#__codelineno-14-3> 3</a></span>
-<span class=normal><a href=#__codelineno-14-4> 4</a></span>
-<span class=normal><a href=#__codelineno-14-5> 5</a></span>
-<span class=normal><a href=#__codelineno-14-6> 6</a></span>
-<span class=normal><a href=#__codelineno-14-7> 7</a></span>
-<span class=normal><a href=#__codelineno-14-8> 8</a></span>
-<span class=normal><a href=#__codelineno-14-9> 9</a></span>
-<span class=normal><a href=#__codelineno-14-10>10</a></span>
-<span class=normal><a href=#__codelineno-14-11>11</a></span>
-<span class=normal><a href=#__codelineno-14-12>12</a></span>
-<span class=normal><a href=#__codelineno-14-13>13</a></span>
-<span class=normal><a href=#__codelineno-14-14>14</a></span>
-<span class=normal><a href=#__codelineno-14-15>15</a></span>
-<span class=normal><a href=#__codelineno-14-16>16</a></span>
-<span class=normal><a href=#__codelineno-14-17>17</a></span>
-<span class=normal><a href=#__codelineno-14-18>18</a></span>
-<span class=normal><a href=#__codelineno-14-19>19</a></span>
-<span class=normal><a href=#__codelineno-14-20>20</a></span>
-<span class=normal><a href=#__codelineno-14-21>21</a></span>
-<span class=normal><a href=#__codelineno-14-22>22</a></span>
-<span class=normal><a href=#__codelineno-14-23>23</a></span>
-<span class=normal><a href=#__codelineno-14-24>24</a></span>
-<span class=normal><a href=#__codelineno-14-25>25</a></span>
-<span class=normal><a href=#__codelineno-14-26>26</a></span>
-<span class=normal><a href=#__codelineno-14-27>27</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=c1># 1. 查看所有分支（刚开始只有main分支）</span>
-</span><span id=__span-14-2><a id=__codelineno-14-2 name=__codelineno-14-2></a>git<span class=w> </span>branch
-</span><span id=__span-14-3><a id=__codelineno-14-3 name=__codelineno-14-3></a><span class=c1># 输出：* main  （*表示当前所在分支）</span>
-</span><span id=__span-14-4><a id=__codelineno-14-4 name=__codelineno-14-4></a>
-</span><span id=__span-14-5><a id=__codelineno-14-5 name=__codelineno-14-5></a><span class=c1># 2. 创建新分支</span>
-</span><span id=__span-14-6><a id=__codelineno-14-6 name=__codelineno-14-6></a>git<span class=w> </span>branch<span class=w> </span>feature-user-login
-</span><span id=__span-14-7><a id=__codelineno-14-7 name=__codelineno-14-7></a>
-</span><span id=__span-14-8><a id=__codelineno-14-8 name=__codelineno-14-8></a><span class=c1># 3. 切换到新分支</span>
-</span><span id=__span-14-9><a id=__codelineno-14-9 name=__codelineno-14-9></a>git<span class=w> </span>checkout<span class=w> </span>feature-user-login
-</span><span id=__span-14-10><a id=__codelineno-14-10 name=__codelineno-14-10></a><span class=c1># 或者使用更简单的命令：git switch feature-user-login</span>
-</span><span id=__span-14-11><a id=__codelineno-14-11 name=__codelineno-14-11></a>
-</span><span id=__span-14-12><a id=__codelineno-14-12 name=__codelineno-14-12></a><span class=c1># 4. 一步完成创建并切换（推荐）</span>
-</span><span id=__span-14-13><a id=__codelineno-14-13 name=__codelineno-14-13></a>git<span class=w> </span>checkout<span class=w> </span>-b<span class=w> </span>feature-user-profile
-</span><span id=__span-14-14><a id=__codelineno-14-14 name=__codelineno-14-14></a>
-</span><span id=__span-14-15><a id=__codelineno-14-15 name=__codelineno-14-15></a><span class=c1># 5. 在新分支上开发</span>
-</span><span id=__span-14-16><a id=__codelineno-14-16 name=__codelineno-14-16></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;用户个人资料页面&quot;</span><span class=w> </span>&gt;<span class=w> </span>profile.html
-</span><span id=__span-14-17><a id=__codelineno-14-17 name=__codelineno-14-17></a>git<span class=w> </span>add<span class=w> </span>profile.html
-</span><span id=__span-14-18><a id=__codelineno-14-18 name=__codelineno-14-18></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;feat: 添加用户个人资料页面&quot;</span>
-</span><span id=__span-14-19><a id=__codelineno-14-19 name=__codelineno-14-19></a>
-</span><span id=__span-14-20><a id=__codelineno-14-20 name=__codelineno-14-20></a><span class=c1># 6. 切换回main分支</span>
-</span><span id=__span-14-21><a id=__codelineno-14-21 name=__codelineno-14-21></a>git<span class=w> </span>checkout<span class=w> </span>main
-</span><span id=__span-14-22><a id=__codelineno-14-22 name=__codelineno-14-22></a>
-</span><span id=__span-14-23><a id=__codelineno-14-23 name=__codelineno-14-23></a><span class=c1># 7. 合并功能分支</span>
-</span><span id=__span-14-24><a id=__codelineno-14-24 name=__codelineno-14-24></a>git<span class=w> </span>merge<span class=w> </span>feature-user-login
-</span><span id=__span-14-25><a id=__codelineno-14-25 name=__codelineno-14-25></a>
-</span><span id=__span-14-26><a id=__codelineno-14-26 name=__codelineno-14-26></a><span class=c1># 8. 删除已合并的分支（保持整洁）</span>
-</span><span id=__span-14-27><a id=__codelineno-14-27 name=__codelineno-14-27></a>git<span class=w> </span>branch<span class=w> </span>-d<span class=w> </span>feature-user-login
-</span></code></pre></div></td></tr></table></div> <h3 id=_9>分支管理最佳实践<a class=headerlink href=#_9 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
-<span class=normal><a href=#__codelineno-15-2> 2</a></span>
-<span class=normal><a href=#__codelineno-15-3> 3</a></span>
-<span class=normal><a href=#__codelineno-15-4> 4</a></span>
-<span class=normal><a href=#__codelineno-15-5> 5</a></span>
-<span class=normal><a href=#__codelineno-15-6> 6</a></span>
-<span class=normal><a href=#__codelineno-15-7> 7</a></span>
-<span class=normal><a href=#__codelineno-15-8> 8</a></span>
-<span class=normal><a href=#__codelineno-15-9> 9</a></span>
-<span class=normal><a href=#__codelineno-15-10>10</a></span>
-<span class=normal><a href=#__codelineno-15-11>11</a></span>
-<span class=normal><a href=#__codelineno-15-12>12</a></span>
-<span class=normal><a href=#__codelineno-15-13>13</a></span>
-<span class=normal><a href=#__codelineno-15-14>14</a></span>
-<span class=normal><a href=#__codelineno-15-15>15</a></span>
-<span class=normal><a href=#__codelineno-15-16>16</a></span>
-<span class=normal><a href=#__codelineno-15-17>17</a></span>
-<span class=normal><a href=#__codelineno-15-18>18</a></span>
-<span class=normal><a href=#__codelineno-15-19>19</a></span>
-<span class=normal><a href=#__codelineno-15-20>20</a></span>
-<span class=normal><a href=#__codelineno-15-21>21</a></span>
-<span class=normal><a href=#__codelineno-15-22>22</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=c1># 正确的分支工作流程</span>
-</span><span id=__span-15-2><a id=__codelineno-15-2 name=__codelineno-15-2></a>
-</span><span id=__span-15-3><a id=__codelineno-15-3 name=__codelineno-15-3></a><span class=c1># 1. 确保在main分支开始</span>
-</span><span id=__span-15-4><a id=__codelineno-15-4 name=__codelineno-15-4></a>git<span class=w> </span>checkout<span class=w> </span>main
-</span><span id=__span-15-5><a id=__codelineno-15-5 name=__codelineno-15-5></a>
-</span><span id=__span-15-6><a id=__codelineno-15-6 name=__codelineno-15-6></a><span class=c1># 2. 拉取最新代码（团队协作时很重要）</span>
-</span><span id=__span-15-7><a id=__codelineno-15-7 name=__codelineno-15-7></a>git<span class=w> </span>pull<span class=w> </span>origin<span class=w> </span>main
-</span><span id=__span-15-8><a id=__codelineno-15-8 name=__codelineno-15-8></a>
-</span><span id=__span-15-9><a id=__codelineno-15-9 name=__codelineno-15-9></a><span class=c1># 3. 为每个功能创建独立分支</span>
-</span><span id=__span-15-10><a id=__codelineno-15-10 name=__codelineno-15-10></a>git<span class=w> </span>checkout<span class=w> </span>-b<span class=w> </span>feature-payment-integration
-</span><span id=__span-15-11><a id=__codelineno-15-11 name=__codelineno-15-11></a>
-</span><span id=__span-15-12><a id=__codelineno-15-12 name=__codelineno-15-12></a><span class=c1># 4. 在功能分支上专心开发</span>
-</span><span id=__span-15-13><a id=__codelineno-15-13 name=__codelineno-15-13></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;支付接口代码&quot;</span><span class=w> </span>&gt;<span class=w> </span>payment.py
-</span><span id=__span-15-14><a id=__codelineno-15-14 name=__codelineno-15-14></a>git<span class=w> </span>add<span class=w> </span>payment.py
-</span><span id=__span-15-15><a id=__codelineno-15-15 name=__codelineno-15-15></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;feat: 集成支付宝支付接口&quot;</span>
-</span><span id=__span-15-16><a id=__codelineno-15-16 name=__codelineno-15-16></a>
-</span><span id=__span-15-17><a id=__codelineno-15-17 name=__codelineno-15-17></a><span class=c1># 5. 完成开发后合并回main</span>
-</span><span id=__span-15-18><a id=__codelineno-15-18 name=__codelineno-15-18></a>git<span class=w> </span>checkout<span class=w> </span>main
-</span><span id=__span-15-19><a id=__codelineno-15-19 name=__codelineno-15-19></a>git<span class=w> </span>merge<span class=w> </span>feature-payment-integration
-</span><span id=__span-15-20><a id=__codelineno-15-20 name=__codelineno-15-20></a>
-</span><span id=__span-15-21><a id=__codelineno-15-21 name=__codelineno-15-21></a><span class=c1># 6. 删除已合并的功能分支</span>
-</span><span id=__span-15-22><a id=__codelineno-15-22 name=__codelineno-15-22></a>git<span class=w> </span>branch<span class=w> </span>-d<span class=w> </span>feature-payment-integration
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=github_1>🌐 GitHub入门：连接远程仓库<a class=headerlink href=#github_1 title="Permanent link">&para;</a></h2> <p>GitHub是Git的远程托管平台，让你的代码： - 有安全的云端备份 - 可以与他人协作开发 - 参与开源项目贡献 - 展示个人技术能力</p> <h3 id=github_2>第一步：创建GitHub账户<a class=headerlink href=#github_2 title="Permanent link">&para;</a></h3> <ol> <li>访问 https://github.com</li> <li>点击"Sign up"注册账户</li> <li>验证邮箱完成注册</li> <li>完善个人资料</li> </ol> <h3 id=ssh>第二步：创建SSH密钥（安全连接）<a class=headerlink href=#ssh title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1>1</a></span>
-<span class=normal><a href=#__codelineno-16-2>2</a></span>
-<span class=normal><a href=#__codelineno-16-3>3</a></span>
-<span class=normal><a href=#__codelineno-16-4>4</a></span>
-<span class=normal><a href=#__codelineno-16-5>5</a></span>
-<span class=normal><a href=#__codelineno-16-6>6</a></span>
-<span class=normal><a href=#__codelineno-16-7>7</a></span>
-<span class=normal><a href=#__codelineno-16-8>8</a></span>
-<span class=normal><a href=#__codelineno-16-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><a id=__codelineno-16-1 name=__codelineno-16-1></a><span class=c1># 生成SSH密钥对</span>
-</span><span id=__span-16-2><a id=__codelineno-16-2 name=__codelineno-16-2></a>ssh-keygen<span class=w> </span>-t<span class=w> </span>ed25519<span class=w> </span>-C<span class=w> </span><span class=s2>&quot;your_email@example.com&quot;</span>
-</span><span id=__span-16-3><a id=__codelineno-16-3 name=__codelineno-16-3></a>
-</span><span id=__span-16-4><a id=__codelineno-16-4 name=__codelineno-16-4></a><span class=c1># 一路按回车使用默认设置</span>
-</span><span id=__span-16-5><a id=__codelineno-16-5 name=__codelineno-16-5></a><span class=c1># 生成的密钥在：~/.ssh/id_ed25519（私钥）和 ~/.ssh/id_ed25519.pub（公钥）</span>
-</span><span id=__span-16-6><a id=__codelineno-16-6 name=__codelineno-16-6></a>
-</span><span id=__span-16-7><a id=__codelineno-16-7 name=__codelineno-16-7></a><span class=c1># 查看公钥内容</span>
-</span><span id=__span-16-8><a id=__codelineno-16-8 name=__codelineno-16-8></a>cat<span class=w> </span>~/.ssh/id_ed25519.pub
-</span><span id=__span-16-9><a id=__codelineno-16-9 name=__codelineno-16-9></a><span class=c1># 复制全部内容（从ssh-ed25519开始到邮箱结束）</span>
-</span></code></pre></div></td></tr></table></div> <p><strong>在GitHub添加SSH密钥：</strong> 1. 登录GitHub，点击右上角头像 → Settings 2. 左侧菜单选择"SSH and GPG keys" 3. 点击"New SSH key" 4. 标题随便写（如：My Laptop） 5. 粘贴刚才复制的公钥内容 6. 点击"Add SSH key"</p> <h3 id=_10>第三步：配置远程仓库<a class=headerlink href=#_10 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1> 1</a></span>
-<span class=normal><a href=#__codelineno-17-2> 2</a></span>
-<span class=normal><a href=#__codelineno-17-3> 3</a></span>
-<span class=normal><a href=#__codelineno-17-4> 4</a></span>
-<span class=normal><a href=#__codelineno-17-5> 5</a></span>
-<span class=normal><a href=#__codelineno-17-6> 6</a></span>
-<span class=normal><a href=#__codelineno-17-7> 7</a></span>
-<span class=normal><a href=#__codelineno-17-8> 8</a></span>
-<span class=normal><a href=#__codelineno-17-9> 9</a></span>
-<span class=normal><a href=#__codelineno-17-10>10</a></span>
-<span class=normal><a href=#__codelineno-17-11>11</a></span>
-<span class=normal><a href=#__codelineno-17-12>12</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><a id=__codelineno-17-1 name=__codelineno-17-1></a><span class=c1># 查看当前远程仓库配置</span>
-</span><span id=__span-17-2><a id=__codelineno-17-2 name=__codelineno-17-2></a>git<span class=w> </span>remote<span class=w> </span>-v
-</span><span id=__span-17-3><a id=__codelineno-17-3 name=__codelineno-17-3></a><span class=c1># 初始状态：没有配置任何远程仓库</span>
-</span><span id=__span-17-4><a id=__codelineno-17-4 name=__codelineno-17-4></a>
-</span><span id=__span-17-5><a id=__codelineno-17-5 name=__codelineno-17-5></a><span class=c1># 添加远程仓库（替换为你的仓库地址）</span>
-</span><span id=__span-17-6><a id=__codelineno-17-6 name=__codelineno-17-6></a>git<span class=w> </span>remote<span class=w> </span>add<span class=w> </span>origin<span class=w> </span>git@github.com:你的用户名/你的仓库名.git
-</span><span id=__span-17-7><a id=__codelineno-17-7 name=__codelineno-17-7></a>
-</span><span id=__span-17-8><a id=__codelineno-17-8 name=__codelineno-17-8></a><span class=c1># 再次查看确认</span>
-</span><span id=__span-17-9><a id=__codelineno-17-9 name=__codelineno-17-9></a>git<span class=w> </span>remote<span class=w> </span>-v
-</span><span id=__span-17-10><a id=__codelineno-17-10 name=__codelineno-17-10></a><span class=c1># 正确输出：</span>
-</span><span id=__span-17-11><a id=__codelineno-17-11 name=__codelineno-17-11></a><span class=c1># origin  git@github.com:你的用户名/你的仓库名.git (fetch)</span>
-</span><span id=__span-17-12><a id=__codelineno-17-12 name=__codelineno-17-12></a><span class=c1># origin  git@github.com:你的用户名/你的仓库名.git (push)</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=github_3>第四步：推送到GitHub<a class=headerlink href=#github_3 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-18-1> 1</a></span>
-<span class=normal><a href=#__codelineno-18-2> 2</a></span>
-<span class=normal><a href=#__codelineno-18-3> 3</a></span>
-<span class=normal><a href=#__codelineno-18-4> 4</a></span>
-<span class=normal><a href=#__codelineno-18-5> 5</a></span>
-<span class=normal><a href=#__codelineno-18-6> 6</a></span>
-<span class=normal><a href=#__codelineno-18-7> 7</a></span>
-<span class=normal><a href=#__codelineno-18-8> 8</a></span>
-<span class=normal><a href=#__codelineno-18-9> 9</a></span>
-<span class=normal><a href=#__codelineno-18-10>10</a></span>
-<span class=normal><a href=#__codelineno-18-11>11</a></span>
-<span class=normal><a href=#__codelineno-18-12>12</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-18-1><a id=__codelineno-18-1 name=__codelineno-18-1></a><span class=c1># 第一次推送（设置上游分支）</span>
-</span><span id=__span-18-2><a id=__codelineno-18-2 name=__codelineno-18-2></a>git<span class=w> </span>push<span class=w> </span>-u<span class=w> </span>origin<span class=w> </span>main
-</span><span id=__span-18-3><a id=__codelineno-18-3 name=__codelineno-18-3></a><span class=c1># -u 参数表示设置上游分支，以后只需要git push即可</span>
-</span><span id=__span-18-4><a id=__codelineno-18-4 name=__codelineno-18-4></a>
-</span><span id=__span-18-5><a id=__codelineno-18-5 name=__codelineno-18-5></a><span class=c1># 后续推送（简单多了）</span>
-</span><span id=__span-18-6><a id=__codelineno-18-6 name=__codelineno-18-6></a>git<span class=w> </span>push
-</span><span id=__span-18-7><a id=__codelineno-18-7 name=__codelineno-18-7></a>
-</span><span id=__span-18-8><a id=__codelineno-18-8 name=__codelineno-18-8></a><span class=c1># 推送其他分支</span>
-</span><span id=__span-18-9><a id=__codelineno-18-9 name=__codelineno-18-9></a>git<span class=w> </span>push<span class=w> </span>origin<span class=w> </span>feature-branch-name
-</span><span id=__span-18-10><a id=__codelineno-18-10 name=__codelineno-18-10></a>
-</span><span id=__span-18-11><a id=__codelineno-18-11 name=__codelineno-18-11></a><span class=c1># 拉取远程更新</span>
-</span><span id=__span-18-12><a id=__codelineno-18-12 name=__codelineno-18-12></a>git<span class=w> </span>pull<span class=w> </span>origin<span class=w> </span>main
-</span></code></pre></div></td></tr></table></div> <h3 id=_11>常见推送问题解决<a class=headerlink href=#_11 title="Permanent link">&para;</a></h3> <p><strong>问题：权限被拒绝 (Permission denied)</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-19-1>1</a></span>
-<span class=normal><a href=#__codelineno-19-2>2</a></span>
-<span class=normal><a href=#__codelineno-19-3>3</a></span>
-<span class=normal><a href=#__codelineno-19-4>4</a></span>
-<span class=normal><a href=#__codelineno-19-5>5</a></span>
-<span class=normal><a href=#__codelineno-19-6>6</a></span>
-<span class=normal><a href=#__codelineno-19-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-19-1><a id=__codelineno-19-1 name=__codelineno-19-1></a><span class=c1># ❌ 错误信息</span>
-</span><span id=__span-19-2><a id=__codelineno-19-2 name=__codelineno-19-2></a>fatal:<span class=w> </span>unable<span class=w> </span>to<span class=w> </span>access<span class=w> </span><span class=s1>&#39;https://github.com/...&#39;</span>:<span class=w> </span>The<span class=w> </span>requested<span class=w> </span>URL<span class=w> </span>returned<span class=w> </span>error:<span class=w> </span><span class=m>403</span>
-</span><span id=__span-19-3><a id=__codelineno-19-3 name=__codelineno-19-3></a>
-</span><span id=__span-19-4><a id=__codelineno-19-4 name=__codelineno-19-4></a><span class=c1># ✅ 解决方案</span>
-</span><span id=__span-19-5><a id=__codelineno-19-5 name=__codelineno-19-5></a><span class=c1># 1. 检查远程地址是否正确：git remote -v</span>
-</span><span id=__span-19-6><a id=__codelineno-19-6 name=__codelineno-19-6></a><span class=c1># 2. 使用SSH方式（推荐）：git remote set-url origin git@github.com:username/repo.git</span>
-</span><span id=__span-19-7><a id=__codelineno-19-7 name=__codelineno-19-7></a><span class=c1># 3. 或者使用个人访问令牌</span>
-</span></code></pre></div></td></tr></table></div></p> <hr> <h2 id=_12>🔄 高级技巧：解决冲突和撤销操作<a class=headerlink href=#_12 title="Permanent link">&para;</a></h2> <h3 id=_13>处理合并冲突（团队协作必会技能）<a class=headerlink href=#_13 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-20-1> 1</a></span>
-<span class=normal><a href=#__codelineno-20-2> 2</a></span>
-<span class=normal><a href=#__codelineno-20-3> 3</a></span>
-<span class=normal><a href=#__codelineno-20-4> 4</a></span>
-<span class=normal><a href=#__codelineno-20-5> 5</a></span>
-<span class=normal><a href=#__codelineno-20-6> 6</a></span>
-<span class=normal><a href=#__codelineno-20-7> 7</a></span>
-<span class=normal><a href=#__codelineno-20-8> 8</a></span>
-<span class=normal><a href=#__codelineno-20-9> 9</a></span>
-<span class=normal><a href=#__codelineno-20-10>10</a></span>
-<span class=normal><a href=#__codelineno-20-11>11</a></span>
-<span class=normal><a href=#__codelineno-20-12>12</a></span>
-<span class=normal><a href=#__codelineno-20-13>13</a></span>
-<span class=normal><a href=#__codelineno-20-14>14</a></span>
-<span class=normal><a href=#__codelineno-20-15>15</a></span>
-<span class=normal><a href=#__codelineno-20-16>16</a></span>
-<span class=normal><a href=#__codelineno-20-17>17</a></span>
-<span class=normal><a href=#__codelineno-20-18>18</a></span>
-<span class=normal><a href=#__codelineno-20-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-20-1><a id=__codelineno-20-1 name=__codelineno-20-1></a><span class=c1># 当两个人修改了同一文件时会发生冲突</span>
-</span><span id=__span-20-2><a id=__codelineno-20-2 name=__codelineno-20-2></a>git<span class=w> </span>merge<span class=w> </span>feature-branch
-</span><span id=__span-20-3><a id=__codelineno-20-3 name=__codelineno-20-3></a><span class=c1># 输出：Auto-merging file.txt</span>
-</span><span id=__span-20-4><a id=__codelineno-20-4 name=__codelineno-20-4></a><span class=c1># CONFLICT (content): Merge conflict in file.txt</span>
-</span><span id=__span-20-5><a id=__codelineno-20-5 name=__codelineno-20-5></a><span class=c1># Automatic merge failed; fix conflicts and then commit the result.</span>
-</span><span id=__span-20-6><a id=__codelineno-20-6 name=__codelineno-20-6></a>
-</span><span id=__span-20-7><a id=__codelineno-20-7 name=__codelineno-20-7></a><span class=c1># 查看冲突文件内容</span>
-</span><span id=__span-20-8><a id=__codelineno-20-8 name=__codelineno-20-8></a>cat<span class=w> </span>file.txt
-</span><span id=__span-20-9><a id=__codelineno-20-9 name=__codelineno-20-9></a><span class=c1># 显示冲突标记：</span>
-</span><span id=__span-20-10><a id=__codelineno-20-10 name=__codelineno-20-10></a><span class=c1># &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
-</span><span id=__span-20-11><a id=__codelineno-20-11 name=__codelineno-20-11></a><span class=c1># 当前分支的内容（你的修改）</span>
-</span><span id=__span-20-12><a id=__codelineno-20-12 name=__codelineno-20-12></a><span class=c1># =======</span>
-</span><span id=__span-20-13><a id=__codelineno-20-13 name=__codelineno-20-13></a><span class=c1># 要合并的分支的内容（别人的修改）  </span>
-</span><span id=__span-20-14><a id=__codelineno-20-14 name=__codelineno-20-14></a><span class=c1># &gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-branch</span>
-</span><span id=__span-20-15><a id=__codelineno-20-15 name=__codelineno-20-15></a>
-</span><span id=__span-20-16><a id=__codelineno-20-16 name=__codelineno-20-16></a><span class=c1># 手动解决冲突：选择保留哪些内容，删除冲突标记</span>
-</span><span id=__span-20-17><a id=__codelineno-20-17 name=__codelineno-20-17></a><span class=c1># 然后标记冲突已解决</span>
-</span><span id=__span-20-18><a id=__codelineno-20-18 name=__codelineno-20-18></a>git<span class=w> </span>add<span class=w> </span>file.txt
-</span><span id=__span-20-19><a id=__codelineno-20-19 name=__codelineno-20-19></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;解决与feature-branch的合并冲突&quot;</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=_14>撤销操作的多种方式<a class=headerlink href=#_14 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-21-1> 1</a></span>
-<span class=normal><a href=#__codelineno-21-2> 2</a></span>
-<span class=normal><a href=#__codelineno-21-3> 3</a></span>
-<span class=normal><a href=#__codelineno-21-4> 4</a></span>
-<span class=normal><a href=#__codelineno-21-5> 5</a></span>
-<span class=normal><a href=#__codelineno-21-6> 6</a></span>
-<span class=normal><a href=#__codelineno-21-7> 7</a></span>
-<span class=normal><a href=#__codelineno-21-8> 8</a></span>
-<span class=normal><a href=#__codelineno-21-9> 9</a></span>
-<span class=normal><a href=#__codelineno-21-10>10</a></span>
-<span class=normal><a href=#__codelineno-21-11>11</a></span>
-<span class=normal><a href=#__codelineno-21-12>12</a></span>
-<span class=normal><a href=#__codelineno-21-13>13</a></span>
-<span class=normal><a href=#__codelineno-21-14>14</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-21-1><a id=__codelineno-21-1 name=__codelineno-21-1></a><span class=c1># 1. 撤销工作区的修改（慎用！不可恢复）</span>
-</span><span id=__span-21-2><a id=__codelineno-21-2 name=__codelineno-21-2></a>git<span class=w> </span>checkout<span class=w> </span>--<span class=w> </span>filename.txt
-</span><span id=__span-21-3><a id=__codelineno-21-3 name=__codelineno-21-3></a>
-</span><span id=__span-21-4><a id=__codelineno-21-4 name=__codelineno-21-4></a><span class=c1># 2. 撤销暂存区的修改（放回工作区）</span>
-</span><span id=__span-21-5><a id=__codelineno-21-5 name=__codelineno-21-5></a>git<span class=w> </span>reset<span class=w> </span>HEAD<span class=w> </span>filename.txt
-</span><span id=__span-21-6><a id=__codelineno-21-6 name=__codelineno-21-6></a>
-</span><span id=__span-21-7><a id=__codelineno-21-7 name=__codelineno-21-7></a><span class=c1># 3. 撤销最近一次提交（保留修改在工作区）</span>
-</span><span id=__span-21-8><a id=__codelineno-21-8 name=__codelineno-21-8></a>git<span class=w> </span>reset<span class=w> </span>--soft<span class=w> </span>HEAD~1
-</span><span id=__span-21-9><a id=__codelineno-21-9 name=__codelineno-21-9></a>
-</span><span id=__span-21-10><a id=__codelineno-21-10 name=__codelineno-21-10></a><span class=c1># 4. 完全撤销最近一次提交（丢弃所有修改）</span>
-</span><span id=__span-21-11><a id=__codelineno-21-11 name=__codelineno-21-11></a>git<span class=w> </span>reset<span class=w> </span>--hard<span class=w> </span>HEAD~1
-</span><span id=__span-21-12><a id=__codelineno-21-12 name=__codelineno-21-12></a>
-</span><span id=__span-21-13><a id=__codelineno-21-13 name=__codelineno-21-13></a><span class=c1># 5. 安全撤销：创建新的撤销提交（推荐）</span>
-</span><span id=__span-21-14><a id=__codelineno-21-14 name=__codelineno-21-14></a>git<span class=w> </span>revert<span class=w> </span>HEAD
-</span></code></pre></div></td></tr></table></div> <h3 id=_15>误操作挽回技巧<a class=headerlink href=#_15 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-22-1>1</a></span>
-<span class=normal><a href=#__codelineno-22-2>2</a></span>
-<span class=normal><a href=#__codelineno-22-3>3</a></span>
-<span class=normal><a href=#__codelineno-22-4>4</a></span>
-<span class=normal><a href=#__codelineno-22-5>5</a></span>
-<span class=normal><a href=#__codelineno-22-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-22-1><a id=__codelineno-22-1 name=__codelineno-22-1></a><span class=c1># 如果不小心删除了重要文件或提交</span>
-</span><span id=__span-22-2><a id=__codelineno-22-2 name=__codelineno-22-2></a>git<span class=w> </span>reflog<span class=w>  </span><span class=c1># 查看所有操作记录</span>
-</span><span id=__span-22-3><a id=__codelineno-22-3 name=__codelineno-22-3></a><span class=c1># 找到误删的提交哈希值，如：abc1234</span>
-</span><span id=__span-22-4><a id=__codelineno-22-4 name=__codelineno-22-4></a>
-</span><span id=__span-22-5><a id=__codelineno-22-5 name=__codelineno-22-5></a>git<span class=w> </span>checkout<span class=w> </span>abc1234<span class=w>  </span><span class=c1># 切换到那个提交</span>
-</span><span id=__span-22-6><a id=__codelineno-22-6 name=__codelineno-22-6></a><span class=c1># 或者创建新分支保存：git branch recovery-branch abc1234</span>
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=git_7>💡 效率提升：Git实用技巧大全<a class=headerlink href=#git_7 title="Permanent link">&para;</a></h2> <h3 id=_16>配置命令别名（大幅提升效率）<a class=headerlink href=#_16 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-23-1> 1</a></span>
-<span class=normal><a href=#__codelineno-23-2> 2</a></span>
-<span class=normal><a href=#__codelineno-23-3> 3</a></span>
-<span class=normal><a href=#__codelineno-23-4> 4</a></span>
-<span class=normal><a href=#__codelineno-23-5> 5</a></span>
-<span class=normal><a href=#__codelineno-23-6> 6</a></span>
-<span class=normal><a href=#__codelineno-23-7> 7</a></span>
-<span class=normal><a href=#__codelineno-23-8> 8</a></span>
-<span class=normal><a href=#__codelineno-23-9> 9</a></span>
-<span class=normal><a href=#__codelineno-23-10>10</a></span>
-<span class=normal><a href=#__codelineno-23-11>11</a></span>
-<span class=normal><a href=#__codelineno-23-12>12</a></span>
-<span class=normal><a href=#__codelineno-23-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-23-1><a id=__codelineno-23-1 name=__codelineno-23-1></a><span class=c1># 编辑Git全局配置</span>
-</span><span id=__span-23-2><a id=__codelineno-23-2 name=__codelineno-23-2></a>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>alias.st<span class=w> </span>status
-</span><span id=__span-23-3><a id=__codelineno-23-3 name=__codelineno-23-3></a>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>alias.ci<span class=w> </span>commit<span class=w>  </span>
-</span><span id=__span-23-4><a id=__codelineno-23-4 name=__codelineno-23-4></a>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>alias.co<span class=w> </span>checkout
-</span><span id=__span-23-5><a id=__codelineno-23-5 name=__codelineno-23-5></a>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>alias.br<span class=w> </span>branch
-</span><span id=__span-23-6><a id=__codelineno-23-6 name=__codelineno-23-6></a>
-</span><span id=__span-23-7><a id=__codelineno-23-7 name=__codelineno-23-7></a><span class=c1># 现在可以使用简写命令</span>
-</span><span id=__span-23-8><a id=__codelineno-23-8 name=__codelineno-23-8></a>git<span class=w> </span>st<span class=w>    </span><span class=c1># 相当于 git status</span>
-</span><span id=__span-23-9><a id=__codelineno-23-9 name=__codelineno-23-9></a>git<span class=w> </span>ci<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;message&quot;</span><span class=w>  </span><span class=c1># 相当于 git commit -m &quot;message&quot;</span>
-</span><span id=__span-23-10><a id=__codelineno-23-10 name=__codelineno-23-10></a>
-</span><span id=__span-23-11><a id=__codelineno-23-11 name=__codelineno-23-11></a><span class=c1># 更高级的别名</span>
-</span><span id=__span-23-12><a id=__codelineno-23-12 name=__codelineno-23-12></a>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>alias.lg<span class=w> </span><span class=s2>&quot;log --oneline --graph --decorate&quot;</span>
-</span><span id=__span-23-13><a id=__codelineno-23-13 name=__codelineno-23-13></a>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>alias.unstage<span class=w> </span><span class=s2>&quot;reset HEAD --&quot;</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=gitignore>创建.gitignore文件（忽略不需要版本控制的文件）<a class=headerlink href=#gitignore title="Permanent link">&para;</a></h3> <p>在项目根目录创建<code>.gitignore</code>文件：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-24-1> 1</a></span>
-<span class=normal><a href=#__codelineno-24-2> 2</a></span>
-<span class=normal><a href=#__codelineno-24-3> 3</a></span>
-<span class=normal><a href=#__codelineno-24-4> 4</a></span>
-<span class=normal><a href=#__codelineno-24-5> 5</a></span>
-<span class=normal><a href=#__codelineno-24-6> 6</a></span>
-<span class=normal><a href=#__codelineno-24-7> 7</a></span>
-<span class=normal><a href=#__codelineno-24-8> 8</a></span>
-<span class=normal><a href=#__codelineno-24-9> 9</a></span>
-<span class=normal><a href=#__codelineno-24-10>10</a></span>
-<span class=normal><a href=#__codelineno-24-11>11</a></span>
-<span class=normal><a href=#__codelineno-24-12>12</a></span>
-<span class=normal><a href=#__codelineno-24-13>13</a></span>
-<span class=normal><a href=#__codelineno-24-14>14</a></span>
-<span class=normal><a href=#__codelineno-24-15>15</a></span>
-<span class=normal><a href=#__codelineno-24-16>16</a></span>
-<span class=normal><a href=#__codelineno-24-17>17</a></span>
-<span class=normal><a href=#__codelineno-24-18>18</a></span>
-<span class=normal><a href=#__codelineno-24-19>19</a></span>
-<span class=normal><a href=#__codelineno-24-20>20</a></span>
-<span class=normal><a href=#__codelineno-24-21>21</a></span>
-<span class=normal><a href=#__codelineno-24-22>22</a></span>
-<span class=normal><a href=#__codelineno-24-23>23</a></span>
-<span class=normal><a href=#__codelineno-24-24>24</a></span>
-<span class=normal><a href=#__codelineno-24-25>25</a></span>
-<span class=normal><a href=#__codelineno-24-26>26</a></span>
-<span class=normal><a href=#__codelineno-24-27>27</a></span>
-<span class=normal><a href=#__codelineno-24-28>28</a></span>
-<span class=normal><a href=#__codelineno-24-29>29</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-24-1><a id=__codelineno-24-1 name=__codelineno-24-1></a># 编译输出文件
-</span><span id=__span-24-2><a id=__codelineno-24-2 name=__codelineno-24-2></a>*.class
-</span><span id=__span-24-3><a id=__codelineno-24-3 name=__codelineno-24-3></a>*.exe
-</span><span id=__span-24-4><a id=__codelineno-24-4 name=__codelineno-24-4></a>*.dll
-</span><span id=__span-24-5><a id=__codelineno-24-5 name=__codelineno-24-5></a>*.so
-</span><span id=__span-24-6><a id=__codelineno-24-6 name=__codelineno-24-6></a>*.dylib
-</span><span id=__span-24-7><a id=__codelineno-24-7 name=__codelineno-24-7></a>
-</span><span id=__span-24-8><a id=__codelineno-24-8 name=__codelineno-24-8></a># 日志文件
-</span><span id=__span-24-9><a id=__codelineno-24-9 name=__codelineno-24-9></a>*.log
-</span><span id=__span-24-10><a id=__codelineno-24-10 name=__codelineno-24-10></a>logs/
-</span><span id=__span-24-11><a id=__codelineno-24-11 name=__codelineno-24-11></a>
-</span><span id=__span-24-12><a id=__codelineno-24-12 name=__codelineno-24-12></a># 依赖目录（不要提交第三方库）
-</span><span id=__span-24-13><a id=__codelineno-24-13 name=__codelineno-24-13></a>node_modules/
-</span><span id=__span-24-14><a id=__codelineno-24-14 name=__codelineno-24-14></a>vendor/
-</span><span id=__span-24-15><a id=__codelineno-24-15 name=__codelineno-24-15></a>
-</span><span id=__span-24-16><a id=__codelineno-24-16 name=__codelineno-24-16></a># 环境配置文件（包含敏感信息）
-</span><span id=__span-24-17><a id=__codelineno-24-17 name=__codelineno-24-17></a>.env
-</span><span id=__span-24-18><a id=__codelineno-24-18 name=__codelineno-24-18></a>config.ini
-</span><span id=__span-24-19><a id=__codelineno-24-19 name=__codelineno-24-19></a>*.key
-</span><span id=__span-24-20><a id=__codelineno-24-20 name=__codelineno-24-20></a>
-</span><span id=__span-24-21><a id=__codelineno-24-21 name=__codelineno-24-21></a># 系统文件
-</span><span id=__span-24-22><a id=__codelineno-24-22 name=__codelineno-24-22></a>.DS_Store
-</span><span id=__span-24-23><a id=__codelineno-24-23 name=__codelineno-24-23></a>Thumbs.db
-</span><span id=__span-24-24><a id=__codelineno-24-24 name=__codelineno-24-24></a>
-</span><span id=__span-24-25><a id=__codelineno-24-25 name=__codelineno-24-25></a># IDE配置文件
-</span><span id=__span-24-26><a id=__codelineno-24-26 name=__codelineno-24-26></a>.vscode/
-</span><span id=__span-24-27><a id=__codelineno-24-27 name=__codelineno-24-27></a>.idea/
-</span><span id=__span-24-28><a id=__codelineno-24-28 name=__codelineno-24-28></a>*.swp
-</span><span id=__span-24-29><a id=__codelineno-24-29 name=__codelineno-24-29></a>*.swo
-</span></code></pre></div></td></tr></table></div> <h3 id=git_8>Git图形化工具推荐<a class=headerlink href=#git_8 title="Permanent link">&para;</a></h3> <p><strong>初学者推荐：</strong> - <strong>GitHub Desktop</strong> - 界面简洁，与GitHub完美集成 - <strong>SourceTree</strong> - 功能全面，免费使用 - <strong>GitKraken</strong> - 界面美观，跨平台支持</p> <p><strong>高级用户推荐：</strong> - 命令行 + VS Code Git扩展 - Git自带的gitk和git-gui工具 - 各种IDE内置的Git功能</p> <hr> <h2 id=git_9>📊 团队协作：Git工作流最佳实践<a class=headerlink href=#git_9 title="Permanent link">&para;</a></h2> <h3 id=_17>三种常见的工作流模式<a class=headerlink href=#_17 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
+    style H fill:#ff9800</code></pre> <h3 id=_8>分支操作完整示例<a class=headerlink href=#_8 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-14-1><span class=c1># 1. 查看所有分支（刚开始只有main分支）</span>
+</span><span id=__span-14-2>git<span class=w> </span>branch
+</span><span id=__span-14-3><span class=c1># 输出：* main  （*表示当前所在分支）</span>
+</span><span id=__span-14-4>
+</span><span id=__span-14-5><span class=c1># 2. 创建新分支</span>
+</span><span id=__span-14-6>git<span class=w> </span>branch<span class=w> </span>feature-user-login
+</span><span id=__span-14-7>
+</span><span id=__span-14-8><span class=c1># 3. 切换到新分支</span>
+</span><span id=__span-14-9>git<span class=w> </span>checkout<span class=w> </span>feature-user-login
+</span><span id=__span-14-10><span class=c1># 或者使用更简单的命令：git switch feature-user-login</span>
+</span><span id=__span-14-11>
+</span><span id=__span-14-12><span class=c1># 4. 一步完成创建并切换（推荐）</span>
+</span><span id=__span-14-13>git<span class=w> </span>checkout<span class=w> </span>-b<span class=w> </span>feature-user-profile
+</span><span id=__span-14-14>
+</span><span id=__span-14-15><span class=c1># 5. 在新分支上开发</span>
+</span><span id=__span-14-16><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;用户个人资料页面&quot;</span><span class=w> </span>&gt;<span class=w> </span>profile.html
+</span><span id=__span-14-17>git<span class=w> </span>add<span class=w> </span>profile.html
+</span><span id=__span-14-18>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;feat: 添加用户个人资料页面&quot;</span>
+</span><span id=__span-14-19>
+</span><span id=__span-14-20><span class=c1># 6. 切换回main分支</span>
+</span><span id=__span-14-21>git<span class=w> </span>checkout<span class=w> </span>main
+</span><span id=__span-14-22>
+</span><span id=__span-14-23><span class=c1># 7. 合并功能分支</span>
+</span><span id=__span-14-24>git<span class=w> </span>merge<span class=w> </span>feature-user-login
+</span><span id=__span-14-25>
+</span><span id=__span-14-26><span class=c1># 8. 删除已合并的分支（保持整洁）</span>
+</span><span id=__span-14-27>git<span class=w> </span>branch<span class=w> </span>-d<span class=w> </span>feature-user-login
+</span></code></pre></div> <h3 id=_9>分支管理最佳实践<a class=headerlink href=#_9 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-15-1><span class=c1># 正确的分支工作流程</span>
+</span><span id=__span-15-2>
+</span><span id=__span-15-3><span class=c1># 1. 确保在main分支开始</span>
+</span><span id=__span-15-4>git<span class=w> </span>checkout<span class=w> </span>main
+</span><span id=__span-15-5>
+</span><span id=__span-15-6><span class=c1># 2. 拉取最新代码（团队协作时很重要）</span>
+</span><span id=__span-15-7>git<span class=w> </span>pull<span class=w> </span>origin<span class=w> </span>main
+</span><span id=__span-15-8>
+</span><span id=__span-15-9><span class=c1># 3. 为每个功能创建独立分支</span>
+</span><span id=__span-15-10>git<span class=w> </span>checkout<span class=w> </span>-b<span class=w> </span>feature-payment-integration
+</span><span id=__span-15-11>
+</span><span id=__span-15-12><span class=c1># 4. 在功能分支上专心开发</span>
+</span><span id=__span-15-13><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;支付接口代码&quot;</span><span class=w> </span>&gt;<span class=w> </span>payment.py
+</span><span id=__span-15-14>git<span class=w> </span>add<span class=w> </span>payment.py
+</span><span id=__span-15-15>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;feat: 集成支付宝支付接口&quot;</span>
+</span><span id=__span-15-16>
+</span><span id=__span-15-17><span class=c1># 5. 完成开发后合并回main</span>
+</span><span id=__span-15-18>git<span class=w> </span>checkout<span class=w> </span>main
+</span><span id=__span-15-19>git<span class=w> </span>merge<span class=w> </span>feature-payment-integration
+</span><span id=__span-15-20>
+</span><span id=__span-15-21><span class=c1># 6. 删除已合并的功能分支</span>
+</span><span id=__span-15-22>git<span class=w> </span>branch<span class=w> </span>-d<span class=w> </span>feature-payment-integration
+</span></code></pre></div> <hr> <h2 id=github_1>🌐 GitHub入门：连接远程仓库<a class=headerlink href=#github_1 title="Permanent link">&para;</a></h2> <p>GitHub是Git的远程托管平台，让你的代码： - 有安全的云端备份 - 可以与他人协作开发 - 参与开源项目贡献 - 展示个人技术能力</p> <h3 id=github_2>第一步：创建GitHub账户<a class=headerlink href=#github_2 title="Permanent link">&para;</a></h3> <ol> <li>访问 https://github.com</li> <li>点击"Sign up"注册账户</li> <li>验证邮箱完成注册</li> <li>完善个人资料</li> </ol> <h3 id=ssh>第二步：创建SSH密钥（安全连接）<a class=headerlink href=#ssh title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-16-1><span class=c1># 生成SSH密钥对</span>
+</span><span id=__span-16-2>ssh-keygen<span class=w> </span>-t<span class=w> </span>ed25519<span class=w> </span>-C<span class=w> </span><span class=s2>&quot;your_email@example.com&quot;</span>
+</span><span id=__span-16-3>
+</span><span id=__span-16-4><span class=c1># 一路按回车使用默认设置</span>
+</span><span id=__span-16-5><span class=c1># 生成的密钥在：~/.ssh/id_ed25519（私钥）和 ~/.ssh/id_ed25519.pub（公钥）</span>
+</span><span id=__span-16-6>
+</span><span id=__span-16-7><span class=c1># 查看公钥内容</span>
+</span><span id=__span-16-8>cat<span class=w> </span>~/.ssh/id_ed25519.pub
+</span><span id=__span-16-9><span class=c1># 复制全部内容（从ssh-ed25519开始到邮箱结束）</span>
+</span></code></pre></div> <p><strong>在GitHub添加SSH密钥：</strong> 1. 登录GitHub，点击右上角头像 → Settings 2. 左侧菜单选择"SSH and GPG keys" 3. 点击"New SSH key" 4. 标题随便写（如：My Laptop） 5. 粘贴刚才复制的公钥内容 6. 点击"Add SSH key"</p> <h3 id=_10>第三步：配置远程仓库<a class=headerlink href=#_10 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-17-1><span class=c1># 查看当前远程仓库配置</span>
+</span><span id=__span-17-2>git<span class=w> </span>remote<span class=w> </span>-v
+</span><span id=__span-17-3><span class=c1># 初始状态：没有配置任何远程仓库</span>
+</span><span id=__span-17-4>
+</span><span id=__span-17-5><span class=c1># 添加远程仓库（替换为你的仓库地址）</span>
+</span><span id=__span-17-6>git<span class=w> </span>remote<span class=w> </span>add<span class=w> </span>origin<span class=w> </span>git@github.com:你的用户名/你的仓库名.git
+</span><span id=__span-17-7>
+</span><span id=__span-17-8><span class=c1># 再次查看确认</span>
+</span><span id=__span-17-9>git<span class=w> </span>remote<span class=w> </span>-v
+</span><span id=__span-17-10><span class=c1># 正确输出：</span>
+</span><span id=__span-17-11><span class=c1># origin  git@github.com:你的用户名/你的仓库名.git (fetch)</span>
+</span><span id=__span-17-12><span class=c1># origin  git@github.com:你的用户名/你的仓库名.git (push)</span>
+</span></code></pre></div> <h3 id=github_3>第四步：推送到GitHub<a class=headerlink href=#github_3 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-18-1><span class=c1># 第一次推送（设置上游分支）</span>
+</span><span id=__span-18-2>git<span class=w> </span>push<span class=w> </span>-u<span class=w> </span>origin<span class=w> </span>main
+</span><span id=__span-18-3><span class=c1># -u 参数表示设置上游分支，以后只需要git push即可</span>
+</span><span id=__span-18-4>
+</span><span id=__span-18-5><span class=c1># 后续推送（简单多了）</span>
+</span><span id=__span-18-6>git<span class=w> </span>push
+</span><span id=__span-18-7>
+</span><span id=__span-18-8><span class=c1># 推送其他分支</span>
+</span><span id=__span-18-9>git<span class=w> </span>push<span class=w> </span>origin<span class=w> </span>feature-branch-name
+</span><span id=__span-18-10>
+</span><span id=__span-18-11><span class=c1># 拉取远程更新</span>
+</span><span id=__span-18-12>git<span class=w> </span>pull<span class=w> </span>origin<span class=w> </span>main
+</span></code></pre></div> <h3 id=_11>常见推送问题解决<a class=headerlink href=#_11 title="Permanent link">&para;</a></h3> <p><strong>问题：权限被拒绝 (Permission denied)</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-19-1><span class=c1># ❌ 错误信息</span>
+</span><span id=__span-19-2>fatal:<span class=w> </span>unable<span class=w> </span>to<span class=w> </span>access<span class=w> </span><span class=s1>&#39;https://github.com/...&#39;</span>:<span class=w> </span>The<span class=w> </span>requested<span class=w> </span>URL<span class=w> </span>returned<span class=w> </span>error:<span class=w> </span><span class=m>403</span>
+</span><span id=__span-19-3>
+</span><span id=__span-19-4><span class=c1># ✅ 解决方案</span>
+</span><span id=__span-19-5><span class=c1># 1. 检查远程地址是否正确：git remote -v</span>
+</span><span id=__span-19-6><span class=c1># 2. 使用SSH方式（推荐）：git remote set-url origin git@github.com:username/repo.git</span>
+</span><span id=__span-19-7><span class=c1># 3. 或者使用个人访问令牌</span>
+</span></code></pre></div></p> <hr> <h2 id=_12>🔄 高级技巧：解决冲突和撤销操作<a class=headerlink href=#_12 title="Permanent link">&para;</a></h2> <h3 id=_13>处理合并冲突（团队协作必会技能）<a class=headerlink href=#_13 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-20-1><span class=c1># 当两个人修改了同一文件时会发生冲突</span>
+</span><span id=__span-20-2>git<span class=w> </span>merge<span class=w> </span>feature-branch
+</span><span id=__span-20-3><span class=c1># 输出：Auto-merging file.txt</span>
+</span><span id=__span-20-4><span class=c1># CONFLICT (content): Merge conflict in file.txt</span>
+</span><span id=__span-20-5><span class=c1># Automatic merge failed; fix conflicts and then commit the result.</span>
+</span><span id=__span-20-6>
+</span><span id=__span-20-7><span class=c1># 查看冲突文件内容</span>
+</span><span id=__span-20-8>cat<span class=w> </span>file.txt
+</span><span id=__span-20-9><span class=c1># 显示冲突标记：</span>
+</span><span id=__span-20-10><span class=c1># &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+</span><span id=__span-20-11><span class=c1># 当前分支的内容（你的修改）</span>
+</span><span id=__span-20-12><span class=c1># =======</span>
+</span><span id=__span-20-13><span class=c1># 要合并的分支的内容（别人的修改）  </span>
+</span><span id=__span-20-14><span class=c1># &gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-branch</span>
+</span><span id=__span-20-15>
+</span><span id=__span-20-16><span class=c1># 手动解决冲突：选择保留哪些内容，删除冲突标记</span>
+</span><span id=__span-20-17><span class=c1># 然后标记冲突已解决</span>
+</span><span id=__span-20-18>git<span class=w> </span>add<span class=w> </span>file.txt
+</span><span id=__span-20-19>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;解决与feature-branch的合并冲突&quot;</span>
+</span></code></pre></div> <h3 id=_14>撤销操作的多种方式<a class=headerlink href=#_14 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-21-1><span class=c1># 1. 撤销工作区的修改（慎用！不可恢复）</span>
+</span><span id=__span-21-2>git<span class=w> </span>checkout<span class=w> </span>--<span class=w> </span>filename.txt
+</span><span id=__span-21-3>
+</span><span id=__span-21-4><span class=c1># 2. 撤销暂存区的修改（放回工作区）</span>
+</span><span id=__span-21-5>git<span class=w> </span>reset<span class=w> </span>HEAD<span class=w> </span>filename.txt
+</span><span id=__span-21-6>
+</span><span id=__span-21-7><span class=c1># 3. 撤销最近一次提交（保留修改在工作区）</span>
+</span><span id=__span-21-8>git<span class=w> </span>reset<span class=w> </span>--soft<span class=w> </span>HEAD~1
+</span><span id=__span-21-9>
+</span><span id=__span-21-10><span class=c1># 4. 完全撤销最近一次提交（丢弃所有修改）</span>
+</span><span id=__span-21-11>git<span class=w> </span>reset<span class=w> </span>--hard<span class=w> </span>HEAD~1
+</span><span id=__span-21-12>
+</span><span id=__span-21-13><span class=c1># 5. 安全撤销：创建新的撤销提交（推荐）</span>
+</span><span id=__span-21-14>git<span class=w> </span>revert<span class=w> </span>HEAD
+</span></code></pre></div> <h3 id=_15>误操作挽回技巧<a class=headerlink href=#_15 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-22-1><span class=c1># 如果不小心删除了重要文件或提交</span>
+</span><span id=__span-22-2>git<span class=w> </span>reflog<span class=w>  </span><span class=c1># 查看所有操作记录</span>
+</span><span id=__span-22-3><span class=c1># 找到误删的提交哈希值，如：abc1234</span>
+</span><span id=__span-22-4>
+</span><span id=__span-22-5>git<span class=w> </span>checkout<span class=w> </span>abc1234<span class=w>  </span><span class=c1># 切换到那个提交</span>
+</span><span id=__span-22-6><span class=c1># 或者创建新分支保存：git branch recovery-branch abc1234</span>
+</span></code></pre></div> <hr> <h2 id=git_7>💡 效率提升：Git实用技巧大全<a class=headerlink href=#git_7 title="Permanent link">&para;</a></h2> <h3 id=_16>配置命令别名（大幅提升效率）<a class=headerlink href=#_16 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-23-1><span class=c1># 编辑Git全局配置</span>
+</span><span id=__span-23-2>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>alias.st<span class=w> </span>status
+</span><span id=__span-23-3>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>alias.ci<span class=w> </span>commit<span class=w>  </span>
+</span><span id=__span-23-4>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>alias.co<span class=w> </span>checkout
+</span><span id=__span-23-5>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>alias.br<span class=w> </span>branch
+</span><span id=__span-23-6>
+</span><span id=__span-23-7><span class=c1># 现在可以使用简写命令</span>
+</span><span id=__span-23-8>git<span class=w> </span>st<span class=w>    </span><span class=c1># 相当于 git status</span>
+</span><span id=__span-23-9>git<span class=w> </span>ci<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;message&quot;</span><span class=w>  </span><span class=c1># 相当于 git commit -m &quot;message&quot;</span>
+</span><span id=__span-23-10>
+</span><span id=__span-23-11><span class=c1># 更高级的别名</span>
+</span><span id=__span-23-12>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>alias.lg<span class=w> </span><span class=s2>&quot;log --oneline --graph --decorate&quot;</span>
+</span><span id=__span-23-13>git<span class=w> </span>config<span class=w> </span>--global<span class=w> </span>alias.unstage<span class=w> </span><span class=s2>&quot;reset HEAD --&quot;</span>
+</span></code></pre></div> <h3 id=gitignore>创建.gitignore文件（忽略不需要版本控制的文件）<a class=headerlink href=#gitignore title="Permanent link">&para;</a></h3> <p>在项目根目录创建<code>.gitignore</code>文件：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-24-1># 编译输出文件
+</span><span id=__span-24-2>*.class
+</span><span id=__span-24-3>*.exe
+</span><span id=__span-24-4>*.dll
+</span><span id=__span-24-5>*.so
+</span><span id=__span-24-6>*.dylib
+</span><span id=__span-24-7>
+</span><span id=__span-24-8># 日志文件
+</span><span id=__span-24-9>*.log
+</span><span id=__span-24-10>logs/
+</span><span id=__span-24-11>
+</span><span id=__span-24-12># 依赖目录（不要提交第三方库）
+</span><span id=__span-24-13>node_modules/
+</span><span id=__span-24-14>vendor/
+</span><span id=__span-24-15>
+</span><span id=__span-24-16># 环境配置文件（包含敏感信息）
+</span><span id=__span-24-17>.env
+</span><span id=__span-24-18>config.ini
+</span><span id=__span-24-19>*.key
+</span><span id=__span-24-20>
+</span><span id=__span-24-21># 系统文件
+</span><span id=__span-24-22>.DS_Store
+</span><span id=__span-24-23>Thumbs.db
+</span><span id=__span-24-24>
+</span><span id=__span-24-25># IDE配置文件
+</span><span id=__span-24-26>.vscode/
+</span><span id=__span-24-27>.idea/
+</span><span id=__span-24-28>*.swp
+</span><span id=__span-24-29>*.swo
+</span></code></pre></div> <h3 id=git_8>Git图形化工具推荐<a class=headerlink href=#git_8 title="Permanent link">&para;</a></h3> <p><strong>初学者推荐：</strong> - <strong>GitHub Desktop</strong> - 界面简洁，与GitHub完美集成 - <strong>SourceTree</strong> - 功能全面，免费使用 - <strong>GitKraken</strong> - 界面美观，跨平台支持</p> <p><strong>高级用户推荐：</strong> - 命令行 + VS Code Git扩展 - Git自带的gitk和git-gui工具 - 各种IDE内置的Git功能</p> <hr> <h2 id=git_9>📊 团队协作：Git工作流最佳实践<a class=headerlink href=#git_9 title="Permanent link">&para;</a></h2> <h3 id=_17>三种常见的工作流模式<a class=headerlink href=#_17 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
     A[Git Flow] --&gt; A1[功能分支 feat/*]
     A --&gt; A2[发布分支 release/*]
     A --&gt; A3[热修复分支 hotfix/*]
@@ -584,99 +328,55 @@
 
     style A fill:#e1f5fe
     style B fill:#c8e6c9
-    style C fill:#fff3e0</code></pre> <h3 id=github-flow>GitHub Flow（适合大多数团队）<a class=headerlink href=#github-flow title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-25-1> 1</a></span>
-<span class=normal><a href=#__codelineno-25-2> 2</a></span>
-<span class=normal><a href=#__codelineno-25-3> 3</a></span>
-<span class=normal><a href=#__codelineno-25-4> 4</a></span>
-<span class=normal><a href=#__codelineno-25-5> 5</a></span>
-<span class=normal><a href=#__codelineno-25-6> 6</a></span>
-<span class=normal><a href=#__codelineno-25-7> 7</a></span>
-<span class=normal><a href=#__codelineno-25-8> 8</a></span>
-<span class=normal><a href=#__codelineno-25-9> 9</a></span>
-<span class=normal><a href=#__codelineno-25-10>10</a></span>
-<span class=normal><a href=#__codelineno-25-11>11</a></span>
-<span class=normal><a href=#__codelineno-25-12>12</a></span>
-<span class=normal><a href=#__codelineno-25-13>13</a></span>
-<span class=normal><a href=#__codelineno-25-14>14</a></span>
-<span class=normal><a href=#__codelineno-25-15>15</a></span>
-<span class=normal><a href=#__codelineno-25-16>16</a></span>
-<span class=normal><a href=#__codelineno-25-17>17</a></span>
-<span class=normal><a href=#__codelineno-25-18>18</a></span>
-<span class=normal><a href=#__codelineno-25-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-25-1><a id=__codelineno-25-1 name=__codelineno-25-1></a><span class=c1># 1. 确保main分支是最新的</span>
-</span><span id=__span-25-2><a id=__codelineno-25-2 name=__codelineno-25-2></a>git<span class=w> </span>checkout<span class=w> </span>main
-</span><span id=__span-25-3><a id=__codelineno-25-3 name=__codelineno-25-3></a>git<span class=w> </span>pull<span class=w> </span>origin<span class=w> </span>main
-</span><span id=__span-25-4><a id=__codelineno-25-4 name=__codelineno-25-4></a>
-</span><span id=__span-25-5><a id=__codelineno-25-5 name=__codelineno-25-5></a><span class=c1># 2. 创建功能分支</span>
-</span><span id=__span-25-6><a id=__codelineno-25-6 name=__codelineno-25-6></a>git<span class=w> </span>checkout<span class=w> </span>-b<span class=w> </span>feature-awesome-feature
-</span><span id=__span-25-7><a id=__codelineno-25-7 name=__codelineno-25-7></a>
-</span><span id=__span-25-8><a id=__codelineno-25-8 name=__codelineno-25-8></a><span class=c1># 3. 开发并提交代码</span>
-</span><span id=__span-25-9><a id=__codelineno-25-9 name=__codelineno-25-9></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;实现酷炫功能&quot;</span><span class=w> </span>&gt;<span class=w> </span>awesome.py
-</span><span id=__span-25-10><a id=__codelineno-25-10 name=__codelineno-25-10></a>git<span class=w> </span>add<span class=w> </span>awesome.py
-</span><span id=__span-25-11><a id=__codelineno-25-11 name=__codelineno-25-11></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;feat: 实现酷炫新功能&quot;</span>
-</span><span id=__span-25-12><a id=__codelineno-25-12 name=__codelineno-25-12></a>
-</span><span id=__span-25-13><a id=__codelineno-25-13 name=__codelineno-25-13></a><span class=c1># 4. 推送到远程</span>
-</span><span id=__span-25-14><a id=__codelineno-25-14 name=__codelineno-25-14></a>git<span class=w> </span>push<span class=w> </span>origin<span class=w> </span>feature-awesome-feature
-</span><span id=__span-25-15><a id=__codelineno-25-15 name=__codelineno-25-15></a>
-</span><span id=__span-25-16><a id=__codelineno-25-16 name=__codelineno-25-16></a><span class=c1># 5. 在GitHub网站创建Pull Request</span>
-</span><span id=__span-25-17><a id=__codelineno-25-17 name=__codelineno-25-17></a><span class=c1># 6. 团队成员代码审查和讨论</span>
-</span><span id=__span-25-18><a id=__codelineno-25-18 name=__codelineno-25-18></a><span class=c1># 7. 通过后合并到main分支</span>
-</span><span id=__span-25-19><a id=__codelineno-25-19 name=__codelineno-25-19></a><span class=c1># 8. 删除已合并的功能分支</span>
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=_18>🚨 常见问题快速解决方案<a class=headerlink href=#_18 title="Permanent link">&para;</a></h2> <h3 id=1_1>问题1：提交了错误的内容<a class=headerlink href=#1_1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-26-1>1</a></span>
-<span class=normal><a href=#__codelineno-26-2>2</a></span>
-<span class=normal><a href=#__codelineno-26-3>3</a></span>
-<span class=normal><a href=#__codelineno-26-4>4</a></span>
-<span class=normal><a href=#__codelineno-26-5>5</a></span>
-<span class=normal><a href=#__codelineno-26-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-26-1><a id=__codelineno-26-1 name=__codelineno-26-1></a><span class=c1># 修改最后一次提交</span>
-</span><span id=__span-26-2><a id=__codelineno-26-2 name=__codelineno-26-2></a>git<span class=w> </span>add<span class=w> </span>corrected-file.txt
-</span><span id=__span-26-3><a id=__codelineno-26-3 name=__codelineno-26-3></a>git<span class=w> </span>commit<span class=w> </span>--amend<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;正确的提交信息&quot;</span>
-</span><span id=__span-26-4><a id=__codelineno-26-4 name=__codelineno-26-4></a>
-</span><span id=__span-26-5><a id=__codelineno-26-5 name=__codelineno-26-5></a><span class=c1># 注意：如果已经推送到远程，需要使用强制推送（慎用！）</span>
-</span><span id=__span-26-6><a id=__codelineno-26-6 name=__codelineno-26-6></a>git<span class=w> </span>push<span class=w> </span>--force-with-lease<span class=w> </span>origin<span class=w> </span>main
-</span></code></pre></div></td></tr></table></div> <h3 id=2_1>问题2：拆分一个大提交<a class=headerlink href=#2_1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-27-1> 1</a></span>
-<span class=normal><a href=#__codelineno-27-2> 2</a></span>
-<span class=normal><a href=#__codelineno-27-3> 3</a></span>
-<span class=normal><a href=#__codelineno-27-4> 4</a></span>
-<span class=normal><a href=#__codelineno-27-5> 5</a></span>
-<span class=normal><a href=#__codelineno-27-6> 6</a></span>
-<span class=normal><a href=#__codelineno-27-7> 7</a></span>
-<span class=normal><a href=#__codelineno-27-8> 8</a></span>
-<span class=normal><a href=#__codelineno-27-9> 9</a></span>
-<span class=normal><a href=#__codelineno-27-10>10</a></span>
-<span class=normal><a href=#__codelineno-27-11>11</a></span>
-<span class=normal><a href=#__codelineno-27-12>12</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-27-1><a id=__codelineno-27-1 name=__codelineno-27-1></a><span class=c1># 交互式重置（保留修改在工作区）</span>
-</span><span id=__span-27-2><a id=__codelineno-27-2 name=__codelineno-27-2></a>git<span class=w> </span>reset<span class=w> </span>--soft<span class=w> </span>HEAD~3
-</span><span id=__span-27-3><a id=__codelineno-27-3 name=__codelineno-27-3></a>
-</span><span id=__span-27-4><a id=__codelineno-27-4 name=__codelineno-27-4></a><span class=c1># 然后分多次提交</span>
-</span><span id=__span-27-5><a id=__codelineno-27-5 name=__codelineno-27-5></a>git<span class=w> </span>add<span class=w> </span>file1.txt
-</span><span id=__span-27-6><a id=__codelineno-27-6 name=__codelineno-27-6></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;功能A：实现基础框架&quot;</span>
-</span><span id=__span-27-7><a id=__codelineno-27-7 name=__codelineno-27-7></a>
-</span><span id=__span-27-8><a id=__codelineno-27-8 name=__codelineno-27-8></a>git<span class=w> </span>add<span class=w> </span>file2.txt<span class=w>  </span>
-</span><span id=__span-27-9><a id=__codelineno-27-9 name=__codelineno-27-9></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;功能A：添加业务逻辑&quot;</span>
-</span><span id=__span-27-10><a id=__codelineno-27-10 name=__codelineno-27-10></a>
-</span><span id=__span-27-11><a id=__codelineno-27-11 name=__codelineno-27-11></a>git<span class=w> </span>add<span class=w> </span>file3.txt
-</span><span id=__span-27-12><a id=__codelineno-27-12 name=__codelineno-27-12></a>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;功能A：完善测试用例&quot;</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=3>问题3：临时保存工作进度<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-28-1> 1</a></span>
-<span class=normal><a href=#__codelineno-28-2> 2</a></span>
-<span class=normal><a href=#__codelineno-28-3> 3</a></span>
-<span class=normal><a href=#__codelineno-28-4> 4</a></span>
-<span class=normal><a href=#__codelineno-28-5> 5</a></span>
-<span class=normal><a href=#__codelineno-28-6> 6</a></span>
-<span class=normal><a href=#__codelineno-28-7> 7</a></span>
-<span class=normal><a href=#__codelineno-28-8> 8</a></span>
-<span class=normal><a href=#__codelineno-28-9> 9</a></span>
-<span class=normal><a href=#__codelineno-28-10>10</a></span>
-<span class=normal><a href=#__codelineno-28-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-28-1><a id=__codelineno-28-1 name=__codelineno-28-1></a><span class=c1># 保存当前工作进度（适用于临时切换任务）</span>
-</span><span id=__span-28-2><a id=__codelineno-28-2 name=__codelineno-28-2></a>git<span class=w> </span>stash
-</span><span id=__span-28-3><a id=__codelineno-28-3 name=__codelineno-28-3></a>
-</span><span id=__span-28-4><a id=__codelineno-28-4 name=__codelineno-28-4></a><span class=c1># 查看保存的进度列表</span>
-</span><span id=__span-28-5><a id=__codelineno-28-5 name=__codelineno-28-5></a>git<span class=w> </span>stash<span class=w> </span>list
-</span><span id=__span-28-6><a id=__codelineno-28-6 name=__codelineno-28-6></a>
-</span><span id=__span-28-7><a id=__codelineno-28-7 name=__codelineno-28-7></a><span class=c1># 恢复最近保存的进度（并删除stash）</span>
-</span><span id=__span-28-8><a id=__codelineno-28-8 name=__codelineno-28-8></a>git<span class=w> </span>stash<span class=w> </span>pop
-</span><span id=__span-28-9><a id=__codelineno-28-9 name=__codelineno-28-9></a>
-</span><span id=__span-28-10><a id=__codelineno-28-10 name=__codelineno-28-10></a><span class=c1># 应用特定进度（不删除stash）</span>
-</span><span id=__span-28-11><a id=__codelineno-28-11 name=__codelineno-28-11></a>git<span class=w> </span>stash<span class=w> </span>apply<span class=w> </span>stash@<span class=o>{</span><span class=m>1</span><span class=o>}</span>
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=git_10>📈 Git学习路径：从新手到专家<a class=headerlink href=#git_10 title="Permanent link">&para;</a></h2> <h3 id=_19>循序渐进的学习路线图<a class=headerlink href=#_19 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
+    style C fill:#fff3e0</code></pre> <h3 id=github-flow>GitHub Flow（适合大多数团队）<a class=headerlink href=#github-flow title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-25-1><span class=c1># 1. 确保main分支是最新的</span>
+</span><span id=__span-25-2>git<span class=w> </span>checkout<span class=w> </span>main
+</span><span id=__span-25-3>git<span class=w> </span>pull<span class=w> </span>origin<span class=w> </span>main
+</span><span id=__span-25-4>
+</span><span id=__span-25-5><span class=c1># 2. 创建功能分支</span>
+</span><span id=__span-25-6>git<span class=w> </span>checkout<span class=w> </span>-b<span class=w> </span>feature-awesome-feature
+</span><span id=__span-25-7>
+</span><span id=__span-25-8><span class=c1># 3. 开发并提交代码</span>
+</span><span id=__span-25-9><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;实现酷炫功能&quot;</span><span class=w> </span>&gt;<span class=w> </span>awesome.py
+</span><span id=__span-25-10>git<span class=w> </span>add<span class=w> </span>awesome.py
+</span><span id=__span-25-11>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;feat: 实现酷炫新功能&quot;</span>
+</span><span id=__span-25-12>
+</span><span id=__span-25-13><span class=c1># 4. 推送到远程</span>
+</span><span id=__span-25-14>git<span class=w> </span>push<span class=w> </span>origin<span class=w> </span>feature-awesome-feature
+</span><span id=__span-25-15>
+</span><span id=__span-25-16><span class=c1># 5. 在GitHub网站创建Pull Request</span>
+</span><span id=__span-25-17><span class=c1># 6. 团队成员代码审查和讨论</span>
+</span><span id=__span-25-18><span class=c1># 7. 通过后合并到main分支</span>
+</span><span id=__span-25-19><span class=c1># 8. 删除已合并的功能分支</span>
+</span></code></pre></div> <hr> <h2 id=_18>🚨 常见问题快速解决方案<a class=headerlink href=#_18 title="Permanent link">&para;</a></h2> <h3 id=1_1>问题1：提交了错误的内容<a class=headerlink href=#1_1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-26-1><span class=c1># 修改最后一次提交</span>
+</span><span id=__span-26-2>git<span class=w> </span>add<span class=w> </span>corrected-file.txt
+</span><span id=__span-26-3>git<span class=w> </span>commit<span class=w> </span>--amend<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;正确的提交信息&quot;</span>
+</span><span id=__span-26-4>
+</span><span id=__span-26-5><span class=c1># 注意：如果已经推送到远程，需要使用强制推送（慎用！）</span>
+</span><span id=__span-26-6>git<span class=w> </span>push<span class=w> </span>--force-with-lease<span class=w> </span>origin<span class=w> </span>main
+</span></code></pre></div> <h3 id=2_1>问题2：拆分一个大提交<a class=headerlink href=#2_1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-27-1><span class=c1># 交互式重置（保留修改在工作区）</span>
+</span><span id=__span-27-2>git<span class=w> </span>reset<span class=w> </span>--soft<span class=w> </span>HEAD~3
+</span><span id=__span-27-3>
+</span><span id=__span-27-4><span class=c1># 然后分多次提交</span>
+</span><span id=__span-27-5>git<span class=w> </span>add<span class=w> </span>file1.txt
+</span><span id=__span-27-6>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;功能A：实现基础框架&quot;</span>
+</span><span id=__span-27-7>
+</span><span id=__span-27-8>git<span class=w> </span>add<span class=w> </span>file2.txt<span class=w>  </span>
+</span><span id=__span-27-9>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;功能A：添加业务逻辑&quot;</span>
+</span><span id=__span-27-10>
+</span><span id=__span-27-11>git<span class=w> </span>add<span class=w> </span>file3.txt
+</span><span id=__span-27-12>git<span class=w> </span>commit<span class=w> </span>-m<span class=w> </span><span class=s2>&quot;功能A：完善测试用例&quot;</span>
+</span></code></pre></div> <h3 id=3>问题3：临时保存工作进度<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-28-1><span class=c1># 保存当前工作进度（适用于临时切换任务）</span>
+</span><span id=__span-28-2>git<span class=w> </span>stash
+</span><span id=__span-28-3>
+</span><span id=__span-28-4><span class=c1># 查看保存的进度列表</span>
+</span><span id=__span-28-5>git<span class=w> </span>stash<span class=w> </span>list
+</span><span id=__span-28-6>
+</span><span id=__span-28-7><span class=c1># 恢复最近保存的进度（并删除stash）</span>
+</span><span id=__span-28-8>git<span class=w> </span>stash<span class=w> </span>pop
+</span><span id=__span-28-9>
+</span><span id=__span-28-10><span class=c1># 应用特定进度（不删除stash）</span>
+</span><span id=__span-28-11>git<span class=w> </span>stash<span class=w> </span>apply<span class=w> </span>stash@<span class=o>{</span><span class=m>1</span><span class=o>}</span>
+</span></code></pre></div> <hr> <h2 id=git_10>📈 Git学习路径：从新手到专家<a class=headerlink href=#git_10 title="Permanent link">&para;</a></h2> <h3 id=_19>循序渐进的学习路线图<a class=headerlink href=#_19 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
     A[🎯 Git基础入门] --&gt; B[🌿 分支管理 mastery]
     B --&gt; C[🌐 远程协作精通]
     C --&gt; D[🔄 冲突解决专家]

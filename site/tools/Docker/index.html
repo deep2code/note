@@ -8,98 +8,54 @@
     E --&gt; H[快速部署]
 
     style A fill:#ffcdd2
-    style E fill:#c8e6c9</code></pre> <p><strong>核心优势</strong>： - ✅ <strong>环境一致性</strong> - 开发、测试、生产环境完全一致 - ✅ <strong>快速部署</strong> - 秒级启动，毫秒级停止 - ✅ <strong>资源隔离</strong> - 每个容器都是独立的沙箱 - ✅ <strong>易于扩展</strong> - 轻松实现水平扩展 - ✅ <strong>版本控制</strong> - 镜像版本化管理</p> <h2 id=docker_3>🔧 环境准备：Docker安装（避开第一个坑）<a class=headerlink href=#docker_3 title="Permanent link">&para;</a></h2> <h3 id=_1>不同系统的安装方式<a class=headerlink href=#_1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1> 1</a></span>
-<span class=normal><a href=#__codelineno-0-2> 2</a></span>
-<span class=normal><a href=#__codelineno-0-3> 3</a></span>
-<span class=normal><a href=#__codelineno-0-4> 4</a></span>
-<span class=normal><a href=#__codelineno-0-5> 5</a></span>
-<span class=normal><a href=#__codelineno-0-6> 6</a></span>
-<span class=normal><a href=#__codelineno-0-7> 7</a></span>
-<span class=normal><a href=#__codelineno-0-8> 8</a></span>
-<span class=normal><a href=#__codelineno-0-9> 9</a></span>
-<span class=normal><a href=#__codelineno-0-10>10</a></span>
-<span class=normal><a href=#__codelineno-0-11>11</a></span>
-<span class=normal><a href=#__codelineno-0-12>12</a></span>
-<span class=normal><a href=#__codelineno-0-13>13</a></span>
-<span class=normal><a href=#__codelineno-0-14>14</a></span>
-<span class=normal><a href=#__codelineno-0-15>15</a></span>
-<span class=normal><a href=#__codelineno-0-16>16</a></span>
-<span class=normal><a href=#__codelineno-0-17>17</a></span>
-<span class=normal><a href=#__codelineno-0-18>18</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=c1># macOS - 最简单的方式</span>
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a><span class=c1># 安装Docker Desktop，双击安装包即可</span>
-</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a><span class=c1># 或者使用Homebrew</span>
-</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a>brew<span class=w> </span>install<span class=w> </span>--cask<span class=w> </span>docker
-</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a>
-</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a><span class=c1># Windows - Windows 10/11 专业版</span>
-</span><span id=__span-0-7><a id=__codelineno-0-7 name=__codelineno-0-7></a><span class=c1># 下载Docker Desktop安装包</span>
-</span><span id=__span-0-8><a id=__codelineno-0-8 name=__codelineno-0-8></a><span class=c1># 或者使用WSL2</span>
-</span><span id=__span-0-9><a id=__codelineno-0-9 name=__codelineno-0-9></a>
-</span><span id=__span-0-10><a id=__codelineno-0-10 name=__codelineno-0-10></a><span class=c1># Linux (Ubuntu为例)</span>
-</span><span id=__span-0-11><a id=__codelineno-0-11 name=__codelineno-0-11></a>sudo<span class=w> </span>apt<span class=w> </span>update
-</span><span id=__span-0-12><a id=__codelineno-0-12 name=__codelineno-0-12></a>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>docker.io
-</span><span id=__span-0-13><a id=__codelineno-0-13 name=__codelineno-0-13></a>sudo<span class=w> </span>systemctl<span class=w> </span>start<span class=w> </span>docker
-</span><span id=__span-0-14><a id=__codelineno-0-14 name=__codelineno-0-14></a>sudo<span class=w> </span>systemctl<span class=w> </span><span class=nb>enable</span><span class=w> </span>docker
-</span><span id=__span-0-15><a id=__codelineno-0-15 name=__codelineno-0-15></a>
-</span><span id=__span-0-16><a id=__codelineno-0-16 name=__codelineno-0-16></a><span class=c1># 验证安装是否成功</span>
-</span><span id=__span-0-17><a id=__codelineno-0-17 name=__codelineno-0-17></a>docker<span class=w> </span>--version
-</span><span id=__span-0-18><a id=__codelineno-0-18 name=__codelineno-0-18></a><span class=c1># 应该输出: Docker version 20.10.x, build xxxxx</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=1docker>常见错误1：安装后docker命令找不到<a class=headerlink href=#1docker title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1> 1</a></span>
-<span class=normal><a href=#__codelineno-1-2> 2</a></span>
-<span class=normal><a href=#__codelineno-1-3> 3</a></span>
-<span class=normal><a href=#__codelineno-1-4> 4</a></span>
-<span class=normal><a href=#__codelineno-1-5> 5</a></span>
-<span class=normal><a href=#__codelineno-1-6> 6</a></span>
-<span class=normal><a href=#__codelineno-1-7> 7</a></span>
-<span class=normal><a href=#__codelineno-1-8> 8</a></span>
-<span class=normal><a href=#__codelineno-1-9> 9</a></span>
-<span class=normal><a href=#__codelineno-1-10>10</a></span>
-<span class=normal><a href=#__codelineno-1-11>11</a></span>
-<span class=normal><a href=#__codelineno-1-12>12</a></span>
-<span class=normal><a href=#__codelineno-1-13>13</a></span>
-<span class=normal><a href=#__codelineno-1-14>14</a></span>
-<span class=normal><a href=#__codelineno-1-15>15</a></span>
-<span class=normal><a href=#__codelineno-1-16>16</a></span>
-<span class=normal><a href=#__codelineno-1-17>17</a></span>
-<span class=normal><a href=#__codelineno-1-18>18</a></span>
-<span class=normal><a href=#__codelineno-1-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=c1># ❌ 错误：安装后无法执行docker命令</span>
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a>$<span class=w> </span>docker<span class=w> </span>--version
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>-bash:<span class=w> </span>docker:<span class=w> </span><span class=nb>command</span><span class=w> </span>not<span class=w> </span>found
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a>
-</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a><span class=c1># ➡️ 解决方法1：检查Docker服务是否启动</span>
-</span><span id=__span-1-6><a id=__codelineno-1-6 name=__codelineno-1-6></a><span class=c1># macOS/Linux</span>
-</span><span id=__span-1-7><a id=__codelineno-1-7 name=__codelineno-1-7></a>ps<span class=w> </span>aux<span class=w> </span><span class=p>|</span><span class=w> </span>grep<span class=w> </span>docker
-</span><span id=__span-1-8><a id=__codelineno-1-8 name=__codelineno-1-8></a><span class=c1># Windows 检查Docker Desktop是否运行</span>
-</span><span id=__span-1-9><a id=__codelineno-1-9 name=__codelineno-1-9></a>
-</span><span id=__span-1-10><a id=__codelineno-1-10 name=__codelineno-1-10></a><span class=c1># ➡️ 解决方法2：重启Docker服务</span>
-</span><span id=__span-1-11><a id=__codelineno-1-11 name=__codelineno-1-11></a><span class=c1># Linux</span>
-</span><span id=__span-1-12><a id=__codelineno-1-12 name=__codelineno-1-12></a>sudo<span class=w> </span>systemctl<span class=w> </span>restart<span class=w> </span>docker
-</span><span id=__span-1-13><a id=__codelineno-1-13 name=__codelineno-1-13></a>
-</span><span id=__span-1-14><a id=__codelineno-1-14 name=__codelineno-1-14></a><span class=c1># ➡️ 解决方法3：重新加载shell配置</span>
-</span><span id=__span-1-15><a id=__codelineno-1-15 name=__codelineno-1-15></a><span class=nb>source</span><span class=w> </span>~/.bashrc<span class=w>  </span><span class=c1># 或 ~/.zshrc</span>
-</span><span id=__span-1-16><a id=__codelineno-1-16 name=__codelineno-1-16></a>
-</span><span id=__span-1-17><a id=__codelineno-1-17 name=__codelineno-1-17></a><span class=c1># ✅ 正确安装后的验证</span>
-</span><span id=__span-1-18><a id=__codelineno-1-18 name=__codelineno-1-18></a>docker<span class=w> </span>--version
-</span><span id=__span-1-19><a id=__codelineno-1-19 name=__codelineno-1-19></a>docker<span class=w> </span>run<span class=w> </span>hello-world<span class=w>  </span><span class=c1># 运行测试容器</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=2linux>常见错误2：权限问题（Linux环境）<a class=headerlink href=#2linux title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1> 1</a></span>
-<span class=normal><a href=#__codelineno-2-2> 2</a></span>
-<span class=normal><a href=#__codelineno-2-3> 3</a></span>
-<span class=normal><a href=#__codelineno-2-4> 4</a></span>
-<span class=normal><a href=#__codelineno-2-5> 5</a></span>
-<span class=normal><a href=#__codelineno-2-6> 6</a></span>
-<span class=normal><a href=#__codelineno-2-7> 7</a></span>
-<span class=normal><a href=#__codelineno-2-8> 8</a></span>
-<span class=normal><a href=#__codelineno-2-9> 9</a></span>
-<span class=normal><a href=#__codelineno-2-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=c1># ❌ 错误：权限拒绝</span>
-</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a>docker:<span class=w> </span>permission<span class=w> </span>denied<span class=w> </span><span class=k>while</span><span class=w> </span>trying<span class=w> </span>to<span class=w> </span>connect<span class=w> </span>to<span class=w> </span>the<span class=w> </span>Docker<span class=w> </span>daemon<span class=w> </span>socket
-</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a>
-</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a><span class=c1># ✅ 解决方法：将用户添加到docker组</span>
-</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a>sudo<span class=w> </span>usermod<span class=w> </span>-aG<span class=w> </span>docker<span class=w> </span><span class=nv>$USER</span>
-</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6></a><span class=c1># 重新登录或执行以下命令生效</span>
-</span><span id=__span-2-7><a id=__codelineno-2-7 name=__codelineno-2-7></a>newgrp<span class=w> </span>docker
-</span><span id=__span-2-8><a id=__codelineno-2-8 name=__codelineno-2-8></a>
-</span><span id=__span-2-9><a id=__codelineno-2-9 name=__codelineno-2-9></a><span class=c1># 验证权限</span>
-</span><span id=__span-2-10><a id=__codelineno-2-10 name=__codelineno-2-10></a>docker<span class=w> </span>run<span class=w> </span>hello-world<span class=w>  </span><span class=c1># 应该能正常运行</span>
-</span></code></pre></div></td></tr></table></div> <h2 id=docker3>🐳 Docker核心概念：3分钟搞懂<a class=headerlink href=#docker3 title="Permanent link">&para;</a></h2> <h3 id=docker_4>Docker架构图<a class=headerlink href=#docker_4 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
+    style E fill:#c8e6c9</code></pre> <p><strong>核心优势</strong>： - ✅ <strong>环境一致性</strong> - 开发、测试、生产环境完全一致 - ✅ <strong>快速部署</strong> - 秒级启动，毫秒级停止 - ✅ <strong>资源隔离</strong> - 每个容器都是独立的沙箱 - ✅ <strong>易于扩展</strong> - 轻松实现水平扩展 - ✅ <strong>版本控制</strong> - 镜像版本化管理</p> <h2 id=docker_3>🔧 环境准备：Docker安装（避开第一个坑）<a class=headerlink href=#docker_3 title="Permanent link">&para;</a></h2> <h3 id=_1>不同系统的安装方式<a class=headerlink href=#_1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-0-1><span class=c1># macOS - 最简单的方式</span>
+</span><span id=__span-0-2><span class=c1># 安装Docker Desktop，双击安装包即可</span>
+</span><span id=__span-0-3><span class=c1># 或者使用Homebrew</span>
+</span><span id=__span-0-4>brew<span class=w> </span>install<span class=w> </span>--cask<span class=w> </span>docker
+</span><span id=__span-0-5>
+</span><span id=__span-0-6><span class=c1># Windows - Windows 10/11 专业版</span>
+</span><span id=__span-0-7><span class=c1># 下载Docker Desktop安装包</span>
+</span><span id=__span-0-8><span class=c1># 或者使用WSL2</span>
+</span><span id=__span-0-9>
+</span><span id=__span-0-10><span class=c1># Linux (Ubuntu为例)</span>
+</span><span id=__span-0-11>sudo<span class=w> </span>apt<span class=w> </span>update
+</span><span id=__span-0-12>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>docker.io
+</span><span id=__span-0-13>sudo<span class=w> </span>systemctl<span class=w> </span>start<span class=w> </span>docker
+</span><span id=__span-0-14>sudo<span class=w> </span>systemctl<span class=w> </span><span class=nb>enable</span><span class=w> </span>docker
+</span><span id=__span-0-15>
+</span><span id=__span-0-16><span class=c1># 验证安装是否成功</span>
+</span><span id=__span-0-17>docker<span class=w> </span>--version
+</span><span id=__span-0-18><span class=c1># 应该输出: Docker version 20.10.x, build xxxxx</span>
+</span></code></pre></div> <h3 id=1docker>常见错误1：安装后docker命令找不到<a class=headerlink href=#1docker title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-1-1><span class=c1># ❌ 错误：安装后无法执行docker命令</span>
+</span><span id=__span-1-2>$<span class=w> </span>docker<span class=w> </span>--version
+</span><span id=__span-1-3>-bash:<span class=w> </span>docker:<span class=w> </span><span class=nb>command</span><span class=w> </span>not<span class=w> </span>found
+</span><span id=__span-1-4>
+</span><span id=__span-1-5><span class=c1># ➡️ 解决方法1：检查Docker服务是否启动</span>
+</span><span id=__span-1-6><span class=c1># macOS/Linux</span>
+</span><span id=__span-1-7>ps<span class=w> </span>aux<span class=w> </span><span class=p>|</span><span class=w> </span>grep<span class=w> </span>docker
+</span><span id=__span-1-8><span class=c1># Windows 检查Docker Desktop是否运行</span>
+</span><span id=__span-1-9>
+</span><span id=__span-1-10><span class=c1># ➡️ 解决方法2：重启Docker服务</span>
+</span><span id=__span-1-11><span class=c1># Linux</span>
+</span><span id=__span-1-12>sudo<span class=w> </span>systemctl<span class=w> </span>restart<span class=w> </span>docker
+</span><span id=__span-1-13>
+</span><span id=__span-1-14><span class=c1># ➡️ 解决方法3：重新加载shell配置</span>
+</span><span id=__span-1-15><span class=nb>source</span><span class=w> </span>~/.bashrc<span class=w>  </span><span class=c1># 或 ~/.zshrc</span>
+</span><span id=__span-1-16>
+</span><span id=__span-1-17><span class=c1># ✅ 正确安装后的验证</span>
+</span><span id=__span-1-18>docker<span class=w> </span>--version
+</span><span id=__span-1-19>docker<span class=w> </span>run<span class=w> </span>hello-world<span class=w>  </span><span class=c1># 运行测试容器</span>
+</span></code></pre></div> <h3 id=2linux>常见错误2：权限问题（Linux环境）<a class=headerlink href=#2linux title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-2-1><span class=c1># ❌ 错误：权限拒绝</span>
+</span><span id=__span-2-2>docker:<span class=w> </span>permission<span class=w> </span>denied<span class=w> </span><span class=k>while</span><span class=w> </span>trying<span class=w> </span>to<span class=w> </span>connect<span class=w> </span>to<span class=w> </span>the<span class=w> </span>Docker<span class=w> </span>daemon<span class=w> </span>socket
+</span><span id=__span-2-3>
+</span><span id=__span-2-4><span class=c1># ✅ 解决方法：将用户添加到docker组</span>
+</span><span id=__span-2-5>sudo<span class=w> </span>usermod<span class=w> </span>-aG<span class=w> </span>docker<span class=w> </span><span class=nv>$USER</span>
+</span><span id=__span-2-6><span class=c1># 重新登录或执行以下命令生效</span>
+</span><span id=__span-2-7>newgrp<span class=w> </span>docker
+</span><span id=__span-2-8>
+</span><span id=__span-2-9><span class=c1># 验证权限</span>
+</span><span id=__span-2-10>docker<span class=w> </span>run<span class=w> </span>hello-world<span class=w>  </span><span class=c1># 应该能正常运行</span>
+</span></code></pre></div> <h2 id=docker3>🐳 Docker核心概念：3分钟搞懂<a class=headerlink href=#docker3 title="Permanent link">&para;</a></h2> <h3 id=docker_4>Docker架构图<a class=headerlink href=#docker_4 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
     A[Docker客户端] --&gt; B[Docker守护进程]
     B --&gt; C[容器]
     B --&gt; D[镜像仓库]
@@ -117,220 +73,118 @@
     style B fill:#c8e6c9
     style C fill:#fff3e0
     style D fill:#fce4ec
-    style E fill:#f3e5f5</code></pre> <h3 id=_2>核心概念解释<a class=headerlink href=#_2 title="Permanent link">&para;</a></h3> <p><strong>1. 镜像（Image）</strong> - 就像软件的"安装包" - 只读的模板，包含运行应用所需的一切 - 可以从Docker Hub下载，也可以自己构建</p> <p><strong>2. 容器（Container）</strong> - 镜像的运行实例 - 轻量级的虚拟机（但不是虚拟机） - 每个容器都是独立隔离的环境</p> <p><strong>3. 仓库（Registry）</strong> - 镜像的存储中心 - Docker Hub是最大的公共仓库 - 也可以搭建私有仓库</p> <h2 id=dockerhello-world>🚀 第一个Docker容器：Hello World！<a class=headerlink href=#dockerhello-world title="Permanent link">&para;</a></h2> <h3 id=_3>最简单的起点<a class=headerlink href=#_3 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1>1</a></span>
-<span class=normal><a href=#__codelineno-3-2>2</a></span>
-<span class=normal><a href=#__codelineno-3-3>3</a></span>
-<span class=normal><a href=#__codelineno-3-4>4</a></span>
-<span class=normal><a href=#__codelineno-3-5>5</a></span>
-<span class=normal><a href=#__codelineno-3-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=c1># 运行你的第一个容器！</span>
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>docker<span class=w> </span>run<span class=w> </span>hello-world
-</span><span id=__span-3-3><a id=__codelineno-3-3 name=__codelineno-3-3></a>
-</span><span id=__span-3-4><a id=__codelineno-3-4 name=__codelineno-3-4></a><span class=c1># 输出示例：</span>
-</span><span id=__span-3-5><a id=__codelineno-3-5 name=__codelineno-3-5></a><span class=c1># Hello from Docker!</span>
-</span><span id=__span-3-6><a id=__codelineno-3-6 name=__codelineno-3-6></a><span class=c1># This message shows that your installation appears to be working correctly.</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=_4>查看运行中的容器<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1> 1</a></span>
-<span class=normal><a href=#__codelineno-4-2> 2</a></span>
-<span class=normal><a href=#__codelineno-4-3> 3</a></span>
-<span class=normal><a href=#__codelineno-4-4> 4</a></span>
-<span class=normal><a href=#__codelineno-4-5> 5</a></span>
-<span class=normal><a href=#__codelineno-4-6> 6</a></span>
-<span class=normal><a href=#__codelineno-4-7> 7</a></span>
-<span class=normal><a href=#__codelineno-4-8> 8</a></span>
-<span class=normal><a href=#__codelineno-4-9> 9</a></span>
-<span class=normal><a href=#__codelineno-4-10>10</a></span>
-<span class=normal><a href=#__codelineno-4-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a><span class=c1># 查看正在运行的容器</span>
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a>docker<span class=w> </span>ps
-</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a>
-</span><span id=__span-4-4><a id=__codelineno-4-4 name=__codelineno-4-4></a><span class=c1># 查看所有容器（包括已停止的）</span>
-</span><span id=__span-4-5><a id=__codelineno-4-5 name=__codelineno-4-5></a>docker<span class=w> </span>ps<span class=w> </span>-a
-</span><span id=__span-4-6><a id=__codelineno-4-6 name=__codelineno-4-6></a>
-</span><span id=__span-4-7><a id=__codelineno-4-7 name=__codelineno-4-7></a><span class=c1># 查看容器详细信息</span>
-</span><span id=__span-4-8><a id=__codelineno-4-8 name=__codelineno-4-8></a>docker<span class=w> </span>inspect<span class=w> </span>&lt;容器ID&gt;
-</span><span id=__span-4-9><a id=__codelineno-4-9 name=__codelineno-4-9></a>
-</span><span id=__span-4-10><a id=__codelineno-4-10 name=__codelineno-4-10></a><span class=c1># 查看容器日志</span>
-</span><span id=__span-4-11><a id=__codelineno-4-11 name=__codelineno-4-11></a>docker<span class=w> </span>logs<span class=w> </span>&lt;容器ID&gt;
-</span></code></pre></div></td></tr></table></div> <h3 id=3>常见错误3：镜像下载失败<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1> 1</a></span>
-<span class=normal><a href=#__codelineno-5-2> 2</a></span>
-<span class=normal><a href=#__codelineno-5-3> 3</a></span>
-<span class=normal><a href=#__codelineno-5-4> 4</a></span>
-<span class=normal><a href=#__codelineno-5-5> 5</a></span>
-<span class=normal><a href=#__codelineno-5-6> 6</a></span>
-<span class=normal><a href=#__codelineno-5-7> 7</a></span>
-<span class=normal><a href=#__codelineno-5-8> 8</a></span>
-<span class=normal><a href=#__codelineno-5-9> 9</a></span>
-<span class=normal><a href=#__codelineno-5-10>10</a></span>
-<span class=normal><a href=#__codelineno-5-11>11</a></span>
-<span class=normal><a href=#__codelineno-5-12>12</a></span>
-<span class=normal><a href=#__codelineno-5-13>13</a></span>
-<span class=normal><a href=#__codelineno-5-14>14</a></span>
-<span class=normal><a href=#__codelineno-5-15>15</a></span>
-<span class=normal><a href=#__codelineno-5-16>16</a></span>
-<span class=normal><a href=#__codelineno-5-17>17</a></span>
-<span class=normal><a href=#__codelineno-5-18>18</a></span>
-<span class=normal><a href=#__codelineno-5-19>19</a></span>
-<span class=normal><a href=#__codelineno-5-20>20</a></span>
-<span class=normal><a href=#__codelineno-5-21>21</a></span>
-<span class=normal><a href=#__codelineno-5-22>22</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=c1># ❌ 错误：网络问题导致镜像下载失败</span>
-</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a>docker<span class=w> </span>run<span class=w> </span>hello-world
-</span><span id=__span-5-3><a id=__codelineno-5-3 name=__codelineno-5-3></a>Unable<span class=w> </span>to<span class=w> </span>find<span class=w> </span>image<span class=w> </span><span class=s1>&#39;hello-world:latest&#39;</span><span class=w> </span>locally
-</span><span id=__span-5-4><a id=__codelineno-5-4 name=__codelineno-5-4></a>docker:<span class=w> </span>Error<span class=w> </span>response<span class=w> </span>from<span class=w> </span>daemon:<span class=w> </span>Get<span class=w> </span><span class=s2>&quot;https://registry-1.docker.io/v2/&quot;</span>:<span class=w> </span>net/http:<span class=w> </span>request<span class=w> </span>canceled<span class=w> </span><span class=k>while</span><span class=w> </span>waiting<span class=w> </span><span class=k>for</span><span class=w> </span>connection<span class=w> </span><span class=o>(</span>Client.Timeout<span class=w> </span>exceeded<span class=w> </span><span class=k>while</span><span class=w> </span>awaiting<span class=w> </span>headers<span class=o>)</span>.
-</span><span id=__span-5-5><a id=__codelineno-5-5 name=__codelineno-5-5></a>
-</span><span id=__span-5-6><a id=__codelineno-5-6 name=__codelineno-5-6></a><span class=c1># ✅ 解决方法1：配置镜像加速器（国内网络推荐）</span>
-</span><span id=__span-5-7><a id=__codelineno-5-7 name=__codelineno-5-7></a><span class=c1># 创建或编辑 /etc/docker/daemon.json</span>
-</span><span id=__span-5-8><a id=__codelineno-5-8 name=__codelineno-5-8></a>sudo<span class=w> </span>tee<span class=w> </span>/etc/docker/daemon.json<span class=w> </span><span class=s>&lt;&lt;-&#39;EOF&#39;</span>
-</span><span id=__span-5-9><a id=__codelineno-5-9 name=__codelineno-5-9></a><span class=s>{</span>
-</span><span id=__span-5-10><a id=__codelineno-5-10 name=__codelineno-5-10></a><span class=s>  &quot;registry-mirrors&quot;: [</span>
-</span><span id=__span-5-11><a id=__codelineno-5-11 name=__codelineno-5-11></a><span class=s>    &quot;https://docker.mirrors.ustc.edu.cn&quot;,</span>
-</span><span id=__span-5-12><a id=__codelineno-5-12 name=__codelineno-5-12></a><span class=s>    &quot;https://hub-mirror.c.163.com&quot;</span>
-</span><span id=__span-5-13><a id=__codelineno-5-13 name=__codelineno-5-13></a><span class=s>  ]</span>
-</span><span id=__span-5-14><a id=__codelineno-5-14 name=__codelineno-5-14></a><span class=s>}</span>
-</span><span id=__span-5-15><a id=__codelineno-5-15 name=__codelineno-5-15></a><span class=s>EOF</span>
-</span><span id=__span-5-16><a id=__codelineno-5-16 name=__codelineno-5-16></a>
-</span><span id=__span-5-17><a id=__codelineno-5-17 name=__codelineno-5-17></a><span class=c1># 重启Docker服务</span>
-</span><span id=__span-5-18><a id=__codelineno-5-18 name=__codelineno-5-18></a>sudo<span class=w> </span>systemctl<span class=w> </span>restart<span class=w> </span>docker
-</span><span id=__span-5-19><a id=__codelineno-5-19 name=__codelineno-5-19></a>
-</span><span id=__span-5-20><a id=__codelineno-5-20 name=__codelineno-5-20></a><span class=c1># ✅ 解决方法2：手动拉取镜像</span>
-</span><span id=__span-5-21><a id=__codelineno-5-21 name=__codelineno-5-21></a>docker<span class=w> </span>pull<span class=w> </span>hello-world
-</span><span id=__span-5-22><a id=__codelineno-5-22 name=__codelineno-5-22></a>docker<span class=w> </span>run<span class=w> </span>hello-world
-</span></code></pre></div></td></tr></table></div> <h2 id=dockerfile>📦 构建自己的镜像：Dockerfile实战<a class=headerlink href=#dockerfile title="Permanent link">&para;</a></h2> <h3 id=nodejs>创建一个简单的Node.js应用<a class=headerlink href=#nodejs title="Permanent link">&para;</a></h3> <p><strong>项目结构：</strong> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span>
-<span class=normal><a href=#__codelineno-6-2>2</a></span>
-<span class=normal><a href=#__codelineno-6-3>3</a></span>
-<span class=normal><a href=#__codelineno-6-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a>my-app/
-</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a>├── Dockerfile          # Docker构建文件
-</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a>├── package.json        # Node.js依赖配置
-</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a>└── app.js              # 应用代码
-</span></code></pre></div></td></tr></table></div></p> <p><strong>app.js内容：</strong> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1> 1</a></span>
-<span class=normal><a href=#__codelineno-7-2> 2</a></span>
-<span class=normal><a href=#__codelineno-7-3> 3</a></span>
-<span class=normal><a href=#__codelineno-7-4> 4</a></span>
-<span class=normal><a href=#__codelineno-7-5> 5</a></span>
-<span class=normal><a href=#__codelineno-7-6> 6</a></span>
-<span class=normal><a href=#__codelineno-7-7> 7</a></span>
-<span class=normal><a href=#__codelineno-7-8> 8</a></span>
-<span class=normal><a href=#__codelineno-7-9> 9</a></span>
-<span class=normal><a href=#__codelineno-7-10>10</a></span>
-<span class=normal><a href=#__codelineno-7-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=kd>const</span><span class=w> </span><span class=nx>http</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s1>&#39;http&#39;</span><span class=p>);</span>
-</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a>
-</span><span id=__span-7-3><a id=__codelineno-7-3 name=__codelineno-7-3></a><span class=kd>const</span><span class=w> </span><span class=nx>server</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>http</span><span class=p>.</span><span class=nx>createServer</span><span class=p>((</span><span class=nx>req</span><span class=p>,</span><span class=w> </span><span class=nx>res</span><span class=p>)</span><span class=w> </span><span class=p>=&gt;</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-7-4><a id=__codelineno-7-4 name=__codelineno-7-4></a><span class=w>  </span><span class=nx>res</span><span class=p>.</span><span class=nx>writeHead</span><span class=p>(</span><span class=mf>200</span><span class=p>,</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s1>&#39;Content-Type&#39;</span><span class=o>:</span><span class=w> </span><span class=s1>&#39;text/plain&#39;</span><span class=w> </span><span class=p>});</span>
-</span><span id=__span-7-5><a id=__codelineno-7-5 name=__codelineno-7-5></a><span class=w>  </span><span class=nx>res</span><span class=p>.</span><span class=nx>end</span><span class=p>(</span><span class=s1>&#39;Hello from Docker! 🐳\n&#39;</span><span class=p>);</span>
-</span><span id=__span-7-6><a id=__codelineno-7-6 name=__codelineno-7-6></a><span class=p>});</span>
-</span><span id=__span-7-7><a id=__codelineno-7-7 name=__codelineno-7-7></a>
-</span><span id=__span-7-8><a id=__codelineno-7-8 name=__codelineno-7-8></a><span class=kd>const</span><span class=w> </span><span class=nx>port</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mf>3000</span><span class=p>;</span>
-</span><span id=__span-7-9><a id=__codelineno-7-9 name=__codelineno-7-9></a><span class=nx>server</span><span class=p>.</span><span class=nx>listen</span><span class=p>(</span><span class=nx>port</span><span class=p>,</span><span class=w> </span><span class=p>()</span><span class=w> </span><span class=p>=&gt;</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-7-10><a id=__codelineno-7-10 name=__codelineno-7-10></a><span class=w>  </span><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=sb>`Server running at http://localhost:</span><span class=si>${</span><span class=nx>port</span><span class=si>}</span><span class=sb>/`</span><span class=p>);</span>
-</span><span id=__span-7-11><a id=__codelineno-7-11 name=__codelineno-7-11></a><span class=p>});</span>
-</span></code></pre></div></td></tr></table></div></p> <p><strong>package.json内容：</strong> <div class="language-json highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1> 1</a></span>
-<span class=normal><a href=#__codelineno-8-2> 2</a></span>
-<span class=normal><a href=#__codelineno-8-3> 3</a></span>
-<span class=normal><a href=#__codelineno-8-4> 4</a></span>
-<span class=normal><a href=#__codelineno-8-5> 5</a></span>
-<span class=normal><a href=#__codelineno-8-6> 6</a></span>
-<span class=normal><a href=#__codelineno-8-7> 7</a></span>
-<span class=normal><a href=#__codelineno-8-8> 8</a></span>
-<span class=normal><a href=#__codelineno-8-9> 9</a></span>
-<span class=normal><a href=#__codelineno-8-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a><span class=p>{</span>
-</span><span id=__span-8-2><a id=__codelineno-8-2 name=__codelineno-8-2></a><span class=w>  </span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;my-docker-app&quot;</span><span class=p>,</span>
-</span><span id=__span-8-3><a id=__codelineno-8-3 name=__codelineno-8-3></a><span class=w>  </span><span class=nt>&quot;version&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;1.0.0&quot;</span><span class=p>,</span>
-</span><span id=__span-8-4><a id=__codelineno-8-4 name=__codelineno-8-4></a><span class=w>  </span><span class=nt>&quot;description&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;A simple Node.js Docker app&quot;</span><span class=p>,</span>
-</span><span id=__span-8-5><a id=__codelineno-8-5 name=__codelineno-8-5></a><span class=w>  </span><span class=nt>&quot;main&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;app.js&quot;</span><span class=p>,</span>
-</span><span id=__span-8-6><a id=__codelineno-8-6 name=__codelineno-8-6></a><span class=w>  </span><span class=nt>&quot;scripts&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-8-7><a id=__codelineno-8-7 name=__codelineno-8-7></a><span class=w>    </span><span class=nt>&quot;start&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;node app.js&quot;</span>
-</span><span id=__span-8-8><a id=__codelineno-8-8 name=__codelineno-8-8></a><span class=w>  </span><span class=p>},</span>
-</span><span id=__span-8-9><a id=__codelineno-8-9 name=__codelineno-8-9></a><span class=w>  </span><span class=nt>&quot;dependencies&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{}</span>
-</span><span id=__span-8-10><a id=__codelineno-8-10 name=__codelineno-8-10></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div></p> <h3 id=dockerfile_1>编写Dockerfile<a class=headerlink href=#dockerfile_1 title="Permanent link">&para;</a></h3> <div class="language-dockerfile highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1> 1</a></span>
-<span class=normal><a href=#__codelineno-9-2> 2</a></span>
-<span class=normal><a href=#__codelineno-9-3> 3</a></span>
-<span class=normal><a href=#__codelineno-9-4> 4</a></span>
-<span class=normal><a href=#__codelineno-9-5> 5</a></span>
-<span class=normal><a href=#__codelineno-9-6> 6</a></span>
-<span class=normal><a href=#__codelineno-9-7> 7</a></span>
-<span class=normal><a href=#__codelineno-9-8> 8</a></span>
-<span class=normal><a href=#__codelineno-9-9> 9</a></span>
-<span class=normal><a href=#__codelineno-9-10>10</a></span>
-<span class=normal><a href=#__codelineno-9-11>11</a></span>
-<span class=normal><a href=#__codelineno-9-12>12</a></span>
-<span class=normal><a href=#__codelineno-9-13>13</a></span>
-<span class=normal><a href=#__codelineno-9-14>14</a></span>
-<span class=normal><a href=#__codelineno-9-15>15</a></span>
-<span class=normal><a href=#__codelineno-9-16>16</a></span>
-<span class=normal><a href=#__codelineno-9-17>17</a></span>
-<span class=normal><a href=#__codelineno-9-18>18</a></span>
-<span class=normal><a href=#__codelineno-9-19>19</a></span>
-<span class=normal><a href=#__codelineno-9-20>20</a></span>
-<span class=normal><a href=#__codelineno-9-21>21</a></span>
-<span class=normal><a href=#__codelineno-9-22>22</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a><span class=c># Dockerfile - 构建你的第一个镜像</span>
-</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a>
-</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a><span class=c># 第1步：选择基础镜像</span>
-</span><span id=__span-9-4><a id=__codelineno-9-4 name=__codelineno-9-4></a><span class=k>FROM</span><span class=w> </span><span class=s>node:16-alpine</span>
-</span><span id=__span-9-5><a id=__codelineno-9-5 name=__codelineno-9-5></a>
-</span><span id=__span-9-6><a id=__codelineno-9-6 name=__codelineno-9-6></a><span class=c># 第2步：设置工作目录</span>
-</span><span id=__span-9-7><a id=__codelineno-9-7 name=__codelineno-9-7></a><span class=k>WORKDIR</span><span class=w> </span><span class=s>/app</span>
-</span><span id=__span-9-8><a id=__codelineno-9-8 name=__codelineno-9-8></a>
-</span><span id=__span-9-9><a id=__codelineno-9-9 name=__codelineno-9-9></a><span class=c># 第3步：复制依赖文件</span>
-</span><span id=__span-9-10><a id=__codelineno-9-10 name=__codelineno-9-10></a><span class=k>COPY</span><span class=w> </span>package*.json<span class=w> </span>./
-</span><span id=__span-9-11><a id=__codelineno-9-11 name=__codelineno-9-11></a>
-</span><span id=__span-9-12><a id=__codelineno-9-12 name=__codelineno-9-12></a><span class=c># 第4步：安装依赖</span>
-</span><span id=__span-9-13><a id=__codelineno-9-13 name=__codelineno-9-13></a><span class=k>RUN</span><span class=w> </span>npm<span class=w> </span>install
-</span><span id=__span-9-14><a id=__codelineno-9-14 name=__codelineno-9-14></a>
-</span><span id=__span-9-15><a id=__codelineno-9-15 name=__codelineno-9-15></a><span class=c># 第5步：复制应用代码</span>
-</span><span id=__span-9-16><a id=__codelineno-9-16 name=__codelineno-9-16></a><span class=k>COPY</span><span class=w> </span>.<span class=w> </span>.
-</span><span id=__span-9-17><a id=__codelineno-9-17 name=__codelineno-9-17></a>
-</span><span id=__span-9-18><a id=__codelineno-9-18 name=__codelineno-9-18></a><span class=c># 第6步：暴露端口</span>
-</span><span id=__span-9-19><a id=__codelineno-9-19 name=__codelineno-9-19></a><span class=k>EXPOSE</span><span class=w> </span><span class=s>3000</span>
-</span><span id=__span-9-20><a id=__codelineno-9-20 name=__codelineno-9-20></a>
-</span><span id=__span-9-21><a id=__codelineno-9-21 name=__codelineno-9-21></a><span class=c># 第7步：定义启动命令</span>
-</span><span id=__span-9-22><a id=__codelineno-9-22 name=__codelineno-9-22></a><span class=k>CMD</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;npm&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;start&quot;</span><span class=p>]</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=_5>构建和运行<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1> 1</a></span>
-<span class=normal><a href=#__codelineno-10-2> 2</a></span>
-<span class=normal><a href=#__codelineno-10-3> 3</a></span>
-<span class=normal><a href=#__codelineno-10-4> 4</a></span>
-<span class=normal><a href=#__codelineno-10-5> 5</a></span>
-<span class=normal><a href=#__codelineno-10-6> 6</a></span>
-<span class=normal><a href=#__codelineno-10-7> 7</a></span>
-<span class=normal><a href=#__codelineno-10-8> 8</a></span>
-<span class=normal><a href=#__codelineno-10-9> 9</a></span>
-<span class=normal><a href=#__codelineno-10-10>10</a></span>
-<span class=normal><a href=#__codelineno-10-11>11</a></span>
-<span class=normal><a href=#__codelineno-10-12>12</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a><span class=c1># 构建镜像（注意最后的点 . 表示当前目录）</span>
-</span><span id=__span-10-2><a id=__codelineno-10-2 name=__codelineno-10-2></a>docker<span class=w> </span>build<span class=w> </span>-t<span class=w> </span>my-node-app<span class=w> </span>.
-</span><span id=__span-10-3><a id=__codelineno-10-3 name=__codelineno-10-3></a>
-</span><span id=__span-10-4><a id=__codelineno-10-4 name=__codelineno-10-4></a><span class=c1># 运行容器</span>
-</span><span id=__span-10-5><a id=__codelineno-10-5 name=__codelineno-10-5></a>docker<span class=w> </span>run<span class=w> </span>-d<span class=w> </span>-p<span class=w> </span><span class=m>3000</span>:3000<span class=w> </span>--name<span class=w> </span>my-app<span class=w> </span>my-node-app
-</span><span id=__span-10-6><a id=__codelineno-10-6 name=__codelineno-10-6></a>
-</span><span id=__span-10-7><a id=__codelineno-10-7 name=__codelineno-10-7></a><span class=c1># 测试应用</span>
-</span><span id=__span-10-8><a id=__codelineno-10-8 name=__codelineno-10-8></a>curl<span class=w> </span>http://localhost:3000
-</span><span id=__span-10-9><a id=__codelineno-10-9 name=__codelineno-10-9></a><span class=c1># 输出: Hello from Docker! 🐳</span>
-</span><span id=__span-10-10><a id=__codelineno-10-10 name=__codelineno-10-10></a>
-</span><span id=__span-10-11><a id=__codelineno-10-11 name=__codelineno-10-11></a><span class=c1># 查看运行状态</span>
-</span><span id=__span-10-12><a id=__codelineno-10-12 name=__codelineno-10-12></a>docker<span class=w> </span>ps
-</span></code></pre></div></td></tr></table></div> <h3 id=4dockerfile>常见错误4：Dockerfile语法错误<a class=headerlink href=#4dockerfile title="Permanent link">&para;</a></h3> <div class="language-dockerfile highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1> 1</a></span>
-<span class=normal><a href=#__codelineno-11-2> 2</a></span>
-<span class=normal><a href=#__codelineno-11-3> 3</a></span>
-<span class=normal><a href=#__codelineno-11-4> 4</a></span>
-<span class=normal><a href=#__codelineno-11-5> 5</a></span>
-<span class=normal><a href=#__codelineno-11-6> 6</a></span>
-<span class=normal><a href=#__codelineno-11-7> 7</a></span>
-<span class=normal><a href=#__codelineno-11-8> 8</a></span>
-<span class=normal><a href=#__codelineno-11-9> 9</a></span>
-<span class=normal><a href=#__codelineno-11-10>10</a></span>
-<span class=normal><a href=#__codelineno-11-11>11</a></span>
-<span class=normal><a href=#__codelineno-11-12>12</a></span>
-<span class=normal><a href=#__codelineno-11-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a><span class=c># ❌ 错误示例：</span>
-</span><span id=__span-11-2><a id=__codelineno-11-2 name=__codelineno-11-2></a><span class=k>FROM</span><span class=w> </span><span class=s>node</span><span class=w> </span><span class=m>16</span><span class=w> </span>alpine<span class=w>      </span>#<span class=w> </span>缺少冒号
-</span><span id=__span-11-3><a id=__codelineno-11-3 name=__codelineno-11-3></a><span class=k>WORKDIR</span><span class=w> </span><span class=s>/app           </span>
-</span><span id=__span-11-4><a id=__codelineno-11-4 name=__codelineno-11-4></a><span class=k>COPY</span><span class=w> </span>package.json<span class=w>       </span>#<span class=w> </span>缺少目标路径
-</span><span id=__span-11-5><a id=__codelineno-11-5 name=__codelineno-11-5></a><span class=k>RUN</span><span class=w> </span>npm<span class=w> </span>install<span class=w>        </span>
-</span><span id=__span-11-6><a id=__codelineno-11-6 name=__codelineno-11-6></a><span class=k>CMD</span><span class=w> </span>node<span class=w> </span>app.js<span class=w>         </span>#<span class=w> </span>应该使用数组格式
-</span><span id=__span-11-7><a id=__codelineno-11-7 name=__codelineno-11-7></a>
-</span><span id=__span-11-8><a id=__codelineno-11-8 name=__codelineno-11-8></a><span class=c># ✅ 正确示例：</span>
-</span><span id=__span-11-9><a id=__codelineno-11-9 name=__codelineno-11-9></a><span class=k>FROM</span><span class=w> </span><span class=s>node:16-alpine</span>
-</span><span id=__span-11-10><a id=__codelineno-11-10 name=__codelineno-11-10></a><span class=k>WORKDIR</span><span class=w> </span><span class=s>/app</span>
-</span><span id=__span-11-11><a id=__codelineno-11-11 name=__codelineno-11-11></a><span class=k>COPY</span><span class=w> </span>package.json<span class=w> </span>./
-</span><span id=__span-11-12><a id=__codelineno-11-12 name=__codelineno-11-12></a><span class=k>RUN</span><span class=w> </span>npm<span class=w> </span>install
-</span><span id=__span-11-13><a id=__codelineno-11-13 name=__codelineno-11-13></a><span class=k>CMD</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;node&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;app.js&quot;</span><span class=p>]</span>
-</span></code></pre></div></td></tr></table></div> <p><strong>Dockerfile最佳实践：</strong> - 使用<code>.dockerignore</code>文件忽略不必要的文件 - 多阶段构建减少镜像体积 - 使用非root用户运行应用 - 定期更新基础镜像安全补丁</p> <h2 id=docker_5>🔄 Docker开发工作流<a class=headerlink href=#docker_5 title="Permanent link">&para;</a></h2> <h3 id=_6>开发到部署的完整流程<a class=headerlink href=#_6 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
+    style E fill:#f3e5f5</code></pre> <h3 id=_2>核心概念解释<a class=headerlink href=#_2 title="Permanent link">&para;</a></h3> <p><strong>1. 镜像（Image）</strong> - 就像软件的"安装包" - 只读的模板，包含运行应用所需的一切 - 可以从Docker Hub下载，也可以自己构建</p> <p><strong>2. 容器（Container）</strong> - 镜像的运行实例 - 轻量级的虚拟机（但不是虚拟机） - 每个容器都是独立隔离的环境</p> <p><strong>3. 仓库（Registry）</strong> - 镜像的存储中心 - Docker Hub是最大的公共仓库 - 也可以搭建私有仓库</p> <h2 id=dockerhello-world>🚀 第一个Docker容器：Hello World！<a class=headerlink href=#dockerhello-world title="Permanent link">&para;</a></h2> <h3 id=_3>最简单的起点<a class=headerlink href=#_3 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-3-1><span class=c1># 运行你的第一个容器！</span>
+</span><span id=__span-3-2>docker<span class=w> </span>run<span class=w> </span>hello-world
+</span><span id=__span-3-3>
+</span><span id=__span-3-4><span class=c1># 输出示例：</span>
+</span><span id=__span-3-5><span class=c1># Hello from Docker!</span>
+</span><span id=__span-3-6><span class=c1># This message shows that your installation appears to be working correctly.</span>
+</span></code></pre></div> <h3 id=_4>查看运行中的容器<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-4-1><span class=c1># 查看正在运行的容器</span>
+</span><span id=__span-4-2>docker<span class=w> </span>ps
+</span><span id=__span-4-3>
+</span><span id=__span-4-4><span class=c1># 查看所有容器（包括已停止的）</span>
+</span><span id=__span-4-5>docker<span class=w> </span>ps<span class=w> </span>-a
+</span><span id=__span-4-6>
+</span><span id=__span-4-7><span class=c1># 查看容器详细信息</span>
+</span><span id=__span-4-8>docker<span class=w> </span>inspect<span class=w> </span>&lt;容器ID&gt;
+</span><span id=__span-4-9>
+</span><span id=__span-4-10><span class=c1># 查看容器日志</span>
+</span><span id=__span-4-11>docker<span class=w> </span>logs<span class=w> </span>&lt;容器ID&gt;
+</span></code></pre></div> <h3 id=3>常见错误3：镜像下载失败<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-5-1><span class=c1># ❌ 错误：网络问题导致镜像下载失败</span>
+</span><span id=__span-5-2>docker<span class=w> </span>run<span class=w> </span>hello-world
+</span><span id=__span-5-3>Unable<span class=w> </span>to<span class=w> </span>find<span class=w> </span>image<span class=w> </span><span class=s1>&#39;hello-world:latest&#39;</span><span class=w> </span>locally
+</span><span id=__span-5-4>docker:<span class=w> </span>Error<span class=w> </span>response<span class=w> </span>from<span class=w> </span>daemon:<span class=w> </span>Get<span class=w> </span><span class=s2>&quot;https://registry-1.docker.io/v2/&quot;</span>:<span class=w> </span>net/http:<span class=w> </span>request<span class=w> </span>canceled<span class=w> </span><span class=k>while</span><span class=w> </span>waiting<span class=w> </span><span class=k>for</span><span class=w> </span>connection<span class=w> </span><span class=o>(</span>Client.Timeout<span class=w> </span>exceeded<span class=w> </span><span class=k>while</span><span class=w> </span>awaiting<span class=w> </span>headers<span class=o>)</span>.
+</span><span id=__span-5-5>
+</span><span id=__span-5-6><span class=c1># ✅ 解决方法1：配置镜像加速器（国内网络推荐）</span>
+</span><span id=__span-5-7><span class=c1># 创建或编辑 /etc/docker/daemon.json</span>
+</span><span id=__span-5-8>sudo<span class=w> </span>tee<span class=w> </span>/etc/docker/daemon.json<span class=w> </span><span class=s>&lt;&lt;-&#39;EOF&#39;</span>
+</span><span id=__span-5-9><span class=s>{</span>
+</span><span id=__span-5-10><span class=s>  &quot;registry-mirrors&quot;: [</span>
+</span><span id=__span-5-11><span class=s>    &quot;https://docker.mirrors.ustc.edu.cn&quot;,</span>
+</span><span id=__span-5-12><span class=s>    &quot;https://hub-mirror.c.163.com&quot;</span>
+</span><span id=__span-5-13><span class=s>  ]</span>
+</span><span id=__span-5-14><span class=s>}</span>
+</span><span id=__span-5-15><span class=s>EOF</span>
+</span><span id=__span-5-16>
+</span><span id=__span-5-17><span class=c1># 重启Docker服务</span>
+</span><span id=__span-5-18>sudo<span class=w> </span>systemctl<span class=w> </span>restart<span class=w> </span>docker
+</span><span id=__span-5-19>
+</span><span id=__span-5-20><span class=c1># ✅ 解决方法2：手动拉取镜像</span>
+</span><span id=__span-5-21>docker<span class=w> </span>pull<span class=w> </span>hello-world
+</span><span id=__span-5-22>docker<span class=w> </span>run<span class=w> </span>hello-world
+</span></code></pre></div> <h2 id=dockerfile>📦 构建自己的镜像：Dockerfile实战<a class=headerlink href=#dockerfile title="Permanent link">&para;</a></h2> <h3 id=nodejs>创建一个简单的Node.js应用<a class=headerlink href=#nodejs title="Permanent link">&para;</a></h3> <p><strong>项目结构：</strong> <div class="language-text highlight"><pre><span></span><code><span id=__span-6-1>my-app/
+</span><span id=__span-6-2>├── Dockerfile          # Docker构建文件
+</span><span id=__span-6-3>├── package.json        # Node.js依赖配置
+</span><span id=__span-6-4>└── app.js              # 应用代码
+</span></code></pre></div></p> <p><strong>app.js内容：</strong> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-7-1><span class=kd>const</span><span class=w> </span><span class=nx>http</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s1>&#39;http&#39;</span><span class=p>);</span>
+</span><span id=__span-7-2>
+</span><span id=__span-7-3><span class=kd>const</span><span class=w> </span><span class=nx>server</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>http</span><span class=p>.</span><span class=nx>createServer</span><span class=p>((</span><span class=nx>req</span><span class=p>,</span><span class=w> </span><span class=nx>res</span><span class=p>)</span><span class=w> </span><span class=p>=&gt;</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-7-4><span class=w>  </span><span class=nx>res</span><span class=p>.</span><span class=nx>writeHead</span><span class=p>(</span><span class=mf>200</span><span class=p>,</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s1>&#39;Content-Type&#39;</span><span class=o>:</span><span class=w> </span><span class=s1>&#39;text/plain&#39;</span><span class=w> </span><span class=p>});</span>
+</span><span id=__span-7-5><span class=w>  </span><span class=nx>res</span><span class=p>.</span><span class=nx>end</span><span class=p>(</span><span class=s1>&#39;Hello from Docker! 🐳\n&#39;</span><span class=p>);</span>
+</span><span id=__span-7-6><span class=p>});</span>
+</span><span id=__span-7-7>
+</span><span id=__span-7-8><span class=kd>const</span><span class=w> </span><span class=nx>port</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mf>3000</span><span class=p>;</span>
+</span><span id=__span-7-9><span class=nx>server</span><span class=p>.</span><span class=nx>listen</span><span class=p>(</span><span class=nx>port</span><span class=p>,</span><span class=w> </span><span class=p>()</span><span class=w> </span><span class=p>=&gt;</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-7-10><span class=w>  </span><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=sb>`Server running at http://localhost:</span><span class=si>${</span><span class=nx>port</span><span class=si>}</span><span class=sb>/`</span><span class=p>);</span>
+</span><span id=__span-7-11><span class=p>});</span>
+</span></code></pre></div></p> <p><strong>package.json内容：</strong> <div class="language-json highlight"><pre><span></span><code><span id=__span-8-1><span class=p>{</span>
+</span><span id=__span-8-2><span class=w>  </span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;my-docker-app&quot;</span><span class=p>,</span>
+</span><span id=__span-8-3><span class=w>  </span><span class=nt>&quot;version&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;1.0.0&quot;</span><span class=p>,</span>
+</span><span id=__span-8-4><span class=w>  </span><span class=nt>&quot;description&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;A simple Node.js Docker app&quot;</span><span class=p>,</span>
+</span><span id=__span-8-5><span class=w>  </span><span class=nt>&quot;main&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;app.js&quot;</span><span class=p>,</span>
+</span><span id=__span-8-6><span class=w>  </span><span class=nt>&quot;scripts&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-8-7><span class=w>    </span><span class=nt>&quot;start&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;node app.js&quot;</span>
+</span><span id=__span-8-8><span class=w>  </span><span class=p>},</span>
+</span><span id=__span-8-9><span class=w>  </span><span class=nt>&quot;dependencies&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{}</span>
+</span><span id=__span-8-10><span class=p>}</span>
+</span></code></pre></div></p> <h3 id=dockerfile_1>编写Dockerfile<a class=headerlink href=#dockerfile_1 title="Permanent link">&para;</a></h3> <div class="language-dockerfile highlight"><pre><span></span><code><span id=__span-9-1><span class=c># Dockerfile - 构建你的第一个镜像</span>
+</span><span id=__span-9-2>
+</span><span id=__span-9-3><span class=c># 第1步：选择基础镜像</span>
+</span><span id=__span-9-4><span class=k>FROM</span><span class=w> </span><span class=s>node:16-alpine</span>
+</span><span id=__span-9-5>
+</span><span id=__span-9-6><span class=c># 第2步：设置工作目录</span>
+</span><span id=__span-9-7><span class=k>WORKDIR</span><span class=w> </span><span class=s>/app</span>
+</span><span id=__span-9-8>
+</span><span id=__span-9-9><span class=c># 第3步：复制依赖文件</span>
+</span><span id=__span-9-10><span class=k>COPY</span><span class=w> </span>package*.json<span class=w> </span>./
+</span><span id=__span-9-11>
+</span><span id=__span-9-12><span class=c># 第4步：安装依赖</span>
+</span><span id=__span-9-13><span class=k>RUN</span><span class=w> </span>npm<span class=w> </span>install
+</span><span id=__span-9-14>
+</span><span id=__span-9-15><span class=c># 第5步：复制应用代码</span>
+</span><span id=__span-9-16><span class=k>COPY</span><span class=w> </span>.<span class=w> </span>.
+</span><span id=__span-9-17>
+</span><span id=__span-9-18><span class=c># 第6步：暴露端口</span>
+</span><span id=__span-9-19><span class=k>EXPOSE</span><span class=w> </span><span class=s>3000</span>
+</span><span id=__span-9-20>
+</span><span id=__span-9-21><span class=c># 第7步：定义启动命令</span>
+</span><span id=__span-9-22><span class=k>CMD</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;npm&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;start&quot;</span><span class=p>]</span>
+</span></code></pre></div> <h3 id=_5>构建和运行<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-10-1><span class=c1># 构建镜像（注意最后的点 . 表示当前目录）</span>
+</span><span id=__span-10-2>docker<span class=w> </span>build<span class=w> </span>-t<span class=w> </span>my-node-app<span class=w> </span>.
+</span><span id=__span-10-3>
+</span><span id=__span-10-4><span class=c1># 运行容器</span>
+</span><span id=__span-10-5>docker<span class=w> </span>run<span class=w> </span>-d<span class=w> </span>-p<span class=w> </span><span class=m>3000</span>:3000<span class=w> </span>--name<span class=w> </span>my-app<span class=w> </span>my-node-app
+</span><span id=__span-10-6>
+</span><span id=__span-10-7><span class=c1># 测试应用</span>
+</span><span id=__span-10-8>curl<span class=w> </span>http://localhost:3000
+</span><span id=__span-10-9><span class=c1># 输出: Hello from Docker! 🐳</span>
+</span><span id=__span-10-10>
+</span><span id=__span-10-11><span class=c1># 查看运行状态</span>
+</span><span id=__span-10-12>docker<span class=w> </span>ps
+</span></code></pre></div> <h3 id=4dockerfile>常见错误4：Dockerfile语法错误<a class=headerlink href=#4dockerfile title="Permanent link">&para;</a></h3> <div class="language-dockerfile highlight"><pre><span></span><code><span id=__span-11-1><span class=c># ❌ 错误示例：</span>
+</span><span id=__span-11-2><span class=k>FROM</span><span class=w> </span><span class=s>node</span><span class=w> </span><span class=m>16</span><span class=w> </span>alpine<span class=w>      </span>#<span class=w> </span>缺少冒号
+</span><span id=__span-11-3><span class=k>WORKDIR</span><span class=w> </span><span class=s>/app           </span>
+</span><span id=__span-11-4><span class=k>COPY</span><span class=w> </span>package.json<span class=w>       </span>#<span class=w> </span>缺少目标路径
+</span><span id=__span-11-5><span class=k>RUN</span><span class=w> </span>npm<span class=w> </span>install<span class=w>        </span>
+</span><span id=__span-11-6><span class=k>CMD</span><span class=w> </span>node<span class=w> </span>app.js<span class=w>         </span>#<span class=w> </span>应该使用数组格式
+</span><span id=__span-11-7>
+</span><span id=__span-11-8><span class=c># ✅ 正确示例：</span>
+</span><span id=__span-11-9><span class=k>FROM</span><span class=w> </span><span class=s>node:16-alpine</span>
+</span><span id=__span-11-10><span class=k>WORKDIR</span><span class=w> </span><span class=s>/app</span>
+</span><span id=__span-11-11><span class=k>COPY</span><span class=w> </span>package.json<span class=w> </span>./
+</span><span id=__span-11-12><span class=k>RUN</span><span class=w> </span>npm<span class=w> </span>install
+</span><span id=__span-11-13><span class=k>CMD</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;node&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;app.js&quot;</span><span class=p>]</span>
+</span></code></pre></div> <p><strong>Dockerfile最佳实践：</strong> - 使用<code>.dockerignore</code>文件忽略不必要的文件 - 多阶段构建减少镜像体积 - 使用非root用户运行应用 - 定期更新基础镜像安全补丁</p> <h2 id=docker_5>🔄 Docker开发工作流<a class=headerlink href=#docker_5 title="Permanent link">&para;</a></h2> <h3 id=_6>开发到部署的完整流程<a class=headerlink href=#_6 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
     A[编写代码] --&gt; B[编写Dockerfile]
     B --&gt; C[构建镜像]
     C --&gt; D[测试容器]
@@ -342,235 +196,125 @@
     style C fill:#fff3e0
     style D fill:#ffe0b2
     style E fill:#fce4ec
-    style F fill:#d1c4e9</code></pre> <h3 id=_7>实用命令大全<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1> 1</a></span>
-<span class=normal><a href=#__codelineno-12-2> 2</a></span>
-<span class=normal><a href=#__codelineno-12-3> 3</a></span>
-<span class=normal><a href=#__codelineno-12-4> 4</a></span>
-<span class=normal><a href=#__codelineno-12-5> 5</a></span>
-<span class=normal><a href=#__codelineno-12-6> 6</a></span>
-<span class=normal><a href=#__codelineno-12-7> 7</a></span>
-<span class=normal><a href=#__codelineno-12-8> 8</a></span>
-<span class=normal><a href=#__codelineno-12-9> 9</a></span>
-<span class=normal><a href=#__codelineno-12-10>10</a></span>
-<span class=normal><a href=#__codelineno-12-11>11</a></span>
-<span class=normal><a href=#__codelineno-12-12>12</a></span>
-<span class=normal><a href=#__codelineno-12-13>13</a></span>
-<span class=normal><a href=#__codelineno-12-14>14</a></span>
-<span class=normal><a href=#__codelineno-12-15>15</a></span>
-<span class=normal><a href=#__codelineno-12-16>16</a></span>
-<span class=normal><a href=#__codelineno-12-17>17</a></span>
-<span class=normal><a href=#__codelineno-12-18>18</a></span>
-<span class=normal><a href=#__codelineno-12-19>19</a></span>
-<span class=normal><a href=#__codelineno-12-20>20</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><a id=__codelineno-12-1 name=__codelineno-12-1></a><span class=c1># 镜像管理</span>
-</span><span id=__span-12-2><a id=__codelineno-12-2 name=__codelineno-12-2></a>docker<span class=w> </span>images<span class=w>                    </span><span class=c1># 查看本地镜像</span>
-</span><span id=__span-12-3><a id=__codelineno-12-3 name=__codelineno-12-3></a>docker<span class=w> </span>rmi<span class=w> </span>&lt;镜像名&gt;<span class=w>              </span><span class=c1># 删除镜像</span>
-</span><span id=__span-12-4><a id=__codelineno-12-4 name=__codelineno-12-4></a>docker<span class=w> </span>pull<span class=w> </span>&lt;镜像名&gt;<span class=w>             </span><span class=c1># 拉取镜像</span>
-</span><span id=__span-12-5><a id=__codelineno-12-5 name=__codelineno-12-5></a>docker<span class=w> </span>push<span class=w> </span>&lt;镜像名&gt;<span class=w>             </span><span class=c1># 推送镜像</span>
-</span><span id=__span-12-6><a id=__codelineno-12-6 name=__codelineno-12-6></a>
-</span><span id=__span-12-7><a id=__codelineno-12-7 name=__codelineno-12-7></a><span class=c1># 容器管理</span>
-</span><span id=__span-12-8><a id=__codelineno-12-8 name=__codelineno-12-8></a>docker<span class=w> </span>run<span class=w> </span>-d<span class=w> </span>--name<span class=w> </span>&lt;容器名&gt;<span class=w> </span>&lt;镜像&gt;<span class=w>  </span><span class=c1># 后台运行</span>
-</span><span id=__span-12-9><a id=__codelineno-12-9 name=__codelineno-12-9></a>docker<span class=w> </span>stop<span class=w> </span>&lt;容器名&gt;<span class=w>              </span><span class=c1># 停止容器</span>
-</span><span id=__span-12-10><a id=__codelineno-12-10 name=__codelineno-12-10></a>docker<span class=w> </span>start<span class=w> </span>&lt;容器名&gt;<span class=w>             </span><span class=c1># 启动容器</span>
-</span><span id=__span-12-11><a id=__codelineno-12-11 name=__codelineno-12-11></a>docker<span class=w> </span>rm<span class=w> </span>&lt;容器名&gt;<span class=w>                </span><span class=c1># 删除容器</span>
-</span><span id=__span-12-12><a id=__codelineno-12-12 name=__codelineno-12-12></a>docker<span class=w> </span><span class=nb>exec</span><span class=w> </span>-it<span class=w> </span>&lt;容器名&gt;<span class=w> </span>bash<span class=w>     </span><span class=c1># 进入容器</span>
-</span><span id=__span-12-13><a id=__codelineno-12-13 name=__codelineno-12-13></a>
-</span><span id=__span-12-14><a id=__codelineno-12-14 name=__codelineno-12-14></a><span class=c1># 网络和存储</span>
-</span><span id=__span-12-15><a id=__codelineno-12-15 name=__codelineno-12-15></a>docker<span class=w> </span>network<span class=w> </span>ls<span class=w>                </span><span class=c1># 查看网络</span>
-</span><span id=__span-12-16><a id=__codelineno-12-16 name=__codelineno-12-16></a>docker<span class=w> </span>volume<span class=w> </span>ls<span class=w>                 </span><span class=c1># 查看数据卷</span>
-</span><span id=__span-12-17><a id=__codelineno-12-17 name=__codelineno-12-17></a>
-</span><span id=__span-12-18><a id=__codelineno-12-18 name=__codelineno-12-18></a><span class=c1># 系统信息</span>
-</span><span id=__span-12-19><a id=__codelineno-12-19 name=__codelineno-12-19></a>docker<span class=w> </span>info<span class=w>                      </span><span class=c1># Docker信息</span>
-</span><span id=__span-12-20><a id=__codelineno-12-20 name=__codelineno-12-20></a>docker<span class=w> </span>stats<span class=w>                     </span><span class=c1># 资源使用统计</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=5>常见错误5：端口冲突<a class=headerlink href=#5 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1> 1</a></span>
-<span class=normal><a href=#__codelineno-13-2> 2</a></span>
-<span class=normal><a href=#__codelineno-13-3> 3</a></span>
-<span class=normal><a href=#__codelineno-13-4> 4</a></span>
-<span class=normal><a href=#__codelineno-13-5> 5</a></span>
-<span class=normal><a href=#__codelineno-13-6> 6</a></span>
-<span class=normal><a href=#__codelineno-13-7> 7</a></span>
-<span class=normal><a href=#__codelineno-13-8> 8</a></span>
-<span class=normal><a href=#__codelineno-13-9> 9</a></span>
-<span class=normal><a href=#__codelineno-13-10>10</a></span>
-<span class=normal><a href=#__codelineno-13-11>11</a></span>
-<span class=normal><a href=#__codelineno-13-12>12</a></span>
-<span class=normal><a href=#__codelineno-13-13>13</a></span>
-<span class=normal><a href=#__codelineno-13-14>14</a></span>
-<span class=normal><a href=#__codelineno-13-15>15</a></span>
-<span class=normal><a href=#__codelineno-13-16>16</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><a id=__codelineno-13-1 name=__codelineno-13-1></a><span class=c1># ❌ 错误：端口已被占用</span>
-</span><span id=__span-13-2><a id=__codelineno-13-2 name=__codelineno-13-2></a>docker<span class=w> </span>run<span class=w> </span>-p<span class=w> </span><span class=m>80</span>:80<span class=w> </span>nginx
-</span><span id=__span-13-3><a id=__codelineno-13-3 name=__codelineno-13-3></a>docker:<span class=w> </span>Error<span class=w> </span>response<span class=w> </span>from<span class=w> </span>daemon:<span class=w> </span>driver<span class=w> </span>failed<span class=w> </span>programming<span class=w> </span>external<span class=w> </span>connectivity<span class=w> </span>on<span class=w> </span>endpoint:<span class=w> </span>Bind<span class=w> </span><span class=k>for</span><span class=w> </span><span class=m>0</span>.0.0.0:80<span class=w> </span>failed:<span class=w> </span>port<span class=w> </span>is<span class=w> </span>already<span class=w> </span>allocated.
-</span><span id=__span-13-4><a id=__codelineno-13-4 name=__codelineno-13-4></a>
-</span><span id=__span-13-5><a id=__codelineno-13-5 name=__codelineno-13-5></a><span class=c1># ✅ 解决方法1：使用其他端口</span>
-</span><span id=__span-13-6><a id=__codelineno-13-6 name=__codelineno-13-6></a>docker<span class=w> </span>run<span class=w> </span>-p<span class=w> </span><span class=m>8080</span>:80<span class=w> </span>nginx
-</span><span id=__span-13-7><a id=__codelineno-13-7 name=__codelineno-13-7></a>
-</span><span id=__span-13-8><a id=__codelineno-13-8 name=__codelineno-13-8></a><span class=c1># ✅ 解决方法2：停止占用端口的容器</span>
-</span><span id=__span-13-9><a id=__codelineno-13-9 name=__codelineno-13-9></a>docker<span class=w> </span>ps<span class=w>  </span><span class=c1># 查看运行中的容器</span>
-</span><span id=__span-13-10><a id=__codelineno-13-10 name=__codelineno-13-10></a>docker<span class=w> </span>stop<span class=w> </span>&lt;容器ID&gt;<span class=w>  </span><span class=c1># 停止冲突容器</span>
-</span><span id=__span-13-11><a id=__codelineno-13-11 name=__codelineno-13-11></a>
-</span><span id=__span-13-12><a id=__codelineno-13-12 name=__codelineno-13-12></a><span class=c1># ✅ 解决方法3：检查系统进程占用</span>
-</span><span id=__span-13-13><a id=__codelineno-13-13 name=__codelineno-13-13></a><span class=c1># Linux</span>
-</span><span id=__span-13-14><a id=__codelineno-13-14 name=__codelineno-13-14></a>sudo<span class=w> </span>netstat<span class=w> </span>-tulpn<span class=w> </span><span class=p>|</span><span class=w> </span>grep<span class=w> </span>:80
-</span><span id=__span-13-15><a id=__codelineno-13-15 name=__codelineno-13-15></a><span class=c1># macOS</span>
-</span><span id=__span-13-16><a id=__codelineno-13-16 name=__codelineno-13-16></a>lsof<span class=w> </span>-i<span class=w> </span>:80
-</span></code></pre></div></td></tr></table></div> <h2 id=docker_6>💡 进阶技巧：让你的Docker更专业<a class=headerlink href=#docker_6 title="Permanent link">&para;</a></h2> <h3 id=1>1. 多阶段构建（优化镜像体积）<a class=headerlink href=#1 title="Permanent link">&para;</a></h3> <div class="language-dockerfile highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
-<span class=normal><a href=#__codelineno-14-2> 2</a></span>
-<span class=normal><a href=#__codelineno-14-3> 3</a></span>
-<span class=normal><a href=#__codelineno-14-4> 4</a></span>
-<span class=normal><a href=#__codelineno-14-5> 5</a></span>
-<span class=normal><a href=#__codelineno-14-6> 6</a></span>
-<span class=normal><a href=#__codelineno-14-7> 7</a></span>
-<span class=normal><a href=#__codelineno-14-8> 8</a></span>
-<span class=normal><a href=#__codelineno-14-9> 9</a></span>
-<span class=normal><a href=#__codelineno-14-10>10</a></span>
-<span class=normal><a href=#__codelineno-14-11>11</a></span>
-<span class=normal><a href=#__codelineno-14-12>12</a></span>
-<span class=normal><a href=#__codelineno-14-13>13</a></span>
-<span class=normal><a href=#__codelineno-14-14>14</a></span>
-<span class=normal><a href=#__codelineno-14-15>15</a></span>
-<span class=normal><a href=#__codelineno-14-16>16</a></span>
-<span class=normal><a href=#__codelineno-14-17>17</a></span>
-<span class=normal><a href=#__codelineno-14-18>18</a></span>
-<span class=normal><a href=#__codelineno-14-19>19</a></span>
-<span class=normal><a href=#__codelineno-14-20>20</a></span>
-<span class=normal><a href=#__codelineno-14-21>21</a></span>
-<span class=normal><a href=#__codelineno-14-22>22</a></span>
-<span class=normal><a href=#__codelineno-14-23>23</a></span>
-<span class=normal><a href=#__codelineno-14-24>24</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=c># 多阶段构建示例 - 显著减少镜像体积</span>
-</span><span id=__span-14-2><a id=__codelineno-14-2 name=__codelineno-14-2></a>
-</span><span id=__span-14-3><a id=__codelineno-14-3 name=__codelineno-14-3></a><span class=c># 第一阶段：构建阶段</span>
-</span><span id=__span-14-4><a id=__codelineno-14-4 name=__codelineno-14-4></a><span class=k>FROM</span><span class=w> </span><span class=s>node:16-alpine</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=s>builder</span>
-</span><span id=__span-14-5><a id=__codelineno-14-5 name=__codelineno-14-5></a><span class=k>WORKDIR</span><span class=w> </span><span class=s>/app</span>
-</span><span id=__span-14-6><a id=__codelineno-14-6 name=__codelineno-14-6></a><span class=k>COPY</span><span class=w> </span>package*.json<span class=w> </span>./
-</span><span id=__span-14-7><a id=__codelineno-14-7 name=__codelineno-14-7></a><span class=k>RUN</span><span class=w> </span>npm<span class=w> </span>ci<span class=w> </span>--only<span class=o>=</span>production
-</span><span id=__span-14-8><a id=__codelineno-14-8 name=__codelineno-14-8></a><span class=k>COPY</span><span class=w> </span>.<span class=w> </span>.
-</span><span id=__span-14-9><a id=__codelineno-14-9 name=__codelineno-14-9></a><span class=k>RUN</span><span class=w> </span>npm<span class=w> </span>run<span class=w> </span>build
-</span><span id=__span-14-10><a id=__codelineno-14-10 name=__codelineno-14-10></a>
-</span><span id=__span-14-11><a id=__codelineno-14-11 name=__codelineno-14-11></a><span class=c># 第二阶段：运行阶段</span>
-</span><span id=__span-14-12><a id=__codelineno-14-12 name=__codelineno-14-12></a><span class=k>FROM</span><span class=w> </span><span class=s>node:16-alpine</span>
-</span><span id=__span-14-13><a id=__codelineno-14-13 name=__codelineno-14-13></a><span class=k>WORKDIR</span><span class=w> </span><span class=s>/app</span>
-</span><span id=__span-14-14><a id=__codelineno-14-14 name=__codelineno-14-14></a><span class=k>COPY</span><span class=w> </span>--from<span class=o>=</span>builder<span class=w> </span>/app/dist<span class=w> </span>./dist
-</span><span id=__span-14-15><a id=__codelineno-14-15 name=__codelineno-14-15></a><span class=k>COPY</span><span class=w> </span>--from<span class=o>=</span>builder<span class=w> </span>/app/node_modules<span class=w> </span>./node_modules
-</span><span id=__span-14-16><a id=__codelineno-14-16 name=__codelineno-14-16></a><span class=k>COPY</span><span class=w> </span>package.json<span class=w> </span>./
-</span><span id=__span-14-17><a id=__codelineno-14-17 name=__codelineno-14-17></a>
-</span><span id=__span-14-18><a id=__codelineno-14-18 name=__codelineno-14-18></a><span class=c># 使用非root用户增强安全性</span>
-</span><span id=__span-14-19><a id=__codelineno-14-19 name=__codelineno-14-19></a><span class=k>RUN</span><span class=w> </span>addgroup<span class=w> </span>-g<span class=w> </span><span class=m>1001</span><span class=w> </span>-S<span class=w> </span>nodejs
-</span><span id=__span-14-20><a id=__codelineno-14-20 name=__codelineno-14-20></a><span class=k>RUN</span><span class=w> </span>adduser<span class=w> </span>-S<span class=w> </span>nextjs<span class=w> </span>-u<span class=w> </span><span class=m>1001</span>
-</span><span id=__span-14-21><a id=__codelineno-14-21 name=__codelineno-14-21></a><span class=k>USER</span><span class=w> </span><span class=s>nextjs</span>
-</span><span id=__span-14-22><a id=__codelineno-14-22 name=__codelineno-14-22></a>
-</span><span id=__span-14-23><a id=__codelineno-14-23 name=__codelineno-14-23></a><span class=k>EXPOSE</span><span class=w> </span><span class=s>3000</span>
-</span><span id=__span-14-24><a id=__codelineno-14-24 name=__codelineno-14-24></a><span class=k>CMD</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;node&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;dist/app.js&quot;</span><span class=p>]</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=2-docker-compose>2. Docker Compose（多容器应用）<a class=headerlink href=#2-docker-compose title="Permanent link">&para;</a></h3> <p><strong>docker-compose.yml：</strong> <div class="language-yaml highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
-<span class=normal><a href=#__codelineno-15-2> 2</a></span>
-<span class=normal><a href=#__codelineno-15-3> 3</a></span>
-<span class=normal><a href=#__codelineno-15-4> 4</a></span>
-<span class=normal><a href=#__codelineno-15-5> 5</a></span>
-<span class=normal><a href=#__codelineno-15-6> 6</a></span>
-<span class=normal><a href=#__codelineno-15-7> 7</a></span>
-<span class=normal><a href=#__codelineno-15-8> 8</a></span>
-<span class=normal><a href=#__codelineno-15-9> 9</a></span>
-<span class=normal><a href=#__codelineno-15-10>10</a></span>
-<span class=normal><a href=#__codelineno-15-11>11</a></span>
-<span class=normal><a href=#__codelineno-15-12>12</a></span>
-<span class=normal><a href=#__codelineno-15-13>13</a></span>
-<span class=normal><a href=#__codelineno-15-14>14</a></span>
-<span class=normal><a href=#__codelineno-15-15>15</a></span>
-<span class=normal><a href=#__codelineno-15-16>16</a></span>
-<span class=normal><a href=#__codelineno-15-17>17</a></span>
-<span class=normal><a href=#__codelineno-15-18>18</a></span>
-<span class=normal><a href=#__codelineno-15-19>19</a></span>
-<span class=normal><a href=#__codelineno-15-20>20</a></span>
-<span class=normal><a href=#__codelineno-15-21>21</a></span>
-<span class=normal><a href=#__codelineno-15-22>22</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s>&#39;3.8&#39;</span>
-</span><span id=__span-15-2><a id=__codelineno-15-2 name=__codelineno-15-2></a><span class=nt>services</span><span class=p>:</span>
-</span><span id=__span-15-3><a id=__codelineno-15-3 name=__codelineno-15-3></a><span class=w>  </span><span class=nt>web</span><span class=p>:</span>
-</span><span id=__span-15-4><a id=__codelineno-15-4 name=__codelineno-15-4></a><span class=w>    </span><span class=nt>build</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
-</span><span id=__span-15-5><a id=__codelineno-15-5 name=__codelineno-15-5></a><span class=w>    </span><span class=nt>ports</span><span class=p>:</span>
-</span><span id=__span-15-6><a id=__codelineno-15-6 name=__codelineno-15-6></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=s>&quot;3000:3000&quot;</span>
-</span><span id=__span-15-7><a id=__codelineno-15-7 name=__codelineno-15-7></a><span class=w>    </span><span class=nt>depends_on</span><span class=p>:</span>
-</span><span id=__span-15-8><a id=__codelineno-15-8 name=__codelineno-15-8></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
-</span><span id=__span-15-9><a id=__codelineno-15-9 name=__codelineno-15-9></a><span class=w>    </span><span class=nt>environment</span><span class=p>:</span>
-</span><span id=__span-15-10><a id=__codelineno-15-10 name=__codelineno-15-10></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">DATABASE_URL=postgres://user:pass@db:5432/mydb</span>
-</span><span id=__span-15-11><a id=__codelineno-15-11 name=__codelineno-15-11></a>
-</span><span id=__span-15-12><a id=__codelineno-15-12 name=__codelineno-15-12></a><span class=w>  </span><span class=nt>db</span><span class=p>:</span>
-</span><span id=__span-15-13><a id=__codelineno-15-13 name=__codelineno-15-13></a><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">postgres:13</span>
-</span><span id=__span-15-14><a id=__codelineno-15-14 name=__codelineno-15-14></a><span class=w>    </span><span class=nt>environment</span><span class=p>:</span>
-</span><span id=__span-15-15><a id=__codelineno-15-15 name=__codelineno-15-15></a><span class=w>      </span><span class=nt>POSTGRES_DB</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mydb</span>
-</span><span id=__span-15-16><a id=__codelineno-15-16 name=__codelineno-15-16></a><span class=w>      </span><span class=nt>POSTGRES_USER</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
-</span><span id=__span-15-17><a id=__codelineno-15-17 name=__codelineno-15-17></a><span class=w>      </span><span class=nt>POSTGRES_PASSWORD</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">pass</span>
-</span><span id=__span-15-18><a id=__codelineno-15-18 name=__codelineno-15-18></a><span class=w>    </span><span class=nt>volumes</span><span class=p>:</span>
-</span><span id=__span-15-19><a id=__codelineno-15-19 name=__codelineno-15-19></a><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">db_data:/var/lib/postgresql/data</span>
-</span><span id=__span-15-20><a id=__codelineno-15-20 name=__codelineno-15-20></a>
-</span><span id=__span-15-21><a id=__codelineno-15-21 name=__codelineno-15-21></a><span class=nt>volumes</span><span class=p>:</span>
-</span><span id=__span-15-22><a id=__codelineno-15-22 name=__codelineno-15-22></a><span class=w>  </span><span class=nt>db_data</span><span class=p>:</span>
-</span></code></pre></div></td></tr></table></div></p> <p><strong>使用Compose：</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1>1</a></span>
-<span class=normal><a href=#__codelineno-16-2>2</a></span>
-<span class=normal><a href=#__codelineno-16-3>3</a></span>
-<span class=normal><a href=#__codelineno-16-4>4</a></span>
-<span class=normal><a href=#__codelineno-16-5>5</a></span>
-<span class=normal><a href=#__codelineno-16-6>6</a></span>
-<span class=normal><a href=#__codelineno-16-7>7</a></span>
-<span class=normal><a href=#__codelineno-16-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><a id=__codelineno-16-1 name=__codelineno-16-1></a><span class=c1># 启动所有服务</span>
-</span><span id=__span-16-2><a id=__codelineno-16-2 name=__codelineno-16-2></a>docker-compose<span class=w> </span>up<span class=w> </span>-d
-</span><span id=__span-16-3><a id=__codelineno-16-3 name=__codelineno-16-3></a>
-</span><span id=__span-16-4><a id=__codelineno-16-4 name=__codelineno-16-4></a><span class=c1># 查看服务状态</span>
-</span><span id=__span-16-5><a id=__codelineno-16-5 name=__codelineno-16-5></a>docker-compose<span class=w> </span>ps
-</span><span id=__span-16-6><a id=__codelineno-16-6 name=__codelineno-16-6></a>
-</span><span id=__span-16-7><a id=__codelineno-16-7 name=__codelineno-16-7></a><span class=c1># 停止服务</span>
-</span><span id=__span-16-8><a id=__codelineno-16-8 name=__codelineno-16-8></a>docker-compose<span class=w> </span>down
-</span></code></pre></div></td></tr></table></div></p> <h3 id=3_1>3. 数据持久化（避免数据丢失）<a class=headerlink href=#3_1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1> 1</a></span>
-<span class=normal><a href=#__codelineno-17-2> 2</a></span>
-<span class=normal><a href=#__codelineno-17-3> 3</a></span>
-<span class=normal><a href=#__codelineno-17-4> 4</a></span>
-<span class=normal><a href=#__codelineno-17-5> 5</a></span>
-<span class=normal><a href=#__codelineno-17-6> 6</a></span>
-<span class=normal><a href=#__codelineno-17-7> 7</a></span>
-<span class=normal><a href=#__codelineno-17-8> 8</a></span>
-<span class=normal><a href=#__codelineno-17-9> 9</a></span>
-<span class=normal><a href=#__codelineno-17-10>10</a></span>
-<span class=normal><a href=#__codelineno-17-11>11</a></span>
-<span class=normal><a href=#__codelineno-17-12>12</a></span>
-<span class=normal><a href=#__codelineno-17-13>13</a></span>
-<span class=normal><a href=#__codelineno-17-14>14</a></span>
-<span class=normal><a href=#__codelineno-17-15>15</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><a id=__codelineno-17-1 name=__codelineno-17-1></a><span class=c1># 使用数据卷持久化数据</span>
-</span><span id=__span-17-2><a id=__codelineno-17-2 name=__codelineno-17-2></a>docker<span class=w> </span>volume<span class=w> </span>create<span class=w> </span>mydata
-</span><span id=__span-17-3><a id=__codelineno-17-3 name=__codelineno-17-3></a>
-</span><span id=__span-17-4><a id=__codelineno-17-4 name=__codelineno-17-4></a>docker<span class=w> </span>run<span class=w> </span>-d<span class=w> </span><span class=se>\</span>
-</span><span id=__span-17-5><a id=__codelineno-17-5 name=__codelineno-17-5></a><span class=w>  </span>--name<span class=w> </span>mysql-container<span class=w> </span><span class=se>\</span>
-</span><span id=__span-17-6><a id=__codelineno-17-6 name=__codelineno-17-6></a><span class=w>  </span>-v<span class=w> </span>mydata:/var/lib/mysql<span class=w> </span><span class=se>\</span>
-</span><span id=__span-17-7><a id=__codelineno-17-7 name=__codelineno-17-7></a><span class=w>  </span>-e<span class=w> </span><span class=nv>MYSQL_ROOT_PASSWORD</span><span class=o>=</span>secret<span class=w> </span><span class=se>\</span>
-</span><span id=__span-17-8><a id=__codelineno-17-8 name=__codelineno-17-8></a><span class=w>  </span>mysql:8.0
-</span><span id=__span-17-9><a id=__codelineno-17-9 name=__codelineno-17-9></a>
-</span><span id=__span-17-10><a id=__codelineno-17-10 name=__codelineno-17-10></a><span class=c1># 或者使用绑定挂载（开发时推荐）</span>
-</span><span id=__span-17-11><a id=__codelineno-17-11 name=__codelineno-17-11></a>docker<span class=w> </span>run<span class=w> </span>-d<span class=w> </span><span class=se>\</span>
-</span><span id=__span-17-12><a id=__codelineno-17-12 name=__codelineno-17-12></a><span class=w>  </span>--name<span class=w> </span>nginx-container<span class=w> </span><span class=se>\</span>
-</span><span id=__span-17-13><a id=__codelineno-17-13 name=__codelineno-17-13></a><span class=w>  </span>-v<span class=w> </span><span class=k>$(</span><span class=nb>pwd</span><span class=k>)</span>/html:/usr/share/nginx/html<span class=w> </span><span class=se>\</span>
-</span><span id=__span-17-14><a id=__codelineno-17-14 name=__codelineno-17-14></a><span class=w>  </span>-p<span class=w> </span><span class=m>80</span>:80<span class=w> </span><span class=se>\</span>
-</span><span id=__span-17-15><a id=__codelineno-17-15 name=__codelineno-17-15></a><span class=w>  </span>nginx
-</span></code></pre></div></td></tr></table></div> <h2 id=_8>🚨 常见陷阱和解决方案<a class=headerlink href=#_8 title="Permanent link">&para;</a></h2> <h3 id=1_1>陷阱1：容器内应用日志看不到<a class=headerlink href=#1_1 title="Permanent link">&para;</a></h3> <p><strong>问题</strong>：应用在容器内运行，但日志输出看不到</p> <p><strong>解决方案</strong>： <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-18-1>1</a></span>
-<span class=normal><a href=#__codelineno-18-2>2</a></span>
-<span class=normal><a href=#__codelineno-18-3>3</a></span>
-<span class=normal><a href=#__codelineno-18-4>4</a></span>
-<span class=normal><a href=#__codelineno-18-5>5</a></span>
-<span class=normal><a href=#__codelineno-18-6>6</a></span>
-<span class=normal><a href=#__codelineno-18-7>7</a></span>
-<span class=normal><a href=#__codelineno-18-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-18-1><a id=__codelineno-18-1 name=__codelineno-18-1></a><span class=c1># 查看容器日志</span>
-</span><span id=__span-18-2><a id=__codelineno-18-2 name=__codelineno-18-2></a>docker<span class=w> </span>logs<span class=w> </span>&lt;容器名&gt;
-</span><span id=__span-18-3><a id=__codelineno-18-3 name=__codelineno-18-3></a>
-</span><span id=__span-18-4><a id=__codelineno-18-4 name=__codelineno-18-4></a><span class=c1># 实时查看日志</span>
-</span><span id=__span-18-5><a id=__codelineno-18-5 name=__codelineno-18-5></a>docker<span class=w> </span>logs<span class=w> </span>-f<span class=w> </span>&lt;容器名&gt;
-</span><span id=__span-18-6><a id=__codelineno-18-6 name=__codelineno-18-6></a>
-</span><span id=__span-18-7><a id=__codelineno-18-7 name=__codelineno-18-7></a><span class=c1># 在Dockerfile中确保应用输出到标准输出</span>
-</span><span id=__span-18-8><a id=__codelineno-18-8 name=__codelineno-18-8></a><span class=c1># 而不是写入文件</span>
-</span></code></pre></div></td></tr></table></div></p> <h3 id=2>陷阱2：容器停止后数据丢失<a class=headerlink href=#2 title="Permanent link">&para;</a></h3> <p><strong>问题</strong>：容器删除后，所有数据都丢失了</p> <p><strong>解决方案</strong>：使用数据卷或绑定挂载 <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-19-1>1</a></span>
-<span class=normal><a href=#__codelineno-19-2>2</a></span>
-<span class=normal><a href=#__codelineno-19-3>3</a></span>
-<span class=normal><a href=#__codelineno-19-4>4</a></span>
-<span class=normal><a href=#__codelineno-19-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-19-1><a id=__codelineno-19-1 name=__codelineno-19-1></a><span class=c1># 创建数据卷</span>
-</span><span id=__span-19-2><a id=__codelineno-19-2 name=__codelineno-19-2></a>docker<span class=w> </span>volume<span class=w> </span>create<span class=w> </span>app_data
-</span><span id=__span-19-3><a id=__codelineno-19-3 name=__codelineno-19-3></a>
-</span><span id=__span-19-4><a id=__codelineno-19-4 name=__codelineno-19-4></a><span class=c1># 运行容器时挂载数据卷</span>
-</span><span id=__span-19-5><a id=__codelineno-19-5 name=__codelineno-19-5></a>docker<span class=w> </span>run<span class=w> </span>-v<span class=w> </span>app_data:/app/data<span class=w> </span>my-app
-</span></code></pre></div></td></tr></table></div></p> <h3 id=3_2>陷阱3：镜像体积过大<a class=headerlink href=#3_2 title="Permanent link">&para;</a></h3> <p><strong>问题</strong>：构建的镜像几百MB甚至几个GB</p> <p><strong>解决方案</strong>： - 使用Alpine等轻量级基础镜像 - 多阶段构建分离构建和运行环境 - 使用.dockerignore忽略不必要的文件 - 合并RUN指令减少镜像层数</p> <h2 id=docker_7>📊 Docker学习路径建议<a class=headerlink href=#docker_7 title="Permanent link">&para;</a></h2> <h3 id=_9>学习路线图<a class=headerlink href=#_9 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
+    style F fill:#d1c4e9</code></pre> <h3 id=_7>实用命令大全<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-12-1><span class=c1># 镜像管理</span>
+</span><span id=__span-12-2>docker<span class=w> </span>images<span class=w>                    </span><span class=c1># 查看本地镜像</span>
+</span><span id=__span-12-3>docker<span class=w> </span>rmi<span class=w> </span>&lt;镜像名&gt;<span class=w>              </span><span class=c1># 删除镜像</span>
+</span><span id=__span-12-4>docker<span class=w> </span>pull<span class=w> </span>&lt;镜像名&gt;<span class=w>             </span><span class=c1># 拉取镜像</span>
+</span><span id=__span-12-5>docker<span class=w> </span>push<span class=w> </span>&lt;镜像名&gt;<span class=w>             </span><span class=c1># 推送镜像</span>
+</span><span id=__span-12-6>
+</span><span id=__span-12-7><span class=c1># 容器管理</span>
+</span><span id=__span-12-8>docker<span class=w> </span>run<span class=w> </span>-d<span class=w> </span>--name<span class=w> </span>&lt;容器名&gt;<span class=w> </span>&lt;镜像&gt;<span class=w>  </span><span class=c1># 后台运行</span>
+</span><span id=__span-12-9>docker<span class=w> </span>stop<span class=w> </span>&lt;容器名&gt;<span class=w>              </span><span class=c1># 停止容器</span>
+</span><span id=__span-12-10>docker<span class=w> </span>start<span class=w> </span>&lt;容器名&gt;<span class=w>             </span><span class=c1># 启动容器</span>
+</span><span id=__span-12-11>docker<span class=w> </span>rm<span class=w> </span>&lt;容器名&gt;<span class=w>                </span><span class=c1># 删除容器</span>
+</span><span id=__span-12-12>docker<span class=w> </span><span class=nb>exec</span><span class=w> </span>-it<span class=w> </span>&lt;容器名&gt;<span class=w> </span>bash<span class=w>     </span><span class=c1># 进入容器</span>
+</span><span id=__span-12-13>
+</span><span id=__span-12-14><span class=c1># 网络和存储</span>
+</span><span id=__span-12-15>docker<span class=w> </span>network<span class=w> </span>ls<span class=w>                </span><span class=c1># 查看网络</span>
+</span><span id=__span-12-16>docker<span class=w> </span>volume<span class=w> </span>ls<span class=w>                 </span><span class=c1># 查看数据卷</span>
+</span><span id=__span-12-17>
+</span><span id=__span-12-18><span class=c1># 系统信息</span>
+</span><span id=__span-12-19>docker<span class=w> </span>info<span class=w>                      </span><span class=c1># Docker信息</span>
+</span><span id=__span-12-20>docker<span class=w> </span>stats<span class=w>                     </span><span class=c1># 资源使用统计</span>
+</span></code></pre></div> <h3 id=5>常见错误5：端口冲突<a class=headerlink href=#5 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-13-1><span class=c1># ❌ 错误：端口已被占用</span>
+</span><span id=__span-13-2>docker<span class=w> </span>run<span class=w> </span>-p<span class=w> </span><span class=m>80</span>:80<span class=w> </span>nginx
+</span><span id=__span-13-3>docker:<span class=w> </span>Error<span class=w> </span>response<span class=w> </span>from<span class=w> </span>daemon:<span class=w> </span>driver<span class=w> </span>failed<span class=w> </span>programming<span class=w> </span>external<span class=w> </span>connectivity<span class=w> </span>on<span class=w> </span>endpoint:<span class=w> </span>Bind<span class=w> </span><span class=k>for</span><span class=w> </span><span class=m>0</span>.0.0.0:80<span class=w> </span>failed:<span class=w> </span>port<span class=w> </span>is<span class=w> </span>already<span class=w> </span>allocated.
+</span><span id=__span-13-4>
+</span><span id=__span-13-5><span class=c1># ✅ 解决方法1：使用其他端口</span>
+</span><span id=__span-13-6>docker<span class=w> </span>run<span class=w> </span>-p<span class=w> </span><span class=m>8080</span>:80<span class=w> </span>nginx
+</span><span id=__span-13-7>
+</span><span id=__span-13-8><span class=c1># ✅ 解决方法2：停止占用端口的容器</span>
+</span><span id=__span-13-9>docker<span class=w> </span>ps<span class=w>  </span><span class=c1># 查看运行中的容器</span>
+</span><span id=__span-13-10>docker<span class=w> </span>stop<span class=w> </span>&lt;容器ID&gt;<span class=w>  </span><span class=c1># 停止冲突容器</span>
+</span><span id=__span-13-11>
+</span><span id=__span-13-12><span class=c1># ✅ 解决方法3：检查系统进程占用</span>
+</span><span id=__span-13-13><span class=c1># Linux</span>
+</span><span id=__span-13-14>sudo<span class=w> </span>netstat<span class=w> </span>-tulpn<span class=w> </span><span class=p>|</span><span class=w> </span>grep<span class=w> </span>:80
+</span><span id=__span-13-15><span class=c1># macOS</span>
+</span><span id=__span-13-16>lsof<span class=w> </span>-i<span class=w> </span>:80
+</span></code></pre></div> <h2 id=docker_6>💡 进阶技巧：让你的Docker更专业<a class=headerlink href=#docker_6 title="Permanent link">&para;</a></h2> <h3 id=1>1. 多阶段构建（优化镜像体积）<a class=headerlink href=#1 title="Permanent link">&para;</a></h3> <div class="language-dockerfile highlight"><pre><span></span><code><span id=__span-14-1><span class=c># 多阶段构建示例 - 显著减少镜像体积</span>
+</span><span id=__span-14-2>
+</span><span id=__span-14-3><span class=c># 第一阶段：构建阶段</span>
+</span><span id=__span-14-4><span class=k>FROM</span><span class=w> </span><span class=s>node:16-alpine</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=s>builder</span>
+</span><span id=__span-14-5><span class=k>WORKDIR</span><span class=w> </span><span class=s>/app</span>
+</span><span id=__span-14-6><span class=k>COPY</span><span class=w> </span>package*.json<span class=w> </span>./
+</span><span id=__span-14-7><span class=k>RUN</span><span class=w> </span>npm<span class=w> </span>ci<span class=w> </span>--only<span class=o>=</span>production
+</span><span id=__span-14-8><span class=k>COPY</span><span class=w> </span>.<span class=w> </span>.
+</span><span id=__span-14-9><span class=k>RUN</span><span class=w> </span>npm<span class=w> </span>run<span class=w> </span>build
+</span><span id=__span-14-10>
+</span><span id=__span-14-11><span class=c># 第二阶段：运行阶段</span>
+</span><span id=__span-14-12><span class=k>FROM</span><span class=w> </span><span class=s>node:16-alpine</span>
+</span><span id=__span-14-13><span class=k>WORKDIR</span><span class=w> </span><span class=s>/app</span>
+</span><span id=__span-14-14><span class=k>COPY</span><span class=w> </span>--from<span class=o>=</span>builder<span class=w> </span>/app/dist<span class=w> </span>./dist
+</span><span id=__span-14-15><span class=k>COPY</span><span class=w> </span>--from<span class=o>=</span>builder<span class=w> </span>/app/node_modules<span class=w> </span>./node_modules
+</span><span id=__span-14-16><span class=k>COPY</span><span class=w> </span>package.json<span class=w> </span>./
+</span><span id=__span-14-17>
+</span><span id=__span-14-18><span class=c># 使用非root用户增强安全性</span>
+</span><span id=__span-14-19><span class=k>RUN</span><span class=w> </span>addgroup<span class=w> </span>-g<span class=w> </span><span class=m>1001</span><span class=w> </span>-S<span class=w> </span>nodejs
+</span><span id=__span-14-20><span class=k>RUN</span><span class=w> </span>adduser<span class=w> </span>-S<span class=w> </span>nextjs<span class=w> </span>-u<span class=w> </span><span class=m>1001</span>
+</span><span id=__span-14-21><span class=k>USER</span><span class=w> </span><span class=s>nextjs</span>
+</span><span id=__span-14-22>
+</span><span id=__span-14-23><span class=k>EXPOSE</span><span class=w> </span><span class=s>3000</span>
+</span><span id=__span-14-24><span class=k>CMD</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;node&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;dist/app.js&quot;</span><span class=p>]</span>
+</span></code></pre></div> <h3 id=2-docker-compose>2. Docker Compose（多容器应用）<a class=headerlink href=#2-docker-compose title="Permanent link">&para;</a></h3> <p><strong>docker-compose.yml：</strong> <div class="language-yaml highlight"><pre><span></span><code><span id=__span-15-1><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s>&#39;3.8&#39;</span>
+</span><span id=__span-15-2><span class=nt>services</span><span class=p>:</span>
+</span><span id=__span-15-3><span class=w>  </span><span class=nt>web</span><span class=p>:</span>
+</span><span id=__span-15-4><span class=w>    </span><span class=nt>build</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+</span><span id=__span-15-5><span class=w>    </span><span class=nt>ports</span><span class=p>:</span>
+</span><span id=__span-15-6><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=s>&quot;3000:3000&quot;</span>
+</span><span id=__span-15-7><span class=w>    </span><span class=nt>depends_on</span><span class=p>:</span>
+</span><span id=__span-15-8><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+</span><span id=__span-15-9><span class=w>    </span><span class=nt>environment</span><span class=p>:</span>
+</span><span id=__span-15-10><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">DATABASE_URL=postgres://user:pass@db:5432/mydb</span>
+</span><span id=__span-15-11>
+</span><span id=__span-15-12><span class=w>  </span><span class=nt>db</span><span class=p>:</span>
+</span><span id=__span-15-13><span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">postgres:13</span>
+</span><span id=__span-15-14><span class=w>    </span><span class=nt>environment</span><span class=p>:</span>
+</span><span id=__span-15-15><span class=w>      </span><span class=nt>POSTGRES_DB</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">mydb</span>
+</span><span id=__span-15-16><span class=w>      </span><span class=nt>POSTGRES_USER</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">user</span>
+</span><span id=__span-15-17><span class=w>      </span><span class=nt>POSTGRES_PASSWORD</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">pass</span>
+</span><span id=__span-15-18><span class=w>    </span><span class=nt>volumes</span><span class=p>:</span>
+</span><span id=__span-15-19><span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">db_data:/var/lib/postgresql/data</span>
+</span><span id=__span-15-20>
+</span><span id=__span-15-21><span class=nt>volumes</span><span class=p>:</span>
+</span><span id=__span-15-22><span class=w>  </span><span class=nt>db_data</span><span class=p>:</span>
+</span></code></pre></div></p> <p><strong>使用Compose：</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-16-1><span class=c1># 启动所有服务</span>
+</span><span id=__span-16-2>docker-compose<span class=w> </span>up<span class=w> </span>-d
+</span><span id=__span-16-3>
+</span><span id=__span-16-4><span class=c1># 查看服务状态</span>
+</span><span id=__span-16-5>docker-compose<span class=w> </span>ps
+</span><span id=__span-16-6>
+</span><span id=__span-16-7><span class=c1># 停止服务</span>
+</span><span id=__span-16-8>docker-compose<span class=w> </span>down
+</span></code></pre></div></p> <h3 id=3_1>3. 数据持久化（避免数据丢失）<a class=headerlink href=#3_1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-17-1><span class=c1># 使用数据卷持久化数据</span>
+</span><span id=__span-17-2>docker<span class=w> </span>volume<span class=w> </span>create<span class=w> </span>mydata
+</span><span id=__span-17-3>
+</span><span id=__span-17-4>docker<span class=w> </span>run<span class=w> </span>-d<span class=w> </span><span class=se>\</span>
+</span><span id=__span-17-5><span class=w>  </span>--name<span class=w> </span>mysql-container<span class=w> </span><span class=se>\</span>
+</span><span id=__span-17-6><span class=w>  </span>-v<span class=w> </span>mydata:/var/lib/mysql<span class=w> </span><span class=se>\</span>
+</span><span id=__span-17-7><span class=w>  </span>-e<span class=w> </span><span class=nv>MYSQL_ROOT_PASSWORD</span><span class=o>=</span>secret<span class=w> </span><span class=se>\</span>
+</span><span id=__span-17-8><span class=w>  </span>mysql:8.0
+</span><span id=__span-17-9>
+</span><span id=__span-17-10><span class=c1># 或者使用绑定挂载（开发时推荐）</span>
+</span><span id=__span-17-11>docker<span class=w> </span>run<span class=w> </span>-d<span class=w> </span><span class=se>\</span>
+</span><span id=__span-17-12><span class=w>  </span>--name<span class=w> </span>nginx-container<span class=w> </span><span class=se>\</span>
+</span><span id=__span-17-13><span class=w>  </span>-v<span class=w> </span><span class=k>$(</span><span class=nb>pwd</span><span class=k>)</span>/html:/usr/share/nginx/html<span class=w> </span><span class=se>\</span>
+</span><span id=__span-17-14><span class=w>  </span>-p<span class=w> </span><span class=m>80</span>:80<span class=w> </span><span class=se>\</span>
+</span><span id=__span-17-15><span class=w>  </span>nginx
+</span></code></pre></div> <h2 id=_8>🚨 常见陷阱和解决方案<a class=headerlink href=#_8 title="Permanent link">&para;</a></h2> <h3 id=1_1>陷阱1：容器内应用日志看不到<a class=headerlink href=#1_1 title="Permanent link">&para;</a></h3> <p><strong>问题</strong>：应用在容器内运行，但日志输出看不到</p> <p><strong>解决方案</strong>： <div class="language-bash highlight"><pre><span></span><code><span id=__span-18-1><span class=c1># 查看容器日志</span>
+</span><span id=__span-18-2>docker<span class=w> </span>logs<span class=w> </span>&lt;容器名&gt;
+</span><span id=__span-18-3>
+</span><span id=__span-18-4><span class=c1># 实时查看日志</span>
+</span><span id=__span-18-5>docker<span class=w> </span>logs<span class=w> </span>-f<span class=w> </span>&lt;容器名&gt;
+</span><span id=__span-18-6>
+</span><span id=__span-18-7><span class=c1># 在Dockerfile中确保应用输出到标准输出</span>
+</span><span id=__span-18-8><span class=c1># 而不是写入文件</span>
+</span></code></pre></div></p> <h3 id=2>陷阱2：容器停止后数据丢失<a class=headerlink href=#2 title="Permanent link">&para;</a></h3> <p><strong>问题</strong>：容器删除后，所有数据都丢失了</p> <p><strong>解决方案</strong>：使用数据卷或绑定挂载 <div class="language-bash highlight"><pre><span></span><code><span id=__span-19-1><span class=c1># 创建数据卷</span>
+</span><span id=__span-19-2>docker<span class=w> </span>volume<span class=w> </span>create<span class=w> </span>app_data
+</span><span id=__span-19-3>
+</span><span id=__span-19-4><span class=c1># 运行容器时挂载数据卷</span>
+</span><span id=__span-19-5>docker<span class=w> </span>run<span class=w> </span>-v<span class=w> </span>app_data:/app/data<span class=w> </span>my-app
+</span></code></pre></div></p> <h3 id=3_2>陷阱3：镜像体积过大<a class=headerlink href=#3_2 title="Permanent link">&para;</a></h3> <p><strong>问题</strong>：构建的镜像几百MB甚至几个GB</p> <p><strong>解决方案</strong>： - 使用Alpine等轻量级基础镜像 - 多阶段构建分离构建和运行环境 - 使用.dockerignore忽略不必要的文件 - 合并RUN指令减少镜像层数</p> <h2 id=docker_7>📊 Docker学习路径建议<a class=headerlink href=#docker_7 title="Permanent link">&para;</a></h2> <h3 id=_9>学习路线图<a class=headerlink href=#_9 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
     A[Docker基础] --&gt; B[镜像构建]
     B --&gt; C[容器网络]
     C --&gt; D[数据持久化]

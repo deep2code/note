@@ -43,10 +43,10 @@
 
     C --&gt; G[相似度计算]
     F --&gt; G
-    G --&gt; H[高相似度&lt;br/&gt;语义相近]</code></pre> <p>主流的Embedding模型：</p> <table> <thead> <tr> <th>模型</th> <th>维度</th> <th>特点</th> </tr> </thead> <tbody> <tr> <td>OpenAI text-embedding-3-small</td> <td>1536</td> <td>高性能，API调用</td> </tr> <tr> <td>OpenAI text-embedding-3-large</td> <td>3072</td> <td>更高精度</td> </tr> <tr> <td>BGE-large-zh</td> <td>1024</td> <td>中文效果好，开源</td> </tr> <tr> <td>M3E</td> <td>768/1024</td> <td>多语言支持好</td> </tr> <tr> <td>Cohere Embed</td> <td>1024</td> <td>商业API，多语言</td> </tr> </tbody> </table> <h4 id=312>3.1.2 相似度计算<a class=headerlink href=#312 title="Permanent link">&para;</a></h4> <p>常用的向量相似度计算方法：</p> <p><strong>余弦相似度（Cosine Similarity）</strong></p> <p>最常用的方法，计算两个向量夹角的余弦值：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>similarity = (A · B) / (||A|| × ||B||)
-</span></code></pre></div></td></tr></table></div> <p>取值范围 [-1, 1]，值越大表示越相似。</p> <p><strong>欧氏距离（Euclidean Distance）</strong></p> <p>计算两个向量之间的直线距离：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a>distance = sqrt(Σ(ai - bi)²)
-</span></code></pre></div></td></tr></table></div> <p>距离越小越相似。</p> <p><strong>点积（Dot Product）</strong></p> <p>直接计算向量点积：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a>dot_product = A · B = Σ(ai × bi)
-</span></code></pre></div></td></tr></table></div> <h4 id=313>3.1.3 向量数据库<a class=headerlink href=#313 title="Permanent link">&para;</a></h4> <p>向量数据库专门用于存储和检索高维向量，核心能力是<strong>近似最近邻搜索（ANN）</strong>。</p> <p>为什么需要ANN？精确搜索需要计算查询向量与库中所有向量的相似度，时间复杂度O(n)，当数据量达到百万、千万级时无法接受。ANN通过牺牲少量精度换取大幅性能提升。</p> <pre class=mermaid><code>graph TD
+    G --&gt; H[高相似度&lt;br/&gt;语义相近]</code></pre> <p>主流的Embedding模型：</p> <table> <thead> <tr> <th>模型</th> <th>维度</th> <th>特点</th> </tr> </thead> <tbody> <tr> <td>OpenAI text-embedding-3-small</td> <td>1536</td> <td>高性能，API调用</td> </tr> <tr> <td>OpenAI text-embedding-3-large</td> <td>3072</td> <td>更高精度</td> </tr> <tr> <td>BGE-large-zh</td> <td>1024</td> <td>中文效果好，开源</td> </tr> <tr> <td>M3E</td> <td>768/1024</td> <td>多语言支持好</td> </tr> <tr> <td>Cohere Embed</td> <td>1024</td> <td>商业API，多语言</td> </tr> </tbody> </table> <h4 id=312>3.1.2 相似度计算<a class=headerlink href=#312 title="Permanent link">&para;</a></h4> <p>常用的向量相似度计算方法：</p> <p><strong>余弦相似度（Cosine Similarity）</strong></p> <p>最常用的方法，计算两个向量夹角的余弦值：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-0-1>similarity = (A · B) / (||A|| × ||B||)
+</span></code></pre></div> <p>取值范围 [-1, 1]，值越大表示越相似。</p> <p><strong>欧氏距离（Euclidean Distance）</strong></p> <p>计算两个向量之间的直线距离：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-1-1>distance = sqrt(Σ(ai - bi)²)
+</span></code></pre></div> <p>距离越小越相似。</p> <p><strong>点积（Dot Product）</strong></p> <p>直接计算向量点积：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-2-1>dot_product = A · B = Σ(ai × bi)
+</span></code></pre></div> <h4 id=313>3.1.3 向量数据库<a class=headerlink href=#313 title="Permanent link">&para;</a></h4> <p>向量数据库专门用于存储和检索高维向量，核心能力是<strong>近似最近邻搜索（ANN）</strong>。</p> <p>为什么需要ANN？精确搜索需要计算查询向量与库中所有向量的相似度，时间复杂度O(n)，当数据量达到百万、千万级时无法接受。ANN通过牺牲少量精度换取大幅性能提升。</p> <pre class=mermaid><code>graph TD
     A[向量数据入库] --&gt; B[构建索引]
     B --&gt; C{索引类型}
     C --&gt;|IVF| D[倒排文件索引&lt;br/&gt;聚类划分]
@@ -77,10 +77,9 @@
     B --&gt; B1[简单直接&lt;br/&gt;可能切断语义]
     C --&gt; C1[保持语义完整&lt;br/&gt;计算成本高]
     D --&gt; D1[按分隔符递归&lt;br/&gt;兼顾语义与长度]
-    E --&gt; E1[按章节段落&lt;br/&gt;结构清晰]</code></pre> <p>具体来说：</p> <p><strong>固定长度切分</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1>1</a></span>
-<span class=normal><a href=#__codelineno-3-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a>chunk_size = 500字符
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>chunk_overlap = 50字符
-</span></code></pre></div></td></tr></table></div> <p>简单但可能打断句子。</p> <p><strong>递归字符切分</strong>（LangChain默认）</p> <p>按优先级使用分隔符： 1. 双换行符（段落） 2. 单换行符（句子） 3. 句号 4. 空格 5. 字符</p> <p><strong>语义切分</strong></p> <p>计算相邻句子的向量相似度，在语义边界处切分：</p> <pre class=mermaid><code>graph LR
+    E --&gt; E1[按章节段落&lt;br/&gt;结构清晰]</code></pre> <p>具体来说：</p> <p><strong>固定长度切分</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-3-1>chunk_size = 500字符
+</span><span id=__span-3-2>chunk_overlap = 50字符
+</span></code></pre></div> <p>简单但可能打断句子。</p> <p><strong>递归字符切分</strong>（LangChain默认）</p> <p>按优先级使用分隔符： 1. 双换行符（段落） 2. 单换行符（句子） 3. 句号 4. 空格 5. 字符</p> <p><strong>语义切分</strong></p> <p>计算相邻句子的向量相似度，在语义边界处切分：</p> <pre class=mermaid><code>graph LR
     A[句子1] --&gt; B[计算相似度]
     B --&gt;|高相似度| C[合并为同一块]
     B --&gt;|相似度骤降| D[在此处切分]
@@ -99,32 +98,24 @@
     R-&gt;&gt;R: 构建Prompt
     R-&gt;&gt;L: 发送增强Prompt
     L-&gt;&gt;R: 生成回答
-    R-&gt;&gt;U: 返回答案+引用来源</code></pre> <p><strong>Query理解与处理</strong></p> <p>原始用户问题可能表述不清，需要优化：</p> <ul> <li><strong>Query改写</strong>：将口语化问题转为标准查询</li> <li><strong>Query扩展</strong>：生成多个相关查询，提高召回</li> <li><strong>Query分解</strong>：复杂问题拆分为子问题</li> </ul> <p>例子： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
-<span class=normal><a href=#__codelineno-4-2>2</a></span>
-<span class=normal><a href=#__codelineno-4-3>3</a></span>
-<span class=normal><a href=#__codelineno-4-4>4</a></span>
-<span class=normal><a href=#__codelineno-4-5>5</a></span>
-<span class=normal><a href=#__codelineno-4-6>6</a></span>
-<span class=normal><a href=#__codelineno-4-7>7</a></span>
-<span class=normal><a href=#__codelineno-4-8>8</a></span>
-<span class=normal><a href=#__codelineno-4-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a>原始问题：那个新政策怎么样？
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a>↓ Query改写
-</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a>改写后：2024年最新的XX政策有哪些内容和影响？
-</span><span id=__span-4-4><a id=__codelineno-4-4 name=__codelineno-4-4></a>
-</span><span id=__span-4-5><a id=__codelineno-4-5 name=__codelineno-4-5></a>↓ Query扩展
-</span><span id=__span-4-6><a id=__codelineno-4-6 name=__codelineno-4-6></a>扩展查询：
-</span><span id=__span-4-7><a id=__codelineno-4-7 name=__codelineno-4-7></a>1. 2024年XX政策内容解读
-</span><span id=__span-4-8><a id=__codelineno-4-8 name=__codelineno-4-8></a>2. XX政策与旧政策对比
-</span><span id=__span-4-9><a id=__codelineno-4-9 name=__codelineno-4-9></a>3. XX政策实施影响分析
-</span></code></pre></div></td></tr></table></div></p> <p><strong>检索与召回</strong></p> <pre class=mermaid><code>graph TD
+    R-&gt;&gt;U: 返回答案+引用来源</code></pre> <p><strong>Query理解与处理</strong></p> <p>原始用户问题可能表述不清，需要优化：</p> <ul> <li><strong>Query改写</strong>：将口语化问题转为标准查询</li> <li><strong>Query扩展</strong>：生成多个相关查询，提高召回</li> <li><strong>Query分解</strong>：复杂问题拆分为子问题</li> </ul> <p>例子： <div class="language-text highlight"><pre><span></span><code><span id=__span-4-1>原始问题：那个新政策怎么样？
+</span><span id=__span-4-2>↓ Query改写
+</span><span id=__span-4-3>改写后：2024年最新的XX政策有哪些内容和影响？
+</span><span id=__span-4-4>
+</span><span id=__span-4-5>↓ Query扩展
+</span><span id=__span-4-6>扩展查询：
+</span><span id=__span-4-7>1. 2024年XX政策内容解读
+</span><span id=__span-4-8>2. XX政策与旧政策对比
+</span><span id=__span-4-9>3. XX政策实施影响分析
+</span></code></pre></div></p> <p><strong>检索与召回</strong></p> <pre class=mermaid><code>graph TD
     A[检索策略] --&gt; B[稀疏检索&lt;br/&gt;BM25/TF-IDF]
     A --&gt; C[稠密检索&lt;br/&gt;向量检索]
     A --&gt; D[混合检索&lt;br/&gt;Hybrid Search]
 
     B --&gt; B1[精确匹配&lt;br/&gt;关键词命中]
     C --&gt; C1[语义匹配&lt;br/&gt;理解意图]
-    D --&gt; D1[综合优势&lt;br/&gt;RRF融合]</code></pre> <p><strong>混合检索（Hybrid Search）</strong> 是当前的最佳实践：</p> <ol> <li>同时进行关键词检索和向量检索</li> <li>分别获得Top-K结果</li> <li>使用<strong>倒数排名融合（RRF）</strong>合并结果</li> </ol> <p>RRF公式： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a>RRF_score(d) = Σ 1 / (k + rank(d))
-</span></code></pre></div></td></tr></table></div></p> <p>其中k通常取60。</p> <p><strong>重排序（Rerank）</strong></p> <p>检索回来的文档可能相关性不够精准，需要二次排序：</p> <pre class=mermaid><code>flowchart LR
+    D --&gt; D1[综合优势&lt;br/&gt;RRF融合]</code></pre> <p><strong>混合检索（Hybrid Search）</strong> 是当前的最佳实践：</p> <ol> <li>同时进行关键词检索和向量检索</li> <li>分别获得Top-K结果</li> <li>使用<strong>倒数排名融合（RRF）</strong>合并结果</li> </ol> <p>RRF公式： <div class="language-text highlight"><pre><span></span><code><span id=__span-5-1>RRF_score(d) = Σ 1 / (k + rank(d))
+</span></code></pre></div></p> <p>其中k通常取60。</p> <p><strong>重排序（Rerank）</strong></p> <p>检索回来的文档可能相关性不够精准，需要二次排序：</p> <pre class=mermaid><code>flowchart LR
     A[检索返回Top-20] --&gt; B[Rerank模型]
     B --&gt; C[精细相关性计算]
     C --&gt; D[输出Top-5]
@@ -202,14 +193,11 @@
 
     D[Query] --&gt; E[检索小切片]
     E --&gt; F[映射到父切片]
-    F --&gt; G[返回完整上下文]</code></pre> <p><strong>滑动窗口</strong></p> <p>对于长文档，使用滑动窗口确保信息不遗漏：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span>
-<span class=normal><a href=#__codelineno-6-2>2</a></span>
-<span class=normal><a href=#__codelineno-6-3>3</a></span>
-<span class=normal><a href=#__codelineno-6-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a>Window 1: [Doc[0:500]]
-</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a>Window 2: [Doc[400:900]]  # 100字符overlap
-</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a>Window 3: [Doc[800:1300]]
-</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a>...
-</span></code></pre></div></td></tr></table></div> <h3 id=52>5.2 检索优化策略<a class=headerlink href=#52 title="Permanent link">&para;</a></h3> <p><strong>多查询检索</strong></p> <p>一个问题生成多个相关查询，扩大召回：</p> <pre class=mermaid><code>flowchart LR
+    F --&gt; G[返回完整上下文]</code></pre> <p><strong>滑动窗口</strong></p> <p>对于长文档，使用滑动窗口确保信息不遗漏：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-6-1>Window 1: [Doc[0:500]]
+</span><span id=__span-6-2>Window 2: [Doc[400:900]]  # 100字符overlap
+</span><span id=__span-6-3>Window 3: [Doc[800:1300]]
+</span><span id=__span-6-4>...
+</span></code></pre></div> <h3 id=52>5.2 检索优化策略<a class=headerlink href=#52 title="Permanent link">&para;</a></h3> <p><strong>多查询检索</strong></p> <p>一个问题生成多个相关查询，扩大召回：</p> <pre class=mermaid><code>flowchart LR
     A[原始Query] --&gt; B[LLM生成&lt;br/&gt;多个相关查询]
     B --&gt; C[Query 1]
     B --&gt; D[Query 2]
@@ -219,76 +207,46 @@
     D --&gt; F
     E --&gt; F
 
-    F --&gt; G[合并去重]</code></pre> <p><strong>假设性文档嵌入</strong></p> <p>先让LLM生成一个假设性的答案，用这个答案去检索：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1>1</a></span>
-<span class=normal><a href=#__codelineno-7-2>2</a></span>
-<span class=normal><a href=#__codelineno-7-3>3</a></span>
-<span class=normal><a href=#__codelineno-7-4>4</a></span>
-<span class=normal><a href=#__codelineno-7-5>5</a></span>
-<span class=normal><a href=#__codelineno-7-6>6</a></span>
-<span class=normal><a href=#__codelineno-7-7>7</a></span>
-<span class=normal><a href=#__codelineno-7-8>8</a></span>
-<span class=normal><a href=#__codelineno-7-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a>原始问题：如何优化Python代码性能？
-</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a>↓ LLM生成假设答案
-</span><span id=__span-7-3><a id=__codelineno-7-3 name=__codelineno-7-3></a>假设答案：可以通过以下方式优化Python代码性能：
-</span><span id=__span-7-4><a id=__codelineno-7-4 name=__codelineno-7-4></a>1. 使用内置函数代替循环
-</span><span id=__span-7-5><a id=__codelineno-7-5 name=__codelineno-7-5></a>2. 使用生成器减少内存
-</span><span id=__span-7-6><a id=__codelineno-7-6 name=__codelineno-7-6></a>3. 使用NumPy进行数值计算
-</span><span id=__span-7-7><a id=__codelineno-7-7 name=__codelineno-7-7></a>...
-</span><span id=__span-7-8><a id=__codelineno-7-8 name=__codelineno-7-8></a>↓ 用假设答案检索
-</span><span id=__span-7-9><a id=__codelineno-7-9 name=__codelineno-7-9></a>找到真正的相关文档
-</span></code></pre></div></td></tr></table></div> <p><strong>自我查询</strong></p> <p>从问题中提取元数据过滤条件：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1>1</a></span>
-<span class=normal><a href=#__codelineno-8-2>2</a></span>
-<span class=normal><a href=#__codelineno-8-3>3</a></span>
-<span class=normal><a href=#__codelineno-8-4>4</a></span>
-<span class=normal><a href=#__codelineno-8-5>5</a></span>
-<span class=normal><a href=#__codelineno-8-6>6</a></span>
-<span class=normal><a href=#__codelineno-8-7>7</a></span>
-<span class=normal><a href=#__codelineno-8-8>8</a></span>
-<span class=normal><a href=#__codelineno-8-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a>问题：2023年发布的关于人工智能的政策文件有哪些？
-</span><span id=__span-8-2><a id=__codelineno-8-2 name=__codelineno-8-2></a>
-</span><span id=__span-8-3><a id=__codelineno-8-3 name=__codelineno-8-3></a>提取信息：
-</span><span id=__span-8-4><a id=__codelineno-8-4 name=__codelineno-8-4></a>- 时间：2023年
-</span><span id=__span-8-5><a id=__codelineno-8-5 name=__codelineno-8-5></a>- 主题：人工智能
-</span><span id=__span-8-6><a id=__codelineno-8-6 name=__codelineno-8-6></a>- 类型：政策文件
-</span><span id=__span-8-7><a id=__codelineno-8-7 name=__codelineno-8-7></a>
-</span><span id=__span-8-8><a id=__codelineno-8-8 name=__codelineno-8-8></a>执行过滤检索：
-</span><span id=__span-8-9><a id=__codelineno-8-9 name=__codelineno-8-9></a>filter = {&quot;year&quot;: 2023, &quot;topic&quot;: &quot;AI&quot;, &quot;type&quot;: &quot;policy&quot;}
-</span></code></pre></div></td></tr></table></div> <h3 id=53>5.3 上下文管理<a class=headerlink href=#53 title="Permanent link">&para;</a></h3> <p><strong>上下文压缩</strong></p> <p>检索回的内容可能冗长，需要压缩：</p> <pre class=mermaid><code>flowchart LR
+    F --&gt; G[合并去重]</code></pre> <p><strong>假设性文档嵌入</strong></p> <p>先让LLM生成一个假设性的答案，用这个答案去检索：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-7-1>原始问题：如何优化Python代码性能？
+</span><span id=__span-7-2>↓ LLM生成假设答案
+</span><span id=__span-7-3>假设答案：可以通过以下方式优化Python代码性能：
+</span><span id=__span-7-4>1. 使用内置函数代替循环
+</span><span id=__span-7-5>2. 使用生成器减少内存
+</span><span id=__span-7-6>3. 使用NumPy进行数值计算
+</span><span id=__span-7-7>...
+</span><span id=__span-7-8>↓ 用假设答案检索
+</span><span id=__span-7-9>找到真正的相关文档
+</span></code></pre></div> <p><strong>自我查询</strong></p> <p>从问题中提取元数据过滤条件：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-8-1>问题：2023年发布的关于人工智能的政策文件有哪些？
+</span><span id=__span-8-2>
+</span><span id=__span-8-3>提取信息：
+</span><span id=__span-8-4>- 时间：2023年
+</span><span id=__span-8-5>- 主题：人工智能
+</span><span id=__span-8-6>- 类型：政策文件
+</span><span id=__span-8-7>
+</span><span id=__span-8-8>执行过滤检索：
+</span><span id=__span-8-9>filter = {&quot;year&quot;: 2023, &quot;topic&quot;: &quot;AI&quot;, &quot;type&quot;: &quot;policy&quot;}
+</span></code></pre></div> <h3 id=53>5.3 上下文管理<a class=headerlink href=#53 title="Permanent link">&para;</a></h3> <p><strong>上下文压缩</strong></p> <p>检索回的内容可能冗长，需要压缩：</p> <pre class=mermaid><code>flowchart LR
     A[检索文档&lt;br/&gt;5000字] --&gt; B[压缩模型]
     B --&gt; C[核心信息&lt;br/&gt;1000字]
     C --&gt; D[拼接Prompt]</code></pre> <p>压缩方法： - <strong>提取式</strong>：选择关键句子 - <strong>生成式</strong>：用LLM总结要点 - <strong>过滤式</strong>：基于相似度过滤</p> <p><strong>上下文排序</strong></p> <p>把最相关的内容放在Prompt中间靠前的位置：</p> <pre class=mermaid><code>graph LR
     A[研究发现:&lt;br/&gt;LLM更关注Prompt开头和结尾&lt;br/&gt;中间内容容易被忽略]
 
-    B[优化策略:&lt;br/&gt;将最相关文档放在开头&lt;br/&gt;次相关放在中间&lt;br/&gt;再次相关放在结尾]</code></pre> <h3 id=54>5.4 生成优化<a class=headerlink href=#54 title="Permanent link">&para;</a></h3> <p><strong>提示词工程</strong></p> <p>一个优秀的RAG Prompt模板：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1> 1</a></span>
-<span class=normal><a href=#__codelineno-9-2> 2</a></span>
-<span class=normal><a href=#__codelineno-9-3> 3</a></span>
-<span class=normal><a href=#__codelineno-9-4> 4</a></span>
-<span class=normal><a href=#__codelineno-9-5> 5</a></span>
-<span class=normal><a href=#__codelineno-9-6> 6</a></span>
-<span class=normal><a href=#__codelineno-9-7> 7</a></span>
-<span class=normal><a href=#__codelineno-9-8> 8</a></span>
-<span class=normal><a href=#__codelineno-9-9> 9</a></span>
-<span class=normal><a href=#__codelineno-9-10>10</a></span>
-<span class=normal><a href=#__codelineno-9-11>11</a></span>
-<span class=normal><a href=#__codelineno-9-12>12</a></span>
-<span class=normal><a href=#__codelineno-9-13>13</a></span>
-<span class=normal><a href=#__codelineno-9-14>14</a></span>
-<span class=normal><a href=#__codelineno-9-15>15</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a>你是一个专业的问答助手。请基于提供的参考文档回答用户问题。
-</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a>
-</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a>【重要规则】
-</span><span id=__span-9-4><a id=__codelineno-9-4 name=__codelineno-9-4></a>1. 只使用参考文档中的信息回答
-</span><span id=__span-9-5><a id=__codelineno-9-5 name=__codelineno-9-5></a>2. 如果文档中没有相关信息，明确告知用户
-</span><span id=__span-9-6><a id=__codelineno-9-6 name=__codelineno-9-6></a>3. 回答时标注信息来源，格式为[来源1]
-</span><span id=__span-9-7><a id=__codelineno-9-7 name=__codelineno-9-7></a>4. 不要编造或推测信息
-</span><span id=__span-9-8><a id=__codelineno-9-8 name=__codelineno-9-8></a>
-</span><span id=__span-9-9><a id=__codelineno-9-9 name=__codelineno-9-9></a>【参考文档】
-</span><span id=__span-9-10><a id=__codelineno-9-10 name=__codelineno-9-10></a>{documents}
-</span><span id=__span-9-11><a id=__codelineno-9-11 name=__codelineno-9-11></a>
-</span><span id=__span-9-12><a id=__codelineno-9-12 name=__codelineno-9-12></a>【用户问题】
-</span><span id=__span-9-13><a id=__codelineno-9-13 name=__codelineno-9-13></a>{query}
-</span><span id=__span-9-14><a id=__codelineno-9-14 name=__codelineno-9-14></a>
-</span><span id=__span-9-15><a id=__codelineno-9-15 name=__codelineno-9-15></a>【回答】
-</span></code></pre></div></td></tr></table></div> <p><strong>引用标注</strong></p> <p>让模型在回答时标注引用来源：</p> <pre class=mermaid><code>graph LR
+    B[优化策略:&lt;br/&gt;将最相关文档放在开头&lt;br/&gt;次相关放在中间&lt;br/&gt;再次相关放在结尾]</code></pre> <h3 id=54>5.4 生成优化<a class=headerlink href=#54 title="Permanent link">&para;</a></h3> <p><strong>提示词工程</strong></p> <p>一个优秀的RAG Prompt模板：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-9-1>你是一个专业的问答助手。请基于提供的参考文档回答用户问题。
+</span><span id=__span-9-2>
+</span><span id=__span-9-3>【重要规则】
+</span><span id=__span-9-4>1. 只使用参考文档中的信息回答
+</span><span id=__span-9-5>2. 如果文档中没有相关信息，明确告知用户
+</span><span id=__span-9-6>3. 回答时标注信息来源，格式为[来源1]
+</span><span id=__span-9-7>4. 不要编造或推测信息
+</span><span id=__span-9-8>
+</span><span id=__span-9-9>【参考文档】
+</span><span id=__span-9-10>{documents}
+</span><span id=__span-9-11>
+</span><span id=__span-9-12>【用户问题】
+</span><span id=__span-9-13>{query}
+</span><span id=__span-9-14>
+</span><span id=__span-9-15>【回答】
+</span></code></pre></div> <p><strong>引用标注</strong></p> <p>让模型在回答时标注引用来源：</p> <pre class=mermaid><code>graph LR
     A[检索文档] --&gt; B[编号&lt;br/&gt;Doc1, Doc2, Doc3]
     B --&gt; C[Prompt中标注]
     C --&gt; D[模型生成时引用]
@@ -333,12 +291,10 @@
     B --&gt;|复杂| E[多次迭代检索]
 
     E --&gt; F[多跳推理]
-    F --&gt; G[生成答案]</code></pre> <p>问题复杂度判断可以训练一个分类器：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1>1</a></span>
-<span class=normal><a href=#__codelineno-10-2>2</a></span>
-<span class=normal><a href=#__codelineno-10-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a>类别A：简单问题（如&quot;1+1=?&quot;）→ 直接生成
-</span><span id=__span-10-2><a id=__codelineno-10-2 name=__codelineno-10-2></a>类别B：单跳问题（如&quot;北京人口多少?&quot;）→ 单次检索
-</span><span id=__span-10-3><a id=__codelineno-10-3 name=__codelineno-10-3></a>类别C：多跳问题（如&quot;诺贝尔物理学奖得主最多的国家是哪里?&quot;）→ 多次检索
-</span></code></pre></div></td></tr></table></div> <h3 id=64-rag>6.4 多模态RAG<a class=headerlink href=#64-rag title="Permanent link">&para;</a></h3> <p>处理文本、图片、表格等多模态数据：</p> <pre class=mermaid><code>flowchart LR
+    F --&gt; G[生成答案]</code></pre> <p>问题复杂度判断可以训练一个分类器：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-10-1>类别A：简单问题（如&quot;1+1=?&quot;）→ 直接生成
+</span><span id=__span-10-2>类别B：单跳问题（如&quot;北京人口多少?&quot;）→ 单次检索
+</span><span id=__span-10-3>类别C：多跳问题（如&quot;诺贝尔物理学奖得主最多的国家是哪里?&quot;）→ 多次检索
+</span></code></pre></div> <h3 id=64-rag>6.4 多模态RAG<a class=headerlink href=#64-rag title="Permanent link">&para;</a></h3> <p>处理文本、图片、表格等多模态数据：</p> <pre class=mermaid><code>flowchart LR
     subgraph 多模态知识库
         A[文本] --&gt; D[向量数据库]
         B[图片] --&gt; E[图片Embedding]

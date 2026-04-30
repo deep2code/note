@@ -34,72 +34,44 @@
     style LLM fill:#4CAF50,color:#fff
     style Plan fill:#2196F3,color:#fff
     style Mem fill:#FF9800,color:#fff
-    style Tool fill:#9C27B0,color:#fff</code></pre> <hr> <h2 id=llm>二、规划：让 LLM 学会"思考"<a class=headerlink href=#llm title="Permanent link">&para;</a></h2> <h3 id=21-chain-of-thought>2.1 Chain-of-Thought：思维链<a class=headerlink href=#21-chain-of-thought title="Permanent link">&para;</a></h3> <p>Chain-of-Thought（CoT，思维链）是提升 LLM 推理能力的基础技术。核心思想是：<strong>让模型在给出答案之前，先展示推理过程</strong>。</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1> 1</a></span>
-<span class=normal><a href=#__codelineno-0-2> 2</a></span>
-<span class=normal><a href=#__codelineno-0-3> 3</a></span>
-<span class=normal><a href=#__codelineno-0-4> 4</a></span>
-<span class=normal><a href=#__codelineno-0-5> 5</a></span>
-<span class=normal><a href=#__codelineno-0-6> 6</a></span>
-<span class=normal><a href=#__codelineno-0-7> 7</a></span>
-<span class=normal><a href=#__codelineno-0-8> 8</a></span>
-<span class=normal><a href=#__codelineno-0-9> 9</a></span>
-<span class=normal><a href=#__codelineno-0-10>10</a></span>
-<span class=normal><a href=#__codelineno-0-11>11</a></span>
-<span class=normal><a href=#__codelineno-0-12>12</a></span>
-<span class=normal><a href=#__codelineno-0-13>13</a></span>
-<span class=normal><a href=#__codelineno-0-14>14</a></span>
-<span class=normal><a href=#__codelineno-0-15>15</a></span>
-<span class=normal><a href=#__codelineno-0-16>16</a></span>
-<span class=normal><a href=#__codelineno-0-17>17</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>用户：一个农场有鸡和兔子，共 35 个头，94 只脚。鸡和兔子各有多少只？
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a>
-</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a>LLM（直接回答）：鸡 23 只，兔子 12 只。
-</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a>
-</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a>LLM（CoT）：
-</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a>设鸡有 x 只，兔子有 y 只。
-</span><span id=__span-0-7><a id=__codelineno-0-7 name=__codelineno-0-7></a>根据题意：
-</span><span id=__span-0-8><a id=__codelineno-0-8 name=__codelineno-0-8></a>x + y = 35  （头的数量）
-</span><span id=__span-0-9><a id=__codelineno-0-9 name=__codelineno-0-9></a>2x + 4y = 94  （脚的数量）
-</span><span id=__span-0-10><a id=__codelineno-0-10 name=__codelineno-0-10></a>
-</span><span id=__span-0-11><a id=__codelineno-0-11 name=__codelineno-0-11></a>从第一式得：x = 35 - y
-</span><span id=__span-0-12><a id=__codelineno-0-12 name=__codelineno-0-12></a>代入第二式：2(35 - y) + 4y = 94
-</span><span id=__span-0-13><a id=__codelineno-0-13 name=__codelineno-0-13></a>70 - 2y + 4y = 94
-</span><span id=__span-0-14><a id=__codelineno-0-14 name=__codelineno-0-14></a>2y = 24
-</span><span id=__span-0-15><a id=__codelineno-0-15 name=__codelineno-0-15></a>y = 12
-</span><span id=__span-0-16><a id=__codelineno-0-16 name=__codelineno-0-16></a>
-</span><span id=__span-0-17><a id=__codelineno-0-17 name=__codelineno-0-17></a>所以兔子 12 只，鸡 35 - 12 = 23 只。
-</span></code></pre></div></td></tr></table></div> <p>CoT 通过显式展示推理步骤，显著提升了 LLM 在数学、逻辑推理任务上的表现。但 CoT 是"一次性"的——模型生成完推理过程就结束了，没有与外部环境的交互。</p> <h3 id=22-react>2.2 ReAct：推理与行动的循环<a class=headerlink href=#22-react title="Permanent link">&para;</a></h3> <p>ReAct（Reasoning + Acting）是当前最流行的 Agent 范式。它将 CoT 扩展为一个<strong>循环</strong>：思考（Thought）→ 行动（Action）→ 观察（Observation）→ 再思考……</p> <pre class=mermaid><code>flowchart LR
+    style Tool fill:#9C27B0,color:#fff</code></pre> <hr> <h2 id=llm>二、规划：让 LLM 学会"思考"<a class=headerlink href=#llm title="Permanent link">&para;</a></h2> <h3 id=21-chain-of-thought>2.1 Chain-of-Thought：思维链<a class=headerlink href=#21-chain-of-thought title="Permanent link">&para;</a></h3> <p>Chain-of-Thought（CoT，思维链）是提升 LLM 推理能力的基础技术。核心思想是：<strong>让模型在给出答案之前，先展示推理过程</strong>。</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-0-1>用户：一个农场有鸡和兔子，共 35 个头，94 只脚。鸡和兔子各有多少只？
+</span><span id=__span-0-2>
+</span><span id=__span-0-3>LLM（直接回答）：鸡 23 只，兔子 12 只。
+</span><span id=__span-0-4>
+</span><span id=__span-0-5>LLM（CoT）：
+</span><span id=__span-0-6>设鸡有 x 只，兔子有 y 只。
+</span><span id=__span-0-7>根据题意：
+</span><span id=__span-0-8>x + y = 35  （头的数量）
+</span><span id=__span-0-9>2x + 4y = 94  （脚的数量）
+</span><span id=__span-0-10>
+</span><span id=__span-0-11>从第一式得：x = 35 - y
+</span><span id=__span-0-12>代入第二式：2(35 - y) + 4y = 94
+</span><span id=__span-0-13>70 - 2y + 4y = 94
+</span><span id=__span-0-14>2y = 24
+</span><span id=__span-0-15>y = 12
+</span><span id=__span-0-16>
+</span><span id=__span-0-17>所以兔子 12 只，鸡 35 - 12 = 23 只。
+</span></code></pre></div> <p>CoT 通过显式展示推理步骤，显著提升了 LLM 在数学、逻辑推理任务上的表现。但 CoT 是"一次性"的——模型生成完推理过程就结束了，没有与外部环境的交互。</p> <h3 id=22-react>2.2 ReAct：推理与行动的循环<a class=headerlink href=#22-react title="Permanent link">&para;</a></h3> <p>ReAct（Reasoning + Acting）是当前最流行的 Agent 范式。它将 CoT 扩展为一个<strong>循环</strong>：思考（Thought）→ 行动（Action）→ 观察（Observation）→ 再思考……</p> <pre class=mermaid><code>flowchart LR
     subgraph ReActLoop["ReAct 循环"]
         T["Thought&lt;br/&gt;思考：我需要做什么？"] --&gt; A["Action&lt;br/&gt;行动：调用工具"]
         A --&gt; O["Observation&lt;br/&gt;观察：工具返回什么？"]
         O --&gt; T
     end
 
-    ReActLoop --&gt;|"循环直到"| Done["任务完成"]</code></pre> <p><strong>ReAct 的完整示例</strong>：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1> 1</a></span>
-<span class=normal><a href=#__codelineno-1-2> 2</a></span>
-<span class=normal><a href=#__codelineno-1-3> 3</a></span>
-<span class=normal><a href=#__codelineno-1-4> 4</a></span>
-<span class=normal><a href=#__codelineno-1-5> 5</a></span>
-<span class=normal><a href=#__codelineno-1-6> 6</a></span>
-<span class=normal><a href=#__codelineno-1-7> 7</a></span>
-<span class=normal><a href=#__codelineno-1-8> 8</a></span>
-<span class=normal><a href=#__codelineno-1-9> 9</a></span>
-<span class=normal><a href=#__codelineno-1-10>10</a></span>
-<span class=normal><a href=#__codelineno-1-11>11</a></span>
-<span class=normal><a href=#__codelineno-1-12>12</a></span>
-<span class=normal><a href=#__codelineno-1-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a>用户：2024 年诺贝尔文学奖得主是谁？他的代表作有哪些？
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a>
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>Agent:
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a>Thought 1: 用户询问 2024 年诺贝尔文学奖得主。我需要搜索这个信息。
-</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a>Action 1: search(&quot;2024 年诺贝尔文学奖得主&quot;)
-</span><span id=__span-1-6><a id=__codelineno-1-6 name=__codelineno-1-6></a>Observation 1: 2024 年诺贝尔文学奖授予韩国作家韩江（Han Kang）。
-</span><span id=__span-1-7><a id=__codelineno-1-7 name=__codelineno-1-7></a>
-</span><span id=__span-1-8><a id=__codelineno-1-8 name=__codelineno-1-8></a>Thought 2: 已经知道得主是韩江。现在需要查询她的代表作。
-</span><span id=__span-1-9><a id=__codelineno-1-9 name=__codelineno-1-9></a>Action 2: search(&quot;韩江 代表作&quot;)
-</span><span id=__span-1-10><a id=__codelineno-1-10 name=__codelineno-1-10></a>Observation 2: 韩江的代表作包括《素食者》《少年来了》《白》等。
-</span><span id=__span-1-11><a id=__codelineno-1-11 name=__codelineno-1-11></a>
-</span><span id=__span-1-12><a id=__codelineno-1-12 name=__codelineno-1-12></a>Thought 3: 已经收集到足够信息，可以回答用户了。
-</span><span id=__span-1-13><a id=__codelineno-1-13 name=__codelineno-1-13></a>Final Answer: 2024 年诺贝尔文学奖得主是韩国作家韩江，她的代表作包括《素食者》《少年来了》《白》等。
-</span></code></pre></div></td></tr></table></div> <p><strong>根本矛盾之一：LLM 的推理能力与行动能力的割裂。</strong></p> <p>纯 LLM 只能"想"不能"做"，纯工具只能"做"不能"想"。ReAct 通过将两者编织成循环，实现了"边想边做"——这是 Agent 范式的核心突破。</p> <h3 id=23-plan-and-execute>2.3 Plan-and-Execute：先规划后执行<a class=headerlink href=#23-plan-and-execute title="Permanent link">&para;</a></h3> <p>ReAct 是"边想边做"，适合探索性任务。但对于结构化任务，"先规划后执行"更高效：</p> <pre class=mermaid><code>flowchart TD
+    ReActLoop --&gt;|"循环直到"| Done["任务完成"]</code></pre> <p><strong>ReAct 的完整示例</strong>：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-1-1>用户：2024 年诺贝尔文学奖得主是谁？他的代表作有哪些？
+</span><span id=__span-1-2>
+</span><span id=__span-1-3>Agent:
+</span><span id=__span-1-4>Thought 1: 用户询问 2024 年诺贝尔文学奖得主。我需要搜索这个信息。
+</span><span id=__span-1-5>Action 1: search(&quot;2024 年诺贝尔文学奖得主&quot;)
+</span><span id=__span-1-6>Observation 1: 2024 年诺贝尔文学奖授予韩国作家韩江（Han Kang）。
+</span><span id=__span-1-7>
+</span><span id=__span-1-8>Thought 2: 已经知道得主是韩江。现在需要查询她的代表作。
+</span><span id=__span-1-9>Action 2: search(&quot;韩江 代表作&quot;)
+</span><span id=__span-1-10>Observation 2: 韩江的代表作包括《素食者》《少年来了》《白》等。
+</span><span id=__span-1-11>
+</span><span id=__span-1-12>Thought 3: 已经收集到足够信息，可以回答用户了。
+</span><span id=__span-1-13>Final Answer: 2024 年诺贝尔文学奖得主是韩国作家韩江，她的代表作包括《素食者》《少年来了》《白》等。
+</span></code></pre></div> <p><strong>根本矛盾之一：LLM 的推理能力与行动能力的割裂。</strong></p> <p>纯 LLM 只能"想"不能"做"，纯工具只能"做"不能"想"。ReAct 通过将两者编织成循环，实现了"边想边做"——这是 Agent 范式的核心突破。</p> <h3 id=23-plan-and-execute>2.3 Plan-and-Execute：先规划后执行<a class=headerlink href=#23-plan-and-execute title="Permanent link">&para;</a></h3> <p>ReAct 是"边想边做"，适合探索性任务。但对于结构化任务，"先规划后执行"更高效：</p> <pre class=mermaid><code>flowchart TD
     subgraph PlanPhase["规划阶段"]
         P1["接收任务"] --&gt; P2["LLM 生成完整计划"]
         P2 --&gt; P3["计划：步骤 1 → 步骤 2 → ... → 步骤 N"]
@@ -113,24 +85,16 @@
         E3 --&gt;|"所有步骤完成"| Done["任务完成"]
     end
 
-    PlanPhase --&gt; ExecPhase</code></pre> <p><strong>Plan-and-Execute 的适用场景</strong>：</p> <ul> <li>软件开发：需求分析 → 设计 → 编码 → 测试 → 部署</li> <li>数据分析：数据获取 → 清洗 → 分析 → 可视化 → 报告</li> <li>旅行规划：目的地选择 → 机票预订 → 酒店预订 → 行程规划</li> </ul> <h3 id=24>2.4 反思与自我纠错<a class=headerlink href=#24 title="Permanent link">&para;</a></h3> <p>人类在完成任务时会不断反思、调整策略。Agent 也需要这种能力：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span>
-<span class=normal><a href=#__codelineno-2-2>2</a></span>
-<span class=normal><a href=#__codelineno-2-3>3</a></span>
-<span class=normal><a href=#__codelineno-2-4>4</a></span>
-<span class=normal><a href=#__codelineno-2-5>5</a></span>
-<span class=normal><a href=#__codelineno-2-6>6</a></span>
-<span class=normal><a href=#__codelineno-2-7>7</a></span>
-<span class=normal><a href=#__codelineno-2-8>8</a></span>
-<span class=normal><a href=#__codelineno-2-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a>Agent 执行计划：
-</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a>步骤 1: 查询数据库 → 成功
-</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a>步骤 2: 分析数据 → 失败（数据格式错误）
-</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a>
-</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a>反思：数据格式不符合预期，需要先进行数据清洗。
-</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6></a>调整计划：
-</span><span id=__span-2-7><a id=__codelineno-2-7 name=__codelineno-2-7></a>步骤 2（新）: 清洗数据
-</span><span id=__span-2-8><a id=__codelineno-2-8 name=__codelineno-2-8></a>步骤 3: 分析数据
-</span><span id=__span-2-9><a id=__codelineno-2-9 name=__codelineno-2-9></a>...
-</span></code></pre></div></td></tr></table></div> <p><strong>Self-Refine</strong> 和 <strong>Reflexion</strong> 是两种典型的反思机制：</p> <ul> <li><strong>Self-Refine</strong>：模型对自己的输出进行评分，如果不满意则重新生成。</li> <li><strong>Reflexion</strong>：将失败经验存储到记忆中，避免未来犯同样的错误。</li> </ul> <hr> <h2 id=_1>三、记忆：突破上下文窗口的限制<a class=headerlink href=#_1 title="Permanent link">&para;</a></h2> <h3 id=31>3.1 为什么需要记忆？<a class=headerlink href=#31 title="Permanent link">&para;</a></h3> <p>LLM 的上下文窗口（Context Window）是有限的——即使 GPT-4 支持 128k token，也无法容纳无限的历史信息。更重要的是，<strong>模型无法在不同会话之间保持记忆</strong>。</p> <p>Agent 的记忆系统解决两个问题：</p> <ol> <li><strong>短期记忆</strong>：在单次任务中维持上下文，突破上下文窗口限制。</li> <li><strong>长期记忆</strong>：跨会话保持信息，让 Agent 能够"学习"和"成长"。</li> </ol> <h3 id=32>3.2 记忆的分类体系<a class=headerlink href=#32 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>flowchart TD
+    PlanPhase --&gt; ExecPhase</code></pre> <p><strong>Plan-and-Execute 的适用场景</strong>：</p> <ul> <li>软件开发：需求分析 → 设计 → 编码 → 测试 → 部署</li> <li>数据分析：数据获取 → 清洗 → 分析 → 可视化 → 报告</li> <li>旅行规划：目的地选择 → 机票预订 → 酒店预订 → 行程规划</li> </ul> <h3 id=24>2.4 反思与自我纠错<a class=headerlink href=#24 title="Permanent link">&para;</a></h3> <p>人类在完成任务时会不断反思、调整策略。Agent 也需要这种能力：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-2-1>Agent 执行计划：
+</span><span id=__span-2-2>步骤 1: 查询数据库 → 成功
+</span><span id=__span-2-3>步骤 2: 分析数据 → 失败（数据格式错误）
+</span><span id=__span-2-4>
+</span><span id=__span-2-5>反思：数据格式不符合预期，需要先进行数据清洗。
+</span><span id=__span-2-6>调整计划：
+</span><span id=__span-2-7>步骤 2（新）: 清洗数据
+</span><span id=__span-2-8>步骤 3: 分析数据
+</span><span id=__span-2-9>...
+</span></code></pre></div> <p><strong>Self-Refine</strong> 和 <strong>Reflexion</strong> 是两种典型的反思机制：</p> <ul> <li><strong>Self-Refine</strong>：模型对自己的输出进行评分，如果不满意则重新生成。</li> <li><strong>Reflexion</strong>：将失败经验存储到记忆中，避免未来犯同样的错误。</li> </ul> <hr> <h2 id=_1>三、记忆：突破上下文窗口的限制<a class=headerlink href=#_1 title="Permanent link">&para;</a></h2> <h3 id=31>3.1 为什么需要记忆？<a class=headerlink href=#31 title="Permanent link">&para;</a></h3> <p>LLM 的上下文窗口（Context Window）是有限的——即使 GPT-4 支持 128k token，也无法容纳无限的历史信息。更重要的是，<strong>模型无法在不同会话之间保持记忆</strong>。</p> <p>Agent 的记忆系统解决两个问题：</p> <ol> <li><strong>短期记忆</strong>：在单次任务中维持上下文，突破上下文窗口限制。</li> <li><strong>长期记忆</strong>：跨会话保持信息，让 Agent 能够"学习"和"成长"。</li> </ol> <h3 id=32>3.2 记忆的分类体系<a class=headerlink href=#32 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>flowchart TD
     Memory["Agent 记忆系统"] --&gt; STM["短期记忆&lt;br/&gt;Short-Term Memory"]
     Memory --&gt; LTM["长期记忆&lt;br/&gt;Long-Term Memory"]
 
@@ -143,45 +107,27 @@
 
     EM --&gt; VecDB["向量数据库存储&lt;br/&gt;RAG 检索"]
     SM --&gt; KG["知识图谱&lt;br/&gt;结构化知识"]
-    PM --&gt; Workflow["工作流模板&lt;br/&gt;可复用技能"]</code></pre> <h3 id=33>3.3 短期记忆：滑动窗口与摘要<a class=headerlink href=#33 title="Permanent link">&para;</a></h3> <p>最简单的短期记忆实现是<strong>滑动窗口</strong>——只保留最近的 N 轮对话：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1> 1</a></span>
-<span class=normal><a href=#__codelineno-3-2> 2</a></span>
-<span class=normal><a href=#__codelineno-3-3> 3</a></span>
-<span class=normal><a href=#__codelineno-3-4> 4</a></span>
-<span class=normal><a href=#__codelineno-3-5> 5</a></span>
-<span class=normal><a href=#__codelineno-3-6> 6</a></span>
-<span class=normal><a href=#__codelineno-3-7> 7</a></span>
-<span class=normal><a href=#__codelineno-3-8> 8</a></span>
-<span class=normal><a href=#__codelineno-3-9> 9</a></span>
-<span class=normal><a href=#__codelineno-3-10>10</a></span>
-<span class=normal><a href=#__codelineno-3-11>11</a></span>
-<span class=normal><a href=#__codelineno-3-12>12</a></span>
-<span class=normal><a href=#__codelineno-3-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=k>class</span><span class=w> </span><span class=nc>ShortTermMemory</span><span class=p>:</span>
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>    <span class=k>def</span><span class=w> </span><span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>max_turns</span><span class=o>=</span><span class=mi>10</span><span class=p>):</span>
-</span><span id=__span-3-3><a id=__codelineno-3-3 name=__codelineno-3-3></a>        <span class=bp>self</span><span class=o>.</span><span class=n>history</span> <span class=o>=</span> <span class=p>[]</span>
-</span><span id=__span-3-4><a id=__codelineno-3-4 name=__codelineno-3-4></a>        <span class=bp>self</span><span class=o>.</span><span class=n>max_turns</span> <span class=o>=</span> <span class=n>max_turns</span>
-</span><span id=__span-3-5><a id=__codelineno-3-5 name=__codelineno-3-5></a>
-</span><span id=__span-3-6><a id=__codelineno-3-6 name=__codelineno-3-6></a>    <span class=k>def</span><span class=w> </span><span class=nf>add</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>role</span><span class=p>,</span> <span class=n>content</span><span class=p>):</span>
-</span><span id=__span-3-7><a id=__codelineno-3-7 name=__codelineno-3-7></a>        <span class=bp>self</span><span class=o>.</span><span class=n>history</span><span class=o>.</span><span class=n>append</span><span class=p>({</span><span class=s2>&quot;role&quot;</span><span class=p>:</span> <span class=n>role</span><span class=p>,</span> <span class=s2>&quot;content&quot;</span><span class=p>:</span> <span class=n>content</span><span class=p>})</span>
-</span><span id=__span-3-8><a id=__codelineno-3-8 name=__codelineno-3-8></a>        <span class=c1># 保持最近 N 轮</span>
-</span><span id=__span-3-9><a id=__codelineno-3-9 name=__codelineno-3-9></a>        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>history</span><span class=p>)</span> <span class=o>&gt;</span> <span class=bp>self</span><span class=o>.</span><span class=n>max_turns</span> <span class=o>*</span> <span class=mi>2</span><span class=p>:</span>  <span class=c1># *2 因为每轮有 user + assistant</span>
-</span><span id=__span-3-10><a id=__codelineno-3-10 name=__codelineno-3-10></a>            <span class=bp>self</span><span class=o>.</span><span class=n>history</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>history</span><span class=p>[</span><span class=o>-</span><span class=bp>self</span><span class=o>.</span><span class=n>max_turns</span> <span class=o>*</span> <span class=mi>2</span><span class=p>:]</span>
-</span><span id=__span-3-11><a id=__codelineno-3-11 name=__codelineno-3-11></a>
-</span><span id=__span-3-12><a id=__codelineno-3-12 name=__codelineno-3-12></a>    <span class=k>def</span><span class=w> </span><span class=nf>get_context</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-</span><span id=__span-3-13><a id=__codelineno-3-13 name=__codelineno-3-13></a>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>history</span>
-</span></code></pre></div></td></tr></table></div> <p>当对话很长时，可以使用<strong>摘要机制</strong>——让 LLM 对历史对话进行压缩：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
-<span class=normal><a href=#__codelineno-4-2>2</a></span>
-<span class=normal><a href=#__codelineno-4-3>3</a></span>
-<span class=normal><a href=#__codelineno-4-4>4</a></span>
-<span class=normal><a href=#__codelineno-4-5>5</a></span>
-<span class=normal><a href=#__codelineno-4-6>6</a></span>
-<span class=normal><a href=#__codelineno-4-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a>原始对话（100 轮）→ LLM 摘要 → 关键信息（10 条）
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a>
-</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a>摘要内容：
-</span><span id=__span-4-4><a id=__codelineno-4-4 name=__codelineno-4-4></a>- 用户是软件工程师，主要使用 Go 和 Python
-</span><span id=__span-4-5><a id=__codelineno-4-5 name=__codelineno-4-5></a>- 用户正在开发一个微服务项目
-</span><span id=__span-4-6><a id=__codelineno-4-6 name=__codelineno-4-6></a>- 用户关心性能优化和可观测性
-</span><span id=__span-4-7><a id=__codelineno-4-7 name=__codelineno-4-7></a>- ...
-</span></code></pre></div></td></tr></table></div> <h3 id=34-rag>3.4 长期记忆：RAG 与向量数据库<a class=headerlink href=#34-rag title="Permanent link">&para;</a></h3> <p>长期记忆的核心技术是 <strong>RAG（Retrieval-Augmented Generation，检索增强生成）</strong>：</p> <pre class=mermaid><code>flowchart LR
+    PM --&gt; Workflow["工作流模板&lt;br/&gt;可复用技能"]</code></pre> <h3 id=33>3.3 短期记忆：滑动窗口与摘要<a class=headerlink href=#33 title="Permanent link">&para;</a></h3> <p>最简单的短期记忆实现是<strong>滑动窗口</strong>——只保留最近的 N 轮对话：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-3-1><span class=k>class</span><span class=w> </span><span class=nc>ShortTermMemory</span><span class=p>:</span>
+</span><span id=__span-3-2>    <span class=k>def</span><span class=w> </span><span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>max_turns</span><span class=o>=</span><span class=mi>10</span><span class=p>):</span>
+</span><span id=__span-3-3>        <span class=bp>self</span><span class=o>.</span><span class=n>history</span> <span class=o>=</span> <span class=p>[]</span>
+</span><span id=__span-3-4>        <span class=bp>self</span><span class=o>.</span><span class=n>max_turns</span> <span class=o>=</span> <span class=n>max_turns</span>
+</span><span id=__span-3-5>
+</span><span id=__span-3-6>    <span class=k>def</span><span class=w> </span><span class=nf>add</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>role</span><span class=p>,</span> <span class=n>content</span><span class=p>):</span>
+</span><span id=__span-3-7>        <span class=bp>self</span><span class=o>.</span><span class=n>history</span><span class=o>.</span><span class=n>append</span><span class=p>({</span><span class=s2>&quot;role&quot;</span><span class=p>:</span> <span class=n>role</span><span class=p>,</span> <span class=s2>&quot;content&quot;</span><span class=p>:</span> <span class=n>content</span><span class=p>})</span>
+</span><span id=__span-3-8>        <span class=c1># 保持最近 N 轮</span>
+</span><span id=__span-3-9>        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>history</span><span class=p>)</span> <span class=o>&gt;</span> <span class=bp>self</span><span class=o>.</span><span class=n>max_turns</span> <span class=o>*</span> <span class=mi>2</span><span class=p>:</span>  <span class=c1># *2 因为每轮有 user + assistant</span>
+</span><span id=__span-3-10>            <span class=bp>self</span><span class=o>.</span><span class=n>history</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>history</span><span class=p>[</span><span class=o>-</span><span class=bp>self</span><span class=o>.</span><span class=n>max_turns</span> <span class=o>*</span> <span class=mi>2</span><span class=p>:]</span>
+</span><span id=__span-3-11>
+</span><span id=__span-3-12>    <span class=k>def</span><span class=w> </span><span class=nf>get_context</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span><span id=__span-3-13>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>history</span>
+</span></code></pre></div> <p>当对话很长时，可以使用<strong>摘要机制</strong>——让 LLM 对历史对话进行压缩：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-4-1>原始对话（100 轮）→ LLM 摘要 → 关键信息（10 条）
+</span><span id=__span-4-2>
+</span><span id=__span-4-3>摘要内容：
+</span><span id=__span-4-4>- 用户是软件工程师，主要使用 Go 和 Python
+</span><span id=__span-4-5>- 用户正在开发一个微服务项目
+</span><span id=__span-4-6>- 用户关心性能优化和可观测性
+</span><span id=__span-4-7>- ...
+</span></code></pre></div> <h3 id=34-rag>3.4 长期记忆：RAG 与向量数据库<a class=headerlink href=#34-rag title="Permanent link">&para;</a></h3> <p>长期记忆的核心技术是 <strong>RAG（Retrieval-Augmented Generation，检索增强生成）</strong>：</p> <pre class=mermaid><code>flowchart LR
     A["用户查询"] --&gt; B["Embedding 编码"]
     B --&gt; C["向量检索&lt;br/&gt;相似度匹配"]
     C --&gt; D["相关知识片段"]
@@ -204,91 +150,50 @@
     D --&gt; F["调用天气 API"]
     F --&gt; G["API 返回结果"]
     G --&gt; H["结果注入 Prompt"]
-    H --&gt; I["LLM 生成最终回答"]</code></pre> <h3 id=42-function-calling>4.2 Function Calling 的协议<a class=headerlink href=#42-function-calling title="Permanent link">&para;</a></h3> <p>以 OpenAI 的 Function Calling 为例：</p> <div class="language-json highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1> 1</a></span>
-<span class=normal><a href=#__codelineno-5-2> 2</a></span>
-<span class=normal><a href=#__codelineno-5-3> 3</a></span>
-<span class=normal><a href=#__codelineno-5-4> 4</a></span>
-<span class=normal><a href=#__codelineno-5-5> 5</a></span>
-<span class=normal><a href=#__codelineno-5-6> 6</a></span>
-<span class=normal><a href=#__codelineno-5-7> 7</a></span>
-<span class=normal><a href=#__codelineno-5-8> 8</a></span>
-<span class=normal><a href=#__codelineno-5-9> 9</a></span>
-<span class=normal><a href=#__codelineno-5-10>10</a></span>
-<span class=normal><a href=#__codelineno-5-11>11</a></span>
-<span class=normal><a href=#__codelineno-5-12>12</a></span>
-<span class=normal><a href=#__codelineno-5-13>13</a></span>
-<span class=normal><a href=#__codelineno-5-14>14</a></span>
-<span class=normal><a href=#__codelineno-5-15>15</a></span>
-<span class=normal><a href=#__codelineno-5-16>16</a></span>
-<span class=normal><a href=#__codelineno-5-17>17</a></span>
-<span class=normal><a href=#__codelineno-5-18>18</a></span>
-<span class=normal><a href=#__codelineno-5-19>19</a></span>
-<span class=normal><a href=#__codelineno-5-20>20</a></span>
-<span class=normal><a href=#__codelineno-5-21>21</a></span>
-<span class=normal><a href=#__codelineno-5-22>22</a></span>
-<span class=normal><a href=#__codelineno-5-23>23</a></span>
-<span class=normal><a href=#__codelineno-5-24>24</a></span>
-<span class=normal><a href=#__codelineno-5-25>25</a></span>
-<span class=normal><a href=#__codelineno-5-26>26</a></span>
-<span class=normal><a href=#__codelineno-5-27>27</a></span>
-<span class=normal><a href=#__codelineno-5-28>28</a></span>
-<span class=normal><a href=#__codelineno-5-29>29</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=p>{</span>
-</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a><span class=w>  </span><span class=nt>&quot;model&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;gpt-4&quot;</span><span class=p>,</span>
-</span><span id=__span-5-3><a id=__codelineno-5-3 name=__codelineno-5-3></a><span class=w>  </span><span class=nt>&quot;messages&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
-</span><span id=__span-5-4><a id=__codelineno-5-4 name=__codelineno-5-4></a><span class=w>    </span><span class=p>{</span><span class=nt>&quot;role&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;user&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;content&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;北京今天天气如何？&quot;</span><span class=p>}</span>
-</span><span id=__span-5-5><a id=__codelineno-5-5 name=__codelineno-5-5></a><span class=w>  </span><span class=p>],</span>
-</span><span id=__span-5-6><a id=__codelineno-5-6 name=__codelineno-5-6></a><span class=w>  </span><span class=nt>&quot;tools&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
-</span><span id=__span-5-7><a id=__codelineno-5-7 name=__codelineno-5-7></a><span class=w>    </span><span class=p>{</span>
-</span><span id=__span-5-8><a id=__codelineno-5-8 name=__codelineno-5-8></a><span class=w>      </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;function&quot;</span><span class=p>,</span>
-</span><span id=__span-5-9><a id=__codelineno-5-9 name=__codelineno-5-9></a><span class=w>      </span><span class=nt>&quot;function&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-5-10><a id=__codelineno-5-10 name=__codelineno-5-10></a><span class=w>        </span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;get_weather&quot;</span><span class=p>,</span>
-</span><span id=__span-5-11><a id=__codelineno-5-11 name=__codelineno-5-11></a><span class=w>        </span><span class=nt>&quot;description&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;获取指定城市的天气信息&quot;</span><span class=p>,</span>
-</span><span id=__span-5-12><a id=__codelineno-5-12 name=__codelineno-5-12></a><span class=w>        </span><span class=nt>&quot;parameters&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-5-13><a id=__codelineno-5-13 name=__codelineno-5-13></a><span class=w>          </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;object&quot;</span><span class=p>,</span>
-</span><span id=__span-5-14><a id=__codelineno-5-14 name=__codelineno-5-14></a><span class=w>          </span><span class=nt>&quot;properties&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-5-15><a id=__codelineno-5-15 name=__codelineno-5-15></a><span class=w>            </span><span class=nt>&quot;location&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-5-16><a id=__codelineno-5-16 name=__codelineno-5-16></a><span class=w>              </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;string&quot;</span><span class=p>,</span>
-</span><span id=__span-5-17><a id=__codelineno-5-17 name=__codelineno-5-17></a><span class=w>              </span><span class=nt>&quot;description&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;城市名称&quot;</span>
-</span><span id=__span-5-18><a id=__codelineno-5-18 name=__codelineno-5-18></a><span class=w>            </span><span class=p>},</span>
-</span><span id=__span-5-19><a id=__codelineno-5-19 name=__codelineno-5-19></a><span class=w>            </span><span class=nt>&quot;unit&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-5-20><a id=__codelineno-5-20 name=__codelineno-5-20></a><span class=w>              </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;string&quot;</span><span class=p>,</span>
-</span><span id=__span-5-21><a id=__codelineno-5-21 name=__codelineno-5-21></a><span class=w>              </span><span class=nt>&quot;enum&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;celsius&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;fahrenheit&quot;</span><span class=p>]</span>
-</span><span id=__span-5-22><a id=__codelineno-5-22 name=__codelineno-5-22></a><span class=w>            </span><span class=p>}</span>
-</span><span id=__span-5-23><a id=__codelineno-5-23 name=__codelineno-5-23></a><span class=w>          </span><span class=p>},</span>
-</span><span id=__span-5-24><a id=__codelineno-5-24 name=__codelineno-5-24></a><span class=w>          </span><span class=nt>&quot;required&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;location&quot;</span><span class=p>]</span>
-</span><span id=__span-5-25><a id=__codelineno-5-25 name=__codelineno-5-25></a><span class=w>        </span><span class=p>}</span>
-</span><span id=__span-5-26><a id=__codelineno-5-26 name=__codelineno-5-26></a><span class=w>      </span><span class=p>}</span>
-</span><span id=__span-5-27><a id=__codelineno-5-27 name=__codelineno-5-27></a><span class=w>    </span><span class=p>}</span>
-</span><span id=__span-5-28><a id=__codelineno-5-28 name=__codelineno-5-28></a><span class=w>  </span><span class=p>]</span>
-</span><span id=__span-5-29><a id=__codelineno-5-29 name=__codelineno-5-29></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <p>LLM 的响应：</p> <div class="language-json highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1> 1</a></span>
-<span class=normal><a href=#__codelineno-6-2> 2</a></span>
-<span class=normal><a href=#__codelineno-6-3> 3</a></span>
-<span class=normal><a href=#__codelineno-6-4> 4</a></span>
-<span class=normal><a href=#__codelineno-6-5> 5</a></span>
-<span class=normal><a href=#__codelineno-6-6> 6</a></span>
-<span class=normal><a href=#__codelineno-6-7> 7</a></span>
-<span class=normal><a href=#__codelineno-6-8> 8</a></span>
-<span class=normal><a href=#__codelineno-6-9> 9</a></span>
-<span class=normal><a href=#__codelineno-6-10>10</a></span>
-<span class=normal><a href=#__codelineno-6-11>11</a></span>
-<span class=normal><a href=#__codelineno-6-12>12</a></span>
-<span class=normal><a href=#__codelineno-6-13>13</a></span>
-<span class=normal><a href=#__codelineno-6-14>14</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a><span class=p>{</span>
-</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a><span class=w>  </span><span class=nt>&quot;role&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;assistant&quot;</span><span class=p>,</span>
-</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a><span class=w>  </span><span class=nt>&quot;content&quot;</span><span class=p>:</span><span class=w> </span><span class=kc>null</span><span class=p>,</span>
-</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a><span class=w>  </span><span class=nt>&quot;tool_calls&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
-</span><span id=__span-6-5><a id=__codelineno-6-5 name=__codelineno-6-5></a><span class=w>    </span><span class=p>{</span>
-</span><span id=__span-6-6><a id=__codelineno-6-6 name=__codelineno-6-6></a><span class=w>      </span><span class=nt>&quot;id&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;call_xxx&quot;</span><span class=p>,</span>
-</span><span id=__span-6-7><a id=__codelineno-6-7 name=__codelineno-6-7></a><span class=w>      </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;function&quot;</span><span class=p>,</span>
-</span><span id=__span-6-8><a id=__codelineno-6-8 name=__codelineno-6-8></a><span class=w>      </span><span class=nt>&quot;function&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-6-9><a id=__codelineno-6-9 name=__codelineno-6-9></a><span class=w>        </span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;get_weather&quot;</span><span class=p>,</span>
-</span><span id=__span-6-10><a id=__codelineno-6-10 name=__codelineno-6-10></a><span class=w>        </span><span class=nt>&quot;arguments&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;{\&quot;location\&quot;: \&quot;北京\&quot;, \&quot;unit\&quot;: \&quot;celsius\&quot;}&quot;</span>
-</span><span id=__span-6-11><a id=__codelineno-6-11 name=__codelineno-6-11></a><span class=w>      </span><span class=p>}</span>
-</span><span id=__span-6-12><a id=__codelineno-6-12 name=__codelineno-6-12></a><span class=w>    </span><span class=p>}</span>
-</span><span id=__span-6-13><a id=__codelineno-6-13 name=__codelineno-6-13></a><span class=w>  </span><span class=p>]</span>
-</span><span id=__span-6-14><a id=__codelineno-6-14 name=__codelineno-6-14></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <p><strong>关键洞察</strong>：LLM 并没有真正"调用"函数，它只是生成了一个<strong>结构化的调用请求</strong>。实际的函数调用由应用程序执行，结果再返回给 LLM。</p> <h3 id=43>4.3 工具调用的执行循环<a class=headerlink href=#43 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>sequenceDiagram
+    H --&gt; I["LLM 生成最终回答"]</code></pre> <h3 id=42-function-calling>4.2 Function Calling 的协议<a class=headerlink href=#42-function-calling title="Permanent link">&para;</a></h3> <p>以 OpenAI 的 Function Calling 为例：</p> <div class="language-json highlight"><pre><span></span><code><span id=__span-5-1><span class=p>{</span>
+</span><span id=__span-5-2><span class=w>  </span><span class=nt>&quot;model&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;gpt-4&quot;</span><span class=p>,</span>
+</span><span id=__span-5-3><span class=w>  </span><span class=nt>&quot;messages&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
+</span><span id=__span-5-4><span class=w>    </span><span class=p>{</span><span class=nt>&quot;role&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;user&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;content&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;北京今天天气如何？&quot;</span><span class=p>}</span>
+</span><span id=__span-5-5><span class=w>  </span><span class=p>],</span>
+</span><span id=__span-5-6><span class=w>  </span><span class=nt>&quot;tools&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
+</span><span id=__span-5-7><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-5-8><span class=w>      </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;function&quot;</span><span class=p>,</span>
+</span><span id=__span-5-9><span class=w>      </span><span class=nt>&quot;function&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-5-10><span class=w>        </span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;get_weather&quot;</span><span class=p>,</span>
+</span><span id=__span-5-11><span class=w>        </span><span class=nt>&quot;description&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;获取指定城市的天气信息&quot;</span><span class=p>,</span>
+</span><span id=__span-5-12><span class=w>        </span><span class=nt>&quot;parameters&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-5-13><span class=w>          </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;object&quot;</span><span class=p>,</span>
+</span><span id=__span-5-14><span class=w>          </span><span class=nt>&quot;properties&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-5-15><span class=w>            </span><span class=nt>&quot;location&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-5-16><span class=w>              </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;string&quot;</span><span class=p>,</span>
+</span><span id=__span-5-17><span class=w>              </span><span class=nt>&quot;description&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;城市名称&quot;</span>
+</span><span id=__span-5-18><span class=w>            </span><span class=p>},</span>
+</span><span id=__span-5-19><span class=w>            </span><span class=nt>&quot;unit&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-5-20><span class=w>              </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;string&quot;</span><span class=p>,</span>
+</span><span id=__span-5-21><span class=w>              </span><span class=nt>&quot;enum&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;celsius&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;fahrenheit&quot;</span><span class=p>]</span>
+</span><span id=__span-5-22><span class=w>            </span><span class=p>}</span>
+</span><span id=__span-5-23><span class=w>          </span><span class=p>},</span>
+</span><span id=__span-5-24><span class=w>          </span><span class=nt>&quot;required&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;location&quot;</span><span class=p>]</span>
+</span><span id=__span-5-25><span class=w>        </span><span class=p>}</span>
+</span><span id=__span-5-26><span class=w>      </span><span class=p>}</span>
+</span><span id=__span-5-27><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-5-28><span class=w>  </span><span class=p>]</span>
+</span><span id=__span-5-29><span class=p>}</span>
+</span></code></pre></div> <p>LLM 的响应：</p> <div class="language-json highlight"><pre><span></span><code><span id=__span-6-1><span class=p>{</span>
+</span><span id=__span-6-2><span class=w>  </span><span class=nt>&quot;role&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;assistant&quot;</span><span class=p>,</span>
+</span><span id=__span-6-3><span class=w>  </span><span class=nt>&quot;content&quot;</span><span class=p>:</span><span class=w> </span><span class=kc>null</span><span class=p>,</span>
+</span><span id=__span-6-4><span class=w>  </span><span class=nt>&quot;tool_calls&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
+</span><span id=__span-6-5><span class=w>    </span><span class=p>{</span>
+</span><span id=__span-6-6><span class=w>      </span><span class=nt>&quot;id&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;call_xxx&quot;</span><span class=p>,</span>
+</span><span id=__span-6-7><span class=w>      </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;function&quot;</span><span class=p>,</span>
+</span><span id=__span-6-8><span class=w>      </span><span class=nt>&quot;function&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-6-9><span class=w>        </span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;get_weather&quot;</span><span class=p>,</span>
+</span><span id=__span-6-10><span class=w>        </span><span class=nt>&quot;arguments&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;{\&quot;location\&quot;: \&quot;北京\&quot;, \&quot;unit\&quot;: \&quot;celsius\&quot;}&quot;</span>
+</span><span id=__span-6-11><span class=w>      </span><span class=p>}</span>
+</span><span id=__span-6-12><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-6-13><span class=w>  </span><span class=p>]</span>
+</span><span id=__span-6-14><span class=p>}</span>
+</span></code></pre></div> <p><strong>关键洞察</strong>：LLM 并没有真正"调用"函数，它只是生成了一个<strong>结构化的调用请求</strong>。实际的函数调用由应用程序执行，结果再返回给 LLM。</p> <h3 id=43>4.3 工具调用的执行循环<a class=headerlink href=#43 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>sequenceDiagram
     participant User
     participant Agent
     participant LLM
@@ -307,51 +212,30 @@
         else 直接回答
             Agent-&gt;&gt;User: 返回最终答案
         end
-    end</code></pre> <h3 id=44>4.4 工具设计的最佳实践<a class=headerlink href=#44 title="Permanent link">&para;</a></h3> <p><strong>1. 工具描述要清晰</strong></p> <p>LLM 根据工具描述决定调用哪个工具。描述不清会导致错误选择：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1>1</a></span>
-<span class=normal><a href=#__codelineno-7-2>2</a></span>
-<span class=normal><a href=#__codelineno-7-3>3</a></span>
-<span class=normal><a href=#__codelineno-7-4>4</a></span>
-<span class=normal><a href=#__codelineno-7-5>5</a></span>
-<span class=normal><a href=#__codelineno-7-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=c1># 不好的描述</span>
-</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a><span class=p>{</span><span class=s2>&quot;name&quot;</span><span class=p>:</span> <span class=s2>&quot;search&quot;</span><span class=p>,</span> <span class=s2>&quot;description&quot;</span><span class=p>:</span> <span class=s2>&quot;搜索&quot;</span><span class=p>}</span>
-</span><span id=__span-7-3><a id=__codelineno-7-3 name=__codelineno-7-3></a>
-</span><span id=__span-7-4><a id=__codelineno-7-4 name=__codelineno-7-4></a><span class=c1># 好的描述</span>
-</span><span id=__span-7-5><a id=__codelineno-7-5 name=__codelineno-7-5></a><span class=p>{</span><span class=s2>&quot;name&quot;</span><span class=p>:</span> <span class=s2>&quot;web_search&quot;</span><span class=p>,</span> 
-</span><span id=__span-7-6><a id=__codelineno-7-6 name=__codelineno-7-6></a> <span class=s2>&quot;description&quot;</span><span class=p>:</span> <span class=s2>&quot;使用 Google 搜索网络信息。适用于查询实时新闻、天气、股价等时效性信息。&quot;</span><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <p><strong>2. 参数设计要精确</strong></p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1> 1</a></span>
-<span class=normal><a href=#__codelineno-8-2> 2</a></span>
-<span class=normal><a href=#__codelineno-8-3> 3</a></span>
-<span class=normal><a href=#__codelineno-8-4> 4</a></span>
-<span class=normal><a href=#__codelineno-8-5> 5</a></span>
-<span class=normal><a href=#__codelineno-8-6> 6</a></span>
-<span class=normal><a href=#__codelineno-8-7> 7</a></span>
-<span class=normal><a href=#__codelineno-8-8> 8</a></span>
-<span class=normal><a href=#__codelineno-8-9> 9</a></span>
-<span class=normal><a href=#__codelineno-8-10>10</a></span>
-<span class=normal><a href=#__codelineno-8-11>11</a></span>
-<span class=normal><a href=#__codelineno-8-12>12</a></span>
-<span class=normal><a href=#__codelineno-8-13>13</a></span>
-<span class=normal><a href=#__codelineno-8-14>14</a></span>
-<span class=normal><a href=#__codelineno-8-15>15</a></span>
-<span class=normal><a href=#__codelineno-8-16>16</a></span>
-<span class=normal><a href=#__codelineno-8-17>17</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a><span class=c1># 不好的参数设计</span>
-</span><span id=__span-8-2><a id=__codelineno-8-2 name=__codelineno-8-2></a><span class=p>{</span><span class=s2>&quot;parameters&quot;</span><span class=p>:</span> <span class=p>{</span><span class=s2>&quot;query&quot;</span><span class=p>:</span> <span class=s2>&quot;string&quot;</span><span class=p>}}</span>
-</span><span id=__span-8-3><a id=__codelineno-8-3 name=__codelineno-8-3></a>
-</span><span id=__span-8-4><a id=__codelineno-8-4 name=__codelineno-8-4></a><span class=c1># 好的参数设计</span>
-</span><span id=__span-8-5><a id=__codelineno-8-5 name=__codelineno-8-5></a><span class=p>{</span>
-</span><span id=__span-8-6><a id=__codelineno-8-6 name=__codelineno-8-6></a>  <span class=s2>&quot;parameters&quot;</span><span class=p>:</span> <span class=p>{</span>
-</span><span id=__span-8-7><a id=__codelineno-8-7 name=__codelineno-8-7></a>    <span class=s2>&quot;query&quot;</span><span class=p>:</span> <span class=p>{</span>
-</span><span id=__span-8-8><a id=__codelineno-8-8 name=__codelineno-8-8></a>      <span class=s2>&quot;type&quot;</span><span class=p>:</span> <span class=s2>&quot;string&quot;</span><span class=p>,</span>
-</span><span id=__span-8-9><a id=__codelineno-8-9 name=__codelineno-8-9></a>      <span class=s2>&quot;description&quot;</span><span class=p>:</span> <span class=s2>&quot;搜索关键词，建议使用英文以获得更好结果&quot;</span>
-</span><span id=__span-8-10><a id=__codelineno-8-10 name=__codelineno-8-10></a>    <span class=p>},</span>
-</span><span id=__span-8-11><a id=__codelineno-8-11 name=__codelineno-8-11></a>    <span class=s2>&quot;num_results&quot;</span><span class=p>:</span> <span class=p>{</span>
-</span><span id=__span-8-12><a id=__codelineno-8-12 name=__codelineno-8-12></a>      <span class=s2>&quot;type&quot;</span><span class=p>:</span> <span class=s2>&quot;integer&quot;</span><span class=p>,</span>
-</span><span id=__span-8-13><a id=__codelineno-8-13 name=__codelineno-8-13></a>      <span class=s2>&quot;description&quot;</span><span class=p>:</span> <span class=s2>&quot;返回结果数量，默认 5，最大 10&quot;</span><span class=p>,</span>
-</span><span id=__span-8-14><a id=__codelineno-8-14 name=__codelineno-8-14></a>      <span class=s2>&quot;default&quot;</span><span class=p>:</span> <span class=mi>5</span>
-</span><span id=__span-8-15><a id=__codelineno-8-15 name=__codelineno-8-15></a>    <span class=p>}</span>
-</span><span id=__span-8-16><a id=__codelineno-8-16 name=__codelineno-8-16></a>  <span class=p>}</span>
-</span><span id=__span-8-17><a id=__codelineno-8-17 name=__codelineno-8-17></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <p><strong>3. 错误处理要完善</strong></p> <p>工具调用可能失败（网络错误、API 限制、参数错误），Agent 需要能够处理这些错误并尝试恢复。</p> <hr> <h2 id=multi-agent>五、Multi-Agent：从单打独斗到团队协作<a class=headerlink href=#multi-agent title="Permanent link">&para;</a></h2> <h3 id=51-agent>5.1 为什么需要多 Agent？<a class=headerlink href=#51-agent title="Permanent link">&para;</a></h3> <p>单个 Agent 的能力是有限的：</p> <ul> <li><strong>专业分工</strong>：软件开发需要产品经理、架构师、程序员、测试员等不同角色。</li> <li><strong>并行处理</strong>：多个 Agent 可以同时处理不同子任务，提高效率。</li> <li><strong>互相验证</strong>：多个 Agent 可以交叉验证结果，减少错误。</li> </ul> <pre class=mermaid><code>flowchart TD
+    end</code></pre> <h3 id=44>4.4 工具设计的最佳实践<a class=headerlink href=#44 title="Permanent link">&para;</a></h3> <p><strong>1. 工具描述要清晰</strong></p> <p>LLM 根据工具描述决定调用哪个工具。描述不清会导致错误选择：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-7-1><span class=c1># 不好的描述</span>
+</span><span id=__span-7-2><span class=p>{</span><span class=s2>&quot;name&quot;</span><span class=p>:</span> <span class=s2>&quot;search&quot;</span><span class=p>,</span> <span class=s2>&quot;description&quot;</span><span class=p>:</span> <span class=s2>&quot;搜索&quot;</span><span class=p>}</span>
+</span><span id=__span-7-3>
+</span><span id=__span-7-4><span class=c1># 好的描述</span>
+</span><span id=__span-7-5><span class=p>{</span><span class=s2>&quot;name&quot;</span><span class=p>:</span> <span class=s2>&quot;web_search&quot;</span><span class=p>,</span> 
+</span><span id=__span-7-6> <span class=s2>&quot;description&quot;</span><span class=p>:</span> <span class=s2>&quot;使用 Google 搜索网络信息。适用于查询实时新闻、天气、股价等时效性信息。&quot;</span><span class=p>}</span>
+</span></code></pre></div> <p><strong>2. 参数设计要精确</strong></p> <div class="language-python highlight"><pre><span></span><code><span id=__span-8-1><span class=c1># 不好的参数设计</span>
+</span><span id=__span-8-2><span class=p>{</span><span class=s2>&quot;parameters&quot;</span><span class=p>:</span> <span class=p>{</span><span class=s2>&quot;query&quot;</span><span class=p>:</span> <span class=s2>&quot;string&quot;</span><span class=p>}}</span>
+</span><span id=__span-8-3>
+</span><span id=__span-8-4><span class=c1># 好的参数设计</span>
+</span><span id=__span-8-5><span class=p>{</span>
+</span><span id=__span-8-6>  <span class=s2>&quot;parameters&quot;</span><span class=p>:</span> <span class=p>{</span>
+</span><span id=__span-8-7>    <span class=s2>&quot;query&quot;</span><span class=p>:</span> <span class=p>{</span>
+</span><span id=__span-8-8>      <span class=s2>&quot;type&quot;</span><span class=p>:</span> <span class=s2>&quot;string&quot;</span><span class=p>,</span>
+</span><span id=__span-8-9>      <span class=s2>&quot;description&quot;</span><span class=p>:</span> <span class=s2>&quot;搜索关键词，建议使用英文以获得更好结果&quot;</span>
+</span><span id=__span-8-10>    <span class=p>},</span>
+</span><span id=__span-8-11>    <span class=s2>&quot;num_results&quot;</span><span class=p>:</span> <span class=p>{</span>
+</span><span id=__span-8-12>      <span class=s2>&quot;type&quot;</span><span class=p>:</span> <span class=s2>&quot;integer&quot;</span><span class=p>,</span>
+</span><span id=__span-8-13>      <span class=s2>&quot;description&quot;</span><span class=p>:</span> <span class=s2>&quot;返回结果数量，默认 5，最大 10&quot;</span><span class=p>,</span>
+</span><span id=__span-8-14>      <span class=s2>&quot;default&quot;</span><span class=p>:</span> <span class=mi>5</span>
+</span><span id=__span-8-15>    <span class=p>}</span>
+</span><span id=__span-8-16>  <span class=p>}</span>
+</span><span id=__span-8-17><span class=p>}</span>
+</span></code></pre></div> <p><strong>3. 错误处理要完善</strong></p> <p>工具调用可能失败（网络错误、API 限制、参数错误），Agent 需要能够处理这些错误并尝试恢复。</p> <hr> <h2 id=multi-agent>五、Multi-Agent：从单打独斗到团队协作<a class=headerlink href=#multi-agent title="Permanent link">&para;</a></h2> <h3 id=51-agent>5.1 为什么需要多 Agent？<a class=headerlink href=#51-agent title="Permanent link">&para;</a></h3> <p>单个 Agent 的能力是有限的：</p> <ul> <li><strong>专业分工</strong>：软件开发需要产品经理、架构师、程序员、测试员等不同角色。</li> <li><strong>并行处理</strong>：多个 Agent 可以同时处理不同子任务，提高效率。</li> <li><strong>互相验证</strong>：多个 Agent 可以交叉验证结果，减少错误。</li> </ul> <pre class=mermaid><code>flowchart TD
     subgraph SingleAgent["单 Agent"]
         A1["一个 Agent&lt;br/&gt;处理所有任务"] --&gt; A2["能力边界有限&lt;br/&gt;效率瓶颈"]
     end
@@ -374,44 +258,26 @@
     C &lt;--&gt; A</code></pre> <p>Agent 之间平等协作，没有中央控制。适合需要高度协作、创意碰撞的场景。</p> <p><strong>3. 流水线式（Pipeline）</strong></p> <pre class=mermaid><code>flowchart LR
     A["数据获取 Agent"] --&gt; B["数据清洗 Agent"]
     B --&gt; C["数据分析 Agent"]
-    C --&gt; D["报告生成 Agent"]</code></pre> <p>每个 Agent 负责流程中的一个环节，数据像流水线一样传递。适合标准化的数据处理流程。</p> <h3 id=53-multi-agent>5.3 主流 Multi-Agent 框架对比<a class=headerlink href=#53-multi-agent title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>框架</th> <th>开发者</th> <th>架构特点</th> <th>适用场景</th> </tr> </thead> <tbody> <tr> <td><strong>AutoGen</strong></td> <td>微软</td> <td>对话式多 Agent，支持人机协作</td> <td>复杂任务分解、代码生成</td> </tr> <tr> <td><strong>CrewAI</strong></td> <td>社区</td> <td>角色扮演，任务委派</td> <td>业务流程自动化</td> </tr> <tr> <td><strong>MetaGPT</strong></td> <td>社区</td> <td>模拟软件公司组织架构</td> <td>软件开发全流程</td> </tr> <tr> <td><strong>LangGraph</strong></td> <td>LangChain</td> <td>基于图的状态机</td> <td>复杂工作流编排</td> </tr> </tbody> </table> <p><strong>AutoGen 的核心概念</strong>：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1> 1</a></span>
-<span class=normal><a href=#__codelineno-9-2> 2</a></span>
-<span class=normal><a href=#__codelineno-9-3> 3</a></span>
-<span class=normal><a href=#__codelineno-9-4> 4</a></span>
-<span class=normal><a href=#__codelineno-9-5> 5</a></span>
-<span class=normal><a href=#__codelineno-9-6> 6</a></span>
-<span class=normal><a href=#__codelineno-9-7> 7</a></span>
-<span class=normal><a href=#__codelineno-9-8> 8</a></span>
-<span class=normal><a href=#__codelineno-9-9> 9</a></span>
-<span class=normal><a href=#__codelineno-9-10>10</a></span>
-<span class=normal><a href=#__codelineno-9-11>11</a></span>
-<span class=normal><a href=#__codelineno-9-12>12</a></span>
-<span class=normal><a href=#__codelineno-9-13>13</a></span>
-<span class=normal><a href=#__codelineno-9-14>14</a></span>
-<span class=normal><a href=#__codelineno-9-15>15</a></span>
-<span class=normal><a href=#__codelineno-9-16>16</a></span>
-<span class=normal><a href=#__codelineno-9-17>17</a></span>
-<span class=normal><a href=#__codelineno-9-18>18</a></span>
-<span class=normal><a href=#__codelineno-9-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a><span class=kn>from</span><span class=w> </span><span class=nn>autogen</span><span class=w> </span><span class=kn>import</span> <span class=n>AssistantAgent</span><span class=p>,</span> <span class=n>UserProxyAgent</span>
-</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a>
-</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a><span class=c1># 创建 Agent</span>
-</span><span id=__span-9-4><a id=__codelineno-9-4 name=__codelineno-9-4></a><span class=n>assistant</span> <span class=o>=</span> <span class=n>AssistantAgent</span><span class=p>(</span>
-</span><span id=__span-9-5><a id=__codelineno-9-5 name=__codelineno-9-5></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;assistant&quot;</span><span class=p>,</span>
-</span><span id=__span-9-6><a id=__codelineno-9-6 name=__codelineno-9-6></a>    <span class=n>llm_config</span><span class=o>=</span><span class=p>{</span><span class=s2>&quot;model&quot;</span><span class=p>:</span> <span class=s2>&quot;gpt-4&quot;</span><span class=p>,</span> <span class=s2>&quot;api_key&quot;</span><span class=p>:</span> <span class=s2>&quot;...&quot;</span><span class=p>}</span>
-</span><span id=__span-9-7><a id=__codelineno-9-7 name=__codelineno-9-7></a><span class=p>)</span>
-</span><span id=__span-9-8><a id=__codelineno-9-8 name=__codelineno-9-8></a>
-</span><span id=__span-9-9><a id=__codelineno-9-9 name=__codelineno-9-9></a><span class=n>user_proxy</span> <span class=o>=</span> <span class=n>UserProxyAgent</span><span class=p>(</span>
-</span><span id=__span-9-10><a id=__codelineno-9-10 name=__codelineno-9-10></a>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;user_proxy&quot;</span><span class=p>,</span>
-</span><span id=__span-9-11><a id=__codelineno-9-11 name=__codelineno-9-11></a>    <span class=n>human_input_mode</span><span class=o>=</span><span class=s2>&quot;NEVER&quot;</span><span class=p>,</span>
-</span><span id=__span-9-12><a id=__codelineno-9-12 name=__codelineno-9-12></a>    <span class=n>max_consecutive_auto_reply</span><span class=o>=</span><span class=mi>10</span>
-</span><span id=__span-9-13><a id=__codelineno-9-13 name=__codelineno-9-13></a><span class=p>)</span>
-</span><span id=__span-9-14><a id=__codelineno-9-14 name=__codelineno-9-14></a>
-</span><span id=__span-9-15><a id=__codelineno-9-15 name=__codelineno-9-15></a><span class=c1># 启动对话</span>
-</span><span id=__span-9-16><a id=__codelineno-9-16 name=__codelineno-9-16></a><span class=n>user_proxy</span><span class=o>.</span><span class=n>initiate_chat</span><span class=p>(</span>
-</span><span id=__span-9-17><a id=__codelineno-9-17 name=__codelineno-9-17></a>    <span class=n>assistant</span><span class=p>,</span>
-</span><span id=__span-9-18><a id=__codelineno-9-18 name=__codelineno-9-18></a>    <span class=n>message</span><span class=o>=</span><span class=s2>&quot;帮我写一个 Python 函数，计算斐波那契数列&quot;</span>
-</span><span id=__span-9-19><a id=__codelineno-9-19 name=__codelineno-9-19></a><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div> <p><strong>MetaGPT 的软件公司模拟</strong>：</p> <pre class=mermaid><code>flowchart TD
+    C --&gt; D["报告生成 Agent"]</code></pre> <p>每个 Agent 负责流程中的一个环节，数据像流水线一样传递。适合标准化的数据处理流程。</p> <h3 id=53-multi-agent>5.3 主流 Multi-Agent 框架对比<a class=headerlink href=#53-multi-agent title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>框架</th> <th>开发者</th> <th>架构特点</th> <th>适用场景</th> </tr> </thead> <tbody> <tr> <td><strong>AutoGen</strong></td> <td>微软</td> <td>对话式多 Agent，支持人机协作</td> <td>复杂任务分解、代码生成</td> </tr> <tr> <td><strong>CrewAI</strong></td> <td>社区</td> <td>角色扮演，任务委派</td> <td>业务流程自动化</td> </tr> <tr> <td><strong>MetaGPT</strong></td> <td>社区</td> <td>模拟软件公司组织架构</td> <td>软件开发全流程</td> </tr> <tr> <td><strong>LangGraph</strong></td> <td>LangChain</td> <td>基于图的状态机</td> <td>复杂工作流编排</td> </tr> </tbody> </table> <p><strong>AutoGen 的核心概念</strong>：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-9-1><span class=kn>from</span><span class=w> </span><span class=nn>autogen</span><span class=w> </span><span class=kn>import</span> <span class=n>AssistantAgent</span><span class=p>,</span> <span class=n>UserProxyAgent</span>
+</span><span id=__span-9-2>
+</span><span id=__span-9-3><span class=c1># 创建 Agent</span>
+</span><span id=__span-9-4><span class=n>assistant</span> <span class=o>=</span> <span class=n>AssistantAgent</span><span class=p>(</span>
+</span><span id=__span-9-5>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;assistant&quot;</span><span class=p>,</span>
+</span><span id=__span-9-6>    <span class=n>llm_config</span><span class=o>=</span><span class=p>{</span><span class=s2>&quot;model&quot;</span><span class=p>:</span> <span class=s2>&quot;gpt-4&quot;</span><span class=p>,</span> <span class=s2>&quot;api_key&quot;</span><span class=p>:</span> <span class=s2>&quot;...&quot;</span><span class=p>}</span>
+</span><span id=__span-9-7><span class=p>)</span>
+</span><span id=__span-9-8>
+</span><span id=__span-9-9><span class=n>user_proxy</span> <span class=o>=</span> <span class=n>UserProxyAgent</span><span class=p>(</span>
+</span><span id=__span-9-10>    <span class=n>name</span><span class=o>=</span><span class=s2>&quot;user_proxy&quot;</span><span class=p>,</span>
+</span><span id=__span-9-11>    <span class=n>human_input_mode</span><span class=o>=</span><span class=s2>&quot;NEVER&quot;</span><span class=p>,</span>
+</span><span id=__span-9-12>    <span class=n>max_consecutive_auto_reply</span><span class=o>=</span><span class=mi>10</span>
+</span><span id=__span-9-13><span class=p>)</span>
+</span><span id=__span-9-14>
+</span><span id=__span-9-15><span class=c1># 启动对话</span>
+</span><span id=__span-9-16><span class=n>user_proxy</span><span class=o>.</span><span class=n>initiate_chat</span><span class=p>(</span>
+</span><span id=__span-9-17>    <span class=n>assistant</span><span class=p>,</span>
+</span><span id=__span-9-18>    <span class=n>message</span><span class=o>=</span><span class=s2>&quot;帮我写一个 Python 函数，计算斐波那契数列&quot;</span>
+</span><span id=__span-9-19><span class=p>)</span>
+</span></code></pre></div> <p><strong>MetaGPT 的软件公司模拟</strong>：</p> <pre class=mermaid><code>flowchart TD
     subgraph MetaGPT["MetaGPT 软件公司"]
         PM["产品经理&lt;br/&gt;写 PRD"]
         Arch["架构师&lt;br/&gt;设计技术方案"]
@@ -420,23 +286,16 @@
     end
 
     PM --&gt; Arch --&gt; Dev --&gt; QA
-    QA --&gt;|"Bug 报告"| Dev</code></pre> <p>MetaGPT 让不同角色的 Agent 按照软件开发的 SOP（标准操作流程）协作，从需求文档到可运行代码。</p> <h3 id=54>5.4 根本矛盾之三：协作效率与通信开销的权衡<a class=headerlink href=#54 title="Permanent link">&para;</a></h3> <p>Multi-Agent 的优势是专业分工，但代价是：</p> <ul> <li><strong>通信开销</strong>：Agent 之间需要频繁通信，协调成本增加。</li> <li><strong>一致性维护</strong>：多个 Agent 可能产生冲突的决策，需要仲裁机制。</li> <li><strong>调试困难</strong>：问题可能出现在任何 Agent 或协作环节，定位困难。</li> </ul> <p><strong>设计原则</strong>：</p> <ul> <li>Agent 数量不是越多越好，够用即可。</li> <li>明确每个 Agent 的职责边界，避免重叠。</li> <li>设计清晰的通信协议和状态管理机制。</li> </ul> <hr> <h2 id=agent_1>六、幻觉与可靠性：Agent 的命门<a class=headerlink href=#agent_1 title="Permanent link">&para;</a></h2> <h3 id=61-llm>6.1 LLM 幻觉的本质<a class=headerlink href=#61-llm title="Permanent link">&para;</a></h3> <p>幻觉（Hallucination）是指 LLM 生成看似合理但实际错误的内容。在 Agent 场景中，幻觉会导致：</p> <ul> <li>调用错误的工具</li> <li>生成错误的参数</li> <li>做出错误的规划</li> </ul> <p><strong>根本矛盾之四：LLM 的概率生成本质与确定性任务要求的冲突。</strong></p> <p>LLM 被训练成"生成合理的文本"，而非"生成正确的答案"。合理 ≠ 正确。</p> <h3 id=62>6.2 幻觉缓解策略<a class=headerlink href=#62 title="Permanent link">&para;</a></h3> <p><strong>1. 检索增强（RAG）</strong></p> <p>将 LLM 的生成约束在检索到的知识范围内，减少自由发挥的空间。</p> <p><strong>2. 自我验证（Self-Verification）</strong></p> <p>让 LLM 对自己的输出进行验证：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1>1</a></span>
-<span class=normal><a href=#__codelineno-10-2>2</a></span>
-<span class=normal><a href=#__codelineno-10-3>3</a></span>
-<span class=normal><a href=#__codelineno-10-4>4</a></span>
-<span class=normal><a href=#__codelineno-10-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a>Agent 生成答案后：
-</span><span id=__span-10-2><a id=__codelineno-10-2 name=__codelineno-10-2></a>Thought: 我需要验证这个答案是否正确。
-</span><span id=__span-10-3><a id=__codelineno-10-3 name=__codelineno-10-3></a>Action: 搜索相关信息验证答案
-</span><span id=__span-10-4><a id=__codelineno-10-4 name=__codelineno-10-4></a>Observation: 验证结果
-</span><span id=__span-10-5><a id=__codelineno-10-5 name=__codelineno-10-5></a>Final Answer: 根据验证调整后的答案
-</span></code></pre></div></td></tr></table></div> <p><strong>3. 多 Agent 交叉验证</strong></p> <p>多个 Agent 独立生成答案，通过投票或讨论达成共识。</p> <p><strong>4. 工具验证</strong></p> <p>对于可验证的事实（如数学计算、代码执行），使用工具验证而非依赖 LLM：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1>1</a></span>
-<span class=normal><a href=#__codelineno-11-2>2</a></span>
-<span class=normal><a href=#__codelineno-11-3>3</a></span>
-<span class=normal><a href=#__codelineno-11-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a><span class=c1># 让 LLM 生成代码，但用 Python 解释器执行验证</span>
-</span><span id=__span-11-2><a id=__codelineno-11-2 name=__codelineno-11-2></a><span class=n>result</span> <span class=o>=</span> <span class=n>execute_code</span><span class=p>(</span><span class=n>llm_generated_code</span><span class=p>)</span>
-</span><span id=__span-11-3><a id=__codelineno-11-3 name=__codelineno-11-3></a><span class=k>if</span> <span class=n>result</span><span class=o>.</span><span class=n>error</span><span class=p>:</span>
-</span><span id=__span-11-4><a id=__codelineno-11-4 name=__codelineno-11-4></a>    <span class=c1># 让 LLM 修正代码</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=63-llm>6.3 确定性保障：从 LLM 到程序<a class=headerlink href=#63-llm title="Permanent link">&para;</a></h3> <p>对于关键任务，完全依赖 LLM 是不可接受的。更可靠的做法是：</p> <pre class=mermaid><code>flowchart TD
+    QA --&gt;|"Bug 报告"| Dev</code></pre> <p>MetaGPT 让不同角色的 Agent 按照软件开发的 SOP（标准操作流程）协作，从需求文档到可运行代码。</p> <h3 id=54>5.4 根本矛盾之三：协作效率与通信开销的权衡<a class=headerlink href=#54 title="Permanent link">&para;</a></h3> <p>Multi-Agent 的优势是专业分工，但代价是：</p> <ul> <li><strong>通信开销</strong>：Agent 之间需要频繁通信，协调成本增加。</li> <li><strong>一致性维护</strong>：多个 Agent 可能产生冲突的决策，需要仲裁机制。</li> <li><strong>调试困难</strong>：问题可能出现在任何 Agent 或协作环节，定位困难。</li> </ul> <p><strong>设计原则</strong>：</p> <ul> <li>Agent 数量不是越多越好，够用即可。</li> <li>明确每个 Agent 的职责边界，避免重叠。</li> <li>设计清晰的通信协议和状态管理机制。</li> </ul> <hr> <h2 id=agent_1>六、幻觉与可靠性：Agent 的命门<a class=headerlink href=#agent_1 title="Permanent link">&para;</a></h2> <h3 id=61-llm>6.1 LLM 幻觉的本质<a class=headerlink href=#61-llm title="Permanent link">&para;</a></h3> <p>幻觉（Hallucination）是指 LLM 生成看似合理但实际错误的内容。在 Agent 场景中，幻觉会导致：</p> <ul> <li>调用错误的工具</li> <li>生成错误的参数</li> <li>做出错误的规划</li> </ul> <p><strong>根本矛盾之四：LLM 的概率生成本质与确定性任务要求的冲突。</strong></p> <p>LLM 被训练成"生成合理的文本"，而非"生成正确的答案"。合理 ≠ 正确。</p> <h3 id=62>6.2 幻觉缓解策略<a class=headerlink href=#62 title="Permanent link">&para;</a></h3> <p><strong>1. 检索增强（RAG）</strong></p> <p>将 LLM 的生成约束在检索到的知识范围内，减少自由发挥的空间。</p> <p><strong>2. 自我验证（Self-Verification）</strong></p> <p>让 LLM 对自己的输出进行验证：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-10-1>Agent 生成答案后：
+</span><span id=__span-10-2>Thought: 我需要验证这个答案是否正确。
+</span><span id=__span-10-3>Action: 搜索相关信息验证答案
+</span><span id=__span-10-4>Observation: 验证结果
+</span><span id=__span-10-5>Final Answer: 根据验证调整后的答案
+</span></code></pre></div> <p><strong>3. 多 Agent 交叉验证</strong></p> <p>多个 Agent 独立生成答案，通过投票或讨论达成共识。</p> <p><strong>4. 工具验证</strong></p> <p>对于可验证的事实（如数学计算、代码执行），使用工具验证而非依赖 LLM：</p> <div class="language-python highlight"><pre><span></span><code><span id=__span-11-1><span class=c1># 让 LLM 生成代码，但用 Python 解释器执行验证</span>
+</span><span id=__span-11-2><span class=n>result</span> <span class=o>=</span> <span class=n>execute_code</span><span class=p>(</span><span class=n>llm_generated_code</span><span class=p>)</span>
+</span><span id=__span-11-3><span class=k>if</span> <span class=n>result</span><span class=o>.</span><span class=n>error</span><span class=p>:</span>
+</span><span id=__span-11-4>    <span class=c1># 让 LLM 修正代码</span>
+</span></code></pre></div> <h3 id=63-llm>6.3 确定性保障：从 LLM 到程序<a class=headerlink href=#63-llm title="Permanent link">&para;</a></h3> <p>对于关键任务，完全依赖 LLM 是不可接受的。更可靠的做法是：</p> <pre class=mermaid><code>flowchart TD
     A["用户任务"] --&gt; B{"任务类型？"}
     B --&gt;|"结构化任务"| C["使用确定性程序"]
     B --&gt;|"开放性任务"| D["使用 LLM"]
@@ -446,155 +305,83 @@
 
     E &amp; F --&gt; G["结果验证"]
     G --&gt;|"失败"| H["人工介入/重试"]
-    G --&gt;|"成功"| I["输出结果"]</code></pre> <p><strong>核心原则</strong>：</p> <ul> <li>能用规则解决的，不用 LLM。</li> <li>LLM 负责"理解意图"和"生成草案"。</li> <li>程序负责"执行"和"验证"。</li> </ul> <hr> <h2 id=agent_2>七、Agent 的工程实践<a class=headerlink href=#agent_2 title="Permanent link">&para;</a></h2> <h3 id=71-prompt-agent>7.1 Prompt 工程：Agent 的"编程"<a class=headerlink href=#71-prompt-agent title="Permanent link">&para;</a></h3> <p>Agent 的行为很大程度上由 Prompt 决定。一个好的 Agent Prompt 通常包含：</p> <div class="language-markdown highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1> 1</a></span>
-<span class=normal><a href=#__codelineno-12-2> 2</a></span>
-<span class=normal><a href=#__codelineno-12-3> 3</a></span>
-<span class=normal><a href=#__codelineno-12-4> 4</a></span>
-<span class=normal><a href=#__codelineno-12-5> 5</a></span>
-<span class=normal><a href=#__codelineno-12-6> 6</a></span>
-<span class=normal><a href=#__codelineno-12-7> 7</a></span>
-<span class=normal><a href=#__codelineno-12-8> 8</a></span>
-<span class=normal><a href=#__codelineno-12-9> 9</a></span>
-<span class=normal><a href=#__codelineno-12-10>10</a></span>
-<span class=normal><a href=#__codelineno-12-11>11</a></span>
-<span class=normal><a href=#__codelineno-12-12>12</a></span>
-<span class=normal><a href=#__codelineno-12-13>13</a></span>
-<span class=normal><a href=#__codelineno-12-14>14</a></span>
-<span class=normal><a href=#__codelineno-12-15>15</a></span>
-<span class=normal><a href=#__codelineno-12-16>16</a></span>
-<span class=normal><a href=#__codelineno-12-17>17</a></span>
-<span class=normal><a href=#__codelineno-12-18>18</a></span>
-<span class=normal><a href=#__codelineno-12-19>19</a></span>
-<span class=normal><a href=#__codelineno-12-20>20</a></span>
-<span class=normal><a href=#__codelineno-12-21>21</a></span>
-<span class=normal><a href=#__codelineno-12-22>22</a></span>
-<span class=normal><a href=#__codelineno-12-23>23</a></span>
-<span class=normal><a href=#__codelineno-12-24>24</a></span>
-<span class=normal><a href=#__codelineno-12-25>25</a></span>
-<span class=normal><a href=#__codelineno-12-26>26</a></span>
-<span class=normal><a href=#__codelineno-12-27>27</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><a id=__codelineno-12-1 name=__codelineno-12-1></a><span class=gh># 角色定义</span>
-</span><span id=__span-12-2><a id=__codelineno-12-2 name=__codelineno-12-2></a>你是 {角色名称}，{角色描述}。
-</span><span id=__span-12-3><a id=__codelineno-12-3 name=__codelineno-12-3></a>
-</span><span id=__span-12-4><a id=__codelineno-12-4 name=__codelineno-12-4></a><span class=gh># 任务描述</span>
-</span><span id=__span-12-5><a id=__codelineno-12-5 name=__codelineno-12-5></a>你的任务是 {任务目标}。
-</span><span id=__span-12-6><a id=__codelineno-12-6 name=__codelineno-12-6></a>
-</span><span id=__span-12-7><a id=__codelineno-12-7 name=__codelineno-12-7></a><span class=gh># 可用工具</span>
-</span><span id=__span-12-8><a id=__codelineno-12-8 name=__codelineno-12-8></a>{工具列表，每个工具包含名称、描述、参数}
-</span><span id=__span-12-9><a id=__codelineno-12-9 name=__codelineno-12-9></a>
-</span><span id=__span-12-10><a id=__codelineno-12-10 name=__codelineno-12-10></a><span class=gh># 工作流</span>
-</span><span id=__span-12-11><a id=__codelineno-12-11 name=__codelineno-12-11></a><span class=k>1.</span> 分析用户需求
-</span><span id=__span-12-12><a id=__codelineno-12-12 name=__codelineno-12-12></a><span class=k>2.</span> 规划执行步骤
-</span><span id=__span-12-13><a id=__codelineno-12-13 name=__codelineno-12-13></a><span class=k>3.</span> 调用必要工具
-</span><span id=__span-12-14><a id=__codelineno-12-14 name=__codelineno-12-14></a><span class=k>4.</span> 整合结果输出
-</span><span id=__span-12-15><a id=__codelineno-12-15 name=__codelineno-12-15></a>
-</span><span id=__span-12-16><a id=__codelineno-12-16 name=__codelineno-12-16></a><span class=gh># 输出格式</span>
-</span><span id=__span-12-17><a id=__codelineno-12-17 name=__codelineno-12-17></a>Thought: [你的思考过程]
-</span><span id=__span-12-18><a id=__codelineno-12-18 name=__codelineno-12-18></a>Action: [工具名称]
-</span><span id=__span-12-19><a id=__codelineno-12-19 name=__codelineno-12-19></a>Action Input: [工具参数 JSON]
-</span><span id=__span-12-20><a id=__codelineno-12-20 name=__codelineno-12-20></a>Observation: [工具返回结果]
-</span><span id=__span-12-21><a id=__codelineno-12-21 name=__codelineno-12-21></a>...
-</span><span id=__span-12-22><a id=__codelineno-12-22 name=__codelineno-12-22></a>Final Answer: [最终答案]
-</span><span id=__span-12-23><a id=__codelineno-12-23 name=__codelineno-12-23></a>
-</span><span id=__span-12-24><a id=__codelineno-12-24 name=__codelineno-12-24></a><span class=gh># 约束条件</span>
-</span><span id=__span-12-25><a id=__codelineno-12-25 name=__codelineno-12-25></a><span class=k>-</span><span class=w> </span>不要编造信息
-</span><span id=__span-12-26><a id=__codelineno-12-26 name=__codelineno-12-26></a><span class=k>-</span><span class=w> </span>不确定时承认不确定
-</span><span id=__span-12-27><a id=__codelineno-12-27 name=__codelineno-12-27></a><span class=k>-</span><span class=w> </span>优先使用工具获取实时信息
-</span></code></pre></div></td></tr></table></div> <h3 id=72>7.2 状态管理<a class=headerlink href=#72 title="Permanent link">&para;</a></h3> <p>Agent 需要维护状态，包括：</p> <ul> <li>当前任务进度</li> <li>已执行的工具调用历史</li> <li>中间结果</li> <li>错误信息</li> </ul> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1> 1</a></span>
-<span class=normal><a href=#__codelineno-13-2> 2</a></span>
-<span class=normal><a href=#__codelineno-13-3> 3</a></span>
-<span class=normal><a href=#__codelineno-13-4> 4</a></span>
-<span class=normal><a href=#__codelineno-13-5> 5</a></span>
-<span class=normal><a href=#__codelineno-13-6> 6</a></span>
-<span class=normal><a href=#__codelineno-13-7> 7</a></span>
-<span class=normal><a href=#__codelineno-13-8> 8</a></span>
-<span class=normal><a href=#__codelineno-13-9> 9</a></span>
-<span class=normal><a href=#__codelineno-13-10>10</a></span>
-<span class=normal><a href=#__codelineno-13-11>11</a></span>
-<span class=normal><a href=#__codelineno-13-12>12</a></span>
-<span class=normal><a href=#__codelineno-13-13>13</a></span>
-<span class=normal><a href=#__codelineno-13-14>14</a></span>
-<span class=normal><a href=#__codelineno-13-15>15</a></span>
-<span class=normal><a href=#__codelineno-13-16>16</a></span>
-<span class=normal><a href=#__codelineno-13-17>17</a></span>
-<span class=normal><a href=#__codelineno-13-18>18</a></span>
-<span class=normal><a href=#__codelineno-13-19>19</a></span>
-<span class=normal><a href=#__codelineno-13-20>20</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><a id=__codelineno-13-1 name=__codelineno-13-1></a><span class=k>class</span><span class=w> </span><span class=nc>AgentState</span><span class=p>:</span>
-</span><span id=__span-13-2><a id=__codelineno-13-2 name=__codelineno-13-2></a>    <span class=k>def</span><span class=w> </span><span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-</span><span id=__span-13-3><a id=__codelineno-13-3 name=__codelineno-13-3></a>        <span class=bp>self</span><span class=o>.</span><span class=n>task_id</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>generate_id</span><span class=p>()</span>
-</span><span id=__span-13-4><a id=__codelineno-13-4 name=__codelineno-13-4></a>        <span class=bp>self</span><span class=o>.</span><span class=n>status</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=s2>&quot;pending&quot;</span>  <span class=c1># pending, running, completed, failed</span>
-</span><span id=__span-13-5><a id=__codelineno-13-5 name=__codelineno-13-5></a>        <span class=bp>self</span><span class=o>.</span><span class=n>history</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=n>Step</span><span class=p>]</span> <span class=o>=</span> <span class=p>[]</span>
-</span><span id=__span-13-6><a id=__codelineno-13-6 name=__codelineno-13-6></a>        <span class=bp>self</span><span class=o>.</span><span class=n>current_step</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>0</span>
-</span><span id=__span-13-7><a id=__codelineno-13-7 name=__codelineno-13-7></a>        <span class=bp>self</span><span class=o>.</span><span class=n>context</span><span class=p>:</span> <span class=n>Dict</span> <span class=o>=</span> <span class=p>{}</span>
-</span><span id=__span-13-8><a id=__codelineno-13-8 name=__codelineno-13-8></a>
-</span><span id=__span-13-9><a id=__codelineno-13-9 name=__codelineno-13-9></a>    <span class=k>def</span><span class=w> </span><span class=nf>add_step</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>step</span><span class=p>:</span> <span class=n>Step</span><span class=p>):</span>
-</span><span id=__span-13-10><a id=__codelineno-13-10 name=__codelineno-13-10></a>        <span class=bp>self</span><span class=o>.</span><span class=n>history</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>step</span><span class=p>)</span>
-</span><span id=__span-13-11><a id=__codelineno-13-11 name=__codelineno-13-11></a>        <span class=bp>self</span><span class=o>.</span><span class=n>current_step</span> <span class=o>+=</span> <span class=mi>1</span>
-</span><span id=__span-13-12><a id=__codelineno-13-12 name=__codelineno-13-12></a>
-</span><span id=__span-13-13><a id=__codelineno-13-13 name=__codelineno-13-13></a>    <span class=k>def</span><span class=w> </span><span class=nf>to_dict</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Dict</span><span class=p>:</span>
-</span><span id=__span-13-14><a id=__codelineno-13-14 name=__codelineno-13-14></a>        <span class=k>return</span> <span class=p>{</span>
-</span><span id=__span-13-15><a id=__codelineno-13-15 name=__codelineno-13-15></a>            <span class=s2>&quot;task_id&quot;</span><span class=p>:</span> <span class=bp>self</span><span class=o>.</span><span class=n>task_id</span><span class=p>,</span>
-</span><span id=__span-13-16><a id=__codelineno-13-16 name=__codelineno-13-16></a>            <span class=s2>&quot;status&quot;</span><span class=p>:</span> <span class=bp>self</span><span class=o>.</span><span class=n>status</span><span class=p>,</span>
-</span><span id=__span-13-17><a id=__codelineno-13-17 name=__codelineno-13-17></a>            <span class=s2>&quot;history&quot;</span><span class=p>:</span> <span class=p>[</span><span class=n>s</span><span class=o>.</span><span class=n>to_dict</span><span class=p>()</span> <span class=k>for</span> <span class=n>s</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>history</span><span class=p>],</span>
-</span><span id=__span-13-18><a id=__codelineno-13-18 name=__codelineno-13-18></a>            <span class=s2>&quot;current_step&quot;</span><span class=p>:</span> <span class=bp>self</span><span class=o>.</span><span class=n>current_step</span><span class=p>,</span>
-</span><span id=__span-13-19><a id=__codelineno-13-19 name=__codelineno-13-19></a>            <span class=s2>&quot;context&quot;</span><span class=p>:</span> <span class=bp>self</span><span class=o>.</span><span class=n>context</span>
-</span><span id=__span-13-20><a id=__codelineno-13-20 name=__codelineno-13-20></a>        <span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=73>7.3 错误处理与重试<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <p>Agent 执行过程中可能遇到各种错误：</p> <ul> <li>LLM API 错误（速率限制、超时）</li> <li>工具调用错误（网络错误、参数错误）</li> <li>规划错误（步骤不可执行）</li> </ul> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
-<span class=normal><a href=#__codelineno-14-2> 2</a></span>
-<span class=normal><a href=#__codelineno-14-3> 3</a></span>
-<span class=normal><a href=#__codelineno-14-4> 4</a></span>
-<span class=normal><a href=#__codelineno-14-5> 5</a></span>
-<span class=normal><a href=#__codelineno-14-6> 6</a></span>
-<span class=normal><a href=#__codelineno-14-7> 7</a></span>
-<span class=normal><a href=#__codelineno-14-8> 8</a></span>
-<span class=normal><a href=#__codelineno-14-9> 9</a></span>
-<span class=normal><a href=#__codelineno-14-10>10</a></span>
-<span class=normal><a href=#__codelineno-14-11>11</a></span>
-<span class=normal><a href=#__codelineno-14-12>12</a></span>
-<span class=normal><a href=#__codelineno-14-13>13</a></span>
-<span class=normal><a href=#__codelineno-14-14>14</a></span>
-<span class=normal><a href=#__codelineno-14-15>15</a></span>
-<span class=normal><a href=#__codelineno-14-16>16</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=k>class</span><span class=w> </span><span class=nc>AgentExecutor</span><span class=p>:</span>
-</span><span id=__span-14-2><a id=__codelineno-14-2 name=__codelineno-14-2></a>    <span class=k>def</span><span class=w> </span><span class=nf>execute_with_retry</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>max_retries</span><span class=o>=</span><span class=mi>3</span><span class=p>):</span>
-</span><span id=__span-14-3><a id=__codelineno-14-3 name=__codelineno-14-3></a>        <span class=k>for</span> <span class=n>attempt</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>max_retries</span><span class=p>):</span>
-</span><span id=__span-14-4><a id=__codelineno-14-4 name=__codelineno-14-4></a>            <span class=k>try</span><span class=p>:</span>
-</span><span id=__span-14-5><a id=__codelineno-14-5 name=__codelineno-14-5></a>                <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>execute</span><span class=p>()</span>
-</span><span id=__span-14-6><a id=__codelineno-14-6 name=__codelineno-14-6></a>            <span class=k>except</span> <span class=n>LLMError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
-</span><span id=__span-14-7><a id=__codelineno-14-7 name=__codelineno-14-7></a>                <span class=k>if</span> <span class=n>e</span><span class=o>.</span><span class=n>is_rate_limit</span><span class=p>:</span>
-</span><span id=__span-14-8><a id=__codelineno-14-8 name=__codelineno-14-8></a>                    <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>2</span> <span class=o>**</span> <span class=n>attempt</span><span class=p>)</span>  <span class=c1># 指数退避</span>
-</span><span id=__span-14-9><a id=__codelineno-14-9 name=__codelineno-14-9></a>                    <span class=k>continue</span>
-</span><span id=__span-14-10><a id=__codelineno-14-10 name=__codelineno-14-10></a>                <span class=k>raise</span>
-</span><span id=__span-14-11><a id=__codelineno-14-11 name=__codelineno-14-11></a>            <span class=k>except</span> <span class=n>ToolError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
-</span><span id=__span-14-12><a id=__codelineno-14-12 name=__codelineno-14-12></a>                <span class=c1># 让 LLM 修正工具调用</span>
-</span><span id=__span-14-13><a id=__codelineno-14-13 name=__codelineno-14-13></a>                <span class=bp>self</span><span class=o>.</span><span class=n>state</span><span class=o>.</span><span class=n>add_error</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
-</span><span id=__span-14-14><a id=__codelineno-14-14 name=__codelineno-14-14></a>                <span class=bp>self</span><span class=o>.</span><span class=n>replan</span><span class=p>()</span>
-</span><span id=__span-14-15><a id=__codelineno-14-15 name=__codelineno-14-15></a>                <span class=k>continue</span>
-</span><span id=__span-14-16><a id=__codelineno-14-16 name=__codelineno-14-16></a>        <span class=k>raise</span> <span class=n>MaxRetriesExceeded</span><span class=p>()</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=74>7.4 可观测性<a class=headerlink href=#74 title="Permanent link">&para;</a></h3> <p>生产环境的 Agent 需要完善的可观测性：</p> <ul> <li><strong>日志</strong>：记录每次 LLM 调用、工具调用的输入输出</li> <li><strong>追踪</strong>：追踪任务执行的完整链路</li> <li><strong>指标</strong>：成功率、延迟、token 消耗</li> <li><strong>回放</strong>：能够回放任务执行过程，便于调试</li> </ul> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
-<span class=normal><a href=#__codelineno-15-2> 2</a></span>
-<span class=normal><a href=#__codelineno-15-3> 3</a></span>
-<span class=normal><a href=#__codelineno-15-4> 4</a></span>
-<span class=normal><a href=#__codelineno-15-5> 5</a></span>
-<span class=normal><a href=#__codelineno-15-6> 6</a></span>
-<span class=normal><a href=#__codelineno-15-7> 7</a></span>
-<span class=normal><a href=#__codelineno-15-8> 8</a></span>
-<span class=normal><a href=#__codelineno-15-9> 9</a></span>
-<span class=normal><a href=#__codelineno-15-10>10</a></span>
-<span class=normal><a href=#__codelineno-15-11>11</a></span>
-<span class=normal><a href=#__codelineno-15-12>12</a></span>
-<span class=normal><a href=#__codelineno-15-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=nd>@traceable</span><span class=p>(</span><span class=n>run_type</span><span class=o>=</span><span class=s2>&quot;llm&quot;</span><span class=p>)</span>
-</span><span id=__span-15-2><a id=__codelineno-15-2 name=__codelineno-15-2></a><span class=k>def</span><span class=w> </span><span class=nf>call_llm</span><span class=p>(</span><span class=n>messages</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>):</span>
-</span><span id=__span-15-3><a id=__codelineno-15-3 name=__codelineno-15-3></a>    <span class=n>response</span> <span class=o>=</span> <span class=n>openai</span><span class=o>.</span><span class=n>chat</span><span class=o>.</span><span class=n>completions</span><span class=o>.</span><span class=n>create</span><span class=p>(</span>
-</span><span id=__span-15-4><a id=__codelineno-15-4 name=__codelineno-15-4></a>        <span class=n>model</span><span class=o>=</span><span class=s2>&quot;gpt-4&quot;</span><span class=p>,</span>
-</span><span id=__span-15-5><a id=__codelineno-15-5 name=__codelineno-15-5></a>        <span class=n>messages</span><span class=o>=</span><span class=n>messages</span><span class=p>,</span>
-</span><span id=__span-15-6><a id=__codelineno-15-6 name=__codelineno-15-6></a>        <span class=o>**</span><span class=n>kwargs</span>
-</span><span id=__span-15-7><a id=__codelineno-15-7 name=__codelineno-15-7></a>    <span class=p>)</span>
-</span><span id=__span-15-8><a id=__codelineno-15-8 name=__codelineno-15-8></a>    <span class=k>return</span> <span class=n>response</span>
-</span><span id=__span-15-9><a id=__codelineno-15-9 name=__codelineno-15-9></a>
-</span><span id=__span-15-10><a id=__codelineno-15-10 name=__codelineno-15-10></a><span class=nd>@traceable</span><span class=p>(</span><span class=n>run_type</span><span class=o>=</span><span class=s2>&quot;tool&quot;</span><span class=p>)</span>
-</span><span id=__span-15-11><a id=__codelineno-15-11 name=__codelineno-15-11></a><span class=k>def</span><span class=w> </span><span class=nf>call_tool</span><span class=p>(</span><span class=n>tool_name</span><span class=p>,</span> <span class=n>params</span><span class=p>):</span>
-</span><span id=__span-15-12><a id=__codelineno-15-12 name=__codelineno-15-12></a>    <span class=n>result</span> <span class=o>=</span> <span class=n>tool_registry</span><span class=p>[</span><span class=n>tool_name</span><span class=p>](</span><span class=o>**</span><span class=n>params</span><span class=p>)</span>
-</span><span id=__span-15-13><a id=__codelineno-15-13 name=__codelineno-15-13></a>    <span class=k>return</span> <span class=n>result</span>
-</span></code></pre></div></td></tr></table></div> <hr> <pre class=mermaid><code>flowchart TD
+    G --&gt;|"成功"| I["输出结果"]</code></pre> <p><strong>核心原则</strong>：</p> <ul> <li>能用规则解决的，不用 LLM。</li> <li>LLM 负责"理解意图"和"生成草案"。</li> <li>程序负责"执行"和"验证"。</li> </ul> <hr> <h2 id=agent_2>七、Agent 的工程实践<a class=headerlink href=#agent_2 title="Permanent link">&para;</a></h2> <h3 id=71-prompt-agent>7.1 Prompt 工程：Agent 的"编程"<a class=headerlink href=#71-prompt-agent title="Permanent link">&para;</a></h3> <p>Agent 的行为很大程度上由 Prompt 决定。一个好的 Agent Prompt 通常包含：</p> <div class="language-markdown highlight"><pre><span></span><code><span id=__span-12-1><span class=gh># 角色定义</span>
+</span><span id=__span-12-2>你是 {角色名称}，{角色描述}。
+</span><span id=__span-12-3>
+</span><span id=__span-12-4><span class=gh># 任务描述</span>
+</span><span id=__span-12-5>你的任务是 {任务目标}。
+</span><span id=__span-12-6>
+</span><span id=__span-12-7><span class=gh># 可用工具</span>
+</span><span id=__span-12-8>{工具列表，每个工具包含名称、描述、参数}
+</span><span id=__span-12-9>
+</span><span id=__span-12-10><span class=gh># 工作流</span>
+</span><span id=__span-12-11><span class=k>1.</span> 分析用户需求
+</span><span id=__span-12-12><span class=k>2.</span> 规划执行步骤
+</span><span id=__span-12-13><span class=k>3.</span> 调用必要工具
+</span><span id=__span-12-14><span class=k>4.</span> 整合结果输出
+</span><span id=__span-12-15>
+</span><span id=__span-12-16><span class=gh># 输出格式</span>
+</span><span id=__span-12-17>Thought: [你的思考过程]
+</span><span id=__span-12-18>Action: [工具名称]
+</span><span id=__span-12-19>Action Input: [工具参数 JSON]
+</span><span id=__span-12-20>Observation: [工具返回结果]
+</span><span id=__span-12-21>...
+</span><span id=__span-12-22>Final Answer: [最终答案]
+</span><span id=__span-12-23>
+</span><span id=__span-12-24><span class=gh># 约束条件</span>
+</span><span id=__span-12-25><span class=k>-</span><span class=w> </span>不要编造信息
+</span><span id=__span-12-26><span class=k>-</span><span class=w> </span>不确定时承认不确定
+</span><span id=__span-12-27><span class=k>-</span><span class=w> </span>优先使用工具获取实时信息
+</span></code></pre></div> <h3 id=72>7.2 状态管理<a class=headerlink href=#72 title="Permanent link">&para;</a></h3> <p>Agent 需要维护状态，包括：</p> <ul> <li>当前任务进度</li> <li>已执行的工具调用历史</li> <li>中间结果</li> <li>错误信息</li> </ul> <div class="language-python highlight"><pre><span></span><code><span id=__span-13-1><span class=k>class</span><span class=w> </span><span class=nc>AgentState</span><span class=p>:</span>
+</span><span id=__span-13-2>    <span class=k>def</span><span class=w> </span><span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span><span id=__span-13-3>        <span class=bp>self</span><span class=o>.</span><span class=n>task_id</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>generate_id</span><span class=p>()</span>
+</span><span id=__span-13-4>        <span class=bp>self</span><span class=o>.</span><span class=n>status</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=s2>&quot;pending&quot;</span>  <span class=c1># pending, running, completed, failed</span>
+</span><span id=__span-13-5>        <span class=bp>self</span><span class=o>.</span><span class=n>history</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=n>Step</span><span class=p>]</span> <span class=o>=</span> <span class=p>[]</span>
+</span><span id=__span-13-6>        <span class=bp>self</span><span class=o>.</span><span class=n>current_step</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>0</span>
+</span><span id=__span-13-7>        <span class=bp>self</span><span class=o>.</span><span class=n>context</span><span class=p>:</span> <span class=n>Dict</span> <span class=o>=</span> <span class=p>{}</span>
+</span><span id=__span-13-8>
+</span><span id=__span-13-9>    <span class=k>def</span><span class=w> </span><span class=nf>add_step</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>step</span><span class=p>:</span> <span class=n>Step</span><span class=p>):</span>
+</span><span id=__span-13-10>        <span class=bp>self</span><span class=o>.</span><span class=n>history</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>step</span><span class=p>)</span>
+</span><span id=__span-13-11>        <span class=bp>self</span><span class=o>.</span><span class=n>current_step</span> <span class=o>+=</span> <span class=mi>1</span>
+</span><span id=__span-13-12>
+</span><span id=__span-13-13>    <span class=k>def</span><span class=w> </span><span class=nf>to_dict</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Dict</span><span class=p>:</span>
+</span><span id=__span-13-14>        <span class=k>return</span> <span class=p>{</span>
+</span><span id=__span-13-15>            <span class=s2>&quot;task_id&quot;</span><span class=p>:</span> <span class=bp>self</span><span class=o>.</span><span class=n>task_id</span><span class=p>,</span>
+</span><span id=__span-13-16>            <span class=s2>&quot;status&quot;</span><span class=p>:</span> <span class=bp>self</span><span class=o>.</span><span class=n>status</span><span class=p>,</span>
+</span><span id=__span-13-17>            <span class=s2>&quot;history&quot;</span><span class=p>:</span> <span class=p>[</span><span class=n>s</span><span class=o>.</span><span class=n>to_dict</span><span class=p>()</span> <span class=k>for</span> <span class=n>s</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>history</span><span class=p>],</span>
+</span><span id=__span-13-18>            <span class=s2>&quot;current_step&quot;</span><span class=p>:</span> <span class=bp>self</span><span class=o>.</span><span class=n>current_step</span><span class=p>,</span>
+</span><span id=__span-13-19>            <span class=s2>&quot;context&quot;</span><span class=p>:</span> <span class=bp>self</span><span class=o>.</span><span class=n>context</span>
+</span><span id=__span-13-20>        <span class=p>}</span>
+</span></code></pre></div> <h3 id=73>7.3 错误处理与重试<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <p>Agent 执行过程中可能遇到各种错误：</p> <ul> <li>LLM API 错误（速率限制、超时）</li> <li>工具调用错误（网络错误、参数错误）</li> <li>规划错误（步骤不可执行）</li> </ul> <div class="language-python highlight"><pre><span></span><code><span id=__span-14-1><span class=k>class</span><span class=w> </span><span class=nc>AgentExecutor</span><span class=p>:</span>
+</span><span id=__span-14-2>    <span class=k>def</span><span class=w> </span><span class=nf>execute_with_retry</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>max_retries</span><span class=o>=</span><span class=mi>3</span><span class=p>):</span>
+</span><span id=__span-14-3>        <span class=k>for</span> <span class=n>attempt</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>max_retries</span><span class=p>):</span>
+</span><span id=__span-14-4>            <span class=k>try</span><span class=p>:</span>
+</span><span id=__span-14-5>                <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>execute</span><span class=p>()</span>
+</span><span id=__span-14-6>            <span class=k>except</span> <span class=n>LLMError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span><span id=__span-14-7>                <span class=k>if</span> <span class=n>e</span><span class=o>.</span><span class=n>is_rate_limit</span><span class=p>:</span>
+</span><span id=__span-14-8>                    <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>2</span> <span class=o>**</span> <span class=n>attempt</span><span class=p>)</span>  <span class=c1># 指数退避</span>
+</span><span id=__span-14-9>                    <span class=k>continue</span>
+</span><span id=__span-14-10>                <span class=k>raise</span>
+</span><span id=__span-14-11>            <span class=k>except</span> <span class=n>ToolError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span><span id=__span-14-12>                <span class=c1># 让 LLM 修正工具调用</span>
+</span><span id=__span-14-13>                <span class=bp>self</span><span class=o>.</span><span class=n>state</span><span class=o>.</span><span class=n>add_error</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span><span id=__span-14-14>                <span class=bp>self</span><span class=o>.</span><span class=n>replan</span><span class=p>()</span>
+</span><span id=__span-14-15>                <span class=k>continue</span>
+</span><span id=__span-14-16>        <span class=k>raise</span> <span class=n>MaxRetriesExceeded</span><span class=p>()</span>
+</span></code></pre></div> <h3 id=74>7.4 可观测性<a class=headerlink href=#74 title="Permanent link">&para;</a></h3> <p>生产环境的 Agent 需要完善的可观测性：</p> <ul> <li><strong>日志</strong>：记录每次 LLM 调用、工具调用的输入输出</li> <li><strong>追踪</strong>：追踪任务执行的完整链路</li> <li><strong>指标</strong>：成功率、延迟、token 消耗</li> <li><strong>回放</strong>：能够回放任务执行过程，便于调试</li> </ul> <div class="language-python highlight"><pre><span></span><code><span id=__span-15-1><span class=nd>@traceable</span><span class=p>(</span><span class=n>run_type</span><span class=o>=</span><span class=s2>&quot;llm&quot;</span><span class=p>)</span>
+</span><span id=__span-15-2><span class=k>def</span><span class=w> </span><span class=nf>call_llm</span><span class=p>(</span><span class=n>messages</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>):</span>
+</span><span id=__span-15-3>    <span class=n>response</span> <span class=o>=</span> <span class=n>openai</span><span class=o>.</span><span class=n>chat</span><span class=o>.</span><span class=n>completions</span><span class=o>.</span><span class=n>create</span><span class=p>(</span>
+</span><span id=__span-15-4>        <span class=n>model</span><span class=o>=</span><span class=s2>&quot;gpt-4&quot;</span><span class=p>,</span>
+</span><span id=__span-15-5>        <span class=n>messages</span><span class=o>=</span><span class=n>messages</span><span class=p>,</span>
+</span><span id=__span-15-6>        <span class=o>**</span><span class=n>kwargs</span>
+</span><span id=__span-15-7>    <span class=p>)</span>
+</span><span id=__span-15-8>    <span class=k>return</span> <span class=n>response</span>
+</span><span id=__span-15-9>
+</span><span id=__span-15-10><span class=nd>@traceable</span><span class=p>(</span><span class=n>run_type</span><span class=o>=</span><span class=s2>&quot;tool&quot;</span><span class=p>)</span>
+</span><span id=__span-15-11><span class=k>def</span><span class=w> </span><span class=nf>call_tool</span><span class=p>(</span><span class=n>tool_name</span><span class=p>,</span> <span class=n>params</span><span class=p>):</span>
+</span><span id=__span-15-12>    <span class=n>result</span> <span class=o>=</span> <span class=n>tool_registry</span><span class=p>[</span><span class=n>tool_name</span><span class=p>](</span><span class=o>**</span><span class=n>params</span><span class=p>)</span>
+</span><span id=__span-15-13>    <span class=k>return</span> <span class=n>result</span>
+</span></code></pre></div> <hr> <pre class=mermaid><code>flowchart TD
     A["Agent 技术的六重根本矛盾"] 
 
     A --&gt; B1["矛盾一：&lt;br/&gt;LLM 推理与行动的割裂&lt;br/&gt;ReAct 循环是折中方案"]

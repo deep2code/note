@@ -44,47 +44,29 @@
         D --&gt; E["思考步骤2"]
         E --&gt; F["思考步骤3"]
         F --&gt; G["最终答案"]
-    end</code></pre> <p><strong>传统提示（Standard Prompt）：</strong> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1>1</a></span>
-<span class=normal><a href=#__codelineno-0-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>问题：小明有10个苹果，给了小红3个，又买了5个，现在小明有多少个苹果？
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a>答案：12个
-</span></code></pre></div></td></tr></table></div></p> <p><strong>思维链提示（CoT Prompt）：</strong> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span>
-<span class=normal><a href=#__codelineno-1-2>2</a></span>
-<span class=normal><a href=#__codelineno-1-3>3</a></span>
-<span class=normal><a href=#__codelineno-1-4>4</a></span>
-<span class=normal><a href=#__codelineno-1-5>5</a></span>
-<span class=normal><a href=#__codelineno-1-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a>问题：小明有10个苹果，给了小红3个，又买了5个，现在小明有多少个苹果？
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a>让我们一步步思考：
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>1. 小明原来有10个苹果
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a>2. 给小红3个后，还剩10-3=7个
-</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a>3. 又买了5个，现在有7+5=12个
-</span><span id=__span-1-6><a id=__codelineno-1-6 name=__codelineno-1-6></a>答案：12个
-</span></code></pre></div></td></tr></table></div></p> <h3 id=23>2.3 思维链的实现方式<a class=headerlink href=#23 title="Permanent link">&para;</a></h3> <h4 id=few-shot>方式一：Few-shot 示例引导<a class=headerlink href=#few-shot title="Permanent link">&para;</a></h4> <p>在提示中提供几个包含推理过程的示例，让模型学习这种“逐步思考”的模式：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1> 1</a></span>
-<span class=normal><a href=#__codelineno-2-2> 2</a></span>
-<span class=normal><a href=#__codelineno-2-3> 3</a></span>
-<span class=normal><a href=#__codelineno-2-4> 4</a></span>
-<span class=normal><a href=#__codelineno-2-5> 5</a></span>
-<span class=normal><a href=#__codelineno-2-6> 6</a></span>
-<span class=normal><a href=#__codelineno-2-7> 7</a></span>
-<span class=normal><a href=#__codelineno-2-8> 8</a></span>
-<span class=normal><a href=#__codelineno-2-9> 9</a></span>
-<span class=normal><a href=#__codelineno-2-10>10</a></span>
-<span class=normal><a href=#__codelineno-2-11>11</a></span>
-<span class=normal><a href=#__codelineno-2-12>12</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a>示例1：
-</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a>问题：一个水池有200升水，每小时注入15升，同时每小时流出8升，6小时后水池有多少水？
-</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a>思考：
-</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a>1. 每小时净注入量 = 15 - 8 = 7升
-</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a>2. 6小时净注入量 = 7 × 6 = 42升
-</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6></a>3. 最终水量 = 200 + 42 = 242升
-</span><span id=__span-2-7><a id=__codelineno-2-7 name=__codelineno-2-7></a>答案：242升
-</span><span id=__span-2-8><a id=__codelineno-2-8 name=__codelineno-2-8></a>
-</span><span id=__span-2-9><a id=__codelineno-2-9 name=__codelineno-2-9></a>示例2：
-</span><span id=__span-2-10><a id=__codelineno-2-10 name=__codelineno-2-10></a>[继续提供更多示例...]
-</span><span id=__span-2-11><a id=__codelineno-2-11 name=__codelineno-2-11></a>
-</span><span id=__span-2-12><a id=__codelineno-2-12 name=__codelineno-2-12></a>问题：[你的问题]
-</span></code></pre></div></td></tr></table></div> <h4 id=zero-shot>方式二：Zero-shot 触发<a class=headerlink href=#zero-shot title="Permanent link">&para;</a></h4> <p>研究表明，只需在问题后加上一句“让我们一步步思考”（Let's think step by step），就能显著提升模型的推理能力：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1>1</a></span>
-<span class=normal><a href=#__codelineno-3-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a>问题：[复杂问题]
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>让我们一步步思考。
-</span></code></pre></div></td></tr></table></div> <p>这种简单却有效的方法利用了模型在预训练阶段学到的知识，激发了模型的推理潜能。</p> <h3 id=24>2.4 思维链的关键要素<a class=headerlink href=#24 title="Permanent link">&para;</a></h3> <p>思维链的有效性依赖于以下几个关键要素：</p> <h4 id=1>1. 中间步骤的完整性<a class=headerlink href=#1 title="Permanent link">&para;</a></h4> <p>每个推理步骤应该是一个完整的逻辑单元，不应跳跃或省略：</p> <pre class=mermaid><code>graph TB
+    end</code></pre> <p><strong>传统提示（Standard Prompt）：</strong> <div class="language-text highlight"><pre><span></span><code><span id=__span-0-1>问题：小明有10个苹果，给了小红3个，又买了5个，现在小明有多少个苹果？
+</span><span id=__span-0-2>答案：12个
+</span></code></pre></div></p> <p><strong>思维链提示（CoT Prompt）：</strong> <div class="language-text highlight"><pre><span></span><code><span id=__span-1-1>问题：小明有10个苹果，给了小红3个，又买了5个，现在小明有多少个苹果？
+</span><span id=__span-1-2>让我们一步步思考：
+</span><span id=__span-1-3>1. 小明原来有10个苹果
+</span><span id=__span-1-4>2. 给小红3个后，还剩10-3=7个
+</span><span id=__span-1-5>3. 又买了5个，现在有7+5=12个
+</span><span id=__span-1-6>答案：12个
+</span></code></pre></div></p> <h3 id=23>2.3 思维链的实现方式<a class=headerlink href=#23 title="Permanent link">&para;</a></h3> <h4 id=few-shot>方式一：Few-shot 示例引导<a class=headerlink href=#few-shot title="Permanent link">&para;</a></h4> <p>在提示中提供几个包含推理过程的示例，让模型学习这种“逐步思考”的模式：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-2-1>示例1：
+</span><span id=__span-2-2>问题：一个水池有200升水，每小时注入15升，同时每小时流出8升，6小时后水池有多少水？
+</span><span id=__span-2-3>思考：
+</span><span id=__span-2-4>1. 每小时净注入量 = 15 - 8 = 7升
+</span><span id=__span-2-5>2. 6小时净注入量 = 7 × 6 = 42升
+</span><span id=__span-2-6>3. 最终水量 = 200 + 42 = 242升
+</span><span id=__span-2-7>答案：242升
+</span><span id=__span-2-8>
+</span><span id=__span-2-9>示例2：
+</span><span id=__span-2-10>[继续提供更多示例...]
+</span><span id=__span-2-11>
+</span><span id=__span-2-12>问题：[你的问题]
+</span></code></pre></div> <h4 id=zero-shot>方式二：Zero-shot 触发<a class=headerlink href=#zero-shot title="Permanent link">&para;</a></h4> <p>研究表明，只需在问题后加上一句“让我们一步步思考”（Let's think step by step），就能显著提升模型的推理能力：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-3-1>问题：[复杂问题]
+</span><span id=__span-3-2>让我们一步步思考。
+</span></code></pre></div> <p>这种简单却有效的方法利用了模型在预训练阶段学到的知识，激发了模型的推理潜能。</p> <h3 id=24>2.4 思维链的关键要素<a class=headerlink href=#24 title="Permanent link">&para;</a></h3> <p>思维链的有效性依赖于以下几个关键要素：</p> <h4 id=1>1. 中间步骤的完整性<a class=headerlink href=#1 title="Permanent link">&para;</a></h4> <p>每个推理步骤应该是一个完整的逻辑单元，不应跳跃或省略：</p> <pre class=mermaid><code>graph TB
     A["完整推理"] --&gt; B["步骤1：理解问题"]
     B --&gt; C["步骤2：提取关键信息"]
     C --&gt; D["步骤3：应用公式/规则"]
@@ -95,30 +77,23 @@
     B2 --&gt; C2["直接跳到结果"]
 
     style A fill:#9ff,stroke:#333
-    style A2 fill:#f99,stroke:#333</code></pre> <h4 id=2>2. 逻辑链的一致性<a class=headerlink href=#2 title="Permanent link">&para;</a></h4> <p>各步骤之间应该有清晰的逻辑关系，形成一条完整的推理链：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
-<span class=normal><a href=#__codelineno-4-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a>正确：第一步 → 因为第一步 → 所以第二步 → 因为第二步 → 所以第三步 → 最终答案
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a>错误：第一步...第二步...第三步（各步骤之间没有逻辑关联）
-</span></code></pre></div></td></tr></table></div> <h4 id=3>3. 结果的可验证性<a class=headerlink href=#3 title="Permanent link">&para;</a></h4> <p>推理的最终结果应该是可验证的，这样模型可以自我检查：</p> <ul> <li>数学问题可以验算</li> <li>事实性问题可以查证</li> <li>逻辑问题可以推敲</li> </ul> <h3 id=25>2.5 思维链的变体<a class=headerlink href=#25 title="Permanent link">&para;</a></h3> <p>研究者们基于基础思维链，开发了多种变体：</p> <h4 id=1-self-consistency>1. 自洽性思维链（Self-Consistency）<a class=headerlink href=#1-self-consistency title="Permanent link">&para;</a></h4> <p>核心思想是“集思广益”——生成多条推理路径，然后通过投票选择最一致的答案：</p> <pre class=mermaid><code>flowchart TD
+    style A2 fill:#f99,stroke:#333</code></pre> <h4 id=2>2. 逻辑链的一致性<a class=headerlink href=#2 title="Permanent link">&para;</a></h4> <p>各步骤之间应该有清晰的逻辑关系，形成一条完整的推理链：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-4-1>正确：第一步 → 因为第一步 → 所以第二步 → 因为第二步 → 所以第三步 → 最终答案
+</span><span id=__span-4-2>错误：第一步...第二步...第三步（各步骤之间没有逻辑关联）
+</span></code></pre></div> <h4 id=3>3. 结果的可验证性<a class=headerlink href=#3 title="Permanent link">&para;</a></h4> <p>推理的最终结果应该是可验证的，这样模型可以自我检查：</p> <ul> <li>数学问题可以验算</li> <li>事实性问题可以查证</li> <li>逻辑问题可以推敲</li> </ul> <h3 id=25>2.5 思维链的变体<a class=headerlink href=#25 title="Permanent link">&para;</a></h3> <p>研究者们基于基础思维链，开发了多种变体：</p> <h4 id=1-self-consistency>1. 自洽性思维链（Self-Consistency）<a class=headerlink href=#1-self-consistency title="Permanent link">&para;</a></h4> <p>核心思想是“集思广益”——生成多条推理路径，然后通过投票选择最一致的答案：</p> <pre class=mermaid><code>flowchart TD
     A["问题"] --&gt; B["生成N条推理路径"]
     B --&gt; C["每条路径得出答案"]
     C --&gt; D["投票选择最常见答案"]
 
     style A fill:#9ff,stroke:#333
-    style D fill:#ff9,stroke:#333</code></pre> <p><strong>实现方式：</strong> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1>1</a></span>
-<span class=normal><a href=#__codelineno-5-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a>问题：[复杂问题]
-</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a>请生成多个不同的解题思路，然后综合分析给出最终答案。
-</span></code></pre></div></td></tr></table></div></p> <h4 id=2-cot-tools>2. 思维链+工具（CoT + Tools）<a class=headerlink href=#2-cot-tools title="Permanent link">&para;</a></h4> <p>在推理过程中调用外部工具进行计算或查证：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span>
-<span class=normal><a href=#__codelineno-6-2>2</a></span>
-<span class=normal><a href=#__codelineno-6-3>3</a></span>
-<span class=normal><a href=#__codelineno-6-4>4</a></span>
-<span class=normal><a href=#__codelineno-6-5>5</a></span>
-<span class=normal><a href=#__codelineno-6-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a>问题：2024年北京马拉松冠军的成绩是多少？
-</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a>思考：
-</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a>1. 我需要查找2024年北京马拉松的比赛数据
-</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a>2. 调用搜索工具...
-</span><span id=__span-6-5><a id=__codelineno-6-5 name=__codelineno-6-5></a>3. 根据搜索结果...
-</span><span id=__span-6-6><a id=__codelineno-6-6 name=__codelineno-6-6></a>4. 得出结论
-</span></code></pre></div></td></tr></table></div> <h4 id=3-tree-of-thoughts>3. 思维树（Tree of Thoughts）<a class=headerlink href=#3-tree-of-thoughts title="Permanent link">&para;</a></h4> <p>将思维链扩展为树状结构，同时探索多个推理方向：</p> <pre class=mermaid><code>graph TB
+    style D fill:#ff9,stroke:#333</code></pre> <p><strong>实现方式：</strong> <div class="language-text highlight"><pre><span></span><code><span id=__span-5-1>问题：[复杂问题]
+</span><span id=__span-5-2>请生成多个不同的解题思路，然后综合分析给出最终答案。
+</span></code></pre></div></p> <h4 id=2-cot-tools>2. 思维链+工具（CoT + Tools）<a class=headerlink href=#2-cot-tools title="Permanent link">&para;</a></h4> <p>在推理过程中调用外部工具进行计算或查证：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-6-1>问题：2024年北京马拉松冠军的成绩是多少？
+</span><span id=__span-6-2>思考：
+</span><span id=__span-6-3>1. 我需要查找2024年北京马拉松的比赛数据
+</span><span id=__span-6-4>2. 调用搜索工具...
+</span><span id=__span-6-5>3. 根据搜索结果...
+</span><span id=__span-6-6>4. 得出结论
+</span></code></pre></div> <h4 id=3-tree-of-thoughts>3. 思维树（Tree of Thoughts）<a class=headerlink href=#3-tree-of-thoughts title="Permanent link">&para;</a></h4> <p>将思维链扩展为树状结构，同时探索多个推理方向：</p> <pre class=mermaid><code>graph TB
     A["问题"] --&gt; B["方向1"]
     A --&gt; C["方向2"]
     A --&gt; D["方向3"]
@@ -148,57 +123,34 @@
     style B fill:#ff9,stroke:#333
     style C fill:#9ff,stroke:#333
     style D fill:#9ff,stroke:#333
-    style F fill:#ff9,stroke:#333</code></pre> <p><strong>与传统方式的区别：</strong></p> <table> <thead> <tr> <th>对比维度</th> <th>传统方式</th> <th>ReAct</th> </tr> </thead> <tbody> <tr> <td>信息来源</td> <td>仅依赖训练知识</td> <td>可以获取实时信息</td> </tr> <tr> <td>行动能力</td> <td>无</td> <td>可以调用工具</td> </tr> <tr> <td>反馈机制</td> <td>无</td> <td>基于行动结果调整</td> </tr> <tr> <td>任务复杂度</td> <td>有限</td> <td>可以处理复杂任务</td> </tr> </tbody> </table> <h3 id=33-react>3.3 ReAct的具体实现<a class=headerlink href=#33-react title="Permanent link">&para;</a></h3> <p>在实际应用中，ReAct通过以下几个关键组件实现：</p> <h4 id=1-action-space>1. 动作空间（Action Space）<a class=headerlink href=#1-action-space title="Permanent link">&para;</a></h4> <p>定义模型可以执行的各种动作：</p> <div class="language-go highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1>1</a></span>
-<span class=normal><a href=#__codelineno-7-2>2</a></span>
-<span class=normal><a href=#__codelineno-7-3>3</a></span>
-<span class=normal><a href=#__codelineno-7-4>4</a></span>
-<span class=normal><a href=#__codelineno-7-5>5</a></span>
-<span class=normal><a href=#__codelineno-7-6>6</a></span>
-<span class=normal><a href=#__codelineno-7-7>7</a></span>
-<span class=normal><a href=#__codelineno-7-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=c1>// 动作空间示例</span>
-</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a><span class=nx>ActionSpace</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-7-3><a id=__codelineno-7-3 name=__codelineno-7-3></a><span class=w>    </span><span class=s>&quot;search&quot;</span><span class=p>:</span><span class=w> </span><span class=s>&quot;搜索相关信息&quot;</span><span class=p>,</span>
-</span><span id=__span-7-4><a id=__codelineno-7-4 name=__codelineno-7-4></a><span class=w>    </span><span class=s>&quot;calculate&quot;</span><span class=p>:</span><span class=w> </span><span class=s>&quot;执行数学计算&quot;</span><span class=p>,</span>
-</span><span id=__span-7-5><a id=__codelineno-7-5 name=__codelineno-7-5></a><span class=w>    </span><span class=s>&quot;lookup&quot;</span><span class=p>:</span><span class=w> </span><span class=s>&quot;查询特定信息&quot;</span><span class=p>,</span>
-</span><span id=__span-7-6><a id=__codelineno-7-6 name=__codelineno-7-6></a><span class=w>    </span><span class=s>&quot;execute&quot;</span><span class=p>:</span><span class=w> </span><span class=s>&quot;执行代码&quot;</span><span class=p>,</span>
-</span><span id=__span-7-7><a id=__codelineno-7-7 name=__codelineno-7-7></a><span class=w>    </span><span class=s>&quot;finish&quot;</span><span class=p>:</span><span class=w> </span><span class=s>&quot;完成任务并输出结果&quot;</span>
-</span><span id=__span-7-8><a id=__codelineno-7-8 name=__codelineno-7-8></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <h4 id=2-observation-space>2. 观察空间（Observation Space）<a class=headerlink href=#2-observation-space title="Permanent link">&para;</a></h4> <p>定义模型可以获取的各种信息：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1>1</a></span>
-<span class=normal><a href=#__codelineno-8-2>2</a></span>
-<span class=normal><a href=#__codelineno-8-3>3</a></span>
-<span class=normal><a href=#__codelineno-8-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a>观察结果示例：
-</span><span id=__span-8-2><a id=__codelineno-8-2 name=__codelineno-8-2></a>- 搜索结果：关于[主题]的百科介绍...
-</span><span id=__span-8-3><a id=__codelineno-8-3 name=__codelineno-8-3></a>- 计算结果：125 + 87 = 212
-</span><span id=__span-8-4><a id=__codelineno-8-4 name=__codelineno-8-4></a>- 代码输出：程序执行成功，输出为...
-</span></code></pre></div></td></tr></table></div> <h4 id=3_1>3. 推理与行动的交织<a class=headerlink href=#3_1 title="Permanent link">&para;</a></h4> <p>ReAct的提示通常包含以下结构：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1> 1</a></span>
-<span class=normal><a href=#__codelineno-9-2> 2</a></span>
-<span class=normal><a href=#__codelineno-9-3> 3</a></span>
-<span class=normal><a href=#__codelineno-9-4> 4</a></span>
-<span class=normal><a href=#__codelineno-9-5> 5</a></span>
-<span class=normal><a href=#__codelineno-9-6> 6</a></span>
-<span class=normal><a href=#__codelineno-9-7> 7</a></span>
-<span class=normal><a href=#__codelineno-9-8> 8</a></span>
-<span class=normal><a href=#__codelineno-9-9> 9</a></span>
-<span class=normal><a href=#__codelineno-9-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a>任务：[用户问题]
-</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a>
-</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a>请按照以下格式思考和行动：
-</span><span id=__span-9-4><a id=__codelineno-9-4 name=__codelineno-9-4></a>思考：分析当前情况，规划下一步行动
-</span><span id=__span-9-5><a id=__codelineno-9-5 name=__codelineno-9-5></a>行动：[选择动作和参数]
-</span><span id=__span-9-6><a id=__codelineno-9-6 name=__codelineno-9-6></a>观察：[获取行动结果]
-</span><span id=__span-9-7><a id=__codelineno-9-7 name=__codelineno-9-7></a>...（重复上述循环直到任务完成）
-</span><span id=__span-9-8><a id=__codelineno-9-8 name=__codelineno-9-8></a>
-</span><span id=__span-9-9><a id=__codelineno-9-9 name=__codelineno-9-9></a>开始：
-</span><span id=__span-9-10><a id=__codelineno-9-10 name=__codelineno-9-10></a>思考：...
-</span></code></pre></div></td></tr></table></div> <h3 id=34-react>3.4 ReAct的实际案例<a class=headerlink href=#34-react title="Permanent link">&para;</a></h3> <p>让我们通过一个具体例子来理解ReAct的工作方式：</p> <p><strong>任务：</strong> 查找2024年诺贝尔物理学奖获得者的主要贡献</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1>1</a></span>
-<span class=normal><a href=#__codelineno-10-2>2</a></span>
-<span class=normal><a href=#__codelineno-10-3>3</a></span>
-<span class=normal><a href=#__codelineno-10-4>4</a></span>
-<span class=normal><a href=#__codelineno-10-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a>思考：我需要搜索2024年诺贝尔物理学奖的相关信息。
-</span><span id=__span-10-2><a id=__codelineno-10-2 name=__codelineno-10-2></a>行动：search 2024年诺贝尔物理学奖
-</span><span id=__span-10-3><a id=__codelineno-10-3 name=__codelineno-10-3></a>观察：2024年诺贝尔物理学奖授予了Pierre Agostini、Ferenc Krausz和Anne L&#39;Huillier，以表彰他们在产生阿秒光脉冲方面的实验方法。
-</span><span id=__span-10-4><a id=__codelineno-10-4 name=__codelineno-10-4></a>思考：三位获奖者的主要贡献是产生阿秒光脉冲，这是非常短的光脉冲，可以用于研究电子运动。
-</span><span id=__span-10-5><a id=__codelineno-10-5 name=__codelineno-10-5></a>行动：finish 三位科学家因在产生阿秒光脉冲方面的开创性贡献获奖，这项技术让我们能够观察电子的快速运动。
-</span></code></pre></div></td></tr></table></div> <h3 id=35-react-vs>3.5 ReAct vs 思维链<a class=headerlink href=#35-react-vs title="Permanent link">&para;</a></h3> <p>ReAct与思维链有本质的区别：</p> <pre class=mermaid><code>graph LR
+    style F fill:#ff9,stroke:#333</code></pre> <p><strong>与传统方式的区别：</strong></p> <table> <thead> <tr> <th>对比维度</th> <th>传统方式</th> <th>ReAct</th> </tr> </thead> <tbody> <tr> <td>信息来源</td> <td>仅依赖训练知识</td> <td>可以获取实时信息</td> </tr> <tr> <td>行动能力</td> <td>无</td> <td>可以调用工具</td> </tr> <tr> <td>反馈机制</td> <td>无</td> <td>基于行动结果调整</td> </tr> <tr> <td>任务复杂度</td> <td>有限</td> <td>可以处理复杂任务</td> </tr> </tbody> </table> <h3 id=33-react>3.3 ReAct的具体实现<a class=headerlink href=#33-react title="Permanent link">&para;</a></h3> <p>在实际应用中，ReAct通过以下几个关键组件实现：</p> <h4 id=1-action-space>1. 动作空间（Action Space）<a class=headerlink href=#1-action-space title="Permanent link">&para;</a></h4> <p>定义模型可以执行的各种动作：</p> <div class="language-go highlight"><pre><span></span><code><span id=__span-7-1><span class=c1>// 动作空间示例</span>
+</span><span id=__span-7-2><span class=nx>ActionSpace</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-7-3><span class=w>    </span><span class=s>&quot;search&quot;</span><span class=p>:</span><span class=w> </span><span class=s>&quot;搜索相关信息&quot;</span><span class=p>,</span>
+</span><span id=__span-7-4><span class=w>    </span><span class=s>&quot;calculate&quot;</span><span class=p>:</span><span class=w> </span><span class=s>&quot;执行数学计算&quot;</span><span class=p>,</span>
+</span><span id=__span-7-5><span class=w>    </span><span class=s>&quot;lookup&quot;</span><span class=p>:</span><span class=w> </span><span class=s>&quot;查询特定信息&quot;</span><span class=p>,</span>
+</span><span id=__span-7-6><span class=w>    </span><span class=s>&quot;execute&quot;</span><span class=p>:</span><span class=w> </span><span class=s>&quot;执行代码&quot;</span><span class=p>,</span>
+</span><span id=__span-7-7><span class=w>    </span><span class=s>&quot;finish&quot;</span><span class=p>:</span><span class=w> </span><span class=s>&quot;完成任务并输出结果&quot;</span>
+</span><span id=__span-7-8><span class=p>}</span>
+</span></code></pre></div> <h4 id=2-observation-space>2. 观察空间（Observation Space）<a class=headerlink href=#2-observation-space title="Permanent link">&para;</a></h4> <p>定义模型可以获取的各种信息：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-8-1>观察结果示例：
+</span><span id=__span-8-2>- 搜索结果：关于[主题]的百科介绍...
+</span><span id=__span-8-3>- 计算结果：125 + 87 = 212
+</span><span id=__span-8-4>- 代码输出：程序执行成功，输出为...
+</span></code></pre></div> <h4 id=3_1>3. 推理与行动的交织<a class=headerlink href=#3_1 title="Permanent link">&para;</a></h4> <p>ReAct的提示通常包含以下结构：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-9-1>任务：[用户问题]
+</span><span id=__span-9-2>
+</span><span id=__span-9-3>请按照以下格式思考和行动：
+</span><span id=__span-9-4>思考：分析当前情况，规划下一步行动
+</span><span id=__span-9-5>行动：[选择动作和参数]
+</span><span id=__span-9-6>观察：[获取行动结果]
+</span><span id=__span-9-7>...（重复上述循环直到任务完成）
+</span><span id=__span-9-8>
+</span><span id=__span-9-9>开始：
+</span><span id=__span-9-10>思考：...
+</span></code></pre></div> <h3 id=34-react>3.4 ReAct的实际案例<a class=headerlink href=#34-react title="Permanent link">&para;</a></h3> <p>让我们通过一个具体例子来理解ReAct的工作方式：</p> <p><strong>任务：</strong> 查找2024年诺贝尔物理学奖获得者的主要贡献</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-10-1>思考：我需要搜索2024年诺贝尔物理学奖的相关信息。
+</span><span id=__span-10-2>行动：search 2024年诺贝尔物理学奖
+</span><span id=__span-10-3>观察：2024年诺贝尔物理学奖授予了Pierre Agostini、Ferenc Krausz和Anne L&#39;Huillier，以表彰他们在产生阿秒光脉冲方面的实验方法。
+</span><span id=__span-10-4>思考：三位获奖者的主要贡献是产生阿秒光脉冲，这是非常短的光脉冲，可以用于研究电子运动。
+</span><span id=__span-10-5>行动：finish 三位科学家因在产生阿秒光脉冲方面的开创性贡献获奖，这项技术让我们能够观察电子的快速运动。
+</span></code></pre></div> <h3 id=35-react-vs>3.5 ReAct vs 思维链<a class=headerlink href=#35-react-vs title="Permanent link">&para;</a></h3> <p>ReAct与思维链有本质的区别：</p> <pre class=mermaid><code>graph LR
     subgraph "思维链（CoT）"
         A["问题"] --&gt; B["推理"] --&gt; C["推理"] --&gt; D["推理"] --&gt; E["答案"]
     end
@@ -236,18 +188,13 @@
     E --&gt; F["选择最佳方案"]
 
     style A fill:#f9f,stroke:#333
-    style E fill:#ff9,stroke:#333</code></pre> <h3 id=43>4.3 思维树的工作流程<a class=headerlink href=#43 title="Permanent link">&para;</a></h3> <p>思维树通常包含以下步骤：</p> <h4 id=1-thought-generation>1. 思想生成（Thought Generation）<a class=headerlink href=#1-thought-generation title="Permanent link">&para;</a></h4> <p>对于每个节点，生成多个可能的“想法”或“方向”：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1>1</a></span>
-<span class=normal><a href=#__codelineno-11-2>2</a></span>
-<span class=normal><a href=#__codelineno-11-3>3</a></span>
-<span class=normal><a href=#__codelineno-11-4>4</a></span>
-<span class=normal><a href=#__codelineno-11-5>5</a></span>
-<span class=normal><a href=#__codelineno-11-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a>当前状态：需要优化查询性能
-</span><span id=__span-11-2><a id=__codelineno-11-2 name=__codelineno-11-2></a>可能的方向：
-</span><span id=__span-11-3><a id=__codelineno-11-3 name=__codelineno-11-3></a>- 方向1：增加缓存层
-</span><span id=__span-11-4><a id=__codelineno-11-4 name=__codelineno-11-4></a>- 方向2：优化数据库索引
-</span><span id=__span-11-5><a id=__codelineno-11-5 name=__codelineno-11-5></a>- 方向3：使用CDN加速
-</span><span id=__span-11-6><a id=__codelineno-11-6 name=__codelineno-11-6></a>- 方向4：读写分离
-</span></code></pre></div></td></tr></table></div> <h4 id=2-state-evaluation>2. 状态评估（State Evaluation）<a class=headerlink href=#2-state-evaluation title="Permanent link">&para;</a></h4> <p>对每个分支进行评估，判断其潜力：</p> <pre class=mermaid><code>flowchart TD
+    style E fill:#ff9,stroke:#333</code></pre> <h3 id=43>4.3 思维树的工作流程<a class=headerlink href=#43 title="Permanent link">&para;</a></h3> <p>思维树通常包含以下步骤：</p> <h4 id=1-thought-generation>1. 思想生成（Thought Generation）<a class=headerlink href=#1-thought-generation title="Permanent link">&para;</a></h4> <p>对于每个节点，生成多个可能的“想法”或“方向”：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-11-1>当前状态：需要优化查询性能
+</span><span id=__span-11-2>可能的方向：
+</span><span id=__span-11-3>- 方向1：增加缓存层
+</span><span id=__span-11-4>- 方向2：优化数据库索引
+</span><span id=__span-11-5>- 方向3：使用CDN加速
+</span><span id=__span-11-6>- 方向4：读写分离
+</span></code></pre></div> <h4 id=2-state-evaluation>2. 状态评估（State Evaluation）<a class=headerlink href=#2-state-evaluation title="Permanent link">&para;</a></h4> <p>对每个分支进行评估，判断其潜力：</p> <pre class=mermaid><code>flowchart TD
     A["评估维度"] --&gt; B["可行性"]
     A --&gt; C["效率"]
     A --&gt; D["成本"]
@@ -335,16 +282,12 @@
     F --&gt; G["重新执行"]
 
     style D fill:#9ff,stroke:#333
-    style G fill:#ff9,stroke:#333</code></pre> <h3 id=53-agent>5.3 Agent的实现模式<a class=headerlink href=#53-agent title="Permanent link">&para;</a></h3> <h4 id=1-react>1. ReAct模式<a class=headerlink href=#1-react title="Permanent link">&para;</a></h4> <p>最基本的Agent模式，核心是“思考-行动-观察”的循环：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1>1</a></span>
-<span class=normal><a href=#__codelineno-12-2>2</a></span>
-<span class=normal><a href=#__codelineno-12-3>3</a></span>
-<span class=normal><a href=#__codelineno-12-4>4</a></span>
-<span class=normal><a href=#__codelineno-12-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><a id=__codelineno-12-1 name=__codelineno-12-1></a>while not task_complete:
-</span><span id=__span-12-2><a id=__codelineno-12-2 name=__codelineno-12-2></a>    thought = think(current_state)
-</span><span id=__span-12-3><a id=__codelineno-12-3 name=__codelineno-12-3></a>    action = select_action(thought)
-</span><span id=__span-12-4><a id=__codelineno-12-4 name=__codelineno-12-4></a>    observation = execute(action)
-</span><span id=__span-12-5><a id=__codelineno-12-5 name=__codelineno-12-5></a>    update_state(observation)
-</span></code></pre></div></td></tr></table></div> <h4 id=2-plan-and-execute>2. Plan-and-Execute模式<a class=headerlink href=#2-plan-and-execute title="Permanent link">&para;</a></h4> <p>先制定完整计划，再逐步执行：</p> <pre class=mermaid><code>flowchart TD
+    style G fill:#ff9,stroke:#333</code></pre> <h3 id=53-agent>5.3 Agent的实现模式<a class=headerlink href=#53-agent title="Permanent link">&para;</a></h3> <h4 id=1-react>1. ReAct模式<a class=headerlink href=#1-react title="Permanent link">&para;</a></h4> <p>最基本的Agent模式，核心是“思考-行动-观察”的循环：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-12-1>while not task_complete:
+</span><span id=__span-12-2>    thought = think(current_state)
+</span><span id=__span-12-3>    action = select_action(thought)
+</span><span id=__span-12-4>    observation = execute(action)
+</span><span id=__span-12-5>    update_state(observation)
+</span></code></pre></div> <h4 id=2-plan-and-execute>2. Plan-and-Execute模式<a class=headerlink href=#2-plan-and-execute title="Permanent link">&para;</a></h4> <p>先制定完整计划，再逐步执行：</p> <pre class=mermaid><code>flowchart TD
     A["接收任务"] --&gt; B["制定计划"]
     B --&gt; C["执行步骤1"]
     C --&gt; D["检查结果"]
@@ -354,37 +297,23 @@
     F --&gt; D
 
     style B fill:#ff9,stroke:#333
-    style G fill:#9ff,stroke:#333</code></pre> <h4 id=3-self-critic>3. Self-Critic模式<a class=headerlink href=#3-self-critic title="Permanent link">&para;</a></h4> <p>引入自我批评机制，在执行过程中不断反思：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1>1</a></span>
-<span class=normal><a href=#__codelineno-13-2>2</a></span>
-<span class=normal><a href=#__codelineno-13-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><a id=__codelineno-13-1 name=__codelineno-13-1></a>Execute step → Evaluate result → 
-</span><span id=__span-13-2><a id=__codelineno-13-2 name=__codelineno-13-2></a>If good: continue
-</span><span id=__span-13-3><a id=__codelineno-13-3 name=__codelineno-13-3></a>If bad: criticize → revise plan → retry
-</span></code></pre></div></td></tr></table></div> <h3 id=54-agent>5.4 主流Agent框架<a class=headerlink href=#54-agent title="Permanent link">&para;</a></h3> <h4 id=1-langchain>1. LangChain<a class=headerlink href=#1-langchain title="Permanent link">&para;</a></h4> <p>LangChain是最流行的LLM应用开发框架之一，提供了丰富的Agent组件：</p> <div class="language-go highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
-<span class=normal><a href=#__codelineno-14-2> 2</a></span>
-<span class=normal><a href=#__codelineno-14-3> 3</a></span>
-<span class=normal><a href=#__codelineno-14-4> 4</a></span>
-<span class=normal><a href=#__codelineno-14-5> 5</a></span>
-<span class=normal><a href=#__codelineno-14-6> 6</a></span>
-<span class=normal><a href=#__codelineno-14-7> 7</a></span>
-<span class=normal><a href=#__codelineno-14-8> 8</a></span>
-<span class=normal><a href=#__codelineno-14-9> 9</a></span>
-<span class=normal><a href=#__codelineno-14-10>10</a></span>
-<span class=normal><a href=#__codelineno-14-11>11</a></span>
-<span class=normal><a href=#__codelineno-14-12>12</a></span>
-<span class=normal><a href=#__codelineno-14-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=c1>// LangChain Agent 示例结构</span>
-</span><span id=__span-14-2><a id=__codelineno-14-2 name=__codelineno-14-2></a><span class=nx>from</span><span class=w> </span><span class=nx>langchain</span><span class=p>.</span><span class=nx>agents</span><span class=w> </span><span class=kn>import</span><span class=w> </span><span class=nx>AgentExecutor</span><span class=p>,</span><span class=w> </span><span class=nx>create_openai_functions_agent</span>
-</span><span id=__span-14-3><a id=__codelineno-14-3 name=__codelineno-14-3></a><span class=nx>from</span><span class=w> </span><span class=nx>langchain</span><span class=w> </span><span class=kn>import</span><span class=w> </span><span class=nx>hub</span>
-</span><span id=__span-14-4><a id=__codelineno-14-4 name=__codelineno-14-4></a>
-</span><span id=__span-14-5><a id=__codelineno-14-5 name=__codelineno-14-5></a><span class=err>#</span><span class=w> </span><span class=nx>加载提示模板</span>
-</span><span id=__span-14-6><a id=__codelineno-14-6 name=__codelineno-14-6></a><span class=nx>prompt</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>hub</span><span class=p>.</span><span class=nx>pull</span><span class=p>(</span><span class=s>&quot;hwchase17/openai-functions-agent&quot;</span><span class=p>)</span>
-</span><span id=__span-14-7><a id=__codelineno-14-7 name=__codelineno-14-7></a>
-</span><span id=__span-14-8><a id=__codelineno-14-8 name=__codelineno-14-8></a><span class=err>#</span><span class=w> </span><span class=nx>创建Agent</span>
-</span><span id=__span-14-9><a id=__codelineno-14-9 name=__codelineno-14-9></a><span class=nx>agent</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>create_openai_functions_agent</span><span class=p>(</span><span class=nx>llm</span><span class=p>,</span><span class=w> </span><span class=nx>tools</span><span class=p>,</span><span class=w> </span><span class=nx>prompt</span><span class=p>)</span>
-</span><span id=__span-14-10><a id=__codelineno-14-10 name=__codelineno-14-10></a>
-</span><span id=__span-14-11><a id=__codelineno-14-11 name=__codelineno-14-11></a><span class=err>#</span><span class=w> </span><span class=nx>执行Agent</span>
-</span><span id=__span-14-12><a id=__codelineno-14-12 name=__codelineno-14-12></a><span class=nx>agent_executor</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>AgentExecutor</span><span class=p>(</span><span class=nx>agent</span><span class=p>=</span><span class=nx>agent</span><span class=p>,</span><span class=w> </span><span class=nx>tools</span><span class=p>=</span><span class=nx>tools</span><span class=p>)</span>
-</span><span id=__span-14-13><a id=__codelineno-14-13 name=__codelineno-14-13></a><span class=nx>result</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>agent_executor</span><span class=p>.</span><span class=nx>invoke</span><span class=p>({</span><span class=s>&quot;input&quot;</span><span class=p>:</span><span class=w> </span><span class=s>&quot;帮我查一下明天北京的天气&quot;</span><span class=p>})</span>
-</span></code></pre></div></td></tr></table></div> <p><strong>LangChain Agent 核心组件：</strong>：训练数据有截止日期，无法获取最新信息 2. <strong>计算精确性</strong>：大模型做数学计算容易出错 3. <strong>行动能力</strong>：无法执行实际操作，如发邮件、订票 4. <strong>幻觉风险</strong>：可能生成看似合理但实际错误的信息</p> <p>工具调用（Tool Calling）正是为了解决这些问题而设计的。</p> <h3 id=62-function-calling>6.2 Function Calling机制<a class=headerlink href=#62-function-calling title="Permanent link">&para;</a></h3> <p>Function Calling是大语言模型调用外部函数/工具的能力：</p> <pre class=mermaid><code>flowchart TD
+    style G fill:#9ff,stroke:#333</code></pre> <h4 id=3-self-critic>3. Self-Critic模式<a class=headerlink href=#3-self-critic title="Permanent link">&para;</a></h4> <p>引入自我批评机制，在执行过程中不断反思：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-13-1>Execute step → Evaluate result → 
+</span><span id=__span-13-2>If good: continue
+</span><span id=__span-13-3>If bad: criticize → revise plan → retry
+</span></code></pre></div> <h3 id=54-agent>5.4 主流Agent框架<a class=headerlink href=#54-agent title="Permanent link">&para;</a></h3> <h4 id=1-langchain>1. LangChain<a class=headerlink href=#1-langchain title="Permanent link">&para;</a></h4> <p>LangChain是最流行的LLM应用开发框架之一，提供了丰富的Agent组件：</p> <div class="language-go highlight"><pre><span></span><code><span id=__span-14-1><span class=c1>// LangChain Agent 示例结构</span>
+</span><span id=__span-14-2><span class=nx>from</span><span class=w> </span><span class=nx>langchain</span><span class=p>.</span><span class=nx>agents</span><span class=w> </span><span class=kn>import</span><span class=w> </span><span class=nx>AgentExecutor</span><span class=p>,</span><span class=w> </span><span class=nx>create_openai_functions_agent</span>
+</span><span id=__span-14-3><span class=nx>from</span><span class=w> </span><span class=nx>langchain</span><span class=w> </span><span class=kn>import</span><span class=w> </span><span class=nx>hub</span>
+</span><span id=__span-14-4>
+</span><span id=__span-14-5><span class=err>#</span><span class=w> </span><span class=nx>加载提示模板</span>
+</span><span id=__span-14-6><span class=nx>prompt</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>hub</span><span class=p>.</span><span class=nx>pull</span><span class=p>(</span><span class=s>&quot;hwchase17/openai-functions-agent&quot;</span><span class=p>)</span>
+</span><span id=__span-14-7>
+</span><span id=__span-14-8><span class=err>#</span><span class=w> </span><span class=nx>创建Agent</span>
+</span><span id=__span-14-9><span class=nx>agent</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>create_openai_functions_agent</span><span class=p>(</span><span class=nx>llm</span><span class=p>,</span><span class=w> </span><span class=nx>tools</span><span class=p>,</span><span class=w> </span><span class=nx>prompt</span><span class=p>)</span>
+</span><span id=__span-14-10>
+</span><span id=__span-14-11><span class=err>#</span><span class=w> </span><span class=nx>执行Agent</span>
+</span><span id=__span-14-12><span class=nx>agent_executor</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>AgentExecutor</span><span class=p>(</span><span class=nx>agent</span><span class=p>=</span><span class=nx>agent</span><span class=p>,</span><span class=w> </span><span class=nx>tools</span><span class=p>=</span><span class=nx>tools</span><span class=p>)</span>
+</span><span id=__span-14-13><span class=nx>result</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>agent_executor</span><span class=p>.</span><span class=nx>invoke</span><span class=p>({</span><span class=s>&quot;input&quot;</span><span class=p>:</span><span class=w> </span><span class=s>&quot;帮我查一下明天北京的天气&quot;</span><span class=p>})</span>
+</span></code></pre></div> <p><strong>LangChain Agent 核心组件：</strong>：训练数据有截止日期，无法获取最新信息 2. <strong>计算精确性</strong>：大模型做数学计算容易出错 3. <strong>行动能力</strong>：无法执行实际操作，如发邮件、订票 4. <strong>幻觉风险</strong>：可能生成看似合理但实际错误的信息</p> <p>工具调用（Tool Calling）正是为了解决这些问题而设计的。</p> <h3 id=62-function-calling>6.2 Function Calling机制<a class=headerlink href=#62-function-calling title="Permanent link">&para;</a></h3> <p>Function Calling是大语言模型调用外部函数/工具的能力：</p> <pre class=mermaid><code>flowchart TD
     A["用户请求"] --&gt; B["大模型"]
     B --&gt; C{"需要调用函数？"}
     C --&gt;|"是"| D["生成函数调用"]
@@ -395,249 +324,138 @@
     B --&gt; H["最终输出"]
 
     style D fill:#ff9,stroke:#333
-    style E fill:#9ff,stroke:#333</code></pre> <p><strong>Function Calling的工作流程：</strong></p> <ol> <li><strong>模型识别</strong>：模型判断是否需要调用外部函数</li> <li><strong>生成调用</strong>：模型生成函数名和参数</li> <li><strong>执行函数</strong>：外部系统执行函数并返回结果</li> <li><strong>整合结果</strong>：模型将函数结果整合到最终回答中</li> </ol> <h3 id=63>6.3 工具定义规范<a class=headerlink href=#63 title="Permanent link">&para;</a></h3> <p>通常，工具通过JSON Schema定义：</p> <div class="language-json highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
-<span class=normal><a href=#__codelineno-15-2> 2</a></span>
-<span class=normal><a href=#__codelineno-15-3> 3</a></span>
-<span class=normal><a href=#__codelineno-15-4> 4</a></span>
-<span class=normal><a href=#__codelineno-15-5> 5</a></span>
-<span class=normal><a href=#__codelineno-15-6> 6</a></span>
-<span class=normal><a href=#__codelineno-15-7> 7</a></span>
-<span class=normal><a href=#__codelineno-15-8> 8</a></span>
-<span class=normal><a href=#__codelineno-15-9> 9</a></span>
-<span class=normal><a href=#__codelineno-15-10>10</a></span>
-<span class=normal><a href=#__codelineno-15-11>11</a></span>
-<span class=normal><a href=#__codelineno-15-12>12</a></span>
-<span class=normal><a href=#__codelineno-15-13>13</a></span>
-<span class=normal><a href=#__codelineno-15-14>14</a></span>
-<span class=normal><a href=#__codelineno-15-15>15</a></span>
-<span class=normal><a href=#__codelineno-15-16>16</a></span>
-<span class=normal><a href=#__codelineno-15-17>17</a></span>
-<span class=normal><a href=#__codelineno-15-18>18</a></span>
-<span class=normal><a href=#__codelineno-15-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=p>{</span>
-</span><span id=__span-15-2><a id=__codelineno-15-2 name=__codelineno-15-2></a><span class=w>  </span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;search_wikipedia&quot;</span><span class=p>,</span>
-</span><span id=__span-15-3><a id=__codelineno-15-3 name=__codelineno-15-3></a><span class=w>  </span><span class=nt>&quot;description&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;搜索维基百科获取信息&quot;</span><span class=p>,</span>
-</span><span id=__span-15-4><a id=__codelineno-15-4 name=__codelineno-15-4></a><span class=w>  </span><span class=nt>&quot;parameters&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-15-5><a id=__codelineno-15-5 name=__codelineno-15-5></a><span class=w>    </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;object&quot;</span><span class=p>,</span>
-</span><span id=__span-15-6><a id=__codelineno-15-6 name=__codelineno-15-6></a><span class=w>    </span><span class=nt>&quot;properties&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-15-7><a id=__codelineno-15-7 name=__codelineno-15-7></a><span class=w>      </span><span class=nt>&quot;query&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-15-8><a id=__codelineno-15-8 name=__codelineno-15-8></a><span class=w>        </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;string&quot;</span><span class=p>,</span>
-</span><span id=__span-15-9><a id=__codelineno-15-9 name=__codelineno-15-9></a><span class=w>        </span><span class=nt>&quot;description&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;搜索关键词&quot;</span>
-</span><span id=__span-15-10><a id=__codelineno-15-10 name=__codelineno-15-10></a><span class=w>      </span><span class=p>},</span>
-</span><span id=__span-15-11><a id=__codelineno-15-11 name=__codelineno-15-11></a><span class=w>      </span><span class=nt>&quot;limit&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-15-12><a id=__codelineno-15-12 name=__codelineno-15-12></a><span class=w>        </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;integer&quot;</span><span class=p>,</span>
-</span><span id=__span-15-13><a id=__codelineno-15-13 name=__codelineno-15-13></a><span class=w>        </span><span class=nt>&quot;description&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;返回结果数量限制&quot;</span><span class=p>,</span>
-</span><span id=__span-15-14><a id=__codelineno-15-14 name=__codelineno-15-14></a><span class=w>        </span><span class=nt>&quot;default&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>5</span>
-</span><span id=__span-15-15><a id=__codelineno-15-15 name=__codelineno-15-15></a><span class=w>      </span><span class=p>}</span>
-</span><span id=__span-15-16><a id=__codelineno-15-16 name=__codelineno-15-16></a><span class=w>    </span><span class=p>},</span>
-</span><span id=__span-15-17><a id=__codelineno-15-17 name=__codelineno-15-17></a><span class=w>    </span><span class=nt>&quot;required&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;query&quot;</span><span class=p>]</span>
-</span><span id=__span-15-18><a id=__codelineno-15-18 name=__codelineno-15-18></a><span class=w>  </span><span class=p>}</span>
-</span><span id=__span-15-19><a id=__codelineno-15-19 name=__codelineno-15-19></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=64>6.4 常用工具类型<a class=headerlink href=#64 title="Permanent link">&para;</a></h3> <h4 id=1_2>1. 搜索工具<a class=headerlink href=#1_2 title="Permanent link">&para;</a></h4> <div class="language-go highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1>1</a></span>
-<span class=normal><a href=#__codelineno-16-2>2</a></span>
-<span class=normal><a href=#__codelineno-16-3>3</a></span>
-<span class=normal><a href=#__codelineno-16-4>4</a></span>
-<span class=normal><a href=#__codelineno-16-5>5</a></span>
-<span class=normal><a href=#__codelineno-16-6>6</a></span>
-<span class=normal><a href=#__codelineno-16-7>7</a></span>
-<span class=normal><a href=#__codelineno-16-8>8</a></span>
-<span class=normal><a href=#__codelineno-16-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><a id=__codelineno-16-1 name=__codelineno-16-1></a><span class=c1>// 搜索工具示例</span>
-</span><span id=__span-16-2><a id=__codelineno-16-2 name=__codelineno-16-2></a><span class=nx>Tool</span><span class=w> </span><span class=nx>search</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-16-3><a id=__codelineno-16-3 name=__codelineno-16-3></a><span class=w>    </span><span class=nx>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;web_search&quot;</span><span class=p>,</span>
-</span><span id=__span-16-4><a id=__codelineno-16-4 name=__codelineno-16-4></a><span class=w>    </span><span class=nx>description</span><span class=p>:</span><span class=w> </span><span class=s>&quot;搜索互联网获取信息&quot;</span><span class=p>,</span>
-</span><span id=__span-16-5><a id=__codelineno-16-5 name=__codelineno-16-5></a><span class=w>    </span><span class=nx>parameters</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-16-6><a id=__codelineno-16-6 name=__codelineno-16-6></a><span class=w>        </span><span class=nx>query</span><span class=p>:</span><span class=w> </span><span class=s>&quot;搜索内容&quot;</span><span class=p>,</span>
-</span><span id=__span-16-7><a id=__codelineno-16-7 name=__codelineno-16-7></a><span class=w>        </span><span class=nx>max_results</span><span class=p>:</span><span class=w> </span><span class=s>&quot;最多返回结果数&quot;</span>
-</span><span id=__span-16-8><a id=__codelineno-16-8 name=__codelineno-16-8></a><span class=w>    </span><span class=p>}</span>
-</span><span id=__span-16-9><a id=__codelineno-16-9 name=__codelineno-16-9></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <h4 id=2_2>2. 计算工具<a class=headerlink href=#2_2 title="Permanent link">&para;</a></h4> <div class="language-go highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1>1</a></span>
-<span class=normal><a href=#__codelineno-17-2>2</a></span>
-<span class=normal><a href=#__codelineno-17-3>3</a></span>
-<span class=normal><a href=#__codelineno-17-4>4</a></span>
-<span class=normal><a href=#__codelineno-17-5>5</a></span>
-<span class=normal><a href=#__codelineno-17-6>6</a></span>
-<span class=normal><a href=#__codelineno-17-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><a id=__codelineno-17-1 name=__codelineno-17-1></a><span class=nx>Tool</span><span class=w> </span><span class=nx>calculator</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-17-2><a id=__codelineno-17-2 name=__codelineno-17-2></a><span class=w>    </span><span class=nx>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;calculate&quot;</span><span class=p>,</span>
-</span><span id=__span-17-3><a id=__codelineno-17-3 name=__codelineno-17-3></a><span class=w>    </span><span class=nx>description</span><span class=p>:</span><span class=w> </span><span class=s>&quot;执行数学计算&quot;</span><span class=p>,</span>
-</span><span id=__span-17-4><a id=__codelineno-17-4 name=__codelineno-17-4></a><span class=w>    </span><span class=nx>parameters</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-17-5><a id=__codelineno-17-5 name=__codelineno-17-5></a><span class=w>        </span><span class=nx>expression</span><span class=p>:</span><span class=w> </span><span class=s>&quot;数学表达式&quot;</span>
-</span><span id=__span-17-6><a id=__codelineno-17-6 name=__codelineno-17-6></a><span class=w>    </span><span class=p>}</span>
-</span><span id=__span-17-7><a id=__codelineno-17-7 name=__codelineno-17-7></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <h4 id=3_3>3. 代码执行工具<a class=headerlink href=#3_3 title="Permanent link">&para;</a></h4> <div class="language-go highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-18-1>1</a></span>
-<span class=normal><a href=#__codelineno-18-2>2</a></span>
-<span class=normal><a href=#__codelineno-18-3>3</a></span>
-<span class=normal><a href=#__codelineno-18-4>4</a></span>
-<span class=normal><a href=#__codelineno-18-5>5</a></span>
-<span class=normal><a href=#__codelineno-18-6>6</a></span>
-<span class=normal><a href=#__codelineno-18-7>7</a></span>
-<span class=normal><a href=#__codelineno-18-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-18-1><a id=__codelineno-18-1 name=__codelineno-18-1></a><span class=nx>Tool</span><span class=w> </span><span class=nx>code_executor</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-18-2><a id=__codelineno-18-2 name=__codelineno-18-2></a><span class=w>    </span><span class=nx>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;execute_code&quot;</span><span class=p>,</span>
-</span><span id=__span-18-3><a id=__codelineno-18-3 name=__codelineno-18-3></a><span class=w>    </span><span class=nx>description</span><span class=p>:</span><span class=w> </span><span class=s>&quot;执行代码并返回结果&quot;</span><span class=p>,</span>
-</span><span id=__span-18-4><a id=__codelineno-18-4 name=__codelineno-18-4></a><span class=w>    </span><span class=nx>parameters</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-18-5><a id=__codelineno-18-5 name=__codelineno-18-5></a><span class=w>        </span><span class=nx>language</span><span class=p>:</span><span class=w> </span><span class=s>&quot;编程语言&quot;</span><span class=p>,</span>
-</span><span id=__span-18-6><a id=__codelineno-18-6 name=__codelineno-18-6></a><span class=w>        </span><span class=nx>code</span><span class=p>:</span><span class=w> </span><span class=s>&quot;要执行的代码&quot;</span>
-</span><span id=__span-18-7><a id=__codelineno-18-7 name=__codelineno-18-7></a><span class=w>    </span><span class=p>}</span>
-</span><span id=__span-18-8><a id=__codelineno-18-8 name=__codelineno-18-8></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <h4 id=4-api>4. API调用工具<a class=headerlink href=#4-api title="Permanent link">&para;</a></h4> <div class="language-go highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-19-1> 1</a></span>
-<span class=normal><a href=#__codelineno-19-2> 2</a></span>
-<span class=normal><a href=#__codelineno-19-3> 3</a></span>
-<span class=normal><a href=#__codelineno-19-4> 4</a></span>
-<span class=normal><a href=#__codelineno-19-5> 5</a></span>
-<span class=normal><a href=#__codelineno-19-6> 6</a></span>
-<span class=normal><a href=#__codelineno-19-7> 7</a></span>
-<span class=normal><a href=#__codelineno-19-8> 8</a></span>
-<span class=normal><a href=#__codelineno-19-9> 9</a></span>
-<span class=normal><a href=#__codelineno-19-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-19-1><a id=__codelineno-19-1 name=__codelineno-19-1></a><span class=nx>Tool</span><span class=w> </span><span class=nx>http_request</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-19-2><a id=__codelineno-19-2 name=__codelineno-19-2></a><span class=w>    </span><span class=nx>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;http_request&quot;</span><span class=p>,</span>
-</span><span id=__span-19-3><a id=__codelineno-19-3 name=__codelineno-19-3></a><span class=w>    </span><span class=nx>description</span><span class=p>:</span><span class=w> </span><span class=s>&quot;发送HTTP请求&quot;</span><span class=p>,</span>
-</span><span id=__span-19-4><a id=__codelineno-19-4 name=__codelineno-19-4></a><span class=w>    </span><span class=nx>parameters</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-19-5><a id=__codelineno-19-5 name=__codelineno-19-5></a><span class=w>        </span><span class=nx>method</span><span class=p>:</span><span class=w> </span><span class=s>&quot;GET/POST/PUT/DELETE&quot;</span><span class=p>,</span>
-</span><span id=__span-19-6><a id=__codelineno-19-6 name=__codelineno-19-6></a><span class=w>        </span><span class=nx>url</span><span class=p>:</span><span class=w> </span><span class=s>&quot;请求URL&quot;</span><span class=p>,</span>
-</span><span id=__span-19-7><a id=__codelineno-19-7 name=__codelineno-19-7></a><span class=w>        </span><span class=nx>headers</span><span class=p>:</span><span class=w> </span><span class=s>&quot;请求头&quot;</span><span class=p>,</span>
-</span><span id=__span-19-8><a id=__codelineno-19-8 name=__codelineno-19-8></a><span class=w>        </span><span class=nx>body</span><span class=p>:</span><span class=w> </span><span class=s>&quot;请求体&quot;</span>
-</span><span id=__span-19-9><a id=__codelineno-19-9 name=__codelineno-19-9></a><span class=w>    </span><span class=p>}</span>
-</span><span id=__span-19-10><a id=__codelineno-19-10 name=__codelineno-19-10></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=65>6.5 工具选择策略<a class=headerlink href=#65 title="Permanent link">&para;</a></h3> <p>当有多个工具可用时，模型需要决定使用哪个工具：</p> <pre class=mermaid><code>flowchart TD
+    style E fill:#9ff,stroke:#333</code></pre> <p><strong>Function Calling的工作流程：</strong></p> <ol> <li><strong>模型识别</strong>：模型判断是否需要调用外部函数</li> <li><strong>生成调用</strong>：模型生成函数名和参数</li> <li><strong>执行函数</strong>：外部系统执行函数并返回结果</li> <li><strong>整合结果</strong>：模型将函数结果整合到最终回答中</li> </ol> <h3 id=63>6.3 工具定义规范<a class=headerlink href=#63 title="Permanent link">&para;</a></h3> <p>通常，工具通过JSON Schema定义：</p> <div class="language-json highlight"><pre><span></span><code><span id=__span-15-1><span class=p>{</span>
+</span><span id=__span-15-2><span class=w>  </span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;search_wikipedia&quot;</span><span class=p>,</span>
+</span><span id=__span-15-3><span class=w>  </span><span class=nt>&quot;description&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;搜索维基百科获取信息&quot;</span><span class=p>,</span>
+</span><span id=__span-15-4><span class=w>  </span><span class=nt>&quot;parameters&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-15-5><span class=w>    </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;object&quot;</span><span class=p>,</span>
+</span><span id=__span-15-6><span class=w>    </span><span class=nt>&quot;properties&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-15-7><span class=w>      </span><span class=nt>&quot;query&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-15-8><span class=w>        </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;string&quot;</span><span class=p>,</span>
+</span><span id=__span-15-9><span class=w>        </span><span class=nt>&quot;description&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;搜索关键词&quot;</span>
+</span><span id=__span-15-10><span class=w>      </span><span class=p>},</span>
+</span><span id=__span-15-11><span class=w>      </span><span class=nt>&quot;limit&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-15-12><span class=w>        </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;integer&quot;</span><span class=p>,</span>
+</span><span id=__span-15-13><span class=w>        </span><span class=nt>&quot;description&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;返回结果数量限制&quot;</span><span class=p>,</span>
+</span><span id=__span-15-14><span class=w>        </span><span class=nt>&quot;default&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>5</span>
+</span><span id=__span-15-15><span class=w>      </span><span class=p>}</span>
+</span><span id=__span-15-16><span class=w>    </span><span class=p>},</span>
+</span><span id=__span-15-17><span class=w>    </span><span class=nt>&quot;required&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;query&quot;</span><span class=p>]</span>
+</span><span id=__span-15-18><span class=w>  </span><span class=p>}</span>
+</span><span id=__span-15-19><span class=p>}</span>
+</span></code></pre></div> <h3 id=64>6.4 常用工具类型<a class=headerlink href=#64 title="Permanent link">&para;</a></h3> <h4 id=1_2>1. 搜索工具<a class=headerlink href=#1_2 title="Permanent link">&para;</a></h4> <div class="language-go highlight"><pre><span></span><code><span id=__span-16-1><span class=c1>// 搜索工具示例</span>
+</span><span id=__span-16-2><span class=nx>Tool</span><span class=w> </span><span class=nx>search</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-16-3><span class=w>    </span><span class=nx>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;web_search&quot;</span><span class=p>,</span>
+</span><span id=__span-16-4><span class=w>    </span><span class=nx>description</span><span class=p>:</span><span class=w> </span><span class=s>&quot;搜索互联网获取信息&quot;</span><span class=p>,</span>
+</span><span id=__span-16-5><span class=w>    </span><span class=nx>parameters</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-16-6><span class=w>        </span><span class=nx>query</span><span class=p>:</span><span class=w> </span><span class=s>&quot;搜索内容&quot;</span><span class=p>,</span>
+</span><span id=__span-16-7><span class=w>        </span><span class=nx>max_results</span><span class=p>:</span><span class=w> </span><span class=s>&quot;最多返回结果数&quot;</span>
+</span><span id=__span-16-8><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-16-9><span class=p>}</span>
+</span></code></pre></div> <h4 id=2_2>2. 计算工具<a class=headerlink href=#2_2 title="Permanent link">&para;</a></h4> <div class="language-go highlight"><pre><span></span><code><span id=__span-17-1><span class=nx>Tool</span><span class=w> </span><span class=nx>calculator</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-17-2><span class=w>    </span><span class=nx>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;calculate&quot;</span><span class=p>,</span>
+</span><span id=__span-17-3><span class=w>    </span><span class=nx>description</span><span class=p>:</span><span class=w> </span><span class=s>&quot;执行数学计算&quot;</span><span class=p>,</span>
+</span><span id=__span-17-4><span class=w>    </span><span class=nx>parameters</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-17-5><span class=w>        </span><span class=nx>expression</span><span class=p>:</span><span class=w> </span><span class=s>&quot;数学表达式&quot;</span>
+</span><span id=__span-17-6><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-17-7><span class=p>}</span>
+</span></code></pre></div> <h4 id=3_3>3. 代码执行工具<a class=headerlink href=#3_3 title="Permanent link">&para;</a></h4> <div class="language-go highlight"><pre><span></span><code><span id=__span-18-1><span class=nx>Tool</span><span class=w> </span><span class=nx>code_executor</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-18-2><span class=w>    </span><span class=nx>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;execute_code&quot;</span><span class=p>,</span>
+</span><span id=__span-18-3><span class=w>    </span><span class=nx>description</span><span class=p>:</span><span class=w> </span><span class=s>&quot;执行代码并返回结果&quot;</span><span class=p>,</span>
+</span><span id=__span-18-4><span class=w>    </span><span class=nx>parameters</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-18-5><span class=w>        </span><span class=nx>language</span><span class=p>:</span><span class=w> </span><span class=s>&quot;编程语言&quot;</span><span class=p>,</span>
+</span><span id=__span-18-6><span class=w>        </span><span class=nx>code</span><span class=p>:</span><span class=w> </span><span class=s>&quot;要执行的代码&quot;</span>
+</span><span id=__span-18-7><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-18-8><span class=p>}</span>
+</span></code></pre></div> <h4 id=4-api>4. API调用工具<a class=headerlink href=#4-api title="Permanent link">&para;</a></h4> <div class="language-go highlight"><pre><span></span><code><span id=__span-19-1><span class=nx>Tool</span><span class=w> </span><span class=nx>http_request</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-19-2><span class=w>    </span><span class=nx>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;http_request&quot;</span><span class=p>,</span>
+</span><span id=__span-19-3><span class=w>    </span><span class=nx>description</span><span class=p>:</span><span class=w> </span><span class=s>&quot;发送HTTP请求&quot;</span><span class=p>,</span>
+</span><span id=__span-19-4><span class=w>    </span><span class=nx>parameters</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-19-5><span class=w>        </span><span class=nx>method</span><span class=p>:</span><span class=w> </span><span class=s>&quot;GET/POST/PUT/DELETE&quot;</span><span class=p>,</span>
+</span><span id=__span-19-6><span class=w>        </span><span class=nx>url</span><span class=p>:</span><span class=w> </span><span class=s>&quot;请求URL&quot;</span><span class=p>,</span>
+</span><span id=__span-19-7><span class=w>        </span><span class=nx>headers</span><span class=p>:</span><span class=w> </span><span class=s>&quot;请求头&quot;</span><span class=p>,</span>
+</span><span id=__span-19-8><span class=w>        </span><span class=nx>body</span><span class=p>:</span><span class=w> </span><span class=s>&quot;请求体&quot;</span>
+</span><span id=__span-19-9><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-19-10><span class=p>}</span>
+</span></code></pre></div> <h3 id=65>6.5 工具选择策略<a class=headerlink href=#65 title="Permanent link">&para;</a></h3> <p>当有多个工具可用时，模型需要决定使用哪个工具：</p> <pre class=mermaid><code>flowchart TD
     A["任务需求"] --&gt; B["匹配工具"]
     B --&gt; C["评估工具适用性"]
     C --&gt; D["选择最佳工具"]
     D --&gt; E["生成调用参数"]
 
     style A fill:#9ff,stroke:#333
-    style D fill:#ff9,stroke:#333</code></pre> <p><strong>选择策略：</strong> 1. <strong>功能匹配</strong>：工具功能是否满足任务需求 2. <strong>效率优先</strong>：哪个工具能更快获得结果 3. <strong>准确性</strong>：哪个工具的结果更可靠 4. <strong>成本考虑</strong>：调用不同工具的成本差异</p> <hr> <h2 id=_4>第七章：提示工程——激活主动创造能力<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <h3 id=71>7.1 提示工程的重要性<a class=headerlink href=#71 title="Permanent link">&para;</a></h3> <p>无论算法多么先进，最终都需要通过提示（Prompt）来激活模型的能力。好的提示可以充分激发模型的“主动创造”潜力，而糟糕的提示则可能让模型“迷失方向”。</p> <h3 id=72>7.2 核心提示策略<a class=headerlink href=#72 title="Permanent link">&para;</a></h3> <h4 id=1-role-prompting>1. 角色扮演（Role Prompting）<a class=headerlink href=#1-role-prompting title="Permanent link">&para;</a></h4> <p>通过设定角色来引导模型的思考方式：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-20-1>1</a></span>
-<span class=normal><a href=#__codelineno-20-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-20-1><a id=__codelineno-20-1 name=__codelineno-20-1></a>你是一位经验丰富的软件架构师，专门负责设计高性能、可扩展的系统。请分析以下需求并提供架构建议：
-</span><span id=__span-20-2><a id=__codelineno-20-2 name=__codelineno-20-2></a>[需求描述]
-</span></code></pre></div></td></tr></table></div> <h4 id=2-step-by-step>2. 分步引导（Step-by-Step）<a class=headerlink href=#2-step-by-step title="Permanent link">&para;</a></h4> <p>将复杂任务分解为多个步骤，引导模型逐步完成：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-21-1>1</a></span>
-<span class=normal><a href=#__codelineno-21-2>2</a></span>
-<span class=normal><a href=#__codelineno-21-3>3</a></span>
-<span class=normal><a href=#__codelineno-21-4>4</a></span>
-<span class=normal><a href=#__codelineno-21-5>5</a></span>
-<span class=normal><a href=#__codelineno-21-6>6</a></span>
-<span class=normal><a href=#__codelineno-21-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-21-1><a id=__codelineno-21-1 name=__codelineno-21-1></a>分析这个问题需要以下步骤：
-</span><span id=__span-21-2><a id=__codelineno-21-2 name=__codelineno-21-2></a>1. 首先，识别问题的核心要素
-</span><span id=__span-21-3><a id=__codelineno-21-3 name=__codelineno-21-3></a>2. 然后，列出所有可能的解决方案
-</span><span id=__span-21-4><a id=__codelineno-21-4 name=__codelineno-21-4></a>3. 接着，评估每个方案的优缺点
-</span><span id=__span-21-5><a id=__codelineno-21-5 name=__codelineno-21-5></a>4. 最后，选择最佳方案并详细说明理由
-</span><span id=__span-21-6><a id=__codelineno-21-6 name=__codelineno-21-6></a>
-</span><span id=__span-21-7><a id=__codelineno-21-7 name=__codelineno-21-7></a>问题：[你的问题]
-</span></code></pre></div></td></tr></table></div> <h4 id=3-few-shot-learning>3. 示例注入（Few-shot Learning）<a class=headerlink href=#3-few-shot-learning title="Permanent link">&para;</a></h4> <p>通过示例展示期望的输出格式和推理过程：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-22-1>1</a></span>
-<span class=normal><a href=#__codelineno-22-2>2</a></span>
-<span class=normal><a href=#__codelineno-22-3>3</a></span>
-<span class=normal><a href=#__codelineno-22-4>4</a></span>
-<span class=normal><a href=#__codelineno-22-5>5</a></span>
-<span class=normal><a href=#__codelineno-22-6>6</a></span>
-<span class=normal><a href=#__codelineno-22-7>7</a></span>
-<span class=normal><a href=#__codelineno-22-8>8</a></span>
-<span class=normal><a href=#__codelineno-22-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-22-1><a id=__codelineno-22-1 name=__codelineno-22-1></a>示例1：
-</span><span id=__span-22-2><a id=__codelineno-22-2 name=__codelineno-22-2></a>输入：分析这家公司的财务状况
-</span><span id=__span-22-3><a id=__codelineno-22-3 name=__codelineno-22-3></a>输出：分析将包括：1) 营收增长趋势 2) 利润率变化 3) 现金流状况 4) 债务水平 5) 综合评估
-</span><span id=__span-22-4><a id=__codelineno-22-4 name=__codelineno-22-4></a>
-</span><span id=__span-22-5><a id=__codelineno-22-5 name=__codelineno-22-5></a>示例2：
-</span><span id=__span-22-6><a id=__codelineno-22-6 name=__codelineno-22-6></a>输入：评估这个产品的市场表现
-</span><span id=__span-22-7><a id=__codelineno-22-7 name=__codelineno-22-7></a>输出：评估将包括：1) 市场份额变化 2) 用户增长率 3) 竞品对比 4) 用户评价 5) 发展建议
-</span><span id=__span-22-8><a id=__codelineno-22-8 name=__codelineno-22-8></a>
-</span><span id=__span-22-9><a id=__codelineno-22-9 name=__codelineno-22-9></a>请分析：[你的输入]
-</span></code></pre></div></td></tr></table></div> <h4 id=4_1>4. 思维链激活<a class=headerlink href=#4_1 title="Permanent link">&para;</a></h4> <p>明确要求模型展示推理过程：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-23-1>1</a></span>
-<span class=normal><a href=#__codelineno-23-2>2</a></span>
-<span class=normal><a href=#__codelineno-23-3>3</a></span>
-<span class=normal><a href=#__codelineno-23-4>4</a></span>
-<span class=normal><a href=#__codelineno-23-5>5</a></span>
-<span class=normal><a href=#__codelineno-23-6>6</a></span>
-<span class=normal><a href=#__codelineno-23-7>7</a></span>
-<span class=normal><a href=#__codelineno-23-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-23-1><a id=__codelineno-23-1 name=__codelineno-23-1></a>请在回答时：
-</span><span id=__span-23-2><a id=__codelineno-23-2 name=__codelineno-23-2></a>1. 先分析问题
-</span><span id=__span-23-3><a id=__codelineno-23-3 name=__codelineno-23-3></a>2. 列出关键因素
-</span><span id=__span-23-4><a id=__codelineno-23-4 name=__codelineno-23-4></a>3. 进行逻辑推导
-</span><span id=__span-23-5><a id=__codelineno-23-5 name=__codelineno-23-5></a>4. 得出结论
-</span><span id=__span-23-6><a id=__codelineno-23-6 name=__codelineno-23-6></a>5. 验证答案合理性
-</span><span id=__span-23-7><a id=__codelineno-23-7 name=__codelineno-23-7></a>
-</span><span id=__span-23-8><a id=__codelineno-23-8 name=__codelineno-23-8></a>问题：[你的问题]
-</span></code></pre></div></td></tr></table></div> <h4 id=5>5. 约束设置<a class=headerlink href=#5 title="Permanent link">&para;</a></h4> <p>通过约束条件引导模型的输出方向：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-24-1>1</a></span>
-<span class=normal><a href=#__codelineno-24-2>2</a></span>
-<span class=normal><a href=#__codelineno-24-3>3</a></span>
-<span class=normal><a href=#__codelineno-24-4>4</a></span>
-<span class=normal><a href=#__codelineno-24-5>5</a></span>
-<span class=normal><a href=#__codelineno-24-6>6</a></span>
-<span class=normal><a href=#__codelineno-24-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-24-1><a id=__codelineno-24-1 name=__codelineno-24-1></a>请在回答时遵循以下约束：
-</span><span id=__span-24-2><a id=__codelineno-24-2 name=__codelineno-24-2></a>- 保持客观中立
-</span><span id=__span-24-3><a id=__codelineno-24-3 name=__codelineno-24-3></a>- 数据必须来自可靠来源
-</span><span id=__span-24-4><a id=__codelineno-24-4 name=__codelineno-24-4></a>- 结论需要有充分论据支撑
-</span><span id=__span-24-5><a id=__codelineno-24-5 name=__codelineno-24-5></a>- 避免过度推测
-</span><span id=__span-24-6><a id=__codelineno-24-6 name=__codelineno-24-6></a>
-</span><span id=__span-24-7><a id=__codelineno-24-7 name=__codelineno-24-7></a>问题：[你的问题]
-</span></code></pre></div></td></tr></table></div> <h3 id=73>7.3 高级提示模式<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <h4 id=1-react_1>1. ReAct提示模板<a class=headerlink href=#1-react_1 title="Permanent link">&para;</a></h4> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-25-1> 1</a></span>
-<span class=normal><a href=#__codelineno-25-2> 2</a></span>
-<span class=normal><a href=#__codelineno-25-3> 3</a></span>
-<span class=normal><a href=#__codelineno-25-4> 4</a></span>
-<span class=normal><a href=#__codelineno-25-5> 5</a></span>
-<span class=normal><a href=#__codelineno-25-6> 6</a></span>
-<span class=normal><a href=#__codelineno-25-7> 7</a></span>
-<span class=normal><a href=#__codelineno-25-8> 8</a></span>
-<span class=normal><a href=#__codelineno-25-9> 9</a></span>
-<span class=normal><a href=#__codelineno-25-10>10</a></span>
-<span class=normal><a href=#__codelineno-25-11>11</a></span>
-<span class=normal><a href=#__codelineno-25-12>12</a></span>
-<span class=normal><a href=#__codelineno-25-13>13</a></span>
-<span class=normal><a href=#__codelineno-25-14>14</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-25-1><a id=__codelineno-25-1 name=__codelineno-25-1></a>你是一个智能助手，可以通过搜索、计算和执行操作来完成任务。
-</span><span id=__span-25-2><a id=__codelineno-25-2 name=__codelineno-25-2></a>
-</span><span id=__span-25-3><a id=__codelineno-25-3 name=__codelineno-25-3></a>可用工具：
-</span><span id=__span-25-4><a id=__codelineno-25-4 name=__codelineno-25-4></a>- search: 搜索互联网信息
-</span><span id=__span-25-5><a id=__codelineno-25-5 name=__codelineno-25-5></a>- calculate: 执行数学计算
-</span><span id=__span-25-6><a id=__codelineno-25-6 name=__codelineno-25-6></a>- finish: 完成任务并输出结果
-</span><span id=__span-25-7><a id=__codelineno-25-7 name=__codelineno-25-7></a>
-</span><span id=__span-25-8><a id=__codelineno-25-8 name=__codelineno-25-8></a>任务：[用户任务]
-</span><span id=__span-25-9><a id=__codelineno-25-9 name=__codelineno-25-9></a>
-</span><span id=__span-25-10><a id=__codelineno-25-10 name=__codelineno-25-10></a>请按照以下格式思考和行动：
-</span><span id=__span-25-11><a id=__codelineno-25-11 name=__codelineno-25-11></a>思考：[分析当前情况]
-</span><span id=__span-25-12><a id=__codelineno-25-12 name=__codelineno-25-12></a>行动：[选择工具和参数]
-</span><span id=__span-25-13><a id=__codelineno-25-13 name=__codelineno-25-13></a>观察：[工具返回的结果]
-</span><span id=__span-25-14><a id=__codelineno-25-14 name=__codelineno-25-14></a>...（重复直到任务完成）
-</span></code></pre></div></td></tr></table></div> <h4 id=2-agent>2. Agent提示模板<a class=headerlink href=#2-agent title="Permanent link">&para;</a></h4> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-26-1> 1</a></span>
-<span class=normal><a href=#__codelineno-26-2> 2</a></span>
-<span class=normal><a href=#__codelineno-26-3> 3</a></span>
-<span class=normal><a href=#__codelineno-26-4> 4</a></span>
-<span class=normal><a href=#__codelineno-26-5> 5</a></span>
-<span class=normal><a href=#__codelineno-26-6> 6</a></span>
-<span class=normal><a href=#__codelineno-26-7> 7</a></span>
-<span class=normal><a href=#__codelineno-26-8> 8</a></span>
-<span class=normal><a href=#__codelineno-26-9> 9</a></span>
-<span class=normal><a href=#__codelineno-26-10>10</a></span>
-<span class=normal><a href=#__codelineno-26-11>11</a></span>
-<span class=normal><a href=#__codelineno-26-12>12</a></span>
-<span class=normal><a href=#__codelineno-26-13>13</a></span>
-<span class=normal><a href=#__codelineno-26-14>14</a></span>
-<span class=normal><a href=#__codelineno-26-15>15</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-26-1><a id=__codelineno-26-1 name=__codelineno-26-1></a>你是一个专业的AI助手，名字叫[名字]。
-</span><span id=__span-26-2><a id=__codelineno-26-2 name=__codelineno-26-2></a>
-</span><span id=__span-26-3><a id=__codelineno-26-3 name=__codelineno-26-3></a>你的工作流程：
-</span><span id=__span-26-4><a id=__codelineno-26-4 name=__codelineno-26-4></a>1. 理解用户需求
-</span><span id=__span-26-5><a id=__codelineno-26-5 name=__codelineno-26-5></a>2. 制定执行计划
-</span><span id=__span-26-6><a id=__codelineno-26-6 name=__codelineno-26-6></a>3. 逐步执行任务
-</span><span id=__span-26-7><a id=__codelineno-26-7 name=__codelineno-26-7></a>4. 检查完成质量
-</span><span id=__span-26-8><a id=__codelineno-26-8 name=__codelineno-26-8></a>5. 优化和完善结果
-</span><span id=__span-26-9><a id=__codelineno-26-9 name=__codelineno-26-9></a>
-</span><span id=__span-26-10><a id=__codelineno-26-10 name=__codelineno-26-10></a>可用能力：
-</span><span id=__span-26-11><a id=__codelineno-26-11 name=__codelineno-26-11></a>- [能力1描述]
-</span><span id=__span-26-12><a id=__codelineno-26-12 name=__codelineno-26-12></a>- [能力2描述]
-</span><span id=__span-26-13><a id=__codelineno-26-13 name=__codelineno-26-13></a>- [能力3描述]
-</span><span id=__span-26-14><a id=__codelineno-26-14 name=__codelineno-26-14></a>
-</span><span id=__span-26-15><a id=__codelineno-26-15 name=__codelineno-26-15></a>请开始帮助用户：[任务描述]
-</span></code></pre></div></td></tr></table></div> <h4 id=3_4>3. 反思提示模板<a class=headerlink href=#3_4 title="Permanent link">&para;</a></h4> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-27-1>1</a></span>
-<span class=normal><a href=#__codelineno-27-2>2</a></span>
-<span class=normal><a href=#__codelineno-27-3>3</a></span>
-<span class=normal><a href=#__codelineno-27-4>4</a></span>
-<span class=normal><a href=#__codelineno-27-5>5</a></span>
-<span class=normal><a href=#__codelineno-27-6>6</a></span>
-<span class=normal><a href=#__codelineno-27-7>7</a></span>
-<span class=normal><a href=#__codelineno-27-8>8</a></span>
-<span class=normal><a href=#__codelineno-27-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-27-1><a id=__codelineno-27-1 name=__codelineno-27-1></a>回答这个问题后，请进行自我检查：
-</span><span id=__span-27-2><a id=__codelineno-27-2 name=__codelineno-27-2></a>1. 答案是否完整？
-</span><span id=__span-27-3><a id=__codelineno-27-3 name=__codelineno-27-3></a>2. 推理过程是否正确？
-</span><span id=__span-27-4><a id=__codelineno-27-4 name=__codelineno-27-4></a>3. 是否有遗漏的重要因素？
-</span><span id=__span-27-5><a id=__codelineno-27-5 name=__codelineno-27-5></a>4. 结论是否有充分的依据？
-</span><span id=__span-27-6><a id=__codelineno-27-6 name=__codelineno-27-6></a>
-</span><span id=__span-27-7><a id=__codelineno-27-7 name=__codelineno-27-7></a>如有不足，请修正后再输出最终答案。
-</span><span id=__span-27-8><a id=__codelineno-27-8 name=__codelineno-27-8></a>
-</span><span id=__span-27-9><a id=__codelineno-27-9 name=__codelineno-27-9></a>问题：[你的问题]
-</span></code></pre></div></td></tr></table></div> <h3 id=74>7.4 提示优化技巧<a class=headerlink href=#74 title="Permanent link">&para;</a></h3> <h4 id=1_3>1. 迭代优化<a class=headerlink href=#1_3 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>flowchart TD
+    style D fill:#ff9,stroke:#333</code></pre> <p><strong>选择策略：</strong> 1. <strong>功能匹配</strong>：工具功能是否满足任务需求 2. <strong>效率优先</strong>：哪个工具能更快获得结果 3. <strong>准确性</strong>：哪个工具的结果更可靠 4. <strong>成本考虑</strong>：调用不同工具的成本差异</p> <hr> <h2 id=_4>第七章：提示工程——激活主动创造能力<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <h3 id=71>7.1 提示工程的重要性<a class=headerlink href=#71 title="Permanent link">&para;</a></h3> <p>无论算法多么先进，最终都需要通过提示（Prompt）来激活模型的能力。好的提示可以充分激发模型的“主动创造”潜力，而糟糕的提示则可能让模型“迷失方向”。</p> <h3 id=72>7.2 核心提示策略<a class=headerlink href=#72 title="Permanent link">&para;</a></h3> <h4 id=1-role-prompting>1. 角色扮演（Role Prompting）<a class=headerlink href=#1-role-prompting title="Permanent link">&para;</a></h4> <p>通过设定角色来引导模型的思考方式：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-20-1>你是一位经验丰富的软件架构师，专门负责设计高性能、可扩展的系统。请分析以下需求并提供架构建议：
+</span><span id=__span-20-2>[需求描述]
+</span></code></pre></div> <h4 id=2-step-by-step>2. 分步引导（Step-by-Step）<a class=headerlink href=#2-step-by-step title="Permanent link">&para;</a></h4> <p>将复杂任务分解为多个步骤，引导模型逐步完成：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-21-1>分析这个问题需要以下步骤：
+</span><span id=__span-21-2>1. 首先，识别问题的核心要素
+</span><span id=__span-21-3>2. 然后，列出所有可能的解决方案
+</span><span id=__span-21-4>3. 接着，评估每个方案的优缺点
+</span><span id=__span-21-5>4. 最后，选择最佳方案并详细说明理由
+</span><span id=__span-21-6>
+</span><span id=__span-21-7>问题：[你的问题]
+</span></code></pre></div> <h4 id=3-few-shot-learning>3. 示例注入（Few-shot Learning）<a class=headerlink href=#3-few-shot-learning title="Permanent link">&para;</a></h4> <p>通过示例展示期望的输出格式和推理过程：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-22-1>示例1：
+</span><span id=__span-22-2>输入：分析这家公司的财务状况
+</span><span id=__span-22-3>输出：分析将包括：1) 营收增长趋势 2) 利润率变化 3) 现金流状况 4) 债务水平 5) 综合评估
+</span><span id=__span-22-4>
+</span><span id=__span-22-5>示例2：
+</span><span id=__span-22-6>输入：评估这个产品的市场表现
+</span><span id=__span-22-7>输出：评估将包括：1) 市场份额变化 2) 用户增长率 3) 竞品对比 4) 用户评价 5) 发展建议
+</span><span id=__span-22-8>
+</span><span id=__span-22-9>请分析：[你的输入]
+</span></code></pre></div> <h4 id=4_1>4. 思维链激活<a class=headerlink href=#4_1 title="Permanent link">&para;</a></h4> <p>明确要求模型展示推理过程：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-23-1>请在回答时：
+</span><span id=__span-23-2>1. 先分析问题
+</span><span id=__span-23-3>2. 列出关键因素
+</span><span id=__span-23-4>3. 进行逻辑推导
+</span><span id=__span-23-5>4. 得出结论
+</span><span id=__span-23-6>5. 验证答案合理性
+</span><span id=__span-23-7>
+</span><span id=__span-23-8>问题：[你的问题]
+</span></code></pre></div> <h4 id=5>5. 约束设置<a class=headerlink href=#5 title="Permanent link">&para;</a></h4> <p>通过约束条件引导模型的输出方向：</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-24-1>请在回答时遵循以下约束：
+</span><span id=__span-24-2>- 保持客观中立
+</span><span id=__span-24-3>- 数据必须来自可靠来源
+</span><span id=__span-24-4>- 结论需要有充分论据支撑
+</span><span id=__span-24-5>- 避免过度推测
+</span><span id=__span-24-6>
+</span><span id=__span-24-7>问题：[你的问题]
+</span></code></pre></div> <h3 id=73>7.3 高级提示模式<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <h4 id=1-react_1>1. ReAct提示模板<a class=headerlink href=#1-react_1 title="Permanent link">&para;</a></h4> <div class="language-text highlight"><pre><span></span><code><span id=__span-25-1>你是一个智能助手，可以通过搜索、计算和执行操作来完成任务。
+</span><span id=__span-25-2>
+</span><span id=__span-25-3>可用工具：
+</span><span id=__span-25-4>- search: 搜索互联网信息
+</span><span id=__span-25-5>- calculate: 执行数学计算
+</span><span id=__span-25-6>- finish: 完成任务并输出结果
+</span><span id=__span-25-7>
+</span><span id=__span-25-8>任务：[用户任务]
+</span><span id=__span-25-9>
+</span><span id=__span-25-10>请按照以下格式思考和行动：
+</span><span id=__span-25-11>思考：[分析当前情况]
+</span><span id=__span-25-12>行动：[选择工具和参数]
+</span><span id=__span-25-13>观察：[工具返回的结果]
+</span><span id=__span-25-14>...（重复直到任务完成）
+</span></code></pre></div> <h4 id=2-agent>2. Agent提示模板<a class=headerlink href=#2-agent title="Permanent link">&para;</a></h4> <div class="language-text highlight"><pre><span></span><code><span id=__span-26-1>你是一个专业的AI助手，名字叫[名字]。
+</span><span id=__span-26-2>
+</span><span id=__span-26-3>你的工作流程：
+</span><span id=__span-26-4>1. 理解用户需求
+</span><span id=__span-26-5>2. 制定执行计划
+</span><span id=__span-26-6>3. 逐步执行任务
+</span><span id=__span-26-7>4. 检查完成质量
+</span><span id=__span-26-8>5. 优化和完善结果
+</span><span id=__span-26-9>
+</span><span id=__span-26-10>可用能力：
+</span><span id=__span-26-11>- [能力1描述]
+</span><span id=__span-26-12>- [能力2描述]
+</span><span id=__span-26-13>- [能力3描述]
+</span><span id=__span-26-14>
+</span><span id=__span-26-15>请开始帮助用户：[任务描述]
+</span></code></pre></div> <h4 id=3_4>3. 反思提示模板<a class=headerlink href=#3_4 title="Permanent link">&para;</a></h4> <div class="language-text highlight"><pre><span></span><code><span id=__span-27-1>回答这个问题后，请进行自我检查：
+</span><span id=__span-27-2>1. 答案是否完整？
+</span><span id=__span-27-3>2. 推理过程是否正确？
+</span><span id=__span-27-4>3. 是否有遗漏的重要因素？
+</span><span id=__span-27-5>4. 结论是否有充分的依据？
+</span><span id=__span-27-6>
+</span><span id=__span-27-7>如有不足，请修正后再输出最终答案。
+</span><span id=__span-27-8>
+</span><span id=__span-27-9>问题：[你的问题]
+</span></code></pre></div> <h3 id=74>7.4 提示优化技巧<a class=headerlink href=#74 title="Permanent link">&para;</a></h3> <h4 id=1_3>1. 迭代优化<a class=headerlink href=#1_3 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>flowchart TD
     A["初始提示"] --&gt; B["测试效果"]
     B --&gt; C{"效果如何？"}
     C --&gt;|"不足"| D["分析问题"]
@@ -653,77 +471,42 @@
     E --&gt; F["输出详细计划"]
 
     style A fill:#9ff,stroke:#333
-    style F fill:#9ff,stroke:#333</code></pre> <p><strong>Agent执行过程：</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-28-1>1</a></span>
-<span class=normal><a href=#__codelineno-28-2>2</a></span>
-<span class=normal><a href=#__codelineno-28-3>3</a></span>
-<span class=normal><a href=#__codelineno-28-4>4</a></span>
-<span class=normal><a href=#__codelineno-28-5>5</a></span>
-<span class=normal><a href=#__codelineno-28-6>6</a></span>
-<span class=normal><a href=#__codelineno-28-7>7</a></span>
-<span class=normal><a href=#__codelineno-28-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-28-1><a id=__codelineno-28-1 name=__codelineno-28-1></a>思考：用户想要规划云南7日游。我需要了解云南的主要旅游目的地、景点、美食等信息，然后制定一个合理的行程。
-</span><span id=__span-28-2><a id=__codelineno-28-2 name=__codelineno-28-2></a>行动：search 云南旅游必去景点 7天行程推荐
-</span><span id=__span-28-3><a id=__codelineno-28-3 name=__codelineno-28-3></a>观察：搜索结果显示云南热门目的地包括昆明、大理、丽江、香格里拉等。主要景点有石林、玉龙雪山、洱海、泸沽湖等。
-</span><span id=__span-28-4><a id=__codelineno-28-4 name=__codelineno-28-4></a>思考：云南地域广阔，7天时间需要合理规划路线。昆明-大理-丽江是比较经典的线路。
-</span><span id=__span-28-5><a id=__codelineno-28-5 name=__codelineno-28-5></a>行动：search 昆明大理丽江7日游最佳路线
-</span><span id=__span-28-6><a id=__codelineno-28-6 name=__codelineno-28-6></a>观察：建议行程为：昆明1天（石林、滇池）-大理2天（洱海、古城）-丽江2天（古城、玉龙雪山）-泸沽湖2天。
-</span><span id=__span-28-7><a id=__codelineno-28-7 name=__codelineno-28-7></a>思考：根据用户偏好（可能是首次去云南），我制定了以下行程。需要注意季节因素和天气情况。
-</span><span id=__span-28-8><a id=__codelineno-28-8 name=__codelineno-28-8></a>行动：finish [生成详细行程计划，包含每日安排、住宿建议、美食推荐、注意事项等]
-</span></code></pre></div></td></tr></table></div> <h3 id=82>8.2 案例二：代码调试助手<a class=headerlink href=#82 title="Permanent link">&para;</a></h3> <p><strong>任务</strong>：帮助用户修复一个Python程序的bug</p> <p><strong>用户输入</strong>：我的Python程序运行出错，显示"IndexError: list index out of range"，但我不知道问题在哪里</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-29-1>1</a></span>
-<span class=normal><a href=#__codelineno-29-2>2</a></span>
-<span class=normal><a href=#__codelineno-29-3>3</a></span>
-<span class=normal><a href=#__codelineno-29-4>4</a></span>
-<span class=normal><a href=#__codelineno-29-5>5</a></span>
-<span class=normal><a href=#__codelineno-29-6>6</a></span>
-<span class=normal><a href=#__codelineno-29-7>7</a></span>
-<span class=normal><a href=#__codelineno-29-8>8</a></span>
-<span class=normal><a href=#__codelineno-29-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-29-1><a id=__codelineno-29-1 name=__codelineno-29-1></a>代码：
-</span><span id=__span-29-2><a id=__codelineno-29-2 name=__codelineno-29-2></a>def find_max(numbers):
-</span><span id=__span-29-3><a id=__codelineno-29-3 name=__codelineno-29-3></a>    max_num = 0
-</span><span id=__span-29-4><a id=__codelineno-29-4 name=__codelineno-29-4></a>    for num in numbers:
-</span><span id=__span-29-5><a id=__codelineno-29-5 name=__codelineno-29-5></a>        if num &gt; max_num:
-</span><span id=__span-29-6><a id=__codelineno-29-6 name=__codelineno-29-6></a>            max_num = num
-</span><span id=__span-29-7><a id=__codelineno-29-7 name=__codelineno-29-7></a>    return max_num
-</span><span id=__span-29-8><a id=__codelineno-29-8 name=__codelineno-29-8></a>
-</span><span id=__span-29-9><a id=__codelineno-29-9 name=__codelineno-29-9></a>print(find_max([-1, -2, -3]))
-</span></code></pre></div></td></tr></table></div> <p><strong>Agent执行过程：</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-30-1> 1</a></span>
-<span class=normal><a href=#__codelineno-30-2> 2</a></span>
-<span class=normal><a href=#__codelineno-30-3> 3</a></span>
-<span class=normal><a href=#__codelineno-30-4> 4</a></span>
-<span class=normal><a href=#__codelineno-30-5> 5</a></span>
-<span class=normal><a href=#__codelineno-30-6> 6</a></span>
-<span class=normal><a href=#__codelineno-30-7> 7</a></span>
-<span class=normal><a href=#__codelineno-30-8> 8</a></span>
-<span class=normal><a href=#__codelineno-30-9> 9</a></span>
-<span class=normal><a href=#__codelineno-30-10>10</a></span>
-<span class=normal><a href=#__codelineno-30-11>11</a></span>
-<span class=normal><a href=#__codelineno-30-12>12</a></span>
-<span class=normal><a href=#__codelineno-30-13>13</a></span>
-<span class=normal><a href=#__codelineno-30-14>14</a></span>
-<span class=normal><a href=#__codelineno-30-15>15</a></span>
-<span class=normal><a href=#__codelineno-30-16>16</a></span>
-<span class=normal><a href=#__codelineno-30-17>17</a></span>
-<span class=normal><a href=#__codelineno-30-18>18</a></span>
-<span class=normal><a href=#__codelineno-30-19>19</a></span>
-<span class=normal><a href=#__codelineno-30-20>20</a></span>
-<span class=normal><a href=#__codelineno-30-21>21</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-30-1><a id=__codelineno-30-1 name=__codelineno-30-1></a>思考：用户遇到了IndexError，但提供的代码看起来没有明显的越界问题。我需要仔细分析这段代码。
-</span><span id=__span-30-2><a id=__codelineno-30-2 name=__codelineno-30-2></a>分析代码：
-</span><span id=__span-30-3><a id=__codelineno-30-3 name=__codelineno-30-3></a>1. 初始化 max_num = 0
-</span><span id=__span-30-4><a id=__codelineno-30-4 name=__codelineno-30-4></a>2. 遍历列表找最大值
-</span><span id=__span-30-5><a id=__codelineno-30-5 name=__codelineno-30-5></a>3. 返回最大值
-</span><span id=__span-30-6><a id=__codelineno-30-6 name=__codelineno-30-6></a>
-</span><span id=__span-30-7><a id=__codelineno-30-7 name=__codelineno-30-7></a>问题发现：
-</span><span id=__span-30-8><a id=__codelineno-30-8 name=__codelineno-30-8></a>当输入是 [-1, -2, -3] 这种全为负数的列表时，max_num 初始化为0会导致错误结果，因为所有负数都小于0，所以会返回0而不是真正的最大值-1。
-</span><span id=__span-30-9><a id=__codelineno-30-9 name=__codelineno-30-9></a>
-</span><span id=__span-30-10><a id=__codelineno-30-10 name=__codelineno-30-10></a>但是这不会导致IndexError...让我重新分析用户提供的信息。用户说报错是&quot;list index out of range&quot;，这可能是简化后的代码，实际情况可能不同。
-</span><span id=__span-30-11><a id=__codelineno-30-11 name=__codelineno-30-11></a>思考：需要更多信息来定位问题。用户可能提供了简化版本或有其他代码问题。
-</span><span id=__span-30-12><a id=__codelineno-30-12 name=__codelineno-30-12></a>行动：finish 
-</span><span id=__span-30-13><a id=__codelineno-30-13 name=__codelineno-30-13></a>
-</span><span id=__span-30-14><a id=__codelineno-30-14 name=__codelineno-30-14></a>分析结果：
-</span><span id=__span-30-15><a id=__codelineno-30-15 name=__codelineno-30-15></a>这段代码本身不会导致 IndexError。但存在逻辑问题：
-</span><span id=__span-30-16><a id=__codelineno-30-16 name=__codelineno-30-16></a>- 如果列表全为负数，会返回0而不是真正的最大值
-</span><span id=__span-30-17><a id=__codelineno-30-17 name=__codelineno-30-17></a>
-</span><span id=__span-30-18><a id=__codelineno-30-18 name=__codelineno-30-18></a>如需解决真正的 IndexError，请提供：
-</span><span id=__span-30-19><a id=__codelineno-30-19 name=__codelineno-30-19></a>1. 完整的报错信息
-</span><span id=__span-30-20><a id=__codelineno-30-20 name=__codelineno-30-20></a>2. 完整的代码
-</span><span id=__span-30-21><a id=__codelineno-30-21 name=__codelineno-30-21></a>3. 调用的输入示例
-</span></code></pre></div></td></tr></table></div> <h3 id=83>8.3 案例三：数据分析报告<a class=headerlink href=#83 title="Permanent link">&para;</a></h3> <p><strong>任务</strong>：分析一家电商公司的销售数据并生成报告</p> <p><strong>输入</strong>：一个包含销售记录的CSV文件</p> <p>**Agent执行过程：</p> <p><strong>核心要点回顾：</strong></p> <ol> <li> <p><strong>思维链（CoT）</strong>：通过引导模型展示中间推理步骤，显著提升复杂任务表现</p> </li> <li> <p><strong>ReAct</strong>：将推理与外部行动结合，形成“思考-行动-观察”的闭环</p> </li> <li> <p><strong>思维树（ToT）</strong>：同时探索多条推理路径，增强问题解决的全面性</p> </li> <li> <p><strong>AI Agent</strong>：具备感知、规划、执行、反思的完整能力，是主动创造的终极形态</p> </li> <li> <p><strong>工具调用</strong>：通过调用外部工具，弥补大模型的知识和行动局限</p> </li> <li> <p><strong>提示工程</strong>：好的提示是激活模型能力的关键</p> </li> </ol> <p>技术的进步永无止境。随着更多研究的深入和应用的拓展，大模型的“主动创造”能力将会越来越强大。也许在不久的将来，我们每个人都将拥有一个真正的“数字助手”，它不仅能回答问题，更能帮助我们解决问题、创造价值。</p> <p>这就是大模型主动创造算法的世界——一个充满可能性的前沿领域。</p> <hr> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> </div> <div class=md-social> <a href=https://github.com/deep2code target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://linkedin.com/in/deep2code target=_blank rel=noopener title=linkedin.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg> </a> <a href=https://twitter.com/deep2code target=_blank rel=noopener title=twitter.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.select", "content.code.annotate", "content.tabs.link", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script> <script src=../../assets/javascripts/bundle.79ae519e.min.js></script> <script src=https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js></script> <script src=../../assets/js/code-block.js></script> <script src=../../assets/js/custom.js></script> </body> </html>
+    style F fill:#9ff,stroke:#333</code></pre> <p><strong>Agent执行过程：</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-28-1>思考：用户想要规划云南7日游。我需要了解云南的主要旅游目的地、景点、美食等信息，然后制定一个合理的行程。
+</span><span id=__span-28-2>行动：search 云南旅游必去景点 7天行程推荐
+</span><span id=__span-28-3>观察：搜索结果显示云南热门目的地包括昆明、大理、丽江、香格里拉等。主要景点有石林、玉龙雪山、洱海、泸沽湖等。
+</span><span id=__span-28-4>思考：云南地域广阔，7天时间需要合理规划路线。昆明-大理-丽江是比较经典的线路。
+</span><span id=__span-28-5>行动：search 昆明大理丽江7日游最佳路线
+</span><span id=__span-28-6>观察：建议行程为：昆明1天（石林、滇池）-大理2天（洱海、古城）-丽江2天（古城、玉龙雪山）-泸沽湖2天。
+</span><span id=__span-28-7>思考：根据用户偏好（可能是首次去云南），我制定了以下行程。需要注意季节因素和天气情况。
+</span><span id=__span-28-8>行动：finish [生成详细行程计划，包含每日安排、住宿建议、美食推荐、注意事项等]
+</span></code></pre></div> <h3 id=82>8.2 案例二：代码调试助手<a class=headerlink href=#82 title="Permanent link">&para;</a></h3> <p><strong>任务</strong>：帮助用户修复一个Python程序的bug</p> <p><strong>用户输入</strong>：我的Python程序运行出错，显示"IndexError: list index out of range"，但我不知道问题在哪里</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-29-1>代码：
+</span><span id=__span-29-2>def find_max(numbers):
+</span><span id=__span-29-3>    max_num = 0
+</span><span id=__span-29-4>    for num in numbers:
+</span><span id=__span-29-5>        if num &gt; max_num:
+</span><span id=__span-29-6>            max_num = num
+</span><span id=__span-29-7>    return max_num
+</span><span id=__span-29-8>
+</span><span id=__span-29-9>print(find_max([-1, -2, -3]))
+</span></code></pre></div> <p><strong>Agent执行过程：</strong></p> <div class="language-text highlight"><pre><span></span><code><span id=__span-30-1>思考：用户遇到了IndexError，但提供的代码看起来没有明显的越界问题。我需要仔细分析这段代码。
+</span><span id=__span-30-2>分析代码：
+</span><span id=__span-30-3>1. 初始化 max_num = 0
+</span><span id=__span-30-4>2. 遍历列表找最大值
+</span><span id=__span-30-5>3. 返回最大值
+</span><span id=__span-30-6>
+</span><span id=__span-30-7>问题发现：
+</span><span id=__span-30-8>当输入是 [-1, -2, -3] 这种全为负数的列表时，max_num 初始化为0会导致错误结果，因为所有负数都小于0，所以会返回0而不是真正的最大值-1。
+</span><span id=__span-30-9>
+</span><span id=__span-30-10>但是这不会导致IndexError...让我重新分析用户提供的信息。用户说报错是&quot;list index out of range&quot;，这可能是简化后的代码，实际情况可能不同。
+</span><span id=__span-30-11>思考：需要更多信息来定位问题。用户可能提供了简化版本或有其他代码问题。
+</span><span id=__span-30-12>行动：finish 
+</span><span id=__span-30-13>
+</span><span id=__span-30-14>分析结果：
+</span><span id=__span-30-15>这段代码本身不会导致 IndexError。但存在逻辑问题：
+</span><span id=__span-30-16>- 如果列表全为负数，会返回0而不是真正的最大值
+</span><span id=__span-30-17>
+</span><span id=__span-30-18>如需解决真正的 IndexError，请提供：
+</span><span id=__span-30-19>1. 完整的报错信息
+</span><span id=__span-30-20>2. 完整的代码
+</span><span id=__span-30-21>3. 调用的输入示例
+</span></code></pre></div> <h3 id=83>8.3 案例三：数据分析报告<a class=headerlink href=#83 title="Permanent link">&para;</a></h3> <p><strong>任务</strong>：分析一家电商公司的销售数据并生成报告</p> <p><strong>输入</strong>：一个包含销售记录的CSV文件</p> <p>**Agent执行过程：</p> <p><strong>核心要点回顾：</strong></p> <ol> <li> <p><strong>思维链（CoT）</strong>：通过引导模型展示中间推理步骤，显著提升复杂任务表现</p> </li> <li> <p><strong>ReAct</strong>：将推理与外部行动结合，形成“思考-行动-观察”的闭环</p> </li> <li> <p><strong>思维树（ToT）</strong>：同时探索多条推理路径，增强问题解决的全面性</p> </li> <li> <p><strong>AI Agent</strong>：具备感知、规划、执行、反思的完整能力，是主动创造的终极形态</p> </li> <li> <p><strong>工具调用</strong>：通过调用外部工具，弥补大模型的知识和行动局限</p> </li> <li> <p><strong>提示工程</strong>：好的提示是激活模型能力的关键</p> </li> </ol> <p>技术的进步永无止境。随着更多研究的深入和应用的拓展，大模型的“主动创造”能力将会越来越强大。也许在不久的将来，我们每个人都将拥有一个真正的“数字助手”，它不仅能回答问题，更能帮助我们解决问题、创造价值。</p> <p>这就是大模型主动创造算法的世界——一个充满可能性的前沿领域。</p> <hr> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> </div> <div class=md-social> <a href=https://github.com/deep2code target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://linkedin.com/in/deep2code target=_blank rel=noopener title=linkedin.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg> </a> <a href=https://twitter.com/deep2code target=_blank rel=noopener title=twitter.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.select", "content.code.annotate", "content.tabs.link", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script> <script src=../../assets/javascripts/bundle.79ae519e.min.js></script> <script src=https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js></script> <script src=../../assets/js/code-block.js></script> <script src=../../assets/js/custom.js></script> </body> </html>

@@ -57,66 +57,37 @@
     H --&gt; H2[Zlib压缩]
     H --&gt; H3[AES加密]
 
-    style D fill:#ffd700</code></pre> <h3 id=_3>数据在磁盘上的真实模样<a class=headerlink href=#_3 title="Permanent link">&para;</a></h3> <p><strong>一个文档的物理存储结构：</strong></p> <div class="language-json highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1> 1</a></span>
-<span class=normal><a href=#__codelineno-0-2> 2</a></span>
-<span class=normal><a href=#__codelineno-0-3> 3</a></span>
-<span class=normal><a href=#__codelineno-0-4> 4</a></span>
-<span class=normal><a href=#__codelineno-0-5> 5</a></span>
-<span class=normal><a href=#__codelineno-0-6> 6</a></span>
-<span class=normal><a href=#__codelineno-0-7> 7</a></span>
-<span class=normal><a href=#__codelineno-0-8> 8</a></span>
-<span class=normal><a href=#__codelineno-0-9> 9</a></span>
-<span class=normal><a href=#__codelineno-0-10>10</a></span>
-<span class=normal><a href=#__codelineno-0-11>11</a></span>
-<span class=normal><a href=#__codelineno-0-12>12</a></span>
-<span class=normal><a href=#__codelineno-0-13>13</a></span>
-<span class=normal><a href=#__codelineno-0-14>14</a></span>
-<span class=normal><a href=#__codelineno-0-15>15</a></span>
-<span class=normal><a href=#__codelineno-0-16>16</a></span>
-<span class=normal><a href=#__codelineno-0-17>17</a></span>
-<span class=normal><a href=#__codelineno-0-18>18</a></span>
-<span class=normal><a href=#__codelineno-0-19>19</a></span>
-<span class=normal><a href=#__codelineno-0-20>20</a></span>
-<span class=normal><a href=#__codelineno-0-21>21</a></span>
-<span class=normal><a href=#__codelineno-0-22>22</a></span>
-<span class=normal><a href=#__codelineno-0-23>23</a></span>
-<span class=normal><a href=#__codelineno-0-24>24</a></span>
-<span class=normal><a href=#__codelineno-0-25>25</a></span>
-<span class=normal><a href=#__codelineno-0-26>26</a></span>
-<span class=normal><a href=#__codelineno-0-27>27</a></span>
-<span class=normal><a href=#__codelineno-0-28>28</a></span>
-<span class=normal><a href=#__codelineno-0-29>29</a></span>
-<span class=normal><a href=#__codelineno-0-30>30</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=c1>// 逻辑视图 - 我们看到的文档</span>
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a><span class=p>{</span>
-</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a><span class=w>  </span><span class=nt>&quot;_id&quot;</span><span class=p>:</span><span class=w> </span><span class=err>Objec</span><span class=kc>t</span><span class=err>Id(</span><span class=s2>&quot;507f1f77bcf86cd799439011&quot;</span><span class=err>)</span><span class=p>,</span>
-</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a><span class=w>  </span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;张三&quot;</span><span class=p>,</span>
-</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a><span class=w>  </span><span class=nt>&quot;age&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>25</span><span class=p>,</span>
-</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a><span class=w>  </span><span class=nt>&quot;address&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-0-7><a id=__codelineno-0-7 name=__codelineno-0-7></a><span class=w>    </span><span class=nt>&quot;city&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;北京&quot;</span><span class=p>,</span>
-</span><span id=__span-0-8><a id=__codelineno-0-8 name=__codelineno-0-8></a><span class=w>    </span><span class=nt>&quot;street&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;中关村&quot;</span>
-</span><span id=__span-0-9><a id=__codelineno-0-9 name=__codelineno-0-9></a><span class=w>  </span><span class=p>},</span>
-</span><span id=__span-0-10><a id=__codelineno-0-10 name=__codelineno-0-10></a><span class=w>  </span><span class=nt>&quot;tags&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;技术&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;编程&quot;</span><span class=p>]</span>
-</span><span id=__span-0-11><a id=__codelineno-0-11 name=__codelineno-0-11></a><span class=p>}</span>
-</span><span id=__span-0-12><a id=__codelineno-0-12 name=__codelineno-0-12></a>
-</span><span id=__span-0-13><a id=__codelineno-0-13 name=__codelineno-0-13></a><span class=c1>// 物理存储 - 实际在磁盘上的格式</span>
-</span><span id=__span-0-14><a id=__codelineno-0-14 name=__codelineno-0-14></a><span class=p>{</span>
-</span><span id=__span-0-15><a id=__codelineno-0-15 name=__codelineno-0-15></a><span class=w>  </span><span class=nt>&quot;header&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-0-16><a id=__codelineno-0-16 name=__codelineno-0-16></a><span class=w>    </span><span class=nt>&quot;length&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>156</span><span class=p>,</span>
-</span><span id=__span-0-17><a id=__codelineno-0-17 name=__codelineno-0-17></a><span class=w>    </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;document&quot;</span><span class=p>,</span>
-</span><span id=__span-0-18><a id=__codelineno-0-18 name=__codelineno-0-18></a><span class=w>    </span><span class=nt>&quot;flags&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>0</span>
-</span><span id=__span-0-19><a id=__codelineno-0-19 name=__codelineno-0-19></a><span class=w>  </span><span class=p>},</span>
-</span><span id=__span-0-20><a id=__codelineno-0-20 name=__codelineno-0-20></a><span class=w>  </span><span class=nt>&quot;elements&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
-</span><span id=__span-0-21><a id=__codelineno-0-21 name=__codelineno-0-21></a><span class=w>    </span><span class=p>{</span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;_id&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;ObjectId&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;value&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;507f1f77bcf86cd799439011&quot;</span><span class=p>},</span>
-</span><span id=__span-0-22><a id=__codelineno-0-22 name=__codelineno-0-22></a><span class=w>    </span><span class=p>{</span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;name&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;string&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;value&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;张三&quot;</span><span class=p>},</span>
-</span><span id=__span-0-23><a id=__codelineno-0-23 name=__codelineno-0-23></a><span class=w>    </span><span class=p>{</span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;age&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;int32&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;value&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>25</span><span class=p>},</span>
-</span><span id=__span-0-24><a id=__codelineno-0-24 name=__codelineno-0-24></a><span class=w>    </span><span class=p>{</span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;address&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;embedded&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;value&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-0-25><a id=__codelineno-0-25 name=__codelineno-0-25></a><span class=w>      </span><span class=nt>&quot;city&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;北京&quot;</span><span class=p>,</span>
-</span><span id=__span-0-26><a id=__codelineno-0-26 name=__codelineno-0-26></a><span class=w>      </span><span class=nt>&quot;street&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;中关村&quot;</span>
-</span><span id=__span-0-27><a id=__codelineno-0-27 name=__codelineno-0-27></a><span class=w>    </span><span class=p>}},</span>
-</span><span id=__span-0-28><a id=__codelineno-0-28 name=__codelineno-0-28></a><span class=w>    </span><span class=p>{</span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;tags&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;array&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;value&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;技术&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;编程&quot;</span><span class=p>]}</span>
-</span><span id=__span-0-29><a id=__codelineno-0-29 name=__codelineno-0-29></a><span class=w>  </span><span class=p>]</span>
-</span><span id=__span-0-30><a id=__codelineno-0-30 name=__codelineno-0-30></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=wiredtiger_1>WiredTiger的内存管理魔法<a class=headerlink href=#wiredtiger_1 title="Permanent link">&para;</a></h3> <p><strong>工作集(Working Set)概念：</strong></p> <pre class=mermaid><code>graph TB
+    style D fill:#ffd700</code></pre> <h3 id=_3>数据在磁盘上的真实模样<a class=headerlink href=#_3 title="Permanent link">&para;</a></h3> <p><strong>一个文档的物理存储结构：</strong></p> <div class="language-json highlight"><pre><span></span><code><span id=__span-0-1><span class=c1>// 逻辑视图 - 我们看到的文档</span>
+</span><span id=__span-0-2><span class=p>{</span>
+</span><span id=__span-0-3><span class=w>  </span><span class=nt>&quot;_id&quot;</span><span class=p>:</span><span class=w> </span><span class=err>Objec</span><span class=kc>t</span><span class=err>Id(</span><span class=s2>&quot;507f1f77bcf86cd799439011&quot;</span><span class=err>)</span><span class=p>,</span>
+</span><span id=__span-0-4><span class=w>  </span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;张三&quot;</span><span class=p>,</span>
+</span><span id=__span-0-5><span class=w>  </span><span class=nt>&quot;age&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>25</span><span class=p>,</span>
+</span><span id=__span-0-6><span class=w>  </span><span class=nt>&quot;address&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-0-7><span class=w>    </span><span class=nt>&quot;city&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;北京&quot;</span><span class=p>,</span>
+</span><span id=__span-0-8><span class=w>    </span><span class=nt>&quot;street&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;中关村&quot;</span>
+</span><span id=__span-0-9><span class=w>  </span><span class=p>},</span>
+</span><span id=__span-0-10><span class=w>  </span><span class=nt>&quot;tags&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;技术&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;编程&quot;</span><span class=p>]</span>
+</span><span id=__span-0-11><span class=p>}</span>
+</span><span id=__span-0-12>
+</span><span id=__span-0-13><span class=c1>// 物理存储 - 实际在磁盘上的格式</span>
+</span><span id=__span-0-14><span class=p>{</span>
+</span><span id=__span-0-15><span class=w>  </span><span class=nt>&quot;header&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-0-16><span class=w>    </span><span class=nt>&quot;length&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>156</span><span class=p>,</span>
+</span><span id=__span-0-17><span class=w>    </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;document&quot;</span><span class=p>,</span>
+</span><span id=__span-0-18><span class=w>    </span><span class=nt>&quot;flags&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>0</span>
+</span><span id=__span-0-19><span class=w>  </span><span class=p>},</span>
+</span><span id=__span-0-20><span class=w>  </span><span class=nt>&quot;elements&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span>
+</span><span id=__span-0-21><span class=w>    </span><span class=p>{</span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;_id&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;ObjectId&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;value&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;507f1f77bcf86cd799439011&quot;</span><span class=p>},</span>
+</span><span id=__span-0-22><span class=w>    </span><span class=p>{</span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;name&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;string&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;value&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;张三&quot;</span><span class=p>},</span>
+</span><span id=__span-0-23><span class=w>    </span><span class=p>{</span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;age&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;int32&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;value&quot;</span><span class=p>:</span><span class=w> </span><span class=mi>25</span><span class=p>},</span>
+</span><span id=__span-0-24><span class=w>    </span><span class=p>{</span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;address&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;embedded&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;value&quot;</span><span class=p>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-0-25><span class=w>      </span><span class=nt>&quot;city&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;北京&quot;</span><span class=p>,</span>
+</span><span id=__span-0-26><span class=w>      </span><span class=nt>&quot;street&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;中关村&quot;</span>
+</span><span id=__span-0-27><span class=w>    </span><span class=p>}},</span>
+</span><span id=__span-0-28><span class=w>    </span><span class=p>{</span><span class=nt>&quot;name&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;tags&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;type&quot;</span><span class=p>:</span><span class=w> </span><span class=s2>&quot;array&quot;</span><span class=p>,</span><span class=w> </span><span class=nt>&quot;value&quot;</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&quot;技术&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;编程&quot;</span><span class=p>]}</span>
+</span><span id=__span-0-29><span class=w>  </span><span class=p>]</span>
+</span><span id=__span-0-30><span class=p>}</span>
+</span></code></pre></div> <h3 id=wiredtiger_1>WiredTiger的内存管理魔法<a class=headerlink href=#wiredtiger_1 title="Permanent link">&para;</a></h3> <p><strong>工作集(Working Set)概念：</strong></p> <pre class=mermaid><code>graph TB
     A[全部数据] --&gt; B[工作集数据]
     B --&gt; C[缓存命中数据]
     C --&gt; D[正在处理数据]
@@ -126,63 +97,36 @@
 
     style B fill:#4caf50
     style C fill:#2196f3
-    style D fill:#ff9800</code></pre> <p><strong>关键配置参数：</strong> <div class="language-yaml highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1> 1</a></span>
-<span class=normal><a href=#__codelineno-1-2> 2</a></span>
-<span class=normal><a href=#__codelineno-1-3> 3</a></span>
-<span class=normal><a href=#__codelineno-1-4> 4</a></span>
-<span class=normal><a href=#__codelineno-1-5> 5</a></span>
-<span class=normal><a href=#__codelineno-1-6> 6</a></span>
-<span class=normal><a href=#__codelineno-1-7> 7</a></span>
-<span class=normal><a href=#__codelineno-1-8> 8</a></span>
-<span class=normal><a href=#__codelineno-1-9> 9</a></span>
-<span class=normal><a href=#__codelineno-1-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=c1># mongod.conf 配置示例</span>
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a><span class=nt>storage</span><span class=p>:</span>
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a><span class=w>  </span><span class=nt>wiredTiger</span><span class=p>:</span>
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a><span class=w>    </span><span class=nt>engineConfig</span><span class=p>:</span>
-</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a><span class=w>      </span><span class=nt>cacheSizeGB</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">8</span><span class=w>          </span><span class=c1># 缓存大小，建议是内存的50-80%</span>
-</span><span id=__span-1-6><a id=__codelineno-1-6 name=__codelineno-1-6></a><span class=w>      </span><span class=nt>journalCompressor</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">snappy</span><span class=w>  </span><span class=c1># 日志压缩算法</span>
-</span><span id=__span-1-7><a id=__codelineno-1-7 name=__codelineno-1-7></a><span class=w>    </span><span class=nt>collectionConfig</span><span class=p>:</span>
-</span><span id=__span-1-8><a id=__codelineno-1-8 name=__codelineno-1-8></a><span class=w>      </span><span class=nt>blockCompressor</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">snappy</span><span class=w>    </span><span class=c1># 数据压缩算法</span>
-</span><span id=__span-1-9><a id=__codelineno-1-9 name=__codelineno-1-9></a><span class=w>    </span><span class=nt>indexConfig</span><span class=p>:</span>
-</span><span id=__span-1-10><a id=__codelineno-1-10 name=__codelineno-1-10></a><span class=w>      </span><span class=nt>prefixCompression</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class=w>    </span><span class=c1># 索引前缀压缩</span>
-</span></code></pre></div></td></tr></table></div></p> <hr> <h2 id=bson>📊 深入理解文档存储格式：BSON的奥秘<a class=headerlink href=#bson title="Permanent link">&para;</a></h2> <h3 id=bson-vs-jsonjson>BSON vs JSON：为什么不用JSON存储？<a class=headerlink href=#bson-vs-jsonjson title="Permanent link">&para;</a></h3> <p><strong>JSON的局限性：</strong> - 文本格式，解析慢 - 没有原生二进制类型支持 - 缺乏标准化的时间戳等类型</p> <p><strong>BSON的优势：</strong> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1> 1</a></span>
-<span class=normal><a href=#__codelineno-2-2> 2</a></span>
-<span class=normal><a href=#__codelineno-2-3> 3</a></span>
-<span class=normal><a href=#__codelineno-2-4> 4</a></span>
-<span class=normal><a href=#__codelineno-2-5> 5</a></span>
-<span class=normal><a href=#__codelineno-2-6> 6</a></span>
-<span class=normal><a href=#__codelineno-2-7> 7</a></span>
-<span class=normal><a href=#__codelineno-2-8> 8</a></span>
-<span class=normal><a href=#__codelineno-2-9> 9</a></span>
-<span class=normal><a href=#__codelineno-2-10>10</a></span>
-<span class=normal><a href=#__codelineno-2-11>11</a></span>
-<span class=normal><a href=#__codelineno-2-12>12</a></span>
-<span class=normal><a href=#__codelineno-2-13>13</a></span>
-<span class=normal><a href=#__codelineno-2-14>14</a></span>
-<span class=normal><a href=#__codelineno-2-15>15</a></span>
-<span class=normal><a href=#__codelineno-2-16>16</a></span>
-<span class=normal><a href=#__codelineno-2-17>17</a></span>
-<span class=normal><a href=#__codelineno-2-18>18</a></span>
-<span class=normal><a href=#__codelineno-2-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=c1># BSON的二进制结构示例</span>
-</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a><span class=kn>import</span><span class=w> </span><span class=nn>bson</span>
-</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a>
-</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a><span class=c1># 创建一个文档</span>
-</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a><span class=n>doc</span> <span class=o>=</span> <span class=p>{</span>
-</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6></a>    <span class=s2>&quot;name&quot;</span><span class=p>:</span> <span class=s2>&quot;张三&quot;</span><span class=p>,</span>
-</span><span id=__span-2-7><a id=__codelineno-2-7 name=__codelineno-2-7></a>    <span class=s2>&quot;age&quot;</span><span class=p>:</span> <span class=mi>25</span><span class=p>,</span>
-</span><span id=__span-2-8><a id=__codelineno-2-8 name=__codelineno-2-8></a>    <span class=s2>&quot;salary&quot;</span><span class=p>:</span> <span class=mf>15000.50</span><span class=p>,</span>
-</span><span id=__span-2-9><a id=__codelineno-2-9 name=__codelineno-2-9></a>    <span class=s2>&quot;birthday&quot;</span><span class=p>:</span> <span class=n>datetime</span><span class=p>(</span><span class=mi>1990</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>15</span><span class=p>),</span>
-</span><span id=__span-2-10><a id=__codelineno-2-10 name=__codelineno-2-10></a>    <span class=s2>&quot;skills&quot;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&quot;Python&quot;</span><span class=p>,</span> <span class=s2>&quot;MongoDB&quot;</span><span class=p>]</span>
-</span><span id=__span-2-11><a id=__codelineno-2-11 name=__codelineno-2-11></a><span class=p>}</span>
-</span><span id=__span-2-12><a id=__codelineno-2-12 name=__codelineno-2-12></a>
-</span><span id=__span-2-13><a id=__codelineno-2-13 name=__codelineno-2-13></a><span class=c1># 转换为BSON</span>
-</span><span id=__span-2-14><a id=__codelineno-2-14 name=__codelineno-2-14></a><span class=n>bson_data</span> <span class=o>=</span> <span class=n>bson</span><span class=o>.</span><span class=n>BSON</span><span class=o>.</span><span class=n>encode</span><span class=p>(</span><span class=n>doc</span><span class=p>)</span>
-</span><span id=__span-2-15><a id=__codelineno-2-15 name=__codelineno-2-15></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;BSON大小: </span><span class=si>{</span><span class=nb>len</span><span class=p>(</span><span class=n>bson_data</span><span class=p>)</span><span class=si>}</span><span class=s2> 字节&quot;</span><span class=p>)</span>
-</span><span id=__span-2-16><a id=__codelineno-2-16 name=__codelineno-2-16></a>
-</span><span id=__span-2-17><a id=__codelineno-2-17 name=__codelineno-2-17></a><span class=c1># 解析BSON</span>
-</span><span id=__span-2-18><a id=__codelineno-2-18 name=__codelineno-2-18></a><span class=n>decoded_doc</span> <span class=o>=</span> <span class=n>bson</span><span class=o>.</span><span class=n>BSON</span><span class=p>(</span><span class=n>bson_data</span><span class=p>)</span><span class=o>.</span><span class=n>decode</span><span class=p>()</span>
-</span><span id=__span-2-19><a id=__codelineno-2-19 name=__codelineno-2-19></a><span class=nb>print</span><span class=p>(</span><span class=n>decoded_doc</span><span class=p>)</span>
-</span></code></pre></div></td></tr></table></div></p> <h3 id=bson_1>BSON类型系统详解<a class=headerlink href=#bson_1 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
+    style D fill:#ff9800</code></pre> <p><strong>关键配置参数：</strong> <div class="language-yaml highlight"><pre><span></span><code><span id=__span-1-1><span class=c1># mongod.conf 配置示例</span>
+</span><span id=__span-1-2><span class=nt>storage</span><span class=p>:</span>
+</span><span id=__span-1-3><span class=w>  </span><span class=nt>wiredTiger</span><span class=p>:</span>
+</span><span id=__span-1-4><span class=w>    </span><span class=nt>engineConfig</span><span class=p>:</span>
+</span><span id=__span-1-5><span class=w>      </span><span class=nt>cacheSizeGB</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">8</span><span class=w>          </span><span class=c1># 缓存大小，建议是内存的50-80%</span>
+</span><span id=__span-1-6><span class=w>      </span><span class=nt>journalCompressor</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">snappy</span><span class=w>  </span><span class=c1># 日志压缩算法</span>
+</span><span id=__span-1-7><span class=w>    </span><span class=nt>collectionConfig</span><span class=p>:</span>
+</span><span id=__span-1-8><span class=w>      </span><span class=nt>blockCompressor</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">snappy</span><span class=w>    </span><span class=c1># 数据压缩算法</span>
+</span><span id=__span-1-9><span class=w>    </span><span class=nt>indexConfig</span><span class=p>:</span>
+</span><span id=__span-1-10><span class=w>      </span><span class=nt>prefixCompression</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class=w>    </span><span class=c1># 索引前缀压缩</span>
+</span></code></pre></div></p> <hr> <h2 id=bson>📊 深入理解文档存储格式：BSON的奥秘<a class=headerlink href=#bson title="Permanent link">&para;</a></h2> <h3 id=bson-vs-jsonjson>BSON vs JSON：为什么不用JSON存储？<a class=headerlink href=#bson-vs-jsonjson title="Permanent link">&para;</a></h3> <p><strong>JSON的局限性：</strong> - 文本格式，解析慢 - 没有原生二进制类型支持 - 缺乏标准化的时间戳等类型</p> <p><strong>BSON的优势：</strong> <div class="language-python highlight"><pre><span></span><code><span id=__span-2-1><span class=c1># BSON的二进制结构示例</span>
+</span><span id=__span-2-2><span class=kn>import</span><span class=w> </span><span class=nn>bson</span>
+</span><span id=__span-2-3>
+</span><span id=__span-2-4><span class=c1># 创建一个文档</span>
+</span><span id=__span-2-5><span class=n>doc</span> <span class=o>=</span> <span class=p>{</span>
+</span><span id=__span-2-6>    <span class=s2>&quot;name&quot;</span><span class=p>:</span> <span class=s2>&quot;张三&quot;</span><span class=p>,</span>
+</span><span id=__span-2-7>    <span class=s2>&quot;age&quot;</span><span class=p>:</span> <span class=mi>25</span><span class=p>,</span>
+</span><span id=__span-2-8>    <span class=s2>&quot;salary&quot;</span><span class=p>:</span> <span class=mf>15000.50</span><span class=p>,</span>
+</span><span id=__span-2-9>    <span class=s2>&quot;birthday&quot;</span><span class=p>:</span> <span class=n>datetime</span><span class=p>(</span><span class=mi>1990</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>15</span><span class=p>),</span>
+</span><span id=__span-2-10>    <span class=s2>&quot;skills&quot;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&quot;Python&quot;</span><span class=p>,</span> <span class=s2>&quot;MongoDB&quot;</span><span class=p>]</span>
+</span><span id=__span-2-11><span class=p>}</span>
+</span><span id=__span-2-12>
+</span><span id=__span-2-13><span class=c1># 转换为BSON</span>
+</span><span id=__span-2-14><span class=n>bson_data</span> <span class=o>=</span> <span class=n>bson</span><span class=o>.</span><span class=n>BSON</span><span class=o>.</span><span class=n>encode</span><span class=p>(</span><span class=n>doc</span><span class=p>)</span>
+</span><span id=__span-2-15><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;BSON大小: </span><span class=si>{</span><span class=nb>len</span><span class=p>(</span><span class=n>bson_data</span><span class=p>)</span><span class=si>}</span><span class=s2> 字节&quot;</span><span class=p>)</span>
+</span><span id=__span-2-16>
+</span><span id=__span-2-17><span class=c1># 解析BSON</span>
+</span><span id=__span-2-18><span class=n>decoded_doc</span> <span class=o>=</span> <span class=n>bson</span><span class=o>.</span><span class=n>BSON</span><span class=p>(</span><span class=n>bson_data</span><span class=p>)</span><span class=o>.</span><span class=n>decode</span><span class=p>()</span>
+</span><span id=__span-2-19><span class=nb>print</span><span class=p>(</span><span class=n>decoded_doc</span><span class=p>)</span>
+</span></code></pre></div></p> <h3 id=bson_1>BSON类型系统详解<a class=headerlink href=#bson_1 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
     A[BSON类型] --&gt; B[基本类型]
     A --&gt; C[特殊类型]
     A --&gt; D[组合类型]
@@ -199,43 +143,26 @@
 
     D --&gt; D1[文档 Document]
     D --&gt; D2[数组 Array]
-    D --&gt; D3[嵌套文档]</code></pre> <h3 id=_4>文档存储的物理布局<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <p><strong>一个集合的物理文件结构：</strong></p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1> 1</a></span>
-<span class=normal><a href=#__codelineno-3-2> 2</a></span>
-<span class=normal><a href=#__codelineno-3-3> 3</a></span>
-<span class=normal><a href=#__codelineno-3-4> 4</a></span>
-<span class=normal><a href=#__codelineno-3-5> 5</a></span>
-<span class=normal><a href=#__codelineno-3-6> 6</a></span>
-<span class=normal><a href=#__codelineno-3-7> 7</a></span>
-<span class=normal><a href=#__codelineno-3-8> 8</a></span>
-<span class=normal><a href=#__codelineno-3-9> 9</a></span>
-<span class=normal><a href=#__codelineno-3-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=c1># MongoDB数据目录结构</span>
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>/data/db/
-</span><span id=__span-3-3><a id=__codelineno-3-3 name=__codelineno-3-3></a>├──<span class=w> </span>collection-0--123456789.wt<span class=w>      </span><span class=c1># 集合数据文件</span>
-</span><span id=__span-3-4><a id=__codelineno-3-4 name=__codelineno-3-4></a>├──<span class=w> </span>index-1--123456789.wt<span class=w>           </span><span class=c1># 索引文件</span>
-</span><span id=__span-3-5><a id=__codelineno-3-5 name=__codelineno-3-5></a>├──<span class=w> </span>index-2--123456789.wt<span class=w>           </span><span class=c1># 另一个索引文件</span>
-</span><span id=__span-3-6><a id=__codelineno-3-6 name=__codelineno-3-6></a>├──<span class=w> </span>WiredTiger.wt<span class=w>                   </span><span class=c1># 元数据文件</span>
-</span><span id=__span-3-7><a id=__codelineno-3-7 name=__codelineno-3-7></a>├──<span class=w> </span>WiredTiger.turtle<span class=w>               </span><span class=c1># 配置信息</span>
-</span><span id=__span-3-8><a id=__codelineno-3-8 name=__codelineno-3-8></a>└──<span class=w> </span>journal/<span class=w>                        </span><span class=c1># 日志目录</span>
-</span><span id=__span-3-9><a id=__codelineno-3-9 name=__codelineno-3-9></a><span class=w>    </span>├──<span class=w> </span>WiredTigerLog.0000000001
-</span><span id=__span-3-10><a id=__codelineno-3-10 name=__codelineno-3-10></a><span class=w>    </span>└──<span class=w> </span>WiredTigerPreplog.0000000001
-</span></code></pre></div></td></tr></table></div> <p><strong>数据文件的内部结构：</strong> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
-<span class=normal><a href=#__codelineno-4-2>2</a></span>
-<span class=normal><a href=#__codelineno-4-3>3</a></span>
-<span class=normal><a href=#__codelineno-4-4>4</a></span>
-<span class=normal><a href=#__codelineno-4-5>5</a></span>
-<span class=normal><a href=#__codelineno-4-6>6</a></span>
-<span class=normal><a href=#__codelineno-4-7>7</a></span>
-<span class=normal><a href=#__codelineno-4-8>8</a></span>
-<span class=normal><a href=#__codelineno-4-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a>┌─────────────────────────────────────────────┐
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a>│               数据文件 (.wt)                 │
-</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a>├─────────────┬─────────────┬─────────────┤
-</span><span id=__span-4-4><a id=__codelineno-4-4 name=__codelineno-4-4></a>│   页面1     │   页面2     │   页面3     │
-</span><span id=__span-4-5><a id=__codelineno-4-5 name=__codelineno-4-5></a>│   (16KB)    │   (16KB)    │   (16KB)    │
-</span><span id=__span-4-6><a id=__codelineno-4-6 name=__codelineno-4-6></a>├─────────────┼─────────────┼─────────────┤
-</span><span id=__span-4-7><a id=__codelineno-4-7 name=__codelineno-4-7></a>│ 文档A       │ 文档C       │ 文档E       │
-</span><span id=__span-4-8><a id=__codelineno-4-8 name=__codelineno-4-8></a>│ 文档B       │ 文档D       │ 文档F       │
-</span><span id=__span-4-9><a id=__codelineno-4-9 name=__codelineno-4-9></a>└─────────────┴─────────────┴─────────────┘
-</span></code></pre></div></td></tr></table></div></p> <hr> <h2 id=mongodbb-tree>🌲 MongoDB索引原理：B-Tree的智慧<a class=headerlink href=#mongodbb-tree title="Permanent link">&para;</a></h2> <h3 id=_5>为什么需要索引？一个生动的比喻<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <p><strong>没有索引的查询就像：</strong></p> <blockquote> <p>在图书馆的100万本书中，一页一页地找一本特定的书</p> </blockquote> <p><strong>有索引的查询就像：</strong></p> <blockquote> <p>使用图书目录卡片，直接找到书的位置</p> </blockquote> <h3 id=b-tree>B-Tree索引结构深度解析<a class=headerlink href=#b-tree title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    D --&gt; D3[嵌套文档]</code></pre> <h3 id=_4>文档存储的物理布局<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <p><strong>一个集合的物理文件结构：</strong></p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-3-1><span class=c1># MongoDB数据目录结构</span>
+</span><span id=__span-3-2>/data/db/
+</span><span id=__span-3-3>├──<span class=w> </span>collection-0--123456789.wt<span class=w>      </span><span class=c1># 集合数据文件</span>
+</span><span id=__span-3-4>├──<span class=w> </span>index-1--123456789.wt<span class=w>           </span><span class=c1># 索引文件</span>
+</span><span id=__span-3-5>├──<span class=w> </span>index-2--123456789.wt<span class=w>           </span><span class=c1># 另一个索引文件</span>
+</span><span id=__span-3-6>├──<span class=w> </span>WiredTiger.wt<span class=w>                   </span><span class=c1># 元数据文件</span>
+</span><span id=__span-3-7>├──<span class=w> </span>WiredTiger.turtle<span class=w>               </span><span class=c1># 配置信息</span>
+</span><span id=__span-3-8>└──<span class=w> </span>journal/<span class=w>                        </span><span class=c1># 日志目录</span>
+</span><span id=__span-3-9><span class=w>    </span>├──<span class=w> </span>WiredTigerLog.0000000001
+</span><span id=__span-3-10><span class=w>    </span>└──<span class=w> </span>WiredTigerPreplog.0000000001
+</span></code></pre></div> <p><strong>数据文件的内部结构：</strong> <div class="language-text highlight"><pre><span></span><code><span id=__span-4-1>┌─────────────────────────────────────────────┐
+</span><span id=__span-4-2>│               数据文件 (.wt)                 │
+</span><span id=__span-4-3>├─────────────┬─────────────┬─────────────┤
+</span><span id=__span-4-4>│   页面1     │   页面2     │   页面3     │
+</span><span id=__span-4-5>│   (16KB)    │   (16KB)    │   (16KB)    │
+</span><span id=__span-4-6>├─────────────┼─────────────┼─────────────┤
+</span><span id=__span-4-7>│ 文档A       │ 文档C       │ 文档E       │
+</span><span id=__span-4-8>│ 文档B       │ 文档D       │ 文档F       │
+</span><span id=__span-4-9>└─────────────┴─────────────┴─────────────┘
+</span></code></pre></div></p> <hr> <h2 id=mongodbb-tree>🌲 MongoDB索引原理：B-Tree的智慧<a class=headerlink href=#mongodbb-tree title="Permanent link">&para;</a></h2> <h3 id=_5>为什么需要索引？一个生动的比喻<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <p><strong>没有索引的查询就像：</strong></p> <blockquote> <p>在图书馆的100万本书中，一页一页地找一本特定的书</p> </blockquote> <p><strong>有索引的查询就像：</strong></p> <blockquote> <p>使用图书目录卡片，直接找到书的位置</p> </blockquote> <h3 id=b-tree>B-Tree索引结构深度解析<a class=headerlink href=#b-tree title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
     A[根节点] --&gt; B[内部节点1]
     A --&gt; C[内部节点2]
 
@@ -264,221 +191,119 @@
     style E fill:#45b7d1
     style F fill:#45b7d1
     style G fill:#45b7d1
-    style H fill:#45b7d1</code></pre> <h3 id=b-tree_1>B-Tree的数学之美<a class=headerlink href=#b-tree_1 title="Permanent link">&para;</a></h3> <p><strong>B-Tree的关键特性：</strong> - 🎯 <strong>平衡树</strong> - 所有叶子节点在同一层级 - 🔄 <strong>多路搜索</strong> - 每个节点有多个子节点 - 💾 <strong>磁盘友好</strong> - 节点大小匹配磁盘块大小 - 📈 <strong>高效范围查询</strong> - 叶子节点双向链接</p> <p><strong>B-Tree的搜索复杂度：</strong> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1>1</a></span>
-<span class=normal><a href=#__codelineno-5-2>2</a></span>
-<span class=normal><a href=#__codelineno-5-3>3</a></span>
-<span class=normal><a href=#__codelineno-5-4>4</a></span>
-<span class=normal><a href=#__codelineno-5-5>5</a></span>
-<span class=normal><a href=#__codelineno-5-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a>搜索时间复杂度: O(logₘn)
-</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a>其中 m = 每个节点的最大子节点数
-</span><span id=__span-5-3><a id=__codelineno-5-3 name=__codelineno-5-3></a>     n = 总文档数量
-</span><span id=__span-5-4><a id=__codelineno-5-4 name=__codelineno-5-4></a>
-</span><span id=__span-5-5><a id=__codelineno-5-5 name=__codelineno-5-5></a>示例：如果有100万文档，m=100
-</span><span id=__span-5-6><a id=__codelineno-5-6 name=__codelineno-5-6></a>则 log₁₀₀(1,000,000) ≈ 3次磁盘IO
-</span></code></pre></div></td></tr></table></div></p> <h3 id=_6>索引的物理存储<a class=headerlink href=#_6 title="Permanent link">&para;</a></h3> <p><strong>索引条目结构：</strong> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span>
-<span class=normal><a href=#__codelineno-6-2>2</a></span>
-<span class=normal><a href=#__codelineno-6-3>3</a></span>
-<span class=normal><a href=#__codelineno-6-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a>┌─────────────┬─────────────┬─────────────┐
-</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a>│   键值      │  文档位置   │  下一指针   │
-</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a>│  (索引字段) │  (文件ID+偏移) │ (可选)     │
-</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a>└─────────────┴─────────────┴─────────────┘
-</span></code></pre></div></td></tr></table></div></p> <p><strong>实际索引文件示例：</strong> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1>1</a></span>
-<span class=normal><a href=#__codelineno-7-2>2</a></span>
-<span class=normal><a href=#__codelineno-7-3>3</a></span>
-<span class=normal><a href=#__codelineno-7-4>4</a></span>
-<span class=normal><a href=#__codelineno-7-5>5</a></span>
-<span class=normal><a href=#__codelineno-7-6>6</a></span>
-<span class=normal><a href=#__codelineno-7-7>7</a></span>
-<span class=normal><a href=#__codelineno-7-8>8</a></span>
-<span class=normal><a href=#__codelineno-7-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=c1>// 创建索引</span>
-</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;name&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
-</span><span id=__span-7-3><a id=__codelineno-7-3 name=__codelineno-7-3></a>
-</span><span id=__span-7-4><a id=__codelineno-7-4 name=__codelineno-7-4></a><span class=c1>// 索引条目示例</span>
-</span><span id=__span-7-5><a id=__codelineno-7-5 name=__codelineno-7-5></a><span class=p>{</span>
-</span><span id=__span-7-6><a id=__codelineno-7-6 name=__codelineno-7-6></a><span class=w>  </span><span class=s2>&quot;key&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;张三&quot;</span><span class=p>,</span>
-</span><span id=__span-7-7><a id=__codelineno-7-7 name=__codelineno-7-7></a><span class=w>  </span><span class=s2>&quot;location&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;file&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;collection-0&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;offset&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>12345</span><span class=w> </span><span class=p>},</span>
-</span><span id=__span-7-8><a id=__codelineno-7-8 name=__codelineno-7-8></a><span class=w>  </span><span class=s2>&quot;next&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;file&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;index-1&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;offset&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>67890</span><span class=w> </span><span class=p>}</span>
-</span><span id=__span-7-9><a id=__codelineno-7-9 name=__codelineno-7-9></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div></p> <hr> <h2 id=mongodb_2>🎯 MongoDB索引类型大全<a class=headerlink href=#mongodb_2 title="Permanent link">&para;</a></h2> <h3 id=1>1. 单字段索引（最常用）<a class=headerlink href=#1 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1>1</a></span>
-<span class=normal><a href=#__codelineno-8-2>2</a></span>
-<span class=normal><a href=#__codelineno-8-3>3</a></span>
-<span class=normal><a href=#__codelineno-8-4>4</a></span>
-<span class=normal><a href=#__codelineno-8-5>5</a></span>
-<span class=normal><a href=#__codelineno-8-6>6</a></span>
-<span class=normal><a href=#__codelineno-8-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a><span class=c1>// 创建单字段索引</span>
-</span><span id=__span-8-2><a id=__codelineno-8-2 name=__codelineno-8-2></a><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;email&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span><span class=w>  </span><span class=c1>// 1表示升序，-1表示降序</span>
-</span><span id=__span-8-3><a id=__codelineno-8-3 name=__codelineno-8-3></a>
-</span><span id=__span-8-4><a id=__codelineno-8-4 name=__codelineno-8-4></a><span class=c1>// 支持的查询类型</span>
-</span><span id=__span-8-5><a id=__codelineno-8-5 name=__codelineno-8-5></a><span class=o>-</span><span class=w> </span><span class=nx>精确匹配</span><span class=o>:</span><span class=w> </span><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;email&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;zhangsan@example.com&quot;</span><span class=w> </span><span class=p>})</span>
-</span><span id=__span-8-6><a id=__codelineno-8-6 name=__codelineno-8-6></a><span class=o>-</span><span class=w> </span><span class=nx>范围查询</span><span class=o>:</span><span class=w> </span><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;age&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$gte&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>18</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;$lte&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>30</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>})</span>
-</span><span id=__span-8-7><a id=__codelineno-8-7 name=__codelineno-8-7></a><span class=o>-</span><span class=w> </span><span class=nx>排序</span><span class=o>:</span><span class=w> </span><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>find</span><span class=p>().</span><span class=nx>sort</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;email&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=2>2. 复合索引（威力巨大）<a class=headerlink href=#2 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1> 1</a></span>
-<span class=normal><a href=#__codelineno-9-2> 2</a></span>
-<span class=normal><a href=#__codelineno-9-3> 3</a></span>
-<span class=normal><a href=#__codelineno-9-4> 4</a></span>
-<span class=normal><a href=#__codelineno-9-5> 5</a></span>
-<span class=normal><a href=#__codelineno-9-6> 6</a></span>
-<span class=normal><a href=#__codelineno-9-7> 7</a></span>
-<span class=normal><a href=#__codelineno-9-8> 8</a></span>
-<span class=normal><a href=#__codelineno-9-9> 9</a></span>
-<span class=normal><a href=#__codelineno-9-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a><span class=c1>// 创建复合索引</span>
-</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a><span class=nx>db</span><span class=p>.</span><span class=nx>orders</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;order_date&quot;</span><span class=o>:</span><span class=w> </span><span class=o>-</span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
-</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a>
-</span><span id=__span-9-4><a id=__codelineno-9-4 name=__codelineno-9-4></a><span class=c1>// 索引前缀原则：复合索引支持前缀查询</span>
-</span><span id=__span-9-5><a id=__codelineno-9-5 name=__codelineno-9-5></a><span class=c1>// 有效查询：</span>
-</span><span id=__span-9-6><a id=__codelineno-9-6 name=__codelineno-9-6></a><span class=nx>db</span><span class=p>.</span><span class=nx>orders</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;123&quot;</span><span class=w> </span><span class=p>})</span><span class=w>  </span><span class=c1>// 使用索引前缀</span>
-</span><span id=__span-9-7><a id=__codelineno-9-7 name=__codelineno-9-7></a><span class=nx>db</span><span class=p>.</span><span class=nx>orders</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;123&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;order_date&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$gt&quot;</span><span class=o>:</span><span class=w> </span><span class=nx>ISODate</span><span class=p>(...)</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>})</span><span class=w>  </span><span class=c1>// 使用完整索引</span>
-</span><span id=__span-9-8><a id=__codelineno-9-8 name=__codelineno-9-8></a>
-</span><span id=__span-9-9><a id=__codelineno-9-9 name=__codelineno-9-9></a><span class=c1>// 无效查询：</span>
-</span><span id=__span-9-10><a id=__codelineno-9-10 name=__codelineno-9-10></a><span class=nx>db</span><span class=p>.</span><span class=nx>orders</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;order_date&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$gt&quot;</span><span class=o>:</span><span class=w> </span><span class=nx>ISODate</span><span class=p>(...)</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>})</span><span class=w>  </span><span class=c1>// 缺少前缀字段</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=3>3. 多键索引（数组字段）<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1>1</a></span>
-<span class=normal><a href=#__codelineno-10-2>2</a></span>
-<span class=normal><a href=#__codelineno-10-3>3</a></span>
-<span class=normal><a href=#__codelineno-10-4>4</a></span>
-<span class=normal><a href=#__codelineno-10-5>5</a></span>
-<span class=normal><a href=#__codelineno-10-6>6</a></span>
-<span class=normal><a href=#__codelineno-10-7>7</a></span>
-<span class=normal><a href=#__codelineno-10-8>8</a></span>
-<span class=normal><a href=#__codelineno-10-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a><span class=c1>// 创建多键索引</span>
-</span><span id=__span-10-2><a id=__codelineno-10-2 name=__codelineno-10-2></a><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;tags&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
-</span><span id=__span-10-3><a id=__codelineno-10-3 name=__codelineno-10-3></a>
-</span><span id=__span-10-4><a id=__codelineno-10-4 name=__codelineno-10-4></a><span class=c1>// 数组查询示例</span>
-</span><span id=__span-10-5><a id=__codelineno-10-5 name=__codelineno-10-5></a><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;tags&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;electronics&quot;</span><span class=w> </span><span class=p>})</span><span class=w>  </span><span class=c1>// 使用多键索引</span>
-</span><span id=__span-10-6><a id=__codelineno-10-6 name=__codelineno-10-6></a>
-</span><span id=__span-10-7><a id=__codelineno-10-7 name=__codelineno-10-7></a><span class=c1>// 多键索引的限制：</span>
-</span><span id=__span-10-8><a id=__codelineno-10-8 name=__codelineno-10-8></a><span class=c1>// - 一个复合索引只能有一个数组字段</span>
-</span><span id=__span-10-9><a id=__codelineno-10-9 name=__codelineno-10-9></a><span class=c1>// - 不能创建{ &quot;tags&quot;: 1, &quot;categories&quot;: 1 }这样的索引</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=4>4. 地理空间索引<a class=headerlink href=#4 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1> 1</a></span>
-<span class=normal><a href=#__codelineno-11-2> 2</a></span>
-<span class=normal><a href=#__codelineno-11-3> 3</a></span>
-<span class=normal><a href=#__codelineno-11-4> 4</a></span>
-<span class=normal><a href=#__codelineno-11-5> 5</a></span>
-<span class=normal><a href=#__codelineno-11-6> 6</a></span>
-<span class=normal><a href=#__codelineno-11-7> 7</a></span>
-<span class=normal><a href=#__codelineno-11-8> 8</a></span>
-<span class=normal><a href=#__codelineno-11-9> 9</a></span>
-<span class=normal><a href=#__codelineno-11-10>10</a></span>
-<span class=normal><a href=#__codelineno-11-11>11</a></span>
-<span class=normal><a href=#__codelineno-11-12>12</a></span>
-<span class=normal><a href=#__codelineno-11-13>13</a></span>
-<span class=normal><a href=#__codelineno-11-14>14</a></span>
-<span class=normal><a href=#__codelineno-11-15>15</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a><span class=c1>// 2dsphere索引（球面几何）</span>
-</span><span id=__span-11-2><a id=__codelineno-11-2 name=__codelineno-11-2></a><span class=nx>db</span><span class=p>.</span><span class=nx>places</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;location&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;2dsphere&quot;</span><span class=w> </span><span class=p>})</span>
-</span><span id=__span-11-3><a id=__codelineno-11-3 name=__codelineno-11-3></a>
-</span><span id=__span-11-4><a id=__codelineno-11-4 name=__codelineno-11-4></a><span class=c1>// 地理查询示例</span>
-</span><span id=__span-11-5><a id=__codelineno-11-5 name=__codelineno-11-5></a><span class=nx>db</span><span class=p>.</span><span class=nx>places</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span>
-</span><span id=__span-11-6><a id=__codelineno-11-6 name=__codelineno-11-6></a><span class=w>  </span><span class=s2>&quot;location&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-11-7><a id=__codelineno-11-7 name=__codelineno-11-7></a><span class=w>    </span><span class=s2>&quot;$near&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-11-8><a id=__codelineno-11-8 name=__codelineno-11-8></a><span class=w>      </span><span class=s2>&quot;$geometry&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-11-9><a id=__codelineno-11-9 name=__codelineno-11-9></a><span class=w>        </span><span class=s2>&quot;type&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;Point&quot;</span><span class=p>,</span>
-</span><span id=__span-11-10><a id=__codelineno-11-10 name=__codelineno-11-10></a><span class=w>        </span><span class=s2>&quot;coordinates&quot;</span><span class=o>:</span><span class=w> </span><span class=p>[</span><span class=mf>116.3974</span><span class=p>,</span><span class=w> </span><span class=mf>39.9093</span><span class=p>]</span><span class=w>  </span><span class=c1>// 北京天安门</span>
-</span><span id=__span-11-11><a id=__codelineno-11-11 name=__codelineno-11-11></a><span class=w>      </span><span class=p>},</span>
-</span><span id=__span-11-12><a id=__codelineno-11-12 name=__codelineno-11-12></a><span class=w>      </span><span class=s2>&quot;$maxDistance&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1000</span><span class=w>  </span><span class=c1>// 1公里范围内</span>
-</span><span id=__span-11-13><a id=__codelineno-11-13 name=__codelineno-11-13></a><span class=w>    </span><span class=p>}</span>
-</span><span id=__span-11-14><a id=__codelineno-11-14 name=__codelineno-11-14></a><span class=w>  </span><span class=p>}</span>
-</span><span id=__span-11-15><a id=__codelineno-11-15 name=__codelineno-11-15></a><span class=p>})</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=5>5. 文本索引（全文搜索）<a class=headerlink href=#5 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1> 1</a></span>
-<span class=normal><a href=#__codelineno-12-2> 2</a></span>
-<span class=normal><a href=#__codelineno-12-3> 3</a></span>
-<span class=normal><a href=#__codelineno-12-4> 4</a></span>
-<span class=normal><a href=#__codelineno-12-5> 5</a></span>
-<span class=normal><a href=#__codelineno-12-6> 6</a></span>
-<span class=normal><a href=#__codelineno-12-7> 7</a></span>
-<span class=normal><a href=#__codelineno-12-8> 8</a></span>
-<span class=normal><a href=#__codelineno-12-9> 9</a></span>
-<span class=normal><a href=#__codelineno-12-10>10</a></span>
-<span class=normal><a href=#__codelineno-12-11>11</a></span>
-<span class=normal><a href=#__codelineno-12-12>12</a></span>
-<span class=normal><a href=#__codelineno-12-13>13</a></span>
-<span class=normal><a href=#__codelineno-12-14>14</a></span>
-<span class=normal><a href=#__codelineno-12-15>15</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><a id=__codelineno-12-1 name=__codelineno-12-1></a><span class=c1>// 创建文本索引</span>
-</span><span id=__span-12-2><a id=__codelineno-12-2 name=__codelineno-12-2></a><span class=nx>db</span><span class=p>.</span><span class=nx>articles</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;title&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;text&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;content&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;text&quot;</span><span class=w> </span><span class=p>})</span>
-</span><span id=__span-12-3><a id=__codelineno-12-3 name=__codelineno-12-3></a>
-</span><span id=__span-12-4><a id=__codelineno-12-4 name=__codelineno-12-4></a><span class=c1>// 全文搜索示例</span>
-</span><span id=__span-12-5><a id=__codelineno-12-5 name=__codelineno-12-5></a><span class=nx>db</span><span class=p>.</span><span class=nx>articles</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span>
-</span><span id=__span-12-6><a id=__codelineno-12-6 name=__codelineno-12-6></a><span class=w>  </span><span class=s2>&quot;$text&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span>
-</span><span id=__span-12-7><a id=__codelineno-12-7 name=__codelineno-12-7></a><span class=w>    </span><span class=s2>&quot;$search&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;MongoDB 索引 优化&quot;</span><span class=w> </span>
-</span><span id=__span-12-8><a id=__codelineno-12-8 name=__codelineno-12-8></a><span class=w>  </span><span class=p>}</span><span class=w> </span>
-</span><span id=__span-12-9><a id=__codelineno-12-9 name=__codelineno-12-9></a><span class=p>})</span>
-</span><span id=__span-12-10><a id=__codelineno-12-10 name=__codelineno-12-10></a>
-</span><span id=__span-12-11><a id=__codelineno-12-11 name=__codelineno-12-11></a><span class=c1>// 文本搜索评分</span>
-</span><span id=__span-12-12><a id=__codelineno-12-12 name=__codelineno-12-12></a><span class=nx>db</span><span class=p>.</span><span class=nx>articles</span><span class=p>.</span><span class=nx>find</span><span class=p>(</span>
-</span><span id=__span-12-13><a id=__codelineno-12-13 name=__codelineno-12-13></a><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$text&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$search&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;数据库&quot;</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>},</span>
-</span><span id=__span-12-14><a id=__codelineno-12-14 name=__codelineno-12-14></a><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;score&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$meta&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;textScore&quot;</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>}</span>
-</span><span id=__span-12-15><a id=__codelineno-12-15 name=__codelineno-12-15></a><span class=p>).</span><span class=nx>sort</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;score&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$meta&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;textScore&quot;</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>})</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=6>6. 哈希索引（分片专用）<a class=headerlink href=#6 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1> 1</a></span>
-<span class=normal><a href=#__codelineno-13-2> 2</a></span>
-<span class=normal><a href=#__codelineno-13-3> 3</a></span>
-<span class=normal><a href=#__codelineno-13-4> 4</a></span>
-<span class=normal><a href=#__codelineno-13-5> 5</a></span>
-<span class=normal><a href=#__codelineno-13-6> 6</a></span>
-<span class=normal><a href=#__codelineno-13-7> 7</a></span>
-<span class=normal><a href=#__codelineno-13-8> 8</a></span>
-<span class=normal><a href=#__codelineno-13-9> 9</a></span>
-<span class=normal><a href=#__codelineno-13-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><a id=__codelineno-13-1 name=__codelineno-13-1></a><span class=c1>// 创建哈希索引（用于分片）</span>
-</span><span id=__span-13-2><a id=__codelineno-13-2 name=__codelineno-13-2></a><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;user_id&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;hashed&quot;</span><span class=w> </span><span class=p>})</span>
-</span><span id=__span-13-3><a id=__codelineno-13-3 name=__codelineno-13-3></a>
-</span><span id=__span-13-4><a id=__codelineno-13-4 name=__codelineno-13-4></a><span class=c1>// 分片配置</span>
-</span><span id=__span-13-5><a id=__codelineno-13-5 name=__codelineno-13-5></a><span class=nx>sh</span><span class=p>.</span><span class=nx>shardCollection</span><span class=p>(</span><span class=s2>&quot;mydb.users&quot;</span><span class=p>,</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;user_id&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;hashed&quot;</span><span class=w> </span><span class=p>})</span>
-</span><span id=__span-13-6><a id=__codelineno-13-6 name=__codelineno-13-6></a>
-</span><span id=__span-13-7><a id=__codelineno-13-7 name=__codelineno-13-7></a><span class=c1>// 哈希索引特点：</span>
-</span><span id=__span-13-8><a id=__codelineno-13-8 name=__codelineno-13-8></a><span class=c1>// - 均匀分布数据</span>
-</span><span id=__span-13-9><a id=__codelineno-13-9 name=__codelineno-13-9></a><span class=c1>// - 只支持相等匹配查询</span>
-</span><span id=__span-13-10><a id=__codelineno-13-10 name=__codelineno-13-10></a><span class=c1>// - 不支持范围查询</span>
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=explain>🔍 查询执行计划：看懂Explain输出<a class=headerlink href=#explain title="Permanent link">&para;</a></h2> <h3 id=explain_1>Explain()方法详解<a class=headerlink href=#explain_1 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
-<span class=normal><a href=#__codelineno-14-2> 2</a></span>
-<span class=normal><a href=#__codelineno-14-3> 3</a></span>
-<span class=normal><a href=#__codelineno-14-4> 4</a></span>
-<span class=normal><a href=#__codelineno-14-5> 5</a></span>
-<span class=normal><a href=#__codelineno-14-6> 6</a></span>
-<span class=normal><a href=#__codelineno-14-7> 7</a></span>
-<span class=normal><a href=#__codelineno-14-8> 8</a></span>
-<span class=normal><a href=#__codelineno-14-9> 9</a></span>
-<span class=normal><a href=#__codelineno-14-10>10</a></span>
-<span class=normal><a href=#__codelineno-14-11>11</a></span>
-<span class=normal><a href=#__codelineno-14-12>12</a></span>
-<span class=normal><a href=#__codelineno-14-13>13</a></span>
-<span class=normal><a href=#__codelineno-14-14>14</a></span>
-<span class=normal><a href=#__codelineno-14-15>15</a></span>
-<span class=normal><a href=#__codelineno-14-16>16</a></span>
-<span class=normal><a href=#__codelineno-14-17>17</a></span>
-<span class=normal><a href=#__codelineno-14-18>18</a></span>
-<span class=normal><a href=#__codelineno-14-19>19</a></span>
-<span class=normal><a href=#__codelineno-14-20>20</a></span>
-<span class=normal><a href=#__codelineno-14-21>21</a></span>
-<span class=normal><a href=#__codelineno-14-22>22</a></span>
-<span class=normal><a href=#__codelineno-14-23>23</a></span>
-<span class=normal><a href=#__codelineno-14-24>24</a></span>
-<span class=normal><a href=#__codelineno-14-25>25</a></span>
-<span class=normal><a href=#__codelineno-14-26>26</a></span>
-<span class=normal><a href=#__codelineno-14-27>27</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=c1>// 查看查询执行计划</span>
-</span><span id=__span-14-2><a id=__codelineno-14-2 name=__codelineno-14-2></a><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;age&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$gte&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>25</span><span class=w> </span><span class=p>},</span><span class=w> </span><span class=s2>&quot;city&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;北京&quot;</span><span class=w> </span><span class=p>})</span>
-</span><span id=__span-14-3><a id=__codelineno-14-3 name=__codelineno-14-3></a><span class=w>   </span><span class=p>.</span><span class=nx>explain</span><span class=p>(</span><span class=s2>&quot;executionStats&quot;</span><span class=p>)</span>
-</span><span id=__span-14-4><a id=__codelineno-14-4 name=__codelineno-14-4></a>
-</span><span id=__span-14-5><a id=__codelineno-14-5 name=__codelineno-14-5></a><span class=c1>// 关键指标解读</span>
-</span><span id=__span-14-6><a id=__codelineno-14-6 name=__codelineno-14-6></a><span class=p>{</span>
-</span><span id=__span-14-7><a id=__codelineno-14-7 name=__codelineno-14-7></a><span class=w>  </span><span class=s2>&quot;queryPlanner&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-14-8><a id=__codelineno-14-8 name=__codelineno-14-8></a><span class=w>    </span><span class=s2>&quot;winningPlan&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-14-9><a id=__codelineno-14-9 name=__codelineno-14-9></a><span class=w>      </span><span class=s2>&quot;stage&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;FETCH&quot;</span><span class=p>,</span><span class=w>           </span><span class=c1>// 执行阶段</span>
-</span><span id=__span-14-10><a id=__codelineno-14-10 name=__codelineno-14-10></a><span class=w>      </span><span class=s2>&quot;inputStage&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-14-11><a id=__codelineno-14-11 name=__codelineno-14-11></a><span class=w>        </span><span class=s2>&quot;stage&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;IXSCAN&quot;</span><span class=p>,</span><span class=w>        </span><span class=c1>// 索引扫描</span>
-</span><span id=__span-14-12><a id=__codelineno-14-12 name=__codelineno-14-12></a><span class=w>        </span><span class=s2>&quot;keyPattern&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;age&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;city&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>},</span><span class=w>  </span><span class=c1>// 使用的索引</span>
-</span><span id=__span-14-13><a id=__codelineno-14-13 name=__codelineno-14-13></a><span class=w>        </span><span class=s2>&quot;indexName&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;age_1_city_1&quot;</span><span class=p>,</span>
-</span><span id=__span-14-14><a id=__codelineno-14-14 name=__codelineno-14-14></a><span class=w>        </span><span class=s2>&quot;isMultiKey&quot;</span><span class=o>:</span><span class=w> </span><span class=kc>false</span><span class=p>,</span>
-</span><span id=__span-14-15><a id=__codelineno-14-15 name=__codelineno-14-15></a><span class=w>        </span><span class=s2>&quot;direction&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;forward&quot;</span>
-</span><span id=__span-14-16><a id=__codelineno-14-16 name=__codelineno-14-16></a><span class=w>      </span><span class=p>}</span>
-</span><span id=__span-14-17><a id=__codelineno-14-17 name=__codelineno-14-17></a><span class=w>    </span><span class=p>},</span>
-</span><span id=__span-14-18><a id=__codelineno-14-18 name=__codelineno-14-18></a><span class=w>    </span><span class=s2>&quot;rejectedPlans&quot;</span><span class=o>:</span><span class=w> </span><span class=p>[...]</span><span class=w>         </span><span class=c1>// 被拒绝的执行计划</span>
-</span><span id=__span-14-19><a id=__codelineno-14-19 name=__codelineno-14-19></a><span class=w>  </span><span class=p>},</span>
-</span><span id=__span-14-20><a id=__codelineno-14-20 name=__codelineno-14-20></a><span class=w>  </span><span class=s2>&quot;executionStats&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-14-21><a id=__codelineno-14-21 name=__codelineno-14-21></a><span class=w>    </span><span class=s2>&quot;nReturned&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>123</span><span class=p>,</span><span class=w>              </span><span class=c1>// 返回文档数</span>
-</span><span id=__span-14-22><a id=__codelineno-14-22 name=__codelineno-14-22></a><span class=w>    </span><span class=s2>&quot;executionTimeMillis&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>15</span><span class=p>,</span><span class=w>     </span><span class=c1>// 执行时间(毫秒)</span>
-</span><span id=__span-14-23><a id=__codelineno-14-23 name=__codelineno-14-23></a><span class=w>    </span><span class=s2>&quot;totalKeysExamined&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>150</span><span class=p>,</span><span class=w>      </span><span class=c1>// 检查的索引键数</span>
-</span><span id=__span-14-24><a id=__codelineno-14-24 name=__codelineno-14-24></a><span class=w>    </span><span class=s2>&quot;totalDocsExamined&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>123</span><span class=p>,</span><span class=w>      </span><span class=c1>// 检查的文档数</span>
-</span><span id=__span-14-25><a id=__codelineno-14-25 name=__codelineno-14-25></a><span class=w>    </span><span class=s2>&quot;stage&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;FETCH&quot;</span>
-</span><span id=__span-14-26><a id=__codelineno-14-26 name=__codelineno-14-26></a><span class=w>  </span><span class=p>}</span>
-</span><span id=__span-14-27><a id=__codelineno-14-27 name=__codelineno-14-27></a><span class=p>}</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=_7>执行阶段类型解析<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
+    style H fill:#45b7d1</code></pre> <h3 id=b-tree_1>B-Tree的数学之美<a class=headerlink href=#b-tree_1 title="Permanent link">&para;</a></h3> <p><strong>B-Tree的关键特性：</strong> - 🎯 <strong>平衡树</strong> - 所有叶子节点在同一层级 - 🔄 <strong>多路搜索</strong> - 每个节点有多个子节点 - 💾 <strong>磁盘友好</strong> - 节点大小匹配磁盘块大小 - 📈 <strong>高效范围查询</strong> - 叶子节点双向链接</p> <p><strong>B-Tree的搜索复杂度：</strong> <div class="language-text highlight"><pre><span></span><code><span id=__span-5-1>搜索时间复杂度: O(logₘn)
+</span><span id=__span-5-2>其中 m = 每个节点的最大子节点数
+</span><span id=__span-5-3>     n = 总文档数量
+</span><span id=__span-5-4>
+</span><span id=__span-5-5>示例：如果有100万文档，m=100
+</span><span id=__span-5-6>则 log₁₀₀(1,000,000) ≈ 3次磁盘IO
+</span></code></pre></div></p> <h3 id=_6>索引的物理存储<a class=headerlink href=#_6 title="Permanent link">&para;</a></h3> <p><strong>索引条目结构：</strong> <div class="language-text highlight"><pre><span></span><code><span id=__span-6-1>┌─────────────┬─────────────┬─────────────┐
+</span><span id=__span-6-2>│   键值      │  文档位置   │  下一指针   │
+</span><span id=__span-6-3>│  (索引字段) │  (文件ID+偏移) │ (可选)     │
+</span><span id=__span-6-4>└─────────────┴─────────────┴─────────────┘
+</span></code></pre></div></p> <p><strong>实际索引文件示例：</strong> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-7-1><span class=c1>// 创建索引</span>
+</span><span id=__span-7-2><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;name&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
+</span><span id=__span-7-3>
+</span><span id=__span-7-4><span class=c1>// 索引条目示例</span>
+</span><span id=__span-7-5><span class=p>{</span>
+</span><span id=__span-7-6><span class=w>  </span><span class=s2>&quot;key&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;张三&quot;</span><span class=p>,</span>
+</span><span id=__span-7-7><span class=w>  </span><span class=s2>&quot;location&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;file&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;collection-0&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;offset&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>12345</span><span class=w> </span><span class=p>},</span>
+</span><span id=__span-7-8><span class=w>  </span><span class=s2>&quot;next&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;file&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;index-1&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;offset&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>67890</span><span class=w> </span><span class=p>}</span>
+</span><span id=__span-7-9><span class=p>}</span>
+</span></code></pre></div></p> <hr> <h2 id=mongodb_2>🎯 MongoDB索引类型大全<a class=headerlink href=#mongodb_2 title="Permanent link">&para;</a></h2> <h3 id=1>1. 单字段索引（最常用）<a class=headerlink href=#1 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-8-1><span class=c1>// 创建单字段索引</span>
+</span><span id=__span-8-2><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;email&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span><span class=w>  </span><span class=c1>// 1表示升序，-1表示降序</span>
+</span><span id=__span-8-3>
+</span><span id=__span-8-4><span class=c1>// 支持的查询类型</span>
+</span><span id=__span-8-5><span class=o>-</span><span class=w> </span><span class=nx>精确匹配</span><span class=o>:</span><span class=w> </span><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;email&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;zhangsan@example.com&quot;</span><span class=w> </span><span class=p>})</span>
+</span><span id=__span-8-6><span class=o>-</span><span class=w> </span><span class=nx>范围查询</span><span class=o>:</span><span class=w> </span><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;age&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$gte&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>18</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;$lte&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>30</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>})</span>
+</span><span id=__span-8-7><span class=o>-</span><span class=w> </span><span class=nx>排序</span><span class=o>:</span><span class=w> </span><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>find</span><span class=p>().</span><span class=nx>sort</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;email&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
+</span></code></pre></div> <h3 id=2>2. 复合索引（威力巨大）<a class=headerlink href=#2 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-9-1><span class=c1>// 创建复合索引</span>
+</span><span id=__span-9-2><span class=nx>db</span><span class=p>.</span><span class=nx>orders</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;order_date&quot;</span><span class=o>:</span><span class=w> </span><span class=o>-</span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
+</span><span id=__span-9-3>
+</span><span id=__span-9-4><span class=c1>// 索引前缀原则：复合索引支持前缀查询</span>
+</span><span id=__span-9-5><span class=c1>// 有效查询：</span>
+</span><span id=__span-9-6><span class=nx>db</span><span class=p>.</span><span class=nx>orders</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;123&quot;</span><span class=w> </span><span class=p>})</span><span class=w>  </span><span class=c1>// 使用索引前缀</span>
+</span><span id=__span-9-7><span class=nx>db</span><span class=p>.</span><span class=nx>orders</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;123&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;order_date&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$gt&quot;</span><span class=o>:</span><span class=w> </span><span class=nx>ISODate</span><span class=p>(...)</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>})</span><span class=w>  </span><span class=c1>// 使用完整索引</span>
+</span><span id=__span-9-8>
+</span><span id=__span-9-9><span class=c1>// 无效查询：</span>
+</span><span id=__span-9-10><span class=nx>db</span><span class=p>.</span><span class=nx>orders</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;order_date&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$gt&quot;</span><span class=o>:</span><span class=w> </span><span class=nx>ISODate</span><span class=p>(...)</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>})</span><span class=w>  </span><span class=c1>// 缺少前缀字段</span>
+</span></code></pre></div> <h3 id=3>3. 多键索引（数组字段）<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-10-1><span class=c1>// 创建多键索引</span>
+</span><span id=__span-10-2><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;tags&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
+</span><span id=__span-10-3>
+</span><span id=__span-10-4><span class=c1>// 数组查询示例</span>
+</span><span id=__span-10-5><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;tags&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;electronics&quot;</span><span class=w> </span><span class=p>})</span><span class=w>  </span><span class=c1>// 使用多键索引</span>
+</span><span id=__span-10-6>
+</span><span id=__span-10-7><span class=c1>// 多键索引的限制：</span>
+</span><span id=__span-10-8><span class=c1>// - 一个复合索引只能有一个数组字段</span>
+</span><span id=__span-10-9><span class=c1>// - 不能创建{ &quot;tags&quot;: 1, &quot;categories&quot;: 1 }这样的索引</span>
+</span></code></pre></div> <h3 id=4>4. 地理空间索引<a class=headerlink href=#4 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-11-1><span class=c1>// 2dsphere索引（球面几何）</span>
+</span><span id=__span-11-2><span class=nx>db</span><span class=p>.</span><span class=nx>places</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;location&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;2dsphere&quot;</span><span class=w> </span><span class=p>})</span>
+</span><span id=__span-11-3>
+</span><span id=__span-11-4><span class=c1>// 地理查询示例</span>
+</span><span id=__span-11-5><span class=nx>db</span><span class=p>.</span><span class=nx>places</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span>
+</span><span id=__span-11-6><span class=w>  </span><span class=s2>&quot;location&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-11-7><span class=w>    </span><span class=s2>&quot;$near&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-11-8><span class=w>      </span><span class=s2>&quot;$geometry&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-11-9><span class=w>        </span><span class=s2>&quot;type&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;Point&quot;</span><span class=p>,</span>
+</span><span id=__span-11-10><span class=w>        </span><span class=s2>&quot;coordinates&quot;</span><span class=o>:</span><span class=w> </span><span class=p>[</span><span class=mf>116.3974</span><span class=p>,</span><span class=w> </span><span class=mf>39.9093</span><span class=p>]</span><span class=w>  </span><span class=c1>// 北京天安门</span>
+</span><span id=__span-11-11><span class=w>      </span><span class=p>},</span>
+</span><span id=__span-11-12><span class=w>      </span><span class=s2>&quot;$maxDistance&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1000</span><span class=w>  </span><span class=c1>// 1公里范围内</span>
+</span><span id=__span-11-13><span class=w>    </span><span class=p>}</span>
+</span><span id=__span-11-14><span class=w>  </span><span class=p>}</span>
+</span><span id=__span-11-15><span class=p>})</span>
+</span></code></pre></div> <h3 id=5>5. 文本索引（全文搜索）<a class=headerlink href=#5 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-12-1><span class=c1>// 创建文本索引</span>
+</span><span id=__span-12-2><span class=nx>db</span><span class=p>.</span><span class=nx>articles</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;title&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;text&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;content&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;text&quot;</span><span class=w> </span><span class=p>})</span>
+</span><span id=__span-12-3>
+</span><span id=__span-12-4><span class=c1>// 全文搜索示例</span>
+</span><span id=__span-12-5><span class=nx>db</span><span class=p>.</span><span class=nx>articles</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span>
+</span><span id=__span-12-6><span class=w>  </span><span class=s2>&quot;$text&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span>
+</span><span id=__span-12-7><span class=w>    </span><span class=s2>&quot;$search&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;MongoDB 索引 优化&quot;</span><span class=w> </span>
+</span><span id=__span-12-8><span class=w>  </span><span class=p>}</span><span class=w> </span>
+</span><span id=__span-12-9><span class=p>})</span>
+</span><span id=__span-12-10>
+</span><span id=__span-12-11><span class=c1>// 文本搜索评分</span>
+</span><span id=__span-12-12><span class=nx>db</span><span class=p>.</span><span class=nx>articles</span><span class=p>.</span><span class=nx>find</span><span class=p>(</span>
+</span><span id=__span-12-13><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$text&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$search&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;数据库&quot;</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>},</span>
+</span><span id=__span-12-14><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;score&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$meta&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;textScore&quot;</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>}</span>
+</span><span id=__span-12-15><span class=p>).</span><span class=nx>sort</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;score&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$meta&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;textScore&quot;</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>})</span>
+</span></code></pre></div> <h3 id=6>6. 哈希索引（分片专用）<a class=headerlink href=#6 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-13-1><span class=c1>// 创建哈希索引（用于分片）</span>
+</span><span id=__span-13-2><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;user_id&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;hashed&quot;</span><span class=w> </span><span class=p>})</span>
+</span><span id=__span-13-3>
+</span><span id=__span-13-4><span class=c1>// 分片配置</span>
+</span><span id=__span-13-5><span class=nx>sh</span><span class=p>.</span><span class=nx>shardCollection</span><span class=p>(</span><span class=s2>&quot;mydb.users&quot;</span><span class=p>,</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;user_id&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;hashed&quot;</span><span class=w> </span><span class=p>})</span>
+</span><span id=__span-13-6>
+</span><span id=__span-13-7><span class=c1>// 哈希索引特点：</span>
+</span><span id=__span-13-8><span class=c1>// - 均匀分布数据</span>
+</span><span id=__span-13-9><span class=c1>// - 只支持相等匹配查询</span>
+</span><span id=__span-13-10><span class=c1>// - 不支持范围查询</span>
+</span></code></pre></div> <hr> <h2 id=explain>🔍 查询执行计划：看懂Explain输出<a class=headerlink href=#explain title="Permanent link">&para;</a></h2> <h3 id=explain_1>Explain()方法详解<a class=headerlink href=#explain_1 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-14-1><span class=c1>// 查看查询执行计划</span>
+</span><span id=__span-14-2><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>find</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;age&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$gte&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>25</span><span class=w> </span><span class=p>},</span><span class=w> </span><span class=s2>&quot;city&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;北京&quot;</span><span class=w> </span><span class=p>})</span>
+</span><span id=__span-14-3><span class=w>   </span><span class=p>.</span><span class=nx>explain</span><span class=p>(</span><span class=s2>&quot;executionStats&quot;</span><span class=p>)</span>
+</span><span id=__span-14-4>
+</span><span id=__span-14-5><span class=c1>// 关键指标解读</span>
+</span><span id=__span-14-6><span class=p>{</span>
+</span><span id=__span-14-7><span class=w>  </span><span class=s2>&quot;queryPlanner&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-14-8><span class=w>    </span><span class=s2>&quot;winningPlan&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-14-9><span class=w>      </span><span class=s2>&quot;stage&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;FETCH&quot;</span><span class=p>,</span><span class=w>           </span><span class=c1>// 执行阶段</span>
+</span><span id=__span-14-10><span class=w>      </span><span class=s2>&quot;inputStage&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-14-11><span class=w>        </span><span class=s2>&quot;stage&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;IXSCAN&quot;</span><span class=p>,</span><span class=w>        </span><span class=c1>// 索引扫描</span>
+</span><span id=__span-14-12><span class=w>        </span><span class=s2>&quot;keyPattern&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;age&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;city&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>},</span><span class=w>  </span><span class=c1>// 使用的索引</span>
+</span><span id=__span-14-13><span class=w>        </span><span class=s2>&quot;indexName&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;age_1_city_1&quot;</span><span class=p>,</span>
+</span><span id=__span-14-14><span class=w>        </span><span class=s2>&quot;isMultiKey&quot;</span><span class=o>:</span><span class=w> </span><span class=kc>false</span><span class=p>,</span>
+</span><span id=__span-14-15><span class=w>        </span><span class=s2>&quot;direction&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;forward&quot;</span>
+</span><span id=__span-14-16><span class=w>      </span><span class=p>}</span>
+</span><span id=__span-14-17><span class=w>    </span><span class=p>},</span>
+</span><span id=__span-14-18><span class=w>    </span><span class=s2>&quot;rejectedPlans&quot;</span><span class=o>:</span><span class=w> </span><span class=p>[...]</span><span class=w>         </span><span class=c1>// 被拒绝的执行计划</span>
+</span><span id=__span-14-19><span class=w>  </span><span class=p>},</span>
+</span><span id=__span-14-20><span class=w>  </span><span class=s2>&quot;executionStats&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-14-21><span class=w>    </span><span class=s2>&quot;nReturned&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>123</span><span class=p>,</span><span class=w>              </span><span class=c1>// 返回文档数</span>
+</span><span id=__span-14-22><span class=w>    </span><span class=s2>&quot;executionTimeMillis&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>15</span><span class=p>,</span><span class=w>     </span><span class=c1>// 执行时间(毫秒)</span>
+</span><span id=__span-14-23><span class=w>    </span><span class=s2>&quot;totalKeysExamined&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>150</span><span class=p>,</span><span class=w>      </span><span class=c1>// 检查的索引键数</span>
+</span><span id=__span-14-24><span class=w>    </span><span class=s2>&quot;totalDocsExamined&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>123</span><span class=p>,</span><span class=w>      </span><span class=c1>// 检查的文档数</span>
+</span><span id=__span-14-25><span class=w>    </span><span class=s2>&quot;stage&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;FETCH&quot;</span>
+</span><span id=__span-14-26><span class=w>  </span><span class=p>}</span>
+</span><span id=__span-14-27><span class=p>}</span>
+</span></code></pre></div> <h3 id=_7>执行阶段类型解析<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
     A[查询开始] --&gt; B{是否有合适索引?}
     B --&gt;|是| C[IXSCAN 索引扫描]
     B --&gt;|否| D[COLLSCAN 集合扫描]
@@ -491,194 +316,104 @@
 
     style C fill:#4caf50
     style D fill:#f44336
-    style E fill:#2196f3</code></pre> <h3 id=_8>性能优化关键指标<a class=headerlink href=#_8 title="Permanent link">&para;</a></h3> <p><strong>理想情况：</strong> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><a id=__codelineno-15-1 name=__codelineno-15-1></a>nReturned ≈ totalDocsExamined ≈ totalKeysExamined
-</span></code></pre></div></td></tr></table></div></p> <p><strong>问题信号：</strong> - <code>nReturned</code> &lt;&lt; <code>totalDocsExamined</code> - 索引选择性差 - <code>totalDocsExamined</code> &gt;&gt; <code>totalKeysExamined</code> - 索引覆盖不完整 - <code>executionTimeMillis</code> 过大 - 需要优化查询或索引</p> <hr> <h2 id=_9>💡 索引设计最佳实践<a class=headerlink href=#_9 title="Permanent link">&para;</a></h2> <h3 id=1-esr>1. ESR规则：相等→排序→范围<a class=headerlink href=#1-esr title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1> 1</a></span>
-<span class=normal><a href=#__codelineno-16-2> 2</a></span>
-<span class=normal><a href=#__codelineno-16-3> 3</a></span>
-<span class=normal><a href=#__codelineno-16-4> 4</a></span>
-<span class=normal><a href=#__codelineno-16-5> 5</a></span>
-<span class=normal><a href=#__codelineno-16-6> 6</a></span>
-<span class=normal><a href=#__codelineno-16-7> 7</a></span>
-<span class=normal><a href=#__codelineno-16-8> 8</a></span>
-<span class=normal><a href=#__codelineno-16-9> 9</a></span>
-<span class=normal><a href=#__codelineno-16-10>10</a></span>
-<span class=normal><a href=#__codelineno-16-11>11</a></span>
-<span class=normal><a href=#__codelineno-16-12>12</a></span>
-<span class=normal><a href=#__codelineno-16-13>13</a></span>
-<span class=normal><a href=#__codelineno-16-14>14</a></span>
-<span class=normal><a href=#__codelineno-16-15>15</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><a id=__codelineno-16-1 name=__codelineno-16-1></a><span class=c1>// 好的索引设计示例</span>
-</span><span id=__span-16-2><a id=__codelineno-16-2 name=__codelineno-16-2></a><span class=c1>// 查询: db.orders.find({ status: &quot;completed&quot;, customer_id: &quot;123&quot; }).sort({ order_date: -1 })</span>
-</span><span id=__span-16-3><a id=__codelineno-16-3 name=__codelineno-16-3></a>
-</span><span id=__span-16-4><a id=__codelineno-16-4 name=__codelineno-16-4></a><span class=c1>// 根据ESR规则创建索引:</span>
-</span><span id=__span-16-5><a id=__codelineno-16-5 name=__codelineno-16-5></a><span class=nx>db</span><span class=p>.</span><span class=nx>orders</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
-</span><span id=__span-16-6><a id=__codelineno-16-6 name=__codelineno-16-6></a><span class=w>  </span><span class=s2>&quot;status&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w>        </span><span class=c1>// Equality - 相等匹配</span>
-</span><span id=__span-16-7><a id=__codelineno-16-7 name=__codelineno-16-7></a><span class=w>  </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w>   </span><span class=c1>// Equality - 相等匹配  </span>
-</span><span id=__span-16-8><a id=__codelineno-16-8 name=__codelineno-16-8></a><span class=w>  </span><span class=s2>&quot;order_date&quot;</span><span class=o>:</span><span class=w> </span><span class=o>-</span><span class=mf>1</span><span class=w>    </span><span class=c1>// Sort - 排序字段</span>
-</span><span id=__span-16-9><a id=__codelineno-16-9 name=__codelineno-16-9></a><span class=p>})</span>
-</span><span id=__span-16-10><a id=__codelineno-16-10 name=__codelineno-16-10></a>
-</span><span id=__span-16-11><a id=__codelineno-16-11 name=__codelineno-16-11></a><span class=c1>// 范围查询字段应该放在最后</span>
-</span><span id=__span-16-12><a id=__codelineno-16-12 name=__codelineno-16-12></a><span class=nx>db</span><span class=p>.</span><span class=nx>orders</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span>
-</span><span id=__span-16-13><a id=__codelineno-16-13 name=__codelineno-16-13></a><span class=w>  </span><span class=s2>&quot;category&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w>      </span><span class=c1>// Equality</span>
-</span><span id=__span-16-14><a id=__codelineno-16-14 name=__codelineno-16-14></a><span class=w>  </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w>          </span><span class=c1>// Range - 范围查询放在最后</span>
-</span><span id=__span-16-15><a id=__codelineno-16-15 name=__codelineno-16-15></a><span class=p>})</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=2_1>2. 索引选择性原则<a class=headerlink href=#2_1 title="Permanent link">&para;</a></h3> <p><strong>选择性的计算：</strong> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1>1</a></span>
-<span class=normal><a href=#__codelineno-17-2>2</a></span>
-<span class=normal><a href=#__codelineno-17-3>3</a></span>
-<span class=normal><a href=#__codelineno-17-4>4</a></span>
-<span class=normal><a href=#__codelineno-17-5>5</a></span>
-<span class=normal><a href=#__codelineno-17-6>6</a></span>
-<span class=normal><a href=#__codelineno-17-7>7</a></span>
-<span class=normal><a href=#__codelineno-17-8>8</a></span>
-<span class=normal><a href=#__codelineno-17-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><a id=__codelineno-17-1 name=__codelineno-17-1></a><span class=c1>// 计算字段的选择性</span>
-</span><span id=__span-17-2><a id=__codelineno-17-2 name=__codelineno-17-2></a><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>aggregate</span><span class=p>([</span>
-</span><span id=__span-17-3><a id=__codelineno-17-3 name=__codelineno-17-3></a><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=nx>$group</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>_id</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;$city&quot;</span><span class=p>,</span><span class=w> </span><span class=nx>count</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>$sum</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>},</span>
-</span><span id=__span-17-4><a id=__codelineno-17-4 name=__codelineno-17-4></a><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=nx>$sort</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>count</span><span class=o>:</span><span class=w> </span><span class=o>-</span><span class=mf>1</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>},</span>
-</span><span id=__span-17-5><a id=__codelineno-17-5 name=__codelineno-17-5></a><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=nx>$limit</span><span class=o>:</span><span class=w> </span><span class=mf>10</span><span class=w> </span><span class=p>}</span>
-</span><span id=__span-17-6><a id=__codelineno-17-6 name=__codelineno-17-6></a><span class=p>])</span>
-</span><span id=__span-17-7><a id=__codelineno-17-7 name=__codelineno-17-7></a>
-</span><span id=__span-17-8><a id=__codelineno-17-8 name=__codelineno-17-8></a><span class=c1>// 选择性 = 唯一值的数量 / 总文档数</span>
-</span><span id=__span-17-9><a id=__codelineno-17-9 name=__codelineno-17-9></a><span class=c1>// 高选择性字段更适合建立索引</span>
-</span></code></pre></div></td></tr></table></div></p> <p><strong>选择性示例：</strong> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-18-1>1</a></span>
-<span class=normal><a href=#__codelineno-18-2>2</a></span>
-<span class=normal><a href=#__codelineno-18-3>3</a></span>
-<span class=normal><a href=#__codelineno-18-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-18-1><a id=__codelineno-18-1 name=__codelineno-18-1></a>字段       唯一值数量   总文档数   选择性   适合索引?
-</span><span id=__span-18-2><a id=__codelineno-18-2 name=__codelineno-18-2></a>email      1,000,000   1,000,000  1.0      ✅ 非常适合
-</span><span id=__span-18-3><a id=__codelineno-18-3 name=__codelineno-18-3></a>city       100         1,000,000  0.0001   ❌ 选择性太低
-</span><span id=__span-18-4><a id=__codelineno-18-4 name=__codelineno-18-4></a>gender     2           1,000,000  0.000002 ❌ 绝对不适合
-</span></code></pre></div></td></tr></table></div></p> <h3 id=3_1>3. 覆盖查询优化<a class=headerlink href=#3_1 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-19-1> 1</a></span>
-<span class=normal><a href=#__codelineno-19-2> 2</a></span>
-<span class=normal><a href=#__codelineno-19-3> 3</a></span>
-<span class=normal><a href=#__codelineno-19-4> 4</a></span>
-<span class=normal><a href=#__codelineno-19-5> 5</a></span>
-<span class=normal><a href=#__codelineno-19-6> 6</a></span>
-<span class=normal><a href=#__codelineno-19-7> 7</a></span>
-<span class=normal><a href=#__codelineno-19-8> 8</a></span>
-<span class=normal><a href=#__codelineno-19-9> 9</a></span>
-<span class=normal><a href=#__codelineno-19-10>10</a></span>
-<span class=normal><a href=#__codelineno-19-11>11</a></span>
-<span class=normal><a href=#__codelineno-19-12>12</a></span>
-<span class=normal><a href=#__codelineno-19-13>13</a></span>
-<span class=normal><a href=#__codelineno-19-14>14</a></span>
-<span class=normal><a href=#__codelineno-19-15>15</a></span>
-<span class=normal><a href=#__codelineno-19-16>16</a></span>
-<span class=normal><a href=#__codelineno-19-17>17</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-19-1><a id=__codelineno-19-1 name=__codelineno-19-1></a><span class=c1>// 创建覆盖索引</span>
-</span><span id=__span-19-2><a id=__codelineno-19-2 name=__codelineno-19-2></a><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
-</span><span id=__span-19-3><a id=__codelineno-19-3 name=__codelineno-19-3></a><span class=w>  </span><span class=s2>&quot;category&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
-</span><span id=__span-19-4><a id=__codelineno-19-4 name=__codelineno-19-4></a><span class=w>  </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
-</span><span id=__span-19-5><a id=__codelineno-19-5 name=__codelineno-19-5></a><span class=w>  </span><span class=s2>&quot;name&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span>
-</span><span id=__span-19-6><a id=__codelineno-19-6 name=__codelineno-19-6></a><span class=p>})</span>
-</span><span id=__span-19-7><a id=__codelineno-19-7 name=__codelineno-19-7></a>
-</span><span id=__span-19-8><a id=__codelineno-19-8 name=__codelineno-19-8></a><span class=c1>// 覆盖查询 - 只从索引获取数据，无需回表</span>
-</span><span id=__span-19-9><a id=__codelineno-19-9 name=__codelineno-19-9></a><span class=c1>// 查询字段都在索引中</span>
-</span><span id=__span-19-10><a id=__codelineno-19-10 name=__codelineno-19-10></a><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>find</span><span class=p>(</span>
-</span><span id=__span-19-11><a id=__codelineno-19-11 name=__codelineno-19-11></a><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;category&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;electronics&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$gte&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1000</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>},</span>
-</span><span id=__span-19-12><a id=__codelineno-19-12 name=__codelineno-19-12></a><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>0</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;name&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>}</span><span class=w>  </span><span class=c1>// 只返回索引包含的字段</span>
-</span><span id=__span-19-13><a id=__codelineno-19-13 name=__codelineno-19-13></a><span class=p>)</span>
-</span><span id=__span-19-14><a id=__codelineno-19-14 name=__codelineno-19-14></a>
-</span><span id=__span-19-15><a id=__codelineno-19-15 name=__codelineno-19-15></a><span class=c1>// 检查是否覆盖查询</span>
-</span><span id=__span-19-16><a id=__codelineno-19-16 name=__codelineno-19-16></a><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>find</span><span class=p>(...).</span><span class=nx>explain</span><span class=p>(</span><span class=s2>&quot;executionStats&quot;</span><span class=p>)</span>
-</span><span id=__span-19-17><a id=__codelineno-19-17 name=__codelineno-19-17></a><span class=c1>// 如果出现 &quot;indexOnly&quot;: true，说明是覆盖查询</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=4_1>4. 索引的维护和监控<a class=headerlink href=#4_1 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-20-1> 1</a></span>
-<span class=normal><a href=#__codelineno-20-2> 2</a></span>
-<span class=normal><a href=#__codelineno-20-3> 3</a></span>
-<span class=normal><a href=#__codelineno-20-4> 4</a></span>
-<span class=normal><a href=#__codelineno-20-5> 5</a></span>
-<span class=normal><a href=#__codelineno-20-6> 6</a></span>
-<span class=normal><a href=#__codelineno-20-7> 7</a></span>
-<span class=normal><a href=#__codelineno-20-8> 8</a></span>
-<span class=normal><a href=#__codelineno-20-9> 9</a></span>
-<span class=normal><a href=#__codelineno-20-10>10</a></span>
-<span class=normal><a href=#__codelineno-20-11>11</a></span>
-<span class=normal><a href=#__codelineno-20-12>12</a></span>
-<span class=normal><a href=#__codelineno-20-13>13</a></span>
-<span class=normal><a href=#__codelineno-20-14>14</a></span>
-<span class=normal><a href=#__codelineno-20-15>15</a></span>
-<span class=normal><a href=#__codelineno-20-16>16</a></span>
-<span class=normal><a href=#__codelineno-20-17>17</a></span>
-<span class=normal><a href=#__codelineno-20-18>18</a></span>
-<span class=normal><a href=#__codelineno-20-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-20-1><a id=__codelineno-20-1 name=__codelineno-20-1></a><span class=c1>// 查看索引使用情况</span>
-</span><span id=__span-20-2><a id=__codelineno-20-2 name=__codelineno-20-2></a><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>aggregate</span><span class=p>([{</span><span class=w> </span><span class=nx>$indexStats</span><span class=o>:</span><span class=w> </span><span class=p>{}</span><span class=w> </span><span class=p>}])</span>
-</span><span id=__span-20-3><a id=__codelineno-20-3 name=__codelineno-20-3></a>
-</span><span id=__span-20-4><a id=__codelineno-20-4 name=__codelineno-20-4></a><span class=c1>// 结果示例</span>
-</span><span id=__span-20-5><a id=__codelineno-20-5 name=__codelineno-20-5></a><span class=p>{</span>
-</span><span id=__span-20-6><a id=__codelineno-20-6 name=__codelineno-20-6></a><span class=w>  </span><span class=s2>&quot;name&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;email_1&quot;</span><span class=p>,</span>
-</span><span id=__span-20-7><a id=__codelineno-20-7 name=__codelineno-20-7></a><span class=w>  </span><span class=s2>&quot;key&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;email&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>},</span>
-</span><span id=__span-20-8><a id=__codelineno-20-8 name=__codelineno-20-8></a><span class=w>  </span><span class=s2>&quot;host&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;server1:27017&quot;</span><span class=p>,</span>
-</span><span id=__span-20-9><a id=__codelineno-20-9 name=__codelineno-20-9></a><span class=w>  </span><span class=s2>&quot;accesses&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-20-10><a id=__codelineno-20-10 name=__codelineno-20-10></a><span class=w>    </span><span class=s2>&quot;ops&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>15000</span><span class=p>,</span><span class=w>        </span><span class=c1>// 使用次数</span>
-</span><span id=__span-20-11><a id=__codelineno-20-11 name=__codelineno-20-11></a><span class=w>    </span><span class=s2>&quot;since&quot;</span><span class=o>:</span><span class=w> </span><span class=nx>ISODate</span><span class=p>(...)</span>
-</span><span id=__span-20-12><a id=__codelineno-20-12 name=__codelineno-20-12></a><span class=w>  </span><span class=p>}</span>
-</span><span id=__span-20-13><a id=__codelineno-20-13 name=__codelineno-20-13></a><span class=p>}</span>
-</span><span id=__span-20-14><a id=__codelineno-20-14 name=__codelineno-20-14></a>
-</span><span id=__span-20-15><a id=__codelineno-20-15 name=__codelineno-20-15></a><span class=c1>// 删除未使用的索引</span>
-</span><span id=__span-20-16><a id=__codelineno-20-16 name=__codelineno-20-16></a><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>dropIndex</span><span class=p>(</span><span class=s2>&quot;unused_index_name&quot;</span><span class=p>)</span>
-</span><span id=__span-20-17><a id=__codelineno-20-17 name=__codelineno-20-17></a>
-</span><span id=__span-20-18><a id=__codelineno-20-18 name=__codelineno-20-18></a><span class=c1>// 重建索引（解决索引碎片化）</span>
-</span><span id=__span-20-19><a id=__codelineno-20-19 name=__codelineno-20-19></a><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>reIndex</span><span class=p>()</span>
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=_10>🚀 实战案例：电商系统索引优化<a class=headerlink href=#_10 title="Permanent link">&para;</a></h2> <h3 id=_11>场景分析<a class=headerlink href=#_11 title="Permanent link">&para;</a></h3> <p><strong>电商系统典型查询：</strong> 1. 用户按商品名称搜索 2. 按分类和价格范围筛选 3. 按销量和评价排序 4. 商家管理后台的各种统计</p> <h3 id=_12>索引设计方案<a class=headerlink href=#_12 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-21-1> 1</a></span>
-<span class=normal><a href=#__codelineno-21-2> 2</a></span>
-<span class=normal><a href=#__codelineno-21-3> 3</a></span>
-<span class=normal><a href=#__codelineno-21-4> 4</a></span>
-<span class=normal><a href=#__codelineno-21-5> 5</a></span>
-<span class=normal><a href=#__codelineno-21-6> 6</a></span>
-<span class=normal><a href=#__codelineno-21-7> 7</a></span>
-<span class=normal><a href=#__codelineno-21-8> 8</a></span>
-<span class=normal><a href=#__codelineno-21-9> 9</a></span>
-<span class=normal><a href=#__codelineno-21-10>10</a></span>
-<span class=normal><a href=#__codelineno-21-11>11</a></span>
-<span class=normal><a href=#__codelineno-21-12>12</a></span>
-<span class=normal><a href=#__codelineno-21-13>13</a></span>
-<span class=normal><a href=#__codelineno-21-14>14</a></span>
-<span class=normal><a href=#__codelineno-21-15>15</a></span>
-<span class=normal><a href=#__codelineno-21-16>16</a></span>
-<span class=normal><a href=#__codelineno-21-17>17</a></span>
-<span class=normal><a href=#__codelineno-21-18>18</a></span>
-<span class=normal><a href=#__codelineno-21-19>19</a></span>
-<span class=normal><a href=#__codelineno-21-20>20</a></span>
-<span class=normal><a href=#__codelineno-21-21>21</a></span>
-<span class=normal><a href=#__codelineno-21-22>22</a></span>
-<span class=normal><a href=#__codelineno-21-23>23</a></span>
-<span class=normal><a href=#__codelineno-21-24>24</a></span>
-<span class=normal><a href=#__codelineno-21-25>25</a></span>
-<span class=normal><a href=#__codelineno-21-26>26</a></span>
-<span class=normal><a href=#__codelineno-21-27>27</a></span>
-<span class=normal><a href=#__codelineno-21-28>28</a></span>
-<span class=normal><a href=#__codelineno-21-29>29</a></span>
-<span class=normal><a href=#__codelineno-21-30>30</a></span>
-<span class=normal><a href=#__codelineno-21-31>31</a></span>
-<span class=normal><a href=#__codelineno-21-32>32</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-21-1><a id=__codelineno-21-1 name=__codelineno-21-1></a><span class=c1>// 商品集合索引策略</span>
-</span><span id=__span-21-2><a id=__codelineno-21-2 name=__codelineno-21-2></a><span class=c1>// 1. 主搜索索引</span>
-</span><span id=__span-21-3><a id=__codelineno-21-3 name=__codelineno-21-3></a><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
-</span><span id=__span-21-4><a id=__codelineno-21-4 name=__codelineno-21-4></a><span class=w>  </span><span class=s2>&quot;name&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;text&quot;</span><span class=p>,</span><span class=w> </span>
-</span><span id=__span-21-5><a id=__codelineno-21-5 name=__codelineno-21-5></a><span class=w>  </span><span class=s2>&quot;description&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;text&quot;</span><span class=w> </span>
-</span><span id=__span-21-6><a id=__codelineno-21-6 name=__codelineno-21-6></a><span class=p>})</span>
-</span><span id=__span-21-7><a id=__codelineno-21-7 name=__codelineno-21-7></a>
-</span><span id=__span-21-8><a id=__codelineno-21-8 name=__codelineno-21-8></a><span class=c1>// 2. 分类+价格+销量复合索引</span>
-</span><span id=__span-21-9><a id=__codelineno-21-9 name=__codelineno-21-9></a><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
-</span><span id=__span-21-10><a id=__codelineno-21-10 name=__codelineno-21-10></a><span class=w>  </span><span class=s2>&quot;category_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
-</span><span id=__span-21-11><a id=__codelineno-21-11 name=__codelineno-21-11></a><span class=w>  </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
-</span><span id=__span-21-12><a id=__codelineno-21-12 name=__codelineno-21-12></a><span class=w>  </span><span class=s2>&quot;sales_count&quot;</span><span class=o>:</span><span class=w> </span><span class=o>-</span><span class=mf>1</span><span class=w> </span>
-</span><span id=__span-21-13><a id=__codelineno-21-13 name=__codelineno-21-13></a><span class=p>})</span>
-</span><span id=__span-21-14><a id=__codelineno-21-14 name=__codelineno-21-14></a>
-</span><span id=__span-21-15><a id=__codelineno-21-15 name=__codelineno-21-15></a><span class=c1>// 3. 多维度筛选索引</span>
-</span><span id=__span-21-16><a id=__codelineno-21-16 name=__codelineno-21-16></a><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
-</span><span id=__span-21-17><a id=__codelineno-21-17 name=__codelineno-21-17></a><span class=w>  </span><span class=s2>&quot;category_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
-</span><span id=__span-21-18><a id=__codelineno-21-18 name=__codelineno-21-18></a><span class=w>  </span><span class=s2>&quot;brand&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
-</span><span id=__span-21-19><a id=__codelineno-21-19 name=__codelineno-21-19></a><span class=w>  </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
-</span><span id=__span-21-20><a id=__codelineno-21-20 name=__codelineno-21-20></a><span class=w>  </span><span class=s2>&quot;rating&quot;</span><span class=o>:</span><span class=w> </span><span class=o>-</span><span class=mf>1</span><span class=w> </span>
-</span><span id=__span-21-21><a id=__codelineno-21-21 name=__codelineno-21-21></a><span class=p>})</span>
-</span><span id=__span-21-22><a id=__codelineno-21-22 name=__codelineno-21-22></a>
-</span><span id=__span-21-23><a id=__codelineno-21-23 name=__codelineno-21-23></a><span class=c1>// 4. 商家后台统计索引</span>
-</span><span id=__span-21-24><a id=__codelineno-21-24 name=__codelineno-21-24></a><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
-</span><span id=__span-21-25><a id=__codelineno-21-25 name=__codelineno-21-25></a><span class=w>  </span><span class=s2>&quot;seller_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
-</span><span id=__span-21-26><a id=__codelineno-21-26 name=__codelineno-21-26></a><span class=w>  </span><span class=s2>&quot;created_date&quot;</span><span class=o>:</span><span class=w> </span><span class=o>-</span><span class=mf>1</span><span class=w> </span>
-</span><span id=__span-21-27><a id=__codelineno-21-27 name=__codelineno-21-27></a><span class=p>})</span>
-</span><span id=__span-21-28><a id=__codelineno-21-28 name=__codelineno-21-28></a>
-</span><span id=__span-21-29><a id=__codelineno-21-29 name=__codelineno-21-29></a><span class=c1>// 5. 地理空间索引（支持附近商品）</span>
-</span><span id=__span-21-30><a id=__codelineno-21-30 name=__codelineno-21-30></a><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
-</span><span id=__span-21-31><a id=__codelineno-21-31 name=__codelineno-21-31></a><span class=w>  </span><span class=s2>&quot;location&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;2dsphere&quot;</span><span class=w> </span>
-</span><span id=__span-21-32><a id=__codelineno-21-32 name=__codelineno-21-32></a><span class=p>})</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=_13>查询性能对比<a class=headerlink href=#_13 title="Permanent link">&para;</a></h3> <p><strong>优化前 vs 优化后：</strong></p> <pre class=mermaid><code>graph LR
+    style E fill:#2196f3</code></pre> <h3 id=_8>性能优化关键指标<a class=headerlink href=#_8 title="Permanent link">&para;</a></h3> <p><strong>理想情况：</strong> <div class="language-text highlight"><pre><span></span><code><span id=__span-15-1>nReturned ≈ totalDocsExamined ≈ totalKeysExamined
+</span></code></pre></div></p> <p><strong>问题信号：</strong> - <code>nReturned</code> &lt;&lt; <code>totalDocsExamined</code> - 索引选择性差 - <code>totalDocsExamined</code> &gt;&gt; <code>totalKeysExamined</code> - 索引覆盖不完整 - <code>executionTimeMillis</code> 过大 - 需要优化查询或索引</p> <hr> <h2 id=_9>💡 索引设计最佳实践<a class=headerlink href=#_9 title="Permanent link">&para;</a></h2> <h3 id=1-esr>1. ESR规则：相等→排序→范围<a class=headerlink href=#1-esr title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-16-1><span class=c1>// 好的索引设计示例</span>
+</span><span id=__span-16-2><span class=c1>// 查询: db.orders.find({ status: &quot;completed&quot;, customer_id: &quot;123&quot; }).sort({ order_date: -1 })</span>
+</span><span id=__span-16-3>
+</span><span id=__span-16-4><span class=c1>// 根据ESR规则创建索引:</span>
+</span><span id=__span-16-5><span class=nx>db</span><span class=p>.</span><span class=nx>orders</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
+</span><span id=__span-16-6><span class=w>  </span><span class=s2>&quot;status&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w>        </span><span class=c1>// Equality - 相等匹配</span>
+</span><span id=__span-16-7><span class=w>  </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w>   </span><span class=c1>// Equality - 相等匹配  </span>
+</span><span id=__span-16-8><span class=w>  </span><span class=s2>&quot;order_date&quot;</span><span class=o>:</span><span class=w> </span><span class=o>-</span><span class=mf>1</span><span class=w>    </span><span class=c1>// Sort - 排序字段</span>
+</span><span id=__span-16-9><span class=p>})</span>
+</span><span id=__span-16-10>
+</span><span id=__span-16-11><span class=c1>// 范围查询字段应该放在最后</span>
+</span><span id=__span-16-12><span class=nx>db</span><span class=p>.</span><span class=nx>orders</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span>
+</span><span id=__span-16-13><span class=w>  </span><span class=s2>&quot;category&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w>      </span><span class=c1>// Equality</span>
+</span><span id=__span-16-14><span class=w>  </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w>          </span><span class=c1>// Range - 范围查询放在最后</span>
+</span><span id=__span-16-15><span class=p>})</span>
+</span></code></pre></div> <h3 id=2_1>2. 索引选择性原则<a class=headerlink href=#2_1 title="Permanent link">&para;</a></h3> <p><strong>选择性的计算：</strong> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-17-1><span class=c1>// 计算字段的选择性</span>
+</span><span id=__span-17-2><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>aggregate</span><span class=p>([</span>
+</span><span id=__span-17-3><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=nx>$group</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>_id</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;$city&quot;</span><span class=p>,</span><span class=w> </span><span class=nx>count</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>$sum</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>},</span>
+</span><span id=__span-17-4><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=nx>$sort</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=nx>count</span><span class=o>:</span><span class=w> </span><span class=o>-</span><span class=mf>1</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>},</span>
+</span><span id=__span-17-5><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=nx>$limit</span><span class=o>:</span><span class=w> </span><span class=mf>10</span><span class=w> </span><span class=p>}</span>
+</span><span id=__span-17-6><span class=p>])</span>
+</span><span id=__span-17-7>
+</span><span id=__span-17-8><span class=c1>// 选择性 = 唯一值的数量 / 总文档数</span>
+</span><span id=__span-17-9><span class=c1>// 高选择性字段更适合建立索引</span>
+</span></code></pre></div></p> <p><strong>选择性示例：</strong> <div class="language-text highlight"><pre><span></span><code><span id=__span-18-1>字段       唯一值数量   总文档数   选择性   适合索引?
+</span><span id=__span-18-2>email      1,000,000   1,000,000  1.0      ✅ 非常适合
+</span><span id=__span-18-3>city       100         1,000,000  0.0001   ❌ 选择性太低
+</span><span id=__span-18-4>gender     2           1,000,000  0.000002 ❌ 绝对不适合
+</span></code></pre></div></p> <h3 id=3_1>3. 覆盖查询优化<a class=headerlink href=#3_1 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-19-1><span class=c1>// 创建覆盖索引</span>
+</span><span id=__span-19-2><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
+</span><span id=__span-19-3><span class=w>  </span><span class=s2>&quot;category&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
+</span><span id=__span-19-4><span class=w>  </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
+</span><span id=__span-19-5><span class=w>  </span><span class=s2>&quot;name&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span>
+</span><span id=__span-19-6><span class=p>})</span>
+</span><span id=__span-19-7>
+</span><span id=__span-19-8><span class=c1>// 覆盖查询 - 只从索引获取数据，无需回表</span>
+</span><span id=__span-19-9><span class=c1>// 查询字段都在索引中</span>
+</span><span id=__span-19-10><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>find</span><span class=p>(</span>
+</span><span id=__span-19-11><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;category&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;electronics&quot;</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;$gte&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1000</span><span class=w> </span><span class=p>}</span><span class=w> </span><span class=p>},</span>
+</span><span id=__span-19-12><span class=w>  </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>0</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;name&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>}</span><span class=w>  </span><span class=c1>// 只返回索引包含的字段</span>
+</span><span id=__span-19-13><span class=p>)</span>
+</span><span id=__span-19-14>
+</span><span id=__span-19-15><span class=c1>// 检查是否覆盖查询</span>
+</span><span id=__span-19-16><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>find</span><span class=p>(...).</span><span class=nx>explain</span><span class=p>(</span><span class=s2>&quot;executionStats&quot;</span><span class=p>)</span>
+</span><span id=__span-19-17><span class=c1>// 如果出现 &quot;indexOnly&quot;: true，说明是覆盖查询</span>
+</span></code></pre></div> <h3 id=4_1>4. 索引的维护和监控<a class=headerlink href=#4_1 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-20-1><span class=c1>// 查看索引使用情况</span>
+</span><span id=__span-20-2><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>aggregate</span><span class=p>([{</span><span class=w> </span><span class=nx>$indexStats</span><span class=o>:</span><span class=w> </span><span class=p>{}</span><span class=w> </span><span class=p>}])</span>
+</span><span id=__span-20-3>
+</span><span id=__span-20-4><span class=c1>// 结果示例</span>
+</span><span id=__span-20-5><span class=p>{</span>
+</span><span id=__span-20-6><span class=w>  </span><span class=s2>&quot;name&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;email_1&quot;</span><span class=p>,</span>
+</span><span id=__span-20-7><span class=w>  </span><span class=s2>&quot;key&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;email&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>},</span>
+</span><span id=__span-20-8><span class=w>  </span><span class=s2>&quot;host&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;server1:27017&quot;</span><span class=p>,</span>
+</span><span id=__span-20-9><span class=w>  </span><span class=s2>&quot;accesses&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-20-10><span class=w>    </span><span class=s2>&quot;ops&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>15000</span><span class=p>,</span><span class=w>        </span><span class=c1>// 使用次数</span>
+</span><span id=__span-20-11><span class=w>    </span><span class=s2>&quot;since&quot;</span><span class=o>:</span><span class=w> </span><span class=nx>ISODate</span><span class=p>(...)</span>
+</span><span id=__span-20-12><span class=w>  </span><span class=p>}</span>
+</span><span id=__span-20-13><span class=p>}</span>
+</span><span id=__span-20-14>
+</span><span id=__span-20-15><span class=c1>// 删除未使用的索引</span>
+</span><span id=__span-20-16><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>dropIndex</span><span class=p>(</span><span class=s2>&quot;unused_index_name&quot;</span><span class=p>)</span>
+</span><span id=__span-20-17>
+</span><span id=__span-20-18><span class=c1>// 重建索引（解决索引碎片化）</span>
+</span><span id=__span-20-19><span class=nx>db</span><span class=p>.</span><span class=nx>users</span><span class=p>.</span><span class=nx>reIndex</span><span class=p>()</span>
+</span></code></pre></div> <hr> <h2 id=_10>🚀 实战案例：电商系统索引优化<a class=headerlink href=#_10 title="Permanent link">&para;</a></h2> <h3 id=_11>场景分析<a class=headerlink href=#_11 title="Permanent link">&para;</a></h3> <p><strong>电商系统典型查询：</strong> 1. 用户按商品名称搜索 2. 按分类和价格范围筛选 3. 按销量和评价排序 4. 商家管理后台的各种统计</p> <h3 id=_12>索引设计方案<a class=headerlink href=#_12 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-21-1><span class=c1>// 商品集合索引策略</span>
+</span><span id=__span-21-2><span class=c1>// 1. 主搜索索引</span>
+</span><span id=__span-21-3><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
+</span><span id=__span-21-4><span class=w>  </span><span class=s2>&quot;name&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;text&quot;</span><span class=p>,</span><span class=w> </span>
+</span><span id=__span-21-5><span class=w>  </span><span class=s2>&quot;description&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;text&quot;</span><span class=w> </span>
+</span><span id=__span-21-6><span class=p>})</span>
+</span><span id=__span-21-7>
+</span><span id=__span-21-8><span class=c1>// 2. 分类+价格+销量复合索引</span>
+</span><span id=__span-21-9><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
+</span><span id=__span-21-10><span class=w>  </span><span class=s2>&quot;category_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
+</span><span id=__span-21-11><span class=w>  </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
+</span><span id=__span-21-12><span class=w>  </span><span class=s2>&quot;sales_count&quot;</span><span class=o>:</span><span class=w> </span><span class=o>-</span><span class=mf>1</span><span class=w> </span>
+</span><span id=__span-21-13><span class=p>})</span>
+</span><span id=__span-21-14>
+</span><span id=__span-21-15><span class=c1>// 3. 多维度筛选索引</span>
+</span><span id=__span-21-16><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
+</span><span id=__span-21-17><span class=w>  </span><span class=s2>&quot;category_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
+</span><span id=__span-21-18><span class=w>  </span><span class=s2>&quot;brand&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
+</span><span id=__span-21-19><span class=w>  </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
+</span><span id=__span-21-20><span class=w>  </span><span class=s2>&quot;rating&quot;</span><span class=o>:</span><span class=w> </span><span class=o>-</span><span class=mf>1</span><span class=w> </span>
+</span><span id=__span-21-21><span class=p>})</span>
+</span><span id=__span-21-22>
+</span><span id=__span-21-23><span class=c1>// 4. 商家后台统计索引</span>
+</span><span id=__span-21-24><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
+</span><span id=__span-21-25><span class=w>  </span><span class=s2>&quot;seller_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span>
+</span><span id=__span-21-26><span class=w>  </span><span class=s2>&quot;created_date&quot;</span><span class=o>:</span><span class=w> </span><span class=o>-</span><span class=mf>1</span><span class=w> </span>
+</span><span id=__span-21-27><span class=p>})</span>
+</span><span id=__span-21-28>
+</span><span id=__span-21-29><span class=c1>// 5. 地理空间索引（支持附近商品）</span>
+</span><span id=__span-21-30><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span>
+</span><span id=__span-21-31><span class=w>  </span><span class=s2>&quot;location&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;2dsphere&quot;</span><span class=w> </span>
+</span><span id=__span-21-32><span class=p>})</span>
+</span></code></pre></div> <h3 id=_13>查询性能对比<a class=headerlink href=#_13 title="Permanent link">&para;</a></h3> <p><strong>优化前 vs 优化后：</strong></p> <pre class=mermaid><code>graph LR
     A[优化前查询] --&gt; B[COLLSCAN全表扫描]
     B --&gt; C[10秒响应时间]
 
@@ -688,50 +423,29 @@
     style A fill:#f44336
     style C fill:#f44336
     style D fill:#4caf50
-    style F fill:#4caf50</code></pre> <h3 id=_14>监控和调优脚本<a class=headerlink href=#_14 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-22-1> 1</a></span>
-<span class=normal><a href=#__codelineno-22-2> 2</a></span>
-<span class=normal><a href=#__codelineno-22-3> 3</a></span>
-<span class=normal><a href=#__codelineno-22-4> 4</a></span>
-<span class=normal><a href=#__codelineno-22-5> 5</a></span>
-<span class=normal><a href=#__codelineno-22-6> 6</a></span>
-<span class=normal><a href=#__codelineno-22-7> 7</a></span>
-<span class=normal><a href=#__codelineno-22-8> 8</a></span>
-<span class=normal><a href=#__codelineno-22-9> 9</a></span>
-<span class=normal><a href=#__codelineno-22-10>10</a></span>
-<span class=normal><a href=#__codelineno-22-11>11</a></span>
-<span class=normal><a href=#__codelineno-22-12>12</a></span>
-<span class=normal><a href=#__codelineno-22-13>13</a></span>
-<span class=normal><a href=#__codelineno-22-14>14</a></span>
-<span class=normal><a href=#__codelineno-22-15>15</a></span>
-<span class=normal><a href=#__codelineno-22-16>16</a></span>
-<span class=normal><a href=#__codelineno-22-17>17</a></span>
-<span class=normal><a href=#__codelineno-22-18>18</a></span>
-<span class=normal><a href=#__codelineno-22-19>19</a></span>
-<span class=normal><a href=#__codelineno-22-20>20</a></span>
-<span class=normal><a href=#__codelineno-22-21>21</a></span>
-<span class=normal><a href=#__codelineno-22-22>22</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-22-1><a id=__codelineno-22-1 name=__codelineno-22-1></a><span class=c1>// 索引性能监控脚本</span>
-</span><span id=__span-22-2><a id=__codelineno-22-2 name=__codelineno-22-2></a><span class=kd>function</span><span class=w> </span><span class=nx>monitorIndexPerformance</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-22-3><a id=__codelineno-22-3 name=__codelineno-22-3></a><span class=w>    </span><span class=kd>const</span><span class=w> </span><span class=nx>collections</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>db</span><span class=p>.</span><span class=nx>getCollectionNames</span><span class=p>();</span>
-</span><span id=__span-22-4><a id=__codelineno-22-4 name=__codelineno-22-4></a>
-</span><span id=__span-22-5><a id=__codelineno-22-5 name=__codelineno-22-5></a><span class=w>    </span><span class=nx>collections</span><span class=p>.</span><span class=nx>forEach</span><span class=p>(</span><span class=nx>collectionName</span><span class=w> </span><span class=p>=&gt;</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-22-6><a id=__codelineno-22-6 name=__codelineno-22-6></a><span class=w>        </span><span class=kd>const</span><span class=w> </span><span class=nx>stats</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>db</span><span class=p>[</span><span class=nx>collectionName</span><span class=p>].</span><span class=nx>stats</span><span class=p>();</span>
-</span><span id=__span-22-7><a id=__codelineno-22-7 name=__codelineno-22-7></a><span class=w>        </span><span class=kd>const</span><span class=w> </span><span class=nx>indexStats</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>db</span><span class=p>[</span><span class=nx>collectionName</span><span class=p>].</span><span class=nx>aggregate</span><span class=p>([{</span><span class=w> </span><span class=nx>$indexStats</span><span class=o>:</span><span class=w> </span><span class=p>{}</span><span class=w> </span><span class=p>}]).</span><span class=nx>toArray</span><span class=p>();</span>
-</span><span id=__span-22-8><a id=__codelineno-22-8 name=__codelineno-22-8></a>
-</span><span id=__span-22-9><a id=__codelineno-22-9 name=__codelineno-22-9></a><span class=w>        </span><span class=nx>print</span><span class=p>(</span><span class=sb>`\n=== </span><span class=si>${</span><span class=nx>collectionName</span><span class=si>}</span><span class=sb> 索引统计 ===`</span><span class=p>);</span>
-</span><span id=__span-22-10><a id=__codelineno-22-10 name=__codelineno-22-10></a><span class=w>        </span><span class=nx>indexStats</span><span class=p>.</span><span class=nx>forEach</span><span class=p>(</span><span class=nx>index</span><span class=w> </span><span class=p>=&gt;</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-22-11><a id=__codelineno-22-11 name=__codelineno-22-11></a><span class=w>            </span><span class=kd>const</span><span class=w> </span><span class=nx>usageRate</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>index</span><span class=p>.</span><span class=nx>accesses</span><span class=p>.</span><span class=nx>ops</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=nx>stats</span><span class=p>.</span><span class=nx>count</span><span class=p>;</span>
-</span><span id=__span-22-12><a id=__codelineno-22-12 name=__codelineno-22-12></a><span class=w>            </span><span class=nx>print</span><span class=p>(</span><span class=sb>`索引 </span><span class=si>${</span><span class=nx>index</span><span class=p>.</span><span class=nx>name</span><span class=si>}</span><span class=sb>: 使用次数 </span><span class=si>${</span><span class=nx>index</span><span class=p>.</span><span class=nx>accesses</span><span class=p>.</span><span class=nx>ops</span><span class=si>}</span><span class=sb>, 使用率 </span><span class=si>${</span><span class=p>(</span><span class=nx>usageRate</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mf>100</span><span class=p>).</span><span class=nx>toFixed</span><span class=p>(</span><span class=mf>2</span><span class=p>)</span><span class=si>}</span><span class=sb>%`</span><span class=p>);</span>
-</span><span id=__span-22-13><a id=__codelineno-22-13 name=__codelineno-22-13></a>
-</span><span id=__span-22-14><a id=__codelineno-22-14 name=__codelineno-22-14></a><span class=w>            </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=nx>usageRate</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=mf>0.01</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
-</span><span id=__span-22-15><a id=__codelineno-22-15 name=__codelineno-22-15></a><span class=w>                </span><span class=nx>print</span><span class=p>(</span><span class=sb>`⚠️  建议检查索引 </span><span class=si>${</span><span class=nx>index</span><span class=p>.</span><span class=nx>name</span><span class=si>}</span><span class=sb> 的使用情况`</span><span class=p>);</span>
-</span><span id=__span-22-16><a id=__codelineno-22-16 name=__codelineno-22-16></a><span class=w>            </span><span class=p>}</span>
-</span><span id=__span-22-17><a id=__codelineno-22-17 name=__codelineno-22-17></a><span class=w>        </span><span class=p>});</span>
-</span><span id=__span-22-18><a id=__codelineno-22-18 name=__codelineno-22-18></a><span class=w>    </span><span class=p>});</span>
-</span><span id=__span-22-19><a id=__codelineno-22-19 name=__codelineno-22-19></a><span class=p>}</span>
-</span><span id=__span-22-20><a id=__codelineno-22-20 name=__codelineno-22-20></a>
-</span><span id=__span-22-21><a id=__codelineno-22-21 name=__codelineno-22-21></a><span class=c1>// 运行监控</span>
-</span><span id=__span-22-22><a id=__codelineno-22-22 name=__codelineno-22-22></a><span class=nx>monitorIndexPerformance</span><span class=p>();</span>
-</span></code></pre></div></td></tr></table></div> <hr> <h2 id=_15>📈 高级主题：分片集群中的索引<a class=headerlink href=#_15 title="Permanent link">&para;</a></h2> <h3 id=_16>分片集群索引策略<a class=headerlink href=#_16 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
+    style F fill:#4caf50</code></pre> <h3 id=_14>监控和调优脚本<a class=headerlink href=#_14 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-22-1><span class=c1>// 索引性能监控脚本</span>
+</span><span id=__span-22-2><span class=kd>function</span><span class=w> </span><span class=nx>monitorIndexPerformance</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-22-3><span class=w>    </span><span class=kd>const</span><span class=w> </span><span class=nx>collections</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>db</span><span class=p>.</span><span class=nx>getCollectionNames</span><span class=p>();</span>
+</span><span id=__span-22-4>
+</span><span id=__span-22-5><span class=w>    </span><span class=nx>collections</span><span class=p>.</span><span class=nx>forEach</span><span class=p>(</span><span class=nx>collectionName</span><span class=w> </span><span class=p>=&gt;</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-22-6><span class=w>        </span><span class=kd>const</span><span class=w> </span><span class=nx>stats</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>db</span><span class=p>[</span><span class=nx>collectionName</span><span class=p>].</span><span class=nx>stats</span><span class=p>();</span>
+</span><span id=__span-22-7><span class=w>        </span><span class=kd>const</span><span class=w> </span><span class=nx>indexStats</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>db</span><span class=p>[</span><span class=nx>collectionName</span><span class=p>].</span><span class=nx>aggregate</span><span class=p>([{</span><span class=w> </span><span class=nx>$indexStats</span><span class=o>:</span><span class=w> </span><span class=p>{}</span><span class=w> </span><span class=p>}]).</span><span class=nx>toArray</span><span class=p>();</span>
+</span><span id=__span-22-8>
+</span><span id=__span-22-9><span class=w>        </span><span class=nx>print</span><span class=p>(</span><span class=sb>`\n=== </span><span class=si>${</span><span class=nx>collectionName</span><span class=si>}</span><span class=sb> 索引统计 ===`</span><span class=p>);</span>
+</span><span id=__span-22-10><span class=w>        </span><span class=nx>indexStats</span><span class=p>.</span><span class=nx>forEach</span><span class=p>(</span><span class=nx>index</span><span class=w> </span><span class=p>=&gt;</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-22-11><span class=w>            </span><span class=kd>const</span><span class=w> </span><span class=nx>usageRate</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nx>index</span><span class=p>.</span><span class=nx>accesses</span><span class=p>.</span><span class=nx>ops</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=nx>stats</span><span class=p>.</span><span class=nx>count</span><span class=p>;</span>
+</span><span id=__span-22-12><span class=w>            </span><span class=nx>print</span><span class=p>(</span><span class=sb>`索引 </span><span class=si>${</span><span class=nx>index</span><span class=p>.</span><span class=nx>name</span><span class=si>}</span><span class=sb>: 使用次数 </span><span class=si>${</span><span class=nx>index</span><span class=p>.</span><span class=nx>accesses</span><span class=p>.</span><span class=nx>ops</span><span class=si>}</span><span class=sb>, 使用率 </span><span class=si>${</span><span class=p>(</span><span class=nx>usageRate</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=mf>100</span><span class=p>).</span><span class=nx>toFixed</span><span class=p>(</span><span class=mf>2</span><span class=p>)</span><span class=si>}</span><span class=sb>%`</span><span class=p>);</span>
+</span><span id=__span-22-13>
+</span><span id=__span-22-14><span class=w>            </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=nx>usageRate</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=mf>0.01</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
+</span><span id=__span-22-15><span class=w>                </span><span class=nx>print</span><span class=p>(</span><span class=sb>`⚠️  建议检查索引 </span><span class=si>${</span><span class=nx>index</span><span class=p>.</span><span class=nx>name</span><span class=si>}</span><span class=sb> 的使用情况`</span><span class=p>);</span>
+</span><span id=__span-22-16><span class=w>            </span><span class=p>}</span>
+</span><span id=__span-22-17><span class=w>        </span><span class=p>});</span>
+</span><span id=__span-22-18><span class=w>    </span><span class=p>});</span>
+</span><span id=__span-22-19><span class=p>}</span>
+</span><span id=__span-22-20>
+</span><span id=__span-22-21><span class=c1>// 运行监控</span>
+</span><span id=__span-22-22><span class=nx>monitorIndexPerformance</span><span class=p>();</span>
+</span></code></pre></div> <hr> <h2 id=_15>📈 高级主题：分片集群中的索引<a class=headerlink href=#_15 title="Permanent link">&para;</a></h2> <h3 id=_16>分片集群索引策略<a class=headerlink href=#_16 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
     A[客户端] --&gt; B[路由器mongos]
     B --&gt; C[配置服务器]
 
@@ -745,42 +459,24 @@
     F --&gt; F1[数据块4]
 
     style C fill:#ffd700
-    style B fill:#4caf50</code></pre> <h3 id=_17>分片键选择原则<a class=headerlink href=#_17 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-23-1> 1</a></span>
-<span class=normal><a href=#__codelineno-23-2> 2</a></span>
-<span class=normal><a href=#__codelineno-23-3> 3</a></span>
-<span class=normal><a href=#__codelineno-23-4> 4</a></span>
-<span class=normal><a href=#__codelineno-23-5> 5</a></span>
-<span class=normal><a href=#__codelineno-23-6> 6</a></span>
-<span class=normal><a href=#__codelineno-23-7> 7</a></span>
-<span class=normal><a href=#__codelineno-23-8> 8</a></span>
-<span class=normal><a href=#__codelineno-23-9> 9</a></span>
-<span class=normal><a href=#__codelineno-23-10>10</a></span>
-<span class=normal><a href=#__codelineno-23-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-23-1><a id=__codelineno-23-1 name=__codelineno-23-1></a><span class=c1>// 好的分片键特征：</span>
-</span><span id=__span-23-2><a id=__codelineno-23-2 name=__codelineno-23-2></a><span class=c1>// 1. 基数高（唯一值多）</span>
-</span><span id=__span-23-3><a id=__codelineno-23-3 name=__codelineno-23-3></a><span class=c1>// 2. 写分布均匀</span>
-</span><span id=__span-23-4><a id=__codelineno-23-4 name=__codelineno-23-4></a><span class=c1>// 3. 支持常用查询模式</span>
-</span><span id=__span-23-5><a id=__codelineno-23-5 name=__codelineno-23-5></a>
-</span><span id=__span-23-6><a id=__codelineno-23-6 name=__codelineno-23-6></a><span class=c1>// 分片键示例</span>
-</span><span id=__span-23-7><a id=__codelineno-23-7 name=__codelineno-23-7></a><span class=nx>db</span><span class=p>.</span><span class=nx>customers</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;hashed&quot;</span><span class=w> </span><span class=p>})</span><span class=w>  </span><span class=c1>// 哈希分片</span>
-</span><span id=__span-23-8><a id=__codelineno-23-8 name=__codelineno-23-8></a><span class=nx>sh</span><span class=p>.</span><span class=nx>shardCollection</span><span class=p>(</span><span class=s2>&quot;mydb.customers&quot;</span><span class=p>,</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;hashed&quot;</span><span class=w> </span><span class=p>})</span>
-</span><span id=__span-23-9><a id=__codelineno-23-9 name=__codelineno-23-9></a>
-</span><span id=__span-23-10><a id=__codelineno-23-10 name=__codelineno-23-10></a><span class=c1>// 或者范围分片</span>
-</span><span id=__span-23-11><a id=__codelineno-23-11 name=__codelineno-23-11></a><span class=nx>sh</span><span class=p>.</span><span class=nx>shardCollection</span><span class=p>(</span><span class=s2>&quot;mydb.orders&quot;</span><span class=p>,</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;order_date&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=_18>分片集群的索引管理<a class=headerlink href=#_18 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-24-1>1</a></span>
-<span class=normal><a href=#__codelineno-24-2>2</a></span>
-<span class=normal><a href=#__codelineno-24-3>3</a></span>
-<span class=normal><a href=#__codelineno-24-4>4</a></span>
-<span class=normal><a href=#__codelineno-24-5>5</a></span>
-<span class=normal><a href=#__codelineno-24-6>6</a></span>
-<span class=normal><a href=#__codelineno-24-7>7</a></span>
-<span class=normal><a href=#__codelineno-24-8>8</a></span>
-<span class=normal><a href=#__codelineno-24-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-24-1><a id=__codelineno-24-1 name=__codelineno-24-1></a><span class=c1>// 在分片集群中创建索引</span>
-</span><span id=__span-24-2><a id=__codelineno-24-2 name=__codelineno-24-2></a><span class=c1>// 方法1：通过mongos创建（推荐）</span>
-</span><span id=__span-24-3><a id=__codelineno-24-3 name=__codelineno-24-3></a><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;category&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
-</span><span id=__span-24-4><a id=__codelineno-24-4 name=__codelineno-24-4></a>
-</span><span id=__span-24-5><a id=__codelineno-24-5 name=__codelineno-24-5></a><span class=c1>// 方法2：在每个分片上分别创建</span>
-</span><span id=__span-24-6><a id=__codelineno-24-6 name=__codelineno-24-6></a><span class=nx>db</span><span class=p>.</span><span class=nx>getSiblingDB</span><span class=p>(</span><span class=s2>&quot;mydb&quot;</span><span class=p>).</span><span class=nx>getCollection</span><span class=p>(</span><span class=s2>&quot;products&quot;</span><span class=p>).</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;category&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
-</span><span id=__span-24-7><a id=__codelineno-24-7 name=__codelineno-24-7></a>
-</span><span id=__span-24-8><a id=__codelineno-24-8 name=__codelineno-24-8></a><span class=c1>// 查看分片索引状态</span>
-</span><span id=__span-24-9><a id=__codelineno-24-9 name=__codelineno-24-9></a><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>getShardDistribution</span><span class=p>()</span>
-</span></code></pre></div></td></tr></table></div> <hr> <h3 id=_19>存储引擎关键记忆点<a class=headerlink href=#_19 title="Permanent link">&para;</a></h3> <ol> <li><strong>WiredTiger是默认引擎</strong> - 支持文档级锁和压缩</li> <li><strong>内存管理很重要</strong> - 合理设置cacheSizeGB</li> <li><strong>日志保证持久性</strong> - Journaling防止数据丢失</li> <li><strong>压缩节省空间</strong> - Snappy和Zlib压缩算法</li> </ol> <h3 id=_20>索引设计黄金法则<a class=headerlink href=#_20 title="Permanent link">&para;</a></h3> <ol> <li><strong>ESR原则</strong> - 相等→排序→范围的字段顺序</li> <li><strong>高选择性</strong> - 选择唯一值多的字段建索引</li> <li><strong>覆盖查询</strong> - 让查询只使用索引</li> <li><strong>复合索引</strong> - 多字段查询的首选方案</li> <li><strong>监控使用</strong> - 定期检查索引的有效性</li> </ol> <h3 id=_21>性能优化检查清单<a class=headerlink href=#_21 title="Permanent link">&para;</a></h3> <ul> <li>✅ 为常用查询字段创建索引</li> <li>✅ 使用复合索引替代多个单字段索引</li> <li>✅ 确保索引的选择性足够高</li> <li>✅ 定期监控和清理未使用的索引</li> <li>✅ 使用explain()分析查询性能</li> <li>✅ 考虑分片集群的索引策略</li> </ul> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> </div> <div class=md-social> <a href=https://github.com/deep2code target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://linkedin.com/in/deep2code target=_blank rel=noopener title=linkedin.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg> </a> <a href=https://twitter.com/deep2code target=_blank rel=noopener title=twitter.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.select", "content.code.annotate", "content.tabs.link", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script> <script src=../../assets/javascripts/bundle.79ae519e.min.js></script> <script src=https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js></script> <script src=../../assets/js/code-block.js></script> <script src=../../assets/js/custom.js></script> </body> </html>
+    style B fill:#4caf50</code></pre> <h3 id=_17>分片键选择原则<a class=headerlink href=#_17 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-23-1><span class=c1>// 好的分片键特征：</span>
+</span><span id=__span-23-2><span class=c1>// 1. 基数高（唯一值多）</span>
+</span><span id=__span-23-3><span class=c1>// 2. 写分布均匀</span>
+</span><span id=__span-23-4><span class=c1>// 3. 支持常用查询模式</span>
+</span><span id=__span-23-5>
+</span><span id=__span-23-6><span class=c1>// 分片键示例</span>
+</span><span id=__span-23-7><span class=nx>db</span><span class=p>.</span><span class=nx>customers</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;hashed&quot;</span><span class=w> </span><span class=p>})</span><span class=w>  </span><span class=c1>// 哈希分片</span>
+</span><span id=__span-23-8><span class=nx>sh</span><span class=p>.</span><span class=nx>shardCollection</span><span class=p>(</span><span class=s2>&quot;mydb.customers&quot;</span><span class=p>,</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;hashed&quot;</span><span class=w> </span><span class=p>})</span>
+</span><span id=__span-23-9>
+</span><span id=__span-23-10><span class=c1>// 或者范围分片</span>
+</span><span id=__span-23-11><span class=nx>sh</span><span class=p>.</span><span class=nx>shardCollection</span><span class=p>(</span><span class=s2>&quot;mydb.orders&quot;</span><span class=p>,</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=s2>&quot;order_date&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;customer_id&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
+</span></code></pre></div> <h3 id=_18>分片集群的索引管理<a class=headerlink href=#_18 title="Permanent link">&para;</a></h3> <div class="language-javascript highlight"><pre><span></span><code><span id=__span-24-1><span class=c1>// 在分片集群中创建索引</span>
+</span><span id=__span-24-2><span class=c1>// 方法1：通过mongos创建（推荐）</span>
+</span><span id=__span-24-3><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;category&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
+</span><span id=__span-24-4>
+</span><span id=__span-24-5><span class=c1>// 方法2：在每个分片上分别创建</span>
+</span><span id=__span-24-6><span class=nx>db</span><span class=p>.</span><span class=nx>getSiblingDB</span><span class=p>(</span><span class=s2>&quot;mydb&quot;</span><span class=p>).</span><span class=nx>getCollection</span><span class=p>(</span><span class=s2>&quot;products&quot;</span><span class=p>).</span><span class=nx>createIndex</span><span class=p>({</span><span class=w> </span><span class=s2>&quot;category&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=p>,</span><span class=w> </span><span class=s2>&quot;price&quot;</span><span class=o>:</span><span class=w> </span><span class=mf>1</span><span class=w> </span><span class=p>})</span>
+</span><span id=__span-24-7>
+</span><span id=__span-24-8><span class=c1>// 查看分片索引状态</span>
+</span><span id=__span-24-9><span class=nx>db</span><span class=p>.</span><span class=nx>products</span><span class=p>.</span><span class=nx>getShardDistribution</span><span class=p>()</span>
+</span></code></pre></div> <hr> <h3 id=_19>存储引擎关键记忆点<a class=headerlink href=#_19 title="Permanent link">&para;</a></h3> <ol> <li><strong>WiredTiger是默认引擎</strong> - 支持文档级锁和压缩</li> <li><strong>内存管理很重要</strong> - 合理设置cacheSizeGB</li> <li><strong>日志保证持久性</strong> - Journaling防止数据丢失</li> <li><strong>压缩节省空间</strong> - Snappy和Zlib压缩算法</li> </ol> <h3 id=_20>索引设计黄金法则<a class=headerlink href=#_20 title="Permanent link">&para;</a></h3> <ol> <li><strong>ESR原则</strong> - 相等→排序→范围的字段顺序</li> <li><strong>高选择性</strong> - 选择唯一值多的字段建索引</li> <li><strong>覆盖查询</strong> - 让查询只使用索引</li> <li><strong>复合索引</strong> - 多字段查询的首选方案</li> <li><strong>监控使用</strong> - 定期检查索引的有效性</li> </ol> <h3 id=_21>性能优化检查清单<a class=headerlink href=#_21 title="Permanent link">&para;</a></h3> <ul> <li>✅ 为常用查询字段创建索引</li> <li>✅ 使用复合索引替代多个单字段索引</li> <li>✅ 确保索引的选择性足够高</li> <li>✅ 定期监控和清理未使用的索引</li> <li>✅ 使用explain()分析查询性能</li> <li>✅ 考虑分片集群的索引策略</li> </ul> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> </div> <div class=md-social> <a href=https://github.com/deep2code target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://linkedin.com/in/deep2code target=_blank rel=noopener title=linkedin.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg> </a> <a href=https://twitter.com/deep2code target=_blank rel=noopener title=twitter.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.select", "content.code.annotate", "content.tabs.link", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script> <script src=../../assets/javascripts/bundle.79ae519e.min.js></script> <script src=https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js></script> <script src=../../assets/js/code-block.js></script> <script src=../../assets/js/custom.js></script> </body> </html>

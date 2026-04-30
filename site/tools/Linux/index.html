@@ -8,49 +8,29 @@
     E --&gt; H[环境一致]
 
     style A fill:#ffcdd2
-    style E fill:#c8e6c9</code></pre> <p><strong>核心优势：</strong> - ✅ <strong>开源免费</strong> - 不用花钱买许可证 - ✅ <strong>稳定可靠</strong> - 服务器可以几年不重启 - ✅ <strong>安全性强</strong> - 权限控制严格，病毒少 - ✅ <strong>性能优异</strong> - 资源占用低，运行效率高 - ✅ <strong>生态丰富</strong> - 海量开源软件和工具</p> <h2 id=linux_3>💻 Linux环境准备：迈出第一步<a class=headerlink href=#linux_3 title="Permanent link">&para;</a></h2> <h3 id=linux_4>选择适合的Linux发行版<a class=headerlink href=#linux_4 title="Permanent link">&para;</a></h3> <p><strong>初学者推荐：</strong> - 🐧 <strong>Ubuntu</strong> - 用户友好，社区活跃，文档丰富 - 🎯 <strong>Linux Mint</strong> - 界面美观，开箱即用 - 🔴 <strong>Fedora</strong> - 技术前沿，适合开发者</p> <p><strong>安装方式推荐：</strong></p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1> 1</a></span>
-<span class=normal><a href=#__codelineno-0-2> 2</a></span>
-<span class=normal><a href=#__codelineno-0-3> 3</a></span>
-<span class=normal><a href=#__codelineno-0-4> 4</a></span>
-<span class=normal><a href=#__codelineno-0-5> 5</a></span>
-<span class=normal><a href=#__codelineno-0-6> 6</a></span>
-<span class=normal><a href=#__codelineno-0-7> 7</a></span>
-<span class=normal><a href=#__codelineno-0-8> 8</a></span>
-<span class=normal><a href=#__codelineno-0-9> 9</a></span>
-<span class=normal><a href=#__codelineno-0-10>10</a></span>
-<span class=normal><a href=#__codelineno-0-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a><span class=c1># 方式1：虚拟机安装（最安全）</span>
-</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a><span class=c1># 下载VirtualBox或VMware</span>
-</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a><span class=c1># 安装Ubuntu镜像，完全隔离环境</span>
-</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a>
-</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a><span class=c1># 方式2：双系统安装</span>
-</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a><span class=c1># 适合有一定经验的用户</span>
-</span><span id=__span-0-7><a id=__codelineno-0-7 name=__codelineno-0-7></a><span class=c1># 注意备份重要数据</span>
-</span><span id=__span-0-8><a id=__codelineno-0-8 name=__codelineno-0-8></a>
-</span><span id=__span-0-9><a id=__codelineno-0-9 name=__codelineno-0-9></a><span class=c1># 方式3：WSL2（Windows用户）</span>
-</span><span id=__span-0-10><a id=__codelineno-0-10 name=__codelineno-0-10></a><span class=c1># 在Windows商店搜索&quot;Ubuntu&quot;</span>
-</span><span id=__span-0-11><a id=__codelineno-0-11 name=__codelineno-0-11></a><span class=c1># 一键安装，原生Linux体验</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=1>常见错误1：安装过程卡住<a class=headerlink href=#1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1> 1</a></span>
-<span class=normal><a href=#__codelineno-1-2> 2</a></span>
-<span class=normal><a href=#__codelineno-1-3> 3</a></span>
-<span class=normal><a href=#__codelineno-1-4> 4</a></span>
-<span class=normal><a href=#__codelineno-1-5> 5</a></span>
-<span class=normal><a href=#__codelineno-1-6> 6</a></span>
-<span class=normal><a href=#__codelineno-1-7> 7</a></span>
-<span class=normal><a href=#__codelineno-1-8> 8</a></span>
-<span class=normal><a href=#__codelineno-1-9> 9</a></span>
-<span class=normal><a href=#__codelineno-1-10>10</a></span>
-<span class=normal><a href=#__codelineno-1-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=c1># ❌ 错误：安装过程卡在某个步骤</span>
-</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a><span class=c1># 系统无响应，鼠标键盘失灵</span>
-</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>
-</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a><span class=c1># ✅ 解决方法：</span>
-</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a><span class=c1># 1. 检查镜像文件是否完整</span>
-</span><span id=__span-1-6><a id=__codelineno-1-6 name=__codelineno-1-6></a><span class=c1>#   下载后验证MD5/SHA256校验值</span>
-</span><span id=__span-1-7><a id=__codelineno-1-7 name=__codelineno-1-7></a><span class=c1># 2. 调整虚拟机配置</span>
-</span><span id=__span-1-8><a id=__codelineno-1-8 name=__codelineno-1-8></a><span class=c1>#   增加内存到4GB以上</span>
-</span><span id=__span-1-9><a id=__codelineno-1-9 name=__codelineno-1-9></a><span class=c1>#   启用硬件虚拟化支持</span>
-</span><span id=__span-1-10><a id=__codelineno-1-10 name=__codelineno-1-10></a><span class=c1># 3. 尝试不同的安装选项</span>
-</span><span id=__span-1-11><a id=__codelineno-1-11 name=__codelineno-1-11></a><span class=c1>#   选择&quot;最小安装&quot;或&quot;快速安装&quot;</span>
-</span></code></pre></div></td></tr></table></div> <p><strong>安装成功标志：</strong> - 看到登录界面 - 能正常输入用户名密码 - 进入桌面环境或命令行界面</p> <h2 id=linux_5>🔧 第一印象：认识Linux界面<a class=headerlink href=#linux_5 title="Permanent link">&para;</a></h2> <h3 id=vs>图形界面 vs 命令行界面<a class=headerlink href=#vs title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
+    style E fill:#c8e6c9</code></pre> <p><strong>核心优势：</strong> - ✅ <strong>开源免费</strong> - 不用花钱买许可证 - ✅ <strong>稳定可靠</strong> - 服务器可以几年不重启 - ✅ <strong>安全性强</strong> - 权限控制严格，病毒少 - ✅ <strong>性能优异</strong> - 资源占用低，运行效率高 - ✅ <strong>生态丰富</strong> - 海量开源软件和工具</p> <h2 id=linux_3>💻 Linux环境准备：迈出第一步<a class=headerlink href=#linux_3 title="Permanent link">&para;</a></h2> <h3 id=linux_4>选择适合的Linux发行版<a class=headerlink href=#linux_4 title="Permanent link">&para;</a></h3> <p><strong>初学者推荐：</strong> - 🐧 <strong>Ubuntu</strong> - 用户友好，社区活跃，文档丰富 - 🎯 <strong>Linux Mint</strong> - 界面美观，开箱即用 - 🔴 <strong>Fedora</strong> - 技术前沿，适合开发者</p> <p><strong>安装方式推荐：</strong></p> <div class="language-bash highlight"><pre><span></span><code><span id=__span-0-1><span class=c1># 方式1：虚拟机安装（最安全）</span>
+</span><span id=__span-0-2><span class=c1># 下载VirtualBox或VMware</span>
+</span><span id=__span-0-3><span class=c1># 安装Ubuntu镜像，完全隔离环境</span>
+</span><span id=__span-0-4>
+</span><span id=__span-0-5><span class=c1># 方式2：双系统安装</span>
+</span><span id=__span-0-6><span class=c1># 适合有一定经验的用户</span>
+</span><span id=__span-0-7><span class=c1># 注意备份重要数据</span>
+</span><span id=__span-0-8>
+</span><span id=__span-0-9><span class=c1># 方式3：WSL2（Windows用户）</span>
+</span><span id=__span-0-10><span class=c1># 在Windows商店搜索&quot;Ubuntu&quot;</span>
+</span><span id=__span-0-11><span class=c1># 一键安装，原生Linux体验</span>
+</span></code></pre></div> <h3 id=1>常见错误1：安装过程卡住<a class=headerlink href=#1 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-1-1><span class=c1># ❌ 错误：安装过程卡在某个步骤</span>
+</span><span id=__span-1-2><span class=c1># 系统无响应，鼠标键盘失灵</span>
+</span><span id=__span-1-3>
+</span><span id=__span-1-4><span class=c1># ✅ 解决方法：</span>
+</span><span id=__span-1-5><span class=c1># 1. 检查镜像文件是否完整</span>
+</span><span id=__span-1-6><span class=c1>#   下载后验证MD5/SHA256校验值</span>
+</span><span id=__span-1-7><span class=c1># 2. 调整虚拟机配置</span>
+</span><span id=__span-1-8><span class=c1>#   增加内存到4GB以上</span>
+</span><span id=__span-1-9><span class=c1>#   启用硬件虚拟化支持</span>
+</span><span id=__span-1-10><span class=c1># 3. 尝试不同的安装选项</span>
+</span><span id=__span-1-11><span class=c1>#   选择&quot;最小安装&quot;或&quot;快速安装&quot;</span>
+</span></code></pre></div> <p><strong>安装成功标志：</strong> - 看到登录界面 - 能正常输入用户名密码 - 进入桌面环境或命令行界面</p> <h2 id=linux_5>🔧 第一印象：认识Linux界面<a class=headerlink href=#linux_5 title="Permanent link">&para;</a></h2> <h3 id=vs>图形界面 vs 命令行界面<a class=headerlink href=#vs title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
     A[Linux界面] --&gt; B[图形界面GUI]
     A --&gt; C[命令行界面CLI]
 
@@ -63,10 +43,9 @@
     C --&gt; C3[Fish]
 
     style B fill:#e1f5fe
-    style C fill:#c8e6c9</code></pre> <p><strong>初学者建议：</strong>先熟悉图形界面，再逐步学习命令行</p> <h3 id=_1>打开终端（命令行）<a class=headerlink href=#_1 title="Permanent link">&para;</a></h3> <p><strong>不同系统的打开方式：</strong> - <strong>Ubuntu GNOME</strong>: <code>Ctrl + Alt + T</code> - <strong>Windows WSL</strong>: 在开始菜单搜索"Ubuntu" - <strong>macOS</strong>: 使用Terminal或iTerm2</p> <p><strong>看到这个界面就对了：</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span>
-<span class=normal><a href=#__codelineno-2-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a>username@hostname:~$
-</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a><span class=c1># 用户名@主机名:当前目录$</span>
-</span></code></pre></div></td></tr></table></div></p> <h2 id=linux_6>📁 Linux文件系统：理解目录结构<a class=headerlink href=#linux_6 title="Permanent link">&para;</a></h2> <h3 id=linux_7>Linux目录树结构<a class=headerlink href=#linux_7 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    style C fill:#c8e6c9</code></pre> <p><strong>初学者建议：</strong>先熟悉图形界面，再逐步学习命令行</p> <h3 id=_1>打开终端（命令行）<a class=headerlink href=#_1 title="Permanent link">&para;</a></h3> <p><strong>不同系统的打开方式：</strong> - <strong>Ubuntu GNOME</strong>: <code>Ctrl + Alt + T</code> - <strong>Windows WSL</strong>: 在开始菜单搜索"Ubuntu" - <strong>macOS</strong>: 使用Terminal或iTerm2</p> <p><strong>看到这个界面就对了：</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-2-1>username@hostname:~$
+</span><span id=__span-2-2><span class=c1># 用户名@主机名:当前目录$</span>
+</span></code></pre></div></p> <h2 id=linux_6>📁 Linux文件系统：理解目录结构<a class=headerlink href=#linux_6 title="Permanent link">&para;</a></h2> <h3 id=linux_7>Linux目录树结构<a class=headerlink href=#linux_7 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
     A[/ 根目录] --&gt; B[/bin 基本命令]
     A --&gt; C[/etc 配置文件]
     A --&gt; D[/home 用户目录]
@@ -82,422 +61,221 @@
     D1 --&gt; D4[桌面]
 
     style A fill:#f3e5f5
-    style D fill:#e1f5fe</code></pre> <h3 id=_2>常用目录说明<a class=headerlink href=#_2 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>目录</th> <th>用途</th> <th>重要文件示例</th> </tr> </thead> <tbody> <tr> <td><code>/home/用户名</code></td> <td>你的个人文件夹</td> <td>文档、下载、桌面</td> </tr> <tr> <td><code>/etc</code></td> <td>系统配置文件</td> <td><code>passwd</code>, <code>hosts</code>, <code>nginx.conf</code></td> </tr> <tr> <td><code>/var</code></td> <td>可变数据文件</td> <td>日志、数据库、邮件</td> </tr> <tr> <td><code>/tmp</code></td> <td>临时文件</td> <td>自动清理，不要放重要数据</td> </tr> <tr> <td><code>/usr</code></td> <td>用户程序</td> <td><code>bin</code>, <code>lib</code>, <code>share</code></td> </tr> </tbody> </table> <h2 id=_3>🎯 核心命令：从零开始学起<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <h3 id=_4>第一组必须掌握的命令<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1> 1</a></span>
-<span class=normal><a href=#__codelineno-3-2> 2</a></span>
-<span class=normal><a href=#__codelineno-3-3> 3</a></span>
-<span class=normal><a href=#__codelineno-3-4> 4</a></span>
-<span class=normal><a href=#__codelineno-3-5> 5</a></span>
-<span class=normal><a href=#__codelineno-3-6> 6</a></span>
-<span class=normal><a href=#__codelineno-3-7> 7</a></span>
-<span class=normal><a href=#__codelineno-3-8> 8</a></span>
-<span class=normal><a href=#__codelineno-3-9> 9</a></span>
-<span class=normal><a href=#__codelineno-3-10>10</a></span>
-<span class=normal><a href=#__codelineno-3-11>11</a></span>
-<span class=normal><a href=#__codelineno-3-12>12</a></span>
-<span class=normal><a href=#__codelineno-3-13>13</a></span>
-<span class=normal><a href=#__codelineno-3-14>14</a></span>
-<span class=normal><a href=#__codelineno-3-15>15</a></span>
-<span class=normal><a href=#__codelineno-3-16>16</a></span>
-<span class=normal><a href=#__codelineno-3-17>17</a></span>
-<span class=normal><a href=#__codelineno-3-18>18</a></span>
-<span class=normal><a href=#__codelineno-3-19>19</a></span>
-<span class=normal><a href=#__codelineno-3-20>20</a></span>
-<span class=normal><a href=#__codelineno-3-21>21</a></span>
-<span class=normal><a href=#__codelineno-3-22>22</a></span>
-<span class=normal><a href=#__codelineno-3-23>23</a></span>
-<span class=normal><a href=#__codelineno-3-24>24</a></span>
-<span class=normal><a href=#__codelineno-3-25>25</a></span>
-<span class=normal><a href=#__codelineno-3-26>26</a></span>
-<span class=normal><a href=#__codelineno-3-27>27</a></span>
-<span class=normal><a href=#__codelineno-3-28>28</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=c1># 1. 查看当前目录</span>
-</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a><span class=nb>pwd</span>
-</span><span id=__span-3-3><a id=__codelineno-3-3 name=__codelineno-3-3></a><span class=c1># 输出: /home/username</span>
-</span><span id=__span-3-4><a id=__codelineno-3-4 name=__codelineno-3-4></a>
-</span><span id=__span-3-5><a id=__codelineno-3-5 name=__codelineno-3-5></a><span class=c1># 2. 查看目录内容</span>
-</span><span id=__span-3-6><a id=__codelineno-3-6 name=__codelineno-3-6></a>ls
-</span><span id=__span-3-7><a id=__codelineno-3-7 name=__codelineno-3-7></a>ls<span class=w> </span>-l<span class=w>    </span><span class=c1># 详细列表</span>
-</span><span id=__span-3-8><a id=__codelineno-3-8 name=__codelineno-3-8></a>ls<span class=w> </span>-a<span class=w>    </span><span class=c1># 显示隐藏文件</span>
-</span><span id=__span-3-9><a id=__codelineno-3-9 name=__codelineno-3-9></a>
-</span><span id=__span-3-10><a id=__codelineno-3-10 name=__codelineno-3-10></a><span class=c1># 3. 切换目录</span>
-</span><span id=__span-3-11><a id=__codelineno-3-11 name=__codelineno-3-11></a><span class=nb>cd</span><span class=w> </span>/home/username<span class=w>     </span><span class=c1># 绝对路径</span>
-</span><span id=__span-3-12><a id=__codelineno-3-12 name=__codelineno-3-12></a><span class=nb>cd</span><span class=w> </span>Documents<span class=w>          </span><span class=c1># 相对路径</span>
-</span><span id=__span-3-13><a id=__codelineno-3-13 name=__codelineno-3-13></a><span class=nb>cd</span><span class=w> </span>..<span class=w>                 </span><span class=c1># 返回上级目录</span>
-</span><span id=__span-3-14><a id=__codelineno-3-14 name=__codelineno-3-14></a><span class=nb>cd</span><span class=w> </span>~<span class=w>                  </span><span class=c1># 返回家目录</span>
-</span><span id=__span-3-15><a id=__codelineno-3-15 name=__codelineno-3-15></a><span class=nb>cd</span><span class=w> </span>-<span class=w>                  </span><span class=c1># 返回上次目录</span>
-</span><span id=__span-3-16><a id=__codelineno-3-16 name=__codelineno-3-16></a>
-</span><span id=__span-3-17><a id=__codelineno-3-17 name=__codelineno-3-17></a><span class=c1># 4. 创建目录</span>
-</span><span id=__span-3-18><a id=__codelineno-3-18 name=__codelineno-3-18></a>mkdir<span class=w> </span>new_folder
-</span><span id=__span-3-19><a id=__codelineno-3-19 name=__codelineno-3-19></a>mkdir<span class=w> </span>-p<span class=w> </span>path/to/nested/folder<span class=w>  </span><span class=c1># 创建多级目录</span>
-</span><span id=__span-3-20><a id=__codelineno-3-20 name=__codelineno-3-20></a>
-</span><span id=__span-3-21><a id=__codelineno-3-21 name=__codelineno-3-21></a><span class=c1># 5. 创建文件</span>
-</span><span id=__span-3-22><a id=__codelineno-3-22 name=__codelineno-3-22></a>touch<span class=w> </span>new_file.txt
-</span><span id=__span-3-23><a id=__codelineno-3-23 name=__codelineno-3-23></a>
-</span><span id=__span-3-24><a id=__codelineno-3-24 name=__codelineno-3-24></a><span class=c1># 6. 查看文件内容</span>
-</span><span id=__span-3-25><a id=__codelineno-3-25 name=__codelineno-3-25></a>cat<span class=w> </span>file.txt<span class=w>          </span><span class=c1># 显示全部内容</span>
-</span><span id=__span-3-26><a id=__codelineno-3-26 name=__codelineno-3-26></a>less<span class=w> </span>file.txt<span class=w>         </span><span class=c1># 分页查看</span>
-</span><span id=__span-3-27><a id=__codelineno-3-27 name=__codelineno-3-27></a>head<span class=w> </span>-10<span class=w> </span>file.txt<span class=w>     </span><span class=c1># 查看前10行</span>
-</span><span id=__span-3-28><a id=__codelineno-3-28 name=__codelineno-3-28></a>tail<span class=w> </span>-10<span class=w> </span>file.txt<span class=w>     </span><span class=c1># 查看后10行</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=2>常见错误2：权限不够<a class=headerlink href=#2 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1> 1</a></span>
-<span class=normal><a href=#__codelineno-4-2> 2</a></span>
-<span class=normal><a href=#__codelineno-4-3> 3</a></span>
-<span class=normal><a href=#__codelineno-4-4> 4</a></span>
-<span class=normal><a href=#__codelineno-4-5> 5</a></span>
-<span class=normal><a href=#__codelineno-4-6> 6</a></span>
-<span class=normal><a href=#__codelineno-4-7> 7</a></span>
-<span class=normal><a href=#__codelineno-4-8> 8</a></span>
-<span class=normal><a href=#__codelineno-4-9> 9</a></span>
-<span class=normal><a href=#__codelineno-4-10>10</a></span>
-<span class=normal><a href=#__codelineno-4-11>11</a></span>
-<span class=normal><a href=#__codelineno-4-12>12</a></span>
-<span class=normal><a href=#__codelineno-4-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a><span class=c1># ❌ 错误：Permission denied</span>
-</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a>mkdir<span class=w> </span>/usr/local/myapp
-</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a><span class=c1># mkdir: cannot create directory &#39;/usr/local/myapp&#39;: Permission denied</span>
-</span><span id=__span-4-4><a id=__codelineno-4-4 name=__codelineno-4-4></a>
-</span><span id=__span-4-5><a id=__codelineno-4-5 name=__codelineno-4-5></a><span class=c1># ✅ 解决方法1：使用sudo（管理员权限）</span>
-</span><span id=__span-4-6><a id=__codelineno-4-6 name=__codelineno-4-6></a>sudo<span class=w> </span>mkdir<span class=w> </span>/usr/local/myapp
-</span><span id=__span-4-7><a id=__codelineno-4-7 name=__codelineno-4-7></a><span class=c1># 输入密码后即可执行</span>
-</span><span id=__span-4-8><a id=__codelineno-4-8 name=__codelineno-4-8></a>
-</span><span id=__span-4-9><a id=__codelineno-4-9 name=__codelineno-4-9></a><span class=c1># ✅ 解决方法2：在用户目录操作</span>
-</span><span id=__span-4-10><a id=__codelineno-4-10 name=__codelineno-4-10></a>mkdir<span class=w> </span>~/myapp<span class=w>         </span><span class=c1># 在家目录创建，无需权限</span>
-</span><span id=__span-4-11><a id=__codelineno-4-11 name=__codelineno-4-11></a>
-</span><span id=__span-4-12><a id=__codelineno-4-12 name=__codelineno-4-12></a><span class=c1># ✅ 解决方法3：修改权限（高级）</span>
-</span><span id=__span-4-13><a id=__codelineno-4-13 name=__codelineno-4-13></a>sudo<span class=w> </span>chmod<span class=w> </span><span class=m>755</span><span class=w> </span>/some/directory
-</span></code></pre></div></td></tr></table></div> <p><strong>权限小知识：</strong> - <code>rwx</code> = 读(read)写(write)执行(execute) - 三个权限组：用户(user)、组(group)、其他(other) - <code>755</code> = 用户有全部权限，其他用户只有读和执行权限</p> <h2 id=_5>🔄 文件操作：复制、移动、删除<a class=headerlink href=#_5 title="Permanent link">&para;</a></h2> <h3 id=_6>文件操作命令大全<a class=headerlink href=#_6 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1> 1</a></span>
-<span class=normal><a href=#__codelineno-5-2> 2</a></span>
-<span class=normal><a href=#__codelineno-5-3> 3</a></span>
-<span class=normal><a href=#__codelineno-5-4> 4</a></span>
-<span class=normal><a href=#__codelineno-5-5> 5</a></span>
-<span class=normal><a href=#__codelineno-5-6> 6</a></span>
-<span class=normal><a href=#__codelineno-5-7> 7</a></span>
-<span class=normal><a href=#__codelineno-5-8> 8</a></span>
-<span class=normal><a href=#__codelineno-5-9> 9</a></span>
-<span class=normal><a href=#__codelineno-5-10>10</a></span>
-<span class=normal><a href=#__codelineno-5-11>11</a></span>
-<span class=normal><a href=#__codelineno-5-12>12</a></span>
-<span class=normal><a href=#__codelineno-5-13>13</a></span>
-<span class=normal><a href=#__codelineno-5-14>14</a></span>
-<span class=normal><a href=#__codelineno-5-15>15</a></span>
-<span class=normal><a href=#__codelineno-5-16>16</a></span>
-<span class=normal><a href=#__codelineno-5-17>17</a></span>
-<span class=normal><a href=#__codelineno-5-18>18</a></span>
-<span class=normal><a href=#__codelineno-5-19>19</a></span>
-<span class=normal><a href=#__codelineno-5-20>20</a></span>
-<span class=normal><a href=#__codelineno-5-21>21</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=c1># 1. 复制文件</span>
-</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a>cp<span class=w> </span>file.txt<span class=w> </span>file_backup.txt
-</span><span id=__span-5-3><a id=__codelineno-5-3 name=__codelineno-5-3></a>cp<span class=w> </span>file.txt<span class=w> </span>/path/to/destination/
-</span><span id=__span-5-4><a id=__codelineno-5-4 name=__codelineno-5-4></a>cp<span class=w> </span>-r<span class=w> </span>folder/<span class=w> </span>new_folder/<span class=w>    </span><span class=c1># 复制目录</span>
-</span><span id=__span-5-5><a id=__codelineno-5-5 name=__codelineno-5-5></a>
-</span><span id=__span-5-6><a id=__codelineno-5-6 name=__codelineno-5-6></a><span class=c1># 2. 移动/重命名文件</span>
-</span><span id=__span-5-7><a id=__codelineno-5-7 name=__codelineno-5-7></a>mv<span class=w> </span>old_name.txt<span class=w> </span>new_name.txt
-</span><span id=__span-5-8><a id=__codelineno-5-8 name=__codelineno-5-8></a>mv<span class=w> </span>file.txt<span class=w> </span>/path/to/destination/
-</span><span id=__span-5-9><a id=__codelineno-5-9 name=__codelineno-5-9></a>
-</span><span id=__span-5-10><a id=__codelineno-5-10 name=__codelineno-5-10></a><span class=c1># 3. 删除文件</span>
-</span><span id=__span-5-11><a id=__codelineno-5-11 name=__codelineno-5-11></a>rm<span class=w> </span>file.txt
-</span><span id=__span-5-12><a id=__codelineno-5-12 name=__codelineno-5-12></a>rm<span class=w> </span>-r<span class=w> </span>folder/<span class=w>                </span><span class=c1># 删除目录</span>
-</span><span id=__span-5-13><a id=__codelineno-5-13 name=__codelineno-5-13></a>rm<span class=w> </span>-rf<span class=w> </span>folder/<span class=w>               </span><span class=c1># 强制删除（危险！）</span>
-</span><span id=__span-5-14><a id=__codelineno-5-14 name=__codelineno-5-14></a>
-</span><span id=__span-5-15><a id=__codelineno-5-15 name=__codelineno-5-15></a><span class=c1># 4. 查找文件</span>
-</span><span id=__span-5-16><a id=__codelineno-5-16 name=__codelineno-5-16></a>find<span class=w> </span>/home<span class=w> </span>-name<span class=w> </span><span class=s2>&quot;*.txt&quot;</span><span class=w>     </span><span class=c1># 按名称查找</span>
-</span><span id=__span-5-17><a id=__codelineno-5-17 name=__codelineno-5-17></a>find<span class=w> </span>.<span class=w> </span>-type<span class=w> </span>f<span class=w> </span>-size<span class=w> </span>+1M<span class=w>     </span><span class=c1># 查找大于1MB的文件</span>
-</span><span id=__span-5-18><a id=__codelineno-5-18 name=__codelineno-5-18></a>
-</span><span id=__span-5-19><a id=__codelineno-5-19 name=__codelineno-5-19></a><span class=c1># 5. 文件统计</span>
-</span><span id=__span-5-20><a id=__codelineno-5-20 name=__codelineno-5-20></a>wc<span class=w> </span>file.txt<span class=w>                  </span><span class=c1># 行数、词数、字节数</span>
-</span><span id=__span-5-21><a id=__codelineno-5-21 name=__codelineno-5-21></a>wc<span class=w> </span>-l<span class=w> </span>file.txt<span class=w>               </span><span class=c1># 只统计行数</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=3>常见错误3：误删重要文件<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1> 1</a></span>
-<span class=normal><a href=#__codelineno-6-2> 2</a></span>
-<span class=normal><a href=#__codelineno-6-3> 3</a></span>
-<span class=normal><a href=#__codelineno-6-4> 4</a></span>
-<span class=normal><a href=#__codelineno-6-5> 5</a></span>
-<span class=normal><a href=#__codelineno-6-6> 6</a></span>
-<span class=normal><a href=#__codelineno-6-7> 7</a></span>
-<span class=normal><a href=#__codelineno-6-8> 8</a></span>
-<span class=normal><a href=#__codelineno-6-9> 9</a></span>
-<span class=normal><a href=#__codelineno-6-10>10</a></span>
-<span class=normal><a href=#__codelineno-6-11>11</a></span>
-<span class=normal><a href=#__codelineno-6-12>12</a></span>
-<span class=normal><a href=#__codelineno-6-13>13</a></span>
-<span class=normal><a href=#__codelineno-6-14>14</a></span>
-<span class=normal><a href=#__codelineno-6-15>15</a></span>
-<span class=normal><a href=#__codelineno-6-16>16</a></span>
-<span class=normal><a href=#__codelineno-6-17>17</a></span>
-<span class=normal><a href=#__codelineno-6-18>18</a></span>
-<span class=normal><a href=#__codelineno-6-19>19</a></span>
-<span class=normal><a href=#__codelineno-6-20>20</a></span>
-<span class=normal><a href=#__codelineno-6-21>21</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a><span class=c1># ❌ 致命错误：rm -rf / （千万不要尝试！）</span>
-</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a><span class=c1># 这会删除整个系统！</span>
-</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a>
-</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a><span class=c1># ✅ 安全删除习惯：</span>
-</span><span id=__span-6-5><a id=__codelineno-6-5 name=__codelineno-6-5></a><span class=c1># 1. 删除前先确认</span>
-</span><span id=__span-6-6><a id=__codelineno-6-6 name=__codelineno-6-6></a>ls<span class=w> </span>folder/<span class=w>              </span><span class=c1># 先查看内容</span>
-</span><span id=__span-6-7><a id=__codelineno-6-7 name=__codelineno-6-7></a>rm<span class=w> </span>-r<span class=w> </span>folder/<span class=w>           </span><span class=c1># 再删除</span>
-</span><span id=__span-6-8><a id=__codelineno-6-8 name=__codelineno-6-8></a>
-</span><span id=__span-6-9><a id=__codelineno-6-9 name=__codelineno-6-9></a><span class=c1># 2. 使用-i参数交互确认</span>
-</span><span id=__span-6-10><a id=__codelineno-6-10 name=__codelineno-6-10></a>rm<span class=w> </span>-i<span class=w> </span>file.txt<span class=w>          </span><span class=c1># 删除前会询问</span>
-</span><span id=__span-6-11><a id=__codelineno-6-11 name=__codelineno-6-11></a><span class=c1># rm: remove regular file &#39;file.txt&#39;? y/n</span>
-</span><span id=__span-6-12><a id=__codelineno-6-12 name=__codelineno-6-12></a>
-</span><span id=__span-6-13><a id=__codelineno-6-13 name=__codelineno-6-13></a><span class=c1># 3. 重要文件先备份</span>
-</span><span id=__span-6-14><a id=__codelineno-6-14 name=__codelineno-6-14></a>cp<span class=w> </span>important.txt<span class=w> </span>important_backup.txt
-</span><span id=__span-6-15><a id=__codelineno-6-15 name=__codelineno-6-15></a>rm<span class=w> </span>important.txt
-</span><span id=__span-6-16><a id=__codelineno-6-16 name=__codelineno-6-16></a>
-</span><span id=__span-6-17><a id=__codelineno-6-17 name=__codelineno-6-17></a><span class=c1># 4. 使用trash-cli工具（推荐）</span>
-</span><span id=__span-6-18><a id=__codelineno-6-18 name=__codelineno-6-18></a>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>trash-cli
-</span><span id=__span-6-19><a id=__codelineno-6-19 name=__codelineno-6-19></a>trash<span class=w> </span>file.txt<span class=w>          </span><span class=c1># 移到回收站</span>
-</span><span id=__span-6-20><a id=__codelineno-6-20 name=__codelineno-6-20></a>trash-list<span class=w>              </span><span class=c1># 查看回收站</span>
-</span><span id=__span-6-21><a id=__codelineno-6-21 name=__codelineno-6-21></a>trash-restore<span class=w>           </span><span class=c1># 恢复文件</span>
-</span></code></pre></div></td></tr></table></div> <h2 id=linux_8>📊 系统信息：了解你的Linux<a class=headerlink href=#linux_8 title="Permanent link">&para;</a></h2> <h3 id=_7>查看系统状态命令<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1> 1</a></span>
-<span class=normal><a href=#__codelineno-7-2> 2</a></span>
-<span class=normal><a href=#__codelineno-7-3> 3</a></span>
-<span class=normal><a href=#__codelineno-7-4> 4</a></span>
-<span class=normal><a href=#__codelineno-7-5> 5</a></span>
-<span class=normal><a href=#__codelineno-7-6> 6</a></span>
-<span class=normal><a href=#__codelineno-7-7> 7</a></span>
-<span class=normal><a href=#__codelineno-7-8> 8</a></span>
-<span class=normal><a href=#__codelineno-7-9> 9</a></span>
-<span class=normal><a href=#__codelineno-7-10>10</a></span>
-<span class=normal><a href=#__codelineno-7-11>11</a></span>
-<span class=normal><a href=#__codelineno-7-12>12</a></span>
-<span class=normal><a href=#__codelineno-7-13>13</a></span>
-<span class=normal><a href=#__codelineno-7-14>14</a></span>
-<span class=normal><a href=#__codelineno-7-15>15</a></span>
-<span class=normal><a href=#__codelineno-7-16>16</a></span>
-<span class=normal><a href=#__codelineno-7-17>17</a></span>
-<span class=normal><a href=#__codelineno-7-18>18</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=c1># 1. 系统信息</span>
-</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a>uname<span class=w> </span>-a<span class=w>                </span><span class=c1># 内核版本</span>
-</span><span id=__span-7-3><a id=__codelineno-7-3 name=__codelineno-7-3></a>cat<span class=w> </span>/etc/os-release<span class=w>     </span><span class=c1># 发行版信息</span>
-</span><span id=__span-7-4><a id=__codelineno-7-4 name=__codelineno-7-4></a>
-</span><span id=__span-7-5><a id=__codelineno-7-5 name=__codelineno-7-5></a><span class=c1># 2. 硬件信息</span>
-</span><span id=__span-7-6><a id=__codelineno-7-6 name=__codelineno-7-6></a>free<span class=w> </span>-h<span class=w>                </span><span class=c1># 内存使用情况</span>
-</span><span id=__span-7-7><a id=__codelineno-7-7 name=__codelineno-7-7></a>df<span class=w> </span>-h<span class=w>                  </span><span class=c1># 磁盘空间使用</span>
-</span><span id=__span-7-8><a id=__codelineno-7-8 name=__codelineno-7-8></a>lscpu<span class=w>                  </span><span class=c1># CPU信息</span>
-</span><span id=__span-7-9><a id=__codelineno-7-9 name=__codelineno-7-9></a>
-</span><span id=__span-7-10><a id=__codelineno-7-10 name=__codelineno-7-10></a><span class=c1># 3. 进程管理</span>
-</span><span id=__span-7-11><a id=__codelineno-7-11 name=__codelineno-7-11></a>ps<span class=w> </span>aux<span class=w>                 </span><span class=c1># 查看所有进程</span>
-</span><span id=__span-7-12><a id=__codelineno-7-12 name=__codelineno-7-12></a>top<span class=w>                    </span><span class=c1># 实时进程监控</span>
-</span><span id=__span-7-13><a id=__codelineno-7-13 name=__codelineno-7-13></a>htop<span class=w>                   </span><span class=c1># 增强版top（需安装）</span>
-</span><span id=__span-7-14><a id=__codelineno-7-14 name=__codelineno-7-14></a>
-</span><span id=__span-7-15><a id=__codelineno-7-15 name=__codelineno-7-15></a><span class=c1># 4. 网络信息</span>
-</span><span id=__span-7-16><a id=__codelineno-7-16 name=__codelineno-7-16></a>ifconfig<span class=w>               </span><span class=c1># 网络接口信息</span>
-</span><span id=__span-7-17><a id=__codelineno-7-17 name=__codelineno-7-17></a>ping<span class=w> </span>google.com<span class=w>        </span><span class=c1># 测试网络连接</span>
-</span><span id=__span-7-18><a id=__codelineno-7-18 name=__codelineno-7-18></a>netstat<span class=w> </span>-tulpn<span class=w>         </span><span class=c1># 查看端口监听</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=4>常见错误4：命令找不到<a class=headerlink href=#4 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1> 1</a></span>
-<span class=normal><a href=#__codelineno-8-2> 2</a></span>
-<span class=normal><a href=#__codelineno-8-3> 3</a></span>
-<span class=normal><a href=#__codelineno-8-4> 4</a></span>
-<span class=normal><a href=#__codelineno-8-5> 5</a></span>
-<span class=normal><a href=#__codelineno-8-6> 6</a></span>
-<span class=normal><a href=#__codelineno-8-7> 7</a></span>
-<span class=normal><a href=#__codelineno-8-8> 8</a></span>
-<span class=normal><a href=#__codelineno-8-9> 9</a></span>
-<span class=normal><a href=#__codelineno-8-10>10</a></span>
-<span class=normal><a href=#__codelineno-8-11>11</a></span>
-<span class=normal><a href=#__codelineno-8-12>12</a></span>
-<span class=normal><a href=#__codelineno-8-13>13</a></span>
-<span class=normal><a href=#__codelineno-8-14>14</a></span>
-<span class=normal><a href=#__codelineno-8-15>15</a></span>
-<span class=normal><a href=#__codelineno-8-16>16</a></span>
-<span class=normal><a href=#__codelineno-8-17>17</a></span>
-<span class=normal><a href=#__codelineno-8-18>18</a></span>
-<span class=normal><a href=#__codelineno-8-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a><span class=c1># ❌ 错误：command not found</span>
-</span><span id=__span-8-2><a id=__codelineno-8-2 name=__codelineno-8-2></a>top
-</span><span id=__span-8-3><a id=__codelineno-8-3 name=__codelineno-8-3></a><span class=c1># bash: top: command not found</span>
-</span><span id=__span-8-4><a id=__codelineno-8-4 name=__codelineno-8-4></a>
-</span><span id=__span-8-5><a id=__codelineno-8-5 name=__codelineno-8-5></a><span class=c1># ✅ 解决方法1：安装缺失的命令</span>
-</span><span id=__span-8-6><a id=__codelineno-8-6 name=__codelineno-8-6></a><span class=c1># Ubuntu/Debian</span>
-</span><span id=__span-8-7><a id=__codelineno-8-7 name=__codelineno-8-7></a>sudo<span class=w> </span>apt<span class=w> </span>update
-</span><span id=__span-8-8><a id=__codelineno-8-8 name=__codelineno-8-8></a>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>procps<span class=w>  </span><span class=c1># 安装top命令</span>
-</span><span id=__span-8-9><a id=__codelineno-8-9 name=__codelineno-8-9></a>
-</span><span id=__span-8-10><a id=__codelineno-8-10 name=__codelineno-8-10></a><span class=c1># CentOS/RHEL</span>
-</span><span id=__span-8-11><a id=__codelineno-8-11 name=__codelineno-8-11></a>sudo<span class=w> </span>yum<span class=w> </span>install<span class=w> </span>procps-ng
-</span><span id=__span-8-12><a id=__codelineno-8-12 name=__codelineno-8-12></a>
-</span><span id=__span-8-13><a id=__codelineno-8-13 name=__codelineno-8-13></a><span class=c1># ✅ 解决方法2：检查命令路径</span>
-</span><span id=__span-8-14><a id=__codelineno-8-14 name=__codelineno-8-14></a>which<span class=w> </span>top<span class=w>               </span><span class=c1># 查看命令位置</span>
-</span><span id=__span-8-15><a id=__codelineno-8-15 name=__codelineno-8-15></a>whereis<span class=w> </span>top<span class=w>             </span><span class=c1># 查找命令相关文件</span>
-</span><span id=__span-8-16><a id=__codelineno-8-16 name=__codelineno-8-16></a>
-</span><span id=__span-8-17><a id=__codelineno-8-17 name=__codelineno-8-17></a><span class=c1># ✅ 解决方法3：更新PATH环境变量</span>
-</span><span id=__span-8-18><a id=__codelineno-8-18 name=__codelineno-8-18></a><span class=nb>echo</span><span class=w> </span><span class=nv>$PATH</span><span class=w>              </span><span class=c1># 查看当前PATH</span>
-</span><span id=__span-8-19><a id=__codelineno-8-19 name=__codelineno-8-19></a><span class=nb>export</span><span class=w> </span><span class=nv>PATH</span><span class=o>=</span><span class=nv>$PATH</span>:/usr/local/bin<span class=w>  </span><span class=c1># 添加新路径</span>
-</span></code></pre></div></td></tr></table></div> <h2 id=_8>🛠️ 软件管理：安装和更新<a class=headerlink href=#_8 title="Permanent link">&para;</a></h2> <h3 id=_9>包管理器使用<a class=headerlink href=#_9 title="Permanent link">&para;</a></h3> <p><strong>Ubuntu/Debian (apt)：</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1> 1</a></span>
-<span class=normal><a href=#__codelineno-9-2> 2</a></span>
-<span class=normal><a href=#__codelineno-9-3> 3</a></span>
-<span class=normal><a href=#__codelineno-9-4> 4</a></span>
-<span class=normal><a href=#__codelineno-9-5> 5</a></span>
-<span class=normal><a href=#__codelineno-9-6> 6</a></span>
-<span class=normal><a href=#__codelineno-9-7> 7</a></span>
-<span class=normal><a href=#__codelineno-9-8> 8</a></span>
-<span class=normal><a href=#__codelineno-9-9> 9</a></span>
-<span class=normal><a href=#__codelineno-9-10>10</a></span>
-<span class=normal><a href=#__codelineno-9-11>11</a></span>
-<span class=normal><a href=#__codelineno-9-12>12</a></span>
-<span class=normal><a href=#__codelineno-9-13>13</a></span>
-<span class=normal><a href=#__codelineno-9-14>14</a></span>
-<span class=normal><a href=#__codelineno-9-15>15</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a><span class=c1># 更新软件包列表</span>
-</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a>sudo<span class=w> </span>apt<span class=w> </span>update
-</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a>
-</span><span id=__span-9-4><a id=__codelineno-9-4 name=__codelineno-9-4></a><span class=c1># 升级已安装的软件包</span>
-</span><span id=__span-9-5><a id=__codelineno-9-5 name=__codelineno-9-5></a>sudo<span class=w> </span>apt<span class=w> </span>upgrade
-</span><span id=__span-9-6><a id=__codelineno-9-6 name=__codelineno-9-6></a>
-</span><span id=__span-9-7><a id=__codelineno-9-7 name=__codelineno-9-7></a><span class=c1># 安装新软件</span>
-</span><span id=__span-9-8><a id=__codelineno-9-8 name=__codelineno-9-8></a>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>vim<span class=w> </span>git<span class=w> </span>htop
-</span><span id=__span-9-9><a id=__codelineno-9-9 name=__codelineno-9-9></a>
-</span><span id=__span-9-10><a id=__codelineno-9-10 name=__codelineno-9-10></a><span class=c1># 搜索软件包</span>
-</span><span id=__span-9-11><a id=__codelineno-9-11 name=__codelineno-9-11></a>apt<span class=w> </span>search<span class=w> </span><span class=s2>&quot;web browser&quot;</span>
-</span><span id=__span-9-12><a id=__codelineno-9-12 name=__codelineno-9-12></a>
-</span><span id=__span-9-13><a id=__codelineno-9-13 name=__codelineno-9-13></a><span class=c1># 卸载软件</span>
-</span><span id=__span-9-14><a id=__codelineno-9-14 name=__codelineno-9-14></a>sudo<span class=w> </span>apt<span class=w> </span>remove<span class=w> </span>vim
-</span><span id=__span-9-15><a id=__codelineno-9-15 name=__codelineno-9-15></a>sudo<span class=w> </span>apt<span class=w> </span>autoremove<span class=w>    </span><span class=c1># 清理依赖</span>
-</span></code></pre></div></td></tr></table></div></p> <p><strong>CentOS/RHEL (yum/dnf)：</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1>1</a></span>
-<span class=normal><a href=#__codelineno-10-2>2</a></span>
-<span class=normal><a href=#__codelineno-10-3>3</a></span>
-<span class=normal><a href=#__codelineno-10-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a><span class=c1># 安装软件</span>
-</span><span id=__span-10-2><a id=__codelineno-10-2 name=__codelineno-10-2></a>sudo<span class=w> </span>yum<span class=w> </span>install<span class=w> </span>vim
-</span><span id=__span-10-3><a id=__codelineno-10-3 name=__codelineno-10-3></a><span class=c1># 或使用dnf（新版）</span>
-</span><span id=__span-10-4><a id=__codelineno-10-4 name=__codelineno-10-4></a>sudo<span class=w> </span>dnf<span class=w> </span>install<span class=w> </span>vim
-</span></code></pre></div></td></tr></table></div></p> <h3 id=5>常见错误5：依赖冲突<a class=headerlink href=#5 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1> 1</a></span>
-<span class=normal><a href=#__codelineno-11-2> 2</a></span>
-<span class=normal><a href=#__codelineno-11-3> 3</a></span>
-<span class=normal><a href=#__codelineno-11-4> 4</a></span>
-<span class=normal><a href=#__codelineno-11-5> 5</a></span>
-<span class=normal><a href=#__codelineno-11-6> 6</a></span>
-<span class=normal><a href=#__codelineno-11-7> 7</a></span>
-<span class=normal><a href=#__codelineno-11-8> 8</a></span>
-<span class=normal><a href=#__codelineno-11-9> 9</a></span>
-<span class=normal><a href=#__codelineno-11-10>10</a></span>
-<span class=normal><a href=#__codelineno-11-11>11</a></span>
-<span class=normal><a href=#__codelineno-11-12>12</a></span>
-<span class=normal><a href=#__codelineno-11-13>13</a></span>
-<span class=normal><a href=#__codelineno-11-14>14</a></span>
-<span class=normal><a href=#__codelineno-11-15>15</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a><span class=c1># ❌ 错误：依赖关系问题</span>
-</span><span id=__span-11-2><a id=__codelineno-11-2 name=__codelineno-11-2></a>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>packageA
-</span><span id=__span-11-3><a id=__codelineno-11-3 name=__codelineno-11-3></a><span class=c1># Some packages could not be installed...</span>
-</span><span id=__span-11-4><a id=__codelineno-11-4 name=__codelineno-11-4></a><span class=c1># Depends: packageB but it is not going to be installed</span>
-</span><span id=__span-11-5><a id=__codelineno-11-5 name=__codelineno-11-5></a>
-</span><span id=__span-11-6><a id=__codelineno-11-6 name=__codelineno-11-6></a><span class=c1># ✅ 解决方法1：修复依赖</span>
-</span><span id=__span-11-7><a id=__codelineno-11-7 name=__codelineno-11-7></a>sudo<span class=w> </span>apt<span class=w> </span>--fix-broken<span class=w> </span>install
-</span><span id=__span-11-8><a id=__codelineno-11-8 name=__codelineno-11-8></a>
-</span><span id=__span-11-9><a id=__codelineno-11-9 name=__codelineno-11-9></a><span class=c1># ✅ 解决方法2：更新源</span>
-</span><span id=__span-11-10><a id=__codelineno-11-10 name=__codelineno-11-10></a>sudo<span class=w> </span>apt<span class=w> </span>update
-</span><span id=__span-11-11><a id=__codelineno-11-11 name=__codelineno-11-11></a>sudo<span class=w> </span>apt<span class=w> </span>upgrade
-</span><span id=__span-11-12><a id=__codelineno-11-12 name=__codelineno-11-12></a>
-</span><span id=__span-11-13><a id=__codelineno-11-13 name=__codelineno-11-13></a><span class=c1># ✅ 解决方法3：使用 aptitude（智能解决依赖）</span>
-</span><span id=__span-11-14><a id=__codelineno-11-14 name=__codelineno-11-14></a>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>aptitude
-</span><span id=__span-11-15><a id=__codelineno-11-15 name=__codelineno-11-15></a>sudo<span class=w> </span>aptitude<span class=w> </span>install<span class=w> </span>packageA
-</span></code></pre></div></td></tr></table></div> <h2 id=shell>📜 Shell脚本编程：自动化你的工作<a class=headerlink href=#shell title="Permanent link">&para;</a></h2> <h3 id=shell_1>第一个Shell脚本<a class=headerlink href=#shell_1 title="Permanent link">&para;</a></h3> <p><strong>创建脚本文件：</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1> 1</a></span>
-<span class=normal><a href=#__codelineno-12-2> 2</a></span>
-<span class=normal><a href=#__codelineno-12-3> 3</a></span>
-<span class=normal><a href=#__codelineno-12-4> 4</a></span>
-<span class=normal><a href=#__codelineno-12-5> 5</a></span>
-<span class=normal><a href=#__codelineno-12-6> 6</a></span>
-<span class=normal><a href=#__codelineno-12-7> 7</a></span>
-<span class=normal><a href=#__codelineno-12-8> 8</a></span>
-<span class=normal><a href=#__codelineno-12-9> 9</a></span>
-<span class=normal><a href=#__codelineno-12-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><a id=__codelineno-12-1 name=__codelineno-12-1></a><span class=c1># 创建脚本文件</span>
-</span><span id=__span-12-2><a id=__codelineno-12-2 name=__codelineno-12-2></a>nano<span class=w> </span>hello.sh
-</span><span id=__span-12-3><a id=__codelineno-12-3 name=__codelineno-12-3></a>
-</span><span id=__span-12-4><a id=__codelineno-12-4 name=__codelineno-12-4></a><span class=c1># 添加内容：</span>
-</span><span id=__span-12-5><a id=__codelineno-12-5 name=__codelineno-12-5></a><span class=c1>#!/bin/bash</span>
-</span><span id=__span-12-6><a id=__codelineno-12-6 name=__codelineno-12-6></a><span class=c1># 这是我的第一个Shell脚本</span>
-</span><span id=__span-12-7><a id=__codelineno-12-7 name=__codelineno-12-7></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;Hello, Linux World!&quot;</span>
-</span><span id=__span-12-8><a id=__codelineno-12-8 name=__codelineno-12-8></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;当前用户: </span><span class=k>$(</span>whoami<span class=k>)</span><span class=s2>&quot;</span>
-</span><span id=__span-12-9><a id=__codelineno-12-9 name=__codelineno-12-9></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;当前目录: </span><span class=k>$(</span><span class=nb>pwd</span><span class=k>)</span><span class=s2>&quot;</span>
-</span><span id=__span-12-10><a id=__codelineno-12-10 name=__codelineno-12-10></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;当前时间: </span><span class=k>$(</span>date<span class=k>)</span><span class=s2>&quot;</span>
-</span></code></pre></div></td></tr></table></div></p> <p><strong>运行脚本：</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1> 1</a></span>
-<span class=normal><a href=#__codelineno-13-2> 2</a></span>
-<span class=normal><a href=#__codelineno-13-3> 3</a></span>
-<span class=normal><a href=#__codelineno-13-4> 4</a></span>
-<span class=normal><a href=#__codelineno-13-5> 5</a></span>
-<span class=normal><a href=#__codelineno-13-6> 6</a></span>
-<span class=normal><a href=#__codelineno-13-7> 7</a></span>
-<span class=normal><a href=#__codelineno-13-8> 8</a></span>
-<span class=normal><a href=#__codelineno-13-9> 9</a></span>
-<span class=normal><a href=#__codelineno-13-10>10</a></span>
-<span class=normal><a href=#__codelineno-13-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><a id=__codelineno-13-1 name=__codelineno-13-1></a><span class=c1># 给脚本添加执行权限</span>
-</span><span id=__span-13-2><a id=__codelineno-13-2 name=__codelineno-13-2></a>chmod<span class=w> </span>+x<span class=w> </span>hello.sh
-</span><span id=__span-13-3><a id=__codelineno-13-3 name=__codelineno-13-3></a>
-</span><span id=__span-13-4><a id=__codelineno-13-4 name=__codelineno-13-4></a><span class=c1># 运行脚本</span>
-</span><span id=__span-13-5><a id=__codelineno-13-5 name=__codelineno-13-5></a>./hello.sh
-</span><span id=__span-13-6><a id=__codelineno-13-6 name=__codelineno-13-6></a>
-</span><span id=__span-13-7><a id=__codelineno-13-7 name=__codelineno-13-7></a><span class=c1># 输出示例：</span>
-</span><span id=__span-13-8><a id=__codelineno-13-8 name=__codelineno-13-8></a><span class=c1># Hello, Linux World!</span>
-</span><span id=__span-13-9><a id=__codelineno-13-9 name=__codelineno-13-9></a><span class=c1># 当前用户: username</span>
-</span><span id=__span-13-10><a id=__codelineno-13-10 name=__codelineno-13-10></a><span class=c1># 当前目录: /home/username</span>
-</span><span id=__span-13-11><a id=__codelineno-13-11 name=__codelineno-13-11></a><span class=c1># 当前时间: Mon Apr 20 14:30:25 CST 2026</span>
-</span></code></pre></div></td></tr></table></div></p> <h3 id=shell_2>实用的Shell脚本示例<a class=headerlink href=#shell_2 title="Permanent link">&para;</a></h3> <p><strong>备份脚本：</strong> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
-<span class=normal><a href=#__codelineno-14-2> 2</a></span>
-<span class=normal><a href=#__codelineno-14-3> 3</a></span>
-<span class=normal><a href=#__codelineno-14-4> 4</a></span>
-<span class=normal><a href=#__codelineno-14-5> 5</a></span>
-<span class=normal><a href=#__codelineno-14-6> 6</a></span>
-<span class=normal><a href=#__codelineno-14-7> 7</a></span>
-<span class=normal><a href=#__codelineno-14-8> 8</a></span>
-<span class=normal><a href=#__codelineno-14-9> 9</a></span>
-<span class=normal><a href=#__codelineno-14-10>10</a></span>
-<span class=normal><a href=#__codelineno-14-11>11</a></span>
-<span class=normal><a href=#__codelineno-14-12>12</a></span>
-<span class=normal><a href=#__codelineno-14-13>13</a></span>
-<span class=normal><a href=#__codelineno-14-14>14</a></span>
-<span class=normal><a href=#__codelineno-14-15>15</a></span>
-<span class=normal><a href=#__codelineno-14-16>16</a></span>
-<span class=normal><a href=#__codelineno-14-17>17</a></span>
-<span class=normal><a href=#__codelineno-14-18>18</a></span>
-<span class=normal><a href=#__codelineno-14-19>19</a></span>
-<span class=normal><a href=#__codelineno-14-20>20</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=ch>#!/bin/bash</span>
-</span><span id=__span-14-2><a id=__codelineno-14-2 name=__codelineno-14-2></a><span class=c1># 自动备份脚本</span>
-</span><span id=__span-14-3><a id=__codelineno-14-3 name=__codelineno-14-3></a>
-</span><span id=__span-14-4><a id=__codelineno-14-4 name=__codelineno-14-4></a><span class=nv>BACKUP_DIR</span><span class=o>=</span><span class=s2>&quot;/home/</span><span class=k>$(</span>whoami<span class=k>)</span><span class=s2>/backups&quot;</span>
-</span><span id=__span-14-5><a id=__codelineno-14-5 name=__codelineno-14-5></a><span class=nv>DATE</span><span class=o>=</span><span class=k>$(</span>date<span class=w> </span>+%Y%m%d_%H%M%S<span class=k>)</span>
-</span><span id=__span-14-6><a id=__codelineno-14-6 name=__codelineno-14-6></a>
-</span><span id=__span-14-7><a id=__codelineno-14-7 name=__codelineno-14-7></a><span class=c1># 创建备份目录</span>
-</span><span id=__span-14-8><a id=__codelineno-14-8 name=__codelineno-14-8></a>mkdir<span class=w> </span>-p<span class=w> </span><span class=s2>&quot;</span><span class=nv>$BACKUP_DIR</span><span class=s2>&quot;</span>
-</span><span id=__span-14-9><a id=__codelineno-14-9 name=__codelineno-14-9></a>
-</span><span id=__span-14-10><a id=__codelineno-14-10 name=__codelineno-14-10></a><span class=c1># 备份重要文件</span>
-</span><span id=__span-14-11><a id=__codelineno-14-11 name=__codelineno-14-11></a>tar<span class=w> </span>-czf<span class=w> </span><span class=s2>&quot;</span><span class=nv>$BACKUP_DIR</span><span class=s2>/backup_</span><span class=nv>$DATE</span><span class=s2>.tar.gz&quot;</span><span class=w> </span><span class=se>\</span>
-</span><span id=__span-14-12><a id=__codelineno-14-12 name=__codelineno-14-12></a><span class=w>    </span>/home/<span class=k>$(</span>whoami<span class=k>)</span>/Documents<span class=w> </span><span class=se>\</span>
-</span><span id=__span-14-13><a id=__codelineno-14-13 name=__codelineno-14-13></a><span class=w>    </span>/home/<span class=k>$(</span>whoami<span class=k>)</span>/Pictures<span class=w> </span><span class=se>\</span>
-</span><span id=__span-14-14><a id=__codelineno-14-14 name=__codelineno-14-14></a><span class=w>    </span>/home/<span class=k>$(</span>whoami<span class=k>)</span>/重要文件
-</span><span id=__span-14-15><a id=__codelineno-14-15 name=__codelineno-14-15></a>
-</span><span id=__span-14-16><a id=__codelineno-14-16 name=__codelineno-14-16></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;备份完成: </span><span class=nv>$BACKUP_DIR</span><span class=s2>/backup_</span><span class=nv>$DATE</span><span class=s2>.tar.gz&quot;</span>
-</span><span id=__span-14-17><a id=__codelineno-14-17 name=__codelineno-14-17></a>
-</span><span id=__span-14-18><a id=__codelineno-14-18 name=__codelineno-14-18></a><span class=c1># 删除7天前的备份</span>
-</span><span id=__span-14-19><a id=__codelineno-14-19 name=__codelineno-14-19></a>find<span class=w> </span><span class=s2>&quot;</span><span class=nv>$BACKUP_DIR</span><span class=s2>&quot;</span><span class=w> </span>-name<span class=w> </span><span class=s2>&quot;backup_*.tar.gz&quot;</span><span class=w> </span>-mtime<span class=w> </span>+7<span class=w> </span>-delete
-</span><span id=__span-14-20><a id=__codelineno-14-20 name=__codelineno-14-20></a><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;已清理7天前的备份文件&quot;</span>
-</span></code></pre></div></td></tr></table></div></p> <h2 id=linux_9>🔒 权限管理：理解Linux安全基础<a class=headerlink href=#linux_9 title="Permanent link">&para;</a></h2> <h3 id=_10>用户和权限<a class=headerlink href=#_10 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
-<span class=normal><a href=#__codelineno-15-2> 2</a></span>
-<span class=normal><a href=#__codelineno-15-3> 3</a></span>
-<span class=normal><a href=#__codelineno-15-4> 4</a></span>
-<span class=normal><a href=#__codelineno-15-5> 5</a></span>
-<span class=normal><a href=#__codelineno-15-6> 6</a></span>
-<span class=normal><a href=#__codelineno-15-7> 7</a></span>
-<span class=normal><a href=#__codelineno-15-8> 8</a></span>
-<span class=normal><a href=#__codelineno-15-9> 9</a></span>
-<span class=normal><a href=#__codelineno-15-10>10</a></span>
-<span class=normal><a href=#__codelineno-15-11>11</a></span>
-<span class=normal><a href=#__codelineno-15-12>12</a></span>
-<span class=normal><a href=#__codelineno-15-13>13</a></span>
-<span class=normal><a href=#__codelineno-15-14>14</a></span>
-<span class=normal><a href=#__codelineno-15-15>15</a></span>
-<span class=normal><a href=#__codelineno-15-16>16</a></span>
-<span class=normal><a href=#__codelineno-15-17>17</a></span>
-<span class=normal><a href=#__codelineno-15-18>18</a></span>
-<span class=normal><a href=#__codelineno-15-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=c1># 查看当前用户</span>
-</span><span id=__span-15-2><a id=__codelineno-15-2 name=__codelineno-15-2></a>whoami
-</span><span id=__span-15-3><a id=__codelineno-15-3 name=__codelineno-15-3></a>
-</span><span id=__span-15-4><a id=__codelineno-15-4 name=__codelineno-15-4></a><span class=c1># 查看用户信息</span>
-</span><span id=__span-15-5><a id=__codelineno-15-5 name=__codelineno-15-5></a>id
-</span><span id=__span-15-6><a id=__codelineno-15-6 name=__codelineno-15-6></a>
-</span><span id=__span-15-7><a id=__codelineno-15-7 name=__codelineno-15-7></a><span class=c1># 切换用户（需要密码）</span>
-</span><span id=__span-15-8><a id=__codelineno-15-8 name=__codelineno-15-8></a>su<span class=w> </span>-<span class=w> </span>otheruser
-</span><span id=__span-15-9><a id=__codelineno-15-9 name=__codelineno-15-9></a>
-</span><span id=__span-15-10><a id=__codelineno-15-10 name=__codelineno-15-10></a><span class=c1># 查看文件权限</span>
-</span><span id=__span-15-11><a id=__codelineno-15-11 name=__codelineno-15-11></a>ls<span class=w> </span>-l<span class=w> </span>file.txt
-</span><span id=__span-15-12><a id=__codelineno-15-12 name=__codelineno-15-12></a><span class=c1># -rw-r--r-- 1 user group 1024 Apr 20 14:30 file.txt</span>
-</span><span id=__span-15-13><a id=__codelineno-15-13 name=__codelineno-15-13></a>
-</span><span id=__span-15-14><a id=__codelineno-15-14 name=__codelineno-15-14></a><span class=c1># 修改文件权限</span>
-</span><span id=__span-15-15><a id=__codelineno-15-15 name=__codelineno-15-15></a>chmod<span class=w> </span><span class=m>644</span><span class=w> </span>file.txt<span class=w>          </span><span class=c1># 用户可读写，其他只读</span>
-</span><span id=__span-15-16><a id=__codelineno-15-16 name=__codelineno-15-16></a>chmod<span class=w> </span>+x<span class=w> </span>script.sh<span class=w>          </span><span class=c1># 添加执行权限</span>
-</span><span id=__span-15-17><a id=__codelineno-15-17 name=__codelineno-15-17></a>
-</span><span id=__span-15-18><a id=__codelineno-15-18 name=__codelineno-15-18></a><span class=c1># 修改文件所有者</span>
-</span><span id=__span-15-19><a id=__codelineno-15-19 name=__codelineno-15-19></a>sudo<span class=w> </span>chown<span class=w> </span>newuser:newgroup<span class=w> </span>file.txt
-</span></code></pre></div></td></tr></table></div> <h3 id=_11>权限数字表示法<a class=headerlink href=#_11 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
+    style D fill:#e1f5fe</code></pre> <h3 id=_2>常用目录说明<a class=headerlink href=#_2 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>目录</th> <th>用途</th> <th>重要文件示例</th> </tr> </thead> <tbody> <tr> <td><code>/home/用户名</code></td> <td>你的个人文件夹</td> <td>文档、下载、桌面</td> </tr> <tr> <td><code>/etc</code></td> <td>系统配置文件</td> <td><code>passwd</code>, <code>hosts</code>, <code>nginx.conf</code></td> </tr> <tr> <td><code>/var</code></td> <td>可变数据文件</td> <td>日志、数据库、邮件</td> </tr> <tr> <td><code>/tmp</code></td> <td>临时文件</td> <td>自动清理，不要放重要数据</td> </tr> <tr> <td><code>/usr</code></td> <td>用户程序</td> <td><code>bin</code>, <code>lib</code>, <code>share</code></td> </tr> </tbody> </table> <h2 id=_3>🎯 核心命令：从零开始学起<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <h3 id=_4>第一组必须掌握的命令<a class=headerlink href=#_4 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-3-1><span class=c1># 1. 查看当前目录</span>
+</span><span id=__span-3-2><span class=nb>pwd</span>
+</span><span id=__span-3-3><span class=c1># 输出: /home/username</span>
+</span><span id=__span-3-4>
+</span><span id=__span-3-5><span class=c1># 2. 查看目录内容</span>
+</span><span id=__span-3-6>ls
+</span><span id=__span-3-7>ls<span class=w> </span>-l<span class=w>    </span><span class=c1># 详细列表</span>
+</span><span id=__span-3-8>ls<span class=w> </span>-a<span class=w>    </span><span class=c1># 显示隐藏文件</span>
+</span><span id=__span-3-9>
+</span><span id=__span-3-10><span class=c1># 3. 切换目录</span>
+</span><span id=__span-3-11><span class=nb>cd</span><span class=w> </span>/home/username<span class=w>     </span><span class=c1># 绝对路径</span>
+</span><span id=__span-3-12><span class=nb>cd</span><span class=w> </span>Documents<span class=w>          </span><span class=c1># 相对路径</span>
+</span><span id=__span-3-13><span class=nb>cd</span><span class=w> </span>..<span class=w>                 </span><span class=c1># 返回上级目录</span>
+</span><span id=__span-3-14><span class=nb>cd</span><span class=w> </span>~<span class=w>                  </span><span class=c1># 返回家目录</span>
+</span><span id=__span-3-15><span class=nb>cd</span><span class=w> </span>-<span class=w>                  </span><span class=c1># 返回上次目录</span>
+</span><span id=__span-3-16>
+</span><span id=__span-3-17><span class=c1># 4. 创建目录</span>
+</span><span id=__span-3-18>mkdir<span class=w> </span>new_folder
+</span><span id=__span-3-19>mkdir<span class=w> </span>-p<span class=w> </span>path/to/nested/folder<span class=w>  </span><span class=c1># 创建多级目录</span>
+</span><span id=__span-3-20>
+</span><span id=__span-3-21><span class=c1># 5. 创建文件</span>
+</span><span id=__span-3-22>touch<span class=w> </span>new_file.txt
+</span><span id=__span-3-23>
+</span><span id=__span-3-24><span class=c1># 6. 查看文件内容</span>
+</span><span id=__span-3-25>cat<span class=w> </span>file.txt<span class=w>          </span><span class=c1># 显示全部内容</span>
+</span><span id=__span-3-26>less<span class=w> </span>file.txt<span class=w>         </span><span class=c1># 分页查看</span>
+</span><span id=__span-3-27>head<span class=w> </span>-10<span class=w> </span>file.txt<span class=w>     </span><span class=c1># 查看前10行</span>
+</span><span id=__span-3-28>tail<span class=w> </span>-10<span class=w> </span>file.txt<span class=w>     </span><span class=c1># 查看后10行</span>
+</span></code></pre></div> <h3 id=2>常见错误2：权限不够<a class=headerlink href=#2 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-4-1><span class=c1># ❌ 错误：Permission denied</span>
+</span><span id=__span-4-2>mkdir<span class=w> </span>/usr/local/myapp
+</span><span id=__span-4-3><span class=c1># mkdir: cannot create directory &#39;/usr/local/myapp&#39;: Permission denied</span>
+</span><span id=__span-4-4>
+</span><span id=__span-4-5><span class=c1># ✅ 解决方法1：使用sudo（管理员权限）</span>
+</span><span id=__span-4-6>sudo<span class=w> </span>mkdir<span class=w> </span>/usr/local/myapp
+</span><span id=__span-4-7><span class=c1># 输入密码后即可执行</span>
+</span><span id=__span-4-8>
+</span><span id=__span-4-9><span class=c1># ✅ 解决方法2：在用户目录操作</span>
+</span><span id=__span-4-10>mkdir<span class=w> </span>~/myapp<span class=w>         </span><span class=c1># 在家目录创建，无需权限</span>
+</span><span id=__span-4-11>
+</span><span id=__span-4-12><span class=c1># ✅ 解决方法3：修改权限（高级）</span>
+</span><span id=__span-4-13>sudo<span class=w> </span>chmod<span class=w> </span><span class=m>755</span><span class=w> </span>/some/directory
+</span></code></pre></div> <p><strong>权限小知识：</strong> - <code>rwx</code> = 读(read)写(write)执行(execute) - 三个权限组：用户(user)、组(group)、其他(other) - <code>755</code> = 用户有全部权限，其他用户只有读和执行权限</p> <h2 id=_5>🔄 文件操作：复制、移动、删除<a class=headerlink href=#_5 title="Permanent link">&para;</a></h2> <h3 id=_6>文件操作命令大全<a class=headerlink href=#_6 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-5-1><span class=c1># 1. 复制文件</span>
+</span><span id=__span-5-2>cp<span class=w> </span>file.txt<span class=w> </span>file_backup.txt
+</span><span id=__span-5-3>cp<span class=w> </span>file.txt<span class=w> </span>/path/to/destination/
+</span><span id=__span-5-4>cp<span class=w> </span>-r<span class=w> </span>folder/<span class=w> </span>new_folder/<span class=w>    </span><span class=c1># 复制目录</span>
+</span><span id=__span-5-5>
+</span><span id=__span-5-6><span class=c1># 2. 移动/重命名文件</span>
+</span><span id=__span-5-7>mv<span class=w> </span>old_name.txt<span class=w> </span>new_name.txt
+</span><span id=__span-5-8>mv<span class=w> </span>file.txt<span class=w> </span>/path/to/destination/
+</span><span id=__span-5-9>
+</span><span id=__span-5-10><span class=c1># 3. 删除文件</span>
+</span><span id=__span-5-11>rm<span class=w> </span>file.txt
+</span><span id=__span-5-12>rm<span class=w> </span>-r<span class=w> </span>folder/<span class=w>                </span><span class=c1># 删除目录</span>
+</span><span id=__span-5-13>rm<span class=w> </span>-rf<span class=w> </span>folder/<span class=w>               </span><span class=c1># 强制删除（危险！）</span>
+</span><span id=__span-5-14>
+</span><span id=__span-5-15><span class=c1># 4. 查找文件</span>
+</span><span id=__span-5-16>find<span class=w> </span>/home<span class=w> </span>-name<span class=w> </span><span class=s2>&quot;*.txt&quot;</span><span class=w>     </span><span class=c1># 按名称查找</span>
+</span><span id=__span-5-17>find<span class=w> </span>.<span class=w> </span>-type<span class=w> </span>f<span class=w> </span>-size<span class=w> </span>+1M<span class=w>     </span><span class=c1># 查找大于1MB的文件</span>
+</span><span id=__span-5-18>
+</span><span id=__span-5-19><span class=c1># 5. 文件统计</span>
+</span><span id=__span-5-20>wc<span class=w> </span>file.txt<span class=w>                  </span><span class=c1># 行数、词数、字节数</span>
+</span><span id=__span-5-21>wc<span class=w> </span>-l<span class=w> </span>file.txt<span class=w>               </span><span class=c1># 只统计行数</span>
+</span></code></pre></div> <h3 id=3>常见错误3：误删重要文件<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-6-1><span class=c1># ❌ 致命错误：rm -rf / （千万不要尝试！）</span>
+</span><span id=__span-6-2><span class=c1># 这会删除整个系统！</span>
+</span><span id=__span-6-3>
+</span><span id=__span-6-4><span class=c1># ✅ 安全删除习惯：</span>
+</span><span id=__span-6-5><span class=c1># 1. 删除前先确认</span>
+</span><span id=__span-6-6>ls<span class=w> </span>folder/<span class=w>              </span><span class=c1># 先查看内容</span>
+</span><span id=__span-6-7>rm<span class=w> </span>-r<span class=w> </span>folder/<span class=w>           </span><span class=c1># 再删除</span>
+</span><span id=__span-6-8>
+</span><span id=__span-6-9><span class=c1># 2. 使用-i参数交互确认</span>
+</span><span id=__span-6-10>rm<span class=w> </span>-i<span class=w> </span>file.txt<span class=w>          </span><span class=c1># 删除前会询问</span>
+</span><span id=__span-6-11><span class=c1># rm: remove regular file &#39;file.txt&#39;? y/n</span>
+</span><span id=__span-6-12>
+</span><span id=__span-6-13><span class=c1># 3. 重要文件先备份</span>
+</span><span id=__span-6-14>cp<span class=w> </span>important.txt<span class=w> </span>important_backup.txt
+</span><span id=__span-6-15>rm<span class=w> </span>important.txt
+</span><span id=__span-6-16>
+</span><span id=__span-6-17><span class=c1># 4. 使用trash-cli工具（推荐）</span>
+</span><span id=__span-6-18>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>trash-cli
+</span><span id=__span-6-19>trash<span class=w> </span>file.txt<span class=w>          </span><span class=c1># 移到回收站</span>
+</span><span id=__span-6-20>trash-list<span class=w>              </span><span class=c1># 查看回收站</span>
+</span><span id=__span-6-21>trash-restore<span class=w>           </span><span class=c1># 恢复文件</span>
+</span></code></pre></div> <h2 id=linux_8>📊 系统信息：了解你的Linux<a class=headerlink href=#linux_8 title="Permanent link">&para;</a></h2> <h3 id=_7>查看系统状态命令<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-7-1><span class=c1># 1. 系统信息</span>
+</span><span id=__span-7-2>uname<span class=w> </span>-a<span class=w>                </span><span class=c1># 内核版本</span>
+</span><span id=__span-7-3>cat<span class=w> </span>/etc/os-release<span class=w>     </span><span class=c1># 发行版信息</span>
+</span><span id=__span-7-4>
+</span><span id=__span-7-5><span class=c1># 2. 硬件信息</span>
+</span><span id=__span-7-6>free<span class=w> </span>-h<span class=w>                </span><span class=c1># 内存使用情况</span>
+</span><span id=__span-7-7>df<span class=w> </span>-h<span class=w>                  </span><span class=c1># 磁盘空间使用</span>
+</span><span id=__span-7-8>lscpu<span class=w>                  </span><span class=c1># CPU信息</span>
+</span><span id=__span-7-9>
+</span><span id=__span-7-10><span class=c1># 3. 进程管理</span>
+</span><span id=__span-7-11>ps<span class=w> </span>aux<span class=w>                 </span><span class=c1># 查看所有进程</span>
+</span><span id=__span-7-12>top<span class=w>                    </span><span class=c1># 实时进程监控</span>
+</span><span id=__span-7-13>htop<span class=w>                   </span><span class=c1># 增强版top（需安装）</span>
+</span><span id=__span-7-14>
+</span><span id=__span-7-15><span class=c1># 4. 网络信息</span>
+</span><span id=__span-7-16>ifconfig<span class=w>               </span><span class=c1># 网络接口信息</span>
+</span><span id=__span-7-17>ping<span class=w> </span>google.com<span class=w>        </span><span class=c1># 测试网络连接</span>
+</span><span id=__span-7-18>netstat<span class=w> </span>-tulpn<span class=w>         </span><span class=c1># 查看端口监听</span>
+</span></code></pre></div> <h3 id=4>常见错误4：命令找不到<a class=headerlink href=#4 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-8-1><span class=c1># ❌ 错误：command not found</span>
+</span><span id=__span-8-2>top
+</span><span id=__span-8-3><span class=c1># bash: top: command not found</span>
+</span><span id=__span-8-4>
+</span><span id=__span-8-5><span class=c1># ✅ 解决方法1：安装缺失的命令</span>
+</span><span id=__span-8-6><span class=c1># Ubuntu/Debian</span>
+</span><span id=__span-8-7>sudo<span class=w> </span>apt<span class=w> </span>update
+</span><span id=__span-8-8>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>procps<span class=w>  </span><span class=c1># 安装top命令</span>
+</span><span id=__span-8-9>
+</span><span id=__span-8-10><span class=c1># CentOS/RHEL</span>
+</span><span id=__span-8-11>sudo<span class=w> </span>yum<span class=w> </span>install<span class=w> </span>procps-ng
+</span><span id=__span-8-12>
+</span><span id=__span-8-13><span class=c1># ✅ 解决方法2：检查命令路径</span>
+</span><span id=__span-8-14>which<span class=w> </span>top<span class=w>               </span><span class=c1># 查看命令位置</span>
+</span><span id=__span-8-15>whereis<span class=w> </span>top<span class=w>             </span><span class=c1># 查找命令相关文件</span>
+</span><span id=__span-8-16>
+</span><span id=__span-8-17><span class=c1># ✅ 解决方法3：更新PATH环境变量</span>
+</span><span id=__span-8-18><span class=nb>echo</span><span class=w> </span><span class=nv>$PATH</span><span class=w>              </span><span class=c1># 查看当前PATH</span>
+</span><span id=__span-8-19><span class=nb>export</span><span class=w> </span><span class=nv>PATH</span><span class=o>=</span><span class=nv>$PATH</span>:/usr/local/bin<span class=w>  </span><span class=c1># 添加新路径</span>
+</span></code></pre></div> <h2 id=_8>🛠️ 软件管理：安装和更新<a class=headerlink href=#_8 title="Permanent link">&para;</a></h2> <h3 id=_9>包管理器使用<a class=headerlink href=#_9 title="Permanent link">&para;</a></h3> <p><strong>Ubuntu/Debian (apt)：</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-9-1><span class=c1># 更新软件包列表</span>
+</span><span id=__span-9-2>sudo<span class=w> </span>apt<span class=w> </span>update
+</span><span id=__span-9-3>
+</span><span id=__span-9-4><span class=c1># 升级已安装的软件包</span>
+</span><span id=__span-9-5>sudo<span class=w> </span>apt<span class=w> </span>upgrade
+</span><span id=__span-9-6>
+</span><span id=__span-9-7><span class=c1># 安装新软件</span>
+</span><span id=__span-9-8>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>vim<span class=w> </span>git<span class=w> </span>htop
+</span><span id=__span-9-9>
+</span><span id=__span-9-10><span class=c1># 搜索软件包</span>
+</span><span id=__span-9-11>apt<span class=w> </span>search<span class=w> </span><span class=s2>&quot;web browser&quot;</span>
+</span><span id=__span-9-12>
+</span><span id=__span-9-13><span class=c1># 卸载软件</span>
+</span><span id=__span-9-14>sudo<span class=w> </span>apt<span class=w> </span>remove<span class=w> </span>vim
+</span><span id=__span-9-15>sudo<span class=w> </span>apt<span class=w> </span>autoremove<span class=w>    </span><span class=c1># 清理依赖</span>
+</span></code></pre></div></p> <p><strong>CentOS/RHEL (yum/dnf)：</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-10-1><span class=c1># 安装软件</span>
+</span><span id=__span-10-2>sudo<span class=w> </span>yum<span class=w> </span>install<span class=w> </span>vim
+</span><span id=__span-10-3><span class=c1># 或使用dnf（新版）</span>
+</span><span id=__span-10-4>sudo<span class=w> </span>dnf<span class=w> </span>install<span class=w> </span>vim
+</span></code></pre></div></p> <h3 id=5>常见错误5：依赖冲突<a class=headerlink href=#5 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-11-1><span class=c1># ❌ 错误：依赖关系问题</span>
+</span><span id=__span-11-2>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>packageA
+</span><span id=__span-11-3><span class=c1># Some packages could not be installed...</span>
+</span><span id=__span-11-4><span class=c1># Depends: packageB but it is not going to be installed</span>
+</span><span id=__span-11-5>
+</span><span id=__span-11-6><span class=c1># ✅ 解决方法1：修复依赖</span>
+</span><span id=__span-11-7>sudo<span class=w> </span>apt<span class=w> </span>--fix-broken<span class=w> </span>install
+</span><span id=__span-11-8>
+</span><span id=__span-11-9><span class=c1># ✅ 解决方法2：更新源</span>
+</span><span id=__span-11-10>sudo<span class=w> </span>apt<span class=w> </span>update
+</span><span id=__span-11-11>sudo<span class=w> </span>apt<span class=w> </span>upgrade
+</span><span id=__span-11-12>
+</span><span id=__span-11-13><span class=c1># ✅ 解决方法3：使用 aptitude（智能解决依赖）</span>
+</span><span id=__span-11-14>sudo<span class=w> </span>apt<span class=w> </span>install<span class=w> </span>aptitude
+</span><span id=__span-11-15>sudo<span class=w> </span>aptitude<span class=w> </span>install<span class=w> </span>packageA
+</span></code></pre></div> <h2 id=shell>📜 Shell脚本编程：自动化你的工作<a class=headerlink href=#shell title="Permanent link">&para;</a></h2> <h3 id=shell_1>第一个Shell脚本<a class=headerlink href=#shell_1 title="Permanent link">&para;</a></h3> <p><strong>创建脚本文件：</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-12-1><span class=c1># 创建脚本文件</span>
+</span><span id=__span-12-2>nano<span class=w> </span>hello.sh
+</span><span id=__span-12-3>
+</span><span id=__span-12-4><span class=c1># 添加内容：</span>
+</span><span id=__span-12-5><span class=c1>#!/bin/bash</span>
+</span><span id=__span-12-6><span class=c1># 这是我的第一个Shell脚本</span>
+</span><span id=__span-12-7><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;Hello, Linux World!&quot;</span>
+</span><span id=__span-12-8><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;当前用户: </span><span class=k>$(</span>whoami<span class=k>)</span><span class=s2>&quot;</span>
+</span><span id=__span-12-9><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;当前目录: </span><span class=k>$(</span><span class=nb>pwd</span><span class=k>)</span><span class=s2>&quot;</span>
+</span><span id=__span-12-10><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;当前时间: </span><span class=k>$(</span>date<span class=k>)</span><span class=s2>&quot;</span>
+</span></code></pre></div></p> <p><strong>运行脚本：</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-13-1><span class=c1># 给脚本添加执行权限</span>
+</span><span id=__span-13-2>chmod<span class=w> </span>+x<span class=w> </span>hello.sh
+</span><span id=__span-13-3>
+</span><span id=__span-13-4><span class=c1># 运行脚本</span>
+</span><span id=__span-13-5>./hello.sh
+</span><span id=__span-13-6>
+</span><span id=__span-13-7><span class=c1># 输出示例：</span>
+</span><span id=__span-13-8><span class=c1># Hello, Linux World!</span>
+</span><span id=__span-13-9><span class=c1># 当前用户: username</span>
+</span><span id=__span-13-10><span class=c1># 当前目录: /home/username</span>
+</span><span id=__span-13-11><span class=c1># 当前时间: Mon Apr 20 14:30:25 CST 2026</span>
+</span></code></pre></div></p> <h3 id=shell_2>实用的Shell脚本示例<a class=headerlink href=#shell_2 title="Permanent link">&para;</a></h3> <p><strong>备份脚本：</strong> <div class="language-bash highlight"><pre><span></span><code><span id=__span-14-1><span class=ch>#!/bin/bash</span>
+</span><span id=__span-14-2><span class=c1># 自动备份脚本</span>
+</span><span id=__span-14-3>
+</span><span id=__span-14-4><span class=nv>BACKUP_DIR</span><span class=o>=</span><span class=s2>&quot;/home/</span><span class=k>$(</span>whoami<span class=k>)</span><span class=s2>/backups&quot;</span>
+</span><span id=__span-14-5><span class=nv>DATE</span><span class=o>=</span><span class=k>$(</span>date<span class=w> </span>+%Y%m%d_%H%M%S<span class=k>)</span>
+</span><span id=__span-14-6>
+</span><span id=__span-14-7><span class=c1># 创建备份目录</span>
+</span><span id=__span-14-8>mkdir<span class=w> </span>-p<span class=w> </span><span class=s2>&quot;</span><span class=nv>$BACKUP_DIR</span><span class=s2>&quot;</span>
+</span><span id=__span-14-9>
+</span><span id=__span-14-10><span class=c1># 备份重要文件</span>
+</span><span id=__span-14-11>tar<span class=w> </span>-czf<span class=w> </span><span class=s2>&quot;</span><span class=nv>$BACKUP_DIR</span><span class=s2>/backup_</span><span class=nv>$DATE</span><span class=s2>.tar.gz&quot;</span><span class=w> </span><span class=se>\</span>
+</span><span id=__span-14-12><span class=w>    </span>/home/<span class=k>$(</span>whoami<span class=k>)</span>/Documents<span class=w> </span><span class=se>\</span>
+</span><span id=__span-14-13><span class=w>    </span>/home/<span class=k>$(</span>whoami<span class=k>)</span>/Pictures<span class=w> </span><span class=se>\</span>
+</span><span id=__span-14-14><span class=w>    </span>/home/<span class=k>$(</span>whoami<span class=k>)</span>/重要文件
+</span><span id=__span-14-15>
+</span><span id=__span-14-16><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;备份完成: </span><span class=nv>$BACKUP_DIR</span><span class=s2>/backup_</span><span class=nv>$DATE</span><span class=s2>.tar.gz&quot;</span>
+</span><span id=__span-14-17>
+</span><span id=__span-14-18><span class=c1># 删除7天前的备份</span>
+</span><span id=__span-14-19>find<span class=w> </span><span class=s2>&quot;</span><span class=nv>$BACKUP_DIR</span><span class=s2>&quot;</span><span class=w> </span>-name<span class=w> </span><span class=s2>&quot;backup_*.tar.gz&quot;</span><span class=w> </span>-mtime<span class=w> </span>+7<span class=w> </span>-delete
+</span><span id=__span-14-20><span class=nb>echo</span><span class=w> </span><span class=s2>&quot;已清理7天前的备份文件&quot;</span>
+</span></code></pre></div></p> <h2 id=linux_9>🔒 权限管理：理解Linux安全基础<a class=headerlink href=#linux_9 title="Permanent link">&para;</a></h2> <h3 id=_10>用户和权限<a class=headerlink href=#_10 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-15-1><span class=c1># 查看当前用户</span>
+</span><span id=__span-15-2>whoami
+</span><span id=__span-15-3>
+</span><span id=__span-15-4><span class=c1># 查看用户信息</span>
+</span><span id=__span-15-5>id
+</span><span id=__span-15-6>
+</span><span id=__span-15-7><span class=c1># 切换用户（需要密码）</span>
+</span><span id=__span-15-8>su<span class=w> </span>-<span class=w> </span>otheruser
+</span><span id=__span-15-9>
+</span><span id=__span-15-10><span class=c1># 查看文件权限</span>
+</span><span id=__span-15-11>ls<span class=w> </span>-l<span class=w> </span>file.txt
+</span><span id=__span-15-12><span class=c1># -rw-r--r-- 1 user group 1024 Apr 20 14:30 file.txt</span>
+</span><span id=__span-15-13>
+</span><span id=__span-15-14><span class=c1># 修改文件权限</span>
+</span><span id=__span-15-15>chmod<span class=w> </span><span class=m>644</span><span class=w> </span>file.txt<span class=w>          </span><span class=c1># 用户可读写，其他只读</span>
+</span><span id=__span-15-16>chmod<span class=w> </span>+x<span class=w> </span>script.sh<span class=w>          </span><span class=c1># 添加执行权限</span>
+</span><span id=__span-15-17>
+</span><span id=__span-15-18><span class=c1># 修改文件所有者</span>
+</span><span id=__span-15-19>sudo<span class=w> </span>chown<span class=w> </span>newuser:newgroup<span class=w> </span>file.txt
+</span></code></pre></div> <h3 id=_11>权限数字表示法<a class=headerlink href=#_11 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
     A[权限表示] --&gt; B[字母表示]
     A --&gt; C[数字表示]
 
@@ -510,89 +288,49 @@
     C --&gt; C3[5 = 4+0+1]
 
     style B fill:#e1f5fe
-    style C fill:#c8e6c9</code></pre> <p><strong>权限值对应：</strong> - 4 = 读 (r) - 2 = 写 (w)<br> - 1 = 执行 (x) - 0 = 无权限 (-)</p> <p><strong>常见权限组合：</strong> - <code>755</code> = <code>rwxr-xr-x</code> (用户全部，其他读执行) - <code>644</code> = <code>rw- r-- r--</code> (用户读写，其他只读) - <code>777</code> = <code>rwxrwxrwx</code> (所有人全部权限，危险！)</p> <h2 id=linux_10>🚀 实用技巧：提升你的Linux效率<a class=headerlink href=#linux_10 title="Permanent link">&para;</a></h2> <h3 id=_12>命令行效率技巧<a class=headerlink href=#_12 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1> 1</a></span>
-<span class=normal><a href=#__codelineno-16-2> 2</a></span>
-<span class=normal><a href=#__codelineno-16-3> 3</a></span>
-<span class=normal><a href=#__codelineno-16-4> 4</a></span>
-<span class=normal><a href=#__codelineno-16-5> 5</a></span>
-<span class=normal><a href=#__codelineno-16-6> 6</a></span>
-<span class=normal><a href=#__codelineno-16-7> 7</a></span>
-<span class=normal><a href=#__codelineno-16-8> 8</a></span>
-<span class=normal><a href=#__codelineno-16-9> 9</a></span>
-<span class=normal><a href=#__codelineno-16-10>10</a></span>
-<span class=normal><a href=#__codelineno-16-11>11</a></span>
-<span class=normal><a href=#__codelineno-16-12>12</a></span>
-<span class=normal><a href=#__codelineno-16-13>13</a></span>
-<span class=normal><a href=#__codelineno-16-14>14</a></span>
-<span class=normal><a href=#__codelineno-16-15>15</a></span>
-<span class=normal><a href=#__codelineno-16-16>16</a></span>
-<span class=normal><a href=#__codelineno-16-17>17</a></span>
-<span class=normal><a href=#__codelineno-16-18>18</a></span>
-<span class=normal><a href=#__codelineno-16-19>19</a></span>
-<span class=normal><a href=#__codelineno-16-20>20</a></span>
-<span class=normal><a href=#__codelineno-16-21>21</a></span>
-<span class=normal><a href=#__codelineno-16-22>22</a></span>
-<span class=normal><a href=#__codelineno-16-23>23</a></span>
-<span class=normal><a href=#__codelineno-16-24>24</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><a id=__codelineno-16-1 name=__codelineno-16-1></a><span class=c1># 1. 命令历史</span>
-</span><span id=__span-16-2><a id=__codelineno-16-2 name=__codelineno-16-2></a><span class=nb>history</span><span class=w>                  </span><span class=c1># 查看命令历史</span>
-</span><span id=__span-16-3><a id=__codelineno-16-3 name=__codelineno-16-3></a>!100<span class=w>                    </span><span class=c1># 执行第100条历史命令</span>
-</span><span id=__span-16-4><a id=__codelineno-16-4 name=__codelineno-16-4></a>Ctrl<span class=w> </span>+<span class=w> </span>R<span class=w>                </span><span class=c1># 搜索历史命令</span>
-</span><span id=__span-16-5><a id=__codelineno-16-5 name=__codelineno-16-5></a>
-</span><span id=__span-16-6><a id=__codelineno-16-6 name=__codelineno-16-6></a><span class=c1># 2. 命令补全</span>
-</span><span id=__span-16-7><a id=__codelineno-16-7 name=__codelineno-16-7></a>Tab键<span class=w>                   </span><span class=c1># 自动补全命令和文件名</span>
-</span><span id=__span-16-8><a id=__codelineno-16-8 name=__codelineno-16-8></a>
-</span><span id=__span-16-9><a id=__codelineno-16-9 name=__codelineno-16-9></a><span class=c1># 3. 快速导航</span>
-</span><span id=__span-16-10><a id=__codelineno-16-10 name=__codelineno-16-10></a>Ctrl<span class=w> </span>+<span class=w> </span>A<span class=w>                </span><span class=c1># 移动到行首</span>
-</span><span id=__span-16-11><a id=__codelineno-16-11 name=__codelineno-16-11></a>Ctrl<span class=w> </span>+<span class=w> </span>E<span class=w>                </span><span class=c1># 移动到行尾</span>
-</span><span id=__span-16-12><a id=__codelineno-16-12 name=__codelineno-16-12></a>Ctrl<span class=w> </span>+<span class=w> </span>U<span class=w>                </span><span class=c1># 删除到行首</span>
-</span><span id=__span-16-13><a id=__codelineno-16-13 name=__codelineno-16-13></a>Ctrl<span class=w> </span>+<span class=w> </span>K<span class=w>                </span><span class=c1># 删除到行尾</span>
-</span><span id=__span-16-14><a id=__codelineno-16-14 name=__codelineno-16-14></a>
-</span><span id=__span-16-15><a id=__codelineno-16-15 name=__codelineno-16-15></a><span class=c1># 4. 进程控制</span>
-</span><span id=__span-16-16><a id=__codelineno-16-16 name=__codelineno-16-16></a>Ctrl<span class=w> </span>+<span class=w> </span>C<span class=w>                </span><span class=c1># 终止当前命令</span>
-</span><span id=__span-16-17><a id=__codelineno-16-17 name=__codelineno-16-17></a>Ctrl<span class=w> </span>+<span class=w> </span>Z<span class=w>                </span><span class=c1># 暂停当前命令</span>
-</span><span id=__span-16-18><a id=__codelineno-16-18 name=__codelineno-16-18></a><span class=nb>bg</span><span class=w>                      </span><span class=c1># 后台运行暂停的命令</span>
-</span><span id=__span-16-19><a id=__codelineno-16-19 name=__codelineno-16-19></a><span class=nb>fg</span><span class=w>                      </span><span class=c1># 切换到前台</span>
-</span><span id=__span-16-20><a id=__codelineno-16-20 name=__codelineno-16-20></a>
-</span><span id=__span-16-21><a id=__codelineno-16-21 name=__codelineno-16-21></a><span class=c1># 5. 输出重定向</span>
-</span><span id=__span-16-22><a id=__codelineno-16-22 name=__codelineno-16-22></a>ls<span class=w> </span>&gt;<span class=w> </span>file.txt<span class=w>           </span><span class=c1># 输出重定向到文件</span>
-</span><span id=__span-16-23><a id=__codelineno-16-23 name=__codelineno-16-23></a>ls<span class=w> </span>&gt;&gt;<span class=w> </span>file.txt<span class=w>          </span><span class=c1># 追加到文件</span>
-</span><span id=__span-16-24><a id=__codelineno-16-24 name=__codelineno-16-24></a><span class=nb>command</span><span class=w> </span><span class=m>2</span>&gt;<span class=p>&amp;</span><span class=m>1</span><span class=w>            </span><span class=c1># 错误输出重定向到标准输出</span>
-</span></code></pre></div></td></tr></table></div> <h3 id=6>常见错误6：磁盘空间不足<a class=headerlink href=#6 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1> 1</a></span>
-<span class=normal><a href=#__codelineno-17-2> 2</a></span>
-<span class=normal><a href=#__codelineno-17-3> 3</a></span>
-<span class=normal><a href=#__codelineno-17-4> 4</a></span>
-<span class=normal><a href=#__codelineno-17-5> 5</a></span>
-<span class=normal><a href=#__codelineno-17-6> 6</a></span>
-<span class=normal><a href=#__codelineno-17-7> 7</a></span>
-<span class=normal><a href=#__codelineno-17-8> 8</a></span>
-<span class=normal><a href=#__codelineno-17-9> 9</a></span>
-<span class=normal><a href=#__codelineno-17-10>10</a></span>
-<span class=normal><a href=#__codelineno-17-11>11</a></span>
-<span class=normal><a href=#__codelineno-17-12>12</a></span>
-<span class=normal><a href=#__codelineno-17-13>13</a></span>
-<span class=normal><a href=#__codelineno-17-14>14</a></span>
-<span class=normal><a href=#__codelineno-17-15>15</a></span>
-<span class=normal><a href=#__codelineno-17-16>16</a></span>
-<span class=normal><a href=#__codelineno-17-17>17</a></span>
-<span class=normal><a href=#__codelineno-17-18>18</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><a id=__codelineno-17-1 name=__codelineno-17-1></a><span class=c1># ❌ 错误：No space left on device</span>
-</span><span id=__span-17-2><a id=__codelineno-17-2 name=__codelineno-17-2></a>dd<span class=w> </span><span class=k>if</span><span class=o>=</span>/dev/zero<span class=w> </span><span class=nv>of</span><span class=o>=</span>test.txt<span class=w> </span><span class=nv>bs</span><span class=o>=</span>1M<span class=w> </span><span class=nv>count</span><span class=o>=</span><span class=m>100</span>
-</span><span id=__span-17-3><a id=__codelineno-17-3 name=__codelineno-17-3></a><span class=c1># dd: error writing &#39;test.txt&#39;: No space left on device</span>
-</span><span id=__span-17-4><a id=__codelineno-17-4 name=__codelineno-17-4></a>
-</span><span id=__span-17-5><a id=__codelineno-17-5 name=__codelineno-17-5></a><span class=c1># ✅ 解决方法1：检查磁盘使用</span>
-</span><span id=__span-17-6><a id=__codelineno-17-6 name=__codelineno-17-6></a>df<span class=w> </span>-h<span class=w>                    </span><span class=c1># 查看各分区使用情况</span>
-</span><span id=__span-17-7><a id=__codelineno-17-7 name=__codelineno-17-7></a>
-</span><span id=__span-17-8><a id=__codelineno-17-8 name=__codelineno-17-8></a><span class=c1># ✅ 解决方法2：清理临时文件</span>
-</span><span id=__span-17-9><a id=__codelineno-17-9 name=__codelineno-17-9></a>sudo<span class=w> </span>apt<span class=w> </span>autoremove<span class=w>      </span><span class=c1># 清理不需要的包</span>
-</span><span id=__span-17-10><a id=__codelineno-17-10 name=__codelineno-17-10></a>sudo<span class=w> </span>apt<span class=w> </span>autoclean<span class=w>       </span><span class=c1># 清理包缓存</span>
-</span><span id=__span-17-11><a id=__codelineno-17-11 name=__codelineno-17-11></a>
-</span><span id=__span-17-12><a id=__codelineno-17-12 name=__codelineno-17-12></a><span class=c1># ✅ 解决方法3：查找大文件</span>
-</span><span id=__span-17-13><a id=__codelineno-17-13 name=__codelineno-17-13></a>find<span class=w> </span>/<span class=w> </span>-type<span class=w> </span>f<span class=w> </span>-size<span class=w> </span>+100M<span class=w> </span><span class=m>2</span>&gt;/dev/null<span class=w>  </span><span class=c1># 查找大于100MB的文件</span>
-</span><span id=__span-17-14><a id=__codelineno-17-14 name=__codelineno-17-14></a>du<span class=w> </span>-sh<span class=w> </span>/var/log/*<span class=w>        </span><span class=c1># 查看日志目录大小</span>
-</span><span id=__span-17-15><a id=__codelineno-17-15 name=__codelineno-17-15></a>
-</span><span id=__span-17-16><a id=__codelineno-17-16 name=__codelineno-17-16></a><span class=c1># ✅ 解决方法4：清理日志</span>
-</span><span id=__span-17-17><a id=__codelineno-17-17 name=__codelineno-17-17></a>sudo<span class=w> </span>journalctl<span class=w> </span>--vacuum-size<span class=o>=</span>100M<span class=w>  </span><span class=c1># 保留100MB日志</span>
-</span><span id=__span-17-18><a id=__codelineno-17-18 name=__codelineno-17-18></a>sudo<span class=w> </span>rm<span class=w> </span>/var/log/*.log.1<span class=w>           </span><span class=c1># 删除旧日志文件</span>
-</span></code></pre></div></td></tr></table></div> <h2 id=linux_11>📈 Linux学习路径建议<a class=headerlink href=#linux_11 title="Permanent link">&para;</a></h2> <h3 id=_13>学习路线图<a class=headerlink href=#_13 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
+    style C fill:#c8e6c9</code></pre> <p><strong>权限值对应：</strong> - 4 = 读 (r) - 2 = 写 (w)<br> - 1 = 执行 (x) - 0 = 无权限 (-)</p> <p><strong>常见权限组合：</strong> - <code>755</code> = <code>rwxr-xr-x</code> (用户全部，其他读执行) - <code>644</code> = <code>rw- r-- r--</code> (用户读写，其他只读) - <code>777</code> = <code>rwxrwxrwx</code> (所有人全部权限，危险！)</p> <h2 id=linux_10>🚀 实用技巧：提升你的Linux效率<a class=headerlink href=#linux_10 title="Permanent link">&para;</a></h2> <h3 id=_12>命令行效率技巧<a class=headerlink href=#_12 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-16-1><span class=c1># 1. 命令历史</span>
+</span><span id=__span-16-2><span class=nb>history</span><span class=w>                  </span><span class=c1># 查看命令历史</span>
+</span><span id=__span-16-3>!100<span class=w>                    </span><span class=c1># 执行第100条历史命令</span>
+</span><span id=__span-16-4>Ctrl<span class=w> </span>+<span class=w> </span>R<span class=w>                </span><span class=c1># 搜索历史命令</span>
+</span><span id=__span-16-5>
+</span><span id=__span-16-6><span class=c1># 2. 命令补全</span>
+</span><span id=__span-16-7>Tab键<span class=w>                   </span><span class=c1># 自动补全命令和文件名</span>
+</span><span id=__span-16-8>
+</span><span id=__span-16-9><span class=c1># 3. 快速导航</span>
+</span><span id=__span-16-10>Ctrl<span class=w> </span>+<span class=w> </span>A<span class=w>                </span><span class=c1># 移动到行首</span>
+</span><span id=__span-16-11>Ctrl<span class=w> </span>+<span class=w> </span>E<span class=w>                </span><span class=c1># 移动到行尾</span>
+</span><span id=__span-16-12>Ctrl<span class=w> </span>+<span class=w> </span>U<span class=w>                </span><span class=c1># 删除到行首</span>
+</span><span id=__span-16-13>Ctrl<span class=w> </span>+<span class=w> </span>K<span class=w>                </span><span class=c1># 删除到行尾</span>
+</span><span id=__span-16-14>
+</span><span id=__span-16-15><span class=c1># 4. 进程控制</span>
+</span><span id=__span-16-16>Ctrl<span class=w> </span>+<span class=w> </span>C<span class=w>                </span><span class=c1># 终止当前命令</span>
+</span><span id=__span-16-17>Ctrl<span class=w> </span>+<span class=w> </span>Z<span class=w>                </span><span class=c1># 暂停当前命令</span>
+</span><span id=__span-16-18><span class=nb>bg</span><span class=w>                      </span><span class=c1># 后台运行暂停的命令</span>
+</span><span id=__span-16-19><span class=nb>fg</span><span class=w>                      </span><span class=c1># 切换到前台</span>
+</span><span id=__span-16-20>
+</span><span id=__span-16-21><span class=c1># 5. 输出重定向</span>
+</span><span id=__span-16-22>ls<span class=w> </span>&gt;<span class=w> </span>file.txt<span class=w>           </span><span class=c1># 输出重定向到文件</span>
+</span><span id=__span-16-23>ls<span class=w> </span>&gt;&gt;<span class=w> </span>file.txt<span class=w>          </span><span class=c1># 追加到文件</span>
+</span><span id=__span-16-24><span class=nb>command</span><span class=w> </span><span class=m>2</span>&gt;<span class=p>&amp;</span><span class=m>1</span><span class=w>            </span><span class=c1># 错误输出重定向到标准输出</span>
+</span></code></pre></div> <h3 id=6>常见错误6：磁盘空间不足<a class=headerlink href=#6 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><pre><span></span><code><span id=__span-17-1><span class=c1># ❌ 错误：No space left on device</span>
+</span><span id=__span-17-2>dd<span class=w> </span><span class=k>if</span><span class=o>=</span>/dev/zero<span class=w> </span><span class=nv>of</span><span class=o>=</span>test.txt<span class=w> </span><span class=nv>bs</span><span class=o>=</span>1M<span class=w> </span><span class=nv>count</span><span class=o>=</span><span class=m>100</span>
+</span><span id=__span-17-3><span class=c1># dd: error writing &#39;test.txt&#39;: No space left on device</span>
+</span><span id=__span-17-4>
+</span><span id=__span-17-5><span class=c1># ✅ 解决方法1：检查磁盘使用</span>
+</span><span id=__span-17-6>df<span class=w> </span>-h<span class=w>                    </span><span class=c1># 查看各分区使用情况</span>
+</span><span id=__span-17-7>
+</span><span id=__span-17-8><span class=c1># ✅ 解决方法2：清理临时文件</span>
+</span><span id=__span-17-9>sudo<span class=w> </span>apt<span class=w> </span>autoremove<span class=w>      </span><span class=c1># 清理不需要的包</span>
+</span><span id=__span-17-10>sudo<span class=w> </span>apt<span class=w> </span>autoclean<span class=w>       </span><span class=c1># 清理包缓存</span>
+</span><span id=__span-17-11>
+</span><span id=__span-17-12><span class=c1># ✅ 解决方法3：查找大文件</span>
+</span><span id=__span-17-13>find<span class=w> </span>/<span class=w> </span>-type<span class=w> </span>f<span class=w> </span>-size<span class=w> </span>+100M<span class=w> </span><span class=m>2</span>&gt;/dev/null<span class=w>  </span><span class=c1># 查找大于100MB的文件</span>
+</span><span id=__span-17-14>du<span class=w> </span>-sh<span class=w> </span>/var/log/*<span class=w>        </span><span class=c1># 查看日志目录大小</span>
+</span><span id=__span-17-15>
+</span><span id=__span-17-16><span class=c1># ✅ 解决方法4：清理日志</span>
+</span><span id=__span-17-17>sudo<span class=w> </span>journalctl<span class=w> </span>--vacuum-size<span class=o>=</span>100M<span class=w>  </span><span class=c1># 保留100MB日志</span>
+</span><span id=__span-17-18>sudo<span class=w> </span>rm<span class=w> </span>/var/log/*.log.1<span class=w>           </span><span class=c1># 删除旧日志文件</span>
+</span></code></pre></div> <h2 id=linux_11>📈 Linux学习路径建议<a class=headerlink href=#linux_11 title="Permanent link">&para;</a></h2> <h3 id=_13>学习路线图<a class=headerlink href=#_13 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TB
     A[Linux基础] --&gt; B[文件操作]
     B --&gt; C[系统管理]
     C --&gt; D[网络配置]

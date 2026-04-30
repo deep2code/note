@@ -1,4 +1,4 @@
-# Tech Knowledge Base
+# 个人知识库   
 
 ![Knowledge](https://img.shields.io/badge/技术文档-311+-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
@@ -222,5 +222,3 @@ graph LR
     H --> J[DevOps]
     I --> K[AI Agent]
 ```
-
----
