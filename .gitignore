@@ -33,5 +33,4 @@ Thumbs.db
 # Logs
 *.log
 
-# Site build
-site/
+# Site build (included for GitHub Pages deployment)
