@@ -1,0 +1,1232 @@
+<!doctype html><html lang=en class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="20+年资深程序员的技术知识库 | Go、Python、AI、DevOps"><meta name=author content=deep2code><link href=https://deep2code.github.io/note/AI/d2-introduction/ rel=canonical><link rel=icon href=../../assets/images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.7.6"><title>用文字画出世界：D2 图表语言从入门到实战 - note</title><link rel=stylesheet href=../../assets/stylesheets/main.484c7ddc.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.ab4e12ef.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style><link rel=stylesheet href=../../assets/css/code-block.css><link rel=stylesheet href=../../assets/css/custom.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=deep-purple data-md-color-accent=amber> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#d2 class=md-skip> Skip to content </a> </div> <div data-md-component=announce> </div> <header class="md-header md-header--shadow" data-md-component=header> <nav class="md-header__inner md-grid" aria-label=Header> <a href=../.. title=note class="md-header__button md-logo" aria-label=note data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> note </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> 用文字画出世界：D2 图表语言从入门到实战 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=deep-purple data-md-color-accent=amber aria-label="Switch to dark mode" type=radio name=__palette id=__palette_0> <label class="md-header__button md-icon" title="Switch to dark mode" for=__palette_1 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg> </label> <input class=md-option data-md-color-media data-md-color-scheme=slate data-md-color-primary=deep-purple data-md-color-accent=amber aria-label="Switch to light mode" type=radio name=__palette id=__palette_1> <label class="md-header__button md-icon" title="Switch to light mode" for=__palette_0 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg> </label> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=Search placeholder=Search autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=Search> <a href=javascript:void(0) class="md-search__icon md-icon" title=Share aria-label=Share data-clipboard data-clipboard-text data-md-component=search-share tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg> </a> <button type=reset class="md-search__icon md-icon" title=Clear aria-label=Clear tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> Initializing search </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> <div class=md-header__source> <a href=https://github.com/deep2code/note title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </div> <div class=md-source__repository> deep2code/note </div> </a> </div> </nav> </header> <div class=md-container data-md-component=container> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--integrated" aria-label=Navigation data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../.. title=note class="md-nav__button md-logo" aria-label=note data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> note </label> <div class=md-nav__source> <a href=https://github.com/deep2code/note title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </div> <div class=md-source__repository> deep2code/note </div> </a> </div> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../.. class=md-nav__link> <span class=md-ellipsis> Home </span> </a> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2> <label class=md-nav__link for=__nav_2 id=__nav_2_label tabindex> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2> <span class="md-nav__icon md-icon"></span> 编程语言 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1> <label class=md-nav__link for=__nav_2_1 id=__nav_2_1_label tabindex=0> <span class=md-ellipsis> Go </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_2_1_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1> <span class="md-nav__icon md-icon"></span> Go </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_1> <label class=md-nav__link for=__nav_2_1_1 id=__nav_2_1_1_label tabindex=0> <span class=md-ellipsis> 标准库 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_1_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_1> <span class="md-nav__icon md-icon"></span> 标准库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/go/01-fmt-%E6%A0%BC%E5%BC%8F%E5%8C%96IO/ class=md-nav__link> <span class=md-ellipsis> fmt </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/02-errors-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> errors </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/03-strings-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> strings </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/04-bytes-%E5%AD%97%E8%8A%82%E5%88%87%E7%89%87%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> bytes </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/05-strconv-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2/ class=md-nav__link> <span class=md-ellipsis> strconv </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/06-context-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> context </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/07-sync-%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD/ class=md-nav__link> <span class=md-ellipsis> sync </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/08-sync-atomic-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> atomic </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/09-io-IO%E6%8E%A5%E5%8F%A3/ class=md-nav__link> <span class=md-ellipsis> io </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/10-os-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/ class=md-nav__link> <span class=md-ellipsis> os </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_2> <label class=md-nav__link for=__nav_2_1_2 id=__nav_2_1_2_label tabindex=0> <span class=md-ellipsis> 框架 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_2> <span class="md-nav__icon md-icon"></span> 框架 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/go/frameworks/Gin%E6%A1%86%E6%9E%B6Context/ class=md-nav__link> <span class=md-ellipsis> Gin </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/GORM-ORM%E5%BA%93/ class=md-nav__link> <span class=md-ellipsis> GORM </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/grpc%20RPC%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> gRPC </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/Echo%E6%A1%86%E6%9E%B6Web%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Echo </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/go-zero%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> go-zero </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_3> <label class=md-nav__link for=__nav_2_1_3 id=__nav_2_1_3_label tabindex=0> <span class=md-ellipsis> 进阶 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_3_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_3> <span class="md-nav__icon md-icon"></span> 进阶 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80Map/ class=md-nav__link> <span class=md-ellipsis> Map </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80Struct/ class=md-nav__link> <span class=md-ellipsis> Struct </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80GORM/ class=md-nav__link> <span class=md-ellipsis> GORM进阶 </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80HTTPS%E5%85%A8%E6%96%B9%E4%BD%8D/ class=md-nav__link> <span class=md-ellipsis> HTTPS </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Golang%E7%A8%8B%E5%BA%8F%E5%91%98%E5%8F%91%E5%B1%95%E4%B9%8B%E8%B7%AF/ class=md-nav__link> <span class=md-ellipsis> 职业发展 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_2> <label class=md-nav__link for=__nav_2_2 id=__nav_2_2_label tabindex=0> <span class=md-ellipsis> Python </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_2_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2_2> <span class="md-nav__icon md-icon"></span> Python </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/python/01_Requests%E5%BA%93/ class=md-nav__link> <span class=md-ellipsis> Requests </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/02_Pandas%E6%95%B0%E6%8D%AE/ class=md-nav__link> <span class=md-ellipsis> Pandas </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/03_NumPy%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/ class=md-nav__link> <span class=md-ellipsis> NumPy </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/04_Django_Web%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Django </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/05_Flask%E5%BE%AE%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Flask </span> </a> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_2_6> <label class=md-nav__link for=__nav_2_2_6 id=__nav_2_2_6_label tabindex=0> <span class=md-ellipsis> 标准库 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_2_6_label aria-expanded=false> <label class=md-nav__title for=__nav_2_2_6> <span class="md-nav__icon md-icon"></span> 标准库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/python/collections%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> collections </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/datetime%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> datetime </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/json%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> json </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/os%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> os </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/pathlib%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> pathlib </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3> <div class="md-nav__link md-nav__container"> <a href=../ class="md-nav__link "> <span class=md-ellipsis> AI </span> </a> <label class="md-nav__link " for=__nav_3 id=__nav_3_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_3_label aria-expanded=false> <label class=md-nav__title for=__nav_3> <span class="md-nav__icon md-icon"></span> AI </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_2> <label class=md-nav__link for=__nav_3_2 id=__nav_3_2_label tabindex=0> <span class=md-ellipsis> 大模型 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_2_label aria-expanded=false> <label class=md-nav__title for=__nav_3_2> <span class="md-nav__icon md-icon"></span> 大模型 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/ class=md-nav__link> <span class=md-ellipsis> 入门指南 </span> </a> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B/ class=md-nav__link> <span class=md-ellipsis> 基础 </span> </a> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B8%B8%E8%AF%86/ class=md-nav__link> <span class=md-ellipsis> 常识 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_3> <label class=md-nav__link for=__nav_3_3 id=__nav_3_3_label tabindex=0> <span class=md-ellipsis> 进阶 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_3_label aria-expanded=false> <label class=md-nav__title for=__nav_3_3> <span class="md-nav__icon md-icon"></span> 进阶 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8BAgent/ class=md-nav__link> <span class=md-ellipsis> Agent </span> </a> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8BSkill/ class=md-nav__link> <span class=md-ellipsis> Skill </span> </a> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%80%9D%E7%BB%B4%E9%93%BECoT/ class=md-nav__link> <span class=md-ellipsis> CoT </span> </a> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%BB%E5%8A%A8%E5%88%9B%E9%80%A0%E7%AE%97%E6%B3%95/ class=md-nav__link> <span class=md-ellipsis> 主动创造 </span> </a> </li> <li class=md-nav__item> <a href=../AutoGen/ class=md-nav__link> <span class=md-ellipsis> AutoGen </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_4> <label class=md-nav__link for=__nav_3_4 id=__nav_3_4_label tabindex=0> <span class=md-ellipsis> 算法 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_4_label aria-expanded=false> <label class=md-nav__title for=__nav_3_4> <span class="md-nav__icon md-icon"></span> 算法 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95/ class=md-nav__link> <span class=md-ellipsis> 线性回归 </span> </a> </li> <li class=md-nav__item> <a href=../%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E8%BF%9B%E5%8C%96%E5%8F%B2/ class=md-nav__link> <span class=md-ellipsis> 推荐算法 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_5> <label class=md-nav__link for=__nav_3_5 id=__nav_3_5_label tabindex=0> <span class=md-ellipsis> 其他 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_5_label aria-expanded=false> <label class=md-nav__title for=__nav_3_5> <span class="md-nav__icon md-icon"></span> 其他 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../RAG%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/ class=md-nav__link> <span class=md-ellipsis> RAG技术 </span> </a> </li> <li class=md-nav__item> <a href=../OpenAI_Agents_SDK_Guide/ class=md-nav__link> <span class=md-ellipsis> OpenAI SDK </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4> <div class="md-nav__link md-nav__container"> <a href=../../protocols/ class="md-nav__link "> <span class=md-ellipsis> 网络协议 </span> </a> <label class="md-nav__link " for=__nav_4 id=__nav_4_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_4_label aria-expanded=false> <label class=md-nav__title for=__nav_4> <span class="md-nav__icon md-icon"></span> 网络协议 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_2> <label class=md-nav__link for=__nav_4_2 id=__nav_4_2_label tabindex=0> <span class=md-ellipsis> HTTP </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_2_label aria-expanded=false> <label class=md-nav__title for=__nav_4_2> <span class="md-nav__icon md-icon"></span> HTTP </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../protocols/HTTP2%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> HTTP/2 </span> </a> </li> <li class=md-nav__item> <a href=../../protocols/HTTP-3%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> HTTP/3 </span> </a> </li> <li class=md-nav__item> <a href=../../protocols/HTTPS/ class=md-nav__link> <span class=md-ellipsis> HTTPS </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_3> <label class=md-nav__link for=__nav_4_3 id=__nav_4_3_label tabindex=0> <span class=md-ellipsis> RPC </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_3_label aria-expanded=false> <label class=md-nav__title for=__nav_4_3> <span class="md-nav__icon md-icon"></span> RPC </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../protocols/gRPC/ class=md-nav__link> <span class=md-ellipsis> gRPC </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_4> <label class=md-nav__link for=__nav_4_4 id=__nav_4_4_label tabindex=0> <span class=md-ellipsis> 其他 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_4_label aria-expanded=false> <label class=md-nav__title for=__nav_4_4> <span class="md-nav__icon md-icon"></span> 其他 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../protocols/RTSP%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> RTSP </span> </a> </li> <li class=md-nav__item> <a href=../../protocols/IPv8/ class=md-nav__link> <span class=md-ellipsis> IPv8 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_5> <div class="md-nav__link md-nav__container"> <a href=../../database/ class="md-nav__link "> <span class=md-ellipsis> 数据库 </span> </a> <label class="md-nav__link " for=__nav_5 id=__nav_5_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_5_label aria-expanded=false> <label class=md-nav__title for=__nav_5> <span class="md-nav__icon md-icon"></span> 数据库 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_5_2> <label class=md-nav__link for=__nav_5_2 id=__nav_5_2_label tabindex=0> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_5_2_label aria-expanded=false> <label class=md-nav__title for=__nav_5_2> <span class="md-nav__icon md-icon"></span> MySQL </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../database/MySQLB%2B%E6%A0%91/ class=md-nav__link> <span class=md-ellipsis> B+树 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6> <div class="md-nav__link md-nav__container"> <a href=../../tools/ class="md-nav__link "> <span class=md-ellipsis> 开发工具 </span> </a> <label class="md-nav__link " for=__nav_6 id=__nav_6_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_6_label aria-expanded=false> <label class=md-nav__title for=__nav_6> <span class="md-nav__icon md-icon"></span> 开发工具 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_2> <label class=md-nav__link for=__nav_6_2 id=__nav_6_2_label tabindex=0> <span class=md-ellipsis> DevOps </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_2_label aria-expanded=false> <label class=md-nav__title for=__nav_6_2> <span class="md-nav__icon md-icon"></span> DevOps </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Docker/ class=md-nav__link> <span class=md-ellipsis> Docker </span> </a> </li> <li class=md-nav__item> <a href=../../tools/Kubernetes/ class=md-nav__link> <span class=md-ellipsis> Kubernetes </span> </a> </li> <li class=md-nav__item> <a href=../../tools/Linux/ class=md-nav__link> <span class=md-ellipsis> Linux </span> </a> </li> <li class=md-nav__item> <a href=../../tools/jenkins-beginner/ class=md-nav__link> <span class=md-ellipsis> Jenkins </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_3> <label class=md-nav__link for=__nav_6_3 id=__nav_6_3_label tabindex=0> <span class=md-ellipsis> Git </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_3_label aria-expanded=false> <label class=md-nav__title for=__nav_6_3> <span class="md-nav__icon md-icon"></span> Git </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/GitHub%E5%85%A5%E9%97%A8%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/ class=md-nav__link> <span class=md-ellipsis> 入门 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_4> <label class=md-nav__link for=__nav_6_4 id=__nav_6_4_label tabindex=0> <span class=md-ellipsis> 调试 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_4_label aria-expanded=false> <label class=md-nav__title for=__nav_6_4> <span class="md-nav__icon md-icon"></span> 调试 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Wireshark/ class=md-nav__link> <span class=md-ellipsis> Wireshark </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_5> <label class=md-nav__link for=__nav_6_5 id=__nav_6_5_label tabindex=0> <span class=md-ellipsis> 文档 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_5_label aria-expanded=false> <label class=md-nav__title for=__nav_6_5> <span class="md-nav__icon md-icon"></span> 文档 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Mermaid%E5%9B%BE%E8%A1%A8/ class=md-nav__link> <span class=md-ellipsis> Mermaid </span> </a> </li> <li class=md-nav__item> <a href=../../tools/PlantUML%E7%94%BB%E5%9B%BE%E7%A5%9E%E5%99%A8/ class=md-nav__link> <span class=md-ellipsis> PlantUML </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_7> <div class="md-nav__link md-nav__container"> <a href=../../science/ class="md-nav__link "> <span class=md-ellipsis> 计算机科学 </span> </a> <label class="md-nav__link " for=__nav_7 id=__nav_7_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_7_label aria-expanded=false> <label class=md-nav__title for=__nav_7> <span class="md-nav__icon md-icon"></span> 计算机科学 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../science/computer-components-complete/ class=md-nav__link> <span class=md-ellipsis> 组件 </span> </a> </li> <li class=md-nav__item> <a href=../../science/numbers-complete/ class=md-nav__link> <span class=md-ellipsis> 数字 </span> </a> </li> <li class=md-nav__item> <a href=../../science/%E5%A3%B0%E9%9F%B3%E5%8E%9F%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> 声音 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=d2>用文字画出世界：D2 图表语言从入门到实战<a class=headerlink href=#d2 title="Permanent link">&para;</a></h1> <blockquote> <p>还在用鼠标拖拖拽拽画架构图？每次改一个节点就要重新排版？多人协作时 merge 冲突让你抓狂？</p> <p>今天介绍一个让你用纯文本就能画出专业级图表的神器——<strong>D2</strong>。</p> </blockquote> <hr> <h2 id=d2_1>一、为什么你需要 D2？<a class=headerlink href=#d2_1 title="Permanent link">&para;</a></h2> <p>先说一个扎心的场景：</p> <p>你花了一个下午，用某画图工具精心排好了一张系统架构图。第二天产品经理说"加一个缓存层"，你删删改改，整个布局全乱了。再后来，同事在 Git 上改了同一个文件，merge 时发现是二进制格式，根本没法 diff。</p> <p>如果你经历过这些，D2 就是来救你的。</p> <p><strong>D2</strong> 的全称是 <strong>Declarative Diagramming</strong>，由 Terrastruct 团队开发并开源。它的核心理念只有一句话：</p> <blockquote> <p><strong>用文本描述图表，让工具负责渲染。</strong></p> </blockquote> <p>这意味着：</p> <ul> <li>图表定义是纯文本，天然支持 Git 版本管理</li> <li>修改只需改文字，不用担心布局崩掉</li> <li>可以写脚本自动生成图表</li> <li>团队协作不再是噩梦</li> </ul> <p>下面这张图，就是用 D2 的一段文本生成的：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1>1</a></span>
+<span class=normal><a href=#__codelineno-0-2>2</a></span>
+<span class=normal><a href=#__codelineno-0-3>3</a></span>
+<span class=normal><a href=#__codelineno-0-4>4</a></span>
+<span class=normal><a href=#__codelineno-0-5>5</a></span>
+<span class=normal><a href=#__codelineno-0-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>用户 -&gt; 应用服务器: 发起请求
+</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a>应用服务器 -&gt; 缓存层: 查询缓存
+</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a>缓存层 -&gt; 数据库: 缓存未命中
+</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a>数据库 -&gt; 缓存层: 返回数据
+</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a>缓存层 -&gt; 应用服务器: 返回数据
+</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a>应用服务器 -&gt; 用户: 响应结果
+</span></code></pre></div></td></tr></table></div> <p>没错，就这么几行文字，渲染出来就是一张完整的请求流程图。是不是有点心动了？让我们一步步来。</p> <hr> <h2 id=5>二、5 分钟上手：安装与初体验<a class=headerlink href=#5 title="Permanent link">&para;</a></h2> <h3 id=21>2.1 安装<a class=headerlink href=#21 title="Permanent link">&para;</a></h3> <p>D2 提供了多种安装方式，最简单的两种：</p> <p><strong>方式一：一键脚本（macOS / Linux）</strong></p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a>curl<span class=w> </span>-fsSL<span class=w> </span>https://d2lang.com/install.sh<span class=w> </span><span class=p>|</span><span class=w> </span>sh<span class=w> </span>-s<span class=w> </span>--
+</span></code></pre></div></td></tr></table></div> <p><strong>方式二：Go 安装</strong></p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a>go<span class=w> </span>install<span class=w> </span>oss.terrastruct.com/d2@latest
+</span></code></pre></div></td></tr></table></div> <p><strong>方式三：Homebrew（macOS）</strong></p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a>brew<span class=w> </span>install<span class=w> </span>d2
+</span></code></pre></div></td></tr></table></div> <p>安装完成后，验证一下：</p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a>d2<span class=w> </span>--version
+</span></code></pre></div></td></tr></table></div> <p>看到版本号输出，就说明安装成功了。</p> <h3 id=22-hello-d2>2.2 第一个图表：Hello D2<a class=headerlink href=#22-hello-d2 title="Permanent link">&para;</a></h3> <p>创建一个文件 <code>hello.d2</code>，写入：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a>hello -&gt; world
+</span></code></pre></div></td></tr></table></div> <p>然后运行：</p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a>d2<span class=w> </span>hello.d2<span class=w> </span>hello.svg
+</span></code></pre></div></td></tr></table></div> <p>打开 <code>hello.svg</code>，你会看到两个方框，一个箭头从 "hello" 指向 "world"。就这么简单——<strong>D2 里任何独立的词或短语都会自动成为一个节点，箭头 <code>-&gt;</code> 表示连接。</strong></p> <h3 id=23>2.3 实时预览：边写边看<a class=headerlink href=#23 title="Permanent link">&para;</a></h3> <p>D2 自带 watch 模式，修改文件后自动刷新预览：</p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a>d2<span class=w> </span>--watch<span class=w> </span>hello.d2<span class=w> </span>hello.svg
+</span></code></pre></div></td></tr></table></div> <p>配合 VS Code 的 D2 插件，可以做到保存即预览，体验非常丝滑。</p> <hr> <h2 id=_1>三、核心语法：从简单到进阶<a class=headerlink href=#_1 title="Permanent link">&para;</a></h2> <p>掌握了安装和基本用法后，我们来系统学习 D2 的语法。别担心，D2 的设计哲学就是<strong>简洁直觉</strong>，你会发现它比你想的要简单。</p> <h3 id=31-shapes>3.1 节点（Shapes）<a class=headerlink href=#31-shapes title="Permanent link">&para;</a></h3> <p>在 D2 中，节点是图表的基本单元。默认情况下，每个节点都是一个矩形：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1>1</a></span>
+<span class=normal><a href=#__codelineno-8-2>2</a></span>
+<span class=normal><a href=#__codelineno-8-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a>用户
+</span><span id=__span-8-2><a id=__codelineno-8-2 name=__codelineno-8-2></a>服务器
+</span><span id=__span-8-3><a id=__codelineno-8-3 name=__codelineno-8-3></a>数据库
+</span></code></pre></div></td></tr></table></div> <p>你可以给节点设置标签，让它显示不同的文字：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1>1</a></span>
+<span class=normal><a href=#__codelineno-9-2>2</a></span>
+<span class=normal><a href=#__codelineno-9-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a>x: 用户端
+</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a>y: 服务端
+</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a>z: 数据端
+</span></code></pre></div></td></tr></table></div> <p>这里 <code>x</code>、<code>y</code>、<code>z</code> 是节点的 ID（用于引用），冒号后面是显示的标签。</p> <h3 id=32-connections>3.2 连接（Connections）<a class=headerlink href=#32-connections title="Permanent link">&para;</a></h3> <p>连接是 D2 的灵魂。用箭头把节点串起来：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1>1</a></span>
+<span class=normal><a href=#__codelineno-10-2>2</a></span>
+<span class=normal><a href=#__codelineno-10-3>3</a></span>
+<span class=normal><a href=#__codelineno-10-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a>用户 -&gt; 服务器: 发送请求
+</span><span id=__span-10-2><a id=__codelineno-10-2 name=__codelineno-10-2></a>服务器 -&gt; 数据库: 查询数据
+</span><span id=__span-10-3><a id=__codelineno-10-3 name=__codelineno-10-3></a>数据库 -&gt; 服务器: 返回结果
+</span><span id=__span-10-4><a id=__codelineno-10-4 name=__codelineno-10-4></a>服务器 -&gt; 用户: 返回响应
+</span></code></pre></div></td></tr></table></div> <p>D2 支持多种箭头方向：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1>1</a></span>
+<span class=normal><a href=#__codelineno-11-2>2</a></span>
+<span class=normal><a href=#__codelineno-11-3>3</a></span>
+<span class=normal><a href=#__codelineno-11-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a>A -&gt; B: 单向箭头（从左到右）
+</span><span id=__span-11-2><a id=__codelineno-11-2 name=__codelineno-11-2></a>C &lt;- D: 反向箭头（从右到左）
+</span><span id=__span-11-3><a id=__codelineno-11-3 name=__codelineno-11-3></a>E -- F: 无箭头连线
+</span><span id=__span-11-4><a id=__codelineno-11-4 name=__codelineno-11-4></a>G &lt;-&gt; H: 双向箭头
+</span></code></pre></div></td></tr></table></div> <p>来看一个实际例子——用户注册流程：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1>1</a></span>
+<span class=normal><a href=#__codelineno-12-2>2</a></span>
+<span class=normal><a href=#__codelineno-12-3>3</a></span>
+<span class=normal><a href=#__codelineno-12-4>4</a></span>
+<span class=normal><a href=#__codelineno-12-5>5</a></span>
+<span class=normal><a href=#__codelineno-12-6>6</a></span>
+<span class=normal><a href=#__codelineno-12-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><a id=__codelineno-12-1 name=__codelineno-12-1></a>用户 -&gt; 前端页面: 填写注册信息
+</span><span id=__span-12-2><a id=__codelineno-12-2 name=__codelineno-12-2></a>前端页面 -&gt; API网关: 提交表单
+</span><span id=__span-12-3><a id=__codelineno-12-3 name=__codelineno-12-3></a>API网关 -&gt; 用户服务: 转发请求
+</span><span id=__span-12-4><a id=__codelineno-12-4 name=__codelineno-12-4></a>用户服务 -&gt; 数据库: 写入用户数据
+</span><span id=__span-12-5><a id=__codelineno-12-5 name=__codelineno-12-5></a>用户服务 -&gt; 消息队列: 发送欢迎邮件事件
+</span><span id=__span-12-6><a id=__codelineno-12-6 name=__codelineno-12-6></a>消息队列 -&gt; 邮件服务: 消费事件
+</span><span id=__span-12-7><a id=__codelineno-12-7 name=__codelineno-12-7></a>邮件服务 -&gt; 用户邮箱: 发送欢迎邮件
+</span></code></pre></div></td></tr></table></div> <h3 id=33-shape>3.3 形状（Shape）：让图表更专业<a class=headerlink href=#33-shape title="Permanent link">&para;</a></h3> <p>矩形只是默认样式。D2 内置了丰富的形状，让你的图表更直观：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1> 1</a></span>
+<span class=normal><a href=#__codelineno-13-2> 2</a></span>
+<span class=normal><a href=#__codelineno-13-3> 3</a></span>
+<span class=normal><a href=#__codelineno-13-4> 4</a></span>
+<span class=normal><a href=#__codelineno-13-5> 5</a></span>
+<span class=normal><a href=#__codelineno-13-6> 6</a></span>
+<span class=normal><a href=#__codelineno-13-7> 7</a></span>
+<span class=normal><a href=#__codelineno-13-8> 8</a></span>
+<span class=normal><a href=#__codelineno-13-9> 9</a></span>
+<span class=normal><a href=#__codelineno-13-10>10</a></span>
+<span class=normal><a href=#__codelineno-13-11>11</a></span>
+<span class=normal><a href=#__codelineno-13-12>12</a></span>
+<span class=normal><a href=#__codelineno-13-13>13</a></span>
+<span class=normal><a href=#__codelineno-13-14>14</a></span>
+<span class=normal><a href=#__codelineno-13-15>15</a></span>
+<span class=normal><a href=#__codelineno-13-16>16</a></span>
+<span class=normal><a href=#__codelineno-13-17>17</a></span>
+<span class=normal><a href=#__codelineno-13-18>18</a></span>
+<span class=normal><a href=#__codelineno-13-19>19</a></span>
+<span class=normal><a href=#__codelineno-13-20>20</a></span>
+<span class=normal><a href=#__codelineno-13-21>21</a></span>
+<span class=normal><a href=#__codelineno-13-22>22</a></span>
+<span class=normal><a href=#__codelineno-13-23>23</a></span>
+<span class=normal><a href=#__codelineno-13-24>24</a></span>
+<span class=normal><a href=#__codelineno-13-25>25</a></span>
+<span class=normal><a href=#__codelineno-13-26>26</a></span>
+<span class=normal><a href=#__codelineno-13-27>27</a></span>
+<span class=normal><a href=#__codelineno-13-28>28</a></span>
+<span class=normal><a href=#__codelineno-13-29>29</a></span>
+<span class=normal><a href=#__codelineno-13-30>30</a></span>
+<span class=normal><a href=#__codelineno-13-31>31</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><a id=__codelineno-13-1 name=__codelineno-13-1></a>用户: 用户 {
+</span><span id=__span-13-2><a id=__codelineno-13-2 name=__codelineno-13-2></a>  shape: person
+</span><span id=__span-13-3><a id=__codelineno-13-3 name=__codelineno-13-3></a>}
+</span><span id=__span-13-4><a id=__codelineno-13-4 name=__codelineno-13-4></a>
+</span><span id=__span-13-5><a id=__codelineno-13-5 name=__codelineno-13-5></a>缓存: Redis缓存 {
+</span><span id=__span-13-6><a id=__codelineno-13-6 name=__codelineno-13-6></a>  shape: cylinder
+</span><span id=__span-13-7><a id=__codelineno-13-7 name=__codelineno-13-7></a>}
+</span><span id=__span-13-8><a id=__codelineno-13-8 name=__codelineno-13-8></a>
+</span><span id=__span-13-9><a id=__codelineno-13-9 name=__codelineno-13-9></a>数据存储: 用户数据 {
+</span><span id=__span-13-10><a id=__codelineno-13-10 name=__codelineno-13-10></a>  shape: stored_data
+</span><span id=__span-13-11><a id=__codelineno-13-11 name=__codelineno-13-11></a>}
+</span><span id=__span-13-12><a id=__codelineno-13-12 name=__codelineno-13-12></a>
+</span><span id=__span-13-13><a id=__codelineno-13-13 name=__codelineno-13-13></a>决策点: 是否VIP {
+</span><span id=__span-13-14><a id=__codelineno-13-14 name=__codelineno-13-14></a>  shape: diamond
+</span><span id=__span-13-15><a id=__codelineno-13-15 name=__codelineno-13-15></a>}
+</span><span id=__span-13-16><a id=__codelineno-13-16 name=__codelineno-13-16></a>
+</span><span id=__span-13-17><a id=__codelineno-13-17 name=__codelineno-13-17></a>服务节点: 微服务 {
+</span><span id=__span-13-18><a id=__codelineno-13-18 name=__codelineno-13-18></a>  shape: hexagon
+</span><span id=__span-13-19><a id=__codelineno-13-19 name=__codelineno-13-19></a>}
+</span><span id=__span-13-20><a id=__codelineno-13-20 name=__codelineno-13-20></a>
+</span><span id=__span-13-21><a id=__codelineno-13-21 name=__codelineno-13-21></a>文档页面: API文档 {
+</span><span id=__span-13-22><a id=__codelineno-13-22 name=__codelineno-13-22></a>  shape: page
+</span><span id=__span-13-23><a id=__codelineno-13-23 name=__codelineno-13-23></a>}
+</span><span id=__span-13-24><a id=__codelineno-13-24 name=__codelineno-13-24></a>
+</span><span id=__span-13-25><a id=__codelineno-13-25 name=__codelineno-13-25></a>圆形节点: 状态A {
+</span><span id=__span-13-26><a id=__codelineno-13-26 name=__codelineno-13-26></a>  shape: circle
+</span><span id=__span-13-27><a id=__codelineno-13-27 name=__codelineno-13-27></a>}
+</span><span id=__span-13-28><a id=__codelineno-13-28 name=__codelineno-13-28></a>
+</span><span id=__span-13-29><a id=__codelineno-13-29 name=__codelineno-13-29></a>椭圆节点: 状态B {
+</span><span id=__span-13-30><a id=__codelineno-13-30 name=__codelineno-13-30></a>  shape: oval
+</span><span id=__span-13-31><a id=__codelineno-13-31 name=__codelineno-13-31></a>}
+</span></code></pre></div></td></tr></table></div> <p>不同的形状传达不同的语义。比如 <code>cylinder</code> 代表数据存储，<code>diamond</code> 代表判断/决策，<code>person</code> 代表人或角色——这在技术文档中是约定俗成的。</p> <p>用一个真实的例子来感受：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
+<span class=normal><a href=#__codelineno-14-2> 2</a></span>
+<span class=normal><a href=#__codelineno-14-3> 3</a></span>
+<span class=normal><a href=#__codelineno-14-4> 4</a></span>
+<span class=normal><a href=#__codelineno-14-5> 5</a></span>
+<span class=normal><a href=#__codelineno-14-6> 6</a></span>
+<span class=normal><a href=#__codelineno-14-7> 7</a></span>
+<span class=normal><a href=#__codelineno-14-8> 8</a></span>
+<span class=normal><a href=#__codelineno-14-9> 9</a></span>
+<span class=normal><a href=#__codelineno-14-10>10</a></span>
+<span class=normal><a href=#__codelineno-14-11>11</a></span>
+<span class=normal><a href=#__codelineno-14-12>12</a></span>
+<span class=normal><a href=#__codelineno-14-13>13</a></span>
+<span class=normal><a href=#__codelineno-14-14>14</a></span>
+<span class=normal><a href=#__codelineno-14-15>15</a></span>
+<span class=normal><a href=#__codelineno-14-16>16</a></span>
+<span class=normal><a href=#__codelineno-14-17>17</a></span>
+<span class=normal><a href=#__codelineno-14-18>18</a></span>
+<span class=normal><a href=#__codelineno-14-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><a id=__codelineno-14-1 name=__codelineno-14-1></a>用户: 普通用户 {
+</span><span id=__span-14-2><a id=__codelineno-14-2 name=__codelineno-14-2></a>  shape: person
+</span><span id=__span-14-3><a id=__codelineno-14-3 name=__codelineno-14-3></a>}
+</span><span id=__span-14-4><a id=__codelineno-14-4 name=__codelineno-14-4></a>
+</span><span id=__span-14-5><a id=__codelineno-14-5 name=__codelineno-14-5></a>是否登录: 判断登录状态 {
+</span><span id=__span-14-6><a id=__codelineno-14-6 name=__codelineno-14-6></a>  shape: diamond
+</span><span id=__span-14-7><a id=__codelineno-14-7 name=__codelineno-14-7></a>}
+</span><span id=__span-14-8><a id=__codelineno-14-8 name=__codelineno-14-8></a>
+</span><span id=__span-14-9><a id=__codelineno-14-9 name=__codelineno-14-9></a>缓存: Redis {
+</span><span id=__span-14-10><a id=__codelineno-14-10 name=__codelineno-14-10></a>  shape: cylinder
+</span><span id=__span-14-11><a id=__codelineno-14-11 name=__codelineno-14-11></a>}
+</span><span id=__span-14-12><a id=__codelineno-14-12 name=__codelineno-14-12></a>
+</span><span id=__span-14-13><a id=__codelineno-14-13 name=__codelineno-14-13></a>数据库: MySQL {
+</span><span id=__span-14-14><a id=__codelineno-14-14 name=__codelineno-14-14></a>  shape: cylinder
+</span><span id=__span-14-15><a id=__codelineno-14-15 name=__codelineno-14-15></a>}
+</span><span id=__span-14-16><a id=__codelineno-14-16 name=__codelineno-14-16></a>
+</span><span id=__span-14-17><a id=__codelineno-14-17 name=__codelineno-14-17></a>用户 -&gt; 是否登录: 访问页面
+</span><span id=__span-14-18><a id=__codelineno-14-18 name=__codelineno-14-18></a>是否登录 -&gt; 缓存: 已登录，查缓存
+</span><span id=__span-14-19><a id=__codelineno-14-19 name=__codelineno-14-19></a>是否登录 -&gt; 数据库: 未登录，查库
+</span></code></pre></div></td></tr></table></div> <h3 id=34-containers>3.4 容器（Containers）：表达层级关系<a class=headerlink href=#34-containers title="Permanent link">&para;</a></h3> <p>当图表变得复杂时，你需要把相关的东西"装"在一起。D2 用花括号 <code>{}</code> 表示容器：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
+<span class=normal><a href=#__codelineno-15-2> 2</a></span>
+<span class=normal><a href=#__codelineno-15-3> 3</a></span>
+<span class=normal><a href=#__codelineno-15-4> 4</a></span>
+<span class=normal><a href=#__codelineno-15-5> 5</a></span>
+<span class=normal><a href=#__codelineno-15-6> 6</a></span>
+<span class=normal><a href=#__codelineno-15-7> 7</a></span>
+<span class=normal><a href=#__codelineno-15-8> 8</a></span>
+<span class=normal><a href=#__codelineno-15-9> 9</a></span>
+<span class=normal><a href=#__codelineno-15-10>10</a></span>
+<span class=normal><a href=#__codelineno-15-11>11</a></span>
+<span class=normal><a href=#__codelineno-15-12>12</a></span>
+<span class=normal><a href=#__codelineno-15-13>13</a></span>
+<span class=normal><a href=#__codelineno-15-14>14</a></span>
+<span class=normal><a href=#__codelineno-15-15>15</a></span>
+<span class=normal><a href=#__codelineno-15-16>16</a></span>
+<span class=normal><a href=#__codelineno-15-17>17</a></span>
+<span class=normal><a href=#__codelineno-15-18>18</a></span>
+<span class=normal><a href=#__codelineno-15-19>19</a></span>
+<span class=normal><a href=#__codelineno-15-20>20</a></span>
+<span class=normal><a href=#__codelineno-15-21>21</a></span>
+<span class=normal><a href=#__codelineno-15-22>22</a></span>
+<span class=normal><a href=#__codelineno-15-23>23</a></span>
+<span class=normal><a href=#__codelineno-15-24>24</a></span>
+<span class=normal><a href=#__codelineno-15-25>25</a></span>
+<span class=normal><a href=#__codelineno-15-26>26</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><a id=__codelineno-15-1 name=__codelineno-15-1></a>前端: 前端层 {
+</span><span id=__span-15-2><a id=__codelineno-15-2 name=__codelineno-15-2></a>  Web应用
+</span><span id=__span-15-3><a id=__codelineno-15-3 name=__codelineno-15-3></a>  移动端
+</span><span id=__span-15-4><a id=__codelineno-15-4 name=__codelineno-15-4></a>}
+</span><span id=__span-15-5><a id=__codelineno-15-5 name=__codelineno-15-5></a>
+</span><span id=__span-15-6><a id=__codelineno-15-6 name=__codelineno-15-6></a>后端: 后端层 {
+</span><span id=__span-15-7><a id=__codelineno-15-7 name=__codelineno-15-7></a>  API网关
+</span><span id=__span-15-8><a id=__codelineno-15-8 name=__codelineno-15-8></a>  用户服务
+</span><span id=__span-15-9><a id=__codelineno-15-9 name=__codelineno-15-9></a>  订单服务
+</span><span id=__span-15-10><a id=__codelineno-15-10 name=__codelineno-15-10></a>}
+</span><span id=__span-15-11><a id=__codelineno-15-11 name=__codelineno-15-11></a>
+</span><span id=__span-15-12><a id=__codelineno-15-12 name=__codelineno-15-12></a>存储: 存储层 {
+</span><span id=__span-15-13><a id=__codelineno-15-13 name=__codelineno-15-13></a>  Redis缓存: {
+</span><span id=__span-15-14><a id=__codelineno-15-14 name=__codelineno-15-14></a>    shape: cylinder
+</span><span id=__span-15-15><a id=__codelineno-15-15 name=__codelineno-15-15></a>  }
+</span><span id=__span-15-16><a id=__codelineno-15-16 name=__codelineno-15-16></a>  MySQL: {
+</span><span id=__span-15-17><a id=__codelineno-15-17 name=__codelineno-15-17></a>    shape: cylinder
+</span><span id=__span-15-18><a id=__codelineno-15-18 name=__codelineno-15-18></a>  }
+</span><span id=__span-15-19><a id=__codelineno-15-19 name=__codelineno-15-19></a>}
+</span><span id=__span-15-20><a id=__codelineno-15-20 name=__codelineno-15-20></a>
+</span><span id=__span-15-21><a id=__codelineno-15-21 name=__codelineno-15-21></a>前端.Web应用 -&gt; 后端.API网关
+</span><span id=__span-15-22><a id=__codelineno-15-22 name=__codelineno-15-22></a>前端.移动端 -&gt; 后端.API网关
+</span><span id=__span-15-23><a id=__codelineno-15-23 name=__codelineno-15-23></a>后端.API网关 -&gt; 后端.用户服务
+</span><span id=__span-15-24><a id=__codelineno-15-24 name=__codelineno-15-24></a>后端.API网关 -&gt; 后端.订单服务
+</span><span id=__span-15-25><a id=__codelineno-15-25 name=__codelineno-15-25></a>后端.用户服务 -&gt; 存储.Redis缓存
+</span><span id=__span-15-26><a id=__codelineno-15-26 name=__codelineno-15-26></a>后端.订单服务 -&gt; 存储.MySQL
+</span></code></pre></div></td></tr></table></div> <p>注意跨容器引用时的语法：<code>容器名.节点名</code>。就像文件路径一样，用 <code>.</code> 分隔层级。</p> <p><strong>一个实用技巧</strong>：在容器内部引用外部节点时，用 <code>_</code> 代表父级：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1>1</a></span>
+<span class=normal><a href=#__codelineno-16-2>2</a></span>
+<span class=normal><a href=#__codelineno-16-3>3</a></span>
+<span class=normal><a href=#__codelineno-16-4>4</a></span>
+<span class=normal><a href=#__codelineno-16-5>5</a></span>
+<span class=normal><a href=#__codelineno-16-6>6</a></span>
+<span class=normal><a href=#__codelineno-16-7>7</a></span>
+<span class=normal><a href=#__codelineno-16-8>8</a></span>
+<span class=normal><a href=#__codelineno-16-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><a id=__codelineno-16-1 name=__codelineno-16-1></a>公司: 科技公司 {
+</span><span id=__span-16-2><a id=__codelineno-16-2 name=__codelineno-16-2></a>  研发部: 研发中心 {
+</span><span id=__span-16-3><a id=__codelineno-16-3 name=__codelineno-16-3></a>    前端组
+</span><span id=__span-16-4><a id=__codelineno-16-4 name=__codelineno-16-4></a>    后端组
+</span><span id=__span-16-5><a id=__codelineno-16-5 name=__codelineno-16-5></a>    前端组 -&gt; 后端组: 协作开发
+</span><span id=__span-16-6><a id=__codelineno-16-6 name=__codelineno-16-6></a>  }
+</span><span id=__span-16-7><a id=__codelineno-16-7 name=__codelineno-16-7></a>  产品部
+</span><span id=__span-16-8><a id=__codelineno-16-8 name=__codelineno-16-8></a>  研发部 -&gt; 产品部: 需求对接
+</span><span id=__span-16-9><a id=__codelineno-16-9 name=__codelineno-16-9></a>}
+</span></code></pre></div></td></tr></table></div> <h3 id=35-style>3.5 样式（Style）：让图表好看<a class=headerlink href=#35-style title="Permanent link">&para;</a></h3> <p>光有结构还不够，好看的图表才能让人眼前一亮。D2 提供了丰富的样式属性：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1> 1</a></span>
+<span class=normal><a href=#__codelineno-17-2> 2</a></span>
+<span class=normal><a href=#__codelineno-17-3> 3</a></span>
+<span class=normal><a href=#__codelineno-17-4> 4</a></span>
+<span class=normal><a href=#__codelineno-17-5> 5</a></span>
+<span class=normal><a href=#__codelineno-17-6> 6</a></span>
+<span class=normal><a href=#__codelineno-17-7> 7</a></span>
+<span class=normal><a href=#__codelineno-17-8> 8</a></span>
+<span class=normal><a href=#__codelineno-17-9> 9</a></span>
+<span class=normal><a href=#__codelineno-17-10>10</a></span>
+<span class=normal><a href=#__codelineno-17-11>11</a></span>
+<span class=normal><a href=#__codelineno-17-12>12</a></span>
+<span class=normal><a href=#__codelineno-17-13>13</a></span>
+<span class=normal><a href=#__codelineno-17-14>14</a></span>
+<span class=normal><a href=#__codelineno-17-15>15</a></span>
+<span class=normal><a href=#__codelineno-17-16>16</a></span>
+<span class=normal><a href=#__codelineno-17-17>17</a></span>
+<span class=normal><a href=#__codelineno-17-18>18</a></span>
+<span class=normal><a href=#__codelineno-17-19>19</a></span>
+<span class=normal><a href=#__codelineno-17-20>20</a></span>
+<span class=normal><a href=#__codelineno-17-21>21</a></span>
+<span class=normal><a href=#__codelineno-17-22>22</a></span>
+<span class=normal><a href=#__codelineno-17-23>23</a></span>
+<span class=normal><a href=#__codelineno-17-24>24</a></span>
+<span class=normal><a href=#__codelineno-17-25>25</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><a id=__codelineno-17-1 name=__codelineno-17-1></a>核心服务: 支付中心 {
+</span><span id=__span-17-2><a id=__codelineno-17-2 name=__codelineno-17-2></a>  style: {
+</span><span id=__span-17-3><a id=__codelineno-17-3 name=__codelineno-17-3></a>    fill: &quot;#E8F5E9&quot;
+</span><span id=__span-17-4><a id=__codelineno-17-4 name=__codelineno-17-4></a>    stroke: &quot;#4CAF50&quot;
+</span><span id=__span-17-5><a id=__codelineno-17-5 name=__codelineno-17-5></a>    stroke-width: 3
+</span><span id=__span-17-6><a id=__codelineno-17-6 name=__codelineno-17-6></a>    border-radius: 10
+</span><span id=__span-17-7><a id=__codelineno-17-7 name=__codelineno-17-7></a>    shadow: true
+</span><span id=__span-17-8><a id=__codelineno-17-8 name=__codelineno-17-8></a>  }
+</span><span id=__span-17-9><a id=__codelineno-17-9 name=__codelineno-17-9></a>}
+</span><span id=__span-17-10><a id=__codelineno-17-10 name=__codelineno-17-10></a>
+</span><span id=__span-17-11><a id=__codelineno-17-11 name=__codelineno-17-11></a>告警节点: 异常处理 {
+</span><span id=__span-17-12><a id=__codelineno-17-12 name=__codelineno-17-12></a>  style: {
+</span><span id=__span-17-13><a id=__codelineno-17-13 name=__codelineno-17-13></a>    fill: &quot;#FFEBEE&quot;
+</span><span id=__span-17-14><a id=__codelineno-17-14 name=__codelineno-17-14></a>    stroke: &quot;#F44336&quot;
+</span><span id=__span-17-15><a id=__codelineno-17-15 name=__codelineno-17-15></a>    font-color: &quot;#D32F2F&quot;
+</span><span id=__span-17-16><a id=__codelineno-17-16 name=__codelineno-17-16></a>    bold: true
+</span><span id=__span-17-17><a id=__codelineno-17-17 name=__codelineno-17-17></a>  }
+</span><span id=__span-17-18><a id=__codelineno-17-18 name=__codelineno-17-18></a>}
+</span><span id=__span-17-19><a id=__codelineno-17-19 name=__codelineno-17-19></a>
+</span><span id=__span-17-20><a id=__codelineno-17-20 name=__codelineno-17-20></a>虚线连接: {
+</span><span id=__span-17-21><a id=__codelineno-17-21 name=__codelineno-17-21></a>  style: {
+</span><span id=__span-17-22><a id=__codelineno-17-22 name=__codelineno-17-22></a>    stroke-dash: 5
+</span><span id=__span-17-23><a id=__codelineno-17-23 name=__codelineno-17-23></a>    stroke: &quot;#9E9E9E&quot;
+</span><span id=__span-17-24><a id=__codelineno-17-24 name=__codelineno-17-24></a>  }
+</span><span id=__span-17-25><a id=__codelineno-17-25 name=__codelineno-17-25></a>}
+</span></code></pre></div></td></tr></table></div> <p><strong>常用样式属性一览：</strong></p> <table> <thead> <tr> <th>属性</th> <th>说明</th> <th>取值范围</th> </tr> </thead> <tbody> <tr> <td><code>fill</code></td> <td>填充色</td> <td>CSS 颜色名 / 十六进制</td> </tr> <tr> <td><code>stroke</code></td> <td>边框/连线颜色</td> <td>CSS 颜色名 / 十六进制</td> </tr> <tr> <td><code>stroke-width</code></td> <td>边框/连线宽度</td> <td>1-15</td> </tr> <tr> <td><code>stroke-dash</code></td> <td>虚线间距</td> <td>0-10</td> </tr> <tr> <td><code>border-radius</code></td> <td>圆角</td> <td>0-20</td> </tr> <tr> <td><code>shadow</code></td> <td>阴影</td> <td>true / false</td> </tr> <tr> <td><code>opacity</code></td> <td>透明度</td> <td>0-1</td> </tr> <tr> <td><code>font-size</code></td> <td>字号</td> <td>8-100</td> </tr> <tr> <td><code>font-color</code></td> <td>字色</td> <td>CSS 颜色名 / 十六进制</td> </tr> <tr> <td><code>bold</code></td> <td>加粗</td> <td>true / false</td> </tr> <tr> <td><code>italic</code></td> <td>斜体</td> <td>true / false</td> </tr> <tr> <td><code>underline</code></td> <td>下划线</td> <td>true / false</td> </tr> <tr> <td><code>3d</code></td> <td>3D效果</td> <td>true / false（仅矩形/方形）</td> </tr> <tr> <td><code>multiple</code></td> <td>多实例</td> <td>true / false</td> </tr> <tr> <td><code>double-border</code></td> <td>双边框</td> <td>true / false</td> </tr> <tr> <td><code>animated</code></td> <td>动画连线</td> <td>true / false</td> </tr> <tr> <td><code>text-transform</code></td> <td>文字变换</td> <td>uppercase / lowercase / title</td> </tr> </tbody> </table> <p>来一个完整的实战样式示例——微服务架构图：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-18-1> 1</a></span>
+<span class=normal><a href=#__codelineno-18-2> 2</a></span>
+<span class=normal><a href=#__codelineno-18-3> 3</a></span>
+<span class=normal><a href=#__codelineno-18-4> 4</a></span>
+<span class=normal><a href=#__codelineno-18-5> 5</a></span>
+<span class=normal><a href=#__codelineno-18-6> 6</a></span>
+<span class=normal><a href=#__codelineno-18-7> 7</a></span>
+<span class=normal><a href=#__codelineno-18-8> 8</a></span>
+<span class=normal><a href=#__codelineno-18-9> 9</a></span>
+<span class=normal><a href=#__codelineno-18-10>10</a></span>
+<span class=normal><a href=#__codelineno-18-11>11</a></span>
+<span class=normal><a href=#__codelineno-18-12>12</a></span>
+<span class=normal><a href=#__codelineno-18-13>13</a></span>
+<span class=normal><a href=#__codelineno-18-14>14</a></span>
+<span class=normal><a href=#__codelineno-18-15>15</a></span>
+<span class=normal><a href=#__codelineno-18-16>16</a></span>
+<span class=normal><a href=#__codelineno-18-17>17</a></span>
+<span class=normal><a href=#__codelineno-18-18>18</a></span>
+<span class=normal><a href=#__codelineno-18-19>19</a></span>
+<span class=normal><a href=#__codelineno-18-20>20</a></span>
+<span class=normal><a href=#__codelineno-18-21>21</a></span>
+<span class=normal><a href=#__codelineno-18-22>22</a></span>
+<span class=normal><a href=#__codelineno-18-23>23</a></span>
+<span class=normal><a href=#__codelineno-18-24>24</a></span>
+<span class=normal><a href=#__codelineno-18-25>25</a></span>
+<span class=normal><a href=#__codelineno-18-26>26</a></span>
+<span class=normal><a href=#__codelineno-18-27>27</a></span>
+<span class=normal><a href=#__codelineno-18-28>28</a></span>
+<span class=normal><a href=#__codelineno-18-29>29</a></span>
+<span class=normal><a href=#__codelineno-18-30>30</a></span>
+<span class=normal><a href=#__codelineno-18-31>31</a></span>
+<span class=normal><a href=#__codelineno-18-32>32</a></span>
+<span class=normal><a href=#__codelineno-18-33>33</a></span>
+<span class=normal><a href=#__codelineno-18-34>34</a></span>
+<span class=normal><a href=#__codelineno-18-35>35</a></span>
+<span class=normal><a href=#__codelineno-18-36>36</a></span>
+<span class=normal><a href=#__codelineno-18-37>37</a></span>
+<span class=normal><a href=#__codelineno-18-38>38</a></span>
+<span class=normal><a href=#__codelineno-18-39>39</a></span>
+<span class=normal><a href=#__codelineno-18-40>40</a></span>
+<span class=normal><a href=#__codelineno-18-41>41</a></span>
+<span class=normal><a href=#__codelineno-18-42>42</a></span>
+<span class=normal><a href=#__codelineno-18-43>43</a></span>
+<span class=normal><a href=#__codelineno-18-44>44</a></span>
+<span class=normal><a href=#__codelineno-18-45>45</a></span>
+<span class=normal><a href=#__codelineno-18-46>46</a></span>
+<span class=normal><a href=#__codelineno-18-47>47</a></span>
+<span class=normal><a href=#__codelineno-18-48>48</a></span>
+<span class=normal><a href=#__codelineno-18-49>49</a></span>
+<span class=normal><a href=#__codelineno-18-50>50</a></span>
+<span class=normal><a href=#__codelineno-18-51>51</a></span>
+<span class=normal><a href=#__codelineno-18-52>52</a></span>
+<span class=normal><a href=#__codelineno-18-53>53</a></span>
+<span class=normal><a href=#__codelineno-18-54>54</a></span>
+<span class=normal><a href=#__codelineno-18-55>55</a></span>
+<span class=normal><a href=#__codelineno-18-56>56</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-18-1><a id=__codelineno-18-1 name=__codelineno-18-1></a>微服务架构: {
+</span><span id=__span-18-2><a id=__codelineno-18-2 name=__codelineno-18-2></a>  网关: API Gateway {
+</span><span id=__span-18-3><a id=__codelineno-18-3 name=__codelineno-18-3></a>    shape: hexagon
+</span><span id=__span-18-4><a id=__codelineno-18-4 name=__codelineno-18-4></a>    style: {
+</span><span id=__span-18-5><a id=__codelineno-18-5 name=__codelineno-18-5></a>      fill: &quot;#E3F2FD&quot;
+</span><span id=__span-18-6><a id=__codelineno-18-6 name=__codelineno-18-6></a>      stroke: &quot;#1976D2&quot;
+</span><span id=__span-18-7><a id=__codelineno-18-7 name=__codelineno-18-7></a>      stroke-width: 2
+</span><span id=__span-18-8><a id=__codelineno-18-8 name=__codelineno-18-8></a>      shadow: true
+</span><span id=__span-18-9><a id=__codelineno-18-9 name=__codelineno-18-9></a>    }
+</span><span id=__span-18-10><a id=__codelineno-18-10 name=__codelineno-18-10></a>  }
+</span><span id=__span-18-11><a id=__codelineno-18-11 name=__codelineno-18-11></a>
+</span><span id=__span-18-12><a id=__codelineno-18-12 name=__codelineno-18-12></a>  用户服务: User Service {
+</span><span id=__span-18-13><a id=__codelineno-18-13 name=__codelineno-18-13></a>    style: {
+</span><span id=__span-18-14><a id=__codelineno-18-14 name=__codelineno-18-14></a>      fill: &quot;#E8F5E9&quot;
+</span><span id=__span-18-15><a id=__codelineno-18-15 name=__codelineno-18-15></a>      stroke: &quot;#388E3C&quot;
+</span><span id=__span-18-16><a id=__codelineno-18-16 name=__codelineno-18-16></a>    }
+</span><span id=__span-18-17><a id=__codelineno-18-17 name=__codelineno-18-17></a>  }
+</span><span id=__span-18-18><a id=__codelineno-18-18 name=__codelineno-18-18></a>
+</span><span id=__span-18-19><a id=__codelineno-18-19 name=__codelineno-18-19></a>  订单服务: Order Service {
+</span><span id=__span-18-20><a id=__codelineno-18-20 name=__codelineno-18-20></a>    style: {
+</span><span id=__span-18-21><a id=__codelineno-18-21 name=__codelineno-18-21></a>      fill: &quot;#FFF3E0&quot;
+</span><span id=__span-18-22><a id=__codelineno-18-22 name=__codelineno-18-22></a>      stroke: &quot;#F57C00&quot;
+</span><span id=__span-18-23><a id=__codelineno-18-23 name=__codelineno-18-23></a>    }
+</span><span id=__span-18-24><a id=__codelineno-18-24 name=__codelineno-18-24></a>  }
+</span><span id=__span-18-25><a id=__codelineno-18-25 name=__codelineno-18-25></a>
+</span><span id=__span-18-26><a id=__codelineno-18-26 name=__codelineno-18-26></a>  支付服务: Payment Service {
+</span><span id=__span-18-27><a id=__codelineno-18-27 name=__codelineno-18-27></a>    style: {
+</span><span id=__span-18-28><a id=__codelineno-18-28 name=__codelineno-18-28></a>      fill: &quot;#FCE4EC&quot;
+</span><span id=__span-18-29><a id=__codelineno-18-29 name=__codelineno-18-29></a>      stroke: &quot;#C62828&quot;
+</span><span id=__span-18-30><a id=__codelineno-18-30 name=__codelineno-18-30></a>    }
+</span><span id=__span-18-31><a id=__codelineno-18-31 name=__codelineno-18-31></a>  }
+</span><span id=__span-18-32><a id=__codelineno-18-32 name=__codelineno-18-32></a>
+</span><span id=__span-18-33><a id=__codelineno-18-33 name=__codelineno-18-33></a>  消息队列: Kafka {
+</span><span id=__span-18-34><a id=__codelineno-18-34 name=__codelineno-18-34></a>    shape: cylinder
+</span><span id=__span-18-35><a id=__codelineno-18-35 name=__codelineno-18-35></a>    style: {
+</span><span id=__span-18-36><a id=__codelineno-18-36 name=__codelineno-18-36></a>      fill: &quot;#F3E5F5&quot;
+</span><span id=__span-18-37><a id=__codelineno-18-37 name=__codelineno-18-37></a>      stroke: &quot;#7B1FA2&quot;
+</span><span id=__span-18-38><a id=__codelineno-18-38 name=__codelineno-18-38></a>    }
+</span><span id=__span-18-39><a id=__codelineno-18-39 name=__codelineno-18-39></a>  }
+</span><span id=__span-18-40><a id=__codelineno-18-40 name=__codelineno-18-40></a>
+</span><span id=__span-18-41><a id=__codelineno-18-41 name=__codelineno-18-41></a>  数据库: PostgreSQL {
+</span><span id=__span-18-42><a id=__codelineno-18-42 name=__codelineno-18-42></a>    shape: cylinder
+</span><span id=__span-18-43><a id=__codelineno-18-43 name=__codelineno-18-43></a>    style: {
+</span><span id=__span-18-44><a id=__codelineno-18-44 name=__codelineno-18-44></a>      fill: &quot;#E0F7FA&quot;
+</span><span id=__span-18-45><a id=__codelineno-18-45 name=__codelineno-18-45></a>      stroke: &quot;#00838F&quot;
+</span><span id=__span-18-46><a id=__codelineno-18-46 name=__codelineno-18-46></a>    }
+</span><span id=__span-18-47><a id=__codelineno-18-47 name=__codelineno-18-47></a>  }
+</span><span id=__span-18-48><a id=__codelineno-18-48 name=__codelineno-18-48></a>
+</span><span id=__span-18-49><a id=__codelineno-18-49 name=__codelineno-18-49></a>  网关 -&gt; 用户服务
+</span><span id=__span-18-50><a id=__codelineno-18-50 name=__codelineno-18-50></a>  网关 -&gt; 订单服务
+</span><span id=__span-18-51><a id=__codelineno-18-51 name=__codelineno-18-51></a>  网关 -&gt; 支付服务
+</span><span id=__span-18-52><a id=__codelineno-18-52 name=__codelineno-18-52></a>  用户服务 -&gt; 消息队列: 发布事件
+</span><span id=__span-18-53><a id=__codelineno-18-53 name=__codelineno-18-53></a>  订单服务 -&gt; 消息队列: 发布事件
+</span><span id=__span-18-54><a id=__codelineno-18-54 name=__codelineno-18-54></a>  支付服务 -&gt; 消息队列: 发布事件
+</span><span id=__span-18-55><a id=__codelineno-18-55 name=__codelineno-18-55></a>  消息队列 -&gt; 数据库: 持久化
+</span><span id=__span-18-56><a id=__codelineno-18-56 name=__codelineno-18-56></a>}
+</span></code></pre></div></td></tr></table></div> <h3 id=36-classes>3.6 类（Classes）：复用样式<a class=headerlink href=#36-classes title="Permanent link">&para;</a></h3> <p>如果你有多个节点需要相同样式，一个个写太繁琐了。D2 的类（Classes）让你定义一次，到处复用：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-19-1> 1</a></span>
+<span class=normal><a href=#__codelineno-19-2> 2</a></span>
+<span class=normal><a href=#__codelineno-19-3> 3</a></span>
+<span class=normal><a href=#__codelineno-19-4> 4</a></span>
+<span class=normal><a href=#__codelineno-19-5> 5</a></span>
+<span class=normal><a href=#__codelineno-19-6> 6</a></span>
+<span class=normal><a href=#__codelineno-19-7> 7</a></span>
+<span class=normal><a href=#__codelineno-19-8> 8</a></span>
+<span class=normal><a href=#__codelineno-19-9> 9</a></span>
+<span class=normal><a href=#__codelineno-19-10>10</a></span>
+<span class=normal><a href=#__codelineno-19-11>11</a></span>
+<span class=normal><a href=#__codelineno-19-12>12</a></span>
+<span class=normal><a href=#__codelineno-19-13>13</a></span>
+<span class=normal><a href=#__codelineno-19-14>14</a></span>
+<span class=normal><a href=#__codelineno-19-15>15</a></span>
+<span class=normal><a href=#__codelineno-19-16>16</a></span>
+<span class=normal><a href=#__codelineno-19-17>17</a></span>
+<span class=normal><a href=#__codelineno-19-18>18</a></span>
+<span class=normal><a href=#__codelineno-19-19>19</a></span>
+<span class=normal><a href=#__codelineno-19-20>20</a></span>
+<span class=normal><a href=#__codelineno-19-21>21</a></span>
+<span class=normal><a href=#__codelineno-19-22>22</a></span>
+<span class=normal><a href=#__codelineno-19-23>23</a></span>
+<span class=normal><a href=#__codelineno-19-24>24</a></span>
+<span class=normal><a href=#__codelineno-19-25>25</a></span>
+<span class=normal><a href=#__codelineno-19-26>26</a></span>
+<span class=normal><a href=#__codelineno-19-27>27</a></span>
+<span class=normal><a href=#__codelineno-19-28>28</a></span>
+<span class=normal><a href=#__codelineno-19-29>29</a></span>
+<span class=normal><a href=#__codelineno-19-30>30</a></span>
+<span class=normal><a href=#__codelineno-19-31>31</a></span>
+<span class=normal><a href=#__codelineno-19-32>32</a></span>
+<span class=normal><a href=#__codelineno-19-33>33</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-19-1><a id=__codelineno-19-1 name=__codelineno-19-1></a>classes: {
+</span><span id=__span-19-2><a id=__codelineno-19-2 name=__codelineno-19-2></a>  微服务: {
+</span><span id=__span-19-3><a id=__codelineno-19-3 name=__codelineno-19-3></a>    style: {
+</span><span id=__span-19-4><a id=__codelineno-19-4 name=__codelineno-19-4></a>      fill: &quot;#E8F5E9&quot;
+</span><span id=__span-19-5><a id=__codelineno-19-5 name=__codelineno-19-5></a>      stroke: &quot;#388E3C&quot;
+</span><span id=__span-19-6><a id=__codelineno-19-6 name=__codelineno-19-6></a>      border-radius: 8
+</span><span id=__span-19-7><a id=__codelineno-19-7 name=__codelineno-19-7></a>      shadow: true
+</span><span id=__span-19-8><a id=__codelineno-19-8 name=__codelineno-19-8></a>    }
+</span><span id=__span-19-9><a id=__codelineno-19-9 name=__codelineno-19-9></a>  }
+</span><span id=__span-19-10><a id=__codelineno-19-10 name=__codelineno-19-10></a>  数据层: {
+</span><span id=__span-19-11><a id=__codelineno-19-11 name=__codelineno-19-11></a>    shape: cylinder
+</span><span id=__span-19-12><a id=__codelineno-19-12 name=__codelineno-19-12></a>    style: {
+</span><span id=__span-19-13><a id=__codelineno-19-13 name=__codelineno-19-13></a>      fill: &quot;#E0F7FA&quot;
+</span><span id=__span-19-14><a id=__codelineno-19-14 name=__codelineno-19-14></a>      stroke: &quot;#00838F&quot;
+</span><span id=__span-19-15><a id=__codelineno-19-15 name=__codelineno-19-15></a>    }
+</span><span id=__span-19-16><a id=__codelineno-19-16 name=__codelineno-19-16></a>  }
+</span><span id=__span-19-17><a id=__codelineno-19-17 name=__codelineno-19-17></a>}
+</span><span id=__span-19-18><a id=__codelineno-19-18 name=__codelineno-19-18></a>
+</span><span id=__span-19-19><a id=__codelineno-19-19 name=__codelineno-19-19></a>服务A: 认证服务 {
+</span><span id=__span-19-20><a id=__codelineno-19-20 name=__codelineno-19-20></a>  class: 微服务
+</span><span id=__span-19-21><a id=__codelineno-19-21 name=__codelineno-19-21></a>}
+</span><span id=__span-19-22><a id=__codelineno-19-22 name=__codelineno-19-22></a>
+</span><span id=__span-19-23><a id=__codelineno-19-23 name=__codelineno-19-23></a>服务B: 授权服务 {
+</span><span id=__span-19-24><a id=__codelineno-19-24 name=__codelineno-19-24></a>  class: 微服务
+</span><span id=__span-19-25><a id=__codelineno-19-25 name=__codelineno-19-25></a>}
+</span><span id=__span-19-26><a id=__codelineno-19-26 name=__codelineno-19-26></a>
+</span><span id=__span-19-27><a id=__codelineno-19-27 name=__codelineno-19-27></a>主库: MySQL主 {
+</span><span id=__span-19-28><a id=__codelineno-19-28 name=__codelineno-19-28></a>  class: 数据层
+</span><span id=__span-19-29><a id=__codelineno-19-29 name=__codelineno-19-29></a>}
+</span><span id=__span-19-30><a id=__codelineno-19-30 name=__codelineno-19-30></a>
+</span><span id=__span-19-31><a id=__codelineno-19-31 name=__codelineno-19-31></a>从库: MySQL从 {
+</span><span id=__span-19-32><a id=__codelineno-19-32 name=__codelineno-19-32></a>  class: 数据层
+</span><span id=__span-19-33><a id=__codelineno-19-33 name=__codelineno-19-33></a>}
+</span></code></pre></div></td></tr></table></div> <p>连接也可以使用类：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-20-1> 1</a></span>
+<span class=normal><a href=#__codelineno-20-2> 2</a></span>
+<span class=normal><a href=#__codelineno-20-3> 3</a></span>
+<span class=normal><a href=#__codelineno-20-4> 4</a></span>
+<span class=normal><a href=#__codelineno-20-5> 5</a></span>
+<span class=normal><a href=#__codelineno-20-6> 6</a></span>
+<span class=normal><a href=#__codelineno-20-7> 7</a></span>
+<span class=normal><a href=#__codelineno-20-8> 8</a></span>
+<span class=normal><a href=#__codelineno-20-9> 9</a></span>
+<span class=normal><a href=#__codelineno-20-10>10</a></span>
+<span class=normal><a href=#__codelineno-20-11>11</a></span>
+<span class=normal><a href=#__codelineno-20-12>12</a></span>
+<span class=normal><a href=#__codelineno-20-13>13</a></span>
+<span class=normal><a href=#__codelineno-20-14>14</a></span>
+<span class=normal><a href=#__codelineno-20-15>15</a></span>
+<span class=normal><a href=#__codelineno-20-16>16</a></span>
+<span class=normal><a href=#__codelineno-20-17>17</a></span>
+<span class=normal><a href=#__codelineno-20-18>18</a></span>
+<span class=normal><a href=#__codelineno-20-19>19</a></span>
+<span class=normal><a href=#__codelineno-20-20>20</a></span>
+<span class=normal><a href=#__codelineno-20-21>21</a></span>
+<span class=normal><a href=#__codelineno-20-22>22</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-20-1><a id=__codelineno-20-1 name=__codelineno-20-1></a>classes: {
+</span><span id=__span-20-2><a id=__codelineno-20-2 name=__codelineno-20-2></a>  异步调用: {
+</span><span id=__span-20-3><a id=__codelineno-20-3 name=__codelineno-20-3></a>    style: {
+</span><span id=__span-20-4><a id=__codelineno-20-4 name=__codelineno-20-4></a>      stroke-dash: 4
+</span><span id=__span-20-5><a id=__codelineno-20-5 name=__codelineno-20-5></a>      stroke: &quot;#9C27B0&quot;
+</span><span id=__span-20-6><a id=__codelineno-20-6 name=__codelineno-20-6></a>    }
+</span><span id=__span-20-7><a id=__codelineno-20-7 name=__codelineno-20-7></a>  }
+</span><span id=__span-20-8><a id=__codelineno-20-8 name=__codelineno-20-8></a>  同步调用: {
+</span><span id=__span-20-9><a id=__codelineno-20-9 name=__codelineno-20-9></a>    style: {
+</span><span id=__span-20-10><a id=__codelineno-20-10 name=__codelineno-20-10></a>      stroke: &quot;#1976D2&quot;
+</span><span id=__span-20-11><a id=__codelineno-20-11 name=__codelineno-20-11></a>      stroke-width: 2
+</span><span id=__span-20-12><a id=__codelineno-20-12 name=__codelineno-20-12></a>    }
+</span><span id=__span-20-13><a id=__codelineno-20-13 name=__codelineno-20-13></a>  }
+</span><span id=__span-20-14><a id=__codelineno-20-14 name=__codelineno-20-14></a>}
+</span><span id=__span-20-15><a id=__codelineno-20-15 name=__codelineno-20-15></a>
+</span><span id=__span-20-16><a id=__codelineno-20-16 name=__codelineno-20-16></a>A -&gt; B: 同步请求 {
+</span><span id=__span-20-17><a id=__codelineno-20-17 name=__codelineno-20-17></a>  class: 同步调用
+</span><span id=__span-20-18><a id=__codelineno-20-18 name=__codelineno-20-18></a>}
+</span><span id=__span-20-19><a id=__codelineno-20-19 name=__codelineno-20-19></a>
+</span><span id=__span-20-20><a id=__codelineno-20-20 name=__codelineno-20-20></a>B -&gt; C: 异步通知 {
+</span><span id=__span-20-21><a id=__codelineno-20-21 name=__codelineno-20-21></a>  class: 异步调用
+</span><span id=__span-20-22><a id=__codelineno-20-22 name=__codelineno-20-22></a>}
+</span></code></pre></div></td></tr></table></div> <hr> <h2 id=d2_2>四、高级玩法：释放 D2 的真正实力<a class=headerlink href=#d2_2 title="Permanent link">&para;</a></h2> <p>基础语法掌握了，让我们看看 D2 的一些高级特性，这些才是让它脱颖而出的关键。</p> <h3 id=41-sql-sql_tableer>4.1 SQL 表（sql_table）：ER 图利器<a class=headerlink href=#41-sql-sql_tableer title="Permanent link">&para;</a></h3> <p>后端开发者做数据库设计时，ER 图是刚需。D2 内置了 <code>sql_table</code> 形状，直接用文本描述表结构：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-21-1> 1</a></span>
+<span class=normal><a href=#__codelineno-21-2> 2</a></span>
+<span class=normal><a href=#__codelineno-21-3> 3</a></span>
+<span class=normal><a href=#__codelineno-21-4> 4</a></span>
+<span class=normal><a href=#__codelineno-21-5> 5</a></span>
+<span class=normal><a href=#__codelineno-21-6> 6</a></span>
+<span class=normal><a href=#__codelineno-21-7> 7</a></span>
+<span class=normal><a href=#__codelineno-21-8> 8</a></span>
+<span class=normal><a href=#__codelineno-21-9> 9</a></span>
+<span class=normal><a href=#__codelineno-21-10>10</a></span>
+<span class=normal><a href=#__codelineno-21-11>11</a></span>
+<span class=normal><a href=#__codelineno-21-12>12</a></span>
+<span class=normal><a href=#__codelineno-21-13>13</a></span>
+<span class=normal><a href=#__codelineno-21-14>14</a></span>
+<span class=normal><a href=#__codelineno-21-15>15</a></span>
+<span class=normal><a href=#__codelineno-21-16>16</a></span>
+<span class=normal><a href=#__codelineno-21-17>17</a></span>
+<span class=normal><a href=#__codelineno-21-18>18</a></span>
+<span class=normal><a href=#__codelineno-21-19>19</a></span>
+<span class=normal><a href=#__codelineno-21-20>20</a></span>
+<span class=normal><a href=#__codelineno-21-21>21</a></span>
+<span class=normal><a href=#__codelineno-21-22>22</a></span>
+<span class=normal><a href=#__codelineno-21-23>23</a></span>
+<span class=normal><a href=#__codelineno-21-24>24</a></span>
+<span class=normal><a href=#__codelineno-21-25>25</a></span>
+<span class=normal><a href=#__codelineno-21-26>26</a></span>
+<span class=normal><a href=#__codelineno-21-27>27</a></span>
+<span class=normal><a href=#__codelineno-21-28>28</a></span>
+<span class=normal><a href=#__codelineno-21-29>29</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-21-1><a id=__codelineno-21-1 name=__codelineno-21-1></a>users: users {
+</span><span id=__span-21-2><a id=__codelineno-21-2 name=__codelineno-21-2></a>  shape: sql_table
+</span><span id=__span-21-3><a id=__codelineno-21-3 name=__codelineno-21-3></a>  id: int {constraint: primary_key}
+</span><span id=__span-21-4><a id=__codelineno-21-4 name=__codelineno-21-4></a>  username: varchar {constraint: unique}
+</span><span id=__span-21-5><a id=__codelineno-21-5 name=__codelineno-21-5></a>  email: varchar
+</span><span id=__span-21-6><a id=__codelineno-21-6 name=__codelineno-21-6></a>  password_hash: varchar
+</span><span id=__span-21-7><a id=__codelineno-21-7 name=__codelineno-21-7></a>  created_at: timestamp
+</span><span id=__span-21-8><a id=__codelineno-21-8 name=__codelineno-21-8></a>}
+</span><span id=__span-21-9><a id=__codelineno-21-9 name=__codelineno-21-9></a>
+</span><span id=__span-21-10><a id=__codelineno-21-10 name=__codelineno-21-10></a>orders: orders {
+</span><span id=__span-21-11><a id=__codelineno-21-11 name=__codelineno-21-11></a>  shape: sql_table
+</span><span id=__span-21-12><a id=__codelineno-21-12 name=__codelineno-21-12></a>  id: int {constraint: primary_key}
+</span><span id=__span-21-13><a id=__codelineno-21-13 name=__codelineno-21-13></a>  user_id: int {constraint: foreign_key}
+</span><span id=__span-21-14><a id=__codelineno-21-14 name=__codelineno-21-14></a>  total_amount: decimal
+</span><span id=__span-21-15><a id=__codelineno-21-15 name=__codelineno-21-15></a>  status: varchar
+</span><span id=__span-21-16><a id=__codelineno-21-16 name=__codelineno-21-16></a>  created_at: timestamp
+</span><span id=__span-21-17><a id=__codelineno-21-17 name=__codelineno-21-17></a>}
+</span><span id=__span-21-18><a id=__codelineno-21-18 name=__codelineno-21-18></a>
+</span><span id=__span-21-19><a id=__codelineno-21-19 name=__codelineno-21-19></a>order_items: order_items {
+</span><span id=__span-21-20><a id=__codelineno-21-20 name=__codelineno-21-20></a>  shape: sql_table
+</span><span id=__span-21-21><a id=__codelineno-21-21 name=__codelineno-21-21></a>  id: int {constraint: primary_key}
+</span><span id=__span-21-22><a id=__codelineno-21-22 name=__codelineno-21-22></a>  order_id: int {constraint: foreign_key}
+</span><span id=__span-21-23><a id=__codelineno-21-23 name=__codelineno-21-23></a>  product_name: varchar
+</span><span id=__span-21-24><a id=__codelineno-21-24 name=__codelineno-21-24></a>  quantity: int
+</span><span id=__span-21-25><a id=__codelineno-21-25 name=__codelineno-21-25></a>  price: decimal
+</span><span id=__span-21-26><a id=__codelineno-21-26 name=__codelineno-21-26></a>}
+</span><span id=__span-21-27><a id=__codelineno-21-27 name=__codelineno-21-27></a>
+</span><span id=__span-21-28><a id=__codelineno-21-28 name=__codelineno-21-28></a>users.id -&gt; orders.user_id
+</span><span id=__span-21-29><a id=__codelineno-21-29 name=__codelineno-21-29></a>orders.id -&gt; order_items.order_id
+</span></code></pre></div></td></tr></table></div> <p>D2 会自动把 <code>primary_key</code> 缩写为 PK，<code>foreign_key</code> 缩写为 FK，<code>unique</code> 缩写为 UNQ。配合 TALA 或 ELK 布局引擎，连线还能精确指向到具体的行。</p> <h3 id=42-class>4.2 类图（class）：面向对象设计<a class=headerlink href=#42-class title="Permanent link">&para;</a></h3> <p>做面向对象设计时，类图必不可少：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-22-1> 1</a></span>
+<span class=normal><a href=#__codelineno-22-2> 2</a></span>
+<span class=normal><a href=#__codelineno-22-3> 3</a></span>
+<span class=normal><a href=#__codelineno-22-4> 4</a></span>
+<span class=normal><a href=#__codelineno-22-5> 5</a></span>
+<span class=normal><a href=#__codelineno-22-6> 6</a></span>
+<span class=normal><a href=#__codelineno-22-7> 7</a></span>
+<span class=normal><a href=#__codelineno-22-8> 8</a></span>
+<span class=normal><a href=#__codelineno-22-9> 9</a></span>
+<span class=normal><a href=#__codelineno-22-10>10</a></span>
+<span class=normal><a href=#__codelineno-22-11>11</a></span>
+<span class=normal><a href=#__codelineno-22-12>12</a></span>
+<span class=normal><a href=#__codelineno-22-13>13</a></span>
+<span class=normal><a href=#__codelineno-22-14>14</a></span>
+<span class=normal><a href=#__codelineno-22-15>15</a></span>
+<span class=normal><a href=#__codelineno-22-16>16</a></span>
+<span class=normal><a href=#__codelineno-22-17>17</a></span>
+<span class=normal><a href=#__codelineno-22-18>18</a></span>
+<span class=normal><a href=#__codelineno-22-19>19</a></span>
+<span class=normal><a href=#__codelineno-22-20>20</a></span>
+<span class=normal><a href=#__codelineno-22-21>21</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-22-1><a id=__codelineno-22-1 name=__codelineno-22-1></a>Animal: Animal {
+</span><span id=__span-22-2><a id=__codelineno-22-2 name=__codelineno-22-2></a>  shape: class
+</span><span id=__span-22-3><a id=__codelineno-22-3 name=__codelineno-22-3></a>  +name: string
+</span><span id=__span-22-4><a id=__codelineno-22-4 name=__codelineno-22-4></a>  +age: int
+</span><span id=__span-22-5><a id=__codelineno-22-5 name=__codelineno-22-5></a>  +speak(): string
+</span><span id=__span-22-6><a id=__codelineno-22-6 name=__codelineno-22-6></a>}
+</span><span id=__span-22-7><a id=__codelineno-22-7 name=__codelineno-22-7></a>
+</span><span id=__span-22-8><a id=__codelineno-22-8 name=__codelineno-22-8></a>Dog: Dog {
+</span><span id=__span-22-9><a id=__codelineno-22-9 name=__codelineno-22-9></a>  shape: class
+</span><span id=__span-22-10><a id=__codelineno-22-10 name=__codelineno-22-10></a>  +breed: string
+</span><span id=__span-22-11><a id=__codelineno-22-11 name=__codelineno-22-11></a>  +fetch(): void
+</span><span id=__span-22-12><a id=__codelineno-22-12 name=__codelineno-22-12></a>}
+</span><span id=__span-22-13><a id=__codelineno-22-13 name=__codelineno-22-13></a>
+</span><span id=__span-22-14><a id=__codelineno-22-14 name=__codelineno-22-14></a>Cat: Cat {
+</span><span id=__span-22-15><a id=__codelineno-22-15 name=__codelineno-22-15></a>  shape: class
+</span><span id=__span-22-16><a id=__codelineno-22-16 name=__codelineno-22-16></a>  +indoor: bool
+</span><span id=__span-22-17><a id=__codelineno-22-17 name=__codelineno-22-17></a>  +purr(): void
+</span><span id=__span-22-18><a id=__codelineno-22-18 name=__codelineno-22-18></a>}
+</span><span id=__span-22-19><a id=__codelineno-22-19 name=__codelineno-22-19></a>
+</span><span id=__span-22-20><a id=__codelineno-22-20 name=__codelineno-22-20></a>Dog -&gt; Animal: 继承
+</span><span id=__span-22-21><a id=__codelineno-22-21 name=__codelineno-22-21></a>Cat -&gt; Animal: 继承
+</span></code></pre></div></td></tr></table></div> <h3 id=43-sequence_diagram>4.3 时序图（sequence_diagram）：交互流程一目了然<a class=headerlink href=#43-sequence_diagram title="Permanent link">&para;</a></h3> <p>时序图是 D2 的杀手级特性之一。创建方式很简单——给容器设置 <code>shape: sequence_diagram</code>：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-23-1> 1</a></span>
+<span class=normal><a href=#__codelineno-23-2> 2</a></span>
+<span class=normal><a href=#__codelineno-23-3> 3</a></span>
+<span class=normal><a href=#__codelineno-23-4> 4</a></span>
+<span class=normal><a href=#__codelineno-23-5> 5</a></span>
+<span class=normal><a href=#__codelineno-23-6> 6</a></span>
+<span class=normal><a href=#__codelineno-23-7> 7</a></span>
+<span class=normal><a href=#__codelineno-23-8> 8</a></span>
+<span class=normal><a href=#__codelineno-23-9> 9</a></span>
+<span class=normal><a href=#__codelineno-23-10>10</a></span>
+<span class=normal><a href=#__codelineno-23-11>11</a></span>
+<span class=normal><a href=#__codelineno-23-12>12</a></span>
+<span class=normal><a href=#__codelineno-23-13>13</a></span>
+<span class=normal><a href=#__codelineno-23-14>14</a></span>
+<span class=normal><a href=#__codelineno-23-15>15</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-23-1><a id=__codelineno-23-1 name=__codelineno-23-1></a>用户登录流程: {
+</span><span id=__span-23-2><a id=__codelineno-23-2 name=__codelineno-23-2></a>  shape: sequence_diagram
+</span><span id=__span-23-3><a id=__codelineno-23-3 name=__codelineno-23-3></a>
+</span><span id=__span-23-4><a id=__codelineno-23-4 name=__codelineno-23-4></a>  客户端
+</span><span id=__span-23-5><a id=__codelineno-23-5 name=__codelineno-23-5></a>  网关
+</span><span id=__span-23-6><a id=__codelineno-23-6 name=__codelineno-23-6></a>  认证服务
+</span><span id=__span-23-7><a id=__codelineno-23-7 name=__codelineno-23-7></a>  数据库
+</span><span id=__span-23-8><a id=__codelineno-23-8 name=__codelineno-23-8></a>
+</span><span id=__span-23-9><a id=__codelineno-23-9 name=__codelineno-23-9></a>  客户端 -&gt; 网关: POST /login
+</span><span id=__span-23-10><a id=__codelineno-23-10 name=__codelineno-23-10></a>  网关 -&gt; 认证服务: 验证凭证
+</span><span id=__span-23-11><a id=__codelineno-23-11 name=__codelineno-23-11></a>  认证服务 -&gt; 数据库: 查询用户信息
+</span><span id=__span-23-12><a id=__codelineno-23-12 name=__codelineno-23-12></a>  数据库 -&gt; 认证服务: 返回用户记录
+</span><span id=__span-23-13><a id=__codelineno-23-13 name=__codelineno-23-13></a>  认证服务 -&gt; 网关: 签发Token
+</span><span id=__span-23-14><a id=__codelineno-23-14 name=__codelineno-23-14></a>  网关 -&gt; 客户端: 200 OK + JWT
+</span><span id=__span-23-15><a id=__codelineno-23-15 name=__codelineno-23-15></a>}
+</span></code></pre></div></td></tr></table></div> <p>时序图有几个特殊规则：</p> <ol> <li><strong>声明顺序即显示顺序</strong>：参与者按你写的顺序从左到右排列</li> <li><strong>同一命名空间</strong>：同一时序图内的同名元素指向同一个参与者</li> <li><strong>支持分组</strong>：用容器给消息分组，类似 UML 的 fragment</li> </ol> <p>进阶用法——带分组和自调用的时序图：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-24-1> 1</a></span>
+<span class=normal><a href=#__codelineno-24-2> 2</a></span>
+<span class=normal><a href=#__codelineno-24-3> 3</a></span>
+<span class=normal><a href=#__codelineno-24-4> 4</a></span>
+<span class=normal><a href=#__codelineno-24-5> 5</a></span>
+<span class=normal><a href=#__codelineno-24-6> 6</a></span>
+<span class=normal><a href=#__codelineno-24-7> 7</a></span>
+<span class=normal><a href=#__codelineno-24-8> 8</a></span>
+<span class=normal><a href=#__codelineno-24-9> 9</a></span>
+<span class=normal><a href=#__codelineno-24-10>10</a></span>
+<span class=normal><a href=#__codelineno-24-11>11</a></span>
+<span class=normal><a href=#__codelineno-24-12>12</a></span>
+<span class=normal><a href=#__codelineno-24-13>13</a></span>
+<span class=normal><a href=#__codelineno-24-14>14</a></span>
+<span class=normal><a href=#__codelineno-24-15>15</a></span>
+<span class=normal><a href=#__codelineno-24-16>16</a></span>
+<span class=normal><a href=#__codelineno-24-17>17</a></span>
+<span class=normal><a href=#__codelineno-24-18>18</a></span>
+<span class=normal><a href=#__codelineno-24-19>19</a></span>
+<span class=normal><a href=#__codelineno-24-20>20</a></span>
+<span class=normal><a href=#__codelineno-24-21>21</a></span>
+<span class=normal><a href=#__codelineno-24-22>22</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-24-1><a id=__codelineno-24-1 name=__codelineno-24-1></a>下单支付流程: {
+</span><span id=__span-24-2><a id=__codelineno-24-2 name=__codelineno-24-2></a>  shape: sequence_diagram
+</span><span id=__span-24-3><a id=__codelineno-24-3 name=__codelineno-24-3></a>
+</span><span id=__span-24-4><a id=__codelineno-24-4 name=__codelineno-24-4></a>  用户
+</span><span id=__span-24-5><a id=__codelineno-24-5 name=__codelineno-24-5></a>  订单服务
+</span><span id=__span-24-6><a id=__codelineno-24-6 name=__codelineno-24-6></a>  支付服务
+</span><span id=__span-24-7><a id=__codelineno-24-7 name=__codelineno-24-7></a>  库存服务
+</span><span id=__span-24-8><a id=__codelineno-24-8 name=__codelineno-24-8></a>
+</span><span id=__span-24-9><a id=__codelineno-24-9 name=__codelineno-24-9></a>  创建订单: {
+</span><span id=__span-24-10><a id=__codelineno-24-10 name=__codelineno-24-10></a>    用户 -&gt; 订单服务: 创建订单
+</span><span id=__span-24-11><a id=__codelineno-24-11 name=__codelineno-24-11></a>    订单服务 -&gt; 库存服务: 检查库存
+</span><span id=__span-24-12><a id=__codelineno-24-12 name=__codelineno-24-12></a>    库存服务 -&gt; 订单服务: 库存充足
+</span><span id=__span-24-13><a id=__codelineno-24-13 name=__codelineno-24-13></a>    订单服务 -&gt; 用户: 订单创建成功
+</span><span id=__span-24-14><a id=__codelineno-24-14 name=__codelineno-24-14></a>  }
+</span><span id=__span-24-15><a id=__codelineno-24-15 name=__codelineno-24-15></a>
+</span><span id=__span-24-16><a id=__codelineno-24-16 name=__codelineno-24-16></a>  支付: {
+</span><span id=__span-24-17><a id=__codelineno-24-17 name=__codelineno-24-17></a>    用户 -&gt; 支付服务: 发起支付
+</span><span id=__span-24-18><a id=__codelineno-24-18 name=__codelineno-24-18></a>    支付服务 -&gt; 支付服务: 调用第三方支付
+</span><span id=__span-24-19><a id=__codelineno-24-19 name=__codelineno-24-19></a>    支付服务 -&gt; 订单服务: 支付回调
+</span><span id=__span-24-20><a id=__codelineno-24-20 name=__codelineno-24-20></a>    订单服务 -&gt; 库存服务: 扣减库存
+</span><span id=__span-24-21><a id=__codelineno-24-21 name=__codelineno-24-21></a>  }
+</span><span id=__span-24-22><a id=__codelineno-24-22 name=__codelineno-24-22></a>}
+</span></code></pre></div></td></tr></table></div> <h3 id=44-markdown>4.4 Markdown 文本：在图表中嵌入丰富内容<a class=headerlink href=#44-markdown title="Permanent link">&para;</a></h3> <p>D2 节点可以包含 Markdown 格式的文本，非常适合添加说明：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-25-1> 1</a></span>
+<span class=normal><a href=#__codelineno-25-2> 2</a></span>
+<span class=normal><a href=#__codelineno-25-3> 3</a></span>
+<span class=normal><a href=#__codelineno-25-4> 4</a></span>
+<span class=normal><a href=#__codelineno-25-5> 5</a></span>
+<span class=normal><a href=#__codelineno-25-6> 6</a></span>
+<span class=normal><a href=#__codelineno-25-7> 7</a></span>
+<span class=normal><a href=#__codelineno-25-8> 8</a></span>
+<span class=normal><a href=#__codelineno-25-9> 9</a></span>
+<span class=normal><a href=#__codelineno-25-10>10</a></span>
+<span class=normal><a href=#__codelineno-25-11>11</a></span>
+<span class=normal><a href=#__codelineno-25-12>12</a></span>
+<span class=normal><a href=#__codelineno-25-13>13</a></span>
+<span class=normal><a href=#__codelineno-25-14>14</a></span>
+<span class=normal><a href=#__codelineno-25-15>15</a></span>
+<span class=normal><a href=#__codelineno-25-16>16</a></span>
+<span class=normal><a href=#__codelineno-25-17>17</a></span>
+<span class=normal><a href=#__codelineno-25-18>18</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-25-1><a id=__codelineno-25-1 name=__codelineno-25-1></a>说明文档: {
+</span><span id=__span-25-2><a id=__codelineno-25-2 name=__codelineno-25-2></a>  shape: text
+</span><span id=__span-25-3><a id=__codelineno-25-3 name=__codelineno-25-3></a>  near: top-left
+</span><span id=__span-25-4><a id=__codelineno-25-4 name=__codelineno-25-4></a>  style: {
+</span><span id=__span-25-5><a id=__codelineno-25-5 name=__codelineno-25-5></a>    font-size: 14
+</span><span id=__span-25-6><a id=__codelineno-25-6 name=__codelineno-25-6></a>    fill: &quot;#FAFAFA&quot;
+</span><span id=__span-25-7><a id=__codelineno-25-7 name=__codelineno-25-7></a>  }
+</span><span id=__span-25-8><a id=__codelineno-25-8 name=__codelineno-25-8></a>
+</span><span id=__span-25-9><a id=__codelineno-25-9 name=__codelineno-25-9></a>  Markdown content here
+</span><span id=__span-25-10><a id=__codelineno-25-10 name=__codelineno-25-10></a>}
+</span><span id=__span-25-11><a id=__codelineno-25-11 name=__codelineno-25-11></a>
+</span><span id=__span-25-12><a id=__codelineno-25-12 name=__codelineno-25-12></a>接口说明: API接口文档 {
+</span><span id=__span-25-13><a id=__codelineno-25-13 name=__codelineno-25-13></a>  shape: text
+</span><span id=__span-25-14><a id=__codelineno-25-14 name=__codelineno-25-14></a>  style: {
+</span><span id=__span-25-15><a id=__codelineno-25-15 name=__codelineno-25-15></a>    font: mono
+</span><span id=__span-25-16><a id=__codelineno-25-16 name=__codelineno-25-16></a>    font-size: 12
+</span><span id=__span-25-17><a id=__codelineno-25-17 name=__codelineno-25-17></a>  }
+</span><span id=__span-25-18><a id=__codelineno-25-18 name=__codelineno-25-18></a>}
+</span></code></pre></div></td></tr></table></div> <h3 id=45-icons>4.5 图标（Icons）：让图表更生动<a class=headerlink href=#45-icons title="Permanent link">&para;</a></h3> <p>D2 支持引入外部 SVG 图标，让图表更直观：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-26-1>1</a></span>
+<span class=normal><a href=#__codelineno-26-2>2</a></span>
+<span class=normal><a href=#__codelineno-26-3>3</a></span>
+<span class=normal><a href=#__codelineno-26-4>4</a></span>
+<span class=normal><a href=#__codelineno-26-5>5</a></span>
+<span class=normal><a href=#__codelineno-26-6>6</a></span>
+<span class=normal><a href=#__codelineno-26-7>7</a></span>
+<span class=normal><a href=#__codelineno-26-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-26-1><a id=__codelineno-26-1 name=__codelineno-26-1></a>服务器: 应用服务器 {
+</span><span id=__span-26-2><a id=__codelineno-26-2 name=__codelineno-26-2></a>  icon: https://icons.terrastruct.com/dev/aws.svg
+</span><span id=__span-26-3><a id=__codelineno-26-3 name=__codelineno-26-3></a>}
+</span><span id=__span-26-4><a id=__codelineno-26-4 name=__codelineno-26-4></a>
+</span><span id=__span-26-5><a id=__codelineno-26-5 name=__codelineno-26-5></a>数据库: PostgreSQL {
+</span><span id=__span-26-6><a id=__codelineno-26-6 name=__codelineno-26-6></a>  shape: cylinder
+</span><span id=__span-26-7><a id=__codelineno-26-7 name=__codelineno-26-7></a>  icon: https://icons.terrastruct.com/dev/db.svg
+</span><span id=__span-26-8><a id=__codelineno-26-8 name=__codelineno-26-8></a>}
+</span></code></pre></div></td></tr></table></div> <p>Terrastruct 提供了丰富的图标库（包括 AWS、Azure、GCP 等云服务图标），也可以使用自己的 SVG 文件。</p> <h3 id=46-near>4.6 定位（near）：精准控制位置<a class=headerlink href=#46-near title="Permanent link">&para;</a></h3> <p>默认情况下，D2 的布局引擎会自动排列元素。但有时候你需要手动微调，比如把标题放在左上角，图例放在右下角：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-27-1> 1</a></span>
+<span class=normal><a href=#__codelineno-27-2> 2</a></span>
+<span class=normal><a href=#__codelineno-27-3> 3</a></span>
+<span class=normal><a href=#__codelineno-27-4> 4</a></span>
+<span class=normal><a href=#__codelineno-27-5> 5</a></span>
+<span class=normal><a href=#__codelineno-27-6> 6</a></span>
+<span class=normal><a href=#__codelineno-27-7> 7</a></span>
+<span class=normal><a href=#__codelineno-27-8> 8</a></span>
+<span class=normal><a href=#__codelineno-27-9> 9</a></span>
+<span class=normal><a href=#__codelineno-27-10>10</a></span>
+<span class=normal><a href=#__codelineno-27-11>11</a></span>
+<span class=normal><a href=#__codelineno-27-12>12</a></span>
+<span class=normal><a href=#__codelineno-27-13>13</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-27-1><a id=__codelineno-27-1 name=__codelineno-27-1></a>标题: 系统架构图 {
+</span><span id=__span-27-2><a id=__codelineno-27-2 name=__codelineno-27-2></a>  near: top-center
+</span><span id=__span-27-3><a id=__codelineno-27-3 name=__codelineno-27-3></a>  shape: text
+</span><span id=__span-27-4><a id=__codelineno-27-4 name=__codelineno-27-4></a>  style: {
+</span><span id=__span-27-5><a id=__codelineno-27-5 name=__codelineno-27-5></a>    font-size: 24
+</span><span id=__span-27-6><a id=__codelineno-27-6 name=__codelineno-27-6></a>    bold: true
+</span><span id=__span-27-7><a id=__codelineno-27-7 name=__codelineno-27-7></a>  }
+</span><span id=__span-27-8><a id=__codelineno-27-8 name=__codelineno-27-8></a>}
+</span><span id=__span-27-9><a id=__codelineno-27-9 name=__codelineno-27-9></a>
+</span><span id=__span-27-10><a id=__codelineno-27-10 name=__codelineno-27-10></a>图例: {
+</span><span id=__span-27-11><a id=__codelineno-27-11 name=__codelineno-27-11></a>  near: bottom-right
+</span><span id=__span-27-12><a id=__codelineno-27-12 name=__codelineno-27-12></a>  shape: text
+</span><span id=__span-27-13><a id=__codelineno-27-13 name=__codelineno-27-13></a>}
+</span></code></pre></div></td></tr></table></div> <p><code>near</code> 支持的方位值：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-28-1>1</a></span>
+<span class=normal><a href=#__codelineno-28-2>2</a></span>
+<span class=normal><a href=#__codelineno-28-3>3</a></span>
+<span class=normal><a href=#__codelineno-28-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-28-1><a id=__codelineno-28-1 name=__codelineno-28-1></a># 九宫格方位
+</span><span id=__span-28-2><a id=__codelineno-28-2 name=__codelineno-28-2></a>top-left     top-center     top-right
+</span><span id=__span-28-3><a id=__codelineno-28-3 name=__codelineno-28-3></a>center-left  center         center-right
+</span><span id=__span-28-4><a id=__codelineno-28-4 name=__codelineno-28-4></a>bottom-left  bottom-center  bottom-right
+</span></code></pre></div></td></tr></table></div> <p>还可以让一个节点靠近另一个节点：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-29-1>1</a></span>
+<span class=normal><a href=#__codelineno-29-2>2</a></span>
+<span class=normal><a href=#__codelineno-29-3>3</a></span>
+<span class=normal><a href=#__codelineno-29-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-29-1><a id=__codelineno-29-1 name=__codelineno-29-1></a>主服务: 核心服务
+</span><span id=__span-29-2><a id=__codelineno-29-2 name=__codelineno-29-2></a>热备: 备用服务 {
+</span><span id=__span-29-3><a id=__codelineno-29-3 name=__codelineno-29-3></a>  near: 主服务
+</span><span id=__span-29-4><a id=__codelineno-29-4 name=__codelineno-29-4></a>}
+</span></code></pre></div></td></tr></table></div> <h3 id=47-vars>4.7 变量（vars）：减少重复<a class=headerlink href=#47-vars title="Permanent link">&para;</a></h3> <p>当代码中出现大量重复文本时，可以用变量来统一管理：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-30-1>1</a></span>
+<span class=normal><a href=#__codelineno-30-2>2</a></span>
+<span class=normal><a href=#__codelineno-30-3>3</a></span>
+<span class=normal><a href=#__codelineno-30-4>4</a></span>
+<span class=normal><a href=#__codelineno-30-5>5</a></span>
+<span class=normal><a href=#__codelineno-30-6>6</a></span>
+<span class=normal><a href=#__codelineno-30-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-30-1><a id=__codelineno-30-1 name=__codelineno-30-1></a>vars: {
+</span><span id=__span-30-2><a id=__codelineno-30-2 name=__codelineno-30-2></a>  service-prefix: &quot;微服务架构&quot;
+</span><span id=__span-30-3><a id=__codelineno-30-3 name=__codelineno-30-3></a>  db-host: &quot;rm-xxxx.mysql.rds.aliyuncs.com&quot;
+</span><span id=__span-30-4><a id=__codelineno-30-4 name=__codelineno-30-4></a>}
+</span><span id=__span-30-5><a id=__codelineno-30-5 name=__codelineno-30-5></a>
+</span><span id=__span-30-6><a id=__codelineno-30-6 name=__codelineno-30-6></a>服务A: ${service-prefix} - 用户中心
+</span><span id=__span-30-7><a id=__codelineno-30-7 name=__codelineno-30-7></a>服务B: ${service-prefix} - 订单中心
+</span></code></pre></div></td></tr></table></div> <h3 id=48-theme>4.8 主题（Theme）：一键换装<a class=headerlink href=#48-theme title="Permanent link">&para;</a></h3> <p>D2 内置了多种主题，一键切换图表风格：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-31-1>1</a></span>
+<span class=normal><a href=#__codelineno-31-2>2</a></span>
+<span class=normal><a href=#__codelineno-31-3>3</a></span>
+<span class=normal><a href=#__codelineno-31-4>4</a></span>
+<span class=normal><a href=#__codelineno-31-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-31-1><a id=__codelineno-31-1 name=__codelineno-31-1></a>vars: {
+</span><span id=__span-31-2><a id=__codelineno-31-2 name=__codelineno-31-2></a>  d2-config: {
+</span><span id=__span-31-3><a id=__codelineno-31-3 name=__codelineno-31-3></a>    theme-id: 4
+</span><span id=__span-31-4><a id=__codelineno-31-4 name=__codelineno-31-4></a>  }
+</span><span id=__span-31-5><a id=__codelineno-31-5 name=__codelineno-31-5></a>}
+</span></code></pre></div></td></tr></table></div> <p>部分主题编号：0（默认）、1（Neutral Grey）、2（Flags）、3（Orange）、4（Grape Soda）、5（Cool Classics）…… 你可以逐一尝试，找到最适合项目的那一款。</p> <hr> <h2 id=_2>五、布局引擎：选择最适合你的排版<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <p>D2 支持三种布局引擎，各有特色：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-32-1>1</a></span>
+<span class=normal><a href=#__codelineno-32-2>2</a></span>
+<span class=normal><a href=#__codelineno-32-3>3</a></span>
+<span class=normal><a href=#__codelineno-32-4>4</a></span>
+<span class=normal><a href=#__codelineno-32-5>5</a></span>
+<span class=normal><a href=#__codelineno-32-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-32-1><a id=__codelineno-32-1 name=__codelineno-32-1></a># 在文件中指定布局引擎
+</span><span id=__span-32-2><a id=__codelineno-32-2 name=__codelineno-32-2></a>vars: {
+</span><span id=__span-32-3><a id=__codelineno-32-3 name=__codelineno-32-3></a>  d2-config: {
+</span><span id=__span-32-4><a id=__codelineno-32-4 name=__codelineno-32-4></a>    layout-engine: elk
+</span><span id=__span-32-5><a id=__codelineno-32-5 name=__codelineno-32-5></a>  }
+</span><span id=__span-32-6><a id=__codelineno-32-6 name=__codelineno-32-6></a>}
+</span></code></pre></div></td></tr></table></div> <p>或者命令行指定：</p> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-33-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-33-1><a id=__codelineno-33-1 name=__codelineno-33-1></a>d2<span class=w> </span>--layout<span class=o>=</span>elk<span class=w> </span>input.d2<span class=w> </span>output.svg
+</span></code></pre></div></td></tr></table></div> <p><strong>三大引擎对比：</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-34-1> 1</a></span>
+<span class=normal><a href=#__codelineno-34-2> 2</a></span>
+<span class=normal><a href=#__codelineno-34-3> 3</a></span>
+<span class=normal><a href=#__codelineno-34-4> 4</a></span>
+<span class=normal><a href=#__codelineno-34-5> 5</a></span>
+<span class=normal><a href=#__codelineno-34-6> 6</a></span>
+<span class=normal><a href=#__codelineno-34-7> 7</a></span>
+<span class=normal><a href=#__codelineno-34-8> 8</a></span>
+<span class=normal><a href=#__codelineno-34-9> 9</a></span>
+<span class=normal><a href=#__codelineno-34-10>10</a></span>
+<span class=normal><a href=#__codelineno-34-11>11</a></span>
+<span class=normal><a href=#__codelineno-34-12>12</a></span>
+<span class=normal><a href=#__codelineno-34-13>13</a></span>
+<span class=normal><a href=#__codelineno-34-14>14</a></span>
+<span class=normal><a href=#__codelineno-34-15>15</a></span>
+<span class=normal><a href=#__codelineno-34-16>16</a></span>
+<span class=normal><a href=#__codelineno-34-17>17</a></span>
+<span class=normal><a href=#__codelineno-34-18>18</a></span>
+<span class=normal><a href=#__codelineno-34-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-34-1><a id=__codelineno-34-1 name=__codelineno-34-1></a>引擎对比: {
+</span><span id=__span-34-2><a id=__codelineno-34-2 name=__codelineno-34-2></a>  DAGRE: {
+</span><span id=__span-34-3><a id=__codelineno-34-3 name=__codelineno-34-3></a>    特点: 默认引擎; 适合流程图; 从上到下布局
+</span><span id=__span-34-4><a id=__codelineno-34-4 name=__codelineno-34-4></a>    标签: 免费内置
+</span><span id=__span-34-5><a id=__codelineno-34-5 name=__codelineno-34-5></a>  }
+</span><span id=__span-34-6><a id=__codelineno-34-6 name=__codelineno-34-6></a>
+</span><span id=__span-34-7><a id=__codelineno-34-7 name=__codelineno-34-7></a>  ELK: {
+</span><span id=__span-34-8><a id=__codelineno-34-8 name=__codelineno-34-8></a>    特点: 适合复杂图; 从左到右布局; 连线更整洁
+</span><span id=__span-34-9><a id=__codelineno-34-9 name=__codelineno-34-9></a>    标签: 免费内置
+</span><span id=__span-34-10><a id=__codelineno-34-10 name=__codelineno-34-10></a>  }
+</span><span id=__span-34-11><a id=__codelineno-34-11 name=__codelineno-34-11></a>
+</span><span id=__span-34-12><a id=__codelineno-34-12 name=__codelineno-34-12></a>  TALA: {
+</span><span id=__span-34-13><a id=__codelineno-34-13 name=__codelineno-34-13></a>    特点: 最智能; 连线指向精确行; 付费商业版
+</span><span id=__span-34-14><a id=__codelineno-34-14 name=__codelineno-34-14></a>    标签: 需单独安装
+</span><span id=__span-34-15><a id=__codelineno-34-15 name=__codelineno-34-15></a>  }
+</span><span id=__span-34-16><a id=__codelineno-34-16 name=__codelineno-34-16></a>
+</span><span id=__span-34-17><a id=__codelineno-34-17 name=__codelineno-34-17></a>  DAGRE -&gt; ELK: 需要更紧凑布局
+</span><span id=__span-34-18><a id=__codelineno-34-18 name=__codelineno-34-18></a>  ELK -&gt; TALA: 需要精确连线
+</span><span id=__span-34-19><a id=__codelineno-34-19 name=__codelineno-34-19></a>}
+</span></code></pre></div></td></tr></table></div> <table> <thead> <tr> <th>引擎</th> <th>方向</th> <th>优势</th> <th>价格</th> </tr> </thead> <tbody> <tr> <td>DAGRE</td> <td>从上到下</td> <td>默认引擎，开箱即用</td> <td>免费</td> </tr> <tr> <td>ELK</td> <td>从左到右</td> <td>连线整洁，适合复杂图</td> <td>免费</td> </tr> <tr> <td>TALA</td> <td>智能选择</td> <td>最智能，连线精确到行</td> <td>付费</td> </tr> </tbody> </table> <p><strong>建议</strong>：日常使用 DAGRE 足够，复杂 ER 图切 ELK，预算充足上 TALA。</p> <hr> <h2 id=_3>六、实战演练：从零画一张完整的微服务架构图<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <p>学完了语法，来一个完整的实战。我们画一张典型的电商微服务架构图：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-35-1>  1</a></span>
+<span class=normal><a href=#__codelineno-35-2>  2</a></span>
+<span class=normal><a href=#__codelineno-35-3>  3</a></span>
+<span class=normal><a href=#__codelineno-35-4>  4</a></span>
+<span class=normal><a href=#__codelineno-35-5>  5</a></span>
+<span class=normal><a href=#__codelineno-35-6>  6</a></span>
+<span class=normal><a href=#__codelineno-35-7>  7</a></span>
+<span class=normal><a href=#__codelineno-35-8>  8</a></span>
+<span class=normal><a href=#__codelineno-35-9>  9</a></span>
+<span class=normal><a href=#__codelineno-35-10> 10</a></span>
+<span class=normal><a href=#__codelineno-35-11> 11</a></span>
+<span class=normal><a href=#__codelineno-35-12> 12</a></span>
+<span class=normal><a href=#__codelineno-35-13> 13</a></span>
+<span class=normal><a href=#__codelineno-35-14> 14</a></span>
+<span class=normal><a href=#__codelineno-35-15> 15</a></span>
+<span class=normal><a href=#__codelineno-35-16> 16</a></span>
+<span class=normal><a href=#__codelineno-35-17> 17</a></span>
+<span class=normal><a href=#__codelineno-35-18> 18</a></span>
+<span class=normal><a href=#__codelineno-35-19> 19</a></span>
+<span class=normal><a href=#__codelineno-35-20> 20</a></span>
+<span class=normal><a href=#__codelineno-35-21> 21</a></span>
+<span class=normal><a href=#__codelineno-35-22> 22</a></span>
+<span class=normal><a href=#__codelineno-35-23> 23</a></span>
+<span class=normal><a href=#__codelineno-35-24> 24</a></span>
+<span class=normal><a href=#__codelineno-35-25> 25</a></span>
+<span class=normal><a href=#__codelineno-35-26> 26</a></span>
+<span class=normal><a href=#__codelineno-35-27> 27</a></span>
+<span class=normal><a href=#__codelineno-35-28> 28</a></span>
+<span class=normal><a href=#__codelineno-35-29> 29</a></span>
+<span class=normal><a href=#__codelineno-35-30> 30</a></span>
+<span class=normal><a href=#__codelineno-35-31> 31</a></span>
+<span class=normal><a href=#__codelineno-35-32> 32</a></span>
+<span class=normal><a href=#__codelineno-35-33> 33</a></span>
+<span class=normal><a href=#__codelineno-35-34> 34</a></span>
+<span class=normal><a href=#__codelineno-35-35> 35</a></span>
+<span class=normal><a href=#__codelineno-35-36> 36</a></span>
+<span class=normal><a href=#__codelineno-35-37> 37</a></span>
+<span class=normal><a href=#__codelineno-35-38> 38</a></span>
+<span class=normal><a href=#__codelineno-35-39> 39</a></span>
+<span class=normal><a href=#__codelineno-35-40> 40</a></span>
+<span class=normal><a href=#__codelineno-35-41> 41</a></span>
+<span class=normal><a href=#__codelineno-35-42> 42</a></span>
+<span class=normal><a href=#__codelineno-35-43> 43</a></span>
+<span class=normal><a href=#__codelineno-35-44> 44</a></span>
+<span class=normal><a href=#__codelineno-35-45> 45</a></span>
+<span class=normal><a href=#__codelineno-35-46> 46</a></span>
+<span class=normal><a href=#__codelineno-35-47> 47</a></span>
+<span class=normal><a href=#__codelineno-35-48> 48</a></span>
+<span class=normal><a href=#__codelineno-35-49> 49</a></span>
+<span class=normal><a href=#__codelineno-35-50> 50</a></span>
+<span class=normal><a href=#__codelineno-35-51> 51</a></span>
+<span class=normal><a href=#__codelineno-35-52> 52</a></span>
+<span class=normal><a href=#__codelineno-35-53> 53</a></span>
+<span class=normal><a href=#__codelineno-35-54> 54</a></span>
+<span class=normal><a href=#__codelineno-35-55> 55</a></span>
+<span class=normal><a href=#__codelineno-35-56> 56</a></span>
+<span class=normal><a href=#__codelineno-35-57> 57</a></span>
+<span class=normal><a href=#__codelineno-35-58> 58</a></span>
+<span class=normal><a href=#__codelineno-35-59> 59</a></span>
+<span class=normal><a href=#__codelineno-35-60> 60</a></span>
+<span class=normal><a href=#__codelineno-35-61> 61</a></span>
+<span class=normal><a href=#__codelineno-35-62> 62</a></span>
+<span class=normal><a href=#__codelineno-35-63> 63</a></span>
+<span class=normal><a href=#__codelineno-35-64> 64</a></span>
+<span class=normal><a href=#__codelineno-35-65> 65</a></span>
+<span class=normal><a href=#__codelineno-35-66> 66</a></span>
+<span class=normal><a href=#__codelineno-35-67> 67</a></span>
+<span class=normal><a href=#__codelineno-35-68> 68</a></span>
+<span class=normal><a href=#__codelineno-35-69> 69</a></span>
+<span class=normal><a href=#__codelineno-35-70> 70</a></span>
+<span class=normal><a href=#__codelineno-35-71> 71</a></span>
+<span class=normal><a href=#__codelineno-35-72> 72</a></span>
+<span class=normal><a href=#__codelineno-35-73> 73</a></span>
+<span class=normal><a href=#__codelineno-35-74> 74</a></span>
+<span class=normal><a href=#__codelineno-35-75> 75</a></span>
+<span class=normal><a href=#__codelineno-35-76> 76</a></span>
+<span class=normal><a href=#__codelineno-35-77> 77</a></span>
+<span class=normal><a href=#__codelineno-35-78> 78</a></span>
+<span class=normal><a href=#__codelineno-35-79> 79</a></span>
+<span class=normal><a href=#__codelineno-35-80> 80</a></span>
+<span class=normal><a href=#__codelineno-35-81> 81</a></span>
+<span class=normal><a href=#__codelineno-35-82> 82</a></span>
+<span class=normal><a href=#__codelineno-35-83> 83</a></span>
+<span class=normal><a href=#__codelineno-35-84> 84</a></span>
+<span class=normal><a href=#__codelineno-35-85> 85</a></span>
+<span class=normal><a href=#__codelineno-35-86> 86</a></span>
+<span class=normal><a href=#__codelineno-35-87> 87</a></span>
+<span class=normal><a href=#__codelineno-35-88> 88</a></span>
+<span class=normal><a href=#__codelineno-35-89> 89</a></span>
+<span class=normal><a href=#__codelineno-35-90> 90</a></span>
+<span class=normal><a href=#__codelineno-35-91> 91</a></span>
+<span class=normal><a href=#__codelineno-35-92> 92</a></span>
+<span class=normal><a href=#__codelineno-35-93> 93</a></span>
+<span class=normal><a href=#__codelineno-35-94> 94</a></span>
+<span class=normal><a href=#__codelineno-35-95> 95</a></span>
+<span class=normal><a href=#__codelineno-35-96> 96</a></span>
+<span class=normal><a href=#__codelineno-35-97> 97</a></span>
+<span class=normal><a href=#__codelineno-35-98> 98</a></span>
+<span class=normal><a href=#__codelineno-35-99> 99</a></span>
+<span class=normal><a href=#__codelineno-35-100>100</a></span>
+<span class=normal><a href=#__codelineno-35-101>101</a></span>
+<span class=normal><a href=#__codelineno-35-102>102</a></span>
+<span class=normal><a href=#__codelineno-35-103>103</a></span>
+<span class=normal><a href=#__codelineno-35-104>104</a></span>
+<span class=normal><a href=#__codelineno-35-105>105</a></span>
+<span class=normal><a href=#__codelineno-35-106>106</a></span>
+<span class=normal><a href=#__codelineno-35-107>107</a></span>
+<span class=normal><a href=#__codelineno-35-108>108</a></span>
+<span class=normal><a href=#__codelineno-35-109>109</a></span>
+<span class=normal><a href=#__codelineno-35-110>110</a></span>
+<span class=normal><a href=#__codelineno-35-111>111</a></span>
+<span class=normal><a href=#__codelineno-35-112>112</a></span>
+<span class=normal><a href=#__codelineno-35-113>113</a></span>
+<span class=normal><a href=#__codelineno-35-114>114</a></span>
+<span class=normal><a href=#__codelineno-35-115>115</a></span>
+<span class=normal><a href=#__codelineno-35-116>116</a></span>
+<span class=normal><a href=#__codelineno-35-117>117</a></span>
+<span class=normal><a href=#__codelineno-35-118>118</a></span>
+<span class=normal><a href=#__codelineno-35-119>119</a></span>
+<span class=normal><a href=#__codelineno-35-120>120</a></span>
+<span class=normal><a href=#__codelineno-35-121>121</a></span>
+<span class=normal><a href=#__codelineno-35-122>122</a></span>
+<span class=normal><a href=#__codelineno-35-123>123</a></span>
+<span class=normal><a href=#__codelineno-35-124>124</a></span>
+<span class=normal><a href=#__codelineno-35-125>125</a></span>
+<span class=normal><a href=#__codelineno-35-126>126</a></span>
+<span class=normal><a href=#__codelineno-35-127>127</a></span>
+<span class=normal><a href=#__codelineno-35-128>128</a></span>
+<span class=normal><a href=#__codelineno-35-129>129</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-35-1><a id=__codelineno-35-1 name=__codelineno-35-1></a>vars: {
+</span><span id=__span-35-2><a id=__codelineno-35-2 name=__codelineno-35-2></a>  d2-config: {
+</span><span id=__span-35-3><a id=__codelineno-35-3 name=__codelineno-35-3></a>    layout-engine: dagre
+</span><span id=__span-35-4><a id=__codelineno-35-4 name=__codelineno-35-4></a>    theme-id: 3
+</span><span id=__span-35-5><a id=__codelineno-35-5 name=__codelineno-35-5></a>  }
+</span><span id=__span-35-6><a id=__codelineno-35-6 name=__codelineno-35-6></a>}
+</span><span id=__span-35-7><a id=__codelineno-35-7 name=__codelineno-35-7></a>
+</span><span id=__span-35-8><a id=__codelineno-35-8 name=__codelineno-35-8></a>title: 电商微服务架构图 {
+</span><span id=__span-35-9><a id=__codelineno-35-9 name=__codelineno-35-9></a>  near: top-center
+</span><span id=__span-35-10><a id=__codelineno-35-10 name=__codelineno-35-10></a>  shape: text
+</span><span id=__span-35-11><a id=__codelineno-35-11 name=__codelineno-35-11></a>  style: {
+</span><span id=__span-35-12><a id=__codelineno-35-12 name=__codelineno-35-12></a>    font-size: 28
+</span><span id=__span-35-13><a id=__codelineno-35-13 name=__codelineno-35-13></a>    bold: true
+</span><span id=__span-35-14><a id=__codelineno-35-14 name=__codelineno-35-14></a>    underline: true
+</span><span id=__span-35-15><a id=__codelineno-35-15 name=__codelineno-35-15></a>  }
+</span><span id=__span-35-16><a id=__codelineno-35-16 name=__codelineno-35-16></a>}
+</span><span id=__span-35-17><a id=__codelineno-35-17 name=__codelineno-35-17></a>
+</span><span id=__span-35-18><a id=__codelineno-35-18 name=__codelineno-35-18></a>客户端: 客户端层 {
+</span><span id=__span-35-19><a id=__codelineno-35-19 name=__codelineno-35-19></a>  Web: Web浏览器
+</span><span id=__span-35-20><a id=__codelineno-35-20 name=__codelineno-35-20></a>  App: 移动App
+</span><span id=__span-35-21><a id=__codelineno-35-21 name=__codelineno-35-21></a>  小程序: 微信小程序
+</span><span id=__span-35-22><a id=__codelineno-35-22 name=__codelineno-35-22></a>}
+</span><span id=__span-35-23><a id=__codelineno-35-23 name=__codelineno-35-23></a>
+</span><span id=__span-35-24><a id=__codelineno-35-24 name=__codelineno-35-24></a>网关层: API Gateway {
+</span><span id=__span-35-25><a id=__codelineno-35-25 name=__codelineno-35-25></a>  shape: hexagon
+</span><span id=__span-35-26><a id=__codelineno-35-26 name=__codelineno-35-26></a>  style: {
+</span><span id=__span-35-27><a id=__codelineno-35-27 name=__codelineno-35-27></a>    fill: &quot;#FFF8E1&quot;
+</span><span id=__span-35-28><a id=__codelineno-35-28 name=__codelineno-35-28></a>    stroke: &quot;#FF8F00&quot;
+</span><span id=__span-35-29><a id=__codelineno-35-29 name=__codelineno-35-29></a>    stroke-width: 3
+</span><span id=__span-35-30><a id=__codelineno-35-30 name=__codelineno-35-30></a>    shadow: true
+</span><span id=__span-35-31><a id=__codelineno-35-31 name=__codelineno-35-31></a>  }
+</span><span id=__span-35-32><a id=__codelineno-35-32 name=__codelineno-35-32></a>}
+</span><span id=__span-35-33><a id=__codelineno-35-33 name=__codelineno-35-33></a>
+</span><span id=__span-35-34><a id=__codelineno-35-34 name=__codelineno-35-34></a>服务层: 微服务集群 {
+</span><span id=__span-35-35><a id=__codelineno-35-35 name=__codelineno-35-35></a>  用户服务: User Service {
+</span><span id=__span-35-36><a id=__codelineno-35-36 name=__codelineno-35-36></a>    shape: hexagon
+</span><span id=__span-35-37><a id=__codelineno-35-37 name=__codelineno-35-37></a>    style: {
+</span><span id=__span-35-38><a id=__codelineno-35-38 name=__codelineno-35-38></a>      fill: &quot;#E8F5E9&quot;
+</span><span id=__span-35-39><a id=__codelineno-35-39 name=__codelineno-35-39></a>      stroke: &quot;#388E3C&quot;
+</span><span id=__span-35-40><a id=__codelineno-35-40 name=__codelineno-35-40></a>    }
+</span><span id=__span-35-41><a id=__codelineno-35-41 name=__codelineno-35-41></a>  }
+</span><span id=__span-35-42><a id=__codelineno-35-42 name=__codelineno-35-42></a>
+</span><span id=__span-35-43><a id=__codelineno-35-43 name=__codelineno-35-43></a>  商品服务: Product Service {
+</span><span id=__span-35-44><a id=__codelineno-35-44 name=__codelineno-35-44></a>    shape: hexagon
+</span><span id=__span-35-45><a id=__codelineno-35-45 name=__codelineno-35-45></a>    style: {
+</span><span id=__span-35-46><a id=__codelineno-35-46 name=__codelineno-35-46></a>      fill: &quot;#E3F2FD&quot;
+</span><span id=__span-35-47><a id=__codelineno-35-47 name=__codelineno-35-47></a>      stroke: &quot;#1976D2&quot;
+</span><span id=__span-35-48><a id=__codelineno-35-48 name=__codelineno-35-48></a>    }
+</span><span id=__span-35-49><a id=__codelineno-35-49 name=__codelineno-35-49></a>  }
+</span><span id=__span-35-50><a id=__codelineno-35-50 name=__codelineno-35-50></a>
+</span><span id=__span-35-51><a id=__codelineno-35-51 name=__codelineno-35-51></a>  订单服务: Order Service {
+</span><span id=__span-35-52><a id=__codelineno-35-52 name=__codelineno-35-52></a>    shape: hexagon
+</span><span id=__span-35-53><a id=__codelineno-35-53 name=__codelineno-35-53></a>    style: {
+</span><span id=__span-35-54><a id=__codelineno-35-54 name=__codelineno-35-54></a>      fill: &quot;#FFF3E0&quot;
+</span><span id=__span-35-55><a id=__codelineno-35-55 name=__codelineno-35-55></a>      stroke: &quot;#F57C00&quot;
+</span><span id=__span-35-56><a id=__codelineno-35-56 name=__codelineno-35-56></a>    }
+</span><span id=__span-35-57><a id=__codelineno-35-57 name=__codelineno-35-57></a>  }
+</span><span id=__span-35-58><a id=__codelineno-35-58 name=__codelineno-35-58></a>
+</span><span id=__span-35-59><a id=__codelineno-35-59 name=__codelineno-35-59></a>  支付服务: Payment Service {
+</span><span id=__span-35-60><a id=__codelineno-35-60 name=__codelineno-35-60></a>    shape: hexagon
+</span><span id=__span-35-61><a id=__codelineno-35-61 name=__codelineno-35-61></a>    style: {
+</span><span id=__span-35-62><a id=__codelineno-35-62 name=__codelineno-35-62></a>      fill: &quot;#FCE4EC&quot;
+</span><span id=__span-35-63><a id=__codelineno-35-63 name=__codelineno-35-63></a>      stroke: &quot;#C62828&quot;
+</span><span id=__span-35-64><a id=__codelineno-35-64 name=__codelineno-35-64></a>    }
+</span><span id=__span-35-65><a id=__codelineno-35-65 name=__codelineno-35-65></a>  }
+</span><span id=__span-35-66><a id=__codelineno-35-66 name=__codelineno-35-66></a>}
+</span><span id=__span-35-67><a id=__codelineno-35-67 name=__codelineno-35-67></a>
+</span><span id=__span-35-68><a id=__codelineno-35-68 name=__codelineno-35-68></a>中间件: 中间件层 {
+</span><span id=__span-35-69><a id=__codelineno-35-69 name=__codelineno-35-69></a>  Kafka: 消息队列 {
+</span><span id=__span-35-70><a id=__codelineno-35-70 name=__codelineno-35-70></a>    shape: cylinder
+</span><span id=__span-35-71><a id=__codelineno-35-71 name=__codelineno-35-71></a>    style: {
+</span><span id=__span-35-72><a id=__codelineno-35-72 name=__codelineno-35-72></a>      fill: &quot;#F3E5F5&quot;
+</span><span id=__span-35-73><a id=__codelineno-35-73 name=__codelineno-35-73></a>      stroke: &quot;#7B1FA2&quot;
+</span><span id=__span-35-74><a id=__codelineno-35-74 name=__codelineno-35-74></a>    }
+</span><span id=__span-35-75><a id=__codelineno-35-75 name=__codelineno-35-75></a>  }
+</span><span id=__span-35-76><a id=__codelineno-35-76 name=__codelineno-35-76></a>
+</span><span id=__span-35-77><a id=__codelineno-35-77 name=__codelineno-35-77></a>  Redis: 缓存集群 {
+</span><span id=__span-35-78><a id=__codelineno-35-78 name=__codelineno-35-78></a>    shape: cylinder
+</span><span id=__span-35-79><a id=__codelineno-35-79 name=__codelineno-35-79></a>    style: {
+</span><span id=__span-35-80><a id=__codelineno-35-80 name=__codelineno-35-80></a>      fill: &quot;#FFEBEE&quot;
+</span><span id=__span-35-81><a id=__codelineno-35-81 name=__codelineno-35-81></a>      stroke: &quot;#D32F2F&quot;
+</span><span id=__span-35-82><a id=__codelineno-35-82 name=__codelineno-35-82></a>    }
+</span><span id=__span-35-83><a id=__codelineno-35-83 name=__codelineno-35-83></a>  }
+</span><span id=__span-35-84><a id=__codelineno-35-84 name=__codelineno-35-84></a>}
+</span><span id=__span-35-85><a id=__codelineno-35-85 name=__codelineno-35-85></a>
+</span><span id=__span-35-86><a id=__codelineno-35-86 name=__codelineno-35-86></a>存储层: 数据持久层 {
+</span><span id=__span-35-87><a id=__codelineno-35-87 name=__codelineno-35-87></a>  MySQL主: MySQL主库 {
+</span><span id=__span-35-88><a id=__codelineno-35-88 name=__codelineno-35-88></a>    shape: cylinder
+</span><span id=__span-35-89><a id=__codelineno-35-89 name=__codelineno-35-89></a>    style: {
+</span><span id=__span-35-90><a id=__codelineno-35-90 name=__codelineno-35-90></a>      fill: &quot;#E0F7FA&quot;
+</span><span id=__span-35-91><a id=__codelineno-35-91 name=__codelineno-35-91></a>      stroke: &quot;#00838F&quot;
+</span><span id=__span-35-92><a id=__codelineno-35-92 name=__codelineno-35-92></a>    }
+</span><span id=__span-35-93><a id=__codelineno-35-93 name=__codelineno-35-93></a>  }
+</span><span id=__span-35-94><a id=__codelineno-35-94 name=__codelineno-35-94></a>
+</span><span id=__span-35-95><a id=__codelineno-35-95 name=__codelineno-35-95></a>  MySQL从: MySQL从库 {
+</span><span id=__span-35-96><a id=__codelineno-35-96 name=__codelineno-35-96></a>    shape: cylinder
+</span><span id=__span-35-97><a id=__codelineno-35-97 name=__codelineno-35-97></a>    style: {
+</span><span id=__span-35-98><a id=__codelineno-35-98 name=__codelineno-35-98></a>      fill: &quot;#E0F7FA&quot;
+</span><span id=__span-35-99><a id=__codelineno-35-99 name=__codelineno-35-99></a>      stroke: &quot;#00838F&quot;
+</span><span id=__span-35-100><a id=__codelineno-35-100 name=__codelineno-35-100></a>      stroke-dash: 3
+</span><span id=__span-35-101><a id=__codelineno-35-101 name=__codelineno-35-101></a>    }
+</span><span id=__span-35-102><a id=__codelineno-35-102 name=__codelineno-35-102></a>  }
+</span><span id=__span-35-103><a id=__codelineno-35-103 name=__codelineno-35-103></a>
+</span><span id=__span-35-104><a id=__codelineno-35-104 name=__codelineno-35-104></a>  ES: ElasticSearch {
+</span><span id=__span-35-105><a id=__codelineno-35-105 name=__codelineno-35-105></a>    shape: cylinder
+</span><span id=__span-35-106><a id=__codelineno-35-106 name=__codelineno-35-106></a>    style: {
+</span><span id=__span-35-107><a id=__codelineno-35-107 name=__codelineno-35-107></a>      fill: &quot;#FFF9C4&quot;
+</span><span id=__span-35-108><a id=__codelineno-35-108 name=__codelineno-35-108></a>      stroke: &quot;#F9A825&quot;
+</span><span id=__span-35-109><a id=__codelineno-35-109 name=__codelineno-35-109></a>    }
+</span><span id=__span-35-110><a id=__codelineno-35-110 name=__codelineno-35-110></a>  }
+</span><span id=__span-35-111><a id=__codelineno-35-111 name=__codelineno-35-111></a>}
+</span><span id=__span-35-112><a id=__codelineno-35-112 name=__codelineno-35-112></a>
+</span><span id=__span-35-113><a id=__codelineno-35-113 name=__codelineno-35-113></a>客户端.Web -&gt; 网关层: HTTPS
+</span><span id=__span-35-114><a id=__codelineno-35-114 name=__codelineno-35-114></a>客户端.App -&gt; 网关层: HTTPS
+</span><span id=__span-35-115><a id=__codelineno-35-115 name=__codelineno-35-115></a>客户端.小程序 -&gt; 网关层: HTTPS
+</span><span id=__span-35-116><a id=__codelineno-35-116 name=__codelineno-35-116></a>
+</span><span id=__span-35-117><a id=__codelineno-35-117 name=__codelineno-35-117></a>网关层 -&gt; 服务层.用户服务: 认证鉴权
+</span><span id=__span-35-118><a id=__codelineno-35-118 name=__codelineno-35-118></a>网关层 -&gt; 服务层.商品服务: 商品查询
+</span><span id=__span-35-119><a id=__codelineno-35-119 name=__codelineno-35-119></a>网关层 -&gt; 服务层.订单服务: 下单
+</span><span id=__span-35-120><a id=__codelineno-35-120 name=__codelineno-35-120></a>网关层 -&gt; 服务层.支付服务: 支付
+</span><span id=__span-35-121><a id=__codelineno-35-121 name=__codelineno-35-121></a>
+</span><span id=__span-35-122><a id=__codelineno-35-122 name=__codelineno-35-122></a>服务层.用户服务 -&gt; 中间件.Redis: 读写缓存
+</span><span id=__span-35-123><a id=__codelineno-35-123 name=__codelineno-35-123></a>服务层.商品服务 -&gt; 中间件.Redis: 热点数据
+</span><span id=__span-35-124><a id=__codelineno-35-124 name=__codelineno-35-124></a>服务层.订单服务 -&gt; 中间件.Kafka: 发布订单事件
+</span><span id=__span-35-125><a id=__codelineno-35-125 name=__codelineno-35-125></a>服务层.支付服务 -&gt; 中间件.Kafka: 发布支付事件
+</span><span id=__span-35-126><a id=__codelineno-35-126 name=__codelineno-35-126></a>
+</span><span id=__span-35-127><a id=__codelineno-35-127 name=__codelineno-35-127></a>中间件.Kafka -&gt; 存储层.MySQL主: 异步写入
+</span><span id=__span-35-128><a id=__codelineno-35-128 name=__codelineno-35-128></a>存储层.MySQL主 -&gt; 存储层.MySQL从: 主从同步
+</span><span id=__span-35-129><a id=__codelineno-35-129 name=__codelineno-35-129></a>中间件.Kafka -&gt; 存储层.ES: 数据索引
+</span></code></pre></div></td></tr></table></div> <p>保存为 <code>ecommerce.d2</code>，运行 <code>d2 ecommerce.d2 ecommerce.svg</code>，一张专业的架构图就出来了。</p> <p><strong>效果亮点</strong>： - 不同服务用不同颜色区分 - 缓存和消息队列用圆柱体表示 - API 网关用六边形突出核心位置 - 主题 3（Orange）给整体加了一层暖色调</p> <hr> <h2 id=d2-vs>七、D2 vs 其他工具：怎么选？<a class=headerlink href=#d2-vs title="Permanent link">&para;</a></h2> <p>你可能会问，市面上已经有 Mermaid、PlantUML、Graphviz 了，D2 有什么不同？</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-36-1> 1</a></span>
+<span class=normal><a href=#__codelineno-36-2> 2</a></span>
+<span class=normal><a href=#__codelineno-36-3> 3</a></span>
+<span class=normal><a href=#__codelineno-36-4> 4</a></span>
+<span class=normal><a href=#__codelineno-36-5> 5</a></span>
+<span class=normal><a href=#__codelineno-36-6> 6</a></span>
+<span class=normal><a href=#__codelineno-36-7> 7</a></span>
+<span class=normal><a href=#__codelineno-36-8> 8</a></span>
+<span class=normal><a href=#__codelineno-36-9> 9</a></span>
+<span class=normal><a href=#__codelineno-36-10>10</a></span>
+<span class=normal><a href=#__codelineno-36-11>11</a></span>
+<span class=normal><a href=#__codelineno-36-12>12</a></span>
+<span class=normal><a href=#__codelineno-36-13>13</a></span>
+<span class=normal><a href=#__codelineno-36-14>14</a></span>
+<span class=normal><a href=#__codelineno-36-15>15</a></span>
+<span class=normal><a href=#__codelineno-36-16>16</a></span>
+<span class=normal><a href=#__codelineno-36-17>17</a></span>
+<span class=normal><a href=#__codelineno-36-18>18</a></span>
+<span class=normal><a href=#__codelineno-36-19>19</a></span>
+<span class=normal><a href=#__codelineno-36-20>20</a></span>
+<span class=normal><a href=#__codelineno-36-21>21</a></span>
+<span class=normal><a href=#__codelineno-36-22>22</a></span>
+<span class=normal><a href=#__codelineno-36-23>23</a></span>
+<span class=normal><a href=#__codelineno-36-24>24</a></span>
+<span class=normal><a href=#__codelineno-36-25>25</a></span>
+<span class=normal><a href=#__codelineno-36-26>26</a></span>
+<span class=normal><a href=#__codelineno-36-27>27</a></span>
+<span class=normal><a href=#__codelineno-36-28>28</a></span>
+<span class=normal><a href=#__codelineno-36-29>29</a></span>
+<span class=normal><a href=#__codelineno-36-30>30</a></span>
+<span class=normal><a href=#__codelineno-36-31>31</a></span>
+<span class=normal><a href=#__codelineno-36-32>32</a></span>
+<span class=normal><a href=#__codelineno-36-33>33</a></span>
+<span class=normal><a href=#__codelineno-36-34>34</a></span>
+<span class=normal><a href=#__codelineno-36-35>35</a></span>
+<span class=normal><a href=#__codelineno-36-36>36</a></span>
+<span class=normal><a href=#__codelineno-36-37>37</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-36-1><a id=__codelineno-36-1 name=__codelineno-36-1></a>工具对比: {
+</span><span id=__span-36-2><a id=__codelineno-36-2 name=__codelineno-36-2></a>  D2: {
+</span><span id=__span-36-3><a id=__codelineno-36-3 name=__codelineno-36-3></a>    语法: 极简直觉
+</span><span id=__span-36-4><a id=__codelineno-36-4 name=__codelineno-36-4></a>    样式: 内置丰富
+</span><span id=__span-36-5><a id=__codelineno-36-5 name=__codelineno-36-5></a>    布局: 三引擎可选
+</span><span id=__span-36-6><a id=__codelineno-36-6 name=__codelineno-36-6></a>    上手: 5分钟入门
+</span><span id=__span-36-7><a id=__codelineno-36-7 name=__codelineno-36-7></a>    生态: VS Code插件; Obsidian插件; GitHub渲染
+</span><span id=__span-36-8><a id=__codelineno-36-8 name=__codelineno-36-8></a>    定位: 现代化; 开发者友好
+</span><span id=__span-36-9><a id=__codelineno-36-9 name=__codelineno-36-9></a>  }
+</span><span id=__span-36-10><a id=__codelineno-36-10 name=__codelineno-36-10></a>
+</span><span id=__span-36-11><a id=__codelineno-36-11 name=__codelineno-36-11></a>  Mermaid: {
+</span><span id=__span-36-12><a id=__codelineno-36-12 name=__codelineno-36-12></a>    语法: 中等复杂
+</span><span id=__span-36-13><a id=__codelineno-36-13 name=__codelineno-36-13></a>    样式: 有限
+</span><span id=__span-36-14><a id=__codelineno-36-14 name=__codelineno-36-14></a>    布局: 单引擎
+</span><span id=__span-36-15><a id=__codelineno-36-15 name=__codelineno-36-15></a>    上手: 需要记语法
+</span><span id=__span-36-16><a id=__codelineno-36-16 name=__codelineno-36-16></a>    生态: GitHub原生支持; 广泛集成
+</span><span id=__span-36-17><a id=__codelineno-36-17 name=__codelineno-36-17></a>    定位: 通用; 社区大
+</span><span id=__span-36-18><a id=__codelineno-36-18 name=__codelineno-36-18></a>  }
+</span><span id=__span-36-19><a id=__codelineno-36-19 name=__codelineno-36-19></a>
+</span><span id=__span-36-20><a id=__codelineno-36-20 name=__codelineno-36-20></a>  PlantUML: {
+</span><span id=__span-36-21><a id=__codelineno-36-21 name=__codelineno-36-21></a>    语法: 较复杂
+</span><span id=__span-36-22><a id=__codelineno-36-22 name=__codelineno-36-22></a>    样式: 有限
+</span><span id=__span-36-23><a id=__codelineno-36-23 name=__codelineno-36-23></a>    布局: Graphviz
+</span><span id=__span-36-24><a id=__codelineno-36-24 name=__codelineno-36-24></a>    上手: 学习曲线陡
+</span><span id=__span-36-25><a id=__codelineno-36-25 name=__codelineno-36-25></a>    生态: 企业级; 老牌
+</span><span id=__span-36-26><a id=__codelineno-36-26 name=__codelineno-36-26></a>    定位: 传统; Java系
+</span><span id=__span-36-27><a id=__codelineno-36-27 name=__codelineno-36-27></a>  }
+</span><span id=__span-36-28><a id=__codelineno-36-28 name=__codelineno-36-28></a>
+</span><span id=__span-36-29><a id=__codelineno-36-29 name=__codelineno-36-29></a>  Graphviz: {
+</span><span id=__span-36-30><a id=__codelineno-36-30 name=__codelineno-36-30></a>    语法: DOT语言
+</span><span id=__span-36-31><a id=__codelineno-36-31 name=__codelineno-36-31></a>    样式: 基础
+</span><span id=__span-36-32><a id=__codelineno-36-32 name=__codelineno-36-32></a>    布局: 多引擎
+</span><span id=__span-36-33><a id=__codelineno-36-33 name=__codelineno-36-33></a>    上手: 需要理解图论
+</span><span id=__span-36-34><a id=__codelineno-36-34 name=__codelineno-36-34></a>    生态: 学术界; 底层工具
+</span><span id=__span-36-35><a id=__codelineno-36-35 name=__codelineno-36-35></a>    定位: 基础设施; 底层
+</span><span id=__span-36-36><a id=__codelineno-36-36 name=__codelineno-36-36></a>  }
+</span><span id=__span-36-37><a id=__codelineno-36-37 name=__codelineno-36-37></a>}
+</span></code></pre></div></td></tr></table></div> <table> <thead> <tr> <th>工具</th> <th>适合谁</th> <th>核心优势</th> </tr> </thead> <tbody> <tr> <td><strong>D2</strong></td> <td>追求效率和美观的开发者</td> <td>语法最简洁，样式最丰富</td> </tr> <tr> <td>Mermaid</td> <td>需要广泛集成的团队</td> <td>GitHub 原生渲染，生态最大</td> </tr> <tr> <td>PlantUML</td> <td>Java 企业级项目</td> <td>UML 图谱最全</td> </tr> <tr> <td>Graphviz</td> <td>学术 / 底层需求</td> <td>图论算法最强</td> </tr> </tbody> </table> <p><strong>我的建议</strong>：如果你是新入坑文本图表，从 D2 开始。语法最直觉，效果最惊艳，学习成本最低。</p> <hr> <h2 id=_4>八、生态与工具链<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <p>D2 不仅仅是一个命令行工具，它背后已经形成了一套完整的生态：</p> <h3 id=81-playground>8.1 在线 PlayGround<a class=headerlink href=#81-playground title="Permanent link">&para;</a></h3> <p>不想安装？打开 <a href=https://play.d2lang.com/ >play.d2lang.com</a>，直接在浏览器里编写和预览 D2 图表，零门槛体验。</p> <h3 id=82-vs-code>8.2 VS Code 插件<a class=headerlink href=#82-vs-code title="Permanent link">&para;</a></h3> <p>搜索 "D2" 插件安装，支持： - 语法高亮 - 实时预览 - 自动格式化 - 代码补全</p> <h3 id=83-obsidian>8.3 Obsidian 插件<a class=headerlink href=#83-obsidian title="Permanent link">&para;</a></h3> <p>用 Obsidian 做知识管理的朋友有福了，D2 社区已经做了 Obsidian 插件，在 Markdown 笔记中直接嵌入 D2 图表。</p> <h3 id=84-github>8.4 GitHub 集成<a class=headerlink href=#84-github title="Permanent link">&para;</a></h3> <p>D2 已被 Thoughtworks 技术雷达收录为"试用"级别工具，社区正在推动 GitHub 原生支持 D2 渲染（类似 Mermaid 的 ```mermaid 代码块渲染）。</p> <h3 id=85>8.5 导出格式<a class=headerlink href=#85 title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-37-1>1</a></span>
+<span class=normal><a href=#__codelineno-37-2>2</a></span>
+<span class=normal><a href=#__codelineno-37-3>3</a></span>
+<span class=normal><a href=#__codelineno-37-4>4</a></span>
+<span class=normal><a href=#__codelineno-37-5>5</a></span>
+<span class=normal><a href=#__codelineno-37-6>6</a></span>
+<span class=normal><a href=#__codelineno-37-7>7</a></span>
+<span class=normal><a href=#__codelineno-37-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-37-1><a id=__codelineno-37-1 name=__codelineno-37-1></a><span class=c1># 导出 SVG（默认，矢量图，无限缩放）</span>
+</span><span id=__span-37-2><a id=__codelineno-37-2 name=__codelineno-37-2></a>d2<span class=w> </span>input.d2<span class=w> </span>output.svg
+</span><span id=__span-37-3><a id=__codelineno-37-3 name=__codelineno-37-3></a>
+</span><span id=__span-37-4><a id=__codelineno-37-4 name=__codelineno-37-4></a><span class=c1># 导出 PNG（位图，适合插入文档）</span>
+</span><span id=__span-37-5><a id=__codelineno-37-5 name=__codelineno-37-5></a>d2<span class=w> </span>input.d2<span class=w> </span>output.png
+</span><span id=__span-37-6><a id=__codelineno-37-6 name=__codelineno-37-6></a>
+</span><span id=__span-37-7><a id=__codelineno-37-7 name=__codelineno-37-7></a><span class=c1># 导出 PDF（打印级质量）</span>
+</span><span id=__span-37-8><a id=__codelineno-37-8 name=__codelineno-37-8></a>d2<span class=w> </span>input.d2<span class=w> </span>output.pdf
+</span></code></pre></div></td></tr></table></div> <hr> <h2 id=_5>九、实用技巧与避坑指南<a class=headerlink href=#_5 title="Permanent link">&para;</a></h2> <p>最后，分享一些实战中的经验和踩过的坑，帮你少走弯路。</p> <h3 id=1>技巧 1：先结构后样式<a class=headerlink href=#1 title="Permanent link">&para;</a></h3> <p>写 D2 时，先用最简单的语法把结构和连线写出来，确认逻辑无误后再加样式。不要一开始就纠结颜色和布局。</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-38-1>1</a></span>
+<span class=normal><a href=#__codelineno-38-2>2</a></span>
+<span class=normal><a href=#__codelineno-38-3>3</a></span>
+<span class=normal><a href=#__codelineno-38-4>4</a></span>
+<span class=normal><a href=#__codelineno-38-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-38-1><a id=__codelineno-38-1 name=__codelineno-38-1></a>第一步：把节点和连线写出来
+</span><span id=__span-38-2><a id=__codelineno-38-2 name=__codelineno-38-2></a>第二步：给关键节点设置 shape
+</span><span id=__span-38-3><a id=__codelineno-38-3 name=__codelineno-38-3></a>第三步：加容器分组
+</span><span id=__span-38-4><a id=__codelineno-38-4 name=__codelineno-38-4></a>第四步：调整样式和主题
+</span><span id=__span-38-5><a id=__codelineno-38-5 name=__codelineno-38-5></a>第五步：微调 near 定位
+</span></code></pre></div></td></tr></table></div> <h3 id=2>技巧 2：善用类来统一样式<a class=headerlink href=#2 title="Permanent link">&para;</a></h3> <p>同一类型的节点用类来统一管理样式，比逐个设置高效得多，后续修改也只需改一处。</p> <h3 id=3>技巧 3：跨容器引用要用完整路径<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-39-1>1</a></span>
+<span class=normal><a href=#__codelineno-39-2>2</a></span>
+<span class=normal><a href=#__codelineno-39-3>3</a></span>
+<span class=normal><a href=#__codelineno-39-4>4</a></span>
+<span class=normal><a href=#__codelineno-39-5>5</a></span>
+<span class=normal><a href=#__codelineno-39-6>6</a></span>
+<span class=normal><a href=#__codelineno-39-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-39-1><a id=__codelineno-39-1 name=__codelineno-39-1></a># 正确
+</span><span id=__span-39-2><a id=__codelineno-39-2 name=__codelineno-39-2></a>前端.Web应用 -&gt; 后端.API网关
+</span><span id=__span-39-3><a id=__codelineno-39-3 name=__codelineno-39-3></a>
+</span><span id=__span-39-4><a id=__codelineno-39-4 name=__codelineno-39-4></a># 错误（会在前端容器内新建一个API网关）
+</span><span id=__span-39-5><a id=__codelineno-39-5 name=__codelineno-39-5></a>前端: {
+</span><span id=__span-39-6><a id=__codelineno-39-6 name=__codelineno-39-6></a>  Web应用 -&gt; API网关
+</span><span id=__span-39-7><a id=__codelineno-39-7 name=__codelineno-39-7></a>}
+</span></code></pre></div></td></tr></table></div> <h3 id=4>技巧 4：布局不满意时换引擎<a class=headerlink href=#4 title="Permanent link">&para;</a></h3> <p>DAGRE 从上到下适合流程图，ELK 从左到右适合架构图。哪个看着顺眼用哪个。</p> <h3 id=5-watch>技巧 5：用 watch 模式实时调整<a class=headerlink href=#5-watch title="Permanent link">&para;</a></h3> <div class="language-bash highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-40-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-40-1><a id=__codelineno-40-1 name=__codelineno-40-1></a>d2<span class=w> </span>--watch<span class=w> </span>input.d2<span class=w> </span>output.svg
+</span></code></pre></div></td></tr></table></div> <p>边写边看，效率翻倍。</p> <h3 id=6>技巧 6：长标签用引号包裹<a class=headerlink href=#6 title="Permanent link">&para;</a></h3> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-41-1>1</a></span>
+<span class=normal><a href=#__codelineno-41-2>2</a></span>
+<span class=normal><a href=#__codelineno-41-3>3</a></span>
+<span class=normal><a href=#__codelineno-41-4>4</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-41-1><a id=__codelineno-41-1 name=__codelineno-41-1></a># 包含空格或特殊字符的标签，用引号包裹
+</span><span id=__span-41-2><a id=__codelineno-41-2 name=__codelineno-41-2></a>&quot;用户认证模块&quot;: Auth Module {
+</span><span id=__span-41-3><a id=__codelineno-41-3 name=__codelineno-41-3></a>  shape: hexagon
+</span><span id=__span-41-4><a id=__codelineno-41-4 name=__codelineno-41-4></a>}
+</span></code></pre></div></td></tr></table></div> <hr> <p>回顾一下我们今天学到的：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-42-1> 1</a></span>
+<span class=normal><a href=#__codelineno-42-2> 2</a></span>
+<span class=normal><a href=#__codelineno-42-3> 3</a></span>
+<span class=normal><a href=#__codelineno-42-4> 4</a></span>
+<span class=normal><a href=#__codelineno-42-5> 5</a></span>
+<span class=normal><a href=#__codelineno-42-6> 6</a></span>
+<span class=normal><a href=#__codelineno-42-7> 7</a></span>
+<span class=normal><a href=#__codelineno-42-8> 8</a></span>
+<span class=normal><a href=#__codelineno-42-9> 9</a></span>
+<span class=normal><a href=#__codelineno-42-10>10</a></span>
+<span class=normal><a href=#__codelineno-42-11>11</a></span>
+<span class=normal><a href=#__codelineno-42-12>12</a></span>
+<span class=normal><a href=#__codelineno-42-13>13</a></span>
+<span class=normal><a href=#__codelineno-42-14>14</a></span>
+<span class=normal><a href=#__codelineno-42-15>15</a></span>
+<span class=normal><a href=#__codelineno-42-16>16</a></span>
+<span class=normal><a href=#__codelineno-42-17>17</a></span>
+<span class=normal><a href=#__codelineno-42-18>18</a></span>
+<span class=normal><a href=#__codelineno-42-19>19</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-42-1><a id=__codelineno-42-1 name=__codelineno-42-1></a>D2学习路径: {
+</span><span id=__span-42-2><a id=__codelineno-42-2 name=__codelineno-42-2></a>  入门: 安装与基本语法 {
+</span><span id=__span-42-3><a id=__codelineno-42-3 name=__codelineno-42-3></a>    节点; 连接; 箭头
+</span><span id=__span-42-4><a id=__codelineno-42-4 name=__codelineno-42-4></a>  }
+</span><span id=__span-42-5><a id=__codelineno-42-5 name=__codelineno-42-5></a>
+</span><span id=__span-42-6><a id=__codelineno-42-6 name=__codelineno-42-6></a>  进阶: 形状与样式 {
+</span><span id=__span-42-7><a id=__codelineno-42-7 name=__codelineno-42-7></a>    shape; style; class; 容器
+</span><span id=__span-42-8><a id=__codelineno-42-8 name=__codelineno-42-8></a>  }
+</span><span id=__span-42-9><a id=__codelineno-42-9 name=__codelineno-42-9></a>
+</span><span id=__span-42-10><a id=__codelineno-42-10 name=__codelineno-42-10></a>  高级: 专业图表 {
+</span><span id=__span-42-11><a id=__codelineno-42-11 name=__codelineno-42-11></a>    sql_table; sequence_diagram; class图
+</span><span id=__span-42-12><a id=__codelineno-42-12 name=__codelineno-42-12></a>  }
+</span><span id=__span-42-13><a id=__codelineno-42-13 name=__codelineno-42-13></a>
+</span><span id=__span-42-14><a id=__codelineno-42-14 name=__codelineno-42-14></a>  实战: 完整项目 {
+</span><span id=__span-42-15><a id=__codelineno-42-15 name=__codelineno-42-15></a>    微服务架构图; ER图; 时序图
+</span><span id=__span-42-16><a id=__codelineno-42-16 name=__codelineno-42-16></a>  }
+</span><span id=__span-42-17><a id=__codelineno-42-17 name=__codelineno-42-17></a>
+</span><span id=__span-42-18><a id=__codelineno-42-18 name=__codelineno-42-18></a>  入门 -&gt; 进阶 -&gt; 高级 -&gt; 实战
+</span><span id=__span-42-19><a id=__codelineno-42-19 name=__codelineno-42-19></a>}
+</span></code></pre></div></td></tr></table></div> <p>D2 的魅力在于：<strong>你只需要关注"画什么"，不需要操心"怎么画"。</strong> 文本即图表，修改即渲染，版本即历史。</p> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> </div> <div class=md-social> <a href=https://github.com/your-username target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://linkedin.com/in/your-username target=_blank rel=noopener title=linkedin.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg> </a> <a href=https://twitter.com/your-username target=_blank rel=noopener title=twitter.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.select", "content.code.annotate", "content.tabs.link", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script> <script src=../../assets/javascripts/bundle.79ae519e.min.js></script> <script src=https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js></script> <script src=../../assets/js/code-block.js></script> <script src=../../assets/js/custom.js></script> </body> </html>

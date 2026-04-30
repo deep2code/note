@@ -1,0 +1,195 @@
+site_name: note
+site_description: 20+年资深程序员的技术知识库 | Go、Python、AI、DevOps
+site_author: deep2code
+site_url: https://deep2code.github.io/note
+repo_url: https://github.com/deep2code/note
+repo_name: deep2code/note
+
+theme:
+        name: material
+        custom_dir: overrides
+        palette:
+                - scheme: default
+                  primary: deep purple
+                  accent: amber
+                  toggle:
+                          icon: material/weather-sunny
+                          name: Switch to dark mode
+                - scheme: slate
+                  primary: deep purple
+                  accent: amber
+                  toggle:
+                          icon: material/weather-night
+                          name: Switch to light mode
+        font:
+                text: Inter
+                code: JetBrains Mono
+        features:
+                - navigation.instant
+                - navigation.tracking
+                - navigation.sections
+                - navigation.expand
+                - navigation.top
+                - navigation.indexes
+                - search.suggest
+                - search.highlight
+                - search.share
+                - content.code.copy
+                - content.code.select
+                - content.code.annotate
+                - content.tabs.link
+                - toc.integrate
+        icon:
+                repo: fontawesome/brands/github
+                logo: material/library
+
+plugins:
+        - search:
+                  lang:
+                          - en
+                          - zh
+                  separator: "[\\s\\u200b\\-_,:!=\\[\\]()\"`'+]*"
+        - minify:
+                  minify_html: true
+        # - git-revision-date-localized:
+        #       type: date
+        #       fallback_to_build_date: true
+
+markdown_extensions:
+        - pymdownx.highlight:
+                  anchor_linenums: true
+                  linenums: true
+                  line_spans: __span
+                  pygments_lang_class: true
+        - pymdownx.inlinehilite
+        - pymdownx.superfences:
+                  custom_fences:
+                          - name: mermaid
+                            class: mermaid
+                            format: !!python/name:pymdownx.superfences.fence_code_format ""
+        - admonition
+        - pymdownx.details
+        - pymdownx.mark
+        - pymdownx.tilde
+        - pymdownx.caret
+        - pymdownx.keys
+        - attr_list
+        - md_in_html
+        - toc:
+                  permalink: true
+                  toc_depth: 3
+        - pymdownx.emoji:
+                  emoji_index: !!python/name:material.extensions.emoji.twemoji ""
+                  emoji_generator:
+
+                          !!python/name:material.extensions.emoji.to_svg ""
+extra_javascript:
+        - https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js
+        - assets/js/code-block.js
+        - assets/js/custom.js
+
+extra_css:
+        - assets/css/code-block.css
+        - assets/css/custom.css
+
+extra:
+        social:
+                - icon: fontawesome/brands/github
+                  link: https://github.com/your-username
+                - icon: fontawesome/brands/linkedin
+                  link: https://linkedin.com/in/your-username
+                - icon: fontawesome/brands/twitter
+                  link: https://twitter.com/your-username
+        generator: false
+
+nav:
+        - Home: index.md
+        - 编程语言:
+                  - Go:
+                            - 标准库:
+                                      - fmt: lang/go/01-fmt-格式化IO.md
+                                      - errors: lang/go/02-errors-错误处理.md
+                                      - strings: lang/go/03-strings-字符串操作.md
+                                      - bytes: lang/go/04-bytes-字节切片操作.md
+                                      - strconv: lang/go/05-strconv-字符串转换.md
+                                      - context: lang/go/06-context-上下文管理.md
+                                      - sync: lang/go/07-sync-同步原语.md
+                                      - atomic: lang/go/08-sync-atomic-原子操作.md
+                                      - io: lang/go/09-io-IO接口.md
+                                      - os: lang/go/10-os-操作系统接口.md
+                            - 框架:
+                                      - Gin: lang/go/frameworks/Gin框架Context.md
+                                      - GORM: lang/go/frameworks/GORM-ORM库.md
+                                      - gRPC: lang/go/frameworks/grpc RPC框架.md
+                                      - Echo: lang/go/frameworks/Echo框架Web框架.md
+                                      - go-zero: lang/go/frameworks/go-zero框架.md
+                            - 进阶:
+                                      - Map: lang/go/Go语言Map.md
+                                      - Struct: lang/go/Go语言Struct.md
+                                      - GORM进阶: lang/go/Go语言GORM.md
+                                      - HTTPS: lang/go/Go语言HTTPS全方位.md
+                                      - 职业发展: lang/go/Golang程序员发展之路.md
+                  - Python:
+                            - Requests: lang/python/01_Requests库.md
+                            - Pandas: lang/python/02_Pandas数据.md
+                            - NumPy: lang/python/03_NumPy科学计算.md
+                            - Django: lang/python/04_Django_Web框架.md
+                            - Flask: lang/python/05_Flask微框架.md
+                            - 标准库:
+                                      - collections: lang/python/collections模块.md
+                                      - datetime: lang/python/datetime模块.md
+                                      - json: lang/python/json模块.md
+                                      - os: lang/python/os模块.md
+                                      - pathlib: lang/python/pathlib模块.md
+        - AI:
+                  - AI/index.md
+                  - 大模型:
+                            - 入门指南: AI/大模型入门指南.md
+                            - 基础: AI/大模型.md
+                            - 常识: AI/大模型常识.md
+                  - 进阶:
+                            - Agent: AI/大模型Agent.md
+                            - Skill: AI/大模型Skill.md
+                            - CoT: AI/大模型思维链CoT.md
+                            - 主动创造: AI/大模型主动创造算法.md
+                            - AutoGen: AI/AutoGen.md
+                  - 算法:
+                            - 线性回归: AI/线性回归算法.md
+                            - 推荐算法: AI/推荐算法进化史.md
+                  - 其他:
+                            - RAG技术: AI/RAG技术深度解析.md
+                            - OpenAI SDK: AI/OpenAI_Agents_SDK_Guide.md
+        - 网络协议:
+                  - protocols/index.md
+                  - HTTP:
+                            - HTTP/2: protocols/HTTP2协议.md
+                            - HTTP/3: protocols/HTTP-3协议.md
+                            - HTTPS: protocols/HTTPS.md
+                  - RPC:
+                            - gRPC: protocols/gRPC.md
+                  - 其他:
+                            - RTSP: protocols/RTSP协议.md
+                            - IPv8: protocols/IPv8.md
+        - 数据库:
+                  - database/index.md
+                  - MySQL:
+                            - B+树: database/MySQLB+树.md
+        - 开发工具:
+                  - tools/index.md
+                  - DevOps:
+                            - Docker: tools/Docker.md
+                            - Kubernetes: tools/Kubernetes.md
+                            - Linux: tools/Linux.md
+                            - Jenkins: tools/jenkins-beginner.md
+                  - Git:
+                            - 入门: tools/GitHub入门版本控制.md
+                  - 调试:
+                            - Wireshark: tools/Wireshark.md
+                  - 文档:
+                            - Mermaid: tools/Mermaid图表.md
+                            - PlantUML: tools/PlantUML画图神器.md
+        - 计算机科学:
+                  - science/index.md
+                  - 组件: science/computer-components-complete.md
+                  - 数字: science/numbers-complete.md
+                  - 声音: science/声音原理.md
