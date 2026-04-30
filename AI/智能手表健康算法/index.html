@@ -1,0 +1,1244 @@
+<!doctype html><html lang=en class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="20+年资深程序员的技术知识库 | Go、Python、AI、DevOps"><meta name=author content=deep2code><link href=https://deep2code.github.io/note/AI/%E6%99%BA%E8%83%BD%E6%89%8B%E8%A1%A8%E5%81%A5%E5%BA%B7%E7%AE%97%E6%B3%95/ rel=canonical><link rel=icon href=../../assets/images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.7.6"><title>智能手表健康算法大揭秘：你的手表是如何"懂"你身体的？ - note</title><link rel=stylesheet href=../../assets/stylesheets/main.484c7ddc.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.ab4e12ef.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style><link rel=stylesheet href=../../assets/css/code-block.css><link rel=stylesheet href=../../assets/css/custom.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=deep-purple data-md-color-accent=amber> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#_1 class=md-skip> Skip to content </a> </div> <div data-md-component=announce> </div> <header class="md-header md-header--shadow" data-md-component=header> <nav class="md-header__inner md-grid" aria-label=Header> <a href=../.. title=note class="md-header__button md-logo" aria-label=note data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> note </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> 智能手表健康算法大揭秘：你的手表是如何"懂"你身体的？ </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=deep-purple data-md-color-accent=amber aria-label="Switch to dark mode" type=radio name=__palette id=__palette_0> <label class="md-header__button md-icon" title="Switch to dark mode" for=__palette_1 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg> </label> <input class=md-option data-md-color-media data-md-color-scheme=slate data-md-color-primary=deep-purple data-md-color-accent=amber aria-label="Switch to light mode" type=radio name=__palette id=__palette_1> <label class="md-header__button md-icon" title="Switch to light mode" for=__palette_0 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg> </label> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=Search placeholder=Search autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=Search> <a href=javascript:void(0) class="md-search__icon md-icon" title=Share aria-label=Share data-clipboard data-clipboard-text data-md-component=search-share tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg> </a> <button type=reset class="md-search__icon md-icon" title=Clear aria-label=Clear tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> Initializing search </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> <div class=md-header__source> <a href=https://github.com/deep2code/note title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </div> <div class=md-source__repository> deep2code/note </div> </a> </div> </nav> </header> <div class=md-container data-md-component=container> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--integrated" aria-label=Navigation data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../.. title=note class="md-nav__button md-logo" aria-label=note data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> note </label> <div class=md-nav__source> <a href=https://github.com/deep2code/note title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </div> <div class=md-source__repository> deep2code/note </div> </a> </div> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../.. class=md-nav__link> <span class=md-ellipsis> Home </span> </a> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2> <label class=md-nav__link for=__nav_2 id=__nav_2_label tabindex> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2> <span class="md-nav__icon md-icon"></span> 编程语言 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1> <label class=md-nav__link for=__nav_2_1 id=__nav_2_1_label tabindex=0> <span class=md-ellipsis> Go </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_2_1_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1> <span class="md-nav__icon md-icon"></span> Go </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_1> <label class=md-nav__link for=__nav_2_1_1 id=__nav_2_1_1_label tabindex=0> <span class=md-ellipsis> 标准库 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_1_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_1> <span class="md-nav__icon md-icon"></span> 标准库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/go/01-fmt-%E6%A0%BC%E5%BC%8F%E5%8C%96IO/ class=md-nav__link> <span class=md-ellipsis> fmt </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/02-errors-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> errors </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/03-strings-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> strings </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/04-bytes-%E5%AD%97%E8%8A%82%E5%88%87%E7%89%87%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> bytes </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/05-strconv-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2/ class=md-nav__link> <span class=md-ellipsis> strconv </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/06-context-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> context </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/07-sync-%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD/ class=md-nav__link> <span class=md-ellipsis> sync </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/08-sync-atomic-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> atomic </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/09-io-IO%E6%8E%A5%E5%8F%A3/ class=md-nav__link> <span class=md-ellipsis> io </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/10-os-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/ class=md-nav__link> <span class=md-ellipsis> os </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_2> <label class=md-nav__link for=__nav_2_1_2 id=__nav_2_1_2_label tabindex=0> <span class=md-ellipsis> 框架 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_2> <span class="md-nav__icon md-icon"></span> 框架 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/go/frameworks/Gin%E6%A1%86%E6%9E%B6Context/ class=md-nav__link> <span class=md-ellipsis> Gin </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/GORM-ORM%E5%BA%93/ class=md-nav__link> <span class=md-ellipsis> GORM </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/grpc%20RPC%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> gRPC </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/Echo%E6%A1%86%E6%9E%B6Web%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Echo </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/go-zero%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> go-zero </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_3> <label class=md-nav__link for=__nav_2_1_3 id=__nav_2_1_3_label tabindex=0> <span class=md-ellipsis> 进阶 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_3_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_3> <span class="md-nav__icon md-icon"></span> 进阶 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80Map/ class=md-nav__link> <span class=md-ellipsis> Map </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80Struct/ class=md-nav__link> <span class=md-ellipsis> Struct </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80GORM/ class=md-nav__link> <span class=md-ellipsis> GORM进阶 </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80HTTPS%E5%85%A8%E6%96%B9%E4%BD%8D/ class=md-nav__link> <span class=md-ellipsis> HTTPS </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Golang%E7%A8%8B%E5%BA%8F%E5%91%98%E5%8F%91%E5%B1%95%E4%B9%8B%E8%B7%AF/ class=md-nav__link> <span class=md-ellipsis> 职业发展 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_2> <label class=md-nav__link for=__nav_2_2 id=__nav_2_2_label tabindex=0> <span class=md-ellipsis> Python </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_2_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2_2> <span class="md-nav__icon md-icon"></span> Python </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/python/01_Requests%E5%BA%93/ class=md-nav__link> <span class=md-ellipsis> Requests </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/02_Pandas%E6%95%B0%E6%8D%AE/ class=md-nav__link> <span class=md-ellipsis> Pandas </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/03_NumPy%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/ class=md-nav__link> <span class=md-ellipsis> NumPy </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/04_Django_Web%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Django </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/05_Flask%E5%BE%AE%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Flask </span> </a> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_2_6> <label class=md-nav__link for=__nav_2_2_6 id=__nav_2_2_6_label tabindex=0> <span class=md-ellipsis> 标准库 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_2_6_label aria-expanded=false> <label class=md-nav__title for=__nav_2_2_6> <span class="md-nav__icon md-icon"></span> 标准库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/python/collections%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> collections </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/datetime%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> datetime </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/json%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> json </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/os%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> os </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/pathlib%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> pathlib </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3> <div class="md-nav__link md-nav__container"> <a href=../ class="md-nav__link "> <span class=md-ellipsis> AI </span> </a> <label class="md-nav__link " for=__nav_3 id=__nav_3_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_3_label aria-expanded=false> <label class=md-nav__title for=__nav_3> <span class="md-nav__icon md-icon"></span> AI </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_2> <label class=md-nav__link for=__nav_3_2 id=__nav_3_2_label tabindex=0> <span class=md-ellipsis> 大模型 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_2_label aria-expanded=false> <label class=md-nav__title for=__nav_3_2> <span class="md-nav__icon md-icon"></span> 大模型 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/ class=md-nav__link> <span class=md-ellipsis> 入门指南 </span> </a> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B/ class=md-nav__link> <span class=md-ellipsis> 基础 </span> </a> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B8%B8%E8%AF%86/ class=md-nav__link> <span class=md-ellipsis> 常识 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_3> <label class=md-nav__link for=__nav_3_3 id=__nav_3_3_label tabindex=0> <span class=md-ellipsis> 进阶 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_3_label aria-expanded=false> <label class=md-nav__title for=__nav_3_3> <span class="md-nav__icon md-icon"></span> 进阶 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8BAgent/ class=md-nav__link> <span class=md-ellipsis> Agent </span> </a> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8BSkill/ class=md-nav__link> <span class=md-ellipsis> Skill </span> </a> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%80%9D%E7%BB%B4%E9%93%BECoT/ class=md-nav__link> <span class=md-ellipsis> CoT </span> </a> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%BB%E5%8A%A8%E5%88%9B%E9%80%A0%E7%AE%97%E6%B3%95/ class=md-nav__link> <span class=md-ellipsis> 主动创造 </span> </a> </li> <li class=md-nav__item> <a href=../AutoGen/ class=md-nav__link> <span class=md-ellipsis> AutoGen </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_4> <label class=md-nav__link for=__nav_3_4 id=__nav_3_4_label tabindex=0> <span class=md-ellipsis> 算法 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_4_label aria-expanded=false> <label class=md-nav__title for=__nav_3_4> <span class="md-nav__icon md-icon"></span> 算法 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95/ class=md-nav__link> <span class=md-ellipsis> 线性回归 </span> </a> </li> <li class=md-nav__item> <a href=../%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E8%BF%9B%E5%8C%96%E5%8F%B2/ class=md-nav__link> <span class=md-ellipsis> 推荐算法 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_5> <label class=md-nav__link for=__nav_3_5 id=__nav_3_5_label tabindex=0> <span class=md-ellipsis> 其他 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_5_label aria-expanded=false> <label class=md-nav__title for=__nav_3_5> <span class="md-nav__icon md-icon"></span> 其他 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../RAG%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/ class=md-nav__link> <span class=md-ellipsis> RAG技术 </span> </a> </li> <li class=md-nav__item> <a href=../OpenAI_Agents_SDK_Guide/ class=md-nav__link> <span class=md-ellipsis> OpenAI SDK </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4> <div class="md-nav__link md-nav__container"> <a href=../../protocols/ class="md-nav__link "> <span class=md-ellipsis> 网络协议 </span> </a> <label class="md-nav__link " for=__nav_4 id=__nav_4_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_4_label aria-expanded=false> <label class=md-nav__title for=__nav_4> <span class="md-nav__icon md-icon"></span> 网络协议 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_2> <label class=md-nav__link for=__nav_4_2 id=__nav_4_2_label tabindex=0> <span class=md-ellipsis> HTTP </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_2_label aria-expanded=false> <label class=md-nav__title for=__nav_4_2> <span class="md-nav__icon md-icon"></span> HTTP </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../protocols/HTTP2%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> HTTP/2 </span> </a> </li> <li class=md-nav__item> <a href=../../protocols/HTTP-3%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> HTTP/3 </span> </a> </li> <li class=md-nav__item> <a href=../../protocols/HTTPS/ class=md-nav__link> <span class=md-ellipsis> HTTPS </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_3> <label class=md-nav__link for=__nav_4_3 id=__nav_4_3_label tabindex=0> <span class=md-ellipsis> RPC </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_3_label aria-expanded=false> <label class=md-nav__title for=__nav_4_3> <span class="md-nav__icon md-icon"></span> RPC </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../protocols/gRPC/ class=md-nav__link> <span class=md-ellipsis> gRPC </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_4> <label class=md-nav__link for=__nav_4_4 id=__nav_4_4_label tabindex=0> <span class=md-ellipsis> 其他 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_4_label aria-expanded=false> <label class=md-nav__title for=__nav_4_4> <span class="md-nav__icon md-icon"></span> 其他 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../protocols/RTSP%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> RTSP </span> </a> </li> <li class=md-nav__item> <a href=../../protocols/IPv8/ class=md-nav__link> <span class=md-ellipsis> IPv8 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_5> <div class="md-nav__link md-nav__container"> <a href=../../database/ class="md-nav__link "> <span class=md-ellipsis> 数据库 </span> </a> <label class="md-nav__link " for=__nav_5 id=__nav_5_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_5_label aria-expanded=false> <label class=md-nav__title for=__nav_5> <span class="md-nav__icon md-icon"></span> 数据库 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_5_2> <label class=md-nav__link for=__nav_5_2 id=__nav_5_2_label tabindex=0> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_5_2_label aria-expanded=false> <label class=md-nav__title for=__nav_5_2> <span class="md-nav__icon md-icon"></span> MySQL </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../database/MySQLB%2B%E6%A0%91/ class=md-nav__link> <span class=md-ellipsis> B+树 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6> <div class="md-nav__link md-nav__container"> <a href=../../tools/ class="md-nav__link "> <span class=md-ellipsis> 开发工具 </span> </a> <label class="md-nav__link " for=__nav_6 id=__nav_6_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_6_label aria-expanded=false> <label class=md-nav__title for=__nav_6> <span class="md-nav__icon md-icon"></span> 开发工具 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_2> <label class=md-nav__link for=__nav_6_2 id=__nav_6_2_label tabindex=0> <span class=md-ellipsis> DevOps </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_2_label aria-expanded=false> <label class=md-nav__title for=__nav_6_2> <span class="md-nav__icon md-icon"></span> DevOps </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Docker/ class=md-nav__link> <span class=md-ellipsis> Docker </span> </a> </li> <li class=md-nav__item> <a href=../../tools/Kubernetes/ class=md-nav__link> <span class=md-ellipsis> Kubernetes </span> </a> </li> <li class=md-nav__item> <a href=../../tools/Linux/ class=md-nav__link> <span class=md-ellipsis> Linux </span> </a> </li> <li class=md-nav__item> <a href=../../tools/jenkins-beginner/ class=md-nav__link> <span class=md-ellipsis> Jenkins </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_3> <label class=md-nav__link for=__nav_6_3 id=__nav_6_3_label tabindex=0> <span class=md-ellipsis> Git </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_3_label aria-expanded=false> <label class=md-nav__title for=__nav_6_3> <span class="md-nav__icon md-icon"></span> Git </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/GitHub%E5%85%A5%E9%97%A8%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/ class=md-nav__link> <span class=md-ellipsis> 入门 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_4> <label class=md-nav__link for=__nav_6_4 id=__nav_6_4_label tabindex=0> <span class=md-ellipsis> 调试 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_4_label aria-expanded=false> <label class=md-nav__title for=__nav_6_4> <span class="md-nav__icon md-icon"></span> 调试 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Wireshark/ class=md-nav__link> <span class=md-ellipsis> Wireshark </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_5> <label class=md-nav__link for=__nav_6_5 id=__nav_6_5_label tabindex=0> <span class=md-ellipsis> 文档 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_5_label aria-expanded=false> <label class=md-nav__title for=__nav_6_5> <span class="md-nav__icon md-icon"></span> 文档 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Mermaid%E5%9B%BE%E8%A1%A8/ class=md-nav__link> <span class=md-ellipsis> Mermaid </span> </a> </li> <li class=md-nav__item> <a href=../../tools/PlantUML%E7%94%BB%E5%9B%BE%E7%A5%9E%E5%99%A8/ class=md-nav__link> <span class=md-ellipsis> PlantUML </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_7> <div class="md-nav__link md-nav__container"> <a href=../../science/ class="md-nav__link "> <span class=md-ellipsis> 计算机科学 </span> </a> <label class="md-nav__link " for=__nav_7 id=__nav_7_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_7_label aria-expanded=false> <label class=md-nav__title for=__nav_7> <span class="md-nav__icon md-icon"></span> 计算机科学 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../science/computer-components-complete/ class=md-nav__link> <span class=md-ellipsis> 组件 </span> </a> </li> <li class=md-nav__item> <a href=../../science/numbers-complete/ class=md-nav__link> <span class=md-ellipsis> 数字 </span> </a> </li> <li class=md-nav__item> <a href=../../science/%E5%A3%B0%E9%9F%B3%E5%8E%9F%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> 声音 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=_1>智能手表健康算法大揭秘：你的手表是如何"懂"你身体的？<a class=headerlink href=#_1 title="Permanent link">&para;</a></h1> <blockquote> <p><strong>导语</strong>：你手腕上那块小小的智能手表，不仅能看时间，还能测心率、血氧、睡眠，甚至预警房颤！但你有没有想过，这些健康数据到底是怎么算出来的？手表里真的藏着一个小医生吗？今天，我们就来扒一扒智能手表背后的健康算法，从原理到实现，让你彻底搞懂！</p> </blockquote> <hr> <h2 id=_2>一、从一个日常场景开始<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <h3 id=11>1.1 你的手表每天都在做什么？<a class=headerlink href=#11 title="Permanent link">&para;</a></h3> <p>想象一下你的一天：</p> <pre class=mermaid><code>timeline
+    title 智能手表的一天
+    07:00 : 睡眠监测唤醒
+           显示：深睡2h 浅睡4h REM1.5h
+    08:30 : 通勤路上
+           自动记录步数 消耗卡路里
+    10:00 : 工作会议中
+           压力指数升高 提醒深呼吸
+    12:30 : 午饭后散步
+           心率120 进入燃脂区间
+    15:00 : 久坐提醒
+           站起来活动一下！
+    19:00 : 运动模式
+           实时心率配速 卡路里消耗
+    23:00 : 入睡检测
+           自动进入睡眠监测模式</code></pre> <p><strong>问题来了</strong>：手表没有眼睛，怎么知道你睡着了？没有抽血，怎么知道你的心率？没有化验，怎么知道你的血氧？</p> <p>答案就是：<strong>算法</strong>！</p> <h3 id=12>1.2 健康算法到底是什么？<a class=headerlink href=#12 title="Permanent link">&para;</a></h3> <p>用一句话定义：</p> <blockquote> <p><strong>健康算法是通过传感器采集的原始生理信号，经过数学建模和机器学习，转化为可读健康指标的计算过程。</strong></p> </blockquote> <pre class=mermaid><code>graph LR
+    A[你的身体] --&gt; B[传感器采集]
+    B --&gt; C[原始信号]
+    C --&gt; D[算法处理]
+    D --&gt; E[健康指标]
+    E --&gt; F[手机App显示]
+
+    style A fill:#E8F5E9
+    style B fill:#C8E6C9
+    style C fill:#FFCDD2
+    style D fill:#BBDEFB
+    style E fill:#C8E6C9
+    style F fill:#E8F5E9</code></pre> <p><strong>简单理解</strong>：传感器负责"感知"，算法负责"理解"。</p> <hr> <h2 id=_3>二、传感器的世界：手表的"五官"<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <h3 id=21>2.1 手表里藏着哪些传感器？<a class=headerlink href=#21 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>mindmap
+    root((智能手表传感器))
+        光学传感器PPG
+            心率
+            血氧
+            血压估算
+        加速度传感器ACC
+            步数
+            手势识别
+            睡眠体动
+        陀螺仪GYRO
+            运动姿态
+            跌倒检测
+        皮肤电传感器EDA
+            压力水平
+            情绪变化
+        温度传感器
+            体表温度
+            女性周期预测
+        GPS
+            轨迹
+            速度
+            海拔</code></pre> <p><strong>重点</strong>：今天我们主要讲<strong>PPG（光电容积脉搏波）</strong>和<strong>加速度传感器</strong>，因为它们是健康算法的绝对主力！</p> <h3 id=22-ppg>2.2 PPG传感器：手表的"透视眼"<a class=headerlink href=#22-ppg title="Permanent link">&para;</a></h3> <h4 id=ppg>什么是PPG？<a class=headerlink href=#ppg title="Permanent link">&para;</a></h4> <p>PPG全称<strong>Photoplethysmography</strong>，中文叫<strong>光电容积脉搏波</strong>。</p> <pre class=mermaid><code>graph TD
+    A[LED灯发射绿光/红光/红外光] --&gt; B[光穿透皮肤到达血管]
+    B --&gt; C{血液流动}
+    C --&gt;|心脏收缩| D[血流量增加 吸收更多光]
+    C --&gt;|心脏舒张| E[血流量减少 吸收较少光]
+    D --&gt; F[光电探测器接收反射光]
+    E --&gt; F
+    F --&gt; G[生成波形信号]</code></pre> <p><strong>核心原理</strong>： - 血液会吸收特定波长的光 - 心脏跳动时，血管里血流量变化 - 血流量多 → 吸收光多 → 反射光少 - 血流量少 → 吸收光少 → 反射光多</p> <p><strong>结果</strong>：反射光的强弱变化，正好对应你的心跳节律！</p> <h4 id=ppg_1>PPG传感器的硬件结构<a class=headerlink href=#ppg_1 title="Permanent link">&para;</a></h4> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1> 1</a></span>
+<span class=normal><a href=#__codelineno-0-2> 2</a></span>
+<span class=normal><a href=#__codelineno-0-3> 3</a></span>
+<span class=normal><a href=#__codelineno-0-4> 4</a></span>
+<span class=normal><a href=#__codelineno-0-5> 5</a></span>
+<span class=normal><a href=#__codelineno-0-6> 6</a></span>
+<span class=normal><a href=#__codelineno-0-7> 7</a></span>
+<span class=normal><a href=#__codelineno-0-8> 8</a></span>
+<span class=normal><a href=#__codelineno-0-9> 9</a></span>
+<span class=normal><a href=#__codelineno-0-10>10</a></span>
+<span class=normal><a href=#__codelineno-0-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>┌─────────────────────────────────────┐
+</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a>│          手表背面                  │
+</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a>│                                     │
+</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a>│    💡💡💡  LED灯组                 │
+</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a>│    (绿光×2 红光×1 红外×1)          │
+</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a>│                                     │
+</span><span id=__span-0-7><a id=__codelineno-0-7 name=__codelineno-0-7></a>│         📷  光电探测器              │
+</span><span id=__span-0-8><a id=__codelineno-0-8 name=__codelineno-0-8></a>│                                     │
+</span><span id=__span-0-9><a id=__codelineno-0-9 name=__codelineno-0-9></a>└─────────────────────────────────────┘
+</span><span id=__span-0-10><a id=__codelineno-0-10 name=__codelineno-0-10></a>         ↓ ↓ ↓
+</span><span id=__span-0-11><a id=__codelineno-0-11 name=__codelineno-0-11></a>    你的手腕皮肤
+</span></code></pre></div></td></tr></table></div> <p><strong>为什么有多种光？</strong></p> <table> <thead> <tr> <th>光源</th> <th>波长</th> <th>用途</th> </tr> </thead> <tbody> <tr> <td>绿光</td> <td>525nm</td> <td>心率监测（日常）</td> </tr> <tr> <td>红光</td> <td>660nm</td> <td>血氧监测</td> </tr> <tr> <td>红外光</td> <td>940nm</td> <td>血氧监测（夜间）</td> </tr> </tbody> </table> <hr> <h2 id=_4>三、心率算法：从光信号到心跳数<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <h3 id=31-ppg>3.1 原始PPG信号长什么样？<a class=headerlink href=#31-ppg title="Permanent link">&para;</a></h3> <p>当你戴上手表，传感器每秒采集几十次数据，得到的原始波形是这样的：</p> <pre class=mermaid><code>xychart-beta
+    title "原始PPG信号波形"
+    x-axis "时间(秒)" 0 --&gt; 10
+    y-axis "光强度" 0 --&gt; 100
+    line "PPG原始信号" [45, 48, 55, 72, 85, 78, 60, 45, 47, 53, 70, 83, 80, 62, 46, 49, 56, 74, 86, 79, 61, 44, 46, 54, 71, 84, 77, 59, 45, 48, 55, 73, 85, 78, 60, 45, 47, 53, 70, 83, 80, 62, 46, 49, 56, 74, 86, 79, 61, 44]</code></pre> <p><strong>看到了吗？</strong> 波形有明显的周期性，每个波峰就是一次心跳！</p> <h3 id=32>3.2 心率算法的完整流程<a class=headerlink href=#32 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>flowchart TD
+    A[原始PPG信号] --&gt; B[预处理：去噪]
+    B --&gt; C[带通滤波 0.5-4Hz]
+    C --&gt; D[消除运动伪影]
+    D --&gt; E[峰值检测]
+    E --&gt; F[计算心率]
+    F --&gt; G[后处理：平滑]
+    G --&gt; H[输出：75 BPM]</code></pre> <p>让我们一步步拆解！</p> <h3 id=33-1>3.3 步骤1：预处理与去噪<a class=headerlink href=#33-1 title="Permanent link">&para;</a></h3> <p><strong>问题</strong>：原始信号中有很多噪声</p> <pre class=mermaid><code>graph LR
+    A[噪声来源] --&gt; B[环境光干扰]
+    A --&gt; C[手臂运动伪影]
+    A --&gt; D[皮肤温度变化]
+    A --&gt; E[佩戴松紧度]
+
+    style A fill:#FFCDD2
+    style B fill:#FFCDD2
+    style C fill:#FFCDD2
+    style D fill:#FFCDD2
+    style E fill:#FFCDD2</code></pre> <p><strong>解决方案</strong>：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1> 1</a></span>
+<span class=normal><a href=#__codelineno-1-2> 2</a></span>
+<span class=normal><a href=#__codelineno-1-3> 3</a></span>
+<span class=normal><a href=#__codelineno-1-4> 4</a></span>
+<span class=normal><a href=#__codelineno-1-5> 5</a></span>
+<span class=normal><a href=#__codelineno-1-6> 6</a></span>
+<span class=normal><a href=#__codelineno-1-7> 7</a></span>
+<span class=normal><a href=#__codelineno-1-8> 8</a></span>
+<span class=normal><a href=#__codelineno-1-9> 9</a></span>
+<span class=normal><a href=#__codelineno-1-10>10</a></span>
+<span class=normal><a href=#__codelineno-1-11>11</a></span>
+<span class=normal><a href=#__codelineno-1-12>12</a></span>
+<span class=normal><a href=#__codelineno-1-13>13</a></span>
+<span class=normal><a href=#__codelineno-1-14>14</a></span>
+<span class=normal><a href=#__codelineno-1-15>15</a></span>
+<span class=normal><a href=#__codelineno-1-16>16</a></span>
+<span class=normal><a href=#__codelineno-1-17>17</a></span>
+<span class=normal><a href=#__codelineno-1-18>18</a></span>
+<span class=normal><a href=#__codelineno-1-19>19</a></span>
+<span class=normal><a href=#__codelineno-1-20>20</a></span>
+<span class=normal><a href=#__codelineno-1-21>21</a></span>
+<span class=normal><a href=#__codelineno-1-22>22</a></span>
+<span class=normal><a href=#__codelineno-1-23>23</a></span>
+<span class=normal><a href=#__codelineno-1-24>24</a></span>
+<span class=normal><a href=#__codelineno-1-25>25</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a><span class=kn>import</span><span class=w> </span><span class=nn>numpy</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=nn>np</span>
+</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a><span class=kn>from</span><span class=w> </span><span class=nn>scipy.signal</span><span class=w> </span><span class=kn>import</span> <span class=n>butter</span><span class=p>,</span> <span class=n>filtfilt</span>
+</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>
+</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a><span class=k>def</span><span class=w> </span><span class=nf>preprocess_ppg</span><span class=p>(</span><span class=n>signal</span><span class=p>,</span> <span class=n>fs</span><span class=o>=</span><span class=mi>25</span><span class=p>):</span>
+</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-1-6><a id=__codelineno-1-6 name=__codelineno-1-6></a><span class=sd>    PPG信号预处理</span>
+</span><span id=__span-1-7><a id=__codelineno-1-7 name=__codelineno-1-7></a><span class=sd>    fs: 采样率（每秒25个点）</span>
+</span><span id=__span-1-8><a id=__codelineno-1-8 name=__codelineno-1-8></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-1-9><a id=__codelineno-1-9 name=__codelineno-1-9></a>    <span class=c1># 1. 去直流分量</span>
+</span><span id=__span-1-10><a id=__codelineno-1-10 name=__codelineno-1-10></a>    <span class=n>signal</span> <span class=o>=</span> <span class=n>signal</span> <span class=o>-</span> <span class=n>np</span><span class=o>.</span><span class=n>mean</span><span class=p>(</span><span class=n>signal</span><span class=p>)</span>
+</span><span id=__span-1-11><a id=__codelineno-1-11 name=__codelineno-1-11></a>
+</span><span id=__span-1-12><a id=__codelineno-1-12 name=__codelineno-1-12></a>    <span class=c1># 2. 带通滤波（保留0.5-4Hz，对应心率30-240 BPM）</span>
+</span><span id=__span-1-13><a id=__codelineno-1-13 name=__codelineno-1-13></a>    <span class=n>lowcut</span> <span class=o>=</span> <span class=mf>0.5</span>
+</span><span id=__span-1-14><a id=__codelineno-1-14 name=__codelineno-1-14></a>    <span class=n>highcut</span> <span class=o>=</span> <span class=mf>4.0</span>
+</span><span id=__span-1-15><a id=__codelineno-1-15 name=__codelineno-1-15></a>    <span class=n>b</span><span class=p>,</span> <span class=n>a</span> <span class=o>=</span> <span class=n>butter</span><span class=p>(</span><span class=mi>4</span><span class=p>,</span> <span class=p>[</span><span class=n>lowcut</span><span class=o>/</span><span class=p>(</span><span class=n>fs</span><span class=o>/</span><span class=mi>2</span><span class=p>),</span> <span class=n>highcut</span><span class=o>/</span><span class=p>(</span><span class=n>fs</span><span class=o>/</span><span class=mi>2</span><span class=p>)],</span> <span class=n>btype</span><span class=o>=</span><span class=s1>&#39;band&#39;</span><span class=p>)</span>
+</span><span id=__span-1-16><a id=__codelineno-1-16 name=__codelineno-1-16></a>    <span class=n>filtered_signal</span> <span class=o>=</span> <span class=n>filtfilt</span><span class=p>(</span><span class=n>b</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>signal</span><span class=p>)</span>
+</span><span id=__span-1-17><a id=__codelineno-1-17 name=__codelineno-1-17></a>
+</span><span id=__span-1-18><a id=__codelineno-1-18 name=__codelineno-1-18></a>    <span class=c1># 3. 归一化</span>
+</span><span id=__span-1-19><a id=__codelineno-1-19 name=__codelineno-1-19></a>    <span class=n>filtered_signal</span> <span class=o>=</span> <span class=n>filtered_signal</span> <span class=o>/</span> <span class=n>np</span><span class=o>.</span><span class=n>max</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>abs</span><span class=p>(</span><span class=n>filtered_signal</span><span class=p>))</span>
+</span><span id=__span-1-20><a id=__codelineno-1-20 name=__codelineno-1-20></a>
+</span><span id=__span-1-21><a id=__codelineno-1-21 name=__codelineno-1-21></a>    <span class=k>return</span> <span class=n>filtered_signal</span>
+</span><span id=__span-1-22><a id=__codelineno-1-22 name=__codelineno-1-22></a>
+</span><span id=__span-1-23><a id=__codelineno-1-23 name=__codelineno-1-23></a><span class=c1># 使用示例</span>
+</span><span id=__span-1-24><a id=__codelineno-1-24 name=__codelineno-1-24></a><span class=n>raw_signal</span> <span class=o>=</span> <span class=p>[</span><span class=o>...</span><span class=p>]</span> <span class=c1># 从传感器读取的数据</span>
+</span><span id=__span-1-25><a id=__codelineno-1-25 name=__codelineno-1-25></a><span class=n>clean_signal</span> <span class=o>=</span> <span class=n>preprocess_ppg</span><span class=p>(</span><span class=n>raw_signal</span><span class=p>)</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=34-2>3.4 步骤2：运动伪影消除（最难的环节！）<a class=headerlink href=#34-2 title="Permanent link">&para;</a></h3> <p><strong>为什么运动时心率不准？</strong></p> <pre class=mermaid><code>graph TD
+    A[你跑步] --&gt; B[手臂摆动]
+    B --&gt; C[皮肤和传感器相对位移]
+    C --&gt; D[PPG信号剧烈波动]
+    D --&gt; E[算法分不清是心跳还是抖动]
+    E --&gt; F[心率读数乱跳]</code></pre> <p><strong>解决方案：用加速度传感器（ACC）帮忙！</strong></p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1> 1</a></span>
+<span class=normal><a href=#__codelineno-2-2> 2</a></span>
+<span class=normal><a href=#__codelineno-2-3> 3</a></span>
+<span class=normal><a href=#__codelineno-2-4> 4</a></span>
+<span class=normal><a href=#__codelineno-2-5> 5</a></span>
+<span class=normal><a href=#__codelineno-2-6> 6</a></span>
+<span class=normal><a href=#__codelineno-2-7> 7</a></span>
+<span class=normal><a href=#__codelineno-2-8> 8</a></span>
+<span class=normal><a href=#__codelineno-2-9> 9</a></span>
+<span class=normal><a href=#__codelineno-2-10>10</a></span>
+<span class=normal><a href=#__codelineno-2-11>11</a></span>
+<span class=normal><a href=#__codelineno-2-12>12</a></span>
+<span class=normal><a href=#__codelineno-2-13>13</a></span>
+<span class=normal><a href=#__codelineno-2-14>14</a></span>
+<span class=normal><a href=#__codelineno-2-15>15</a></span>
+<span class=normal><a href=#__codelineno-2-16>16</a></span>
+<span class=normal><a href=#__codelineno-2-17>17</a></span>
+<span class=normal><a href=#__codelineno-2-18>18</a></span>
+<span class=normal><a href=#__codelineno-2-19>19</a></span>
+<span class=normal><a href=#__codelineno-2-20>20</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a><span class=k>def</span><span class=w> </span><span class=nf>remove_motion_artifact</span><span class=p>(</span><span class=n>ppg_signal</span><span class=p>,</span> <span class=n>acc_signal</span><span class=p>,</span> <span class=n>fs</span><span class=o>=</span><span class=mi>25</span><span class=p>):</span>
+</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a><span class=sd>    使用加速度计信号消除运动伪影</span>
+</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a>    <span class=c1># 方法1：自适应滤波</span>
+</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6></a>    <span class=kn>from</span><span class=w> </span><span class=nn>scipy.signal</span><span class=w> </span><span class=kn>import</span> <span class=n>lms</span>
+</span><span id=__span-2-7><a id=__codelineno-2-7 name=__codelineno-2-7></a>    <span class=n>filtered_signal</span><span class=p>,</span> <span class=n>error</span> <span class=o>=</span> <span class=n>lms</span><span class=p>(</span><span class=n>ppg_signal</span><span class=p>,</span> <span class=n>acc_signal</span><span class=p>,</span> <span class=n>step_size</span><span class=o>=</span><span class=mf>0.01</span><span class=p>)</span>
+</span><span id=__span-2-8><a id=__codelineno-2-8 name=__codelineno-2-8></a>
+</span><span id=__span-2-9><a id=__codelineno-2-9 name=__codelineno-2-9></a>    <span class=c1># 方法2：频域减法</span>
+</span><span id=__span-2-10><a id=__codelineno-2-10 name=__codelineno-2-10></a>    <span class=c1># 1. 对PPG和ACC都做FFT</span>
+</span><span id=__span-2-11><a id=__codelineno-2-11 name=__codelineno-2-11></a>    <span class=n>ppg_fft</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>fft</span><span class=o>.</span><span class=n>fft</span><span class=p>(</span><span class=n>ppg_signal</span><span class=p>)</span>
+</span><span id=__span-2-12><a id=__codelineno-2-12 name=__codelineno-2-12></a>    <span class=n>acc_fft</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>fft</span><span class=o>.</span><span class=n>fft</span><span class=p>(</span><span class=n>acc_signal</span><span class=p>)</span>
+</span><span id=__span-2-13><a id=__codelineno-2-13 name=__codelineno-2-13></a>
+</span><span id=__span-2-14><a id=__codelineno-2-14 name=__codelineno-2-14></a>    <span class=c1># 2. 从PPG频谱中减去与ACC相关的成分</span>
+</span><span id=__span-2-15><a id=__codelineno-2-15 name=__codelineno-2-15></a>    <span class=n>clean_fft</span> <span class=o>=</span> <span class=n>ppg_fft</span> <span class=o>-</span> <span class=mf>0.5</span> <span class=o>*</span> <span class=n>acc_fft</span>
+</span><span id=__span-2-16><a id=__codelineno-2-16 name=__codelineno-2-16></a>
+</span><span id=__span-2-17><a id=__codelineno-2-17 name=__codelineno-2-17></a>    <span class=c1># 3. 逆变换回时域</span>
+</span><span id=__span-2-18><a id=__codelineno-2-18 name=__codelineno-2-18></a>    <span class=n>clean_signal</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>fft</span><span class=o>.</span><span class=n>ifft</span><span class=p>(</span><span class=n>clean_fft</span><span class=p>)</span><span class=o>.</span><span class=n>real</span>
+</span><span id=__span-2-19><a id=__codelineno-2-19 name=__codelineno-2-19></a>
+</span><span id=__span-2-20><a id=__codelineno-2-20 name=__codelineno-2-20></a>    <span class=k>return</span> <span class=n>clean_signal</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=35-3>3.5 步骤3：峰值检测（找心跳）<a class=headerlink href=#35-3 title="Permanent link">&para;</a></h3> <p><strong>核心思路</strong>：找到波峰，计算间隔</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1> 1</a></span>
+<span class=normal><a href=#__codelineno-3-2> 2</a></span>
+<span class=normal><a href=#__codelineno-3-3> 3</a></span>
+<span class=normal><a href=#__codelineno-3-4> 4</a></span>
+<span class=normal><a href=#__codelineno-3-5> 5</a></span>
+<span class=normal><a href=#__codelineno-3-6> 6</a></span>
+<span class=normal><a href=#__codelineno-3-7> 7</a></span>
+<span class=normal><a href=#__codelineno-3-8> 8</a></span>
+<span class=normal><a href=#__codelineno-3-9> 9</a></span>
+<span class=normal><a href=#__codelineno-3-10>10</a></span>
+<span class=normal><a href=#__codelineno-3-11>11</a></span>
+<span class=normal><a href=#__codelineno-3-12>12</a></span>
+<span class=normal><a href=#__codelineno-3-13>13</a></span>
+<span class=normal><a href=#__codelineno-3-14>14</a></span>
+<span class=normal><a href=#__codelineno-3-15>15</a></span>
+<span class=normal><a href=#__codelineno-3-16>16</a></span>
+<span class=normal><a href=#__codelineno-3-17>17</a></span>
+<span class=normal><a href=#__codelineno-3-18>18</a></span>
+<span class=normal><a href=#__codelineno-3-19>19</a></span>
+<span class=normal><a href=#__codelineno-3-20>20</a></span>
+<span class=normal><a href=#__codelineno-3-21>21</a></span>
+<span class=normal><a href=#__codelineno-3-22>22</a></span>
+<span class=normal><a href=#__codelineno-3-23>23</a></span>
+<span class=normal><a href=#__codelineno-3-24>24</a></span>
+<span class=normal><a href=#__codelineno-3-25>25</a></span>
+<span class=normal><a href=#__codelineno-3-26>26</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a><span class=kn>from</span><span class=w> </span><span class=nn>scipy.signal</span><span class=w> </span><span class=kn>import</span> <span class=n>find_peaks</span>
+</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>
+</span><span id=__span-3-3><a id=__codelineno-3-3 name=__codelineno-3-3></a><span class=k>def</span><span class=w> </span><span class=nf>detect_heart_rate</span><span class=p>(</span><span class=n>ppg_signal</span><span class=p>,</span> <span class=n>fs</span><span class=o>=</span><span class=mi>25</span><span class=p>):</span>
+</span><span id=__span-3-4><a id=__codelineno-3-4 name=__codelineno-3-4></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-3-5><a id=__codelineno-3-5 name=__codelineno-3-5></a><span class=sd>    从PPG信号检测心率</span>
+</span><span id=__span-3-6><a id=__codelineno-3-6 name=__codelineno-3-6></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-3-7><a id=__codelineno-3-7 name=__codelineno-3-7></a>    <span class=c1># 1. 找峰值</span>
+</span><span id=__span-3-8><a id=__codelineno-3-8 name=__codelineno-3-8></a>    <span class=n>peaks</span><span class=p>,</span> <span class=n>properties</span> <span class=o>=</span> <span class=n>find_peaks</span><span class=p>(</span>
+</span><span id=__span-3-9><a id=__codelineno-3-9 name=__codelineno-3-9></a>        <span class=n>ppg_signal</span><span class=p>,</span> 
+</span><span id=__span-3-10><a id=__codelineno-3-10 name=__codelineno-3-10></a>        <span class=n>height</span><span class=o>=</span><span class=mf>0.3</span><span class=p>,</span>        <span class=c1># 最小高度</span>
+</span><span id=__span-3-11><a id=__codelineno-3-11 name=__codelineno-3-11></a>        <span class=n>distance</span><span class=o>=</span><span class=n>fs</span><span class=o>*</span><span class=mf>0.3</span>    <span class=c1># 最小间距（排除过高心率）</span>
+</span><span id=__span-3-12><a id=__codelineno-3-12 name=__codelineno-3-12></a>    <span class=p>)</span>
+</span><span id=__span-3-13><a id=__codelineno-3-13 name=__codelineno-3-13></a>
+</span><span id=__span-3-14><a id=__codelineno-3-14 name=__codelineno-3-14></a>    <span class=c1># 2. 计算峰值间隔（RR间期）</span>
+</span><span id=__span-3-15><a id=__codelineno-3-15 name=__codelineno-3-15></a>    <span class=n>rr_intervals</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>diff</span><span class=p>(</span><span class=n>peaks</span><span class=p>)</span> <span class=o>/</span> <span class=n>fs</span>  <span class=c1># 单位：秒</span>
+</span><span id=__span-3-16><a id=__codelineno-3-16 name=__codelineno-3-16></a>
+</span><span id=__span-3-17><a id=__codelineno-3-17 name=__codelineno-3-17></a>    <span class=c1># 3. 转换为心率（BPM = 60 / RR间期）</span>
+</span><span id=__span-3-18><a id=__codelineno-3-18 name=__codelineno-3-18></a>    <span class=n>heart_rates</span> <span class=o>=</span> <span class=mf>60.0</span> <span class=o>/</span> <span class=n>rr_intervals</span>
+</span><span id=__span-3-19><a id=__codelineno-3-19 name=__codelineno-3-19></a>
+</span><span id=__span-3-20><a id=__codelineno-3-20 name=__codelineno-3-20></a>    <span class=c1># 4. 返回平均心率</span>
+</span><span id=__span-3-21><a id=__codelineno-3-21 name=__codelineno-3-21></a>    <span class=n>avg_hr</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>mean</span><span class=p>(</span><span class=n>heart_rates</span><span class=p>)</span>
+</span><span id=__span-3-22><a id=__codelineno-3-22 name=__codelineno-3-22></a>    <span class=k>return</span> <span class=n>avg_hr</span><span class=p>,</span> <span class=n>heart_rates</span>
+</span><span id=__span-3-23><a id=__codelineno-3-23 name=__codelineno-3-23></a>
+</span><span id=__span-3-24><a id=__codelineno-3-24 name=__codelineno-3-24></a><span class=c1># 使用</span>
+</span><span id=__span-3-25><a id=__codelineno-3-25 name=__codelineno-3-25></a><span class=n>hr</span><span class=p>,</span> <span class=n>hr_series</span> <span class=o>=</span> <span class=n>detect_heart_rate</span><span class=p>(</span><span class=n>clean_signal</span><span class=p>,</span> <span class=n>fs</span><span class=o>=</span><span class=mi>25</span><span class=p>)</span>
+</span><span id=__span-3-26><a id=__codelineno-3-26 name=__codelineno-3-26></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;当前心率: </span><span class=si>{</span><span class=n>hr</span><span class=si>:</span><span class=s2>.0f</span><span class=si>}</span><span class=s2> BPM&quot;</span><span class=p>)</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=36>3.6 完整心率算法流程图<a class=headerlink href=#36 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>sequenceDiagram
+    participant 皮肤 as 手腕皮肤
+    participant LED as 绿光LED
+    participant PD as 光电探测器
+    participant ADC as 模数转换器
+    participant 滤波 as 滤波算法
+    participant ACC as 加速度计
+    participant 峰值 as 峰值检测
+    participant 输出 as 心率显示
+
+    LED-&gt;&gt;皮肤: 发射绿光
+    皮肤-&gt;&gt;PD: 反射光（随心跳变化）
+    PD-&gt;&gt;ADC: 模拟信号
+    ADC-&gt;&gt;滤波: 数字信号（25Hz）
+    ACC-&gt;&gt;滤波: 运动数据
+    滤波-&gt;&gt;滤波: 消除运动伪影
+    滤波-&gt;&gt;峰值: 干净PPG波形
+    峰值-&gt;&gt;峰值: 检测波峰间隔
+    峰值-&gt;&gt;输出: 计算心率（BPM）
+    输出-&gt;&gt;输出: 显示在屏幕上</code></pre> <hr> <h2 id=_5>四、血氧算法：你的血液有多"红"？<a class=headerlink href=#_5 title="Permanent link">&para;</a></h2> <h3 id=41-spo2>4.1 什么是血氧饱和度（SpO2）？<a class=headerlink href=#41-spo2 title="Permanent link">&para;</a></h3> <blockquote> <p><strong>血氧饱和度</strong>：血液中与氧气结合的血红蛋白占总血红蛋白的百分比。</p> </blockquote> <pre class=mermaid><code>graph LR
+    A[正常血氧] --&gt; B[95%-100%]
+    C[轻度缺氧] --&gt; D[90%-94%]
+    E[中度缺氧] --&gt; F[85%-89%]
+    G[重度缺氧] --&gt; H[&lt;85%]
+
+    style A fill:#4CAF50
+    style B fill:#4CAF50
+    style C fill:#FFC107
+    style D fill:#FFC107
+    style E fill:#FF9800
+    style F fill:#FF9800
+    style G fill:#F44336
+    style H fill:#F44336</code></pre> <h3 id=42>4.2 血氧测量的光学原理<a class=headerlink href=#42 title="Permanent link">&para;</a></h3> <p><strong>核心发现</strong>： - <strong>含氧血红蛋白（HbO2）</strong>和<strong>脱氧血红蛋白（Hb）</strong>对不同波长的光吸收率不同！</p> <pre class=mermaid><code>xychart-beta
+    title "血红蛋白光吸收率对比"
+    x-axis "波长(nm)" [600, 660, 700, 800, 880, 940, 1000]
+    y-axis "吸收率" 0 --&gt; 100
+    line "含氧血红蛋白(HbO2)" [80, 30, 40, 50, 65, 70, 75]
+    line "脱氧血红蛋白(Hb)" [60, 70, 55, 50, 45, 30, 25]</code></pre> <p><strong>关键波长</strong>： - <strong>660nm（红光）</strong>：脱氧血红蛋白吸收更多 - <strong>940nm（红外光）</strong>：含氧血红蛋白吸收更多</p> <h3 id=43>4.3 血氧算法的核心公式<a class=headerlink href=#43 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[测量红光和红外光的AC/DC比值] --&gt; B[计算R值]
+    B --&gt; C[查找校准曲线]
+    C --&gt; D[得到SpO2值]
+
+    style A fill:#E3F2FD
+    style B fill:#BBDEFB
+    style C fill:#90CAF9
+    style D fill:#64B5F6</code></pre> <p><strong>计算步骤</strong>：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1> 1</a></span>
+<span class=normal><a href=#__codelineno-4-2> 2</a></span>
+<span class=normal><a href=#__codelineno-4-3> 3</a></span>
+<span class=normal><a href=#__codelineno-4-4> 4</a></span>
+<span class=normal><a href=#__codelineno-4-5> 5</a></span>
+<span class=normal><a href=#__codelineno-4-6> 6</a></span>
+<span class=normal><a href=#__codelineno-4-7> 7</a></span>
+<span class=normal><a href=#__codelineno-4-8> 8</a></span>
+<span class=normal><a href=#__codelineno-4-9> 9</a></span>
+<span class=normal><a href=#__codelineno-4-10>10</a></span>
+<span class=normal><a href=#__codelineno-4-11>11</a></span>
+<span class=normal><a href=#__codelineno-4-12>12</a></span>
+<span class=normal><a href=#__codelineno-4-13>13</a></span>
+<span class=normal><a href=#__codelineno-4-14>14</a></span>
+<span class=normal><a href=#__codelineno-4-15>15</a></span>
+<span class=normal><a href=#__codelineno-4-16>16</a></span>
+<span class=normal><a href=#__codelineno-4-17>17</a></span>
+<span class=normal><a href=#__codelineno-4-18>18</a></span>
+<span class=normal><a href=#__codelineno-4-19>19</a></span>
+<span class=normal><a href=#__codelineno-4-20>20</a></span>
+<span class=normal><a href=#__codelineno-4-21>21</a></span>
+<span class=normal><a href=#__codelineno-4-22>22</a></span>
+<span class=normal><a href=#__codelineno-4-23>23</a></span>
+<span class=normal><a href=#__codelineno-4-24>24</a></span>
+<span class=normal><a href=#__codelineno-4-25>25</a></span>
+<span class=normal><a href=#__codelineno-4-26>26</a></span>
+<span class=normal><a href=#__codelineno-4-27>27</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a><span class=k>def</span><span class=w> </span><span class=nf>calculate_spo2</span><span class=p>(</span><span class=n>red_signal</span><span class=p>,</span> <span class=n>ir_signal</span><span class=p>):</span>
+</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a><span class=sd>    计算血氧饱和度</span>
+</span><span id=__span-4-4><a id=__codelineno-4-4 name=__codelineno-4-4></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-4-5><a id=__codelineno-4-5 name=__codelineno-4-5></a>    <span class=c1># 1. 提取交流分量（AC）和直流分量（DC）</span>
+</span><span id=__span-4-6><a id=__codelineno-4-6 name=__codelineno-4-6></a>    <span class=n>red_ac</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>std</span><span class=p>(</span><span class=n>red_signal</span><span class=p>)</span>
+</span><span id=__span-4-7><a id=__codelineno-4-7 name=__codelineno-4-7></a>    <span class=n>red_dc</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>mean</span><span class=p>(</span><span class=n>red_signal</span><span class=p>)</span>
+</span><span id=__span-4-8><a id=__codelineno-4-8 name=__codelineno-4-8></a>    <span class=n>ir_ac</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>std</span><span class=p>(</span><span class=n>ir_signal</span><span class=p>)</span>
+</span><span id=__span-4-9><a id=__codelineno-4-9 name=__codelineno-4-9></a>    <span class=n>ir_dc</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>mean</span><span class=p>(</span><span class=n>ir_signal</span><span class=p>)</span>
+</span><span id=__span-4-10><a id=__codelineno-4-10 name=__codelineno-4-10></a>
+</span><span id=__span-4-11><a id=__codelineno-4-11 name=__codelineno-4-11></a>    <span class=c1># 2. 计算R值（Ratio of Ratios）</span>
+</span><span id=__span-4-12><a id=__codelineno-4-12 name=__codelineno-4-12></a>    <span class=n>r</span> <span class=o>=</span> <span class=p>(</span><span class=n>red_ac</span> <span class=o>/</span> <span class=n>red_dc</span><span class=p>)</span> <span class=o>/</span> <span class=p>(</span><span class=n>ir_ac</span> <span class=o>/</span> <span class=n>ir_dc</span><span class=p>)</span>
+</span><span id=__span-4-13><a id=__codelineno-4-13 name=__codelineno-4-13></a>
+</span><span id=__span-4-14><a id=__codelineno-4-14 name=__codelineno-4-14></a>    <span class=c1># 3. 使用经验公式转换为SpO2</span>
+</span><span id=__span-4-15><a id=__codelineno-4-15 name=__codelineno-4-15></a>    <span class=c1># 这个公式是通过大量临床数据拟合得到的</span>
+</span><span id=__span-4-16><a id=__codelineno-4-16 name=__codelineno-4-16></a>    <span class=n>spo2</span> <span class=o>=</span> <span class=mi>110</span> <span class=o>-</span> <span class=mi>25</span> <span class=o>*</span> <span class=n>r</span>
+</span><span id=__span-4-17><a id=__codelineno-4-17 name=__codelineno-4-17></a>
+</span><span id=__span-4-18><a id=__codelineno-4-18 name=__codelineno-4-18></a>    <span class=c1># 4. 限制在合理范围</span>
+</span><span id=__span-4-19><a id=__codelineno-4-19 name=__codelineno-4-19></a>    <span class=n>spo2</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>clip</span><span class=p>(</span><span class=n>spo2</span><span class=p>,</span> <span class=mi>70</span><span class=p>,</span> <span class=mi>100</span><span class=p>)</span>
+</span><span id=__span-4-20><a id=__codelineno-4-20 name=__codelineno-4-20></a>
+</span><span id=__span-4-21><a id=__codelineno-4-21 name=__codelineno-4-21></a>    <span class=k>return</span> <span class=n>spo2</span>
+</span><span id=__span-4-22><a id=__codelineno-4-22 name=__codelineno-4-22></a>
+</span><span id=__span-4-23><a id=__codelineno-4-23 name=__codelineno-4-23></a><span class=c1># 使用示例</span>
+</span><span id=__span-4-24><a id=__codelineno-4-24 name=__codelineno-4-24></a><span class=n>red_data</span> <span class=o>=</span> <span class=p>[</span><span class=o>...</span><span class=p>]</span>   <span class=c1># 660nm采集的信号</span>
+</span><span id=__span-4-25><a id=__codelineno-4-25 name=__codelineno-4-25></a><span class=n>ir_data</span> <span class=o>=</span> <span class=p>[</span><span class=o>...</span><span class=p>]</span>    <span class=c1># 940nm采集的信号</span>
+</span><span id=__span-4-26><a id=__codelineno-4-26 name=__codelineno-4-26></a><span class=n>spo2</span> <span class=o>=</span> <span class=n>calculate_spo2</span><span class=p>(</span><span class=n>red_data</span><span class=p>,</span> <span class=n>ir_data</span><span class=p>)</span>
+</span><span id=__span-4-27><a id=__codelineno-4-27 name=__codelineno-4-27></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;血氧饱和度: </span><span class=si>{</span><span class=n>spo2</span><span class=si>:</span><span class=s2>.1f</span><span class=si>}</span><span class=s2>%&quot;</span><span class=p>)</span>
+</span></code></pre></div></td></tr></table></div> <p><strong>公式来源</strong>：</p> <p>实际产品中会使用<strong>查找表（Look-up Table）</strong>，这个表是通过与医用血氧仪对比大量实验数据得到的：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1> 1</a></span>
+<span class=normal><a href=#__codelineno-5-2> 2</a></span>
+<span class=normal><a href=#__codelineno-5-3> 3</a></span>
+<span class=normal><a href=#__codelineno-5-4> 4</a></span>
+<span class=normal><a href=#__codelineno-5-5> 5</a></span>
+<span class=normal><a href=#__codelineno-5-6> 6</a></span>
+<span class=normal><a href=#__codelineno-5-7> 7</a></span>
+<span class=normal><a href=#__codelineno-5-8> 8</a></span>
+<span class=normal><a href=#__codelineno-5-9> 9</a></span>
+<span class=normal><a href=#__codelineno-5-10>10</a></span>
+<span class=normal><a href=#__codelineno-5-11>11</a></span>
+<span class=normal><a href=#__codelineno-5-12>12</a></span>
+<span class=normal><a href=#__codelineno-5-13>13</a></span>
+<span class=normal><a href=#__codelineno-5-14>14</a></span>
+<span class=normal><a href=#__codelineno-5-15>15</a></span>
+<span class=normal><a href=#__codelineno-5-16>16</a></span>
+<span class=normal><a href=#__codelineno-5-17>17</a></span>
+<span class=normal><a href=#__codelineno-5-18>18</a></span>
+<span class=normal><a href=#__codelineno-5-19>19</a></span>
+<span class=normal><a href=#__codelineno-5-20>20</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a><span class=c1># 简化的SpO2查找表</span>
+</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a><span class=n>SPO2_LOOKUP_TABLE</span> <span class=o>=</span> <span class=p>{</span>
+</span><span id=__span-5-3><a id=__codelineno-5-3 name=__codelineno-5-3></a>    <span class=mf>0.4</span><span class=p>:</span> <span class=mi>100</span><span class=p>,</span>
+</span><span id=__span-5-4><a id=__codelineno-5-4 name=__codelineno-5-4></a>    <span class=mf>0.5</span><span class=p>:</span> <span class=mi>98</span><span class=p>,</span>
+</span><span id=__span-5-5><a id=__codelineno-5-5 name=__codelineno-5-5></a>    <span class=mf>0.6</span><span class=p>:</span> <span class=mi>96</span><span class=p>,</span>
+</span><span id=__span-5-6><a id=__codelineno-5-6 name=__codelineno-5-6></a>    <span class=mf>0.7</span><span class=p>:</span> <span class=mi>94</span><span class=p>,</span>
+</span><span id=__span-5-7><a id=__codelineno-5-7 name=__codelineno-5-7></a>    <span class=mf>0.8</span><span class=p>:</span> <span class=mi>92</span><span class=p>,</span>
+</span><span id=__span-5-8><a id=__codelineno-5-8 name=__codelineno-5-8></a>    <span class=mf>0.9</span><span class=p>:</span> <span class=mi>90</span><span class=p>,</span>
+</span><span id=__span-5-9><a id=__codelineno-5-9 name=__codelineno-5-9></a>    <span class=mf>1.0</span><span class=p>:</span> <span class=mi>88</span><span class=p>,</span>
+</span><span id=__span-5-10><a id=__codelineno-5-10 name=__codelineno-5-10></a>    <span class=mf>1.1</span><span class=p>:</span> <span class=mi>85</span><span class=p>,</span>
+</span><span id=__span-5-11><a id=__codelineno-5-11 name=__codelineno-5-11></a>    <span class=mf>1.2</span><span class=p>:</span> <span class=mi>82</span><span class=p>,</span>
+</span><span id=__span-5-12><a id=__codelineno-5-12 name=__codelineno-5-12></a>    <span class=mf>1.3</span><span class=p>:</span> <span class=mi>80</span><span class=p>,</span>
+</span><span id=__span-5-13><a id=__codelineno-5-13 name=__codelineno-5-13></a>    <span class=mf>1.4</span><span class=p>:</span> <span class=mi>75</span>
+</span><span id=__span-5-14><a id=__codelineno-5-14 name=__codelineno-5-14></a><span class=p>}</span>
+</span><span id=__span-5-15><a id=__codelineno-5-15 name=__codelineno-5-15></a>
+</span><span id=__span-5-16><a id=__codelineno-5-16 name=__codelineno-5-16></a><span class=k>def</span><span class=w> </span><span class=nf>spo2_from_table</span><span class=p>(</span><span class=n>r_value</span><span class=p>):</span>
+</span><span id=__span-5-17><a id=__codelineno-5-17 name=__codelineno-5-17></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;通过查表得到SpO2&quot;&quot;&quot;</span>
+</span><span id=__span-5-18><a id=__codelineno-5-18 name=__codelineno-5-18></a>    <span class=c1># 找到最接近的R值</span>
+</span><span id=__span-5-19><a id=__codelineno-5-19 name=__codelineno-5-19></a>    <span class=n>closest_r</span> <span class=o>=</span> <span class=nb>min</span><span class=p>(</span><span class=n>SPO2_LOOKUP_TABLE</span><span class=o>.</span><span class=n>keys</span><span class=p>(),</span> <span class=n>key</span><span class=o>=</span><span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=nb>abs</span><span class=p>(</span><span class=n>x</span> <span class=o>-</span> <span class=n>r_value</span><span class=p>))</span>
+</span><span id=__span-5-20><a id=__codelineno-5-20 name=__codelineno-5-20></a>    <span class=k>return</span> <span class=n>SPO2_LOOKUP_TABLE</span><span class=p>[</span><span class=n>closest_r</span><span class=p>]</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=44>4.4 为什么血氧监测通常在静止状态？<a class=headerlink href=#44 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[运动时] --&gt; B[血液流动模式改变]
+    A --&gt; C[静脉血混入]
+    A --&gt; D[传感器接触不稳定]
+    B --&gt; E[AC/DC比值失真]
+    C --&gt; E
+    D --&gt; E
+    E --&gt; F[R值计算错误]
+    F --&gt; G[SpO2读数不准确]
+
+    style A fill:#FFCDD2
+    style E fill:#FFCDD2
+    style G fill:#F44336</code></pre> <p><strong>解决方案</strong>： - 夜间睡眠时自动测量（身体最稳定） - 要求用户保持静止10-15秒 - 使用多帧数据取平均</p> <hr> <h2 id=_6>五、睡眠算法：手表怎么知道你睡着了？<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <h3 id=51>5.1 睡眠分期：你睡得好不好？<a class=headerlink href=#51 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
+    A[睡眠阶段] --&gt; B[清醒 Wake]
+    A --&gt; C[快速眼动 REM]
+    A --&gt; D[浅睡 N1+N2]
+    A --&gt; E[深睡 N3]
+
+    style B fill:#FFCDD2
+    style C fill:#E1BEE7
+    style D fill:#BBDEFB
+    style E fill:#C8E6C9</code></pre> <table> <thead> <tr> <th>阶段</th> <th>占比</th> <th>特征</th> <th>作用</th> </tr> </thead> <tbody> <tr> <td><strong>清醒</strong></td> <td>5-10%</td> <td>翻身、短暂醒来</td> <td>正常现象</td> </tr> <tr> <td><strong>REM</strong></td> <td>20-25%</td> <td>眼球快速运动、做梦</td> <td>记忆巩固</td> </tr> <tr> <td><strong>浅睡</strong></td> <td>45-55%</td> <td>心率和呼吸放缓</td> <td>过渡阶段</td> </tr> <tr> <td><strong>深睡</strong></td> <td>15-25%</td> <td>最难唤醒、生长激素分泌</td> <td>身体修复</td> </tr> </tbody> </table> <h3 id=52>5.2 睡眠算法的多传感器融合<a class=headerlink href=#52 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[睡眠检测] --&gt; B[PPG心率数据]
+    A --&gt; C[ACC体动数据]
+    A --&gt; D[血氧数据]
+    A --&gt; E[环境声音]
+    A --&gt; F[屏幕使用时间]
+
+    B --&gt; G[特征提取]
+    C --&gt; G
+    D --&gt; G
+    E --&gt; G
+    F --&gt; G
+
+    G --&gt; H[机器学习分类器]
+    H --&gt; I[睡眠分期结果]</code></pre> <h3 id=53>5.3 传统算法：基于规则的方法<a class=headerlink href=#53 title="Permanent link">&para;</a></h3> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1> 1</a></span>
+<span class=normal><a href=#__codelineno-6-2> 2</a></span>
+<span class=normal><a href=#__codelineno-6-3> 3</a></span>
+<span class=normal><a href=#__codelineno-6-4> 4</a></span>
+<span class=normal><a href=#__codelineno-6-5> 5</a></span>
+<span class=normal><a href=#__codelineno-6-6> 6</a></span>
+<span class=normal><a href=#__codelineno-6-7> 7</a></span>
+<span class=normal><a href=#__codelineno-6-8> 8</a></span>
+<span class=normal><a href=#__codelineno-6-9> 9</a></span>
+<span class=normal><a href=#__codelineno-6-10>10</a></span>
+<span class=normal><a href=#__codelineno-6-11>11</a></span>
+<span class=normal><a href=#__codelineno-6-12>12</a></span>
+<span class=normal><a href=#__codelineno-6-13>13</a></span>
+<span class=normal><a href=#__codelineno-6-14>14</a></span>
+<span class=normal><a href=#__codelineno-6-15>15</a></span>
+<span class=normal><a href=#__codelineno-6-16>16</a></span>
+<span class=normal><a href=#__codelineno-6-17>17</a></span>
+<span class=normal><a href=#__codelineno-6-18>18</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a><span class=k>def</span><span class=w> </span><span class=nf>classify_sleep_stage</span><span class=p>(</span><span class=n>hr</span><span class=p>,</span> <span class=n>hrv</span><span class=p>,</span> <span class=n>movement</span><span class=p>,</span> <span class=n>spo2</span><span class=p>):</span>
+</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a><span class=sd>    基于规则的睡眠分期（简化版）</span>
+</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-6-5><a id=__codelineno-6-5 name=__codelineno-6-5></a>    <span class=c1># 规则1：体动检测</span>
+</span><span id=__span-6-6><a id=__codelineno-6-6 name=__codelineno-6-6></a>    <span class=k>if</span> <span class=n>movement</span> <span class=o>&gt;</span> <span class=n>threshold_movement</span><span class=p>:</span>
+</span><span id=__span-6-7><a id=__codelineno-6-7 name=__codelineno-6-7></a>        <span class=k>return</span> <span class=s2>&quot;清醒&quot;</span>
+</span><span id=__span-6-8><a id=__codelineno-6-8 name=__codelineno-6-8></a>
+</span><span id=__span-6-9><a id=__codelineno-6-9 name=__codelineno-6-9></a>    <span class=c1># 规则2：心率变异性（HRV）分析</span>
+</span><span id=__span-6-10><a id=__codelineno-6-10 name=__codelineno-6-10></a>    <span class=k>if</span> <span class=n>hrv</span> <span class=o>&gt;</span> <span class=n>threshold_hrv_rem</span><span class=p>:</span>
+</span><span id=__span-6-11><a id=__codelineno-6-11 name=__codelineno-6-11></a>        <span class=k>return</span> <span class=s2>&quot;REM睡眠&quot;</span>
+</span><span id=__span-6-12><a id=__codelineno-6-12 name=__codelineno-6-12></a>
+</span><span id=__span-6-13><a id=__codelineno-6-13 name=__codelineno-6-13></a>    <span class=c1># 规则3：心率和血氧</span>
+</span><span id=__span-6-14><a id=__codelineno-6-14 name=__codelineno-6-14></a>    <span class=k>if</span> <span class=n>hr</span> <span class=o>&lt;</span> <span class=n>threshold_deep_hr</span> <span class=ow>and</span> <span class=n>spo2</span> <span class=o>&gt;</span> <span class=mi>95</span><span class=p>:</span>
+</span><span id=__span-6-15><a id=__codelineno-6-15 name=__codelineno-6-15></a>        <span class=k>return</span> <span class=s2>&quot;深睡&quot;</span>
+</span><span id=__span-6-16><a id=__codelineno-6-16 name=__codelineno-6-16></a>
+</span><span id=__span-6-17><a id=__codelineno-6-17 name=__codelineno-6-17></a>    <span class=c1># 默认浅睡</span>
+</span><span id=__span-6-18><a id=__codelineno-6-18 name=__codelineno-6-18></a>    <span class=k>return</span> <span class=s2>&quot;浅睡&quot;</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=54>5.4 现代算法：深度学习模型<a class=headerlink href=#54 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
+    A[多模态输入] --&gt; B[CNN特征提取]
+    B --&gt; C[RNN时序建模]
+    C --&gt; D[Attention加权]
+    D --&gt; E[Softmax分类]
+    E --&gt; F[睡眠阶段]
+
+    style A fill:#E3F2FD
+    style B fill:#BBDEFB
+    style C fill:#90CAF9
+    style D fill:#64B5F6
+    style E fill:#42A5F5
+    style F fill:#1E88E5</code></pre> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1> 1</a></span>
+<span class=normal><a href=#__codelineno-7-2> 2</a></span>
+<span class=normal><a href=#__codelineno-7-3> 3</a></span>
+<span class=normal><a href=#__codelineno-7-4> 4</a></span>
+<span class=normal><a href=#__codelineno-7-5> 5</a></span>
+<span class=normal><a href=#__codelineno-7-6> 6</a></span>
+<span class=normal><a href=#__codelineno-7-7> 7</a></span>
+<span class=normal><a href=#__codelineno-7-8> 8</a></span>
+<span class=normal><a href=#__codelineno-7-9> 9</a></span>
+<span class=normal><a href=#__codelineno-7-10>10</a></span>
+<span class=normal><a href=#__codelineno-7-11>11</a></span>
+<span class=normal><a href=#__codelineno-7-12>12</a></span>
+<span class=normal><a href=#__codelineno-7-13>13</a></span>
+<span class=normal><a href=#__codelineno-7-14>14</a></span>
+<span class=normal><a href=#__codelineno-7-15>15</a></span>
+<span class=normal><a href=#__codelineno-7-16>16</a></span>
+<span class=normal><a href=#__codelineno-7-17>17</a></span>
+<span class=normal><a href=#__codelineno-7-18>18</a></span>
+<span class=normal><a href=#__codelineno-7-19>19</a></span>
+<span class=normal><a href=#__codelineno-7-20>20</a></span>
+<span class=normal><a href=#__codelineno-7-21>21</a></span>
+<span class=normal><a href=#__codelineno-7-22>22</a></span>
+<span class=normal><a href=#__codelineno-7-23>23</a></span>
+<span class=normal><a href=#__codelineno-7-24>24</a></span>
+<span class=normal><a href=#__codelineno-7-25>25</a></span>
+<span class=normal><a href=#__codelineno-7-26>26</a></span>
+<span class=normal><a href=#__codelineno-7-27>27</a></span>
+<span class=normal><a href=#__codelineno-7-28>28</a></span>
+<span class=normal><a href=#__codelineno-7-29>29</a></span>
+<span class=normal><a href=#__codelineno-7-30>30</a></span>
+<span class=normal><a href=#__codelineno-7-31>31</a></span>
+<span class=normal><a href=#__codelineno-7-32>32</a></span>
+<span class=normal><a href=#__codelineno-7-33>33</a></span>
+<span class=normal><a href=#__codelineno-7-34>34</a></span>
+<span class=normal><a href=#__codelineno-7-35>35</a></span>
+<span class=normal><a href=#__codelineno-7-36>36</a></span>
+<span class=normal><a href=#__codelineno-7-37>37</a></span>
+<span class=normal><a href=#__codelineno-7-38>38</a></span>
+<span class=normal><a href=#__codelineno-7-39>39</a></span>
+<span class=normal><a href=#__codelineno-7-40>40</a></span>
+<span class=normal><a href=#__codelineno-7-41>41</a></span>
+<span class=normal><a href=#__codelineno-7-42>42</a></span>
+<span class=normal><a href=#__codelineno-7-43>43</a></span>
+<span class=normal><a href=#__codelineno-7-44>44</a></span>
+<span class=normal><a href=#__codelineno-7-45>45</a></span>
+<span class=normal><a href=#__codelineno-7-46>46</a></span>
+<span class=normal><a href=#__codelineno-7-47>47</a></span>
+<span class=normal><a href=#__codelineno-7-48>48</a></span>
+<span class=normal><a href=#__codelineno-7-49>49</a></span>
+<span class=normal><a href=#__codelineno-7-50>50</a></span>
+<span class=normal><a href=#__codelineno-7-51>51</a></span>
+<span class=normal><a href=#__codelineno-7-52>52</a></span>
+<span class=normal><a href=#__codelineno-7-53>53</a></span>
+<span class=normal><a href=#__codelineno-7-54>54</a></span>
+<span class=normal><a href=#__codelineno-7-55>55</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a><span class=kn>import</span><span class=w> </span><span class=nn>torch</span>
+</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a><span class=kn>import</span><span class=w> </span><span class=nn>torch.nn</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=nn>nn</span>
+</span><span id=__span-7-3><a id=__codelineno-7-3 name=__codelineno-7-3></a>
+</span><span id=__span-7-4><a id=__codelineno-7-4 name=__codelineno-7-4></a><span class=k>class</span><span class=w> </span><span class=nc>SleepStagingModel</span><span class=p>(</span><span class=n>nn</span><span class=o>.</span><span class=n>Module</span><span class=p>):</span>
+</span><span id=__span-7-5><a id=__codelineno-7-5 name=__codelineno-7-5></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-7-6><a id=__codelineno-7-6 name=__codelineno-7-6></a><span class=sd>    睡眠分期深度学习模型</span>
+</span><span id=__span-7-7><a id=__codelineno-7-7 name=__codelineno-7-7></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-7-8><a id=__codelineno-7-8 name=__codelineno-7-8></a>    <span class=k>def</span><span class=w> </span><span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>num_classes</span><span class=o>=</span><span class=mi>4</span><span class=p>):</span>
+</span><span id=__span-7-9><a id=__codelineno-7-9 name=__codelineno-7-9></a>        <span class=nb>super</span><span class=p>()</span><span class=o>.</span><span class=fm>__init__</span><span class=p>()</span>
+</span><span id=__span-7-10><a id=__codelineno-7-10 name=__codelineno-7-10></a>
+</span><span id=__span-7-11><a id=__codelineno-7-11 name=__codelineno-7-11></a>        <span class=c1># 1. CNN提取空间特征</span>
+</span><span id=__span-7-12><a id=__codelineno-7-12 name=__codelineno-7-12></a>        <span class=bp>self</span><span class=o>.</span><span class=n>cnn</span> <span class=o>=</span> <span class=n>nn</span><span class=o>.</span><span class=n>Sequential</span><span class=p>(</span>
+</span><span id=__span-7-13><a id=__codelineno-7-13 name=__codelineno-7-13></a>            <span class=n>nn</span><span class=o>.</span><span class=n>Conv1d</span><span class=p>(</span><span class=n>in_channels</span><span class=o>=</span><span class=mi>3</span><span class=p>,</span> <span class=n>out_channels</span><span class=o>=</span><span class=mi>64</span><span class=p>,</span> <span class=n>kernel_size</span><span class=o>=</span><span class=mi>5</span><span class=p>),</span>
+</span><span id=__span-7-14><a id=__codelineno-7-14 name=__codelineno-7-14></a>            <span class=n>nn</span><span class=o>.</span><span class=n>ReLU</span><span class=p>(),</span>
+</span><span id=__span-7-15><a id=__codelineno-7-15 name=__codelineno-7-15></a>            <span class=n>nn</span><span class=o>.</span><span class=n>MaxPool1d</span><span class=p>(</span><span class=mi>2</span><span class=p>),</span>
+</span><span id=__span-7-16><a id=__codelineno-7-16 name=__codelineno-7-16></a>            <span class=n>nn</span><span class=o>.</span><span class=n>Conv1d</span><span class=p>(</span><span class=mi>64</span><span class=p>,</span> <span class=mi>128</span><span class=p>,</span> <span class=mi>5</span><span class=p>),</span>
+</span><span id=__span-7-17><a id=__codelineno-7-17 name=__codelineno-7-17></a>            <span class=n>nn</span><span class=o>.</span><span class=n>ReLU</span><span class=p>(),</span>
+</span><span id=__span-7-18><a id=__codelineno-7-18 name=__codelineno-7-18></a>            <span class=n>nn</span><span class=o>.</span><span class=n>MaxPool1d</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span><span id=__span-7-19><a id=__codelineno-7-19 name=__codelineno-7-19></a>        <span class=p>)</span>
+</span><span id=__span-7-20><a id=__codelineno-7-20 name=__codelineno-7-20></a>
+</span><span id=__span-7-21><a id=__codelineno-7-21 name=__codelineno-7-21></a>        <span class=c1># 2. LSTM建模时间序列</span>
+</span><span id=__span-7-22><a id=__codelineno-7-22 name=__codelineno-7-22></a>        <span class=bp>self</span><span class=o>.</span><span class=n>lstm</span> <span class=o>=</span> <span class=n>nn</span><span class=o>.</span><span class=n>LSTM</span><span class=p>(</span>
+</span><span id=__span-7-23><a id=__codelineno-7-23 name=__codelineno-7-23></a>            <span class=n>input_size</span><span class=o>=</span><span class=mi>128</span><span class=p>,</span>
+</span><span id=__span-7-24><a id=__codelineno-7-24 name=__codelineno-7-24></a>            <span class=n>hidden_size</span><span class=o>=</span><span class=mi>256</span><span class=p>,</span>
+</span><span id=__span-7-25><a id=__codelineno-7-25 name=__codelineno-7-25></a>            <span class=n>num_layers</span><span class=o>=</span><span class=mi>2</span><span class=p>,</span>
+</span><span id=__span-7-26><a id=__codelineno-7-26 name=__codelineno-7-26></a>            <span class=n>batch_first</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>
+</span><span id=__span-7-27><a id=__codelineno-7-27 name=__codelineno-7-27></a>            <span class=n>bidirectional</span><span class=o>=</span><span class=kc>True</span>
+</span><span id=__span-7-28><a id=__codelineno-7-28 name=__codelineno-7-28></a>        <span class=p>)</span>
+</span><span id=__span-7-29><a id=__codelineno-7-29 name=__codelineno-7-29></a>
+</span><span id=__span-7-30><a id=__codelineno-7-30 name=__codelineno-7-30></a>        <span class=c1># 3. 分类头</span>
+</span><span id=__span-7-31><a id=__codelineno-7-31 name=__codelineno-7-31></a>        <span class=bp>self</span><span class=o>.</span><span class=n>classifier</span> <span class=o>=</span> <span class=n>nn</span><span class=o>.</span><span class=n>Sequential</span><span class=p>(</span>
+</span><span id=__span-7-32><a id=__codelineno-7-32 name=__codelineno-7-32></a>            <span class=n>nn</span><span class=o>.</span><span class=n>Linear</span><span class=p>(</span><span class=mi>256</span><span class=o>*</span><span class=mi>2</span><span class=p>,</span> <span class=mi>128</span><span class=p>),</span>
+</span><span id=__span-7-33><a id=__codelineno-7-33 name=__codelineno-7-33></a>            <span class=n>nn</span><span class=o>.</span><span class=n>ReLU</span><span class=p>(),</span>
+</span><span id=__span-7-34><a id=__codelineno-7-34 name=__codelineno-7-34></a>            <span class=n>nn</span><span class=o>.</span><span class=n>Dropout</span><span class=p>(</span><span class=mf>0.5</span><span class=p>),</span>
+</span><span id=__span-7-35><a id=__codelineno-7-35 name=__codelineno-7-35></a>            <span class=n>nn</span><span class=o>.</span><span class=n>Linear</span><span class=p>(</span><span class=mi>128</span><span class=p>,</span> <span class=n>num_classes</span><span class=p>)</span>  <span class=c1># 清醒/REM/浅睡/深睡</span>
+</span><span id=__span-7-36><a id=__codelineno-7-36 name=__codelineno-7-36></a>        <span class=p>)</span>
+</span><span id=__span-7-37><a id=__codelineno-7-37 name=__codelineno-7-37></a>
+</span><span id=__span-7-38><a id=__codelineno-7-38 name=__codelineno-7-38></a>    <span class=k>def</span><span class=w> </span><span class=nf>forward</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>x</span><span class=p>):</span>
+</span><span id=__span-7-39><a id=__codelineno-7-39 name=__codelineno-7-39></a>        <span class=c1># x shape: (batch, seq_len, channels)</span>
+</span><span id=__span-7-40><a id=__codelineno-7-40 name=__codelineno-7-40></a>        <span class=c1># channels: [PPG, ACC, SpO2]</span>
+</span><span id=__span-7-41><a id=__codelineno-7-41 name=__codelineno-7-41></a>
+</span><span id=__span-7-42><a id=__codelineno-7-42 name=__codelineno-7-42></a>        <span class=n>x</span> <span class=o>=</span> <span class=n>x</span><span class=o>.</span><span class=n>permute</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>  <span class=c1># (batch, channels, seq_len)</span>
+</span><span id=__span-7-43><a id=__codelineno-7-43 name=__codelineno-7-43></a>        <span class=n>x</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>cnn</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span><span id=__span-7-44><a id=__codelineno-7-44 name=__codelineno-7-44></a>        <span class=n>x</span> <span class=o>=</span> <span class=n>x</span><span class=o>.</span><span class=n>permute</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>  <span class=c1># (batch, seq_len, features)</span>
+</span><span id=__span-7-45><a id=__codelineno-7-45 name=__codelineno-7-45></a>
+</span><span id=__span-7-46><a id=__codelineno-7-46 name=__codelineno-7-46></a>        <span class=n>x</span><span class=p>,</span> <span class=n>_</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>lstm</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span><span id=__span-7-47><a id=__codelineno-7-47 name=__codelineno-7-47></a>        <span class=n>x</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>classifier</span><span class=p>(</span><span class=n>x</span><span class=p>[:,</span> <span class=o>-</span><span class=mi>1</span><span class=p>,</span> <span class=p>:])</span>  <span class=c1># 取最后一个时间步</span>
+</span><span id=__span-7-48><a id=__codelineno-7-48 name=__codelineno-7-48></a>
+</span><span id=__span-7-49><a id=__codelineno-7-49 name=__codelineno-7-49></a>        <span class=k>return</span> <span class=n>x</span>
+</span><span id=__span-7-50><a id=__codelineno-7-50 name=__codelineno-7-50></a>
+</span><span id=__span-7-51><a id=__codelineno-7-51 name=__codelineno-7-51></a><span class=c1># 训练数据示例</span>
+</span><span id=__span-7-52><a id=__codelineno-7-52 name=__codelineno-7-52></a><span class=c1># 输入：30秒窗口，3通道（PPG、ACC、SpO2），每秒25个采样点</span>
+</span><span id=__span-7-53><a id=__codelineno-7-53 name=__codelineno-7-53></a><span class=n>input_data</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>randn</span><span class=p>(</span><span class=mi>32</span><span class=p>,</span> <span class=mi>750</span><span class=p>,</span> <span class=mi>3</span><span class=p>)</span>  <span class=c1># (batch, seq_len, channels)</span>
+</span><span id=__span-7-54><a id=__codelineno-7-54 name=__codelineno-7-54></a><span class=n>model</span> <span class=o>=</span> <span class=n>SleepStagingModel</span><span class=p>(</span><span class=n>num_classes</span><span class=o>=</span><span class=mi>4</span><span class=p>)</span>
+</span><span id=__span-7-55><a id=__codelineno-7-55 name=__codelineno-7-55></a><span class=n>output</span> <span class=o>=</span> <span class=n>model</span><span class=p>(</span><span class=n>input_data</span><span class=p>)</span>  <span class=c1># (32, 4) 4个类别的概率</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=55>5.5 睡眠算法的完整流程<a class=headerlink href=#55 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>sequenceDiagram
+    participant 用户 as 用户入睡
+    participant 传感器 as 传感器持续采集
+    participant 预处理 as 数据预处理
+    participant 特征 as 特征提取
+    participant 模型 as 睡眠分期模型
+    participant 后处理 as 后处理平滑
+    participant 报告 as 生成睡眠报告
+
+    用户-&gt;&gt;传感器: 整夜佩戴
+    传感器-&gt;&gt;预处理: PPG/ACC/SpO2原始数据
+    预处理-&gt;&gt;特征: 干净信号
+    特征-&gt;&gt;特征: 提取HRV/体动/血氧特征
+    特征-&gt;&gt;模型: 30秒窗口输入
+    模型-&gt;&gt;后处理: 初步分期结果
+    后处理-&gt;&gt;后处理: 消除突变 规则修正
+    后处理-&gt;&gt;报告: 最终睡眠结构图
+    报告-&gt;&gt;用户: 早上显示睡眠评分</code></pre> <hr> <h2 id=_7>六、血压算法：无创测血压的黑科技<a class=headerlink href=#_7 title="Permanent link">&para;</a></h2> <h3 id=61-vs>6.1 传统 vs 无创血压测量<a class=headerlink href=#61-vs title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
+    A[传统血压计] --&gt; B[充气加压]
+    A --&gt; C[听诊柯氏音]
+    A --&gt; D[有创体验]
+
+    E[手表无创] --&gt; F[PPG波形分析]
+    E --&gt; G[脉搏波传导时间]
+    E --&gt; H[持续监测]
+
+    style A fill:#FFCDD2
+    style E fill:#C8E6C9</code></pre> <h3 id=62-ptt>6.2 核心原理：脉搏波传导时间（PTT）<a class=headerlink href=#62-ptt title="Permanent link">&para;</a></h3> <pre class=mermaid><code>sequenceDiagram
+    participant 心脏 as 心脏收缩
+    participant 动脉 as 动脉传播
+    participant 手腕 as 手腕PPG
+    participant 算法 as 计算PTT
+
+    心脏-&gt;&gt;动脉: 产生脉搏波
+    动脉-&gt;&gt;手腕: 波传播（需要时间）
+    手腕-&gt;&gt;算法: 检测到波峰
+    Note over 心脏,算法: PTT = 心电R波 - PPG波峰
+    算法-&gt;&gt;算法: PTT越短 → 血压越高
+    算法-&gt;&gt;算法: 使用回归模型估算血压</code></pre> <p><strong>公式</strong>：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a>BP = a × PTT + b × HR + c
+</span></code></pre></div></td></tr></table></div> <p>其中 a, b, c 是通过临床数据拟合的参数。</p> <h3 id=63>6.3 血压算法的实现<a class=headerlink href=#63 title="Permanent link">&para;</a></h3> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1> 1</a></span>
+<span class=normal><a href=#__codelineno-9-2> 2</a></span>
+<span class=normal><a href=#__codelineno-9-3> 3</a></span>
+<span class=normal><a href=#__codelineno-9-4> 4</a></span>
+<span class=normal><a href=#__codelineno-9-5> 5</a></span>
+<span class=normal><a href=#__codelineno-9-6> 6</a></span>
+<span class=normal><a href=#__codelineno-9-7> 7</a></span>
+<span class=normal><a href=#__codelineno-9-8> 8</a></span>
+<span class=normal><a href=#__codelineno-9-9> 9</a></span>
+<span class=normal><a href=#__codelineno-9-10>10</a></span>
+<span class=normal><a href=#__codelineno-9-11>11</a></span>
+<span class=normal><a href=#__codelineno-9-12>12</a></span>
+<span class=normal><a href=#__codelineno-9-13>13</a></span>
+<span class=normal><a href=#__codelineno-9-14>14</a></span>
+<span class=normal><a href=#__codelineno-9-15>15</a></span>
+<span class=normal><a href=#__codelineno-9-16>16</a></span>
+<span class=normal><a href=#__codelineno-9-17>17</a></span>
+<span class=normal><a href=#__codelineno-9-18>18</a></span>
+<span class=normal><a href=#__codelineno-9-19>19</a></span>
+<span class=normal><a href=#__codelineno-9-20>20</a></span>
+<span class=normal><a href=#__codelineno-9-21>21</a></span>
+<span class=normal><a href=#__codelineno-9-22>22</a></span>
+<span class=normal><a href=#__codelineno-9-23>23</a></span>
+<span class=normal><a href=#__codelineno-9-24>24</a></span>
+<span class=normal><a href=#__codelineno-9-25>25</a></span>
+<span class=normal><a href=#__codelineno-9-26>26</a></span>
+<span class=normal><a href=#__codelineno-9-27>27</a></span>
+<span class=normal><a href=#__codelineno-9-28>28</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a><span class=k>def</span><span class=w> </span><span class=nf>estimate_blood_pressure</span><span class=p>(</span><span class=n>ppg_signal</span><span class=p>,</span> <span class=n>ecg_signal</span><span class=p>,</span> <span class=n>fs</span><span class=o>=</span><span class=mi>25</span><span class=p>):</span>
+</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a><span class=sd>    基于PTT的血压估算（简化版）</span>
+</span><span id=__span-9-4><a id=__codelineno-9-4 name=__codelineno-9-4></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-9-5><a id=__codelineno-9-5 name=__codelineno-9-5></a>    <span class=c1># 1. 检测ECG的R波峰值</span>
+</span><span id=__span-9-6><a id=__codelineno-9-6 name=__codelineno-9-6></a>    <span class=n>r_peaks</span> <span class=o>=</span> <span class=n>detect_r_peaks</span><span class=p>(</span><span class=n>ecg_signal</span><span class=p>,</span> <span class=n>fs</span><span class=p>)</span>
+</span><span id=__span-9-7><a id=__codelineno-9-7 name=__codelineno-9-7></a>
+</span><span id=__span-9-8><a id=__codelineno-9-8 name=__codelineno-9-8></a>    <span class=c1># 2. 检测PPG的波峰</span>
+</span><span id=__span-9-9><a id=__codelineno-9-9 name=__codelineno-9-9></a>    <span class=n>ppg_peaks</span> <span class=o>=</span> <span class=n>detect_ppg_peaks</span><span class=p>(</span><span class=n>ppg_signal</span><span class=p>,</span> <span class=n>fs</span><span class=p>)</span>
+</span><span id=__span-9-10><a id=__codelineno-9-10 name=__codelineno-9-10></a>
+</span><span id=__span-9-11><a id=__codelineno-9-11 name=__codelineno-9-11></a>    <span class=c1># 3. 计算PTT（脉搏波传导时间）</span>
+</span><span id=__span-9-12><a id=__codelineno-9-12 name=__codelineno-9-12></a>    <span class=n>ptt_values</span> <span class=o>=</span> <span class=p>[]</span>
+</span><span id=__span-9-13><a id=__codelineno-9-13 name=__codelineno-9-13></a>    <span class=k>for</span> <span class=n>r_peak</span> <span class=ow>in</span> <span class=n>r_peaks</span><span class=p>:</span>
+</span><span id=__span-9-14><a id=__codelineno-9-14 name=__codelineno-9-14></a>        <span class=c1># 找到R波之后最近的PPG峰</span>
+</span><span id=__span-9-15><a id=__codelineno-9-15 name=__codelineno-9-15></a>        <span class=n>next_ppg_peak</span> <span class=o>=</span> <span class=n>find_nearest</span><span class=p>(</span><span class=n>ppg_peaks</span><span class=p>,</span> <span class=n>r_peak</span><span class=p>,</span> <span class=n>direction</span><span class=o>=</span><span class=s1>&#39;after&#39;</span><span class=p>)</span>
+</span><span id=__span-9-16><a id=__codelineno-9-16 name=__codelineno-9-16></a>        <span class=n>ptt</span> <span class=o>=</span> <span class=n>next_ppg_peak</span> <span class=o>-</span> <span class=n>r_peak</span>
+</span><span id=__span-9-17><a id=__codelineno-9-17 name=__codelineno-9-17></a>        <span class=n>ptt_values</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>ptt</span><span class=p>)</span>
+</span><span id=__span-9-18><a id=__codelineno-9-18 name=__codelineno-9-18></a>
+</span><span id=__span-9-19><a id=__codelineno-9-19 name=__codelineno-9-19></a>    <span class=n>avg_ptt</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>mean</span><span class=p>(</span><span class=n>ptt_values</span><span class=p>)</span>
+</span><span id=__span-9-20><a id=__codelineno-9-20 name=__codelineno-9-20></a>
+</span><span id=__span-9-21><a id=__codelineno-9-21 name=__codelineno-9-21></a>    <span class=c1># 4. 使用校准模型估算血压</span>
+</span><span id=__span-9-22><a id=__codelineno-9-22 name=__codelineno-9-22></a>    <span class=c1># 这些参数需要个性化校准</span>
+</span><span id=__span-9-23><a id=__codelineno-9-23 name=__codelineno-9-23></a>    <span class=n>systolic</span> <span class=o>=</span> <span class=mi>120</span> <span class=o>-</span> <span class=mf>0.5</span> <span class=o>*</span> <span class=p>(</span><span class=n>avg_ptt</span> <span class=o>-</span> <span class=mi>200</span><span class=p>)</span>  <span class=c1># 收缩压</span>
+</span><span id=__span-9-24><a id=__codelineno-9-24 name=__codelineno-9-24></a>    <span class=n>diastolic</span> <span class=o>=</span> <span class=mi>80</span> <span class=o>-</span> <span class=mf>0.3</span> <span class=o>*</span> <span class=p>(</span><span class=n>avg_ptt</span> <span class=o>-</span> <span class=mi>200</span><span class=p>)</span>  <span class=c1># 舒张压</span>
+</span><span id=__span-9-25><a id=__codelineno-9-25 name=__codelineno-9-25></a>
+</span><span id=__span-9-26><a id=__codelineno-9-26 name=__codelineno-9-26></a>    <span class=k>return</span> <span class=n>systolic</span><span class=p>,</span> <span class=n>diastolic</span>
+</span><span id=__span-9-27><a id=__codelineno-9-27 name=__codelineno-9-27></a>
+</span><span id=__span-9-28><a id=__codelineno-9-28 name=__codelineno-9-28></a><span class=c1># 注意：实际产品需要定期校准（用传统血压计）</span>
+</span></code></pre></div></td></tr></table></div> <p><strong>重要提示</strong>： - ⚠️ 目前手表血压功能<strong>仅供参考，不能作为医疗诊断依据</strong> - ⚠️ 需要定期用传统血压计校准 - ⚠️ 准确度不如医用设备</p> <hr> <h2 id=hrv>七、HRV算法：压力与健康的"晴雨表"<a class=headerlink href=#hrv title="Permanent link">&para;</a></h2> <h3 id=71-hrv>7.1 什么是HRV？<a class=headerlink href=#71-hrv title="Permanent link">&para;</a></h3> <blockquote> <p><strong>HRV（Heart Rate Variability）</strong>：心跳间隔的变异性，不是心率本身，而是<strong>心跳之间的时间变化</strong>。</p> </blockquote> <pre class=mermaid><code>xychart-beta
+    title "心跳间隔示意"
+    x-axis "心跳序号" [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    y-axis "RR间期(ms)" 800 --&gt; 1100
+    line "RR间隔" [950, 1020, 880, 1050, 920, 980, 1080, 900, 1030, 960]</code></pre> <p><strong>反直觉的事实</strong>： - 心跳越规律，HRV越<strong>低</strong> → 可能压力大、疲劳 - 心跳有一定变化，HRV越<strong>高</strong> → 通常表示健康、放松</p> <h3 id=72-hrv>7.2 HRV的计算方法<a class=headerlink href=#72-hrv title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[PPG峰值检测] --&gt; B[RR间期序列]
+    B --&gt; C[异常值剔除]
+    C --&gt; D[时域分析]
+    C --&gt; E[频域分析]
+    C --&gt; F[非线性分析]
+
+    D --&gt; D1[SDNN: 标准差]
+    D --&gt; D2[RMSSD: 相邻差均方根]
+
+    E --&gt; E1[LF: 低频功率]
+    E --&gt; E2[HF: 高频功率]
+
+    style A fill:#E3F2FD
+    style B fill:#BBDEFB
+    style C fill:#90CAF9</code></pre> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1> 1</a></span>
+<span class=normal><a href=#__codelineno-10-2> 2</a></span>
+<span class=normal><a href=#__codelineno-10-3> 3</a></span>
+<span class=normal><a href=#__codelineno-10-4> 4</a></span>
+<span class=normal><a href=#__codelineno-10-5> 5</a></span>
+<span class=normal><a href=#__codelineno-10-6> 6</a></span>
+<span class=normal><a href=#__codelineno-10-7> 7</a></span>
+<span class=normal><a href=#__codelineno-10-8> 8</a></span>
+<span class=normal><a href=#__codelineno-10-9> 9</a></span>
+<span class=normal><a href=#__codelineno-10-10>10</a></span>
+<span class=normal><a href=#__codelineno-10-11>11</a></span>
+<span class=normal><a href=#__codelineno-10-12>12</a></span>
+<span class=normal><a href=#__codelineno-10-13>13</a></span>
+<span class=normal><a href=#__codelineno-10-14>14</a></span>
+<span class=normal><a href=#__codelineno-10-15>15</a></span>
+<span class=normal><a href=#__codelineno-10-16>16</a></span>
+<span class=normal><a href=#__codelineno-10-17>17</a></span>
+<span class=normal><a href=#__codelineno-10-18>18</a></span>
+<span class=normal><a href=#__codelineno-10-19>19</a></span>
+<span class=normal><a href=#__codelineno-10-20>20</a></span>
+<span class=normal><a href=#__codelineno-10-21>21</a></span>
+<span class=normal><a href=#__codelineno-10-22>22</a></span>
+<span class=normal><a href=#__codelineno-10-23>23</a></span>
+<span class=normal><a href=#__codelineno-10-24>24</a></span>
+<span class=normal><a href=#__codelineno-10-25>25</a></span>
+<span class=normal><a href=#__codelineno-10-26>26</a></span>
+<span class=normal><a href=#__codelineno-10-27>27</a></span>
+<span class=normal><a href=#__codelineno-10-28>28</a></span>
+<span class=normal><a href=#__codelineno-10-29>29</a></span>
+<span class=normal><a href=#__codelineno-10-30>30</a></span>
+<span class=normal><a href=#__codelineno-10-31>31</a></span>
+<span class=normal><a href=#__codelineno-10-32>32</a></span>
+<span class=normal><a href=#__codelineno-10-33>33</a></span>
+<span class=normal><a href=#__codelineno-10-34>34</a></span>
+<span class=normal><a href=#__codelineno-10-35>35</a></span>
+<span class=normal><a href=#__codelineno-10-36>36</a></span>
+<span class=normal><a href=#__codelineno-10-37>37</a></span>
+<span class=normal><a href=#__codelineno-10-38>38</a></span>
+<span class=normal><a href=#__codelineno-10-39>39</a></span>
+<span class=normal><a href=#__codelineno-10-40>40</a></span>
+<span class=normal><a href=#__codelineno-10-41>41</a></span>
+<span class=normal><a href=#__codelineno-10-42>42</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a><span class=k>def</span><span class=w> </span><span class=nf>calculate_hrv</span><span class=p>(</span><span class=n>rr_intervals</span><span class=p>):</span>
+</span><span id=__span-10-2><a id=__codelineno-10-2 name=__codelineno-10-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-10-3><a id=__codelineno-10-3 name=__codelineno-10-3></a><span class=sd>    计算HRV指标</span>
+</span><span id=__span-10-4><a id=__codelineno-10-4 name=__codelineno-10-4></a><span class=sd>    rr_intervals: 心跳间隔序列（毫秒）</span>
+</span><span id=__span-10-5><a id=__codelineno-10-5 name=__codelineno-10-5></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-10-6><a id=__codelineno-10-6 name=__codelineno-10-6></a>    <span class=c1># 1. 时域分析</span>
+</span><span id=__span-10-7><a id=__codelineno-10-7 name=__codelineno-10-7></a>    <span class=n>sdnn</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>std</span><span class=p>(</span><span class=n>rr_intervals</span><span class=p>)</span>  <span class=c1># 总体变异性</span>
+</span><span id=__span-10-8><a id=__codelineno-10-8 name=__codelineno-10-8></a>
+</span><span id=__span-10-9><a id=__codelineno-10-9 name=__codelineno-10-9></a>    <span class=c1># 相邻RR间期的差值</span>
+</span><span id=__span-10-10><a id=__codelineno-10-10 name=__codelineno-10-10></a>    <span class=n>diff_rr</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>diff</span><span class=p>(</span><span class=n>rr_intervals</span><span class=p>)</span>
+</span><span id=__span-10-11><a id=__codelineno-10-11 name=__codelineno-10-11></a>    <span class=n>rmssd</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>sqrt</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>mean</span><span class=p>(</span><span class=n>diff_rr</span><span class=o>**</span><span class=mi>2</span><span class=p>))</span>  <span class=c1># 副交感神经活性</span>
+</span><span id=__span-10-12><a id=__codelineno-10-12 name=__codelineno-10-12></a>
+</span><span id=__span-10-13><a id=__codelineno-10-13 name=__codelineno-10-13></a>    <span class=c1># 2. 频域分析（需要插值重采样）</span>
+</span><span id=__span-10-14><a id=__codelineno-10-14 name=__codelineno-10-14></a>    <span class=kn>from</span><span class=w> </span><span class=nn>scipy.signal</span><span class=w> </span><span class=kn>import</span> <span class=n>welch</span>
+</span><span id=__span-10-15><a id=__codelineno-10-15 name=__codelineno-10-15></a>
+</span><span id=__span-10-16><a id=__codelineno-10-16 name=__codelineno-10-16></a>    <span class=c1># 重采样到4Hz</span>
+</span><span id=__span-10-17><a id=__codelineno-10-17 name=__codelineno-10-17></a>    <span class=n>rr_uniform</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>interp</span><span class=p>(</span>
+</span><span id=__span-10-18><a id=__codelineno-10-18 name=__codelineno-10-18></a>        <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>rr_intervals</span><span class=p>)</span><span class=o>/</span><span class=mi>4</span><span class=p>,</span> <span class=mf>0.25</span><span class=p>),</span>
+</span><span id=__span-10-19><a id=__codelineno-10-19 name=__codelineno-10-19></a>        <span class=n>np</span><span class=o>.</span><span class=n>cumsum</span><span class=p>(</span><span class=n>rr_intervals</span><span class=p>)</span><span class=o>/</span><span class=mi>1000</span><span class=p>,</span>
+</span><span id=__span-10-20><a id=__codelineno-10-20 name=__codelineno-10-20></a>        <span class=n>rr_intervals</span>
+</span><span id=__span-10-21><a id=__codelineno-10-21 name=__codelineno-10-21></a>    <span class=p>)</span>
+</span><span id=__span-10-22><a id=__codelineno-10-22 name=__codelineno-10-22></a>
+</span><span id=__span-10-23><a id=__codelineno-10-23 name=__codelineno-10-23></a>    <span class=c1># 功率谱密度</span>
+</span><span id=__span-10-24><a id=__codelineno-10-24 name=__codelineno-10-24></a>    <span class=n>freqs</span><span class=p>,</span> <span class=n>psd</span> <span class=o>=</span> <span class=n>welch</span><span class=p>(</span><span class=n>rr_uniform</span><span class=p>,</span> <span class=n>fs</span><span class=o>=</span><span class=mf>4.0</span><span class=p>)</span>
+</span><span id=__span-10-25><a id=__codelineno-10-25 name=__codelineno-10-25></a>
+</span><span id=__span-10-26><a id=__codelineno-10-26 name=__codelineno-10-26></a>    <span class=c1># LF (0.04-0.15Hz) 和 HF (0.15-0.4Hz)</span>
+</span><span id=__span-10-27><a id=__codelineno-10-27 name=__codelineno-10-27></a>    <span class=n>lf_power</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>trapz</span><span class=p>(</span><span class=n>psd</span><span class=p>[(</span><span class=n>freqs</span> <span class=o>&gt;=</span> <span class=mf>0.04</span><span class=p>)</span> <span class=o>&amp;</span> <span class=p>(</span><span class=n>freqs</span> <span class=o>&lt;=</span> <span class=mf>0.15</span><span class=p>)])</span>
+</span><span id=__span-10-28><a id=__codelineno-10-28 name=__codelineno-10-28></a>    <span class=n>hf_power</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>trapz</span><span class=p>(</span><span class=n>psd</span><span class=p>[(</span><span class=n>freqs</span> <span class=o>&gt;=</span> <span class=mf>0.15</span><span class=p>)</span> <span class=o>&amp;</span> <span class=p>(</span><span class=n>freqs</span> <span class=o>&lt;=</span> <span class=mf>0.4</span><span class=p>)])</span>
+</span><span id=__span-10-29><a id=__codelineno-10-29 name=__codelineno-10-29></a>    <span class=n>lf_hf_ratio</span> <span class=o>=</span> <span class=n>lf_power</span> <span class=o>/</span> <span class=n>hf_power</span>  <span class=c1># 交感/副交感平衡</span>
+</span><span id=__span-10-30><a id=__codelineno-10-30 name=__codelineno-10-30></a>
+</span><span id=__span-10-31><a id=__codelineno-10-31 name=__codelineno-10-31></a>    <span class=k>return</span> <span class=p>{</span>
+</span><span id=__span-10-32><a id=__codelineno-10-32 name=__codelineno-10-32></a>        <span class=s1>&#39;sdnn&#39;</span><span class=p>:</span> <span class=n>sdnn</span><span class=p>,</span>
+</span><span id=__span-10-33><a id=__codelineno-10-33 name=__codelineno-10-33></a>        <span class=s1>&#39;rmssd&#39;</span><span class=p>:</span> <span class=n>rmssd</span><span class=p>,</span>
+</span><span id=__span-10-34><a id=__codelineno-10-34 name=__codelineno-10-34></a>        <span class=s1>&#39;lf&#39;</span><span class=p>:</span> <span class=n>lf_power</span><span class=p>,</span>
+</span><span id=__span-10-35><a id=__codelineno-10-35 name=__codelineno-10-35></a>        <span class=s1>&#39;hf&#39;</span><span class=p>:</span> <span class=n>hf_power</span><span class=p>,</span>
+</span><span id=__span-10-36><a id=__codelineno-10-36 name=__codelineno-10-36></a>        <span class=s1>&#39;lf_hf_ratio&#39;</span><span class=p>:</span> <span class=n>lf_hf_ratio</span>
+</span><span id=__span-10-37><a id=__codelineno-10-37 name=__codelineno-10-37></a>    <span class=p>}</span>
+</span><span id=__span-10-38><a id=__codelineno-10-38 name=__codelineno-10-38></a>
+</span><span id=__span-10-39><a id=__codelineno-10-39 name=__codelineno-10-39></a><span class=c1># 使用</span>
+</span><span id=__span-10-40><a id=__codelineno-10-40 name=__codelineno-10-40></a><span class=n>rr_data</span> <span class=o>=</span> <span class=p>[</span><span class=mi>950</span><span class=p>,</span> <span class=mi>1020</span><span class=p>,</span> <span class=mi>880</span><span class=p>,</span> <span class=mi>1050</span><span class=p>,</span> <span class=mi>920</span><span class=p>,</span> <span class=o>...</span><span class=p>]</span>
+</span><span id=__span-10-41><a id=__codelineno-10-41 name=__codelineno-10-41></a><span class=n>hrv_metrics</span> <span class=o>=</span> <span class=n>calculate_hrv</span><span class=p>(</span><span class=n>rr_data</span><span class=p>)</span>
+</span><span id=__span-10-42><a id=__codelineno-10-42 name=__codelineno-10-42></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;RMSSD: </span><span class=si>{</span><span class=n>hrv_metrics</span><span class=p>[</span><span class=s1>&#39;rmssd&#39;</span><span class=p>]</span><span class=si>:</span><span class=s2>.2f</span><span class=si>}</span><span class=s2> ms&quot;</span><span class=p>)</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=73-hrv>7.3 HRV的实际应用<a class=headerlink href=#73-hrv title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>场景</th> <th>HRV特征</th> <th>含义</th> </tr> </thead> <tbody> <tr> <td><strong>深度睡眠</strong></td> <td>HRV高，HF主导</td> <td>副交感神经活跃，恢复状态</td> </tr> <tr> <td><strong>运动时</strong></td> <td>HRV低，LF主导</td> <td>交感神经活跃，应激状态</td> </tr> <tr> <td><strong>压力大</strong></td> <td>HRV持续偏低</td> <td>身体疲劳，需要休息</td> </tr> <tr> <td><strong>生病前</strong></td> <td>HRV突然下降</td> <td>免疫系统可能正在战斗</td> </tr> <tr> <td><strong>冥想后</strong></td> <td>HRV升高</td> <td>放松效果明显</td> </tr> </tbody> </table> <hr> <h2 id=_8>八、卡路里算法：你今天消耗了多少能量？<a class=headerlink href=#_8 title="Permanent link">&para;</a></h2> <h3 id=81>8.1 卡路里的两大组成部分<a class=headerlink href=#81 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>pie title 每日卡路里消耗构成
+    "基础代谢(BMR)" : 65
+    "活动消耗" : 25
+    "食物热效应" : 10</code></pre> <h3 id=82-bmr>8.2 基础代谢率（BMR）算法<a class=headerlink href=#82-bmr title="Permanent link">&para;</a></h3> <p><strong>常用公式</strong>：Mifflin-St Jeor 方程</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1> 1</a></span>
+<span class=normal><a href=#__codelineno-11-2> 2</a></span>
+<span class=normal><a href=#__codelineno-11-3> 3</a></span>
+<span class=normal><a href=#__codelineno-11-4> 4</a></span>
+<span class=normal><a href=#__codelineno-11-5> 5</a></span>
+<span class=normal><a href=#__codelineno-11-6> 6</a></span>
+<span class=normal><a href=#__codelineno-11-7> 7</a></span>
+<span class=normal><a href=#__codelineno-11-8> 8</a></span>
+<span class=normal><a href=#__codelineno-11-9> 9</a></span>
+<span class=normal><a href=#__codelineno-11-10>10</a></span>
+<span class=normal><a href=#__codelineno-11-11>11</a></span>
+<span class=normal><a href=#__codelineno-11-12>12</a></span>
+<span class=normal><a href=#__codelineno-11-13>13</a></span>
+<span class=normal><a href=#__codelineno-11-14>14</a></span>
+<span class=normal><a href=#__codelineno-11-15>15</a></span>
+<span class=normal><a href=#__codelineno-11-16>16</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a><span class=k>def</span><span class=w> </span><span class=nf>calculate_bmr</span><span class=p>(</span><span class=n>weight_kg</span><span class=p>,</span> <span class=n>height_cm</span><span class=p>,</span> <span class=n>age</span><span class=p>,</span> <span class=n>gender</span><span class=p>):</span>
+</span><span id=__span-11-2><a id=__codelineno-11-2 name=__codelineno-11-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-11-3><a id=__codelineno-11-3 name=__codelineno-11-3></a><span class=sd>    计算基础代谢率</span>
+</span><span id=__span-11-4><a id=__codelineno-11-4 name=__codelineno-11-4></a><span class=sd>    gender: &#39;male&#39; or &#39;female&#39;</span>
+</span><span id=__span-11-5><a id=__codelineno-11-5 name=__codelineno-11-5></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-11-6><a id=__codelineno-11-6 name=__codelineno-11-6></a>    <span class=k>if</span> <span class=n>gender</span> <span class=o>==</span> <span class=s1>&#39;male&#39;</span><span class=p>:</span>
+</span><span id=__span-11-7><a id=__codelineno-11-7 name=__codelineno-11-7></a>        <span class=n>bmr</span> <span class=o>=</span> <span class=mi>10</span> <span class=o>*</span> <span class=n>weight_kg</span> <span class=o>+</span> <span class=mf>6.25</span> <span class=o>*</span> <span class=n>height_cm</span> <span class=o>-</span> <span class=mi>5</span> <span class=o>*</span> <span class=n>age</span> <span class=o>+</span> <span class=mi>5</span>
+</span><span id=__span-11-8><a id=__codelineno-11-8 name=__codelineno-11-8></a>    <span class=k>else</span><span class=p>:</span>
+</span><span id=__span-11-9><a id=__codelineno-11-9 name=__codelineno-11-9></a>        <span class=n>bmr</span> <span class=o>=</span> <span class=mi>10</span> <span class=o>*</span> <span class=n>weight_kg</span> <span class=o>+</span> <span class=mf>6.25</span> <span class=o>*</span> <span class=n>height_cm</span> <span class=o>-</span> <span class=mi>5</span> <span class=o>*</span> <span class=n>age</span> <span class=o>-</span> <span class=mi>161</span>
+</span><span id=__span-11-10><a id=__codelineno-11-10 name=__codelineno-11-10></a>
+</span><span id=__span-11-11><a id=__codelineno-11-11 name=__codelineno-11-11></a>    <span class=k>return</span> <span class=n>bmr</span>
+</span><span id=__span-11-12><a id=__codelineno-11-12 name=__codelineno-11-12></a>
+</span><span id=__span-11-13><a id=__codelineno-11-13 name=__codelineno-11-13></a><span class=c1># 示例：25岁男性，75kg，180cm</span>
+</span><span id=__span-11-14><a id=__codelineno-11-14 name=__codelineno-11-14></a><span class=n>bmr</span> <span class=o>=</span> <span class=n>calculate_bmr</span><span class=p>(</span><span class=mi>75</span><span class=p>,</span> <span class=mi>180</span><span class=p>,</span> <span class=mi>25</span><span class=p>,</span> <span class=s1>&#39;male&#39;</span><span class=p>)</span>
+</span><span id=__span-11-15><a id=__codelineno-11-15 name=__codelineno-11-15></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;基础代谢: </span><span class=si>{</span><span class=n>bmr</span><span class=si>:</span><span class=s2>.0f</span><span class=si>}</span><span class=s2> kcal/天&quot;</span><span class=p>)</span>
+</span><span id=__span-11-16><a id=__codelineno-11-16 name=__codelineno-11-16></a><span class=c1># 输出：约1756 kcal/天</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=83>8.3 活动消耗算法<a class=headerlink href=#83 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[ACC传感器] --&gt; B[步态识别]
+    B --&gt; C[运动类型分类]
+    C --&gt; D[MET值查询]
+    D --&gt; E[卡路里计算]
+
+    F[心率数据] --&gt; G[心率区间]
+    G --&gt; H[运动强度估算]
+    H --&gt; E
+
+    E --&gt; I[总活动消耗]
+
+    style A fill:#E8F5E9
+    style B fill:#C8E6C9
+    style C fill:#A5D6A7
+    style D fill:#81C784
+    style E fill:#66BB6A</code></pre> <p><strong>MET值表</strong>（代谢当量）：</p> <table> <thead> <tr> <th>活动</th> <th>MET值</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>静坐</td> <td>1.0</td> <td>基础状态</td> </tr> <tr> <td>散步</td> <td>3.0</td> <td>慢速行走</td> </tr> <tr> <td>快走</td> <td>5.0</td> <td>6km/h</td> </tr> <tr> <td>慢跑</td> <td>7.0</td> <td>8km/h</td> </tr> <tr> <td>跑步</td> <td>10.0</td> <td>10km/h</td> </tr> <tr> <td>HIIT</td> <td>12.0</td> <td>高强度间歇</td> </tr> </tbody> </table> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1> 1</a></span>
+<span class=normal><a href=#__codelineno-12-2> 2</a></span>
+<span class=normal><a href=#__codelineno-12-3> 3</a></span>
+<span class=normal><a href=#__codelineno-12-4> 4</a></span>
+<span class=normal><a href=#__codelineno-12-5> 5</a></span>
+<span class=normal><a href=#__codelineno-12-6> 6</a></span>
+<span class=normal><a href=#__codelineno-12-7> 7</a></span>
+<span class=normal><a href=#__codelineno-12-8> 8</a></span>
+<span class=normal><a href=#__codelineno-12-9> 9</a></span>
+<span class=normal><a href=#__codelineno-12-10>10</a></span>
+<span class=normal><a href=#__codelineno-12-11>11</a></span>
+<span class=normal><a href=#__codelineno-12-12>12</a></span>
+<span class=normal><a href=#__codelineno-12-13>13</a></span>
+<span class=normal><a href=#__codelineno-12-14>14</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><a id=__codelineno-12-1 name=__codelineno-12-1></a><span class=k>def</span><span class=w> </span><span class=nf>calculate_active_calories</span><span class=p>(</span><span class=n>weight_kg</span><span class=p>,</span> <span class=n>duration_minutes</span><span class=p>,</span> <span class=n>met_value</span><span class=p>):</span>
+</span><span id=__span-12-2><a id=__codelineno-12-2 name=__codelineno-12-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-12-3><a id=__codelineno-12-3 name=__codelineno-12-3></a><span class=sd>    计算活动消耗卡路里</span>
+</span><span id=__span-12-4><a id=__codelineno-12-4 name=__codelineno-12-4></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-12-5><a id=__codelineno-12-5 name=__codelineno-12-5></a>    <span class=c1># 公式：消耗 = MET × 体重(kg) × 时间(小时)</span>
+</span><span id=__span-12-6><a id=__codelineno-12-6 name=__codelineno-12-6></a>    <span class=n>duration_hours</span> <span class=o>=</span> <span class=n>duration_minutes</span> <span class=o>/</span> <span class=mi>60</span>
+</span><span id=__span-12-7><a id=__codelineno-12-7 name=__codelineno-12-7></a>    <span class=n>calories</span> <span class=o>=</span> <span class=n>met_value</span> <span class=o>*</span> <span class=n>weight_kg</span> <span class=o>*</span> <span class=n>duration_hours</span>
+</span><span id=__span-12-8><a id=__codelineno-12-8 name=__codelineno-12-8></a>
+</span><span id=__span-12-9><a id=__codelineno-12-9 name=__codelineno-12-9></a>    <span class=k>return</span> <span class=n>calories</span>
+</span><span id=__span-12-10><a id=__codelineno-12-10 name=__codelineno-12-10></a>
+</span><span id=__span-12-11><a id=__codelineno-12-11 name=__codelineno-12-11></a><span class=c1># 示例：75kg的人，跑步30分钟（MET=10）</span>
+</span><span id=__span-12-12><a id=__codelineno-12-12 name=__codelineno-12-12></a><span class=n>active_cal</span> <span class=o>=</span> <span class=n>calculate_active_calories</span><span class=p>(</span><span class=mi>75</span><span class=p>,</span> <span class=mi>30</span><span class=p>,</span> <span class=mi>10</span><span class=p>)</span>
+</span><span id=__span-12-13><a id=__codelineno-12-13 name=__codelineno-12-13></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;活动消耗: </span><span class=si>{</span><span class=n>active_cal</span><span class=si>:</span><span class=s2>.0f</span><span class=si>}</span><span class=s2> kcal&quot;</span><span class=p>)</span>
+</span><span id=__span-12-14><a id=__codelineno-12-14 name=__codelineno-12-14></a><span class=c1># 输出：约375 kcal</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=84>8.4 结合心率的精准算法<a class=headerlink href=#84 title="Permanent link">&para;</a></h3> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1> 1</a></span>
+<span class=normal><a href=#__codelineno-13-2> 2</a></span>
+<span class=normal><a href=#__codelineno-13-3> 3</a></span>
+<span class=normal><a href=#__codelineno-13-4> 4</a></span>
+<span class=normal><a href=#__codelineno-13-5> 5</a></span>
+<span class=normal><a href=#__codelineno-13-6> 6</a></span>
+<span class=normal><a href=#__codelineno-13-7> 7</a></span>
+<span class=normal><a href=#__codelineno-13-8> 8</a></span>
+<span class=normal><a href=#__codelineno-13-9> 9</a></span>
+<span class=normal><a href=#__codelineno-13-10>10</a></span>
+<span class=normal><a href=#__codelineno-13-11>11</a></span>
+<span class=normal><a href=#__codelineno-13-12>12</a></span>
+<span class=normal><a href=#__codelineno-13-13>13</a></span>
+<span class=normal><a href=#__codelineno-13-14>14</a></span>
+<span class=normal><a href=#__codelineno-13-15>15</a></span>
+<span class=normal><a href=#__codelineno-13-16>16</a></span>
+<span class=normal><a href=#__codelineno-13-17>17</a></span>
+<span class=normal><a href=#__codelineno-13-18>18</a></span>
+<span class=normal><a href=#__codelineno-13-19>19</a></span>
+<span class=normal><a href=#__codelineno-13-20>20</a></span>
+<span class=normal><a href=#__codelineno-13-21>21</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><a id=__codelineno-13-1 name=__codelineno-13-1></a><span class=k>def</span><span class=w> </span><span class=nf>calculate_calories_with_hr</span><span class=p>(</span><span class=n>weight_kg</span><span class=p>,</span> <span class=n>age</span><span class=p>,</span> <span class=n>gender</span><span class=p>,</span> <span class=n>avg_hr</span><span class=p>,</span> <span class=n>duration_min</span><span class=p>):</span>
+</span><span id=__span-13-2><a id=__codelineno-13-2 name=__codelineno-13-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-13-3><a id=__codelineno-13-3 name=__codelineno-13-3></a><span class=sd>    基于心率的卡路里计算（更准确）</span>
+</span><span id=__span-13-4><a id=__codelineno-13-4 name=__codelineno-13-4></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-13-5><a id=__codelineno-13-5 name=__codelineno-13-5></a>    <span class=c1># 最大心率</span>
+</span><span id=__span-13-6><a id=__codelineno-13-6 name=__codelineno-13-6></a>    <span class=n>max_hr</span> <span class=o>=</span> <span class=mi>220</span> <span class=o>-</span> <span class=n>age</span>
+</span><span id=__span-13-7><a id=__codelineno-13-7 name=__codelineno-13-7></a>
+</span><span id=__span-13-8><a id=__codelineno-13-8 name=__codelineno-13-8></a>    <span class=c1># 心率储备百分比</span>
+</span><span id=__span-13-9><a id=__codelineno-13-9 name=__codelineno-13-9></a>    <span class=n>hr_reserve_pct</span> <span class=o>=</span> <span class=n>avg_hr</span> <span class=o>/</span> <span class=n>max_hr</span>
+</span><span id=__span-13-10><a id=__codelineno-13-10 name=__codelineno-13-10></a>
+</span><span id=__span-13-11><a id=__codelineno-13-11 name=__codelineno-13-11></a>    <span class=c1># 根据心率区间估算MET</span>
+</span><span id=__span-13-12><a id=__codelineno-13-12 name=__codelineno-13-12></a>    <span class=k>if</span> <span class=n>hr_reserve_pct</span> <span class=o>&lt;</span> <span class=mf>0.5</span><span class=p>:</span>
+</span><span id=__span-13-13><a id=__codelineno-13-13 name=__codelineno-13-13></a>        <span class=n>met</span> <span class=o>=</span> <span class=mf>3.0</span>  <span class=c1># 轻度</span>
+</span><span id=__span-13-14><a id=__codelineno-13-14 name=__codelineno-13-14></a>    <span class=k>elif</span> <span class=n>hr_reserve_pct</span> <span class=o>&lt;</span> <span class=mf>0.7</span><span class=p>:</span>
+</span><span id=__span-13-15><a id=__codelineno-13-15 name=__codelineno-13-15></a>        <span class=n>met</span> <span class=o>=</span> <span class=mf>6.0</span>  <span class=c1># 中度</span>
+</span><span id=__span-13-16><a id=__codelineno-13-16 name=__codelineno-13-16></a>    <span class=k>elif</span> <span class=n>hr_reserve_pct</span> <span class=o>&lt;</span> <span class=mf>0.85</span><span class=p>:</span>
+</span><span id=__span-13-17><a id=__codelineno-13-17 name=__codelineno-13-17></a>        <span class=n>met</span> <span class=o>=</span> <span class=mf>9.0</span>  <span class=c1># 强度</span>
+</span><span id=__span-13-18><a id=__codelineno-13-18 name=__codelineno-13-18></a>    <span class=k>else</span><span class=p>:</span>
+</span><span id=__span-13-19><a id=__codelineno-13-19 name=__codelineno-13-19></a>        <span class=n>met</span> <span class=o>=</span> <span class=mf>12.0</span>  <span class=c1># 极限</span>
+</span><span id=__span-13-20><a id=__codelineno-13-20 name=__codelineno-13-20></a>
+</span><span id=__span-13-21><a id=__codelineno-13-21 name=__codelineno-13-21></a>    <span class=k>return</span> <span class=n>calculate_active_calories</span><span class=p>(</span><span class=n>weight_kg</span><span class=p>,</span> <span class=n>duration_min</span><span class=p>,</span> <span class=n>met</span><span class=p>)</span>
+</span></code></pre></div></td></tr></table></div> <hr> <h2 id=_9>九、跌倒检测与紧急求救：关键时刻能救命<a class=headerlink href=#_9 title="Permanent link">&para;</a></h2> <h3 id=91>9.1 跌倒检测的算法逻辑<a class=headerlink href=#91 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>flowchart TD
+    A[实时采集ACC+GYRO] --&gt; B{检测突然加速}
+    B --&gt;|是| C[检测失重阶段]
+    B --&gt;|否| A
+    C --&gt;|是| D[检测撞击冲击]
+    C --&gt;|否| A
+    D --&gt;|是| E[检测体位变化]
+    D --&gt;|否| A
+    E --&gt;|是| F[判定跌倒]
+    E --&gt;|否| A
+    F --&gt; G[启动倒计时]
+    G --&gt; H{用户取消?}
+    H --&gt;|是| A
+    H --&gt;|否| I[拨打紧急电话]</code></pre> <h3 id=92>9.2 跌倒检测的实现<a class=headerlink href=#92 title="Permanent link">&para;</a></h3> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
+<span class=normal><a href=#__codelineno-14-2> 2</a></span>
+<span class=normal><a href=#__codelineno-14-3> 3</a></span>
+<span class=normal><a href=#__codelineno-14-4> 4</a></span>
+<span class=normal><a href=#__codelineno-14-5> 5</a></span>
+<span class=normal><a href=#__codelineno-14-6> 6</a></span>
+<span class=normal><a href=#__codelineno-14-7> 7</a></span>
+<span class=normal><a href=#__codelineno-14-8> 8</a></span>
+<span class=normal><a href=#__codelineno-14-9> 9</a></span>
+<span class=normal><a href=#__codelineno-14-10>10</a></span>
+<span class=normal><a href=#__codelineno-14-11>11</a></span>
+<span class=normal><a href=#__codelineno-14-12>12</a></span>
+<span class=normal><a href=#__codelineno-14-13>13</a></span>
+<span class=normal><a href=#__codelineno-14-14>14</a></span>
+<span class=normal><a href=#__codelineno-14-15>15</a></span>
+<span class=normal><a href=#__codelineno-14-16>16</a></span>
+<span class=normal><a href=#__codelineno-14-17>17</a></span>
+<span class=normal><a href=#__codelineno-14-18>18</a></span>
+<span class=normal><a href=#__codelineno-14-19>19</a></span>
+<span class=normal><a href=#__codelineno-14-20>20</a></span>
+<span class=normal><a href=#__codelineno-14-21>21</a></span>
+<span class=normal><a href=#__codelineno-14-22>22</a></span>
+<span class=normal><a href=#__codelineno-14-23>23</a></span>
+<span class=normal><a href=#__codelineno-14-24>24</a></span>
+<span class=normal><a href=#__codelineno-14-25>25</a></span>
+<span class=normal><a href=#__codelineno-14-26>26</a></span>
+<span class=normal><a href=#__codelineno-14-27>27</a></span>
+<span class=normal><a href=#__codelineno-14-28>28</a></span>
+<span class=normal><a href=#__codelineno-14-29>29</a></span>
+<span class=normal><a href=#__codelineno-14-30>30</a></span>
+<span class=normal><a href=#__codelineno-14-31>31</a></span>
+<span class=normal><a href=#__codelineno-14-32>32</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><a id=__codelineno-14-1 name=__codelineno-14-1></a><span class=k>def</span><span class=w> </span><span class=nf>detect_fall</span><span class=p>(</span><span class=n>acc_data</span><span class=p>,</span> <span class=n>gyro_data</span><span class=p>,</span> <span class=n>fs</span><span class=o>=</span><span class=mi>50</span><span class=p>):</span>
+</span><span id=__span-14-2><a id=__codelineno-14-2 name=__codelineno-14-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-14-3><a id=__codelineno-14-3 name=__codelineno-14-3></a><span class=sd>    跌倒检测算法（简化版）</span>
+</span><span id=__span-14-4><a id=__codelineno-14-4 name=__codelineno-14-4></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-14-5><a id=__codelineno-14-5 name=__codelineno-14-5></a>    <span class=c1># 1. 计算合加速度</span>
+</span><span id=__span-14-6><a id=__codelineno-14-6 name=__codelineno-14-6></a>    <span class=n>acc_magnitude</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>sqrt</span><span class=p>(</span>
+</span><span id=__span-14-7><a id=__codelineno-14-7 name=__codelineno-14-7></a>        <span class=n>acc_data</span><span class=p>[:,</span> <span class=mi>0</span><span class=p>]</span><span class=o>**</span><span class=mi>2</span> <span class=o>+</span> 
+</span><span id=__span-14-8><a id=__codelineno-14-8 name=__codelineno-14-8></a>        <span class=n>acc_data</span><span class=p>[:,</span> <span class=mi>1</span><span class=p>]</span><span class=o>**</span><span class=mi>2</span> <span class=o>+</span> 
+</span><span id=__span-14-9><a id=__codelineno-14-9 name=__codelineno-14-9></a>        <span class=n>acc_data</span><span class=p>[:,</span> <span class=mi>2</span><span class=p>]</span><span class=o>**</span><span class=mi>2</span>
+</span><span id=__span-14-10><a id=__codelineno-14-10 name=__codelineno-14-10></a>    <span class=p>)</span>
+</span><span id=__span-14-11><a id=__codelineno-14-11 name=__codelineno-14-11></a>
+</span><span id=__span-14-12><a id=__codelineno-14-12 name=__codelineno-14-12></a>    <span class=c1># 2. 检测失重阶段（加速度接近0）</span>
+</span><span id=__span-14-13><a id=__codelineno-14-13 name=__codelineno-14-13></a>    <span class=n>freefall_threshold</span> <span class=o>=</span> <span class=mf>0.5</span>  <span class=c1># g</span>
+</span><span id=__span-14-14><a id=__codelineno-14-14 name=__codelineno-14-14></a>    <span class=n>freefall</span> <span class=o>=</span> <span class=n>acc_magnitude</span> <span class=o>&lt;</span> <span class=n>freefall_threshold</span>
+</span><span id=__span-14-15><a id=__codelineno-14-15 name=__codelineno-14-15></a>
+</span><span id=__span-14-16><a id=__codelineno-14-16 name=__codelineno-14-16></a>    <span class=c1># 3. 检测冲击阶段（加速度突然增大）</span>
+</span><span id=__span-14-17><a id=__codelineno-14-17 name=__codelineno-14-17></a>    <span class=n>impact_threshold</span> <span class=o>=</span> <span class=mf>2.5</span>  <span class=c1># g</span>
+</span><span id=__span-14-18><a id=__codelineno-14-18 name=__codelineno-14-18></a>    <span class=n>impact</span> <span class=o>=</span> <span class=n>acc_magnitude</span> <span class=o>&gt;</span> <span class=n>impact_threshold</span>
+</span><span id=__span-14-19><a id=__codelineno-14-19 name=__codelineno-14-19></a>
+</span><span id=__span-14-20><a id=__codelineno-14-20 name=__codelineno-14-20></a>    <span class=c1># 4. 检测体位变化（使用陀螺仪）</span>
+</span><span id=__span-14-21><a id=__codelineno-14-21 name=__codelineno-14-21></a>    <span class=n>gyro_magnitude</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>sqrt</span><span class=p>(</span>
+</span><span id=__span-14-22><a id=__codelineno-14-22 name=__codelineno-14-22></a>        <span class=n>gyro_data</span><span class=p>[:,</span> <span class=mi>0</span><span class=p>]</span><span class=o>**</span><span class=mi>2</span> <span class=o>+</span> 
+</span><span id=__span-14-23><a id=__codelineno-14-23 name=__codelineno-14-23></a>        <span class=n>gyro_data</span><span class=p>[:,</span> <span class=mi>1</span><span class=p>]</span><span class=o>**</span><span class=mi>2</span> <span class=o>+</span> 
+</span><span id=__span-14-24><a id=__codelineno-14-24 name=__codelineno-14-24></a>        <span class=n>gyro_data</span><span class=p>[:,</span> <span class=mi>2</span><span class=p>]</span><span class=o>**</span><span class=mi>2</span>
+</span><span id=__span-14-25><a id=__codelineno-14-25 name=__codelineno-14-25></a>    <span class=p>)</span>
+</span><span id=__span-14-26><a id=__codelineno-14-26 name=__codelineno-14-26></a>    <span class=n>orientation_change</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>max</span><span class=p>(</span><span class=n>gyro_magnitude</span><span class=p>)</span> <span class=o>&gt;</span> <span class=mi>200</span>  <span class=c1># deg/s</span>
+</span><span id=__span-14-27><a id=__codelineno-14-27 name=__codelineno-14-27></a>
+</span><span id=__span-14-28><a id=__codelineno-14-28 name=__codelineno-14-28></a>    <span class=c1># 5. 综合判断</span>
+</span><span id=__span-14-29><a id=__codelineno-14-29 name=__codelineno-14-29></a>    <span class=k>if</span> <span class=n>np</span><span class=o>.</span><span class=n>any</span><span class=p>(</span><span class=n>freefall</span><span class=p>)</span> <span class=ow>and</span> <span class=n>np</span><span class=o>.</span><span class=n>any</span><span class=p>(</span><span class=n>impact</span><span class=p>)</span> <span class=ow>and</span> <span class=n>orientation_change</span><span class=p>:</span>
+</span><span id=__span-14-30><a id=__codelineno-14-30 name=__codelineno-14-30></a>        <span class=k>return</span> <span class=kc>True</span>  <span class=c1># 检测到跌倒</span>
+</span><span id=__span-14-31><a id=__codelineno-14-31 name=__codelineno-14-31></a>
+</span><span id=__span-14-32><a id=__codelineno-14-32 name=__codelineno-14-32></a>    <span class=k>return</span> <span class=kc>False</span>
+</span></code></pre></div></td></tr></table></div> <hr> <h2 id=_10>十、算法的工程实现：从实验室到手腕<a class=headerlink href=#_10 title="Permanent link">&para;</a></h2> <h3 id=101>10.1 嵌入式系统的限制<a class=headerlink href=#101 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>mindmap
+    root((手表算法挑战))
+        算力有限
+            MCU主频低
+            内存小
+            不能跑大模型
+        功耗限制
+            电池小
+            需要多天续航
+            不能持续高负载
+        实时性要求
+            心率需要秒级更新
+            跌倒检测需要即时
+        传感器噪声
+            佩戴位置不同
+            皮肤颜色差异
+            运动干扰</code></pre> <h3 id=102>10.2 算法优化策略<a class=headerlink href=#102 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>策略</th> <th>说明</th> <th>效果</th> </tr> </thead> <tbody> <tr> <td><strong>模型压缩</strong></td> <td>量化、剪枝</td> <td>模型体积减少90%</td> </tr> <tr> <td><strong>边缘计算</strong></td> <td>在手表端跑简单模型</td> <td>降低延迟</td> </tr> <tr> <td><strong>云端协同</strong></td> <td>复杂分析上传手机/云端</td> <td>节省功耗</td> </tr> <tr> <td><strong>自适应采样</strong></td> <td>静止时低频，运动时高频</td> <td>平衡功耗</td> </tr> <tr> <td><strong>特征缓存</strong></td> <td>只传特征，不传原始数据</td> <td>减少传输</td> </tr> </tbody> </table> <h3 id=103>10.3 典型架构<a class=headerlink href=#103 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[传感器] --&gt; B[手表MCU]
+    B --&gt; C[实时简单算法]
+    C --&gt; D[心率/步数等]
+    C --&gt; E[异常检测]
+
+    B --&gt; F[蓝牙传输]
+    F --&gt; G[手机App]
+    G --&gt; H[复杂分析]
+    H --&gt; I[历史趋势]
+    H --&gt; J[AI诊断辅助]
+
+    G --&gt; K[云端]
+    K --&gt; L[模型训练]
+    K --&gt; M[个性化优化]
+    L --&gt; N[下发新手表固件]
+
+    style B fill:#FFF9C4
+    style C fill:#FFF59D
+    style G fill:#FFECB3
+    style K fill:#FFE082</code></pre> <hr> <h2 id=_11>十一、不同品牌手表的算法差异<a class=headerlink href=#_11 title="Permanent link">&para;</a></h2> <h3 id=111>11.1 主流方案对比<a class=headerlink href=#111 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>品牌</th> <th>心率算法</th> <th>睡眠算法</th> <th>特色功能</th> </tr> </thead> <tbody> <tr> <td><strong>Apple Watch</strong></td> <td>多波长PPG+深度学习</td> <td>基于WatchOS专有模型</td> <td>房颤预警、ECG</td> </tr> <tr> <td><strong>华为Watch</strong></td> <td>TruSeen 5.0+</td> <td>TruSleep 3.0</td> <td>血管硬化检测</td> </tr> <tr> <td><strong>小米手环</strong></td> <td>自研算法+供应链方案</td> <td>基础分期</td> <td>性价比</td> </tr> <tr> <td><strong>Garmin</strong></td> <td>Elevate传感器</td> <td>Firstbeat算法</td> <td>运动生理指标</td> </tr> <tr> <td><strong>Fitbit</strong></td> <td>PurePulse</td> <td>业界最早睡眠分期</td> <td>健康生态</td> </tr> </tbody> </table> <h3 id=112>11.2 为什么不同手表数据不一样？<a class=headerlink href=#112 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
+    A[不同手表测出不同数据] --&gt; B[硬件差异]
+    A --&gt; C[算法差异]
+    A --&gt; D[采样率不同]
+
+    B --&gt; B1[LED波长不同]
+    B --&gt; B2[传感器数量不同]
+    B --&gt; B3[佩戴设计不同]
+
+    C --&gt; C1[滤波参数不同]
+    C --&gt; C2[峰值检测算法不同]
+    C --&gt; C3[校准数据不同]</code></pre> <p><strong>核心原因</strong>：每家算法都是<strong>黑盒</strong>，训练数据和处理流程不同，导致结果有差异。</p> <hr> <h2 id=_12>十二、未来趋势：健康算法会走向哪里？<a class=headerlink href=#_12 title="Permanent link">&para;</a></h2> <h3 id=121>12.1 技术趋势<a class=headerlink href=#121 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[当前] --&gt; B[无创血糖]
+    A --&gt; C[连续血压]
+    A --&gt; D[体温趋势]
+    A --&gt; E[情绪识别]
+
+    B --&gt; F[红外光谱分析]
+    C --&gt; G[PTT+机器学习]
+    D --&gt; H[高精度温度传感器]
+    E --&gt; I[HRV+EDA融合]
+
+    style A fill:#E1BEE7
+    style B fill:#CE93D8
+    style C fill:#CE93D8
+    style D fill:#CE93D8
+    style E fill:#CE93D8</code></pre> <h3 id=122>12.2 算法趋势<a class=headerlink href=#122 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>趋势</th> <th>说明</th> <th>意义</th> </tr> </thead> <tbody> <tr> <td><strong>端侧AI</strong></td> <td>手表直接跑小模型</td> <td>降低延迟，保护隐私</td> </tr> <tr> <td><strong>联邦学习</strong></td> <td>多设备联合训练</td> <td>数据不出设备</td> </tr> <tr> <td><strong>多模态融合</strong></td> <td>PPG+ACC+EDA+温度</td> <td>更准确的健康画像</td> </tr> <tr> <td><strong>个性化校准</strong></td> <td>根据个人数据微调</td> <td>提高个体准确度</td> </tr> <tr> <td><strong>医疗级认证</strong></td> <td>通过FDA/NMPA认证</td> <td>从消费品到医疗器械</td> </tr> </tbody> </table> <h3 id=123>12.3 监管与伦理<a class=headerlink href=#123 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>mindmap
+    root((健康算法的挑战))
+        准确度问题
+            不能替代医疗设备
+            误报漏报风险
+        隐私保护
+            健康数据敏感
+            数据泄露风险
+        算法偏见
+            不同肤色准确度差异
+            年龄性别差异
+        责任归属
+            算法出错谁负责
+            监管滞后</code></pre> <hr> <h3 id=131>13.1 健康算法全景图<a class=headerlink href=#131 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>mindmap
+    root((智能手表健康算法))
+        心率监测
+            PPG原理
+            峰值检测
+            运动补偿
+        血氧监测
+            双波长光学
+            AC/DC比值
+            校准曲线
+        睡眠分析
+            多传感器融合
+            深度学习分期
+            HRV辅助
+        血压估算
+            PTT测量
+            回归模型
+            定期校准
+        HRV分析
+            时域频域
+            压力评估
+            健康预警
+        卡路里计算
+            BMR基础
+            MET活动
+            心率辅助
+        跌倒检测
+            ACC+GYRO
+            三阶段判断
+            紧急求救</code></pre> <table> <thead> <tr> <th>算法</th> <th>核心传感器</th> <th>关键技术</th> <th>准确度</th> </tr> </thead> <tbody> <tr> <td>心率</td> <td>PPG绿光</td> <td>峰值检测+运动补偿</td> <td>⭐⭐⭐⭐</td> </tr> <tr> <td>血氧</td> <td>PPG红光+红外</td> <td>双波长比值</td> <td>⭐⭐⭐</td> </tr> <tr> <td>睡眠</td> <td>PPG+ACC</td> <td>多模态分类</td> <td>⭐⭐⭐⭐</td> </tr> <tr> <td>血压</td> <td>PPG+ECG</td> <td>PTT测量</td> <td>⭐⭐⭐</td> </tr> <tr> <td>HRV</td> <td>PPG</td> <td>RR间期分析</td> <td>⭐⭐⭐⭐</td> </tr> <tr> <td>卡路里</td> <td>ACC+HR</td> <td>MET+心率模型</td> <td>⭐⭐⭐</td> </tr> </tbody> </table> <h3 id=133>13.3 给用户的建议<a class=headerlink href=#133 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[使用智能手表] --&gt; B[正确佩戴]
+    A --&gt; C[定期校准]
+    A --&gt; D[理解局限]
+    A --&gt; E[关注趋势而非绝对值]
+
+    B --&gt; B1[紧贴皮肤但不过紧]
+    B --&gt; B2[避开纹身和毛发]
+
+    C --&gt; C1[血压需要医用设备校准]
+
+    D --&gt; D1[不是医疗器械]
+    D --&gt; D2[异常需要就医确认]
+
+    E --&gt; E1[看长期趋势]
+    E --&gt; E2[不要纠结单次数据]
+
+    style A fill:#4CAF50
+    style B fill:#81C784
+    style C fill:#81C784
+    style D fill:#81C784
+    style E fill:#81C784</code></pre> <hr> <h2 id=_13>十四、附录：核心算法代码速查<a class=headerlink href=#_13 title="Permanent link">&para;</a></h2> <h3 id=141>14.1 心率检测完整版<a class=headerlink href=#141 title="Permanent link">&para;</a></h3> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1> 1</a></span>
+<span class=normal><a href=#__codelineno-15-2> 2</a></span>
+<span class=normal><a href=#__codelineno-15-3> 3</a></span>
+<span class=normal><a href=#__codelineno-15-4> 4</a></span>
+<span class=normal><a href=#__codelineno-15-5> 5</a></span>
+<span class=normal><a href=#__codelineno-15-6> 6</a></span>
+<span class=normal><a href=#__codelineno-15-7> 7</a></span>
+<span class=normal><a href=#__codelineno-15-8> 8</a></span>
+<span class=normal><a href=#__codelineno-15-9> 9</a></span>
+<span class=normal><a href=#__codelineno-15-10>10</a></span>
+<span class=normal><a href=#__codelineno-15-11>11</a></span>
+<span class=normal><a href=#__codelineno-15-12>12</a></span>
+<span class=normal><a href=#__codelineno-15-13>13</a></span>
+<span class=normal><a href=#__codelineno-15-14>14</a></span>
+<span class=normal><a href=#__codelineno-15-15>15</a></span>
+<span class=normal><a href=#__codelineno-15-16>16</a></span>
+<span class=normal><a href=#__codelineno-15-17>17</a></span>
+<span class=normal><a href=#__codelineno-15-18>18</a></span>
+<span class=normal><a href=#__codelineno-15-19>19</a></span>
+<span class=normal><a href=#__codelineno-15-20>20</a></span>
+<span class=normal><a href=#__codelineno-15-21>21</a></span>
+<span class=normal><a href=#__codelineno-15-22>22</a></span>
+<span class=normal><a href=#__codelineno-15-23>23</a></span>
+<span class=normal><a href=#__codelineno-15-24>24</a></span>
+<span class=normal><a href=#__codelineno-15-25>25</a></span>
+<span class=normal><a href=#__codelineno-15-26>26</a></span>
+<span class=normal><a href=#__codelineno-15-27>27</a></span>
+<span class=normal><a href=#__codelineno-15-28>28</a></span>
+<span class=normal><a href=#__codelineno-15-29>29</a></span>
+<span class=normal><a href=#__codelineno-15-30>30</a></span>
+<span class=normal><a href=#__codelineno-15-31>31</a></span>
+<span class=normal><a href=#__codelineno-15-32>32</a></span>
+<span class=normal><a href=#__codelineno-15-33>33</a></span>
+<span class=normal><a href=#__codelineno-15-34>34</a></span>
+<span class=normal><a href=#__codelineno-15-35>35</a></span>
+<span class=normal><a href=#__codelineno-15-36>36</a></span>
+<span class=normal><a href=#__codelineno-15-37>37</a></span>
+<span class=normal><a href=#__codelineno-15-38>38</a></span>
+<span class=normal><a href=#__codelineno-15-39>39</a></span>
+<span class=normal><a href=#__codelineno-15-40>40</a></span>
+<span class=normal><a href=#__codelineno-15-41>41</a></span>
+<span class=normal><a href=#__codelineno-15-42>42</a></span>
+<span class=normal><a href=#__codelineno-15-43>43</a></span>
+<span class=normal><a href=#__codelineno-15-44>44</a></span>
+<span class=normal><a href=#__codelineno-15-45>45</a></span>
+<span class=normal><a href=#__codelineno-15-46>46</a></span>
+<span class=normal><a href=#__codelineno-15-47>47</a></span>
+<span class=normal><a href=#__codelineno-15-48>48</a></span>
+<span class=normal><a href=#__codelineno-15-49>49</a></span>
+<span class=normal><a href=#__codelineno-15-50>50</a></span>
+<span class=normal><a href=#__codelineno-15-51>51</a></span>
+<span class=normal><a href=#__codelineno-15-52>52</a></span>
+<span class=normal><a href=#__codelineno-15-53>53</a></span>
+<span class=normal><a href=#__codelineno-15-54>54</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=kn>import</span><span class=w> </span><span class=nn>numpy</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=nn>np</span>
+</span><span id=__span-15-2><a id=__codelineno-15-2 name=__codelineno-15-2></a><span class=kn>from</span><span class=w> </span><span class=nn>scipy.signal</span><span class=w> </span><span class=kn>import</span> <span class=n>butter</span><span class=p>,</span> <span class=n>filtfilt</span><span class=p>,</span> <span class=n>find_peaks</span>
+</span><span id=__span-15-3><a id=__codelineno-15-3 name=__codelineno-15-3></a>
+</span><span id=__span-15-4><a id=__codelineno-15-4 name=__codelineno-15-4></a><span class=k>class</span><span class=w> </span><span class=nc>HeartRateMonitor</span><span class=p>:</span>
+</span><span id=__span-15-5><a id=__codelineno-15-5 name=__codelineno-15-5></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-15-6><a id=__codelineno-15-6 name=__codelineno-15-6></a><span class=sd>    心率监测算法（生产级简化版）</span>
+</span><span id=__span-15-7><a id=__codelineno-15-7 name=__codelineno-15-7></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-15-8><a id=__codelineno-15-8 name=__codelineno-15-8></a>    <span class=k>def</span><span class=w> </span><span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>fs</span><span class=o>=</span><span class=mi>25</span><span class=p>):</span>
+</span><span id=__span-15-9><a id=__codelineno-15-9 name=__codelineno-15-9></a>        <span class=bp>self</span><span class=o>.</span><span class=n>fs</span> <span class=o>=</span> <span class=n>fs</span>
+</span><span id=__span-15-10><a id=__codelineno-15-10 name=__codelineno-15-10></a>        <span class=bp>self</span><span class=o>.</span><span class=n>buffer_size</span> <span class=o>=</span> <span class=n>fs</span> <span class=o>*</span> <span class=mi>10</span>  <span class=c1># 10秒窗口</span>
+</span><span id=__span-15-11><a id=__codelineno-15-11 name=__codelineno-15-11></a>        <span class=bp>self</span><span class=o>.</span><span class=n>ppg_buffer</span> <span class=o>=</span> <span class=p>[]</span>
+</span><span id=__span-15-12><a id=__codelineno-15-12 name=__codelineno-15-12></a>
+</span><span id=__span-15-13><a id=__codelineno-15-13 name=__codelineno-15-13></a>    <span class=k>def</span><span class=w> </span><span class=nf>add_sample</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>ppg_value</span><span class=p>,</span> <span class=n>acc_value</span><span class=o>=</span><span class=kc>None</span><span class=p>):</span>
+</span><span id=__span-15-14><a id=__codelineno-15-14 name=__codelineno-15-14></a><span class=w>        </span><span class=sd>&quot;&quot;&quot;添加新样本&quot;&quot;&quot;</span>
+</span><span id=__span-15-15><a id=__codelineno-15-15 name=__codelineno-15-15></a>        <span class=bp>self</span><span class=o>.</span><span class=n>ppg_buffer</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>ppg_value</span><span class=p>)</span>
+</span><span id=__span-15-16><a id=__codelineno-15-16 name=__codelineno-15-16></a>        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>ppg_buffer</span><span class=p>)</span> <span class=o>&gt;</span> <span class=bp>self</span><span class=o>.</span><span class=n>buffer_size</span><span class=p>:</span>
+</span><span id=__span-15-17><a id=__codelineno-15-17 name=__codelineno-15-17></a>            <span class=bp>self</span><span class=o>.</span><span class=n>ppg_buffer</span><span class=o>.</span><span class=n>pop</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span><span id=__span-15-18><a id=__codelineno-15-18 name=__codelineno-15-18></a>
+</span><span id=__span-15-19><a id=__codelineno-15-19 name=__codelineno-15-19></a>        <span class=c1># 每10秒计算一次</span>
+</span><span id=__span-15-20><a id=__codelineno-15-20 name=__codelineno-15-20></a>        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>ppg_buffer</span><span class=p>)</span> <span class=o>&gt;=</span> <span class=bp>self</span><span class=o>.</span><span class=n>buffer_size</span><span class=p>:</span>
+</span><span id=__span-15-21><a id=__codelineno-15-21 name=__codelineno-15-21></a>            <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>calculate_hr</span><span class=p>()</span>
+</span><span id=__span-15-22><a id=__codelineno-15-22 name=__codelineno-15-22></a>        <span class=k>return</span> <span class=kc>None</span>
+</span><span id=__span-15-23><a id=__codelineno-15-23 name=__codelineno-15-23></a>
+</span><span id=__span-15-24><a id=__codelineno-15-24 name=__codelineno-15-24></a>    <span class=k>def</span><span class=w> </span><span class=nf>calculate_hr</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span><span id=__span-15-25><a id=__codelineno-15-25 name=__codelineno-15-25></a><span class=w>        </span><span class=sd>&quot;&quot;&quot;计算心率&quot;&quot;&quot;</span>
+</span><span id=__span-15-26><a id=__codelineno-15-26 name=__codelineno-15-26></a>        <span class=n>signal</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>ppg_buffer</span><span class=p>)</span>
+</span><span id=__span-15-27><a id=__codelineno-15-27 name=__codelineno-15-27></a>
+</span><span id=__span-15-28><a id=__codelineno-15-28 name=__codelineno-15-28></a>        <span class=c1># 1. 预处理</span>
+</span><span id=__span-15-29><a id=__codelineno-15-29 name=__codelineno-15-29></a>        <span class=n>signal</span> <span class=o>=</span> <span class=n>signal</span> <span class=o>-</span> <span class=n>np</span><span class=o>.</span><span class=n>mean</span><span class=p>(</span><span class=n>signal</span><span class=p>)</span>
+</span><span id=__span-15-30><a id=__codelineno-15-30 name=__codelineno-15-30></a>        <span class=n>b</span><span class=p>,</span> <span class=n>a</span> <span class=o>=</span> <span class=n>butter</span><span class=p>(</span><span class=mi>4</span><span class=p>,</span> <span class=p>[</span><span class=mf>0.5</span><span class=o>/</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>fs</span><span class=o>/</span><span class=mi>2</span><span class=p>),</span> <span class=mf>4.0</span><span class=o>/</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>fs</span><span class=o>/</span><span class=mi>2</span><span class=p>)],</span> <span class=n>btype</span><span class=o>=</span><span class=s1>&#39;band&#39;</span><span class=p>)</span>
+</span><span id=__span-15-31><a id=__codelineno-15-31 name=__codelineno-15-31></a>        <span class=n>signal</span> <span class=o>=</span> <span class=n>filtfilt</span><span class=p>(</span><span class=n>b</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>signal</span><span class=p>)</span>
+</span><span id=__span-15-32><a id=__codelineno-15-32 name=__codelineno-15-32></a>
+</span><span id=__span-15-33><a id=__codelineno-15-33 name=__codelineno-15-33></a>        <span class=c1># 2. 峰值检测</span>
+</span><span id=__span-15-34><a id=__codelineno-15-34 name=__codelineno-15-34></a>        <span class=n>peaks</span><span class=p>,</span> <span class=n>_</span> <span class=o>=</span> <span class=n>find_peaks</span><span class=p>(</span>
+</span><span id=__span-15-35><a id=__codelineno-15-35 name=__codelineno-15-35></a>            <span class=n>signal</span><span class=p>,</span> 
+</span><span id=__span-15-36><a id=__codelineno-15-36 name=__codelineno-15-36></a>            <span class=n>height</span><span class=o>=</span><span class=mf>0.3</span><span class=p>,</span>
+</span><span id=__span-15-37><a id=__codelineno-15-37 name=__codelineno-15-37></a>            <span class=n>distance</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>fs</span><span class=o>*</span><span class=mf>0.3</span>
+</span><span id=__span-15-38><a id=__codelineno-15-38 name=__codelineno-15-38></a>        <span class=p>)</span>
+</span><span id=__span-15-39><a id=__codelineno-15-39 name=__codelineno-15-39></a>
+</span><span id=__span-15-40><a id=__codelineno-15-40 name=__codelineno-15-40></a>        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>peaks</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>2</span><span class=p>:</span>
+</span><span id=__span-15-41><a id=__codelineno-15-41 name=__codelineno-15-41></a>            <span class=k>return</span> <span class=kc>None</span>
+</span><span id=__span-15-42><a id=__codelineno-15-42 name=__codelineno-15-42></a>
+</span><span id=__span-15-43><a id=__codelineno-15-43 name=__codelineno-15-43></a>        <span class=c1># 3. 计算心率</span>
+</span><span id=__span-15-44><a id=__codelineno-15-44 name=__codelineno-15-44></a>        <span class=n>rr_intervals</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>diff</span><span class=p>(</span><span class=n>peaks</span><span class=p>)</span> <span class=o>/</span> <span class=bp>self</span><span class=o>.</span><span class=n>fs</span>
+</span><span id=__span-15-45><a id=__codelineno-15-45 name=__codelineno-15-45></a>        <span class=n>hr</span> <span class=o>=</span> <span class=mf>60.0</span> <span class=o>/</span> <span class=n>np</span><span class=o>.</span><span class=n>mean</span><span class=p>(</span><span class=n>rr_intervals</span><span class=p>)</span>
+</span><span id=__span-15-46><a id=__codelineno-15-46 name=__codelineno-15-46></a>
+</span><span id=__span-15-47><a id=__codelineno-15-47 name=__codelineno-15-47></a>        <span class=k>return</span> <span class=n>hr</span>
+</span><span id=__span-15-48><a id=__codelineno-15-48 name=__codelineno-15-48></a>
+</span><span id=__span-15-49><a id=__codelineno-15-49 name=__codelineno-15-49></a><span class=c1># 使用</span>
+</span><span id=__span-15-50><a id=__codelineno-15-50 name=__codelineno-15-50></a><span class=n>monitor</span> <span class=o>=</span> <span class=n>HeartRateMonitor</span><span class=p>(</span><span class=n>fs</span><span class=o>=</span><span class=mi>25</span><span class=p>)</span>
+</span><span id=__span-15-51><a id=__codelineno-15-51 name=__codelineno-15-51></a><span class=k>for</span> <span class=n>ppg_sample</span> <span class=ow>in</span> <span class=n>sensor_data</span><span class=p>:</span>
+</span><span id=__span-15-52><a id=__codelineno-15-52 name=__codelineno-15-52></a>    <span class=n>hr</span> <span class=o>=</span> <span class=n>monitor</span><span class=o>.</span><span class=n>add_sample</span><span class=p>(</span><span class=n>ppg_sample</span><span class=p>)</span>
+</span><span id=__span-15-53><a id=__codelineno-15-53 name=__codelineno-15-53></a>    <span class=k>if</span> <span class=n>hr</span><span class=p>:</span>
+</span><span id=__span-15-54><a id=__codelineno-15-54 name=__codelineno-15-54></a>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;心率: </span><span class=si>{</span><span class=n>hr</span><span class=si>:</span><span class=s2>.0f</span><span class=si>}</span><span class=s2> BPM&quot;</span><span class=p>)</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=142>14.2 步数检测算法<a class=headerlink href=#142 title="Permanent link">&para;</a></h3> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1> 1</a></span>
+<span class=normal><a href=#__codelineno-16-2> 2</a></span>
+<span class=normal><a href=#__codelineno-16-3> 3</a></span>
+<span class=normal><a href=#__codelineno-16-4> 4</a></span>
+<span class=normal><a href=#__codelineno-16-5> 5</a></span>
+<span class=normal><a href=#__codelineno-16-6> 6</a></span>
+<span class=normal><a href=#__codelineno-16-7> 7</a></span>
+<span class=normal><a href=#__codelineno-16-8> 8</a></span>
+<span class=normal><a href=#__codelineno-16-9> 9</a></span>
+<span class=normal><a href=#__codelineno-16-10>10</a></span>
+<span class=normal><a href=#__codelineno-16-11>11</a></span>
+<span class=normal><a href=#__codelineno-16-12>12</a></span>
+<span class=normal><a href=#__codelineno-16-13>13</a></span>
+<span class=normal><a href=#__codelineno-16-14>14</a></span>
+<span class=normal><a href=#__codelineno-16-15>15</a></span>
+<span class=normal><a href=#__codelineno-16-16>16</a></span>
+<span class=normal><a href=#__codelineno-16-17>17</a></span>
+<span class=normal><a href=#__codelineno-16-18>18</a></span>
+<span class=normal><a href=#__codelineno-16-19>19</a></span>
+<span class=normal><a href=#__codelineno-16-20>20</a></span>
+<span class=normal><a href=#__codelineno-16-21>21</a></span>
+<span class=normal><a href=#__codelineno-16-22>22</a></span>
+<span class=normal><a href=#__codelineno-16-23>23</a></span>
+<span class=normal><a href=#__codelineno-16-24>24</a></span>
+<span class=normal><a href=#__codelineno-16-25>25</a></span>
+<span class=normal><a href=#__codelineno-16-26>26</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><a id=__codelineno-16-1 name=__codelineno-16-1></a><span class=k>def</span><span class=w> </span><span class=nf>count_steps</span><span class=p>(</span><span class=n>acc_data</span><span class=p>,</span> <span class=n>fs</span><span class=o>=</span><span class=mi>25</span><span class=p>):</span>
+</span><span id=__span-16-2><a id=__codelineno-16-2 name=__codelineno-16-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-16-3><a id=__codelineno-16-3 name=__codelineno-16-3></a><span class=sd>    简易步数统计算法</span>
+</span><span id=__span-16-4><a id=__codelineno-16-4 name=__codelineno-16-4></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-16-5><a id=__codelineno-16-5 name=__codelineno-16-5></a>    <span class=c1># 1. 计算合加速度</span>
+</span><span id=__span-16-6><a id=__codelineno-16-6 name=__codelineno-16-6></a>    <span class=n>acc_mag</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>sqrt</span><span class=p>(</span>
+</span><span id=__span-16-7><a id=__codelineno-16-7 name=__codelineno-16-7></a>        <span class=n>acc_data</span><span class=p>[:,</span> <span class=mi>0</span><span class=p>]</span><span class=o>**</span><span class=mi>2</span> <span class=o>+</span> 
+</span><span id=__span-16-8><a id=__codelineno-16-8 name=__codelineno-16-8></a>        <span class=n>acc_data</span><span class=p>[:,</span> <span class=mi>1</span><span class=p>]</span><span class=o>**</span><span class=mi>2</span> <span class=o>+</span> 
+</span><span id=__span-16-9><a id=__codelineno-16-9 name=__codelineno-16-9></a>        <span class=n>acc_data</span><span class=p>[:,</span> <span class=mi>2</span><span class=p>]</span><span class=o>**</span><span class=mi>2</span>
+</span><span id=__span-16-10><a id=__codelineno-16-10 name=__codelineno-16-10></a>    <span class=p>)</span>
+</span><span id=__span-16-11><a id=__codelineno-16-11 name=__codelineno-16-11></a>
+</span><span id=__span-16-12><a id=__codelineno-16-12 name=__codelineno-16-12></a>    <span class=c1># 2. 去除重力加速度</span>
+</span><span id=__span-16-13><a id=__codelineno-16-13 name=__codelineno-16-13></a>    <span class=n>acc_mag</span> <span class=o>=</span> <span class=n>acc_mag</span> <span class=o>-</span> <span class=mf>1.0</span>  <span class=c1># 1g = 9.8m/s²</span>
+</span><span id=__span-16-14><a id=__codelineno-16-14 name=__codelineno-16-14></a>
+</span><span id=__span-16-15><a id=__codelineno-16-15 name=__codelineno-16-15></a>    <span class=c1># 3. 带通滤波（0.5-3Hz，对应步行频率）</span>
+</span><span id=__span-16-16><a id=__codelineno-16-16 name=__codelineno-16-16></a>    <span class=n>b</span><span class=p>,</span> <span class=n>a</span> <span class=o>=</span> <span class=n>butter</span><span class=p>(</span><span class=mi>4</span><span class=p>,</span> <span class=p>[</span><span class=mf>0.5</span><span class=o>/</span><span class=p>(</span><span class=n>fs</span><span class=o>/</span><span class=mi>2</span><span class=p>),</span> <span class=mf>3.0</span><span class=o>/</span><span class=p>(</span><span class=n>fs</span><span class=o>/</span><span class=mi>2</span><span class=p>)],</span> <span class=n>btype</span><span class=o>=</span><span class=s1>&#39;band&#39;</span><span class=p>)</span>
+</span><span id=__span-16-17><a id=__codelineno-16-17 name=__codelineno-16-17></a>    <span class=n>filtered</span> <span class=o>=</span> <span class=n>filtfilt</span><span class=p>(</span><span class=n>b</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>acc_mag</span><span class=p>)</span>
+</span><span id=__span-16-18><a id=__codelineno-16-18 name=__codelineno-16-18></a>
+</span><span id=__span-16-19><a id=__codelineno-16-19 name=__codelineno-16-19></a>    <span class=c1># 4. 峰值检测（每一步对应一个波峰）</span>
+</span><span id=__span-16-20><a id=__codelineno-16-20 name=__codelineno-16-20></a>    <span class=n>peaks</span><span class=p>,</span> <span class=n>_</span> <span class=o>=</span> <span class=n>find_peaks</span><span class=p>(</span>
+</span><span id=__span-16-21><a id=__codelineno-16-21 name=__codelineno-16-21></a>        <span class=n>filtered</span><span class=p>,</span> 
+</span><span id=__span-16-22><a id=__codelineno-16-22 name=__codelineno-16-22></a>        <span class=n>height</span><span class=o>=</span><span class=mf>0.1</span><span class=p>,</span>
+</span><span id=__span-16-23><a id=__codelineno-16-23 name=__codelineno-16-23></a>        <span class=n>distance</span><span class=o>=</span><span class=n>fs</span><span class=o>*</span><span class=mf>0.3</span>  <span class=c1># 最小间隔300ms</span>
+</span><span id=__span-16-24><a id=__codelineno-16-24 name=__codelineno-16-24></a>    <span class=p>)</span>
+</span><span id=__span-16-25><a id=__codelineno-16-25 name=__codelineno-16-25></a>
+</span><span id=__span-16-26><a id=__codelineno-16-26 name=__codelineno-16-26></a>    <span class=k>return</span> <span class=nb>len</span><span class=p>(</span><span class=n>peaks</span><span class=p>)</span>
+</span></code></pre></div></td></tr></table></div> <hr> <p><strong>写在最后</strong>：</p> <p>智能手表的健康算法，是<strong>光学、信号处理、机器学习、生理学</strong>的完美结合。你手腕上那块小小的设备，其实是一个微型的"健康实验室"。</p> <p><strong>记住这些核心要点</strong>： 1. PPG通过光的反射测心率和血氧 2. 加速度计负责计步、睡眠和跌倒检测 3. 算法需要消除运动干扰才能准确 4. 深度学习正在取代传统规则算法 5. 手表数据仅供参考，不能替代医疗设备</p> <p>下次当你的手表提醒你"昨晚深睡只有1小时"时，你会心一笑：我知道这背后有多少算法在为你工作！</p> <hr> <hr> <h2 id=_14>附录：常用缩写对照表<a class=headerlink href=#_14 title="Permanent link">&para;</a></h2> <table> <thead> <tr> <th>缩写</th> <th>全称</th> <th>中文</th> </tr> </thead> <tbody> <tr> <td>PPG</td> <td>Photoplethysmography</td> <td>光电容积脉搏波</td> </tr> <tr> <td>ACC</td> <td>Accelerometer</td> <td>加速度计</td> </tr> <tr> <td>GYRO</td> <td>Gyroscope</td> <td>陀螺仪</td> </tr> <tr> <td>SpO2</td> <td>Peripheral Oxygen Saturation</td> <td>血氧饱和度</td> </tr> <tr> <td>HRV</td> <td>Heart Rate Variability</td> <td>心率变异性</td> </tr> <tr> <td>BPM</td> <td>Beats Per Minute</td> <td>每分钟心跳数</td> </tr> <tr> <td>PTT</td> <td>Pulse Transit Time</td> <td>脉搏波传导时间</td> </tr> <tr> <td>BMR</td> <td>Basal Metabolic Rate</td> <td>基础代谢率</td> </tr> <tr> <td>MET</td> <td>Metabolic Equivalent</td> <td>代谢当量</td> </tr> <tr> <td>ECG</td> <td>Electrocardiogram</td> <td>心电图</td> </tr> <tr> <td>EDA</td> <td>Electrodermal Activity</td> <td>皮肤电活动</td> </tr> <tr> <td>RMSSD</td> <td>Root Mean Square of Successive Differences</td> <td>相邻RR间期差均方根</td> </tr> <tr> <td>SDNN</td> <td>Standard Deviation of NN intervals</td> <td>RR间期标准差</td> </tr> </tbody> </table> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> </div> <div class=md-social> <a href=https://github.com/deep2code target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://linkedin.com/in/deep2code target=_blank rel=noopener title=linkedin.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg> </a> <a href=https://twitter.com/deep2code target=_blank rel=noopener title=twitter.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.select", "content.code.annotate", "content.tabs.link", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script> <script src=../../assets/javascripts/bundle.79ae519e.min.js></script> <script src=https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js></script> <script src=../../assets/js/code-block.js></script> <script src=../../assets/js/custom.js></script> </body> </html>

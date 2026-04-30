@@ -1,0 +1,354 @@
+<!doctype html><html lang=en class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="20+年资深程序员的技术知识库 | Go、Python、AI、DevOps"><meta name=author content=deep2code><link href=https://deep2code.github.io/note/protocols/IPv8/ rel=canonical><link href=../RTSP%E5%8D%8F%E8%AE%AE/ rel=prev><link href=../../database/ rel=next><link rel=icon href=../../assets/images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.7.6"><title>IPv8 - note</title><link rel=stylesheet href=../../assets/stylesheets/main.484c7ddc.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.ab4e12ef.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style><link rel=stylesheet href=../../assets/css/code-block.css><link rel=stylesheet href=../../assets/css/custom.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=deep-purple data-md-color-accent=amber> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#ipv8 class=md-skip> Skip to content </a> </div> <div data-md-component=announce> </div> <header class="md-header md-header--shadow" data-md-component=header> <nav class="md-header__inner md-grid" aria-label=Header> <a href=../.. title=note class="md-header__button md-logo" aria-label=note data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> note </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> IPv8 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=deep-purple data-md-color-accent=amber aria-label="Switch to dark mode" type=radio name=__palette id=__palette_0> <label class="md-header__button md-icon" title="Switch to dark mode" for=__palette_1 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg> </label> <input class=md-option data-md-color-media data-md-color-scheme=slate data-md-color-primary=deep-purple data-md-color-accent=amber aria-label="Switch to light mode" type=radio name=__palette id=__palette_1> <label class="md-header__button md-icon" title="Switch to light mode" for=__palette_0 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg> </label> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=Search placeholder=Search autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=Search> <a href=javascript:void(0) class="md-search__icon md-icon" title=Share aria-label=Share data-clipboard data-clipboard-text data-md-component=search-share tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg> </a> <button type=reset class="md-search__icon md-icon" title=Clear aria-label=Clear tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> Initializing search </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> <div class=md-header__source> <a href=https://github.com/deep2code/note title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </div> <div class=md-source__repository> deep2code/note </div> </a> </div> </nav> </header> <div class=md-container data-md-component=container> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--integrated" aria-label=Navigation data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../.. title=note class="md-nav__button md-logo" aria-label=note data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> note </label> <div class=md-nav__source> <a href=https://github.com/deep2code/note title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </div> <div class=md-source__repository> deep2code/note </div> </a> </div> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../.. class=md-nav__link> <span class=md-ellipsis> Home </span> </a> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2> <label class=md-nav__link for=__nav_2 id=__nav_2_label tabindex> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2> <span class="md-nav__icon md-icon"></span> 编程语言 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1> <label class=md-nav__link for=__nav_2_1 id=__nav_2_1_label tabindex=0> <span class=md-ellipsis> Go </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_2_1_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1> <span class="md-nav__icon md-icon"></span> Go </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_1> <label class=md-nav__link for=__nav_2_1_1 id=__nav_2_1_1_label tabindex=0> <span class=md-ellipsis> 标准库 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_1_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_1> <span class="md-nav__icon md-icon"></span> 标准库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/go/01-fmt-%E6%A0%BC%E5%BC%8F%E5%8C%96IO/ class=md-nav__link> <span class=md-ellipsis> fmt </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/02-errors-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> errors </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/03-strings-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> strings </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/04-bytes-%E5%AD%97%E8%8A%82%E5%88%87%E7%89%87%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> bytes </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/05-strconv-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2/ class=md-nav__link> <span class=md-ellipsis> strconv </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/06-context-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> context </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/07-sync-%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD/ class=md-nav__link> <span class=md-ellipsis> sync </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/08-sync-atomic-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> atomic </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/09-io-IO%E6%8E%A5%E5%8F%A3/ class=md-nav__link> <span class=md-ellipsis> io </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/10-os-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/ class=md-nav__link> <span class=md-ellipsis> os </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_2> <label class=md-nav__link for=__nav_2_1_2 id=__nav_2_1_2_label tabindex=0> <span class=md-ellipsis> 框架 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_2> <span class="md-nav__icon md-icon"></span> 框架 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/go/frameworks/Gin%E6%A1%86%E6%9E%B6Context/ class=md-nav__link> <span class=md-ellipsis> Gin </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/GORM-ORM%E5%BA%93/ class=md-nav__link> <span class=md-ellipsis> GORM </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/grpc%20RPC%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> gRPC </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/Echo%E6%A1%86%E6%9E%B6Web%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Echo </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/go-zero%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> go-zero </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_3> <label class=md-nav__link for=__nav_2_1_3 id=__nav_2_1_3_label tabindex=0> <span class=md-ellipsis> 进阶 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_3_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_3> <span class="md-nav__icon md-icon"></span> 进阶 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80Map/ class=md-nav__link> <span class=md-ellipsis> Map </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80Struct/ class=md-nav__link> <span class=md-ellipsis> Struct </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80GORM/ class=md-nav__link> <span class=md-ellipsis> GORM进阶 </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80HTTPS%E5%85%A8%E6%96%B9%E4%BD%8D/ class=md-nav__link> <span class=md-ellipsis> HTTPS </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Golang%E7%A8%8B%E5%BA%8F%E5%91%98%E5%8F%91%E5%B1%95%E4%B9%8B%E8%B7%AF/ class=md-nav__link> <span class=md-ellipsis> 职业发展 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_2> <label class=md-nav__link for=__nav_2_2 id=__nav_2_2_label tabindex=0> <span class=md-ellipsis> Python </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_2_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2_2> <span class="md-nav__icon md-icon"></span> Python </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/python/01_Requests%E5%BA%93/ class=md-nav__link> <span class=md-ellipsis> Requests </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/02_Pandas%E6%95%B0%E6%8D%AE/ class=md-nav__link> <span class=md-ellipsis> Pandas </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/03_NumPy%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/ class=md-nav__link> <span class=md-ellipsis> NumPy </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/04_Django_Web%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Django </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/05_Flask%E5%BE%AE%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Flask </span> </a> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_2_6> <label class=md-nav__link for=__nav_2_2_6 id=__nav_2_2_6_label tabindex=0> <span class=md-ellipsis> 标准库 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_2_6_label aria-expanded=false> <label class=md-nav__title for=__nav_2_2_6> <span class="md-nav__icon md-icon"></span> 标准库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/python/collections%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> collections </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/datetime%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> datetime </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/json%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> json </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/os%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> os </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/pathlib%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> pathlib </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3> <div class="md-nav__link md-nav__container"> <a href=../../AI/ class="md-nav__link "> <span class=md-ellipsis> AI </span> </a> <label class="md-nav__link " for=__nav_3 id=__nav_3_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_3_label aria-expanded=false> <label class=md-nav__title for=__nav_3> <span class="md-nav__icon md-icon"></span> AI </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_2> <label class=md-nav__link for=__nav_3_2 id=__nav_3_2_label tabindex=0> <span class=md-ellipsis> 大模型 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_2_label aria-expanded=false> <label class=md-nav__title for=__nav_3_2> <span class="md-nav__icon md-icon"></span> 大模型 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/ class=md-nav__link> <span class=md-ellipsis> 入门指南 </span> </a> </li> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8B/ class=md-nav__link> <span class=md-ellipsis> 基础 </span> </a> </li> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B8%B8%E8%AF%86/ class=md-nav__link> <span class=md-ellipsis> 常识 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_3> <label class=md-nav__link for=__nav_3_3 id=__nav_3_3_label tabindex=0> <span class=md-ellipsis> 进阶 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_3_label aria-expanded=false> <label class=md-nav__title for=__nav_3_3> <span class="md-nav__icon md-icon"></span> 进阶 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8BAgent/ class=md-nav__link> <span class=md-ellipsis> Agent </span> </a> </li> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8BSkill/ class=md-nav__link> <span class=md-ellipsis> Skill </span> </a> </li> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%80%9D%E7%BB%B4%E9%93%BECoT/ class=md-nav__link> <span class=md-ellipsis> CoT </span> </a> </li> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%BB%E5%8A%A8%E5%88%9B%E9%80%A0%E7%AE%97%E6%B3%95/ class=md-nav__link> <span class=md-ellipsis> 主动创造 </span> </a> </li> <li class=md-nav__item> <a href=../../AI/AutoGen/ class=md-nav__link> <span class=md-ellipsis> AutoGen </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_4> <label class=md-nav__link for=__nav_3_4 id=__nav_3_4_label tabindex=0> <span class=md-ellipsis> 算法 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_4_label aria-expanded=false> <label class=md-nav__title for=__nav_3_4> <span class="md-nav__icon md-icon"></span> 算法 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../AI/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95/ class=md-nav__link> <span class=md-ellipsis> 线性回归 </span> </a> </li> <li class=md-nav__item> <a href=../../AI/%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E8%BF%9B%E5%8C%96%E5%8F%B2/ class=md-nav__link> <span class=md-ellipsis> 推荐算法 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_5> <label class=md-nav__link for=__nav_3_5 id=__nav_3_5_label tabindex=0> <span class=md-ellipsis> 其他 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_5_label aria-expanded=false> <label class=md-nav__title for=__nav_3_5> <span class="md-nav__icon md-icon"></span> 其他 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../AI/RAG%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/ class=md-nav__link> <span class=md-ellipsis> RAG技术 </span> </a> </li> <li class=md-nav__item> <a href=../../AI/OpenAI_Agents_SDK_Guide/ class=md-nav__link> <span class=md-ellipsis> OpenAI SDK </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_4 checked> <div class="md-nav__link md-nav__container"> <a href=../ class="md-nav__link "> <span class=md-ellipsis> 网络协议 </span> </a> <label class="md-nav__link " for=__nav_4 id=__nav_4_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_4_label aria-expanded=true> <label class=md-nav__title for=__nav_4> <span class="md-nav__icon md-icon"></span> 网络协议 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_2> <label class=md-nav__link for=__nav_4_2 id=__nav_4_2_label tabindex=0> <span class=md-ellipsis> HTTP </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_2_label aria-expanded=false> <label class=md-nav__title for=__nav_4_2> <span class="md-nav__icon md-icon"></span> HTTP </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../HTTP2%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> HTTP/2 </span> </a> </li> <li class=md-nav__item> <a href=../HTTP-3%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> HTTP/3 </span> </a> </li> <li class=md-nav__item> <a href=../HTTPS/ class=md-nav__link> <span class=md-ellipsis> HTTPS </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_3> <label class=md-nav__link for=__nav_4_3 id=__nav_4_3_label tabindex=0> <span class=md-ellipsis> RPC </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_3_label aria-expanded=false> <label class=md-nav__title for=__nav_4_3> <span class="md-nav__icon md-icon"></span> RPC </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../gRPC/ class=md-nav__link> <span class=md-ellipsis> gRPC </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--active md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_4_4 checked> <label class=md-nav__link for=__nav_4_4 id=__nav_4_4_label tabindex=0> <span class=md-ellipsis> 其他 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_4_label aria-expanded=true> <label class=md-nav__title for=__nav_4_4> <span class="md-nav__icon md-icon"></span> 其他 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../RTSP%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> RTSP </span> </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> <span class=md-ellipsis> IPv8 </span> <span class="md-nav__icon md-icon"></span> </label> <a href=./ class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> IPv8 </span> </a> <nav class="md-nav md-nav--secondary" aria-label="Table of contents"> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> Table of contents </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_1 class=md-nav__link> <span class=md-ellipsis> 引言：为什么我们需要重新思考互联网协议？ </span> </a> </li> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 第一部分：互联网协议的演进之痛 </span> </a> <nav class=md-nav aria-label=第一部分：互联网协议的演进之痛> <ul class=md-nav__list> <li class=md-nav__item> <a href=#11-ipv4ipv6 class=md-nav__link> <span class=md-ellipsis> 1.1 从IPv4到IPv6：一场未完成的革命 </span> </a> </li> <li class=md-nav__item> <a href=#12 class=md-nav__link> <span class=md-ellipsis> 1.2 被忽视的结构性问题 </span> </a> </li> <li class=md-nav__item> <a href=#13-ipv8 class=md-nav__link> <span class=md-ellipsis> 1.3 IPv8的设计哲学 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#ipv8_1 class=md-nav__link> <span class=md-ellipsis> 第二部分：IPv8的核心架构 </span> </a> <nav class=md-nav aria-label=第二部分：IPv8的核心架构> <ul class=md-nav__list> <li class=md-nav__item> <a href=#21-64 class=md-nav__link> <span class=md-ellipsis> 2.1 64位地址空间：平衡的艺术 </span> </a> </li> <li class=md-nav__item> <a href=#22-rrrrnnnn class=md-nav__link> <span class=md-ellipsis> 2.2 地址格式：r.r.r.r.n.n.n.n </span> </a> </li> <li class=md-nav__item> <a href=#23 class=md-nav__link> <span class=md-ellipsis> 2.3 报文头格式：向后兼容的进化 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#zone-server class=md-nav__link> <span class=md-ellipsis> 第三部分：Zone Server——统一管理的革命 </span> </a> <nav class=md-nav aria-label="第三部分：Zone Server——统一管理的革命"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#31 class=md-nav__link> <span class=md-ellipsis> 3.1 网络管理的碎片化困境 </span> </a> </li> <li class=md-nav__item> <a href=#32-zone-server class=md-nav__link> <span class=md-ellipsis> 3.2 Zone Server：一站式网络服务平台 </span> </a> </li> <li class=md-nav__item> <a href=#33-oauth2-jwt class=md-nav__link> <span class=md-ellipsis> 3.3 OAuth2 JWT：统一的身份与认证 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 第四部分：地址空间与路由架构 </span> </a> <nav class=md-nav aria-label=第四部分：地址空间与路由架构> <ul class=md-nav__list> <li class=md-nav__item> <a href=#41 class=md-nav__link> <span class=md-ellipsis> 4.1 地址类别全景图 </span> </a> </li> <li class=md-nav__item> <a href=#42-1270008 class=md-nav__link> <span class=md-ellipsis> 4.2 内部区域前缀：127.0.0.0/8 </span> </a> </li> <li class=md-nav__item> <a href=#43-12712700 class=md-nav__link> <span class=md-ellipsis> 4.3 公司间互操作：127.127.0.0 </span> </a> </li> <li class=md-nav__item> <a href=#44 class=md-nav__link> <span class=md-ellipsis> 4.4 路由表结构性限制 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 第五部分：安全架构——协议层面的防护 </span> </a> <nav class=md-nav aria-label=第五部分：安全架构——协议层面的防护> <ul class=md-nav__list> <li class=md-nav__item> <a href=#51-acl8 class=md-nav__link> <span class=md-ellipsis> 5.1 东西向安全：ACL8区域隔离 </span> </a> </li> <li class=md-nav__item> <a href=#52-egress class=md-nav__link> <span class=md-ellipsis> 5.2 南北向安全： egress验证 </span> </a> </li> <li class=md-nav__item> <a href=#53-bgp8-whois8 class=md-nav__link> <span class=md-ellipsis> 5.3 全球路由安全：BGP8 + WHOIS8 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#cost-factor class=md-nav__link> <span class=md-ellipsis> 第六部分：Cost Factor——智能路由的新范式 </span> </a> <nav class=md-nav aria-label="第六部分：Cost Factor——智能路由的新范式"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#61 class=md-nav__link> <span class=md-ellipsis> 6.1 统一的路径质量度量 </span> </a> </li> <li class=md-nav__item> <a href=#62-cf class=md-nav__link> <span class=md-ellipsis> 6.2 CF的突破性特性 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_5 class=md-nav__link> <span class=md-ellipsis> 第七部分：过渡与兼容性 </span> </a> <nav class=md-nav aria-label=第七部分：过渡与兼容性> <ul class=md-nav__list> <li class=md-nav__item> <a href=#71-ipv4 class=md-nav__link> <span class=md-ellipsis> 7.1 IPv4作为真子集 </span> </a> </li> <li class=md-nav__item> <a href=#72-8to4 class=md-nav__link> <span class=md-ellipsis> 7.2 8to4隧道 </span> </a> </li> <li class=md-nav__item> <a href=#73 class=md-nav__link> <span class=md-ellipsis> 7.3 独立过渡阶段 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#ipv8_2 class=md-nav__link> <span class=md-ellipsis> 第八部分：批判性思考——IPv8的挑战与争议 </span> </a> <nav class=md-nav aria-label=第八部分：批判性思考——IPv8的挑战与争议> <ul class=md-nav__list> <li class=md-nav__item> <a href=#81 class=md-nav__link> <span class=md-ellipsis> 8.1 设计选择的权衡 </span> </a> </li> <li class=md-nav__item> <a href=#82-ipv6 class=md-nav__link> <span class=md-ellipsis> 8.2 与IPv6的关系 </span> </a> </li> <li class=md-nav__item> <a href=#83 class=md-nav__link> <span class=md-ellipsis> 8.3 社区的不同声音 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_6 class=md-nav__link> <span class=md-ellipsis> 第九部分：未来展望 </span> </a> <nav class=md-nav aria-label=第九部分：未来展望> <ul class=md-nav__list> <li class=md-nav__item> <a href=#91 class=md-nav__link> <span class=md-ellipsis> 9.1 技术发展的可能路径 </span> </a> </li> <li class=md-nav__item> <a href=#92 class=md-nav__link> <span class=md-ellipsis> 9.2 对网络工程师的意义 </span> </a> </li> <li class=md-nav__item> <a href=#93 class=md-nav__link> <span class=md-ellipsis> 9.3 对架构师的启示 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_5> <div class="md-nav__link md-nav__container"> <a href=../../database/ class="md-nav__link "> <span class=md-ellipsis> 数据库 </span> </a> <label class="md-nav__link " for=__nav_5 id=__nav_5_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_5_label aria-expanded=false> <label class=md-nav__title for=__nav_5> <span class="md-nav__icon md-icon"></span> 数据库 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_5_2> <label class=md-nav__link for=__nav_5_2 id=__nav_5_2_label tabindex=0> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_5_2_label aria-expanded=false> <label class=md-nav__title for=__nav_5_2> <span class="md-nav__icon md-icon"></span> MySQL </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../database/MySQLB%2B%E6%A0%91/ class=md-nav__link> <span class=md-ellipsis> B+树 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6> <div class="md-nav__link md-nav__container"> <a href=../../tools/ class="md-nav__link "> <span class=md-ellipsis> 开发工具 </span> </a> <label class="md-nav__link " for=__nav_6 id=__nav_6_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_6_label aria-expanded=false> <label class=md-nav__title for=__nav_6> <span class="md-nav__icon md-icon"></span> 开发工具 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_2> <label class=md-nav__link for=__nav_6_2 id=__nav_6_2_label tabindex=0> <span class=md-ellipsis> DevOps </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_2_label aria-expanded=false> <label class=md-nav__title for=__nav_6_2> <span class="md-nav__icon md-icon"></span> DevOps </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Docker/ class=md-nav__link> <span class=md-ellipsis> Docker </span> </a> </li> <li class=md-nav__item> <a href=../../tools/Kubernetes/ class=md-nav__link> <span class=md-ellipsis> Kubernetes </span> </a> </li> <li class=md-nav__item> <a href=../../tools/Linux/ class=md-nav__link> <span class=md-ellipsis> Linux </span> </a> </li> <li class=md-nav__item> <a href=../../tools/jenkins-beginner/ class=md-nav__link> <span class=md-ellipsis> Jenkins </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_3> <label class=md-nav__link for=__nav_6_3 id=__nav_6_3_label tabindex=0> <span class=md-ellipsis> Git </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_3_label aria-expanded=false> <label class=md-nav__title for=__nav_6_3> <span class="md-nav__icon md-icon"></span> Git </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/GitHub%E5%85%A5%E9%97%A8%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/ class=md-nav__link> <span class=md-ellipsis> 入门 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_4> <label class=md-nav__link for=__nav_6_4 id=__nav_6_4_label tabindex=0> <span class=md-ellipsis> 调试 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_4_label aria-expanded=false> <label class=md-nav__title for=__nav_6_4> <span class="md-nav__icon md-icon"></span> 调试 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Wireshark/ class=md-nav__link> <span class=md-ellipsis> Wireshark </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_5> <label class=md-nav__link for=__nav_6_5 id=__nav_6_5_label tabindex=0> <span class=md-ellipsis> 文档 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_5_label aria-expanded=false> <label class=md-nav__title for=__nav_6_5> <span class="md-nav__icon md-icon"></span> 文档 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Mermaid%E5%9B%BE%E8%A1%A8/ class=md-nav__link> <span class=md-ellipsis> Mermaid </span> </a> </li> <li class=md-nav__item> <a href=../../tools/PlantUML%E7%94%BB%E5%9B%BE%E7%A5%9E%E5%99%A8/ class=md-nav__link> <span class=md-ellipsis> PlantUML </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_7> <div class="md-nav__link md-nav__container"> <a href=../../science/ class="md-nav__link "> <span class=md-ellipsis> 计算机科学 </span> </a> <label class="md-nav__link " for=__nav_7 id=__nav_7_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_7_label aria-expanded=false> <label class=md-nav__title for=__nav_7> <span class="md-nav__icon md-icon"></span> 计算机科学 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../science/computer-components-complete/ class=md-nav__link> <span class=md-ellipsis> 组件 </span> </a> </li> <li class=md-nav__item> <a href=../../science/numbers-complete/ class=md-nav__link> <span class=md-ellipsis> 数字 </span> </a> </li> <li class=md-nav__item> <a href=../../science/%E5%A3%B0%E9%9F%B3%E5%8E%9F%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> 声音 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=ipv8>IPv8深度解析：下一代互联网协议的革命性设计<a class=headerlink href=#ipv8 title="Permanent link">&para;</a></h1> <blockquote> <p>当IPv6用了25年仍未完成过渡，当BGP路由表突破90万条前缀，当网络管理碎片化成为运维噩梦——IETF最新发布的IPv8草案，正在用一套颠覆性的设计理念，重新定义互联网的未来。</p> </blockquote> <hr> <h2 id=_1>引言：为什么我们需要重新思考互联网协议？<a class=headerlink href=#_1 title="Permanent link">&para;</a></h2> <p>2026年4月，IETF发布了一份名为《Internet Protocol Version 8 (IPv8)》的草案，作者是来自圣母大学的Douglas Thain教授。这份草案一经发布，便在技术社区引发了广泛讨论。</p> <p>但IPv8究竟是什么？它与IPv4、IPv6有何本质区别？更重要的是——它真的能解决困扰互联网数十年的顽疾吗？</p> <p>本文将带你由浅入深，全面解析IPv8的设计理念、技术架构和潜在影响。</p> <hr> <h2 id=_2>第一部分：互联网协议的演进之痛<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <h3 id=11-ipv4ipv6>1.1 从IPv4到IPv6：一场未完成的革命<a class=headerlink href=#11-ipv4ipv6 title="Permanent link">&para;</a></h3> <p>要理解IPv8，我们必须先回顾互联网协议的历史。</p> <pre class=mermaid><code>timeline
+    title 互联网协议演进时间线
+    1981 : IPv4 RFC 791发布
+    1995 : IPv6 RFC 1883草案
+    1998 : IPv6 RFC 2460正式标准
+    2011 : IANA IPv4地址耗尽
+    2011-2020 : 各RIR IPv4地址相继耗尽
+    2024 : BGP路由表突破90万条前缀
+    2026 : IPv8草案发布</code></pre> <p>IPv4诞生于1981年，采用32位地址空间，理论上提供约43亿个地址。在20世纪80年代，这看起来是一个天文数字。但互联网爆炸式的增长很快证明了这一设计的局限性。</p> <p>2011年2月，IANA正式宣布IPv4单播地址空间分配完毕。随后，各区域互联网注册机构（RIR）在2011年至2020年间相继耗尽了其分配的地址。</p> <p>IPv6应运而生。它将地址长度扩展到128位，提供了近乎无限的地址空间。但IPv6面临一个致命问题：<strong>过渡成本</strong>。</p> <p>IPv6采用双栈（Dual-Stack）过渡模型，要求每个设备、每个应用、每个网络同时支持IPv4和IPv6。经过25年的推广，IPv6在全球互联网流量中仍占少数。商业上不可接受的过渡成本，加上缺乏强制迁移的驱动力，使得组织可以无限期地继续使用CGNAT（运营商级网络地址转换）。</p> <h3 id=12>1.2 被忽视的结构性问题<a class=headerlink href=#12 title="Permanent link">&para;</a></h3> <p>IPv6解决了地址耗尽问题，但互联网面临的挑战远不止于此：</p> <p><strong>管理碎片化</strong>：现代网络管理是碎片化的。DHCP、DNS、NTP、syslog、SNMP、认证——这些协议在四十多年间独立制定，没有统一的身份模型，没有共同的认证机制，也没有共享的遥测格式。</p> <p><strong>路由表爆炸</strong>：BGP4全球路由表在2024年突破90万条前缀，且增长没有架构性上限。前缀去聚合（Deaggregation）是增长的主要驱动力，但没有任何协议机制能够阻止它。</p> <p><strong>安全隐患</strong>：BGP4没有将ASN通告的内容与授权通告的内容绑定。前缀劫持、路由泄露、伪造注入之所以可能，是因为没有路由所有权注册表要求边界路由器作为路由接受的条件。</p> <p><strong>东西向与南北向流量安全</strong>：东西向流量（网络内设备间通信）和南北向流量（内网到互联网的通信）缺乏协议层面的安全 enforcement，只能依赖手动配置。</p> <h3 id=13-ipv8>1.3 IPv8的设计哲学<a class=headerlink href=#13-ipv8 title="Permanent link">&para;</a></h3> <p>IPv8的设计者Douglas Thain教授提出了一组大胆的要求，一个可行的继任者协议必须满足：</p> <table> <thead> <tr> <th style="text-align: center;">需求编号</th> <th style="text-align: left;">需求描述</th> </tr> </thead> <tbody> <tr> <td style="text-align: center;">R1</td> <td style="text-align: left;">集成化管理——所有网络服务共享统一的身份、认证、遥测和服务交付机制</td> </tr> <tr> <td style="text-align: center;">R2</td> <td style="text-align: left;">单栈操作——无需双栈要求</td> </tr> <tr> <td style="text-align: center;">R3</td> <td style="text-align: left;">完全向后兼容——现有IPv4应用无需修改，IPv4是IPv8的真子集</td> </tr> <tr> <td style="text-align: center;">R4</td> <td style="text-align: left;">完全向后兼容——RFC 1918内部网络无需修改</td> </tr> <tr> <td style="text-align: center;">R5</td> <td style="text-align: left;">完全向后兼容——CGNAT部署无需修改</td> </tr> <tr> <td style="text-align: center;">R6</td> <td style="text-align: left;">大幅扩展的地址空间</td> </tr> <tr> <td style="text-align: center;">R7</td> <td style="text-align: left;">可作为软件更新实现，无需更换硬件</td> </tr> <tr> <td style="text-align: center;">R8</td> <td style="text-align: left;">人类可读的地址格式，与IPv4操作习惯一致</td> </tr> <tr> <td style="text-align: center;">R9</td> <td style="text-align: left;">东西向和南北向流量安全由协议强制执行，而非手动配置</td> </tr> <tr> <td style="text-align: center;">R10</td> <td style="text-align: left;">结构性限制的全球路由表规模</td> </tr> </tbody> </table> <p>IPv8声称满足全部十条要求。让我们深入看看它是如何做到的。</p> <hr> <h2 id=ipv8_1>第二部分：IPv8的核心架构<a class=headerlink href=#ipv8_1 title="Permanent link">&para;</a></h2> <h3 id=21-64>2.1 64位地址空间：平衡的艺术<a class=headerlink href=#21-64 title="Permanent link">&para;</a></h3> <p>IPv8采用64位地址，这是一个深思熟虑的设计选择：</p> <pre class=mermaid><code>graph LR
+    subgraph "地址长度对比"
+        A[IPv4&lt;br/&gt;32位&lt;br/&gt;4.3×10⁹地址] --&gt; B[IPv8&lt;br/&gt;64位&lt;br/&gt;1.8×10¹⁹地址]
+        B --&gt; C[IPv6&lt;br/&gt;128位&lt;br/&gt;3.4×10³⁸地址]
+    end
+    style A fill:#ffcccc
+    style B fill:#ccffcc
+    style C fill:#ccccff</code></pre> <p>为什么是64位，而不是IPv6的128位？</p> <p>IPv8的设计者认为，128位地址空间虽然"无限"，但带来了不必要的复杂性：更长的报文头、更高的处理开销、更难以人类阅读和记忆。64位提供了18,446,744,073,709,551,616（约1.8×10¹⁹）个唯一地址，这足以满足任何规模的组织需求，同时保持报文头的紧凑性。</p> <h3 id=22-rrrrnnnn>2.2 地址格式：r.r.r.r.n.n.n.n<a class=headerlink href=#22-rrrrnnnn title="Permanent link">&para;</a></h3> <p>IPv8地址采用一种优雅的分层结构：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1>1</a></span>
+<span class=normal><a href=#__codelineno-0-2>2</a></span>
+<span class=normal><a href=#__codelineno-0-3>3</a></span>
+<span class=normal><a href=#__codelineno-0-4>4</a></span>
+<span class=normal><a href=#__codelineno-0-5>5</a></span>
+<span class=normal><a href=#__codelineno-0-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>+--------------------------------------------------+
+</span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2></a>|              IPv8 地址格式 (64位)                 |
+</span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3></a>+--------------------------------------------------+
+</span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4></a>|  r.r.r.r (32位)  |  n.n.n.n (32位)               |
+</span><span id=__span-0-5><a id=__codelineno-0-5 name=__codelineno-0-5></a>|  ASN路由前缀      |  主机地址                      |
+</span><span id=__span-0-6><a id=__codelineno-0-6 name=__codelineno-0-6></a>+--------------------------------------------------+
+</span></code></pre></div></td></tr></table></div> <p>用Mermaid图表表示：</p> <pre class=mermaid><code>block-beta
+    columns 8
+    block:asn:4
+        r1["r (8位)"]
+        r2["r (8位)"]
+        r3["r (8位)"]
+        r4["r (8位)"]
+    end
+    block:host:4
+        n1["n (8位)"]
+        n2["n (8位)"]
+        n3["n (8位)"]
+        n4["n (8位)"]
+    end
+    style asn fill:#e1f5ff,stroke:#01579b
+    style host fill:#e8f5e9,stroke:#1b5e20</code></pre> <ul> <li><strong>r.r.r.r（32位）</strong>：ASN（自治系统号）路由前缀</li> <li><strong>n.n.n.n（32位）</strong>：主机地址（语义与IPv4完全相同）</li> </ul> <p>这种设计的精妙之处在于：<strong>IPv4是IPv8的真子集</strong>。当r.r.r.r = 0.0.0.0时，该地址就是一个纯IPv4地址，使用标准IPv4规则路由。这意味着：</p> <ul> <li>无需修改现有IPv4设备</li> <li>无需修改现有IPv4应用</li> <li>无需修改现有IPv4内部网络</li> </ul> <h3 id=23>2.3 报文头格式：向后兼容的进化<a class=headerlink href=#23 title="Permanent link">&para;</a></h3> <p>IPv8报文头在IPv4基础上自然扩展：</p> <pre class=mermaid><code>packet-beta
+    title IPv8 报文头结构 (24字节)
+    0-3: "版本 (4位)"
+    4-7: "IHL (4位)"
+    8-15: "服务类型 (8位)"
+    16-31: "总长度 (16位)"
+    32-47: "标识 (16位)"
+    48-50: "标志 (3位)"
+    51-63: "片偏移 (13位)"
+    64-71: "生存时间 (8位)"
+    72-79: "协议 (8位)"
+    80-95: "头部校验和 (16位)"
+    96-127: "源ASN前缀 r.r.r.r (32位)"
+    128-159: "源主机地址 n.n.n.n (32位)"
+    160-191: "目的ASN前缀 r.r.r.r (32位)"
+    192-223: "目的主机地址 n.n.n.n (32位)"</code></pre> <p>相比IPv4的20字节报文头，IPv8报文头仅增加8字节（24字节），这是IPv6 40字节报文头的60%。这种紧凑性对于减少带宽开销和提高处理效率至关重要。</p> <hr> <h2 id=zone-server>第三部分：Zone Server——统一管理的革命<a class=headerlink href=#zone-server title="Permanent link">&para;</a></h2> <h3 id=31>3.1 网络管理的碎片化困境<a class=headerlink href=#31 title="Permanent link">&para;</a></h3> <p>传统网络管理是协议的大杂烩：</p> <pre class=mermaid><code>flowchart TB
+    subgraph "传统网络管理碎片化"
+        DHCP[DHCP服务器&lt;br/&gt;地址分配]
+        DNS[DNS服务器&lt;br/&gt;域名解析]
+        NTP[NTP服务器&lt;br/&gt;时间同步]
+        SYSLOG[Syslog服务器&lt;br/&gt;日志收集]
+        SNMP[SNMP服务器&lt;br/&gt;网络监控]
+        AUTH[认证服务器&lt;br/&gt;身份管理]
+        ACL[ACL管理&lt;br/&gt;访问控制]
+    end
+
+    Device[终端设备] --&gt; DHCP
+    Device --&gt; DNS
+    Device --&gt; NTP
+    Device --&gt; SYSLOG
+    Device --&gt; SNMP
+    Device --&gt; AUTH
+    Device --&gt; ACL
+
+    style DHCP fill:#ffcccc
+    style DNS fill:#ccffcc
+    style NTP fill:#ccccff
+    style SYSLOG fill:#ffffcc
+    style SNMP fill:#ffccff
+    style AUTH fill:#ccffff
+    style ACL fill:#ffcc99</code></pre> <p>每个服务： - 独立的产品 - 独立的许可 - 独立的配置 - 独立的维护 - 没有共享的网络状态感知</p> <p>设备连接到网络后，可能需要手动配置十几个独立服务才能正常运行。安全策略不一致——某些服务需要认证，某些服务接受来自任何源的未认证请求。故障排查需要关联从未设计为协同工作的系统之间的数据。</p> <h3 id=32-zone-server>3.2 Zone Server：一站式网络服务平台<a class=headerlink href=#32-zone-server title="Permanent link">&para;</a></h3> <p>IPv8引入了<strong>Zone Server</strong>的概念——一个成对的active/active平台，运行网络段所需的每个服务：</p> <pre class=mermaid><code>flowchart TB
+    subgraph "Zone Server 统一平台"
+        ZS[Zone Server&lt;br/&gt;主/备高可用]
+
+        subgraph "核心服务"
+            DHCP8[DHCP8&lt;br/&gt;地址分配]
+            DNS8[DNS8&lt;br/&gt;域名解析]
+            NTP8[NTP8&lt;br/&gt;时间同步]
+            NetLog8[NetLog8&lt;br/&gt;遥测收集]
+            OAuth8[OAuth8&lt;br/&gt;认证缓存]
+            WHOIS8[WHOIS8&lt;br/&gt;路由验证]
+            ACL8[ACL8&lt;br/&gt;访问控制]
+            XLATE8[XLATE8&lt;br/&gt;IPv4/IPv8转换]
+        end
+    end
+
+    Device[终端设备] --&gt;|"单次DHCP8 Discover"| ZS
+    ZS --&gt; DHCP8
+    ZS --&gt; DNS8
+    ZS --&gt; NTP8
+    ZS --&gt; NetLog8
+    ZS --&gt; OAuth8
+    ZS --&gt; WHOIS8
+    ZS --&gt; ACL8
+    ZS --&gt; XLATE8
+
+    style ZS fill:#90caf9,stroke:#1565c0
+    style DHCP8 fill:#a5d6a7
+    style DNS8 fill:#a5d6a7
+    style NTP8 fill:#a5d6a7
+    style NetLog8 fill:#a5d6a7
+    style OAuth8 fill:#a5d6a7
+    style WHOIS8 fill:#a5d6a7
+    style ACL8 fill:#a5d6a7
+    style XLATE8 fill:#a5d6a7</code></pre> <p>一个设备连接到IPv8网络时，只需发送一个DHCP8 Discover报文，就能在单个响应中接收到所需的所有服务端点。无需后续的手动配置，设备在首次用户交互之前就已完全运行——已认证、已记录日志、已时间同步、已执行区域策略。</p> <h3 id=33-oauth2-jwt>3.3 OAuth2 JWT：统一的身份与认证<a class=headerlink href=#33-oauth2-jwt title="Permanent link">&para;</a></h3> <p>IPv8网络中的每个可管理元素都通过OAuth2 JWT令牌授权。令牌由Zone Server上的OAuth8缓存本地验证，无需往返外部身份提供商。</p> <pre class=mermaid><code>sequenceDiagram
+    participant Device as 终端设备
+    participant ZS as Zone Server&lt;br/&gt;OAuth8缓存
+    participant IdP as 身份提供商&lt;br/&gt;(云端/本地)
+
+    Note over Device,IdP: 首次认证
+    Device-&gt;&gt;IdP: 请求JWT令牌
+    IdP--&gt;&gt;Device: 返回签名JWT
+    Device-&gt;&gt;ZS: 连接请求 + JWT
+    ZS-&gt;&gt;ZS: 本地验证签名
+    ZS--&gt;&gt;Device: 授权访问
+
+    Note over Device,IdP: 后续通信
+    Device-&gt;&gt;ZS: 携带JWT的请求
+    ZS-&gt;&gt;ZS: 本地缓存验证&lt;br/&gt;(亚毫秒级)
+    ZS--&gt;&gt;Device: 响应
+
+    Note over ZS: 即使云端IdP&lt;br/&gt;暂时不可达，&lt;br/&gt;本地缓存仍可&lt;br/&gt;正常验证</code></pre> <p>即使设备位于远程位置，云端身份提供商暂时不可达，OAuth8缓存持有所有公钥，可以在亚毫秒时间内本地验证签名。认证是通用的、一致的，不需要每个服务的凭证管理。</p> <hr> <h2 id=_3>第四部分：地址空间与路由架构<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <h3 id=41>4.1 地址类别全景图<a class=headerlink href=#41 title="Permanent link">&para;</a></h3> <p>IPv8定义了多种地址类别，每种都有特定的用途和路由规则：</p> <pre class=mermaid><code>graph TB
+    subgraph "IPv8地址空间分类"
+        A[0.0.0.0.n.n.n.n&lt;br/&gt;IPv4兼容地址]
+        B[0.0.0.1 - 99.255.255.255&lt;br/&gt;ASN单播地址]
+        C[100.0.0.0/8&lt;br/&gt;RINE对等前缀]
+        D[101.0.0.0 - 126.255.255.255&lt;br/&gt;ASN单播地址]
+        E[127.0.0.0/8&lt;br/&gt;内部区域前缀]
+        F[128.0.0.0 - ff.fe.ff.ff&lt;br/&gt;ASN单播地址]
+        G[ff.ff.00.00 - ff.ff.ef.ff&lt;br/&gt;跨ASN组播]
+        H[ff.ff.ff.ff&lt;br/&gt;广播地址]
+    end
+
+    style A fill:#ffcccc
+    style B fill:#ccffcc
+    style C fill:#ccccff
+    style D fill:#ccffcc
+    style E fill:#ffffcc
+    style F fill:#ccffcc
+    style G fill:#ffccff
+    style H fill:#ffcc99</code></pre> <h3 id=42-1270008>4.2 内部区域前缀：127.0.0.0/8<a class=headerlink href=#42-1270008 title="Permanent link">&para;</a></h3> <p>127.0.0.0/8范围在IPv8中被永久保留为内部区域前缀空间。这与IPv4中127.0.0.1作为本地回环地址的用法不同——在IPv8中，整个127.0.0.0/8段被重新定义。</p> <pre class=mermaid><code>flowchart LR
+    subgraph "企业内部多区域网络"
+        Zone1[127.1.0.0/16&lt;br/&gt;美洲区域]
+        Zone2[127.2.0.0/16&lt;br/&gt;欧洲区域]
+        Zone3[127.3.0.0/16&lt;br/&gt;亚太区域]
+        ZoneN[127.N.0.0/16&lt;br/&gt;其他区域]
+    end
+
+    Core[核心骨干网]
+
+    Zone1 &lt;--&gt;|iBGP8/OSPF8| Core
+    Zone2 &lt;--&gt;|iBGP8/OSPF8| Core
+    Zone3 &lt;--&gt;|iBGP8/OSPF8| Core
+    ZoneN &lt;--&gt;|iBGP8/OSPF8| Core
+
+    style Zone1 fill:#bbdefb
+    style Zone2 fill:#c8e6c9
+    style Zone3 fill:#fff9c4
+    style ZoneN fill:#ffccbc</code></pre> <p>组织可以为网络区域和区域分配内部区域前缀（127.1.0.0、127.2.0.0等）。内部区域地址从不向外部路由，区域之间不可能发生地址冲突。一个组织可以构建任意地理和组织规模的网络——包含数十个区域，每个区域包含数千台设备——使用熟悉的路由协议，无需任何外部地址协调。</p> <h3 id=43-12712700>4.3 公司间互操作：127.127.0.0<a class=headerlink href=#43-12712700 title="Permanent link">&para;</a></h3> <p>127.127.0.0前缀被保留为标准的公司间互操作DMZ。当两个组织需要互联而不暴露其内部区域地址时，双方都部署面向共享127.127.0.0地址空间的XLATE8引擎。</p> <pre class=mermaid><code>flowchart LR
+    subgraph "公司A"
+        A_Internal[127.1.0.0.x&lt;br/&gt;内部网络]
+        A_XLATE[XLATE8-A]
+    end
+
+    subgraph "共享DMZ"
+        DMZ[127.127.0.0/16&lt;br/&gt;互操作空间]
+    end
+
+    subgraph "公司B"
+        B_XLATE[XLATE8-B]
+        B_Internal[127.2.0.0.x&lt;br/&gt;内部网络]
+    end
+
+    A_Internal &lt;--&gt;|地址转换| A_XLATE
+    A_XLATE &lt;--&gt;|对等连接| DMZ
+    DMZ &lt;--&gt;|对等连接| B_XLATE
+    B_XLATE &lt;--&gt;|地址转换| B_Internal
+
+    style A_Internal fill:#bbdefb
+    style B_Internal fill:#c8e6c9
+    style DMZ fill:#fff9c4</code></pre> <p>特性： - 公司A永远看不到公司B的127.2.0.0地址 - 公司B永远看不到公司A的127.1.0.0地址 - 每个公司精确控制其暴露的内容 - 不可能发生地址重叠，没有NAT复杂性 - 设置时间：每个暴露服务仅需数分钟</p> <h3 id=44>4.4 路由表结构性限制<a class=headerlink href=#44 title="Permanent link">&para;</a></h3> <p>IPv8通过两个关键机制解决BGP路由表爆炸问题：</p> <p><strong>1. /16最小可注入前缀规则</strong></p> <p>在AS间边界，禁止通告比/16更具体的前缀。这从架构上阻止了前缀去聚合。</p> <p><strong>2. 每个ASN一条路由条目</strong></p> <p>全球BGP8路由表在结构上限制为每个ASN一个条目。大多数运营商每个区域ASN通告一个/8汇总路由。相比BGP4超过90万条前缀且无增长上限，BGP8路由表受限于ASN分配速率——今天约17.5万条目。</p> <pre class=mermaid><code>graph LR
+    subgraph "BGP4路由表 (2024)"
+        B4[900,000+前缀&lt;br/&gt;无增长上限&lt;br/&gt;前缀劫持频发]
+    end
+
+    subgraph "BGP8路由表"
+        B8[~175,000条目&lt;br/&gt;每个ASN一条&lt;br/&gt;WHOIS8验证]
+    end
+
+    B4 --&gt;|结构性改进| B8
+
+    style B4 fill:#ffcccc
+    style B8 fill:#ccffcc</code></pre> <hr> <h2 id=_4>第五部分：安全架构——协议层面的防护<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <h3 id=51-acl8>5.1 东西向安全：ACL8区域隔离<a class=headerlink href=#51-acl8 title="Permanent link">&para;</a></h3> <p>东西向流量（网络内设备间通信）的安全通过ACL8区域隔离强制执行。</p> <pre class=mermaid><code>flowchart TB
+    subgraph "东西向流量控制"
+        Device1[设备A&lt;br/&gt;127.1.1.10]
+        Device2[设备B&lt;br/&gt;127.1.1.11]
+        Device3[设备C&lt;br/&gt;127.1.1.12]
+        SG[服务网关&lt;br/&gt;ACL8控制点]
+        Cloud[云端服务]
+    end
+
+    Device1 --&gt;|允许| SG
+    Device2 --&gt;|允许| SG
+    Device3 --&gt;|允许| SG
+    SG --&gt;|允许| Cloud
+
+    Device1 -.-&gt;|阻断| Device2
+    Device2 -.-&gt;|阻断| Device3
+    Device1 -.-&gt;|阻断| Device3
+
+    style Device1 fill:#bbdefb
+    style Device2 fill:#bbdefb
+    style Device3 fill:#bbdefb
+    style SG fill:#a5d6a7
+    style Cloud fill:#fff9c4</code></pre> <p>设备只能与其指定的服务网关通信。服务网关只能与指定的云端服务通信。设备间或区域间的横向移动在架构上被阻止——因为不存在通往任何其他目的地的允许路由。</p> <p>三层独立的enforcement层提供纵深防御： 1. NIC固件ACL8 2. Zone Server网关ACL8 3. 交换机端口OAuth2硬件VLAN强制执行</p> <h3 id=52-egress>5.2 南北向安全： egress验证<a class=headerlink href=#52-egress title="Permanent link">&para;</a></h3> <p>南北向流量（内网到互联网的通信）在Zone Server egress处通过两个强制验证步骤强制执行：</p> <pre class=mermaid><code>sequenceDiagram
+    participant Device as 内部设备
+    participant ZS as Zone Server&lt;br/&gt;Egress点
+    participant DNS8 as DNS8
+    participant WHOIS8 as WHOIS8注册表
+    participant Internet as 互联网目标
+
+    Device-&gt;&gt;ZS: 出站连接请求
+
+    ZS-&gt;&gt;DNS8: 查询目标域名
+    DNS8--&gt;&gt;ZS: 返回解析结果
+
+    alt 无DNS解析
+        ZS--xDevice: 阻断连接
+    end
+
+    ZS-&gt;&gt;WHOIS8: 验证目标ASN
+    WHOIS8--&gt;&gt;ZS: 返回注册信息
+
+    alt ASN未注册或无效
+        ZS--xDevice: 阻断连接
+    end
+
+    ZS-&gt;&gt;Internet: 允许转发
+
+    Note over ZS: 两步验证消除&lt;br/&gt;恶意软件C&amp;C通道：&lt;br/&gt;无法连接到无DNS解析的&lt;br/&gt;硬编码IP地址</code></pre> <p><strong>第一步</strong>：每个出站连接必须有对应的DNS8查找——没有DNS查找就没有XLATE8状态表条目，连接被阻断。</p> <p><strong>第二步</strong>：目标ASN针对WHOIS8注册表验证——如果目标前缀未由合法注册的ASN持有者注册为活动路由，数据包被丢弃。</p> <p>这两步一起消除了主要的恶意软件命令与控制通道：连接到没有DNS解析的硬编码IP地址。</p> <h3 id=53-bgp8-whois8>5.3 全球路由安全：BGP8 + WHOIS8<a class=headerlink href=#53-bgp8-whois8 title="Permanent link">&para;</a></h3> <p>在全球路由层面，BGP8路由通告在安装到路由表之前针对WHOIS8进行验证。无法验证的路由不会被安装。</p> <pre class=mermaid><code>flowchart LR
+    subgraph "BGP8路由验证流程"
+        A[收到BGP8通告] --&gt; B{WHOIS8验证}
+        B --&gt;|有效| C[安装到路由表]
+        B --&gt;|无效| D[丢弃通告]
+        C --&gt; E[转发流量]
+    end
+
+    style A fill:#bbdefb
+    style B fill:#fff9c4
+    style C fill:#a5d6a7
+    style D fill:#ffccbc
+    style E fill:#e1bee7</code></pre> <p>手动维护的bogon过滤器列表被消除。前缀劫持在架构上变得困难——攻击者必须同时破坏RIR注册表条目并生成有效签名的WHOIS8记录。</p> <hr> <h2 id=cost-factor>第六部分：Cost Factor——智能路由的新范式<a class=headerlink href=#cost-factor title="Permanent link">&para;</a></h2> <h3 id=61>6.1 统一的路径质量度量<a class=headerlink href=#61 title="Permanent link">&para;</a></h3> <p>IPv8扩展了OSPF8、BGP8（包括iBGP8和eBGP8）和IS-IS8，引入统一的路径质量度量——<strong>Cost Factor (CF)</strong>。</p> <p>CF是一个32位累积度量，从TCP会话遥测的七个组件派生：</p> <pre class=mermaid><code>mindmap
+  root((Cost Factor&lt;br/&gt;7个组成因素))
+    RTT[往返时间]
+    Loss[丢包率]
+    Congestion[拥塞窗口状态]
+    Stability[会话稳定性]
+    Capacity[链路容量]
+    Policy[经济策略]
+    Distance[地理距离&lt;br/&gt;物理下限]</code></pre> <p>CF从源到目的跨越每个BGP8跳累积。每个路由器独立选择累积CF最低的路径，无需协调。</p> <h3 id=62-cf>6.2 CF的突破性特性<a class=headerlink href=#62-cf title="Permanent link">&para;</a></h3> <p>CF结合了： - <strong>EIGRP的动态复合路径质量</strong> - <strong>OSPF的累积成本模型</strong> - <strong>多路径比例负载均衡</strong></p> <p>在一个开放的版本化算法中，跨AS边界端到端运行。</p> <pre class=mermaid><code>graph LR
+    subgraph "传统路由协议局限"
+        OSPF[OSPF] --&gt;|停止于| ASB1[AS边界]
+        EIGRP[EIGRP] --&gt;|停止于| ASB2[AS边界]
+    end
+
+    subgraph "CF端到端能力"
+        CF[Cost Factor] --&gt;|跨越| ASB3[AS边界]
+        ASB3 --&gt;|继续累积| CF2[CF端到端]
+    end
+
+    style OSPF fill:#ffcccc
+    style EIGRP fill:#ffcccc
+    style CF fill:#ccffcc
+    style CF2 fill:#ccffcc</code></pre> <p>CF的地理组件设置了物理下限——没有路径可以看起来比光速沿大圆距离允许的速度更快。测量到比物理允许更快的路径会立即被标记为CF异常。</p> <p>CF是一个开放的版本化算法。CFv1是强制基线。未来版本可能通过IETF流程添加碳成本、抖动、时间、应用层延迟信号。</p> <hr> <h2 id=_5>第七部分：过渡与兼容性<a class=headerlink href=#_5 title="Permanent link">&para;</a></h2> <h3 id=71-ipv4>7.1 IPv4作为真子集<a class=headerlink href=#71-ipv4 title="Permanent link">&para;</a></h3> <p>IPv8的向后兼容策略是其最具争议的也是最具创新性的方面：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span>
+<span class=normal><a href=#__codelineno-1-2>2</a></span>
+<span class=normal><a href=#__codelineno-1-3>3</a></span>
+<span class=normal><a href=#__codelineno-1-4>4</a></span>
+<span class=normal><a href=#__codelineno-1-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a>IPv8地址 r.r.r.r = 0.0.0.0 → 就是IPv4地址
+</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a>使用标准IPv4规则处理
+</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>无需修改IPv4设备
+</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a>无需修改IPv4应用
+</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a>无需修改IPv4内部网络
+</span></code></pre></div></td></tr></table></div> <pre class=mermaid><code>flowchart TB
+    subgraph "IPv8兼容性模型"
+        A[纯IPv4设备&lt;br/&gt;0.0.0.0.n.n.n.n] --&gt;|透明处理| B[IPv8网络]
+        C[IPv8原生设备&lt;br/&gt;ASN.n.n.n.n] --&gt;|原生支持| B
+        D[双栈过渡&lt;br/&gt;无需] --&gt;|单栈操作| B
+    end
+
+    style A fill:#bbdefb
+    style C fill:#c8e6c9
+    style B fill:#fff9c4</code></pre> <p>IPv8不需要双栈操作。没有flag day（强制切换日）。</p> <h3 id=72-8to4>7.2 8to4隧道<a class=headerlink href=#72-8to4 title="Permanent link">&para;</a></h3> <p>8to4隧道使被纯IPv4传输网络分隔的IPv8孤岛能够立即通信。</p> <pre class=mermaid><code>graph LR
+    subgraph "IPv8孤岛A"
+        A1[IPv8网络A]
+    end
+
+    subgraph "IPv4传输网"
+        T[纯IPv4骨干网]
+    end
+
+    subgraph "IPv8孤岛B"
+        B1[IPv8网络B]
+    end
+
+    A1 &lt;--&gt;|8to4隧道&lt;br/&gt;封装IPv8 in IPv4| T
+    T &lt;--&gt;|8to4隧道| B1
+
+    style A1 fill:#c8e6c9
+    style B1 fill:#c8e6c9
+    style T fill:#ffcccc</code></pre> <p>CF自然激励IPv4传输ASN升级——8to4路径测量到更高的延迟，这是一个自动的经济信号，无需任何强制。</p> <h3 id=73>7.3 独立过渡阶段<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <p>Tier 1 ISP、云提供商、企业、消费者ISP可以按任何顺序、任何节奏采用IPv8。8to4确保全程互操作性。</p> <pre class=mermaid><code>timeline
+    title IPv8过渡时间线
+    阶段1 : 早期采用者&lt;br/&gt;云提供商/大型企业
+    阶段2 : 骨干网升级&lt;br/&gt;Tier 1 ISP
+    阶段3 : 企业部署&lt;br/&gt;中大型企业
+    阶段4 : 消费者市场&lt;br/&gt;家庭宽带/移动
+    全程 : 8to4隧道保证&lt;br/&gt;IPv8孤岛互联</code></pre> <hr> <h2 id=ipv8_2>第八部分：批判性思考——IPv8的挑战与争议<a class=headerlink href=#ipv8_2 title="Permanent link">&para;</a></h2> <h3 id=81>8.1 设计选择的权衡<a class=headerlink href=#81 title="Permanent link">&para;</a></h3> <p>任何工程决策都是权衡。IPv8的设计也不例外：</p> <p><strong>优势：</strong> - 真正的向后兼容性 - 简化的过渡路径 - 集成化管理 - 结构性路由表限制 - 协议层面的安全</p> <p><strong>潜在挑战：</strong></p> <table> <thead> <tr> <th style="text-align: left;">挑战</th> <th style="text-align: left;">说明</th> </tr> </thead> <tbody> <tr> <td style="text-align: left;">中心化风险</td> <td style="text-align: left;">Zone Server成为单点故障和攻击目标</td> </tr> <tr> <td style="text-align: left;">OAuth2依赖</td> <td style="text-align: left;">整个安全模型依赖JWT/OAuth2，如果该体系出现系统性漏洞</td> </tr> <tr> <td style="text-align: left;">ASN分配</td> <td style="text-align: left;">32位ASN空间本身可能成为瓶颈（虽然短期内不会）</td> </tr> <tr> <td style="text-align: left;">部署复杂性</td> <td style="text-align: left;">Zone Server的部署和运维需要新的技能集</td> </tr> <tr> <td style="text-align: left;">生态系统</td> <td style="text-align: left;">需要整个硬件/软件生态系统的支持</td> </tr> </tbody> </table> <h3 id=82-ipv6>8.2 与IPv6的关系<a class=headerlink href=#82-ipv6 title="Permanent link">&para;</a></h3> <p>IPv8不是IPv6的替代品，而是对IPv6未能解决之问题的另一种回答。IPv6和IPv8代表了两种截然不同的哲学：</p> <pre class=mermaid><code>graph TB
+    subgraph "IPv6哲学"
+        A1[彻底重构&lt;br/&gt;128位地址]
+        B1[双栈过渡&lt;br/&gt;长期共存]
+        C1[端到端连接&lt;br/&gt;恢复]
+    end
+
+    subgraph "IPv8哲学"
+        A2[渐进演进&lt;br/&gt;64位地址]
+        B2[单栈操作&lt;br/&gt;真子集兼容]
+        C2[管理集成&lt;br/&gt;安全内建]
+    end
+
+    style A1 fill:#ccccff
+    style B1 fill:#ccccff
+    style C1 fill:#ccccff
+    style A2 fill:#ccffcc
+    style B2 fill:#ccffcc
+    style C2 fill:#ccffcc</code></pre> <p>IPv6已经部署了25年，拥有成熟的生态系统。IPv8作为一个2026年的新草案，面临巨大的追赶挑战。</p> <h3 id=83>8.3 社区的不同声音<a class=headerlink href=#83 title="Permanent link">&para;</a></h3> <p>技术社区对IPv8的反应褒贬不一：</p> <p><strong>支持者观点：</strong> - 终于有人认真对待网络管理碎片化问题 - 向后兼容策略比IPv6的现实主义得多 - 路由表结构性限制是BGP的救星 - 安全内建于协议层是正确方向</p> <p><strong>质疑者观点：</strong> - 为什么不用IPv6？已经投入了多少资源 - Zone Server中心化与互联网去中心化精神相悖 - 64位地址是否足够长期需求 - 又一个"下一代IP"草案，历史上有多少失败了</p> <hr> <h2 id=_6>第九部分：未来展望<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <h3 id=91>9.1 技术发展的可能路径<a class=headerlink href=#91 title="Permanent link">&para;</a></h3> <p>IPv8的未来取决于多个因素：</p> <pre class=mermaid><code>flowchart TB
+    A[IPv8草案发布&lt;br/&gt;2026年4月] --&gt; B{社区反馈}
+    B --&gt;|积极| C[修订草案]
+    B --&gt;|消极| D[草案废弃]
+    C --&gt; E{实现与测试}
+    E --&gt;|成功| F[实验性部署]
+    E --&gt;|失败| G[重新设计]
+    F --&gt; H{大规模采用}
+    H --&gt;|是| I[互联网新纪元]
+    H --&gt;|否| J[小众应用]</code></pre> <h3 id=92>9.2 对网络工程师的意义<a class=headerlink href=#92 title="Permanent link">&para;</a></h3> <p>无论IPv8最终是否成功，它提出的问题和解决思路都值得网络工程师关注：</p> <ol> <li><strong>管理自动化</strong>：网络管理必须走向更高程度的集成和自动化</li> <li><strong>安全左移</strong>：安全必须内建于协议架构，而非事后补丁</li> <li><strong>可扩展性设计</strong>：任何新协议必须考虑路由表爆炸等结构性问题</li> <li><strong>过渡策略</strong>：向后兼容不是可选项，而是必选项</li> </ol> <h3 id=93>9.3 对架构师的启示<a class=headerlink href=#93 title="Permanent link">&para;</a></h3> <p>IPv8的设计哲学对软件架构师也有启发：</p> <ul> <li><strong>渐进演进优于革命重构</strong>：当替换成本极高时，真子集兼容性比全新设计更可行</li> <li><strong>统一平台优于最佳单品</strong>：集成化管理平台可能比一堆最佳单品工具更高效</li> <li><strong>协议层面的约束</strong>：在协议层强制执行安全策略，比依赖配置和流程更可靠</li> </ul> <hr> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> </div> <div class=md-social> <a href=https://github.com/deep2code target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://linkedin.com/in/deep2code target=_blank rel=noopener title=linkedin.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg> </a> <a href=https://twitter.com/deep2code target=_blank rel=noopener title=twitter.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.select", "content.code.annotate", "content.tabs.link", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script> <script src=../../assets/javascripts/bundle.79ae519e.min.js></script> <script src=https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js></script> <script src=../../assets/js/code-block.js></script> <script src=../../assets/js/custom.js></script> </body> </html>

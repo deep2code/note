@@ -1,0 +1,435 @@
+/* ================ 全局样式增强 ================ */
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ================ 内容区域美化 ================ */
+
+/* 卡片效果 */
+.card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1a1a2e;
+}
+
+/* 渐变标题 */
+.gradient-title {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ================ 表格美化 ================ */
+
+/* 响应式表格容器 */
+.md-typeset .table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.25rem;
+}
+
+.md-typeset table {
+    width: 100%;
+    min-width: 600px;
+    border-radius: 12px;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
+.md-typeset table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.md-typeset table thead th {
+    color: #ffffff;
+    font-weight: 600;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: none;
+    white-space: nowrap;
+}
+
+.md-typeset table tbody tr {
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.md-typeset table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.md-typeset table tbody tr:hover {
+    background-color: rgba(102, 126, 234, 0.08);
+}
+
+.md-typeset table tbody td {
+    padding: 12px 16px;
+}
+
+/* 响应式表格在移动端的样式 */
+@media (max-width: 768px) {
+    .md-typeset .table-wrapper {
+        border-radius: 8px;
+        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+    }
+    
+    .md-typeset table {
+        min-width: 500px;
+    }
+    
+    .md-typeset table thead th,
+    .md-typeset table tbody td {
+        padding: 10px 12px;
+        font-size: 0.875rem;
+    }
+}
+
+/* ================ 代码块美化 ================ */
+
+/* 代码块容器 */
+.md-typeset pre {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.md-typeset pre code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.875rem;
+    line-height: 1.7;
+}
+
+/* 行号样式 */
+.md-typeset .highlighttable .linenos {
+    background: rgba(0, 0, 0, 0.03);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 16px 8px;
+    text-align: right;
+    user-select: none;
+}
+
+/* ================ Admonition 美化 ================ */
+
+.md-typeset .admonition {
+    border-radius: 12px;
+    border-left-width: 4px;
+    overflow: hidden;
+}
+
+.md-typeset .admonition-title {
+    font-weight: 600;
+    padding: 12px 16px;
+}
+
+.md-typeset .admonition-content {
+    padding: 12px 16px;
+}
+
+/* 不同类型的 admonition */
+.md-typeset .admonition.note {
+    background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+    border-color: #3182ce;
+}
+
+.md-typeset .admonition.tip {
+    background: linear-gradient(135deg, #f0fff4 0%, #ebfffa 100%);
+    border-color: #38a169;
+}
+
+.md-typeset .admonition.info {
+    background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+    border-color: #3182ce;
+}
+
+.md-typeset .admonition.warning {
+    background: linear-gradient(135deg, #fffaf0 0%, #fef6e4 100%);
+    border-color: #d69e2e;
+}
+
+.md-typeset .admonition.danger {
+    background: linear-gradient(135deg, #fff5f5 0%, #feb2b2 100%);
+    border-color: #e53e3e;
+}
+
+/* ================ 按钮美化 ================ */
+
+.md-typeset a {
+    transition: all 0.2s ease;
+}
+
+.md-typeset a:hover {
+    opacity: 0.8;
+}
+
+/* ================ 徽章样式 ================ */
+
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+}
+
+.badge-success {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    color: #ffffff;
+}
+
+.badge-warning {
+    background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+    color: #ffffff;
+}
+
+.badge-info {
+    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+    color: #ffffff;
+}
+
+/* ================ 图标增强 ================ */
+
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    margin-right: 8px;
+}
+
+.icon-go {
+    background: #00add8;
+    color: #ffffff;
+}
+
+.icon-python {
+    background: #3776ab;
+    color: #ffffff;
+}
+
+.icon-ai {
+    background: #ff6f00;
+    color: #ffffff;
+}
+
+.icon-database {
+    background: #4479a1;
+    color: #ffffff;
+}
+
+.icon-network {
+    background: #4a90d9;
+    color: #ffffff;
+}
+
+.icon-tools {
+    background: #0db7ed;
+    color: #ffffff;
+}
+
+/* ================ 重点推荐区域 ================ */
+
+.featured-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+.featured-section h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.featured-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.featured-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.featured-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.featured-card-desc {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* ================ 热门专题样式 ================ */
+
+.topic-section {
+    margin-bottom: 30px;
+}
+
+.topic-section h3 {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.topic-section h3::before {
+    content: '';
+    width: 4px;
+    height: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 2px;
+    margin-right: 12px;
+}
+
+/* ================ 响应式优化 ================ */
+
+@media (max-width: 768px) {
+    .featured-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .card {
+        padding: 16px;
+    }
+    
+    .featured-section {
+        padding: 20px;
+    }
+}
+
+/* ================ 动画效果 ================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* ================ 目录美化 ================ */
+
+.md-typeset .toc {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+}
+
+.md-typeset .toc li {
+    margin-bottom: 4px;
+}
+
+.md-typeset .toc a {
+    color: #475569;
+    font-size: 0.9rem;
+}
+
+.md-typeset .toc a:hover {
+    color: #667eea;
+}
+
+/* ================ 标签页美化 ================ */
+
+.md-typeset .tabbed-set {
+    margin-bottom: 24px;
+}
+
+.md-typeset .tabbed-labels {
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.md-typeset .tabbed-labels li {
+    margin-right: 8px;
+}
+
+.md-typeset .tabbed-labels li a {
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.md-typeset .tabbed-labels li a:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.md-typeset .tabbed-labels li a.md-tabs__link--active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+}

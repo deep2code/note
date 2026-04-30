@@ -1,0 +1,817 @@
+<!doctype html><html lang=en class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="20+年资深程序员的技术知识库 | Go、Python、AI、DevOps"><meta name=author content=deep2code><link href=https://deep2code.github.io/note/lang/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%E5%85%A8%E6%94%BB%E7%95%A5/ rel=canonical><link rel=icon href=../../assets/images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.7.6"><title>计算机常识全攻略：从底层原理到系统架构的深度解析 - note</title><link rel=stylesheet href=../../assets/stylesheets/main.484c7ddc.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.ab4e12ef.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style><link rel=stylesheet href=../../assets/css/code-block.css><link rel=stylesheet href=../../assets/css/custom.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=deep-purple data-md-color-accent=amber> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#_1 class=md-skip> Skip to content </a> </div> <div data-md-component=announce> </div> <header class="md-header md-header--shadow" data-md-component=header> <nav class="md-header__inner md-grid" aria-label=Header> <a href=../.. title=note class="md-header__button md-logo" aria-label=note data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> note </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> 计算机常识全攻略：从底层原理到系统架构的深度解析 </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=deep-purple data-md-color-accent=amber aria-label="Switch to dark mode" type=radio name=__palette id=__palette_0> <label class="md-header__button md-icon" title="Switch to dark mode" for=__palette_1 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg> </label> <input class=md-option data-md-color-media data-md-color-scheme=slate data-md-color-primary=deep-purple data-md-color-accent=amber aria-label="Switch to light mode" type=radio name=__palette id=__palette_1> <label class="md-header__button md-icon" title="Switch to light mode" for=__palette_0 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg> </label> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=Search placeholder=Search autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=Search> <a href=javascript:void(0) class="md-search__icon md-icon" title=Share aria-label=Share data-clipboard data-clipboard-text data-md-component=search-share tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg> </a> <button type=reset class="md-search__icon md-icon" title=Clear aria-label=Clear tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> Initializing search </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> <div class=md-header__source> <a href=https://github.com/deep2code/note title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </div> <div class=md-source__repository> deep2code/note </div> </a> </div> </nav> </header> <div class=md-container data-md-component=container> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--integrated" aria-label=Navigation data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../.. title=note class="md-nav__button md-logo" aria-label=note data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> note </label> <div class=md-nav__source> <a href=https://github.com/deep2code/note title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </div> <div class=md-source__repository> deep2code/note </div> </a> </div> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../.. class=md-nav__link> <span class=md-ellipsis> Home </span> </a> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2> <label class=md-nav__link for=__nav_2 id=__nav_2_label tabindex> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2> <span class="md-nav__icon md-icon"></span> 编程语言 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1> <label class=md-nav__link for=__nav_2_1 id=__nav_2_1_label tabindex=0> <span class=md-ellipsis> Go </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_2_1_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1> <span class="md-nav__icon md-icon"></span> Go </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_1> <label class=md-nav__link for=__nav_2_1_1 id=__nav_2_1_1_label tabindex=0> <span class=md-ellipsis> 标准库 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_1_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_1> <span class="md-nav__icon md-icon"></span> 标准库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../go/01-fmt-%E6%A0%BC%E5%BC%8F%E5%8C%96IO/ class=md-nav__link> <span class=md-ellipsis> fmt </span> </a> </li> <li class=md-nav__item> <a href=../go/02-errors-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> errors </span> </a> </li> <li class=md-nav__item> <a href=../go/03-strings-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> strings </span> </a> </li> <li class=md-nav__item> <a href=../go/04-bytes-%E5%AD%97%E8%8A%82%E5%88%87%E7%89%87%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> bytes </span> </a> </li> <li class=md-nav__item> <a href=../go/05-strconv-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2/ class=md-nav__link> <span class=md-ellipsis> strconv </span> </a> </li> <li class=md-nav__item> <a href=../go/06-context-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> context </span> </a> </li> <li class=md-nav__item> <a href=../go/07-sync-%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD/ class=md-nav__link> <span class=md-ellipsis> sync </span> </a> </li> <li class=md-nav__item> <a href=../go/08-sync-atomic-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> atomic </span> </a> </li> <li class=md-nav__item> <a href=../go/09-io-IO%E6%8E%A5%E5%8F%A3/ class=md-nav__link> <span class=md-ellipsis> io </span> </a> </li> <li class=md-nav__item> <a href=../go/10-os-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/ class=md-nav__link> <span class=md-ellipsis> os </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_2> <label class=md-nav__link for=__nav_2_1_2 id=__nav_2_1_2_label tabindex=0> <span class=md-ellipsis> 框架 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_2> <span class="md-nav__icon md-icon"></span> 框架 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../go/frameworks/Gin%E6%A1%86%E6%9E%B6Context/ class=md-nav__link> <span class=md-ellipsis> Gin </span> </a> </li> <li class=md-nav__item> <a href=../go/frameworks/GORM-ORM%E5%BA%93/ class=md-nav__link> <span class=md-ellipsis> GORM </span> </a> </li> <li class=md-nav__item> <a href=../go/frameworks/grpc%20RPC%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> gRPC </span> </a> </li> <li class=md-nav__item> <a href=../go/frameworks/Echo%E6%A1%86%E6%9E%B6Web%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Echo </span> </a> </li> <li class=md-nav__item> <a href=../go/frameworks/go-zero%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> go-zero </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_3> <label class=md-nav__link for=__nav_2_1_3 id=__nav_2_1_3_label tabindex=0> <span class=md-ellipsis> 进阶 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_3_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_3> <span class="md-nav__icon md-icon"></span> 进阶 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../go/Go%E8%AF%AD%E8%A8%80Map/ class=md-nav__link> <span class=md-ellipsis> Map </span> </a> </li> <li class=md-nav__item> <a href=../go/Go%E8%AF%AD%E8%A8%80Struct/ class=md-nav__link> <span class=md-ellipsis> Struct </span> </a> </li> <li class=md-nav__item> <a href=../go/Go%E8%AF%AD%E8%A8%80GORM/ class=md-nav__link> <span class=md-ellipsis> GORM进阶 </span> </a> </li> <li class=md-nav__item> <a href=../go/Go%E8%AF%AD%E8%A8%80HTTPS%E5%85%A8%E6%96%B9%E4%BD%8D/ class=md-nav__link> <span class=md-ellipsis> HTTPS </span> </a> </li> <li class=md-nav__item> <a href=../go/Golang%E7%A8%8B%E5%BA%8F%E5%91%98%E5%8F%91%E5%B1%95%E4%B9%8B%E8%B7%AF/ class=md-nav__link> <span class=md-ellipsis> 职业发展 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_2> <label class=md-nav__link for=__nav_2_2 id=__nav_2_2_label tabindex=0> <span class=md-ellipsis> Python </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_2_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2_2> <span class="md-nav__icon md-icon"></span> Python </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../python/01_Requests%E5%BA%93/ class=md-nav__link> <span class=md-ellipsis> Requests </span> </a> </li> <li class=md-nav__item> <a href=../python/02_Pandas%E6%95%B0%E6%8D%AE/ class=md-nav__link> <span class=md-ellipsis> Pandas </span> </a> </li> <li class=md-nav__item> <a href=../python/03_NumPy%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/ class=md-nav__link> <span class=md-ellipsis> NumPy </span> </a> </li> <li class=md-nav__item> <a href=../python/04_Django_Web%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Django </span> </a> </li> <li class=md-nav__item> <a href=../python/05_Flask%E5%BE%AE%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Flask </span> </a> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_2_6> <label class=md-nav__link for=__nav_2_2_6 id=__nav_2_2_6_label tabindex=0> <span class=md-ellipsis> 标准库 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_2_6_label aria-expanded=false> <label class=md-nav__title for=__nav_2_2_6> <span class="md-nav__icon md-icon"></span> 标准库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../python/collections%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> collections </span> </a> </li> <li class=md-nav__item> <a href=../python/datetime%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> datetime </span> </a> </li> <li class=md-nav__item> <a href=../python/json%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> json </span> </a> </li> <li class=md-nav__item> <a href=../python/os%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> os </span> </a> </li> <li class=md-nav__item> <a href=../python/pathlib%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> pathlib </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3> <div class="md-nav__link md-nav__container"> <a href=../../AI/ class="md-nav__link "> <span class=md-ellipsis> AI </span> </a> <label class="md-nav__link " for=__nav_3 id=__nav_3_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_3_label aria-expanded=false> <label class=md-nav__title for=__nav_3> <span class="md-nav__icon md-icon"></span> AI </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_2> <label class=md-nav__link for=__nav_3_2 id=__nav_3_2_label tabindex=0> <span class=md-ellipsis> 大模型 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_2_label aria-expanded=false> <label class=md-nav__title for=__nav_3_2> <span class="md-nav__icon md-icon"></span> 大模型 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/ class=md-nav__link> <span class=md-ellipsis> 入门指南 </span> </a> </li> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8B/ class=md-nav__link> <span class=md-ellipsis> 基础 </span> </a> </li> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B8%B8%E8%AF%86/ class=md-nav__link> <span class=md-ellipsis> 常识 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_3> <label class=md-nav__link for=__nav_3_3 id=__nav_3_3_label tabindex=0> <span class=md-ellipsis> 进阶 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_3_label aria-expanded=false> <label class=md-nav__title for=__nav_3_3> <span class="md-nav__icon md-icon"></span> 进阶 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8BAgent/ class=md-nav__link> <span class=md-ellipsis> Agent </span> </a> </li> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8BSkill/ class=md-nav__link> <span class=md-ellipsis> Skill </span> </a> </li> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%80%9D%E7%BB%B4%E9%93%BECoT/ class=md-nav__link> <span class=md-ellipsis> CoT </span> </a> </li> <li class=md-nav__item> <a href=../../AI/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%BB%E5%8A%A8%E5%88%9B%E9%80%A0%E7%AE%97%E6%B3%95/ class=md-nav__link> <span class=md-ellipsis> 主动创造 </span> </a> </li> <li class=md-nav__item> <a href=../../AI/AutoGen/ class=md-nav__link> <span class=md-ellipsis> AutoGen </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_4> <label class=md-nav__link for=__nav_3_4 id=__nav_3_4_label tabindex=0> <span class=md-ellipsis> 算法 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_4_label aria-expanded=false> <label class=md-nav__title for=__nav_3_4> <span class="md-nav__icon md-icon"></span> 算法 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../AI/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95/ class=md-nav__link> <span class=md-ellipsis> 线性回归 </span> </a> </li> <li class=md-nav__item> <a href=../../AI/%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E8%BF%9B%E5%8C%96%E5%8F%B2/ class=md-nav__link> <span class=md-ellipsis> 推荐算法 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_5> <label class=md-nav__link for=__nav_3_5 id=__nav_3_5_label tabindex=0> <span class=md-ellipsis> 其他 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_5_label aria-expanded=false> <label class=md-nav__title for=__nav_3_5> <span class="md-nav__icon md-icon"></span> 其他 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../AI/RAG%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/ class=md-nav__link> <span class=md-ellipsis> RAG技术 </span> </a> </li> <li class=md-nav__item> <a href=../../AI/OpenAI_Agents_SDK_Guide/ class=md-nav__link> <span class=md-ellipsis> OpenAI SDK </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4> <div class="md-nav__link md-nav__container"> <a href=../../protocols/ class="md-nav__link "> <span class=md-ellipsis> 网络协议 </span> </a> <label class="md-nav__link " for=__nav_4 id=__nav_4_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_4_label aria-expanded=false> <label class=md-nav__title for=__nav_4> <span class="md-nav__icon md-icon"></span> 网络协议 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_2> <label class=md-nav__link for=__nav_4_2 id=__nav_4_2_label tabindex=0> <span class=md-ellipsis> HTTP </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_2_label aria-expanded=false> <label class=md-nav__title for=__nav_4_2> <span class="md-nav__icon md-icon"></span> HTTP </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../protocols/HTTP2%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> HTTP/2 </span> </a> </li> <li class=md-nav__item> <a href=../../protocols/HTTP-3%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> HTTP/3 </span> </a> </li> <li class=md-nav__item> <a href=../../protocols/HTTPS/ class=md-nav__link> <span class=md-ellipsis> HTTPS </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_3> <label class=md-nav__link for=__nav_4_3 id=__nav_4_3_label tabindex=0> <span class=md-ellipsis> RPC </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_3_label aria-expanded=false> <label class=md-nav__title for=__nav_4_3> <span class="md-nav__icon md-icon"></span> RPC </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../protocols/gRPC/ class=md-nav__link> <span class=md-ellipsis> gRPC </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_4> <label class=md-nav__link for=__nav_4_4 id=__nav_4_4_label tabindex=0> <span class=md-ellipsis> 其他 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_4_label aria-expanded=false> <label class=md-nav__title for=__nav_4_4> <span class="md-nav__icon md-icon"></span> 其他 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../protocols/RTSP%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> RTSP </span> </a> </li> <li class=md-nav__item> <a href=../../protocols/IPv8/ class=md-nav__link> <span class=md-ellipsis> IPv8 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_5> <div class="md-nav__link md-nav__container"> <a href=../../database/ class="md-nav__link "> <span class=md-ellipsis> 数据库 </span> </a> <label class="md-nav__link " for=__nav_5 id=__nav_5_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_5_label aria-expanded=false> <label class=md-nav__title for=__nav_5> <span class="md-nav__icon md-icon"></span> 数据库 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_5_2> <label class=md-nav__link for=__nav_5_2 id=__nav_5_2_label tabindex=0> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_5_2_label aria-expanded=false> <label class=md-nav__title for=__nav_5_2> <span class="md-nav__icon md-icon"></span> MySQL </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../database/MySQLB%2B%E6%A0%91/ class=md-nav__link> <span class=md-ellipsis> B+树 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6> <div class="md-nav__link md-nav__container"> <a href=../../tools/ class="md-nav__link "> <span class=md-ellipsis> 开发工具 </span> </a> <label class="md-nav__link " for=__nav_6 id=__nav_6_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_6_label aria-expanded=false> <label class=md-nav__title for=__nav_6> <span class="md-nav__icon md-icon"></span> 开发工具 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_2> <label class=md-nav__link for=__nav_6_2 id=__nav_6_2_label tabindex=0> <span class=md-ellipsis> DevOps </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_2_label aria-expanded=false> <label class=md-nav__title for=__nav_6_2> <span class="md-nav__icon md-icon"></span> DevOps </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Docker/ class=md-nav__link> <span class=md-ellipsis> Docker </span> </a> </li> <li class=md-nav__item> <a href=../../tools/Kubernetes/ class=md-nav__link> <span class=md-ellipsis> Kubernetes </span> </a> </li> <li class=md-nav__item> <a href=../../tools/Linux/ class=md-nav__link> <span class=md-ellipsis> Linux </span> </a> </li> <li class=md-nav__item> <a href=../../tools/jenkins-beginner/ class=md-nav__link> <span class=md-ellipsis> Jenkins </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_3> <label class=md-nav__link for=__nav_6_3 id=__nav_6_3_label tabindex=0> <span class=md-ellipsis> Git </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_3_label aria-expanded=false> <label class=md-nav__title for=__nav_6_3> <span class="md-nav__icon md-icon"></span> Git </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/GitHub%E5%85%A5%E9%97%A8%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/ class=md-nav__link> <span class=md-ellipsis> 入门 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_4> <label class=md-nav__link for=__nav_6_4 id=__nav_6_4_label tabindex=0> <span class=md-ellipsis> 调试 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_4_label aria-expanded=false> <label class=md-nav__title for=__nav_6_4> <span class="md-nav__icon md-icon"></span> 调试 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Wireshark/ class=md-nav__link> <span class=md-ellipsis> Wireshark </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_5> <label class=md-nav__link for=__nav_6_5 id=__nav_6_5_label tabindex=0> <span class=md-ellipsis> 文档 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_5_label aria-expanded=false> <label class=md-nav__title for=__nav_6_5> <span class="md-nav__icon md-icon"></span> 文档 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Mermaid%E5%9B%BE%E8%A1%A8/ class=md-nav__link> <span class=md-ellipsis> Mermaid </span> </a> </li> <li class=md-nav__item> <a href=../../tools/PlantUML%E7%94%BB%E5%9B%BE%E7%A5%9E%E5%99%A8/ class=md-nav__link> <span class=md-ellipsis> PlantUML </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_7> <div class="md-nav__link md-nav__container"> <a href=../../science/ class="md-nav__link "> <span class=md-ellipsis> 计算机科学 </span> </a> <label class="md-nav__link " for=__nav_7 id=__nav_7_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_7_label aria-expanded=false> <label class=md-nav__title for=__nav_7> <span class="md-nav__icon md-icon"></span> 计算机科学 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../science/computer-components-complete/ class=md-nav__link> <span class=md-ellipsis> 组件 </span> </a> </li> <li class=md-nav__item> <a href=../../science/numbers-complete/ class=md-nav__link> <span class=md-ellipsis> 数字 </span> </a> </li> <li class=md-nav__item> <a href=../../science/%E5%A3%B0%E9%9F%B3%E5%8E%9F%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> 声音 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=_1>计算机常识全攻略：从底层原理到系统架构的深度解析<a class=headerlink href=#_1 title="Permanent link">&para;</a></h1> <blockquote> <p><strong>导读</strong>：计算机是 20 世纪最伟大的发明之一，深刻改变了人类社会。但大多数人只会在表层使用计算机，对其内部运作一无所知。本文从计算机的本质出发，深入剖析硬件架构、数据表示、软件体系、操作系统等核心概念，揭示每一个技术选择背后的根本原因。</p> </blockquote> <hr> <h2 id=_2>一、计算机的本质：什么是计算机<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <h3 id=11>1.1 计算机的定义<a class=headerlink href=#11 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[计算机] --&gt; B[输入设备]
+    A --&gt; C[存储器]
+    A --&gt; D[运算器]
+    A --&gt; E[控制器]
+    A --&gt; F[输出设备]
+
+    B --&gt; B1[键盘 鼠标&lt;br/&gt;触摸屏 传感器]
+    C --&gt; C1[内存 硬盘&lt;br/&gt;缓存]
+    D --&gt; D1[算术运算&lt;br/&gt;逻辑运算]
+    E --&gt; E1[指令译码&lt;br/&gt;流程控制]
+    F --&gt; F1[显示器 打印机&lt;br/&gt;网络接口]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#e74c3c,color:#fff
+    style E fill:#f39c12,color:#fff
+    style F fill:#1abc9c,color:#fff</code></pre> <p><strong>本质定义</strong>：</p> <blockquote> <p>计算机是一种<strong>可编程的电子设备</strong>，能够接收、存储、处理和输出数据。</p> </blockquote> <p><strong>核心特征</strong>： - ✅ <strong>可编程性</strong>：通过改变程序实现不同功能（与计算器本质区别） - ✅ <strong>存储程序</strong>：程序和数据都存储在内存中（冯·诺依曼架构） - ✅ <strong>自动执行</strong>：无需人工干预，按指令顺序执行 - ✅ <strong>通用性</strong>：理论上可以计算任何可计算的问题（图灵完备）</p> <h3 id=12>1.2 计算机的能力边界<a class=headerlink href=#12 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[计算问题] --&gt; B[可计算问题]
+    A --&gt; C[不可计算问题]
+
+    B --&gt; B1[有明确算法&lt;br/&gt;计算机可解决]
+    C --&gt; C1[停机问题&lt;br/&gt;哥德尔不完备定理]
+
+    B --&gt; D[多项式时间可解&lt;br/&gt;P 类问题]
+    B --&gt; E[多项式时间可验证&lt;br/&gt;NP 类问题]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#27ae60,color:#fff
+    style C fill:#e74c3c,color:#fff
+    style D fill:#3498db,color:#fff
+    style E fill:#f39c12,color:#fff</code></pre> <p><strong>重要认知</strong>： - 计算机<strong>不是万能的</strong>，存在理论上不可计算的问题 - 有些问题<strong>理论上可计算</strong>，但<strong>实际上无法在合理时间内完成</strong> - 理解计算机的能力边界，才能合理使用计算机</p> <h3 id=13>1.3 计算机系统的层次结构<a class=headerlink href=#13 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[用户] --&gt; B[应用软件层]
+    B --&gt; C[操作系统层]
+    C --&gt; D[系统软件层]
+    D --&gt; E[指令集架构层]
+    E --&gt; F[微架构层]
+    F --&gt; G[逻辑电路层]
+    G --&gt; H[晶体管层]
+    H --&gt; I[物理层]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff
+    style E fill:#e74c3c,color:#fff
+    style F fill:#1abc9c,color:#fff
+    style G fill:#9b59b6,color:#fff
+    style H fill:#34495e,color:#fff
+    style I fill:#2c3e50,color:#fff</code></pre> <p><strong>层次抽象的意义</strong>： - 每一层都<strong>隐藏下层的复杂性</strong> - 上层通过<strong>接口</strong>使用下层的服务 - 层次化设计使系统<strong>可管理、可维护、可扩展</strong></p> <hr> <h2 id=_3>二、计算机的历史演进：从算盘到量子计算机<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <h3 id=21>2.1 计算机发展的四个时代<a class=headerlink href=#21 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[计算机时代] --&gt; B[第一代 1946-1957&lt;br/&gt;电子管]
+    A --&gt; C[第二代 1958-1964&lt;br/&gt;晶体管]
+    A --&gt; D[第三代 1965-1970&lt;br/&gt;集成电路]
+    A --&gt; E[第四代 1971 至今&lt;br/&gt;大规模集成电路]
+
+    B --&gt; B1[体积庞大&lt;br/&gt;功耗高&lt;br/&gt;可靠性差&lt;br/&gt;ENIAC]
+    C --&gt; C1[体积缩小&lt;br/&gt;功耗降低&lt;br/&gt;可靠性提高]
+    D --&gt; D1[集成度提高&lt;br/&gt;成本下降&lt;br/&gt;小型化]
+    E --&gt; E1[微处理器&lt;br/&gt;个人电脑&lt;br/&gt;智能手机]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#7f8c8d,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#e74c3c,color:#fff</code></pre> <h3 id=22>2.2 摩尔定律：计算机发展的引擎<a class=headerlink href=#22 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>xychart-beta
+    title "晶体管数量增长（对数坐标）"
+    x-axis [1971, 1980, 1990, 2000, 2010, 2020]
+    y-axis "晶体管数量" 1000 --&gt; 100000000000
+    line [2300, 29000, 1200000, 42000000, 2600000000, 54000000000]</code></pre> <p><strong>摩尔定律内容</strong>：</p> <blockquote> <p>集成电路上可容纳的晶体管数量，约每隔 <strong>18-24 个月</strong> 便会增加一倍，性能也将提升一倍。</p> </blockquote> <p><strong>根本原因</strong>： - 半导体工艺的持续进步 - 光刻技术的精度提升 - 经济效益驱动研发投入</p> <p><strong>当前挑战</strong>： - 物理极限：晶体管尺寸接近原子级别 - 散热问题：功耗密度过高 - 经济极限：制造成本指数级增长</p> <h3 id=23>2.3 计算机发展史上的里程碑<a class=headerlink href=#23 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>年份</th> <th>事件</th> <th>意义</th> </tr> </thead> <tbody> <tr> <td>1833</td> <td>巴贝奇设计分析机</td> <td>通用计算机概念雏形</td> </tr> <tr> <td>1936</td> <td>图灵提出图灵机</td> <td>计算理论基础</td> </tr> <tr> <td>1945</td> <td>冯·诺依曼架构</td> <td>现代计算机架构基础</td> </tr> <tr> <td>1947</td> <td>晶体管发明</td> <td>取代电子管</td> </tr> <tr> <td>1958</td> <td>集成电路发明</td> <td>微型化开始</td> </tr> <tr> <td>1971</td> <td>Intel 4004 微处理器</td> <td>个人电脑时代开启</td> </tr> <tr> <td>1975</td> <td>Altair 8800</td> <td>第一台个人电脑</td> </tr> <tr> <td>1981</td> <td>IBM PC</td> <td>PC 标准化</td> </tr> <tr> <td>1984</td> <td>Macintosh</td> <td>图形界面普及</td> </tr> <tr> <td>2007</td> <td>iPhone</td> <td>移动互联网时代</td> </tr> </tbody> </table> <hr> <h2 id=cpu>三、硬件基础：从晶体管到 CPU<a class=headerlink href=#cpu title="Permanent link">&para;</a></h2> <h3 id=31>3.1 晶体管：计算机的基石<a class=headerlink href=#31 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[晶体管] --&gt; B[N 型半导体]
+    A --&gt; C[P 型半导体]
+    A --&gt; D[工作原理]
+
+    D --&gt; D1[基极加电压&lt;br/&gt;控制电流导通]
+    D --&gt; D2[导通=1&lt;br/&gt;截止=0]
+
+    style A fill:#e74c3c,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#f39c12,color:#fff
+    style D fill:#27ae60,color:#fff</code></pre> <p><strong>为什么用晶体管</strong>？</p> <table> <thead> <tr> <th>特性</th> <th>电子管</th> <th>晶体管</th> <th>根本原因</th> </tr> </thead> <tbody> <tr> <td>尺寸</td> <td>厘米级</td> <td>纳米级</td> <td>半导体材料特性</td> </tr> <tr> <td>功耗</td> <td>瓦特级</td> <td>毫瓦级</td> <td>无需加热阴极</td> </tr> <tr> <td>寿命</td> <td>数千小时</td> <td>数十亿小时</td> <td>无机械磨损</td> </tr> <tr> <td>开关速度</td> <td>微秒级</td> <td>纳秒级</td> <td>电子迁移速度快</td> </tr> <tr> <td>成本</td> <td>高</td> <td>低</td> <td>可批量制造</td> </tr> </tbody> </table> <p><strong>核心原理</strong>： - 晶体管本质是一个<strong>电子开关</strong> - 通过电压控制<strong>导通</strong>（1）或<strong>截止</strong>（0） - 数十亿晶体管组合实现复杂逻辑</p> <h3 id=32>3.2 逻辑门：从晶体管到计算<a class=headerlink href=#32 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[基本逻辑门] --&gt; B[NOT 非门]
+    A --&gt; C[AND 与门]
+    A --&gt; D[OR 或门]
+    A --&gt; E[XOR 异或门]
+
+    B --&gt; B1[输入 0→输出 1&lt;br/&gt;输入 1→输出 0]
+    C --&gt; C1[全 1 出 1&lt;br/&gt;有 0 出 0]
+    D --&gt; D1[有 1 出 1&lt;br/&gt;全 0 出 0]
+    E --&gt; E1[相同出 0&lt;br/&gt;不同出 1]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff
+    style E fill:#e74c3c,color:#fff</code></pre> <p><strong>逻辑门的晶体管实现</strong>：</p> <pre class=mermaid><code>graph LR
+    A[晶体管组合] --&gt; B[2 个晶体管&lt;br/&gt;NAND 门]
+    A --&gt; C[6 个晶体管&lt;br/&gt;NOT 门]
+    A --&gt; D[复杂组合&lt;br/&gt;加法器 寄存器]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff</code></pre> <p><strong>关键认知</strong>： - <strong>所有计算</strong>都可以分解为逻辑门操作 - <strong>逻辑门</strong>由晶体管组合实现 - <strong>复杂度</strong>来自简单元件的组合</p> <h3 id=33-cpu>3.3 CPU 的内部结构<a class=headerlink href=#33-cpu title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[CPU] --&gt; B[控制单元 CU]
+    A --&gt; C[算术逻辑单元 ALU]
+    A --&gt; D[寄存器组]
+    A --&gt; E[缓存]
+
+    B --&gt; B1[指令译码&lt;br/&gt;流程控制&lt;br/&gt;时序生成]
+    C --&gt; C1[加减乘除&lt;br/&gt;逻辑运算&lt;br/&gt;位运算]
+    D --&gt; D1[通用寄存器&lt;br/&gt;程序计数器&lt;br/&gt;状态寄存器]
+    E --&gt; E1[L1 缓存&lt;br/&gt;L2 缓存&lt;br/&gt;L3 缓存]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#f39c12,color:#fff</code></pre> <h4 id=cpu_1>CPU 执行指令的过程<a class=headerlink href=#cpu_1 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>sequenceDiagram
+    participant PC as 程序计数器
+    participant IM as 指令存储器
+    participant CU as 控制单元
+    participant ALU as 算术逻辑单元
+    participant REG as 寄存器
+    participant DM as 数据存储器
+
+    PC-&gt;&gt;IM: 提供指令地址
+    IM-&gt;&gt;CU: 取出指令
+    CU-&gt;&gt;CU: 指令译码
+    CU-&gt;&gt;REG: 读取操作数
+    REG-&gt;&gt;ALU: 传送操作数
+    ALU-&gt;&gt;ALU: 执行运算
+    ALU-&gt;&gt;REG: 写回结果
+    PC-&gt;&gt;PC: 更新下一条指令地址</code></pre> <p><strong>指令周期的五个阶段</strong>： 1. <strong>取指</strong>（IF）：从内存取指令 2. <strong>译码</strong>（ID）：解析指令含义 3. <strong>执行</strong>（EX）：执行运算操作 4. <strong>访存</strong>（MEM）：访问数据内存 5. <strong>写回</strong>（WB）：将结果写回寄存器</p> <h3 id=34-cpu>3.4 为什么 CPU 有这么多核心<a class=headerlink href=#34-cpu title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[多核 CPU] --&gt; B[单核瓶颈]
+    A --&gt; C[并行计算]
+    A --&gt; D[功耗限制]
+
+    B --&gt; B1[频率提升遇到&lt;br/&gt;物理极限]
+    C --&gt; C1[多任务并行&lt;br/&gt;提升吞吐量]
+    D --&gt; D1[频率越高&lt;br/&gt;功耗越大&lt;br/&gt;散热困难]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff</code></pre> <p><strong>根本原因分析</strong>：</p> <table> <thead> <tr> <th>因素</th> <th>说明</th> <th>影响</th> </tr> </thead> <tbody> <tr> <td><strong>频率墙</strong></td> <td>单核频率接近 5GHz 极限</td> <td>无法继续提升频率</td> </tr> <tr> <td><strong>功耗墙</strong></td> <td>功耗与频率立方成正比</td> <td>散热成为瓶颈</td> </tr> <tr> <td><strong>并行需求</strong></td> <td>多任务、多线程应用增多</td> <td>需要并行处理能力</td> </tr> <tr> <td><strong>阿姆达尔定律</strong></td> <td>程序串行部分限制加速比</td> <td>多核提升有限</td> </tr> </tbody> </table> <p><strong>阿姆达尔定律</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>加速比 = 1 / (S + (1-S)/N)
+</span></code></pre></div></td></tr></table></div> 其中：S = 串行部分比例，N = 核心数</p> <p><strong>关键认知</strong>：即使有无限多核心，加速比也受限于<strong>串行部分比例</strong>。</p> <h3 id=35-cpu>3.5 CPU 的指令集架构<a class=headerlink href=#35-cpu title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[指令集架构] --&gt; B[CISC&lt;br/&gt;复杂指令集]
+    A --&gt; D[RISC&lt;br/&gt;精简指令集]
+
+    B --&gt; B1[x86 架构&lt;br/&gt;Intel AMD&lt;br/&gt;指令多而复杂]
+    B --&gt; B2[优势：代码密度高&lt;br/&gt;劣势：设计复杂]
+
+    D --&gt; D1[ARM RISC-V&lt;br/&gt;指令少而简单&lt;br/&gt;固定长度]
+    D --&gt; D2[优势：功耗低设计简单&lt;br/&gt;劣势：代码密度低]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff</code></pre> <h4 id=cisc-vs-risc>CISC vs RISC 对比<a class=headerlink href=#cisc-vs-risc title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th>特性</th> <th>CISC(x86)</th> <th>RISC(ARM/RISC-V)</th> <th>根本原因</th> </tr> </thead> <tbody> <tr> <td>指令数量</td> <td>多（上千条）</td> <td>少（几十条）</td> <td>设计理念不同</td> </tr> <tr> <td>指令长度</td> <td>可变长</td> <td>固定长</td> <td>译码复杂度</td> </tr> <tr> <td>寻址方式</td> <td>多</td> <td>少</td> <td>硬件复杂度</td> </tr> <tr> <td>功耗</td> <td>高</td> <td>低</td> <td>电路复杂度</td> </tr> <tr> <td>应用场景</td> <td>桌面/服务器</td> <td>移动/嵌入式</td> <td>功耗敏感性</td> </tr> </tbody> </table> <p><strong>趋势</strong>： - x86 内部也将复杂指令<strong>微操作化</strong>为简单指令 - RISC 和 CISC 的<strong>界限逐渐模糊</strong> - <strong>RISC-V</strong> 作为开源指令集崛起</p> <hr> <h2 id=_4>四、数据表示：为什么是二进制<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <h3 id=41>4.1 为什么计算机使用二进制<a class=headerlink href=#41 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[为什么用二进制] --&gt; B[物理实现简单]
+    A --&gt; C[抗干扰能力强]
+    A --&gt; D[运算规则简单]
+    A --&gt; E[与逻辑代数对应]
+
+    B --&gt; B1[两种稳定状态&lt;br/&gt;高电平/低电平]
+    C --&gt; C1[噪声容限大&lt;br/&gt;0 和 1 易区分]
+    D --&gt; D1[布尔代数&lt;br/&gt;逻辑门实现]
+    E --&gt; E1[真/假&lt;br/&gt;是/否]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#3498db,color:#fff
+    style E fill:#f39c12,color:#fff</code></pre> <p><strong>根本原因</strong>： - <strong>物理层面</strong>：晶体管只有导通/截止两种稳定状态 - <strong>工程层面</strong>：二值系统抗干扰能力最强 - <strong>数学层面</strong>：布尔代数完美对应二进制运算</p> <p><strong>对比其他进制</strong>：</p> <table> <thead> <tr> <th>进制</th> <th>状态数</th> <th>噪声容限</th> <th>实现难度</th> <th>信息密度</th> </tr> </thead> <tbody> <tr> <td>二进制</td> <td>2</td> <td>50%</td> <td>最低</td> <td>最低</td> </tr> <tr> <td>三进制</td> <td>3</td> <td>33%</td> <td>中等</td> <td>中等</td> </tr> <tr> <td>十进制</td> <td>10</td> <td>10%</td> <td>最高</td> <td>最高</td> </tr> </tbody> </table> <p><strong>关键认知</strong>：二进制不是最优的<strong>信息密度</strong>选择，但是最优的<strong>可靠性</strong>选择。</p> <h3 id=42>4.2 数值的二进制表示<a class=headerlink href=#42 title="Permanent link">&para;</a></h3> <h4 id=_5>整数的表示<a class=headerlink href=#_5 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>graph TD
+    A[整数表示] --&gt; B[原码]
+    A --&gt; C[反码]
+    A --&gt; D[补码]
+
+    B --&gt; B1[最高位符号位&lt;br/&gt;0 正 1 负&lt;br/&gt;+0 和 -0 不同]
+    C --&gt; C1[正数同原码&lt;br/&gt;负数按位取反&lt;br/&gt;+0 和 -0 不同]
+    D --&gt; D1[正数同原码&lt;br/&gt;负数反码 +1&lt;br/&gt;+0 和 -0 相同]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#f39c12,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff</code></pre> <p><strong>为什么用补码</strong>？</p> <table> <thead> <tr> <th>特性</th> <th>原码</th> <th>反码</th> <th>补码</th> <th>根本原因</th> </tr> </thead> <tbody> <tr> <td>0 的表示</td> <td>+0, -0</td> <td>+0, -0</td> <td>唯一</td> <td>避免歧义</td> </tr> <tr> <td>加减运算</td> <td>需要判断符号</td> <td>需要循环进位</td> <td>统一处理</td> <td>简化硬件</td> </tr> <tr> <td>符号扩展</td> <td>复杂</td> <td>复杂</td> <td>简单</td> <td>硬件友好</td> </tr> </tbody> </table> <p><strong>补码的数学原理</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span>
+<span class=normal><a href=#__codelineno-1-2>2</a></span>
+<span class=normal><a href=#__codelineno-1-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a>补码 = 模 - |负数|
+</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a>8 位补码的模 = 256
+</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>-1 的补码 = 256 - 1 = 255 = 11111111
+</span></code></pre></div></td></tr></table></div></p> <h4 id=ieee-754>浮点数的表示（IEEE 754）<a class=headerlink href=#ieee-754 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>graph TD
+    A[32 位浮点数] --&gt; B[符号位 1 位]
+    A --&gt; C[指数位 8 位]
+    A --&gt; D[尾数位 23 位]
+
+    B --&gt; B1[0 正 1 负]
+    C --&gt; C1[偏移 127&lt;br/&gt;实际指数=存储值 -127]
+    D --&gt; D1[隐含前导 1&lt;br/&gt;实际精度 24 位]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff</code></pre> <p><strong>浮点数公式</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a>值 = (-1)^符号 × 1.尾数 × 2^(指数 -127)
+</span></code></pre></div></td></tr></table></div></p> <p><strong>为什么浮点数有精度问题</strong>？</p> <pre class=mermaid><code>graph TD
+    A[精度问题] --&gt; B[有限位数&lt;br/&gt;无法表示所有实数]
+    A --&gt; C[二进制无法精确&lt;br/&gt;表示某些十进制小数]
+    A --&gt; D[舍入误差&lt;br/&gt;累积效应]
+
+    style A fill:#e74c3c,color:#fff
+    style B fill:#f39c12,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff</code></pre> <p><strong>经典案例</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1>1</a></span>
+<span class=normal><a href=#__codelineno-3-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a>0.1 + 0.2 ≠ 0.3  （在计算机中）
+</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>原因：0.1 和 0.2 在二进制中是无限循环小数
+</span></code></pre></div></td></tr></table></div></p> <h3 id=43>4.3 字符的编码表示<a class=headerlink href=#43 title="Permanent link">&para;</a></h3> <h4 id=_6>编码演进历史<a class=headerlink href=#_6 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>graph TD
+    A[字符编码] --&gt; B[ASCII&lt;br/&gt;1963 年]
+    A --&gt; C[GB2312&lt;br/&gt;1980 年]
+    A --&gt; D[Unicode&lt;br/&gt;1991 年]
+    A --&gt; E[UTF-8&lt;br/&gt;1992 年]
+
+    B --&gt; B1[7 位 128 字符&lt;br/&gt;仅英文]
+    C --&gt; C1[双字节&lt;br/&gt;简体中文]
+    D --&gt; D1[统一编码&lt;br/&gt;所有字符]
+    E --&gt; E1[变长编码&lt;br/&gt;兼容 ASCII]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#7f8c8d,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#e74c3c,color:#fff</code></pre> <h4 id=utf-8>UTF-8 编码规则<a class=headerlink href=#utf-8 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th>字符范围</th> <th>UTF-8 编码格式</th> <th>字节数</th> </tr> </thead> <tbody> <tr> <td>U+0000 - U+007F</td> <td>0xxxxxxx</td> <td>1</td> </tr> <tr> <td>U+0080 - U+07FF</td> <td>110xxxxx 10xxxxxx</td> <td>2</td> </tr> <tr> <td>U+0800 - U+FFFF</td> <td>1110xxxx 10xxxxxx 10xxxxxx</td> <td>3</td> </tr> <tr> <td>U+10000 - U+10FFFF</td> <td>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td> <td>4</td> </tr> </tbody> </table> <p><strong>为什么 UTF-8 成为主流</strong>？</p> <table> <thead> <tr> <th>特性</th> <th>UTF-8</th> <th>UTF-16</th> <th>根本原因</th> </tr> </thead> <tbody> <tr> <td>ASCII 兼容</td> <td>是</td> <td>否</td> <td>存量系统多</td> </tr> <tr> <td>空间效率（英文）</td> <td>高（1 字节）</td> <td>低（2 字节）</td> <td>英文内容多</td> </tr> <tr> <td>空间效率（中文）</td> <td>中（3 字节）</td> <td>高（2 字节）</td> <td>-</td> </tr> <tr> <td>无字节序问题</td> <td>是</td> <td>否</td> <td>网络传输友好</td> </tr> </tbody> </table> <h3 id=44>4.4 多媒体数据的表示<a class=headerlink href=#44 title="Permanent link">&para;</a></h3> <h4 id=_7>图像的数字化<a class=headerlink href=#_7 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>graph TD
+    A[图像数字化] --&gt; B[采样&lt;br/&gt;空间离散化]
+    A --&gt; C[量化&lt;br/&gt;颜色离散化]
+    A --&gt; D[编码&lt;br/&gt;压缩存储]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff</code></pre> <p><strong>像素与分辨率</strong>： - <strong>像素</strong>：图像的最小单位 - <strong>分辨率</strong>：像素数量（如 1920×1080） - <strong>颜色深度</strong>：每像素位数（如 24 位真彩色）</p> <p><strong>为什么需要压缩</strong>？</p> <table> <thead> <tr> <th>格式</th> <th>未压缩大小</th> <th>压缩后大小</th> <th>压缩比</th> </tr> </thead> <tbody> <tr> <td>1080P 图片</td> <td>6MB</td> <td>500KB</td> <td>12:1</td> </tr> <tr> <td>1 分钟 1080P 视频</td> <td>2GB</td> <td>100MB</td> <td>20:1</td> </tr> <tr> <td>1 分钟无损音频</td> <td>10MB</td> <td>1MB</td> <td>10:1</td> </tr> </tbody> </table> <p><strong>根本原因</strong>：原始数据量太大，存储和传输成本高。</p> <hr> <h2 id=_8>五、指令系统：计算机如何执行命令<a class=headerlink href=#_8 title="Permanent link">&para;</a></h2> <h3 id=51>5.1 什么是指令<a class=headerlink href=#51 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[指令] --&gt; B[操作码&lt;br/&gt;Opcode]
+    A --&gt; C[操作数&lt;br/&gt;Operand]
+
+    B --&gt; B1[指定操作类型&lt;br/&gt;加减乘除 跳转等]
+    C --&gt; C1[指定操作对象&lt;br/&gt;寄存器 内存地址 立即数]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#3498db,color:#fff</code></pre> <p><strong>指令示例</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
+<span class=normal><a href=#__codelineno-4-2>2</a></span>
+<span class=normal><a href=#__codelineno-4-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a>ADD R1, R2, R3    ; R1 = R2 + R3
+</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a>LOAD R1, [0x1000] ; R1 = 内存 [0x1000] 的值
+</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a>JMP 0x2000        ; 跳转到地址 0x2000
+</span></code></pre></div></td></tr></table></div></p> <h3 id=52>5.2 指令的执行流程<a class=headerlink href=#52 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>sequenceDiagram
+    participant PC as 程序计数器
+    participant IM as 指令存储器
+    participant ID as 指令译码器
+    participant RF as 寄存器堆
+    participant ALU as 算术逻辑单元
+    participant DM as 数据存储器
+    participant WB as 写回单元
+
+    PC-&gt;&gt;IM: 1.取指&lt;br/&gt;提供指令地址
+    IM-&gt;&gt;ID: 取出指令
+    ID-&gt;&gt;ID: 2.译码&lt;br/&gt;解析操作码和操作数
+    ID-&gt;&gt;RF: 3.执行&lt;br/&gt;读取寄存器
+    RF-&gt;&gt;ALU: 传送操作数
+    ALU-&gt;&gt;DM: 4.访存&lt;br/&gt;如需访问内存
+    DM-&gt;&gt;WB: 5.写回&lt;br/&gt;结果写回寄存器
+    WB-&gt;&gt;PC: 更新 PC</code></pre> <h3 id=53-cpu>5.3 流水线技术：为什么 CPU 这么快<a class=headerlink href=#53-cpu title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[流水线技术] --&gt; B[非流水线&lt;br/&gt;顺序执行]
+    A --&gt; C[流水线&lt;br/&gt;并行执行]
+
+    B --&gt; B1[指令 1:IF-ID-EX-MEM-WB&lt;br/&gt;指令 2:等待指令 1 完成&lt;br/&gt;效率低]
+    C --&gt; C1[指令 1:IF-ID-EX-MEM-WB&lt;br/&gt;指令 2: -IF-ID-EX-MEM-WB&lt;br/&gt;指令 3: - -IF-ID-EX-MEM-WB&lt;br/&gt;效率高]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#27ae60,color:#fff</code></pre> <p><strong>流水线时序对比</strong>：</p> <pre class=mermaid><code>xychart-beta
+    title "指令执行时间对比（时钟周期）"
+    x-axis [1, 2, 3, 4, 5, 6, 7]
+    y-axis "完成指令数" 0 --&gt; 7
+    line "非流水线" [1, 1, 1, 1, 1, 2, 2]
+    line "5 级流水线" [1, 2, 3, 4, 5, 6, 7]</code></pre> <p><strong>理想加速比</strong> = 流水线级数</p> <p><strong>流水线的问题</strong>：</p> <table> <thead> <tr> <th>问题</th> <th>原因</th> <th>解决方案</th> </tr> </thead> <tbody> <tr> <td>结构冒险</td> <td>资源冲突</td> <td>增加硬件资源</td> </tr> <tr> <td>数据冒险</td> <td>数据依赖</td> <td>转发技术、暂停</td> </tr> <tr> <td>控制冒险</td> <td>分支跳转</td> <td>分支预测</td> </tr> </tbody> </table> <h3 id=54>5.4 分支预测：为什么需要猜<a class=headerlink href=#54 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[分支预测] --&gt; B[问题]
+    A --&gt; C[影响]
+    A --&gt; D[技术]
+
+    B --&gt; B1[遇到条件分支&lt;br/&gt;不知道走哪条路]
+    C --&gt; C1[等待条件计算&lt;br/&gt;流水线停顿&lt;br/&gt;性能下降]
+    D --&gt; D1[静态预测&lt;br/&gt;动态预测&lt;br/&gt;神经网络预测]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#f39c12,color:#fff
+    style D fill:#27ae60,color:#fff</code></pre> <p><strong>根本原因</strong>： - 现代 CPU 流水线很长（10-20 级） - 分支指令很常见（约 20% 指令） - 等待分支结果会导致流水线<strong>清空</strong>，损失巨大</p> <p><strong>预测准确率</strong>： - 静态预测：约 60-70% - 动态预测：约 90-95% - 现代 CPU（如 Intel）：约 98%</p> <p><strong>预测失败的代价</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1>1</a></span>
+<span class=normal><a href=#__codelineno-5-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a>损失周期数 = 流水线级数 × 预测失败率 × 分支频率
+</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a>= 15 × 2% × 20% ≈ 0.06 周期/指令
+</span></code></pre></div></td></tr></table></div></p> <hr> <h2 id=_9>六、软件体系：从机器码到高级语言<a class=headerlink href=#_9 title="Permanent link">&para;</a></h2> <h3 id=61>6.1 编程语言的层次<a class=headerlink href=#61 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[编程语言层次] --&gt; B[机器语言&lt;br/&gt;0 和 1]
+    A --&gt; C[汇编语言&lt;br/&gt;助记符]
+    A --&gt; D[高级语言&lt;br/&gt;接近自然语言]
+
+    B --&gt; B1[CPU 直接执行&lt;br/&gt;难读难写难维护]
+    C --&gt; C1[需要汇编器&lt;br/&gt;与硬件对应&lt;br/&gt;效率高]
+    D --&gt; D1[需要编译器&lt;br/&gt;抽象程度高&lt;br/&gt;开发效率高]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#2c3e50,color:#fff
+    style C fill:#34495e,color:#fff
+    style D fill:#27ae60,color:#fff</code></pre> <h3 id=62>6.2 编译与解释：两种执行方式<a class=headerlink href=#62 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[程序执行方式] --&gt; B[编译型]
+    A --&gt; C[解释型]
+    A --&gt; D[混合型]
+
+    B --&gt; B1[C C++ Go&lt;br/&gt;源代码→机器码&lt;br/&gt;执行快 编译慢]
+    C --&gt; C1[Python JavaScript&lt;br/&gt;源代码→逐行解释&lt;br/&gt;执行慢 开发快]
+    D --&gt; D1[Java C#&lt;br/&gt;源代码→字节码→JIT 编译&lt;br/&gt;平衡]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#e74c3c,color:#fff
+    style D fill:#27ae60,color:#fff</code></pre> <h4 id=_10>编译过程详解<a class=headerlink href=#_10 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>graph TD
+    A[源代码] --&gt; B[词法分析]
+    B --&gt; C[语法分析]
+    C --&gt; D[语义分析]
+    D --&gt; E[中间代码生成]
+    E --&gt; F[代码优化]
+    F --&gt; G[目标代码生成]
+
+    style A fill:#3498db,color:#fff
+    style B fill:#9b59b6
+    style C fill:#9b59b6
+    style D fill:#9b59b6
+    style E fill:#27ae60,color:#fff
+    style F fill:#27ae60,color:#fff
+    style G fill:#e74c3c,color:#fff</code></pre> <p><strong>各阶段任务</strong>：</p> <table> <thead> <tr> <th>阶段</th> <th>输入</th> <th>输出</th> <th>任务</th> </tr> </thead> <tbody> <tr> <td>词法分析</td> <td>源代码字符流</td> <td>词法单元流</td> <td>识别关键字、标识符、运算符</td> </tr> <tr> <td>语法分析</td> <td>词法单元流</td> <td>语法树</td> <td>检查语法正确性</td> </tr> <tr> <td>语义分析</td> <td>语法树</td> <td>标注语法树</td> <td>类型检查、作用域分析</td> </tr> <tr> <td>中间代码生成</td> <td>标注语法树</td> <td>中间表示</td> <td>生成与机器无关的代码</td> </tr> <tr> <td>代码优化</td> <td>中间表示</td> <td>优化的中间表示</td> <td>提高执行效率</td> </tr> <tr> <td>目标代码生成</td> <td>优化的中间表示</td> <td>机器码</td> <td>生成特定平台的代码</td> </tr> </tbody> </table> <h3 id=63>6.3 为什么有这么多编程语言<a class=headerlink href=#63 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[编程语言多样性] --&gt; B[应用场景不同]
+    A --&gt; C[设计理念不同]
+    A --&gt; D[历史演进]
+    A --&gt; E[权衡取舍]
+
+    B --&gt; B1[系统编程&lt;br/&gt;Web 开发&lt;br/&gt;数据科学&lt;br/&gt;嵌入式]
+    C --&gt; C1[性能优先&lt;br/&gt;开发效率优先&lt;br/&gt;安全性优先]
+    D --&gt; D1[新技术出现&lt;br/&gt;旧语言局限]
+    E --&gt; E1[性能 vs 安全&lt;br/&gt;灵活 vs 严格&lt;br/&gt;简洁 vs 功能]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff
+    style E fill:#e74c3c,color:#fff</code></pre> <h4 id=_11>主流语言对比<a class=headerlink href=#_11 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th>语言</th> <th>类型系统</th> <th>内存管理</th> <th>主要应用</th> <th>特点</th> </tr> </thead> <tbody> <tr> <td>C</td> <td>静态</td> <td>手动</td> <td>系统编程</td> <td>高效、灵活、危险</td> </tr> <tr> <td>Java</td> <td>静态</td> <td>自动 (GC)</td> <td>企业应用</td> <td>安全、跨平台、冗长</td> </tr> <tr> <td>Python</td> <td>动态</td> <td>自动 (GC)</td> <td>数据科学</td> <td>简洁、慢、生态好</td> </tr> <tr> <td>JavaScript</td> <td>动态</td> <td>自动 (GC)</td> <td>Web 前端</td> <td>无处不在、灵活</td> </tr> <tr> <td>Rust</td> <td>静态</td> <td>所有权</td> <td>系统编程</td> <td>安全、高效、学习曲线陡</td> </tr> <tr> <td>Go</td> <td>静态</td> <td>自动 (GC)</td> <td>后端服务</td> <td>简洁、并发好、功能少</td> </tr> </tbody> </table> <h3 id=64>6.4 数据结构：如何组织数据<a class=headerlink href=#64 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[数据结构] --&gt; B[线性结构]
+    A --&gt; C[树形结构]
+    A --&gt; D[图结构]
+    A --&gt; E[哈希结构]
+
+    B --&gt; B1[数组 链表&lt;br/&gt;栈 队列]
+    C --&gt; C1[二叉树&lt;br/&gt;堆 平衡树]
+    D --&gt; D1[有向图&lt;br/&gt;无向图]
+    E --&gt; E1[哈希表&lt;br/&gt;布隆过滤器]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff
+    style E fill:#e74c3c,color:#fff</code></pre> <h4 id=_12>常见数据结构复杂度对比<a class=headerlink href=#_12 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th>数据结构</th> <th>查找</th> <th>插入</th> <th>删除</th> <th>适用场景</th> </tr> </thead> <tbody> <tr> <td>数组</td> <td>O(n)</td> <td>O(n)</td> <td>O(n)</td> <td>随机访问多</td> </tr> <tr> <td>链表</td> <td>O(n)</td> <td>O(1)</td> <td>O(1)</td> <td>频繁插入删除</td> </tr> <tr> <td>二叉搜索树</td> <td>O(logn)</td> <td>O(logn)</td> <td>O(logn)</td> <td>有序数据</td> </tr> <tr> <td>哈希表</td> <td>O(1)</td> <td>O(1)</td> <td>O(1)</td> <td>快速查找</td> </tr> <tr> <td>堆</td> <td>O(n)</td> <td>O(logn)</td> <td>O(logn)</td> <td>优先级队列</td> </tr> </tbody> </table> <p><strong>根本认知</strong>：没有最好的数据结构，只有<strong>最适合</strong>的数据结构。</p> <h3 id=65>6.5 算法：解决问题的方法<a class=headerlink href=#65 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[算法分类] --&gt; B[排序算法]
+    A --&gt; C[搜索算法]
+    A --&gt; D[图算法]
+    A --&gt; E[动态规划]
+    A --&gt; F[贪心算法]
+
+    B --&gt; B1[快速排序&lt;br/&gt;归并排序&lt;br/&gt;堆排序]
+    C --&gt; C1[二分查找&lt;br/&gt;DFS BFS]
+    D --&gt; D1[最短路径&lt;br/&gt;最小生成树]
+    E --&gt; E1[最优子结构&lt;br/&gt;重叠子问题]
+    F --&gt; F1[局部最优&lt;br/&gt;全局最优]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff
+    style E fill:#e74c3c,color:#fff
+    style F fill:#1abc9c,color:#fff</code></pre> <h4 id=_13>算法复杂度等级<a class=headerlink href=#_13 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>graph LR
+    A[O(1)&lt;br/&gt;常数时间] --&gt; B[O(logn)&lt;br/&gt;对数时间]
+    B --&gt; C[O(n)&lt;br/&gt;线性时间]
+    C --&gt; D[O(nlogn)&lt;br/&gt;线性对数]
+    D --&gt; E[O(n²)&lt;br/&gt;平方时间]
+    E --&gt; F[O(2ⁿ)&lt;br/&gt;指数时间]
+
+    style A fill:#27ae60,color:#fff
+    style B fill:#2ecc71,color:#fff
+    style C fill:#f39c12,color:#fff
+    style D fill:#e67e22,color:#fff
+    style E fill:#e74c3c,color:#fff
+    style F fill:#c0392b,color:#fff</code></pre> <p><strong>关键认知</strong>： - 算法复杂度决定<strong>可扩展性</strong> - O(n²) 和 O(nlogn) 在大数据量下差距巨大 - 选择正确算法比优化代码更重要</p> <hr> <h2 id=_14>七、操作系统：计算机的管家<a class=headerlink href=#_14 title="Permanent link">&para;</a></h2> <h3 id=71>7.1 为什么需要操作系统<a class=headerlink href=#71 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[为什么需要 OS] --&gt; B[硬件抽象]
+    A --&gt; C[资源管理]
+    A --&gt; D[用户接口]
+    A --&gt; E[安全隔离]
+
+    B --&gt; B1[隐藏硬件细节&lt;br/&gt;提供统一接口]
+    C --&gt; C1[CPU 调度&lt;br/&gt;内存分配&lt;br/&gt;设备管理]
+    D --&gt; D1[命令行&lt;br/&gt;图形界面&lt;br/&gt;系统调用]
+    E --&gt; E1[进程隔离&lt;br/&gt;权限控制&lt;br/&gt;访问保护]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff
+    style E fill:#e74c3c,color:#fff</code></pre> <p><strong>根本原因</strong>： - 硬件太复杂，程序员无法直接操作 - 多个程序需要<strong>共享资源</strong> - 需要<strong>保护</strong>程序之间不互相干扰 - 需要提供<strong>统一接口</strong>，降低开发难度</p> <h3 id=72>7.2 操作系统的核心功能<a class=headerlink href=#72 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[操作系统] --&gt; B[进程管理]
+    A --&gt; C[内存管理]
+    A --&gt; D[文件系统]
+    A --&gt; E[设备管理]
+    A --&gt; F[网络管理]
+
+    B --&gt; B1[进程调度&lt;br/&gt;进程通信&lt;br/&gt;同步互斥]
+    C --&gt; C1[虚拟内存&lt;br/&gt;分页分段&lt;br/&gt;内存保护]
+    D --&gt; D1[文件存储&lt;br/&gt;目录管理&lt;br/&gt;权限控制]
+    E --&gt; E1[驱动程序&lt;br/&gt;中断处理&lt;br/&gt;DMA]
+    F --&gt; F1[协议栈&lt;br/&gt;套接字&lt;br/&gt;网络配置]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#f39c12,color:#fff
+    style F fill:#1abc9c,color:#fff</code></pre> <h3 id=73>7.3 进程与线程：并发的基础<a class=headerlink href=#73 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[进程 vs 线程] --&gt; B[进程]
+    A --&gt; C[线程]
+
+    B --&gt; B1[资源分配单位&lt;br/&gt;独立地址空间&lt;br/&gt;切换开销大]
+    C --&gt; C1[CPU 调度单位&lt;br/&gt;共享进程资源&lt;br/&gt;切换开销小]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff</code></pre> <h4 id=_15>进程状态转换<a class=headerlink href=#_15 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>stateDiagram-v2
+    [*] --&gt; 新建
+    新建 --&gt; 就绪
+    就绪 --&gt; 运行
+    运行 --&gt; 就绪
+    运行 --&gt; 阻塞
+    阻塞 --&gt; 就绪
+    运行 --&gt; 终止
+    终止 --&gt; [*]</code></pre> <p><strong>状态说明</strong>： - <strong>新建</strong>：进程刚创建 - <strong>就绪</strong>：等待 CPU 时间片 - <strong>运行</strong>：正在 CPU 上执行 - <strong>阻塞</strong>：等待 I/O 或其他事件 - <strong>终止</strong>：进程结束</p> <h3 id=74-cpu>7.4 进程调度：CPU 时间如何分配<a class=headerlink href=#74-cpu title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[调度算法] --&gt; B[先来先服务&lt;br/&gt;FCFS]
+    A --&gt; C[短作业优先&lt;br/&gt;SJF]
+    A --&gt; D[时间片轮转&lt;br/&gt;RR]
+    A --&gt; E[优先级调度]
+    A --&gt; F[多级反馈队列]
+
+    B --&gt; B1[简单&lt;br/&gt;但短作业等待久]
+    C --&gt; C1[平均等待时间最短&lt;br/&gt;但长作业可能饿死]
+    D --&gt; D1[公平&lt;br/&gt;响应时间短&lt;br/&gt;现代 OS 采用]
+    E --&gt; E1[重要任务优先&lt;br/&gt;但低优先级可能饿死]
+    F --&gt; F1[综合方案&lt;br/&gt;最常用]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#7f8c8d,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#f39c12,color:#fff
+    style F fill:#e74c3c,color:#fff</code></pre> <h3 id=75>7.5 虚拟内存：为什么内存不够用<a class=headerlink href=#75 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[虚拟内存] --&gt; B[问题]
+    A --&gt; C[解决方案]
+    A --&gt; D[效果]
+
+    B --&gt; B1[物理内存有限&lt;br/&gt;程序需求增长]
+    C --&gt; C1[磁盘作为扩展&lt;br/&gt;按需加载&lt;br/&gt;页面置换]
+    D --&gt; D1[程序可用内存&lt;br/&gt;大于物理内存&lt;br/&gt;隔离保护]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff</code></pre> <p><strong>虚拟内存原理</strong>：</p> <pre class=mermaid><code>graph LR
+    A[虚拟地址] --&gt; B[MMU&lt;br/&gt;内存管理单元]
+    B --&gt; C{页表查找}
+    C --&gt;|命中 | D[物理地址]
+    C --&gt;|缺页 | E[磁盘读取]
+    E --&gt; F[加载到内存]
+    F --&gt; D
+
+    style A fill:#3498db,color:#fff
+    style B fill:#9b59b6,color:#fff
+    style C fill:#f39c12,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#e74c3c,color:#fff
+    style F fill:#1abc9c,color:#fff</code></pre> <p><strong>关键概念</strong>： - <strong>页</strong>：虚拟内存的基本单位（通常 4KB） - <strong>页表</strong>：虚拟地址到物理地址的映射表 - <strong>缺页中断</strong>：访问的页不在内存时触发 - <strong>页面置换</strong>：内存满时选择页面换出到磁盘</p> <p><strong>为什么虚拟内存会慢</strong>？ - 磁盘访问速度比内存慢 <strong>10 万倍</strong> - 频繁缺页会导致<strong>抖动</strong>，系统几乎无法工作</p> <h3 id=76>7.6 文件系统：数据如何存储<a class=headerlink href=#76 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[文件系统] --&gt; B[FAT32]
+    A --&gt; C[NTFS]
+    A --&gt; D[ext4]
+    A --&gt; E[APFS]
+
+    B --&gt; B1[简单&lt;br/&gt;兼容性好&lt;br/&gt;不支持大文件]
+    C --&gt; C1[功能丰富&lt;br/&gt;日志&lt;br/&gt;权限控制&lt;br/&gt;Windows 默认]
+    D --&gt; D1[Linux 默认&lt;br/&gt;稳定&lt;br/&gt;性能好]
+    E --&gt; E1[macOS 默认&lt;br/&gt;针对 SSD 优化&lt;br/&gt;快照]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#7f8c8d,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#f39c12,color:#fff</code></pre> <h4 id=_16>文件存储原理<a class=headerlink href=#_16 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>graph TD
+    A[文件] --&gt; B[文件控制块&lt;br/&gt;FCB]
+    B --&gt; C[元数据&lt;br/&gt;文件名 大小 权限]
+    B --&gt; D[数据块指针]
+    D --&gt; E[数据块 1]
+    D --&gt; F[数据块 2]
+    D --&gt; G[数据块 N]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff
+    style E fill:#1abc9c,color:#fff
+    style F fill:#1abc9c,color:#fff
+    style G fill:#1abc9c,color:#fff</code></pre> <hr> <h2 id=_17>八、存储体系：为什么需要多级存储<a class=headerlink href=#_17 title="Permanent link">&para;</a></h2> <h3 id=81>8.1 存储器的层次结构<a class=headerlink href=#81 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[存储层次] --&gt; B[寄存器&lt;br/&gt;CPU 内部]
+    A --&gt; C[高速缓存&lt;br/&gt;L1/L2/L3]
+    A --&gt; D[主内存&lt;br/&gt;DRAM]
+    A --&gt; E[辅助存储&lt;br/&gt;SSD/HDD]
+    A --&gt; F[离线存储&lt;br/&gt;磁带 光盘]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#f39c12,color:#fff
+    style D fill:#3498db,color:#fff
+    style E fill:#27ae60,color:#fff
+    style F fill:#7f8c8d,color:#fff</code></pre> <h4 id=_18>各层存储器对比<a class=headerlink href=#_18 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th>层级</th> <th>容量</th> <th>速度</th> <th>成本</th> <th>易失性</th> </tr> </thead> <tbody> <tr> <td>寄存器</td> <td>KB 级</td> <td>最快</td> <td>最高</td> <td>易失</td> </tr> <tr> <td>L1 缓存</td> <td>KB 级</td> <td>很快</td> <td>很高</td> <td>易失</td> </tr> <tr> <td>L2 缓存</td> <td>MB 级</td> <td>快</td> <td>高</td> <td>易失</td> </tr> <tr> <td>L3 缓存</td> <td>MB 级</td> <td>较快</td> <td>较高</td> <td>易失</td> </tr> <tr> <td>主内存</td> <td>GB 级</td> <td>中等</td> <td>中等</td> <td>易失</td> </tr> <tr> <td>SSD</td> <td>TB 级</td> <td>较慢</td> <td>较低</td> <td>非易失</td> </tr> <tr> <td>HDD</td> <td>TB 级</td> <td>慢</td> <td>低</td> <td>非易失</td> </tr> </tbody> </table> <h3 id=82>8.2 为什么需要缓存<a class=headerlink href=#82 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[为什么需要缓存] --&gt; B[CPU 与内存&lt;br/&gt;速度差距大]
+    A --&gt; C[局部性原理]
+    A --&gt; D[成本考虑]
+
+    B --&gt; B1[CPU 速度每年提升&lt;br/&gt;内存速度提升慢&lt;br/&gt;差距达 100 倍]
+    C --&gt; C1[时间局部性&lt;br/&gt;刚访问的数据&lt;br/&gt;很可能再次访问]
+    C --&gt; C2[空间局部性&lt;br/&gt;相邻的数据&lt;br/&gt;很可能被访问]
+    D --&gt; D1[高速存储器贵&lt;br/&gt;全用高速内存&lt;br/&gt;成本太高]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff</code></pre> <p><strong>速度差距可视化</strong>：</p> <pre class=mermaid><code>xychart-beta
+    title "存储器访问延迟对比（时钟周期，对数坐标）"
+    x-axis [L1 缓存，L2 缓存，L3 缓存，主内存，SSD, HDD]
+    y-axis "延迟（周期）" 1 --&gt; 10000000
+    bar [1, 4, 12, 100, 100000, 10000000]</code></pre> <p><strong>关键认知</strong>： - L1 缓存访问约 <strong>1 个周期</strong> - 主内存访问约 <strong>100 个周期</strong> - 硬盘访问约 <strong>1000 万周期</strong> - 缓存命中率决定系统性能</p> <h3 id=83>8.3 缓存的工作原理<a class=headerlink href=#83 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[CPU 请求数据] --&gt; B{缓存命中？}
+    B --&gt;|是 | C[直接返回&lt;br/&gt;1-4 周期]
+    B --&gt;|否 | D[从内存加载&lt;br/&gt;100+ 周期]
+    D --&gt; E[存入缓存]
+    E --&gt; F[返回给 CPU]
+    F --&gt; G[替换旧数据&lt;br/&gt;LRU 算法]
+
+    style A fill:#3498db,color:#fff
+    style B fill:#f39c12,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#e74c3c,color:#fff
+    style E fill:#1abc9c,color:#fff
+    style F fill:#2ecc71,color:#fff
+    style G fill:#9b59b6,color:#fff</code></pre> <p><strong>缓存映射方式</strong>：</p> <table> <thead> <tr> <th>方式</th> <th>特点</th> <th>优点</th> <th>缺点</th> </tr> </thead> <tbody> <tr> <td>直接映射</td> <td>每块内存只有一个缓存位置</td> <td>简单快速</td> <td>冲突多</td> </tr> <tr> <td>全相联</td> <td>每块内存可放任何位置</td> <td>冲突少</td> <td>复杂慢速</td> </tr> <tr> <td>组相联</td> <td>折中方案</td> <td>平衡</td> <td>现代 CPU 采用</td> </tr> </tbody> </table> <h3 id=84-ssd-vs-hdd>8.4 SSD vs HDD：存储技术的演进<a class=headerlink href=#84-ssd-vs-hdd title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[存储技术] --&gt; B[HDD&lt;br/&gt;机械硬盘]
+    A --&gt; C[SSD&lt;br/&gt;固态硬盘]
+    A --&gt; D[NVMe&lt;br/&gt;新一代 SSD]
+
+    B --&gt; B1[磁头读写&lt;br/&gt;机械运动&lt;br/&gt;速度慢&lt;br/&gt;便宜]
+    C --&gt; C1[闪存芯片&lt;br/&gt;电子存储&lt;br/&gt;速度快&lt;br/&gt;较贵]
+    D --&gt; D1[PCIe 接口&lt;br/&gt;直连 CPU&lt;br/&gt;极快&lt;br/&gt;最贵]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#7f8c8d,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff</code></pre> <h4 id=_19>性能对比<a class=headerlink href=#_19 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th>指标</th> <th>HDD</th> <th>SATA SSD</th> <th>NVMe SSD</th> </tr> </thead> <tbody> <tr> <td>顺序读取</td> <td>150 MB/s</td> <td>550 MB/s</td> <td>7000 MB/s</td> </tr> <tr> <td>随机读取</td> <td>1 MB/s</td> <td>50 MB/s</td> <td>500 MB/s</td> </tr> <tr> <td>延迟</td> <td>10ms</td> <td>0.1ms</td> <td>0.02ms</td> </tr> <tr> <td>价格/TB</td> <td>150 元</td> <td>400 元</td> <td>600 元</td> </tr> </tbody> </table> <p><strong>为什么 SSD 快这么多</strong>？ - HDD 需要<strong>机械运动</strong>（磁头寻道） - SSD 是<strong>电子存储</strong>，无机械延迟 - NVMe 使用<strong>PCIe 通道</strong>，带宽更大</p> <hr> <h2 id=_20>九、计算机网络：计算机如何通信<a class=headerlink href=#_20 title="Permanent link">&para;</a></h2> <h3 id=91>9.1 为什么需要网络分层<a class=headerlink href=#91 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[网络分层] --&gt; B[问题分解]
+    A --&gt; C[职责分离]
+    A --&gt; D[独立演进]
+    A --&gt; E[标准化]
+
+    B --&gt; B1[复杂问题&lt;br/&gt;分解为简单问题]
+    C --&gt; C1[每层专注&lt;br/&gt;特定功能]
+    D --&gt; D1[某层变化&lt;br/&gt;不影响其他层]
+    E --&gt; E1[不同厂商&lt;br/&gt;可互操作]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff
+    style E fill:#e74c3c,color:#fff</code></pre> <h3 id=92-osi-vs-tcpip>9.2 OSI 七层模型 vs TCP/IP 四层模型<a class=headerlink href=#92-osi-vs-tcpip title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[网络模型对比] --&gt; B[OSI 七层]
+    A --&gt; C[TCP/IP 四层]
+
+    B --&gt; B1[7.应用层]
+    B --&gt; B2[6.表示层]
+    B --&gt; B3[5.会话层]
+    B --&gt; B4[4.传输层]
+    B --&gt; B5[3.网络层]
+    B --&gt; B6[2.数据链路层]
+    B --&gt; B7[1.物理层]
+
+    C --&gt; C1[应用层&lt;br/&gt;对应 5-7 层]
+    C --&gt; C2[传输层&lt;br/&gt;对应 4 层]
+    C --&gt; C3[网络层&lt;br/&gt;对应 3 层]
+    C --&gt; C4[网络接口层&lt;br/&gt;对应 1-2 层]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff</code></pre> <h3 id=93>9.3 数据封装与解封装<a class=headerlink href=#93 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>sequenceDiagram
+    participant A as 发送方
+    participant N as 网络
+    participant B as 接收方
+
+    A-&gt;&gt;A: 应用数据
+    A-&gt;&gt;A: +TCP 头&lt;br/&gt;传输层
+    A-&gt;&gt;A: +IP 头&lt;br/&gt;网络层
+    A-&gt;&gt;A: + 帧头帧尾&lt;br/&gt;链路层
+    A-&gt;&gt;N: 比特流传输
+    N-&gt;&gt;B: 比特流传输
+    B-&gt;&gt;B: -帧头帧尾&lt;br/&gt;链路层
+    B-&gt;&gt;B: -IP 头&lt;br/&gt;网络层
+    B-&gt;&gt;B: -TCP 头&lt;br/&gt;传输层
+    B-&gt;&gt;B: 应用数据</code></pre> <p><strong>关键认知</strong>： - 每层都添加<strong>头部信息</strong>（元数据） - 头部包含该层所需的<strong>控制信息</strong> - 接收方按相反顺序<strong>剥离头部</strong></p> <h3 id=94-ip>9.4 IP 地址与路由<a class=headerlink href=#94-ip title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[IP 地址] --&gt; B[IPv4&lt;br/&gt;32 位&lt;br/&gt;43 亿地址]
+    A --&gt; C[IPv6&lt;br/&gt;128 位&lt;br/&gt;3.4×10³⁸地址]
+    A --&gt; D[子网掩码&lt;br/&gt;区分网络位和主机位]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#3498db,color:#fff</code></pre> <h4 id=ipv6>为什么需要 IPv6<a class=headerlink href=#ipv6 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th>问题</th> <th>IPv4</th> <th>IPv6</th> <th>根本原因</th> </tr> </thead> <tbody> <tr> <td>地址数量</td> <td>43 亿</td> <td>3.4×10³⁸</td> <td>设备数量爆炸</td> </tr> <tr> <td>地址分配</td> <td>已耗尽</td> <td>充足</td> <td>早期分配不合理</td> </tr> <tr> <td>NAT 需求</td> <td>需要</td> <td>不需要</td> <td>地址不足导致</td> </tr> <tr> <td>安全性</td> <td>可选</td> <td>内置</td> <td>设计时代不同</td> </tr> </tbody> </table> <p><strong>路由原理</strong>：</p> <pre class=mermaid><code>graph TD
+    A[数据包] --&gt; B[路由器 1]
+    B --&gt; C{查路由表}
+    C --&gt;|匹配 | D[转发到下一跳]
+    C --&gt;|不匹配 | E[默认路由]
+    D --&gt; F[路由器 2]
+    F --&gt; G[重复过程]
+    G --&gt; H[目标网络]
+
+    style A fill:#3498db,color:#fff
+    style B fill:#9b59b6
+    style C fill:#f39c12,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#e74c3c,color:#fff
+    style F fill:#9b59b6
+    style G fill:#f39c12,color:#fff
+    style H fill:#1abc9c,color:#fff</code></pre> <h3 id=95-tcp-vs-udp>9.5 TCP vs UDP：传输层协议<a class=headerlink href=#95-tcp-vs-udp title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[传输层协议] --&gt; B[TCP&lt;br/&gt;传输控制协议]
+    A --&gt; C[UDP&lt;br/&gt;用户数据报协议]
+
+    B --&gt; B1[面向连接&lt;br/&gt;可靠传输&lt;br/&gt;流量控制&lt;br/&gt;拥塞控制&lt;br/&gt;HTTP FTP SMTP]
+    C --&gt; C1[无连接&lt;br/&gt;不可靠&lt;br/&gt;低延迟&lt;br/&gt;DNS 视频 游戏]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff</code></pre> <h4 id=tcp>TCP 三次握手<a class=headerlink href=#tcp title="Permanent link">&para;</a></h4> <pre class=mermaid><code>sequenceDiagram
+    participant Client as 客户端
+    participant Server as 服务器
+
+    Client-&gt;&gt;Server: 1. SYN&lt;br/&gt;我想建立连接
+    Server-&gt;&gt;Server: 收到 SYN&lt;br/&gt;准备接收
+    Server-&gt;&gt;Client: 2. SYN-ACK&lt;br/&gt;好的，我也同意
+    Client-&gt;&gt;Client: 收到 SYN-ACK&lt;br/&gt;连接确认
+    Client-&gt;&gt;Server: 3. ACK&lt;br/&gt;连接建立
+    Note over Client,Server: 连接已建立&lt;br/&gt;可以传输数据</code></pre> <p><strong>为什么需要三次握手</strong>？ - 确认<strong>双方</strong>都有发送和接收能力 - 防止<strong>已失效的连接请求</strong>突然到达 - 同步<strong>初始序列号</strong></p> <h3 id=96-http-web>9.6 HTTP 协议：Web 的基础<a class=headerlink href=#96-http-web title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[HTTP 协议演进] --&gt; B[HTTP/1.0&lt;br/&gt;1991 年]
+    A --&gt; C[HTTP/1.1&lt;br/&gt;1997 年]
+    A --&gt; D[HTTP/2&lt;br/&gt;2015 年]
+    A --&gt; E[HTTP/3&lt;br/&gt;2022 年]
+
+    B --&gt; B1[短连接&lt;br/&gt;每次请求新建]
+    C --&gt; C1[长连接&lt;br/&gt;队头阻塞]
+    D --&gt; D1[多路复用&lt;br/&gt;二进制协议&lt;br/&gt;头部压缩]
+    E --&gt; E1[基于 QUIC&lt;br/&gt;UDP 传输&lt;br/&gt;0-RTT]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#7f8c8d,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#e74c3c,color:#fff</code></pre> <hr> <h2 id=_21>十、计算机性能：如何衡量和优化<a class=headerlink href=#_21 title="Permanent link">&para;</a></h2> <h3 id=101>10.1 性能衡量指标<a class=headerlink href=#101 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[性能指标] --&gt; B[响应时间&lt;br/&gt;完成时间]
+    A --&gt; C[吞吐量&lt;br/&gt;单位时间完成量]
+    A --&gt; D[CPU 利用率&lt;br/&gt;忙碌时间比例]
+    A --&gt; E[带宽&lt;br/&gt;数据传输率]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#f39c12,color:#fff</code></pre> <p><strong>性能公式</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a>CPU 时间 = 指令数 × CPI × 时钟周期时间
+</span></code></pre></div></td></tr></table></div></p> <p>其中： - <strong>指令数</strong>：程序包含的指令数量 - <strong>CPI</strong>：每条指令的平均时钟周期数 - <strong>时钟周期时间</strong>：CPU 频率的倒数</p> <h3 id=102>10.2 性能瓶颈分析<a class=headerlink href=#102 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[性能瓶颈] --&gt; B[CPU 瓶颈&lt;br/&gt;计算密集]
+    A --&gt; C[内存瓶颈&lt;br/&gt;内存带宽不足]
+    A --&gt; D[I/O 瓶颈&lt;br/&gt;磁盘网络慢]
+    A --&gt; E[锁竞争&lt;br/&gt;并发瓶颈]
+
+    style A fill:#c0392b,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#f39c12,color:#fff
+    style E fill:#27ae60,color:#fff</code></pre> <h4 id=_22>阿姆达尔定律<a class=headerlink href=#_22 title="Permanent link">&para;</a></h4> <pre class=mermaid><code>graph TD
+    A[阿姆达尔定律] --&gt; B[串行部分限制&lt;br/&gt;最大加速比]
+    A --&gt; C[并行部分可&lt;br/&gt;随核心数扩展]
+
+    B --&gt; B1[10% 串行&lt;br/&gt;最大加速 10 倍&lt;br/&gt;无论多少核心]
+    C --&gt; C1[90% 并行&lt;br/&gt;可充分利用&lt;br/&gt;多核心]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#27ae60,color:#fff</code></pre> <p><strong>公式</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a>最大加速比 = 1 / (S + (1-S)/N)
+</span></code></pre></div></td></tr></table></div></p> <p>S = 串行部分比例，N = 处理器数量</p> <p><strong>关键认知</strong>：优化<strong>串行部分</strong>比增加核心数更重要。</p> <h3 id=103>10.3 性能优化策略<a class=headerlink href=#103 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[优化策略] --&gt; B[算法优化&lt;br/&gt;最有效]
+    A --&gt; C[数据结构优化&lt;br/&gt;减少复杂度]
+    A --&gt; D[缓存优化&lt;br/&gt;提高命中率]
+    A --&gt; E[并行化&lt;br/&gt;多核利用]
+    A --&gt; F[I/O 优化&lt;br/&gt;减少等待]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#f39c12,color:#fff
+    style F fill:#1abc9c,color:#fff</code></pre> <h4 id=_23>优化优先级<a class=headerlink href=#_23 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th>优化类型</th> <th>潜在收益</th> <th>难度</th> <th>优先级</th> </tr> </thead> <tbody> <tr> <td>算法优化</td> <td>10-1000 倍</td> <td>高</td> <td>1</td> </tr> <tr> <td>数据结构优化</td> <td>2-100 倍</td> <td>中</td> <td>2</td> </tr> <tr> <td>缓存优化</td> <td>2-10 倍</td> <td>中</td> <td>3</td> </tr> <tr> <td>并行化</td> <td>2-8 倍</td> <td>高</td> <td>4</td> </tr> <tr> <td>代码微调</td> <td>10-30%</td> <td>低</td> <td>5</td> </tr> </tbody> </table> <p><strong>关键认知</strong>： - ** premature optimization<strong>（过早优化）是万恶之源 - 先</strong>测量<strong>再优化，不要猜测瓶颈 - 优化</strong>热点代码**，而非全部代码</p> <h3 id=104>10.4 缓存友好的编程<a class=headerlink href=#104 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[缓存友好] --&gt; B[空间局部性&lt;br/&gt;顺序访问]
+    A --&gt; C[时间局部性&lt;br/&gt;重复使用]
+    A --&gt; D[数据对齐&lt;br/&gt;避免跨行]
+    A --&gt; E[预取&lt;br/&gt;提前加载]
+
+    style A fill:#27ae60,color:#fff
+    style B fill:#2ecc71,color:#fff
+    style C fill:#2ecc71,color:#fff
+    style D fill:#f39c12,color:#fff
+    style E fill:#3498db,color:#fff</code></pre> <p><strong>示例：矩阵遍历</strong></p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1>1</a></span>
+<span class=normal><a href=#__codelineno-8-2>2</a></span>
+<span class=normal><a href=#__codelineno-8-3>3</a></span>
+<span class=normal><a href=#__codelineno-8-4>4</a></span>
+<span class=normal><a href=#__codelineno-8-5>5</a></span>
+<span class=normal><a href=#__codelineno-8-6>6</a></span>
+<span class=normal><a href=#__codelineno-8-7>7</a></span>
+<span class=normal><a href=#__codelineno-8-8>8</a></span>
+<span class=normal><a href=#__codelineno-8-9>9</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a>// 缓存友好（行优先）
+</span><span id=__span-8-2><a id=__codelineno-8-2 name=__codelineno-8-2></a>for (i = 0; i &lt; N; i++)
+</span><span id=__span-8-3><a id=__codelineno-8-3 name=__codelineno-8-3></a>    for (j = 0; j &lt; N; j++)
+</span><span id=__span-8-4><a id=__codelineno-8-4 name=__codelineno-8-4></a>        sum += matrix[i][j];  // 顺序访问
+</span><span id=__span-8-5><a id=__codelineno-8-5 name=__codelineno-8-5></a>
+</span><span id=__span-8-6><a id=__codelineno-8-6 name=__codelineno-8-6></a>// 缓存不友好（列优先）
+</span><span id=__span-8-7><a id=__codelineno-8-7 name=__codelineno-8-7></a>for (j = 0; j &lt; N; j++)
+</span><span id=__span-8-8><a id=__codelineno-8-8 name=__codelineno-8-8></a>    for (i = 0; i &lt; N; i++)
+</span><span id=__span-8-9><a id=__codelineno-8-9 name=__codelineno-8-9></a>        sum += matrix[i][j];  // 跳跃访问
+</span></code></pre></div></td></tr></table></div> <p><strong>性能差异</strong>：可达 <strong>10 倍以上</strong></p> <hr> <h2 id=_24>十一、未来趋势：计算机的发展方向<a class=headerlink href=#_24 title="Permanent link">&para;</a></h2> <h3 id=111>11.1 后摩尔时代的计算<a class=headerlink href=#111 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[后摩尔时代] --&gt; B[3D 堆叠&lt;br/&gt;垂直集成]
+    A --&gt; C[Chiplet&lt;br/&gt;小芯片组合]
+    A --&gt; D[新材料&lt;br/&gt;碳纳米管]
+    A --&gt; E[新架构&lt;br/&gt;存算一体]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff
+    style E fill:#e74c3c,color:#fff</code></pre> <p><strong>根本挑战</strong>： - 晶体管尺寸接近<strong>物理极限</strong>（5nm 以下） - 功耗密度达到<strong>散热极限</strong> - 制造成本<strong>指数级增长</strong></p> <h3 id=112>11.2 量子计算<a class=headerlink href=#112 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[量子计算] --&gt; B[量子比特&lt;br/&gt;叠加态]
+    A --&gt; C[量子纠缠&lt;br/&gt;超距关联]
+    A --&gt; D[量子干涉&lt;br/&gt;增强正确结果]
+
+    B --&gt; B1[0 和 1 同时存在&lt;br/&gt;指数级并行]
+    C --&gt; C1[n 个量子比特&lt;br/&gt;表示 2ⁿ个状态]
+    D --&gt; D1[错误答案抵消&lt;br/&gt;正确答案增强]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff</code></pre> <p><strong>量子优势</strong>：</p> <table> <thead> <tr> <th>问题类型</th> <th>经典计算机</th> <th>量子计算机</th> <th>加速比</th> </tr> </thead> <tbody> <tr> <td>因数分解</td> <td>指数时间</td> <td>多项式时间</td> <td>指数级</td> </tr> <tr> <td>数据库搜索</td> <td>O(n)</td> <td>O(√n)</td> <td>平方根</td> </tr> <tr> <td>量子系统模拟</td> <td>指数时间</td> <td>多项式时间</td> <td>指数级</td> </tr> <tr> <td>优化问题</td> <td>指数时间</td> <td>可能加速</td> <td>不确定</td> </tr> </tbody> </table> <p><strong>局限性</strong>： - 仅对<strong>特定问题</strong>有优势 - <strong>量子纠错</strong>困难 - <strong>退相干</strong>时间短 - 不会取代经典计算机</p> <h3 id=113>11.3 神经形态计算<a class=headerlink href=#113 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[神经形态计算] --&gt; B[模拟人脑&lt;br/&gt;神经元突触]
+    A --&gt; C[存算一体&lt;br/&gt;消除内存墙]
+    A --&gt; D[事件驱动&lt;br/&gt;低功耗]
+    A --&gt; E[并行处理&lt;br/&gt;模式识别]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#f39c12,color:#fff</code></pre> <p><strong>代表技术</strong>： - Intel Loihi 芯片 - IBM TrueNorth - 类脑芯片研究</p> <h3 id=114>11.4 边缘计算与云计算<a class=headerlink href=#114 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[计算范式] --&gt; B[云计算&lt;br/&gt;集中式]
+    A --&gt; C[边缘计算&lt;br/&gt;分布式]
+    A --&gt; D[雾计算&lt;br/&gt;中间层]
+
+    B --&gt; B1[数据中心&lt;br/&gt;强大算力&lt;br/&gt;高延迟]
+    C --&gt; C1[设备端&lt;br/&gt;低延迟&lt;br/&gt;隐私保护]
+    D --&gt; D1[本地网关&lt;br/&gt;平衡方案]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#3498db,color:#fff
+    style C fill:#27ae60,color:#fff
+    style D fill:#f39c12,color:#fff</code></pre> <p><strong>趋势</strong>： - <strong>云边端协同</strong>：各展所长 - <strong>5G/6G</strong>：低延迟网络 - <strong>IoT 设备</strong>：海量终端</p> <h3 id=115>11.5 计算机发展的根本趋势<a class=headerlink href=#115 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph TD
+    A[根本趋势] --&gt; B[专用化&lt;br/&gt;通用→专用]
+    A --&gt; C[异构化&lt;br/&gt;CPU+GPU+NPU]
+    A --&gt; D[软件定义&lt;br/&gt;硬件可编程]
+    A --&gt; E[智能化&lt;br/&gt;AI 赋能]
+    A --&gt; F[绿色化&lt;br/&gt;能效优先]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#f39c12,color:#fff
+    style F fill:#1abc9c,color:#fff</code></pre> <p><strong>核心洞察</strong>： 1. <strong>摩尔定律放缓</strong>，需要新架构 2. <strong>专用加速器</strong>成为主流（GPU、TPU、NPU） 3. <strong>软件硬件协同设计</strong> 4. <strong>能效</strong>成为第一考量 5. <strong>AI 与计算深度融合</strong></p> <hr> <h2 id=_25>结语：理解计算机，理解数字时代<a class=headerlink href=#_25 title="Permanent link">&para;</a></h2> <p>计算机是 20 世纪最伟大的发明，它已经深度融入我们生活的方方面面。理解计算机的运作原理，不仅是技术人员的必修课，也是每个数字时代公民的素养。</p> <pre class=mermaid><code>graph TD
+    A[计算机知识体系] --&gt; B[硬件基础&lt;br/&gt;晶体管→CPU]
+    A --&gt; C[数据表示&lt;br/&gt;二进制→多媒体]
+    A --&gt; D[软件体系&lt;br/&gt;语言→算法]
+    A --&gt; E[系统软件&lt;br/&gt;操作系统→编译]
+    A --&gt; F[网络通信&lt;br/&gt;协议→互联网]
+    A --&gt; G[性能优化&lt;br/&gt;瓶颈→优化]
+
+    style A fill:#8e44ad,color:#fff
+    style B fill:#e74c3c,color:#fff
+    style C fill:#3498db,color:#fff
+    style D fill:#27ae60,color:#fff
+    style E fill:#f39c12,color:#fff
+    style F fill:#1abc9c,color:#fff
+    style G fill:#9b59b6,color:#fff</code></pre> <p><strong>核心认知</strong>： - 计算机不是魔法，是<strong>工程奇迹</strong> - 每一个设计选择都有其<strong>根本原因</strong> - 理解<strong>为什么</strong>比记住<strong>是什么</strong>更重要 - 计算机技术在<strong>快速演进</strong>，但基础原理不变</p> <p>愿这份指南，帮助你建立对计算机的<strong>系统性理解</strong>，而不仅仅是碎片化知识。</p> <hr> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> </div> <div class=md-social> <a href=https://github.com/deep2code target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://linkedin.com/in/deep2code target=_blank rel=noopener title=linkedin.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg> </a> <a href=https://twitter.com/deep2code target=_blank rel=noopener title=twitter.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.select", "content.code.annotate", "content.tabs.link", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script> <script src=../../assets/javascripts/bundle.79ae519e.min.js></script> <script src=https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js></script> <script src=../../assets/js/code-block.js></script> <script src=../../assets/js/custom.js></script> </body> </html>

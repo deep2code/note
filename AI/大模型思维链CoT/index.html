@@ -1,0 +1,771 @@
+<!doctype html><html lang=en class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="20+年资深程序员的技术知识库 | Go、Python、AI、DevOps"><meta name=author content=deep2code><link href=https://deep2code.github.io/note/AI/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%80%9D%E7%BB%B4%E9%93%BECoT/ rel=canonical><link href=../%E5%A4%A7%E6%A8%A1%E5%9E%8BSkill/ rel=prev><link href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%BB%E5%8A%A8%E5%88%9B%E9%80%A0%E7%AE%97%E6%B3%95/ rel=next><link rel=icon href=../../assets/images/favicon.png><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.7.6"><title>CoT - note</title><link rel=stylesheet href=../../assets/stylesheets/main.484c7ddc.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.ab4e12ef.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style><link rel=stylesheet href=../../assets/css/code-block.css><link rel=stylesheet href=../../assets/css/custom.css><script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=deep-purple data-md-color-accent=amber> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#cotai class=md-skip> Skip to content </a> </div> <div data-md-component=announce> </div> <header class="md-header md-header--shadow" data-md-component=header> <nav class="md-header__inner md-grid" aria-label=Header> <a href=../.. title=note class="md-header__button md-logo" aria-label=note data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> note </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> CoT </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=deep-purple data-md-color-accent=amber aria-label="Switch to dark mode" type=radio name=__palette id=__palette_0> <label class="md-header__button md-icon" title="Switch to dark mode" for=__palette_1 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg> </label> <input class=md-option data-md-color-media data-md-color-scheme=slate data-md-color-primary=deep-purple data-md-color-accent=amber aria-label="Switch to light mode" type=radio name=__palette id=__palette_1> <label class="md-header__button md-icon" title="Switch to light mode" for=__palette_0 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg> </label> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=Search placeholder=Search autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=Search> <a href=javascript:void(0) class="md-search__icon md-icon" title=Share aria-label=Share data-clipboard data-clipboard-text data-md-component=search-share tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg> </a> <button type=reset class="md-search__icon md-icon" title=Clear aria-label=Clear tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> Initializing search </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> <div class=md-header__source> <a href=https://github.com/deep2code/note title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </div> <div class=md-source__repository> deep2code/note </div> </a> </div> </nav> </header> <div class=md-container data-md-component=container> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--integrated" aria-label=Navigation data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../.. title=note class="md-nav__button md-logo" aria-label=note data-md-component=logo> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg> </a> note </label> <div class=md-nav__source> <a href=https://github.com/deep2code/note title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </div> <div class=md-source__repository> deep2code/note </div> </a> </div> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../.. class=md-nav__link> <span class=md-ellipsis> Home </span> </a> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2> <label class=md-nav__link for=__nav_2 id=__nav_2_label tabindex> <span class=md-ellipsis> 编程语言 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2> <span class="md-nav__icon md-icon"></span> 编程语言 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1> <label class=md-nav__link for=__nav_2_1 id=__nav_2_1_label tabindex=0> <span class=md-ellipsis> Go </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_2_1_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1> <span class="md-nav__icon md-icon"></span> Go </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_1> <label class=md-nav__link for=__nav_2_1_1 id=__nav_2_1_1_label tabindex=0> <span class=md-ellipsis> 标准库 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_1_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_1> <span class="md-nav__icon md-icon"></span> 标准库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/go/01-fmt-%E6%A0%BC%E5%BC%8F%E5%8C%96IO/ class=md-nav__link> <span class=md-ellipsis> fmt </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/02-errors-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> errors </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/03-strings-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> strings </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/04-bytes-%E5%AD%97%E8%8A%82%E5%88%87%E7%89%87%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> bytes </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/05-strconv-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2/ class=md-nav__link> <span class=md-ellipsis> strconv </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/06-context-%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> context </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/07-sync-%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD/ class=md-nav__link> <span class=md-ellipsis> sync </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/08-sync-atomic-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/ class=md-nav__link> <span class=md-ellipsis> atomic </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/09-io-IO%E6%8E%A5%E5%8F%A3/ class=md-nav__link> <span class=md-ellipsis> io </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/10-os-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3/ class=md-nav__link> <span class=md-ellipsis> os </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_2> <label class=md-nav__link for=__nav_2_1_2 id=__nav_2_1_2_label tabindex=0> <span class=md-ellipsis> 框架 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_2> <span class="md-nav__icon md-icon"></span> 框架 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/go/frameworks/Gin%E6%A1%86%E6%9E%B6Context/ class=md-nav__link> <span class=md-ellipsis> Gin </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/GORM-ORM%E5%BA%93/ class=md-nav__link> <span class=md-ellipsis> GORM </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/grpc%20RPC%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> gRPC </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/Echo%E6%A1%86%E6%9E%B6Web%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Echo </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/frameworks/go-zero%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> go-zero </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_1_3> <label class=md-nav__link for=__nav_2_1_3 id=__nav_2_1_3_label tabindex=0> <span class=md-ellipsis> 进阶 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_1_3_label aria-expanded=false> <label class=md-nav__title for=__nav_2_1_3> <span class="md-nav__icon md-icon"></span> 进阶 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80Map/ class=md-nav__link> <span class=md-ellipsis> Map </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80Struct/ class=md-nav__link> <span class=md-ellipsis> Struct </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80GORM/ class=md-nav__link> <span class=md-ellipsis> GORM进阶 </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Go%E8%AF%AD%E8%A8%80HTTPS%E5%85%A8%E6%96%B9%E4%BD%8D/ class=md-nav__link> <span class=md-ellipsis> HTTPS </span> </a> </li> <li class=md-nav__item> <a href=../../lang/go/Golang%E7%A8%8B%E5%BA%8F%E5%91%98%E5%8F%91%E5%B1%95%E4%B9%8B%E8%B7%AF/ class=md-nav__link> <span class=md-ellipsis> 职业发展 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_2> <label class=md-nav__link for=__nav_2_2 id=__nav_2_2_label tabindex=0> <span class=md-ellipsis> Python </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_2_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2_2> <span class="md-nav__icon md-icon"></span> Python </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/python/01_Requests%E5%BA%93/ class=md-nav__link> <span class=md-ellipsis> Requests </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/02_Pandas%E6%95%B0%E6%8D%AE/ class=md-nav__link> <span class=md-ellipsis> Pandas </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/03_NumPy%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/ class=md-nav__link> <span class=md-ellipsis> NumPy </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/04_Django_Web%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Django </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/05_Flask%E5%BE%AE%E6%A1%86%E6%9E%B6/ class=md-nav__link> <span class=md-ellipsis> Flask </span> </a> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2_2_6> <label class=md-nav__link for=__nav_2_2_6 id=__nav_2_2_6_label tabindex=0> <span class=md-ellipsis> 标准库 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=3 aria-labelledby=__nav_2_2_6_label aria-expanded=false> <label class=md-nav__title for=__nav_2_2_6> <span class="md-nav__icon md-icon"></span> 标准库 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../lang/python/collections%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> collections </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/datetime%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> datetime </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/json%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> json </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/os%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> os </span> </a> </li> <li class=md-nav__item> <a href=../../lang/python/pathlib%E6%A8%A1%E5%9D%97/ class=md-nav__link> <span class=md-ellipsis> pathlib </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_3 checked> <div class="md-nav__link md-nav__container"> <a href=../ class="md-nav__link "> <span class=md-ellipsis> AI </span> </a> <label class="md-nav__link " for=__nav_3 id=__nav_3_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_3_label aria-expanded=true> <label class=md-nav__title for=__nav_3> <span class="md-nav__icon md-icon"></span> AI </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_2> <label class=md-nav__link for=__nav_3_2 id=__nav_3_2_label tabindex=0> <span class=md-ellipsis> 大模型 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_2_label aria-expanded=false> <label class=md-nav__title for=__nav_3_2> <span class="md-nav__icon md-icon"></span> 大模型 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/ class=md-nav__link> <span class=md-ellipsis> 入门指南 </span> </a> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B/ class=md-nav__link> <span class=md-ellipsis> 基础 </span> </a> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B8%B8%E8%AF%86/ class=md-nav__link> <span class=md-ellipsis> 常识 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--active md-nav__item--nested"> <input class="md-nav__toggle md-toggle " type=checkbox id=__nav_3_3 checked> <label class=md-nav__link for=__nav_3_3 id=__nav_3_3_label tabindex=0> <span class=md-ellipsis> 进阶 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_3_label aria-expanded=true> <label class=md-nav__title for=__nav_3_3> <span class="md-nav__icon md-icon"></span> 进阶 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8BAgent/ class=md-nav__link> <span class=md-ellipsis> Agent </span> </a> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8BSkill/ class=md-nav__link> <span class=md-ellipsis> Skill </span> </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> <span class=md-ellipsis> CoT </span> <span class="md-nav__icon md-icon"></span> </label> <a href=./ class="md-nav__link md-nav__link--active"> <span class=md-ellipsis> CoT </span> </a> <nav class="md-nav md-nav--secondary" aria-label="Table of contents"> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> Table of contents </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#_1 class=md-nav__link> <span class=md-ellipsis> 一、从一个简单的数学题开始 </span> </a> <nav class=md-nav aria-label=一、从一个简单的数学题开始> <ul class=md-nav__list> <li class=md-nav__item> <a href=#11-vs class=md-nav__link> <span class=md-ellipsis> 1.1 直接提问 vs 引导思考 </span> </a> </li> <li class=md-nav__item> <a href=#12 class=md-nav__link> <span class=md-ellipsis> 1.2 什么是思维链？ </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_2 class=md-nav__link> <span class=md-ellipsis> 二、为什么需要思维链？ </span> </a> <nav class=md-nav aria-label=二、为什么需要思维链？> <ul class=md-nav__list> <li class=md-nav__item> <a href=#21 class=md-nav__link> <span class=md-ellipsis> 2.1 大模型的"阿喀琉斯之踵" </span> </a> </li> <li class=md-nav__item> <a href=#22 class=md-nav__link> <span class=md-ellipsis> 2.2 人类的思考方式 </span> </a> </li> <li class=md-nav__item> <a href=#23 class=md-nav__link> <span class=md-ellipsis> 2.3 思维链的三大价值 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_3 class=md-nav__link> <span class=md-ellipsis> 三、思维链的科学原理 </span> </a> <nav class=md-nav aria-label=三、思维链的科学原理> <ul class=md-nav__list> <li class=md-nav__item> <a href=#31 class=md-nav__link> <span class=md-ellipsis> 3.1 大模型是如何"思考"的？ </span> </a> </li> <li class=md-nav__item> <a href=#32 class=md-nav__link> <span class=md-ellipsis> 3.2 思维链为什么有效？ </span> </a> </li> <li class=md-nav__item> <a href=#33-emergent-abilities class=md-nav__link> <span class=md-ellipsis> 3.3 涌现能力（Emergent Abilities） </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_4 class=md-nav__link> <span class=md-ellipsis> 四、思维链的三种实现方式 </span> </a> <nav class=md-nav aria-label=四、思维链的三种实现方式> <ul class=md-nav__list> <li class=md-nav__item> <a href=#41-zero-shot-cot class=md-nav__link> <span class=md-ellipsis> 4.1 方式一：零样本思维链（Zero-Shot CoT） </span> </a> </li> <li class=md-nav__item> <a href=#42-few-shot-cot class=md-nav__link> <span class=md-ellipsis> 4.2 方式二：少样本思维链（Few-Shot CoT） </span> </a> </li> <li class=md-nav__item> <a href=#43-self-consistency class=md-nav__link> <span class=md-ellipsis> 4.3 方式三：自我一致性（Self-Consistency） </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_5 class=md-nav__link> <span class=md-ellipsis> 五、思维链的进阶技术 </span> </a> <nav class=md-nav aria-label=五、思维链的进阶技术> <ul class=md-nav__list> <li class=md-nav__item> <a href=#51-auto-cot class=md-nav__link> <span class=md-ellipsis> 5.1 自动思维链（Auto-CoT） </span> </a> </li> <li class=md-nav__item> <a href=#52-tree-of-thoughts-tot class=md-nav__link> <span class=md-ellipsis> 5.2 思维树（Tree of Thoughts, ToT） </span> </a> </li> <li class=md-nav__item> <a href=#53-graph-of-thoughts-got class=md-nav__link> <span class=md-ellipsis> 5.3 思维图（Graph of Thoughts, GoT） </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_6 class=md-nav__link> <span class=md-ellipsis> 六、思维链的实际应用场景 </span> </a> <nav class=md-nav aria-label=六、思维链的实际应用场景> <ul class=md-nav__list> <li class=md-nav__item> <a href=#61 class=md-nav__link> <span class=md-ellipsis> 6.1 数学解题 </span> </a> </li> <li class=md-nav__item> <a href=#62 class=md-nav__link> <span class=md-ellipsis> 6.2 代码生成 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_7 class=md-nav__link> <span class=md-ellipsis> 九、思维链的学术发展脉络 </span> </a> <nav class=md-nav aria-label=九、思维链的学术发展脉络> <ul class=md-nav__list> <li class=md-nav__item> <a href=#91 class=md-nav__link> <span class=md-ellipsis> 9.1 重要论文时间线 </span> </a> </li> <li class=md-nav__item> <a href=#92 class=md-nav__link> <span class=md-ellipsis> 9.2 核心论文速览 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#cot class=md-nav__link> <span class=md-ellipsis> 十、未来展望：CoT会如何进化？ </span> </a> <nav class=md-nav aria-label=十、未来展望：CoT会如何进化？> <ul class=md-nav__list> <li class=md-nav__item> <a href=#101 class=md-nav__link> <span class=md-ellipsis> 10.1 技术趋势 </span> </a> </li> <li class=md-nav__item> <a href=#102 class=md-nav__link> <span class=md-ellipsis> 10.2 潜在突破方向 </span> </a> </li> <li class=md-nav__item> <a href=#103 class=md-nav__link> <span class=md-ellipsis> 10.3 对普通用户的启示 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#_8 class=md-nav__link> <span class=md-ellipsis> 十一、实战案例完整演示 </span> </a> <nav class=md-nav aria-label=十一、实战案例完整演示> <ul class=md-nav__list> <li class=md-nav__item> <a href=#111-cot class=md-nav__link> <span class=md-ellipsis> 11.1 案例：用CoT解决高考数学题 </span> </a> </li> <li class=md-nav__item> <a href=#112-cot class=md-nav__link> <span class=md-ellipsis> 11.2 案例：用CoT调试代码 </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=#cot_1 class=md-nav__link> <span class=md-ellipsis> 附录：CoT提示词模板库 </span> </a> <nav class=md-nav aria-label=附录：CoT提示词模板库> <ul class=md-nav__list> <li class=md-nav__item> <a href=#1 class=md-nav__link> <span class=md-ellipsis> 模板1：通用推理 </span> </a> </li> <li class=md-nav__item> <a href=#2 class=md-nav__link> <span class=md-ellipsis> 模板2：数学计算 </span> </a> </li> <li class=md-nav__item> <a href=#3 class=md-nav__link> <span class=md-ellipsis> 模板3：代码生成 </span> </a> </li> <li class=md-nav__item> <a href=#4 class=md-nav__link> <span class=md-ellipsis> 模板4：逻辑分析 </span> </a> </li> <li class=md-nav__item> <a href=#5 class=md-nav__link> <span class=md-ellipsis> 模板5：决策分析 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=../%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%BB%E5%8A%A8%E5%88%9B%E9%80%A0%E7%AE%97%E6%B3%95/ class=md-nav__link> <span class=md-ellipsis> 主动创造 </span> </a> </li> <li class=md-nav__item> <a href=../AutoGen/ class=md-nav__link> <span class=md-ellipsis> AutoGen </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_4> <label class=md-nav__link for=__nav_3_4 id=__nav_3_4_label tabindex=0> <span class=md-ellipsis> 算法 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_4_label aria-expanded=false> <label class=md-nav__title for=__nav_3_4> <span class="md-nav__icon md-icon"></span> 算法 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95/ class=md-nav__link> <span class=md-ellipsis> 线性回归 </span> </a> </li> <li class=md-nav__item> <a href=../%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E8%BF%9B%E5%8C%96%E5%8F%B2/ class=md-nav__link> <span class=md-ellipsis> 推荐算法 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3_5> <label class=md-nav__link for=__nav_3_5 id=__nav_3_5_label tabindex=0> <span class=md-ellipsis> 其他 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_3_5_label aria-expanded=false> <label class=md-nav__title for=__nav_3_5> <span class="md-nav__icon md-icon"></span> 其他 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../RAG%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/ class=md-nav__link> <span class=md-ellipsis> RAG技术 </span> </a> </li> <li class=md-nav__item> <a href=../OpenAI_Agents_SDK_Guide/ class=md-nav__link> <span class=md-ellipsis> OpenAI SDK </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4> <div class="md-nav__link md-nav__container"> <a href=../../protocols/ class="md-nav__link "> <span class=md-ellipsis> 网络协议 </span> </a> <label class="md-nav__link " for=__nav_4 id=__nav_4_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_4_label aria-expanded=false> <label class=md-nav__title for=__nav_4> <span class="md-nav__icon md-icon"></span> 网络协议 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_2> <label class=md-nav__link for=__nav_4_2 id=__nav_4_2_label tabindex=0> <span class=md-ellipsis> HTTP </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_2_label aria-expanded=false> <label class=md-nav__title for=__nav_4_2> <span class="md-nav__icon md-icon"></span> HTTP </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../protocols/HTTP2%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> HTTP/2 </span> </a> </li> <li class=md-nav__item> <a href=../../protocols/HTTP-3%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> HTTP/3 </span> </a> </li> <li class=md-nav__item> <a href=../../protocols/HTTPS/ class=md-nav__link> <span class=md-ellipsis> HTTPS </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_3> <label class=md-nav__link for=__nav_4_3 id=__nav_4_3_label tabindex=0> <span class=md-ellipsis> RPC </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_3_label aria-expanded=false> <label class=md-nav__title for=__nav_4_3> <span class="md-nav__icon md-icon"></span> RPC </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../protocols/gRPC/ class=md-nav__link> <span class=md-ellipsis> gRPC </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4_4> <label class=md-nav__link for=__nav_4_4 id=__nav_4_4_label tabindex=0> <span class=md-ellipsis> 其他 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_4_4_label aria-expanded=false> <label class=md-nav__title for=__nav_4_4> <span class="md-nav__icon md-icon"></span> 其他 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../protocols/RTSP%E5%8D%8F%E8%AE%AE/ class=md-nav__link> <span class=md-ellipsis> RTSP </span> </a> </li> <li class=md-nav__item> <a href=../../protocols/IPv8/ class=md-nav__link> <span class=md-ellipsis> IPv8 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_5> <div class="md-nav__link md-nav__container"> <a href=../../database/ class="md-nav__link "> <span class=md-ellipsis> 数据库 </span> </a> <label class="md-nav__link " for=__nav_5 id=__nav_5_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_5_label aria-expanded=false> <label class=md-nav__title for=__nav_5> <span class="md-nav__icon md-icon"></span> 数据库 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_5_2> <label class=md-nav__link for=__nav_5_2 id=__nav_5_2_label tabindex=0> <span class=md-ellipsis> MySQL </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_5_2_label aria-expanded=false> <label class=md-nav__title for=__nav_5_2> <span class="md-nav__icon md-icon"></span> MySQL </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../database/MySQLB%2B%E6%A0%91/ class=md-nav__link> <span class=md-ellipsis> B+树 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6> <div class="md-nav__link md-nav__container"> <a href=../../tools/ class="md-nav__link "> <span class=md-ellipsis> 开发工具 </span> </a> <label class="md-nav__link " for=__nav_6 id=__nav_6_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_6_label aria-expanded=false> <label class=md-nav__title for=__nav_6> <span class="md-nav__icon md-icon"></span> 开发工具 </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_2> <label class=md-nav__link for=__nav_6_2 id=__nav_6_2_label tabindex=0> <span class=md-ellipsis> DevOps </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_2_label aria-expanded=false> <label class=md-nav__title for=__nav_6_2> <span class="md-nav__icon md-icon"></span> DevOps </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Docker/ class=md-nav__link> <span class=md-ellipsis> Docker </span> </a> </li> <li class=md-nav__item> <a href=../../tools/Kubernetes/ class=md-nav__link> <span class=md-ellipsis> Kubernetes </span> </a> </li> <li class=md-nav__item> <a href=../../tools/Linux/ class=md-nav__link> <span class=md-ellipsis> Linux </span> </a> </li> <li class=md-nav__item> <a href=../../tools/jenkins-beginner/ class=md-nav__link> <span class=md-ellipsis> Jenkins </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_3> <label class=md-nav__link for=__nav_6_3 id=__nav_6_3_label tabindex=0> <span class=md-ellipsis> Git </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_3_label aria-expanded=false> <label class=md-nav__title for=__nav_6_3> <span class="md-nav__icon md-icon"></span> Git </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/GitHub%E5%85%A5%E9%97%A8%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/ class=md-nav__link> <span class=md-ellipsis> 入门 </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_4> <label class=md-nav__link for=__nav_6_4 id=__nav_6_4_label tabindex=0> <span class=md-ellipsis> 调试 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_4_label aria-expanded=false> <label class=md-nav__title for=__nav_6_4> <span class="md-nav__icon md-icon"></span> 调试 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Wireshark/ class=md-nav__link> <span class=md-ellipsis> Wireshark </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6_5> <label class=md-nav__link for=__nav_6_5 id=__nav_6_5_label tabindex=0> <span class=md-ellipsis> 文档 </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=2 aria-labelledby=__nav_6_5_label aria-expanded=false> <label class=md-nav__title for=__nav_6_5> <span class="md-nav__icon md-icon"></span> 文档 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../tools/Mermaid%E5%9B%BE%E8%A1%A8/ class=md-nav__link> <span class=md-ellipsis> Mermaid </span> </a> </li> <li class=md-nav__item> <a href=../../tools/PlantUML%E7%94%BB%E5%9B%BE%E7%A5%9E%E5%99%A8/ class=md-nav__link> <span class=md-ellipsis> PlantUML </span> </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--section md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_7> <div class="md-nav__link md-nav__container"> <a href=../../science/ class="md-nav__link "> <span class=md-ellipsis> 计算机科学 </span> </a> <label class="md-nav__link " for=__nav_7 id=__nav_7_label tabindex> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_7_label aria-expanded=false> <label class=md-nav__title for=__nav_7> <span class="md-nav__icon md-icon"></span> 计算机科学 </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../science/computer-components-complete/ class=md-nav__link> <span class=md-ellipsis> 组件 </span> </a> </li> <li class=md-nav__item> <a href=../../science/numbers-complete/ class=md-nav__link> <span class=md-ellipsis> 数字 </span> </a> </li> <li class=md-nav__item> <a href=../../science/%E5%A3%B0%E9%9F%B3%E5%8E%9F%E7%90%86/ class=md-nav__link> <span class=md-ellipsis> 声音 </span> </a> </li> </ul> </nav> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=cotai>大模型思维链（CoT）完全解析：让AI学会"一步步思考"的魔法<a class=headerlink href=#cotai title="Permanent link">&para;</a></h1> <blockquote> <p><strong>导语</strong>：你有没有发现，有时候问AI一个复杂问题，它会直接给出错误答案；但如果你让它"一步步思考"，它反而能答对？这背后隐藏着一个革命性技术——思维链（Chain of Thought, CoT）。今天，我们就把这个技术掰开揉碎，从原理到实战，让你彻底搞懂！</p> </blockquote> <hr> <h2 id=_1>一、从一个简单的数学题开始<a class=headerlink href=#_1 title="Permanent link">&para;</a></h2> <h3 id=11-vs>1.1 直接提问 vs 引导思考<a class=headerlink href=#11-vs title="Permanent link">&para;</a></h3> <p>先来看一个实验。我问大模型一个问题：</p> <p><strong>问题</strong>：小明有5个苹果，吃了2个，妈妈又给了他3个，最后他有多少个苹果？</p> <p><strong>直接提问的回答</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-0-1>1</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1></a>6个
+</span></code></pre></div></td></tr></table></div> （有时候对，有时候错，不太稳定）</p> <p><strong>加上"一步步思考"后的回答</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-1-1>1</a></span>
+<span class=normal><a href=#__codelineno-1-2>2</a></span>
+<span class=normal><a href=#__codelineno-1-3>3</a></span>
+<span class=normal><a href=#__codelineno-1-4>4</a></span>
+<span class=normal><a href=#__codelineno-1-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-1-1><a id=__codelineno-1-1 name=__codelineno-1-1></a>让我一步步来算：
+</span><span id=__span-1-2><a id=__codelineno-1-2 name=__codelineno-1-2></a>- 小明一开始有5个苹果
+</span><span id=__span-1-3><a id=__codelineno-1-3 name=__codelineno-1-3></a>- 吃了2个，还剩 5-2=3个
+</span><span id=__span-1-4><a id=__codelineno-1-4 name=__codelineno-1-4></a>- 妈妈又给了3个，现在有 3+3=6个
+</span><span id=__span-1-5><a id=__codelineno-1-5 name=__codelineno-1-5></a>- 所以答案是6个
+</span></code></pre></div></td></tr></table></div> （几乎每次都对！）</p> <p>发现了什么？<strong>同样的模型，同样的问题，只是多了一句"一步步思考"，准确率就大幅提升！</strong></p> <p>这就是思维链的魔力。</p> <h3 id=12>1.2 什么是思维链？<a class=headerlink href=#12 title="Permanent link">&para;</a></h3> <p>用一句话定义：</p> <blockquote> <p><strong>思维链（Chain of Thought, CoT）是一种提示技术，通过引导大模型展示推理的中间步骤，从而提高复杂任务的准确性和可解释性。</strong></p> </blockquote> <pre class=mermaid><code>graph LR
+    A[传统提示] --&gt; B[问题 → 答案]
+    C[思维链提示] --&gt; D[问题 → 推理步骤 → 答案]
+
+    style A fill:#FFCDD2
+    style B fill:#FFCDD2
+    style C fill:#C8E6C9
+    style D fill:#C8E6C9</code></pre> <p><strong>核心思想</strong>：让AI像人类一样，把思考过程"说出来"，而不是直接跳到结论。</p> <hr> <h2 id=_2>二、为什么需要思维链？<a class=headerlink href=#_2 title="Permanent link">&para;</a></h2> <h3 id=21>2.1 大模型的"阿喀琉斯之踵"<a class=headerlink href=#21 title="Permanent link">&para;</a></h3> <p>大模型虽然强大，但在以下场景中容易翻车：</p> <pre class=mermaid><code>mindmap
+    root((大模型的弱点))
+        复杂数学计算
+        多步逻辑推理
+        符号操作
+        因果关系判断
+        常识推理陷阱
+        空间想象问题</code></pre> <p><strong>典型案例</strong>：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-2-1>1</a></span>
+<span class=normal><a href=#__codelineno-2-2>2</a></span>
+<span class=normal><a href=#__codelineno-2-3>3</a></span>
+<span class=normal><a href=#__codelineno-2-4>4</a></span>
+<span class=normal><a href=#__codelineno-2-5>5</a></span>
+<span class=normal><a href=#__codelineno-2-6>6</a></span>
+<span class=normal><a href=#__codelineno-2-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-2-1><a id=__codelineno-2-1 name=__codelineno-2-1></a>问题：一个房间有3盏灯，外面有3个开关。每个开关控制一盏灯。
+</span><span id=__span-2-2><a id=__codelineno-2-2 name=__codelineno-2-2></a>你只能进房间一次，如何确定哪个开关控制哪盏灯？
+</span><span id=__span-2-3><a id=__codelineno-2-3 name=__codelineno-2-3></a>
+</span><span id=__span-2-4><a id=__codelineno-2-4 name=__codelineno-2-4></a>直接回答（错误）：
+</span><span id=__span-2-5><a id=__codelineno-2-5 name=__codelineno-2-5></a>一个个试就行了。
+</span><span id=__span-2-6><a id=__codelineno-2-6 name=__codelineno-2-6></a>
+</span><span id=__span-2-7><a id=__codelineno-2-7 name=__codelineno-2-7></a>（完全没get到题目的约束条件）
+</span></code></pre></div></td></tr></table></div> <h3 id=22>2.2 人类的思考方式<a class=headerlink href=#22 title="Permanent link">&para;</a></h3> <p>我们人类遇到复杂问题时会怎么做？</p> <pre class=mermaid><code>sequenceDiagram
+    participant 人 as 人类
+    participant 问题 as 复杂问题
+
+    问题-&gt;&gt;人: "鸡兔同笼，35个头，94只脚，各有几只？"
+    Note over 人: 开始思考...
+    人-&gt;&gt;人: 假设全是鸡，应该有35×2=70只脚
+    人-&gt;&gt;人: 实际有94只脚，多了94-70=24只脚
+    人-&gt;&gt;人: 每只兔子比鸡多2只脚
+    人-&gt;&gt;人: 所以兔子有24÷2=12只
+    人-&gt;&gt;人: 鸡有35-12=23只
+    人--&gt;&gt;问题: 给出答案：鸡23只，兔12只</code></pre> <p><strong>关键洞察</strong>：人类的优势不是知识量，而是<strong>推理过程的结构化</strong>。思维链就是让AI模仿这个过程的！</p> <h3 id=23>2.3 思维链的三大价值<a class=headerlink href=#23 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>价值</th> <th>说明</th> <th>实际效果</th> </tr> </thead> <tbody> <tr> <td>🎯 <strong>准确性提升</strong></td> <td>中间步骤降低出错概率</td> <td>数学题准确率提升20-50%</td> </tr> <tr> <td>🔍 <strong>可解释性增强</strong></td> <td>能看到推理过程</td> <td>方便定位错误、建立信任</td> </tr> <tr> <td>🧩 <strong>泛化能力提高</strong></td> <td>学会推理模式，举一反三</td> <td>遇到新题型也能应对</td> </tr> </tbody> </table> <hr> <h2 id=_3>三、思维链的科学原理<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <h3 id=31>3.1 大模型是如何"思考"的？<a class=headerlink href=#31 title="Permanent link">&para;</a></h3> <p>要理解CoT，先要了解大模型的本质：</p> <pre class=mermaid><code>graph TD
+    A[大模型] --&gt; B[本质：下一个token预测器]
+    B --&gt; C[基于上下文预测下一个字]
+    C --&gt; D[没有真正的"理解"能力]
+    D --&gt; E[只是概率计算]
+    E --&gt; F{如何让它更准确？}
+    F --&gt; G[给它更多推理线索]
+    G --&gt; H[这就是CoT的原理]</code></pre> <p><strong>核心机制</strong>：</p> <ol> <li><strong>自回归生成</strong>：模型一个字一个字地生成文本</li> <li><strong>上下文依赖</strong>：每一步生成依赖前面所有的内容</li> <li><strong>推理路径</strong>：中间步骤为后续生成提供了更好的上下文</li> </ol> <h3 id=32>3.2 思维链为什么有效？<a class=headerlink href=#32 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
+    A[提供中间步骤] --&gt; B[激活正确的推理路径]
+    B --&gt; C[减少跳跃式错误]
+    B --&gt; D[避免直觉陷阱]
+    B --&gt; E[保持逻辑一致性]
+
+    style A fill:#BBDEFB
+    style B fill:#90CAF9
+    style C fill:#64B5F6
+    style D fill:#64B5F6
+    style E fill:#64B5F6</code></pre> <p><strong>学术解释</strong>（来自原始论文）：</p> <blockquote> <p>"Chain-of-thought prompting enables large language models to perform complex reasoning by generating intermediate reasoning steps, which serves as a 'computational graph' that guides the model to the correct answer."</p> <p>—— Jason Wei et al., "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models", NeurIPS 2022</p> </blockquote> <p><strong>简单翻译</strong>： 中间步骤就像一个"计算图"，引导模型走正确的路，而不是瞎猜。</p> <h3 id=33-emergent-abilities>3.3 涌现能力（Emergent Abilities）<a class=headerlink href=#33-emergent-abilities title="Permanent link">&para;</a></h3> <p>思维链还有一个神奇的现象：<strong>当模型规模超过1000亿参数时，CoT能力会突然大幅提升！</strong></p> <pre class=mermaid><code>xychart-beta
+    title "模型规模 vs 推理能力"
+    x-axis "模型参数量(亿)" [10, 100, 300, 600, 1000, 1750, 5400]
+    y-axis "数学题准确率%" 0 --&gt; 100
+    line "无CoT" [15, 18, 20, 22, 25, 28, 30]
+    line "有CoT" [12, 15, 18, 25, 55, 78, 85]</code></pre> <p>这意味着：<strong>思维链是一种涌现能力，只有够大的模型才能被"激活"它！</strong></p> <hr> <h2 id=_4>四、思维链的三种实现方式<a class=headerlink href=#_4 title="Permanent link">&para;</a></h2> <h3 id=41-zero-shot-cot>4.1 方式一：零样本思维链（Zero-Shot CoT）<a class=headerlink href=#41-zero-shot-cot title="Permanent link">&para;</a></h3> <p>最简单！只需在问题后面加一句话：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-3-1>1</a></span>
+<span class=normal><a href=#__codelineno-3-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-3-1><a id=__codelineno-3-1 name=__codelineno-3-1></a>Let&#39;s think step by step.
+</span><span id=__span-3-2><a id=__codelineno-3-2 name=__codelineno-3-2></a>（让我们一步步思考。）
+</span></code></pre></div></td></tr></table></div> <p><strong>实战示例</strong>：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-4-1>1</a></span>
+<span class=normal><a href=#__codelineno-4-2>2</a></span>
+<span class=normal><a href=#__codelineno-4-3>3</a></span>
+<span class=normal><a href=#__codelineno-4-4>4</a></span>
+<span class=normal><a href=#__codelineno-4-5>5</a></span>
+<span class=normal><a href=#__codelineno-4-6>6</a></span>
+<span class=normal><a href=#__codelineno-4-7>7</a></span>
+<span class=normal><a href=#__codelineno-4-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-4-1><a id=__codelineno-4-1 name=__codelineno-4-1></a>问题：超市苹果5元一斤，香蕉3元一斤。小明买了2斤苹果和3斤香蕉，
+</span><span id=__span-4-2><a id=__codelineno-4-2 name=__codelineno-4-2></a>给了老板50元，老板应该找回多少钱？
+</span><span id=__span-4-3><a id=__codelineno-4-3 name=__codelineno-4-3></a>
+</span><span id=__span-4-4><a id=__codelineno-4-4 name=__codelineno-4-4></a>Zero-Shot CoT提示：
+</span><span id=__span-4-5><a id=__codelineno-4-5 name=__codelineno-4-5></a>超市苹果5元一斤，香蕉3元一斤。小明买了2斤苹果和3斤香蕉，
+</span><span id=__span-4-6><a id=__codelineno-4-6 name=__codelineno-4-6></a>给了老板50元，老板应该找回多少钱？
+</span><span id=__span-4-7><a id=__codelineno-4-7 name=__codelineno-4-7></a>
+</span><span id=__span-4-8><a id=__codelineno-4-8 name=__codelineno-4-8></a>让我们一步步思考。
+</span></code></pre></div></td></tr></table></div> <p><strong>模型回答</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-5-1>1</a></span>
+<span class=normal><a href=#__codelineno-5-2>2</a></span>
+<span class=normal><a href=#__codelineno-5-3>3</a></span>
+<span class=normal><a href=#__codelineno-5-4>4</a></span>
+<span class=normal><a href=#__codelineno-5-5>5</a></span>
+<span class=normal><a href=#__codelineno-5-6>6</a></span>
+<span class=normal><a href=#__codelineno-5-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1></a>让我们一步步思考：
+</span><span id=__span-5-2><a id=__codelineno-5-2 name=__codelineno-5-2></a>1. 计算苹果的费用：2斤 × 5元/斤 = 10元
+</span><span id=__span-5-3><a id=__codelineno-5-3 name=__codelineno-5-3></a>2. 计算香蕉的费用：3斤 × 3元/斤 = 9元
+</span><span id=__span-5-4><a id=__codelineno-5-4 name=__codelineno-5-4></a>3. 计算总费用：10元 + 9元 = 19元
+</span><span id=__span-5-5><a id=__codelineno-5-5 name=__codelineno-5-5></a>4. 计算找零：50元 - 19元 = 31元
+</span><span id=__span-5-6><a id=__codelineno-5-6 name=__codelineno-5-6></a>
+</span><span id=__span-5-7><a id=__codelineno-5-7 name=__codelineno-5-7></a>所以，老板应该找回31元。
+</span></code></pre></div></td></tr></table></div></p> <p><strong>优点</strong>： - ✅ 零成本，立即可用 - ✅ 适用于任何大模型 - ✅ 不需要示例</p> <p><strong>缺点</strong>： - ❌ 效果不如Few-Shot稳定 - ❌ 对于特别复杂的问题可能不够用</p> <h3 id=42-few-shot-cot>4.2 方式二：少样本思维链（Few-Shot CoT）<a class=headerlink href=#42-few-shot-cot title="Permanent link">&para;</a></h3> <p>这是原始论文提出的方法，<strong>效果最强</strong>！</p> <p>在提示中提供几个带有完整推理过程的示例：</p> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-6-1> 1</a></span>
+<span class=normal><a href=#__codelineno-6-2> 2</a></span>
+<span class=normal><a href=#__codelineno-6-3> 3</a></span>
+<span class=normal><a href=#__codelineno-6-4> 4</a></span>
+<span class=normal><a href=#__codelineno-6-5> 5</a></span>
+<span class=normal><a href=#__codelineno-6-6> 6</a></span>
+<span class=normal><a href=#__codelineno-6-7> 7</a></span>
+<span class=normal><a href=#__codelineno-6-8> 8</a></span>
+<span class=normal><a href=#__codelineno-6-9> 9</a></span>
+<span class=normal><a href=#__codelineno-6-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-6-1><a id=__codelineno-6-1 name=__codelineno-6-1></a>Q: 罗杰有5个网球。他又买了2罐网球，每罐3个。他现在有多少个网球？
+</span><span id=__span-6-2><a id=__codelineno-6-2 name=__codelineno-6-2></a>A: 罗杰一开始有5个球。2罐网球，每罐3个，所以是2×3=6个球。
+</span><span id=__span-6-3><a id=__codelineno-6-3 name=__codelineno-6-3></a>   5+6=11个球。所以答案是11。
+</span><span id=__span-6-4><a id=__codelineno-6-4 name=__codelineno-6-4></a>
+</span><span id=__span-6-5><a id=__codelineno-6-5 name=__codelineno-6-5></a>Q: 自助餐厅每天有96个苹果。早餐用了28个，午餐又用了36个。还剩多少个？
+</span><span id=__span-6-6><a id=__codelineno-6-6 name=__codelineno-6-6></a>A: 一开始有96个苹果。早餐用了28个，96-28=68个。午餐用了36个，68-36=32个。
+</span><span id=__span-6-7><a id=__codelineno-6-7 name=__codelineno-6-7></a>   所以还剩32个苹果。
+</span><span id=__span-6-8><a id=__codelineno-6-8 name=__codelineno-6-8></a>
+</span><span id=__span-6-9><a id=__codelineno-6-9 name=__codelineno-6-9></a>Q: 小明有5个苹果，吃了2个，妈妈又给了他3个，最后他有多少个苹果？
+</span><span id=__span-6-10><a id=__codelineno-6-10 name=__codelineno-6-10></a>A: 
+</span></code></pre></div></td></tr></table></div> <p><strong>模型会自动模仿这种推理模式</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-7-1>1</a></span>
+<span class=normal><a href=#__codelineno-7-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-7-1><a id=__codelineno-7-1 name=__codelineno-7-1></a>小明一开始有5个苹果。吃了2个，5-2=3个。妈妈又给了3个，3+3=6个。
+</span><span id=__span-7-2><a id=__codelineno-7-2 name=__codelineno-7-2></a>所以答案是6个。
+</span></code></pre></div></td></tr></table></div></p> <p><strong>关键要点</strong>：</p> <table> <thead> <tr> <th>要素</th> <th>要求</th> </tr> </thead> <tbody> <tr> <td>示例数量</td> <td>3-8个最佳</td> </tr> <tr> <td>示例质量</td> <td>推理过程要清晰完整</td> </tr> <tr> <td>领域匹配</td> <td>示例和任务最好同领域</td> </tr> <tr> <td>格式一致</td> <td>保持Q/A的格式统一</td> </tr> </tbody> </table> <h3 id=43-self-consistency>4.3 方式三：自我一致性（Self-Consistency）<a class=headerlink href=#43-self-consistency title="Permanent link">&para;</a></h3> <p><strong>升级玩法</strong>：让模型生成多个推理路径，然后投票选出最一致的答案！</p> <pre class=mermaid><code>graph TD
+    A[问题] --&gt; B[生成推理路径1]
+    A --&gt; C[生成推理路径2]
+    A --&gt; D[生成推理路径3]
+    A --&gt; E[生成推理路径N]
+    B --&gt; F[答案: 6]
+    C --&gt; G[答案: 6]
+    D --&gt; H[答案: 7]
+    E --&gt; I[答案: 6]
+    F --&gt; J{投票统计}
+    G --&gt; J
+    H --&gt; J
+    I --&gt; J
+    J --&gt; K[最终答案: 6 票最多]</code></pre> <p><strong>实现代码（Python）</strong>：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-8-1> 1</a></span>
+<span class=normal><a href=#__codelineno-8-2> 2</a></span>
+<span class=normal><a href=#__codelineno-8-3> 3</a></span>
+<span class=normal><a href=#__codelineno-8-4> 4</a></span>
+<span class=normal><a href=#__codelineno-8-5> 5</a></span>
+<span class=normal><a href=#__codelineno-8-6> 6</a></span>
+<span class=normal><a href=#__codelineno-8-7> 7</a></span>
+<span class=normal><a href=#__codelineno-8-8> 8</a></span>
+<span class=normal><a href=#__codelineno-8-9> 9</a></span>
+<span class=normal><a href=#__codelineno-8-10>10</a></span>
+<span class=normal><a href=#__codelineno-8-11>11</a></span>
+<span class=normal><a href=#__codelineno-8-12>12</a></span>
+<span class=normal><a href=#__codelineno-8-13>13</a></span>
+<span class=normal><a href=#__codelineno-8-14>14</a></span>
+<span class=normal><a href=#__codelineno-8-15>15</a></span>
+<span class=normal><a href=#__codelineno-8-16>16</a></span>
+<span class=normal><a href=#__codelineno-8-17>17</a></span>
+<span class=normal><a href=#__codelineno-8-18>18</a></span>
+<span class=normal><a href=#__codelineno-8-19>19</a></span>
+<span class=normal><a href=#__codelineno-8-20>20</a></span>
+<span class=normal><a href=#__codelineno-8-21>21</a></span>
+<span class=normal><a href=#__codelineno-8-22>22</a></span>
+<span class=normal><a href=#__codelineno-8-23>23</a></span>
+<span class=normal><a href=#__codelineno-8-24>24</a></span>
+<span class=normal><a href=#__codelineno-8-25>25</a></span>
+<span class=normal><a href=#__codelineno-8-26>26</a></span>
+<span class=normal><a href=#__codelineno-8-27>27</a></span>
+<span class=normal><a href=#__codelineno-8-28>28</a></span>
+<span class=normal><a href=#__codelineno-8-29>29</a></span>
+<span class=normal><a href=#__codelineno-8-30>30</a></span>
+<span class=normal><a href=#__codelineno-8-31>31</a></span>
+<span class=normal><a href=#__codelineno-8-32>32</a></span>
+<span class=normal><a href=#__codelineno-8-33>33</a></span>
+<span class=normal><a href=#__codelineno-8-34>34</a></span>
+<span class=normal><a href=#__codelineno-8-35>35</a></span>
+<span class=normal><a href=#__codelineno-8-36>36</a></span>
+<span class=normal><a href=#__codelineno-8-37>37</a></span>
+<span class=normal><a href=#__codelineno-8-38>38</a></span>
+<span class=normal><a href=#__codelineno-8-39>39</a></span>
+<span class=normal><a href=#__codelineno-8-40>40</a></span>
+<span class=normal><a href=#__codelineno-8-41>41</a></span>
+<span class=normal><a href=#__codelineno-8-42>42</a></span>
+<span class=normal><a href=#__codelineno-8-43>43</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1></a><span class=kn>import</span><span class=w> </span><span class=nn>openai</span>
+</span><span id=__span-8-2><a id=__codelineno-8-2 name=__codelineno-8-2></a>
+</span><span id=__span-8-3><a id=__codelineno-8-3 name=__codelineno-8-3></a><span class=k>def</span><span class=w> </span><span class=nf>self_consistency_cot</span><span class=p>(</span><span class=n>question</span><span class=p>,</span> <span class=n>num_paths</span><span class=o>=</span><span class=mi>5</span><span class=p>):</span>
+</span><span id=__span-8-4><a id=__codelineno-8-4 name=__codelineno-8-4></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-8-5><a id=__codelineno-8-5 name=__codelineno-8-5></a><span class=sd>    自我一致性思维链</span>
+</span><span id=__span-8-6><a id=__codelineno-8-6 name=__codelineno-8-6></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-8-7><a id=__codelineno-8-7 name=__codelineno-8-7></a>    <span class=n>answers</span> <span class=o>=</span> <span class=p>[]</span>
+</span><span id=__span-8-8><a id=__codelineno-8-8 name=__codelineno-8-8></a>
+</span><span id=__span-8-9><a id=__codelineno-8-9 name=__codelineno-8-9></a>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>num_paths</span><span class=p>):</span>
+</span><span id=__span-8-10><a id=__codelineno-8-10 name=__codelineno-8-10></a>        <span class=n>prompt</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&quot;&quot;&quot;</span>
+</span><span id=__span-8-11><a id=__codelineno-8-11 name=__codelineno-8-11></a><span class=s2>Q: </span><span class=si>{</span><span class=n>question</span><span class=si>}</span>
+</span><span id=__span-8-12><a id=__codelineno-8-12 name=__codelineno-8-12></a><span class=s2>A: Let&#39;s think step by step.</span>
+</span><span id=__span-8-13><a id=__codelineno-8-13 name=__codelineno-8-13></a><span class=s2>&quot;&quot;&quot;</span>
+</span><span id=__span-8-14><a id=__codelineno-8-14 name=__codelineno-8-14></a>        <span class=n>response</span> <span class=o>=</span> <span class=n>openai</span><span class=o>.</span><span class=n>ChatCompletion</span><span class=o>.</span><span class=n>create</span><span class=p>(</span>
+</span><span id=__span-8-15><a id=__codelineno-8-15 name=__codelineno-8-15></a>            <span class=n>model</span><span class=o>=</span><span class=s2>&quot;gpt-3.5-turbo&quot;</span><span class=p>,</span>
+</span><span id=__span-8-16><a id=__codelineno-8-16 name=__codelineno-8-16></a>            <span class=n>messages</span><span class=o>=</span><span class=p>[{</span><span class=s2>&quot;role&quot;</span><span class=p>:</span> <span class=s2>&quot;user&quot;</span><span class=p>,</span> <span class=s2>&quot;content&quot;</span><span class=p>:</span> <span class=n>prompt</span><span class=p>}],</span>
+</span><span id=__span-8-17><a id=__codelineno-8-17 name=__codelineno-8-17></a>            <span class=n>temperature</span><span class=o>=</span><span class=mf>0.7</span><span class=p>,</span>  <span class=c1># 增加随机性</span>
+</span><span id=__span-8-18><a id=__codelineno-8-18 name=__codelineno-8-18></a>            <span class=n>max_tokens</span><span class=o>=</span><span class=mi>500</span>
+</span><span id=__span-8-19><a id=__codelineno-8-19 name=__codelineno-8-19></a>        <span class=p>)</span>
+</span><span id=__span-8-20><a id=__codelineno-8-20 name=__codelineno-8-20></a>
+</span><span id=__span-8-21><a id=__codelineno-8-21 name=__codelineno-8-21></a>        <span class=n>reasoning</span> <span class=o>=</span> <span class=n>response</span><span class=o>.</span><span class=n>choices</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>message</span><span class=o>.</span><span class=n>content</span>
+</span><span id=__span-8-22><a id=__codelineno-8-22 name=__codelineno-8-22></a>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;路径</span><span class=si>{</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=si>}</span><span class=s2>: </span><span class=si>{</span><span class=n>reasoning</span><span class=si>}</span><span class=s2>&quot;</span><span class=p>)</span>
+</span><span id=__span-8-23><a id=__codelineno-8-23 name=__codelineno-8-23></a>
+</span><span id=__span-8-24><a id=__codelineno-8-24 name=__codelineno-8-24></a>        <span class=c1># 提取答案（这里简化处理）</span>
+</span><span id=__span-8-25><a id=__codelineno-8-25 name=__codelineno-8-25></a>        <span class=n>answer</span> <span class=o>=</span> <span class=n>extract_answer</span><span class=p>(</span><span class=n>reasoning</span><span class=p>)</span>
+</span><span id=__span-8-26><a id=__codelineno-8-26 name=__codelineno-8-26></a>        <span class=n>answers</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>answer</span><span class=p>)</span>
+</span><span id=__span-8-27><a id=__codelineno-8-27 name=__codelineno-8-27></a>
+</span><span id=__span-8-28><a id=__codelineno-8-28 name=__codelineno-8-28></a>    <span class=c1># 投票</span>
+</span><span id=__span-8-29><a id=__codelineno-8-29 name=__codelineno-8-29></a>    <span class=kn>from</span><span class=w> </span><span class=nn>collections</span><span class=w> </span><span class=kn>import</span> <span class=n>Counter</span>
+</span><span id=__span-8-30><a id=__codelineno-8-30 name=__codelineno-8-30></a>    <span class=n>most_common</span> <span class=o>=</span> <span class=n>Counter</span><span class=p>(</span><span class=n>answers</span><span class=p>)</span><span class=o>.</span><span class=n>most_common</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span><span id=__span-8-31><a id=__codelineno-8-31 name=__codelineno-8-31></a>    <span class=k>return</span> <span class=n>most_common</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>]</span>
+</span><span id=__span-8-32><a id=__codelineno-8-32 name=__codelineno-8-32></a>
+</span><span id=__span-8-33><a id=__codelineno-8-33 name=__codelineno-8-33></a><span class=k>def</span><span class=w> </span><span class=nf>extract_answer</span><span class=p>(</span><span class=n>reasoning</span><span class=p>):</span>
+</span><span id=__span-8-34><a id=__codelineno-8-34 name=__codelineno-8-34></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;从推理文本中提取最终答案&quot;&quot;&quot;</span>
+</span><span id=__span-8-35><a id=__codelineno-8-35 name=__codelineno-8-35></a>    <span class=c1># 实际应用中需要更复杂的逻辑</span>
+</span><span id=__span-8-36><a id=__codelineno-8-36 name=__codelineno-8-36></a>    <span class=k>if</span> <span class=s2>&quot;答案是&quot;</span> <span class=ow>in</span> <span class=n>reasoning</span><span class=p>:</span>
+</span><span id=__span-8-37><a id=__codelineno-8-37 name=__codelineno-8-37></a>        <span class=k>return</span> <span class=n>reasoning</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s2>&quot;答案是&quot;</span><span class=p>)[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>strip</span><span class=p>()</span>
+</span><span id=__span-8-38><a id=__codelineno-8-38 name=__codelineno-8-38></a>    <span class=k>return</span> <span class=n>reasoning</span>
+</span><span id=__span-8-39><a id=__codelineno-8-39 name=__codelineno-8-39></a>
+</span><span id=__span-8-40><a id=__codelineno-8-40 name=__codelineno-8-40></a><span class=c1># 使用示例</span>
+</span><span id=__span-8-41><a id=__codelineno-8-41 name=__codelineno-8-41></a><span class=n>question</span> <span class=o>=</span> <span class=s2>&quot;小明有5个苹果，吃了2个，妈妈又给了他3个，最后他有多少个苹果？&quot;</span>
+</span><span id=__span-8-42><a id=__codelineno-8-42 name=__codelineno-8-42></a><span class=n>final_answer</span> <span class=o>=</span> <span class=n>self_consistency_cot</span><span class=p>(</span><span class=n>question</span><span class=p>)</span>
+</span><span id=__span-8-43><a id=__codelineno-8-43 name=__codelineno-8-43></a><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;最终答案: </span><span class=si>{</span><span class=n>final_answer</span><span class=si>}</span><span class=s2>&quot;</span><span class=p>)</span>
+</span></code></pre></div></td></tr></table></div> <p><strong>优势</strong>： - ✅ 准确率再提升5-15% - ✅ 降低单次生成的随机性 - ✅ 适合高可靠性场景</p> <p><strong>成本</strong>： - ❌ 需要多次调用API - ❌ 响应时间更长 - ❌ 费用成倍增加</p> <hr> <h2 id=_5>五、思维链的进阶技术<a class=headerlink href=#_5 title="Permanent link">&para;</a></h2> <h3 id=51-auto-cot>5.1 自动思维链（Auto-CoT）<a class=headerlink href=#51-auto-cot title="Permanent link">&para;</a></h3> <p>手动写示例太麻烦？<strong>Auto-CoT让模型自己生成示例！</strong></p> <pre class=mermaid><code>flowchart TD
+    A[问题集合] --&gt; B[Zero-Shot CoT生成推理]
+    B --&gt; C[聚类去重]
+    C --&gt; D[选择代表性示例]
+    D --&gt; E[构建Few-Shot提示]
+    E --&gt; F[应用到新问题]</code></pre> <p><strong>实现步骤</strong>：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-9-1> 1</a></span>
+<span class=normal><a href=#__codelineno-9-2> 2</a></span>
+<span class=normal><a href=#__codelineno-9-3> 3</a></span>
+<span class=normal><a href=#__codelineno-9-4> 4</a></span>
+<span class=normal><a href=#__codelineno-9-5> 5</a></span>
+<span class=normal><a href=#__codelineno-9-6> 6</a></span>
+<span class=normal><a href=#__codelineno-9-7> 7</a></span>
+<span class=normal><a href=#__codelineno-9-8> 8</a></span>
+<span class=normal><a href=#__codelineno-9-9> 9</a></span>
+<span class=normal><a href=#__codelineno-9-10>10</a></span>
+<span class=normal><a href=#__codelineno-9-11>11</a></span>
+<span class=normal><a href=#__codelineno-9-12>12</a></span>
+<span class=normal><a href=#__codelineno-9-13>13</a></span>
+<span class=normal><a href=#__codelineno-9-14>14</a></span>
+<span class=normal><a href=#__codelineno-9-15>15</a></span>
+<span class=normal><a href=#__codelineno-9-16>16</a></span>
+<span class=normal><a href=#__codelineno-9-17>17</a></span>
+<span class=normal><a href=#__codelineno-9-18>18</a></span>
+<span class=normal><a href=#__codelineno-9-19>19</a></span>
+<span class=normal><a href=#__codelineno-9-20>20</a></span>
+<span class=normal><a href=#__codelineno-9-21>21</a></span>
+<span class=normal><a href=#__codelineno-9-22>22</a></span>
+<span class=normal><a href=#__codelineno-9-23>23</a></span>
+<span class=normal><a href=#__codelineno-9-24>24</a></span>
+<span class=normal><a href=#__codelineno-9-25>25</a></span>
+<span class=normal><a href=#__codelineno-9-26>26</a></span>
+<span class=normal><a href=#__codelineno-9-27>27</a></span>
+<span class=normal><a href=#__codelineno-9-28>28</a></span>
+<span class=normal><a href=#__codelineno-9-29>29</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1></a><span class=k>def</span><span class=w> </span><span class=nf>generate_auto_cot_examples</span><span class=p>(</span><span class=n>questions</span><span class=p>,</span> <span class=n>k</span><span class=o>=</span><span class=mi>5</span><span class=p>):</span>
+</span><span id=__span-9-2><a id=__codelineno-9-2 name=__codelineno-9-2></a><span class=w>    </span><span class=sd>&quot;&quot;&quot;</span>
+</span><span id=__span-9-3><a id=__codelineno-9-3 name=__codelineno-9-3></a><span class=sd>    自动生成CoT示例</span>
+</span><span id=__span-9-4><a id=__codelineno-9-4 name=__codelineno-9-4></a><span class=sd>    &quot;&quot;&quot;</span>
+</span><span id=__span-9-5><a id=__codelineno-9-5 name=__codelineno-9-5></a>    <span class=n>examples</span> <span class=o>=</span> <span class=p>[]</span>
+</span><span id=__span-9-6><a id=__codelineno-9-6 name=__codelineno-9-6></a>
+</span><span id=__span-9-7><a id=__codelineno-9-7 name=__codelineno-9-7></a>    <span class=c1># 步骤1: 用Zero-Shot CoT生成推理</span>
+</span><span id=__span-9-8><a id=__codelineno-9-8 name=__codelineno-9-8></a>    <span class=k>for</span> <span class=n>q</span> <span class=ow>in</span> <span class=n>questions</span><span class=p>:</span>
+</span><span id=__span-9-9><a id=__codelineno-9-9 name=__codelineno-9-9></a>        <span class=n>reasoning</span> <span class=o>=</span> <span class=n>zero_shot_cot</span><span class=p>(</span><span class=n>q</span><span class=p>)</span>
+</span><span id=__span-9-10><a id=__codelineno-9-10 name=__codelineno-9-10></a>        <span class=n>examples</span><span class=o>.</span><span class=n>append</span><span class=p>({</span><span class=s2>&quot;question&quot;</span><span class=p>:</span> <span class=n>q</span><span class=p>,</span> <span class=s2>&quot;reasoning&quot;</span><span class=p>:</span> <span class=n>reasoning</span><span class=p>})</span>
+</span><span id=__span-9-11><a id=__codelineno-9-11 name=__codelineno-9-11></a>
+</span><span id=__span-9-12><a id=__codelineno-9-12 name=__codelineno-9-12></a>    <span class=c1># 步骤2: 根据问题复杂度聚类</span>
+</span><span id=__span-9-13><a id=__codelineno-9-13 name=__codelineno-9-13></a>    <span class=n>clustered</span> <span class=o>=</span> <span class=n>cluster_by_complexity</span><span class=p>(</span><span class=n>examples</span><span class=p>)</span>
+</span><span id=__span-9-14><a id=__codelineno-9-14 name=__codelineno-9-14></a>
+</span><span id=__span-9-15><a id=__codelineno-9-15 name=__codelineno-9-15></a>    <span class=c1># 步骤3: 从每个簇中选择代表性示例</span>
+</span><span id=__span-9-16><a id=__codelineno-9-16 name=__codelineno-9-16></a>    <span class=n>selected</span> <span class=o>=</span> <span class=n>select_diverse_examples</span><span class=p>(</span><span class=n>clustered</span><span class=p>,</span> <span class=n>k</span><span class=p>)</span>
+</span><span id=__span-9-17><a id=__codelineno-9-17 name=__codelineno-9-17></a>
+</span><span id=__span-9-18><a id=__codelineno-9-18 name=__codelineno-9-18></a>    <span class=c1># 步骤4: 构建Few-Shot提示</span>
+</span><span id=__span-9-19><a id=__codelineno-9-19 name=__codelineno-9-19></a>    <span class=n>prompt</span> <span class=o>=</span> <span class=n>build_few_shot_prompt</span><span class=p>(</span><span class=n>selected</span><span class=p>)</span>
+</span><span id=__span-9-20><a id=__codelineno-9-20 name=__codelineno-9-20></a>
+</span><span id=__span-9-21><a id=__codelineno-9-21 name=__codelineno-9-21></a>    <span class=k>return</span> <span class=n>prompt</span>
+</span><span id=__span-9-22><a id=__codelineno-9-22 name=__codelineno-9-22></a>
+</span><span id=__span-9-23><a id=__codelineno-9-23 name=__codelineno-9-23></a><span class=c1># 使用</span>
+</span><span id=__span-9-24><a id=__codelineno-9-24 name=__codelineno-9-24></a><span class=n>training_questions</span> <span class=o>=</span> <span class=p>[</span>
+</span><span id=__span-9-25><a id=__codelineno-9-25 name=__codelineno-9-25></a>    <span class=s2>&quot;鸡兔同笼问题...&quot;</span><span class=p>,</span>
+</span><span id=__span-9-26><a id=__codelineno-9-26 name=__codelineno-9-26></a>    <span class=s2>&quot;行程问题...&quot;</span><span class=p>,</span>
+</span><span id=__span-9-27><a id=__codelineno-9-27 name=__codelineno-9-27></a>    <span class=s2>&quot;工程问题...&quot;</span>
+</span><span id=__span-9-28><a id=__codelineno-9-28 name=__codelineno-9-28></a><span class=p>]</span>
+</span><span id=__span-9-29><a id=__codelineno-9-29 name=__codelineno-9-29></a><span class=n>cot_prompt</span> <span class=o>=</span> <span class=n>generate_auto_cot_examples</span><span class=p>(</span><span class=n>training_questions</span><span class=p>)</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=52-tree-of-thoughts-tot>5.2 思维树（Tree of Thoughts, ToT）<a class=headerlink href=#52-tree-of-thoughts-tot title="Permanent link">&para;</a></h3> <p><strong>进一步升级</strong>：不只线性推理，而是构建"思考树"！</p> <pre class=mermaid><code>graph TD
+    A[问题] --&gt; B[思路1]
+    A --&gt; C[思路2]
+    A --&gt; D[思路3]
+    B --&gt; E[评估: 可行]
+    B --&gt; F[评估: 不可行]
+    C --&gt; G[评估: 可行]
+    C --&gt; H[评估: 不可行]
+    D --&gt; I[评估: 可行]
+    E --&gt; J[继续展开]
+    G --&gt; K[继续展开]
+    I --&gt; L[继续展开]
+    J --&gt; M[最终答案]
+    K --&gt; N[最终答案]
+    L --&gt; O[最终答案]
+    M --&gt; P{选择最优}
+    N --&gt; P
+    O --&gt; P
+    P --&gt; Q[最佳答案]</code></pre> <p><strong>核心思想</strong>： 1. <strong>分解</strong>：把问题拆成多个思考分支 2. <strong>生成</strong>：每个分支产生多个思路 3. <strong>评估</strong>：给每个思路打分 4. <strong>搜索</strong>：用BFS/DFS找到最佳路径 5. <strong>整合</strong>：综合得出最终答案</p> <p><strong>示例代码</strong>：</p> <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-10-1> 1</a></span>
+<span class=normal><a href=#__codelineno-10-2> 2</a></span>
+<span class=normal><a href=#__codelineno-10-3> 3</a></span>
+<span class=normal><a href=#__codelineno-10-4> 4</a></span>
+<span class=normal><a href=#__codelineno-10-5> 5</a></span>
+<span class=normal><a href=#__codelineno-10-6> 6</a></span>
+<span class=normal><a href=#__codelineno-10-7> 7</a></span>
+<span class=normal><a href=#__codelineno-10-8> 8</a></span>
+<span class=normal><a href=#__codelineno-10-9> 9</a></span>
+<span class=normal><a href=#__codelineno-10-10>10</a></span>
+<span class=normal><a href=#__codelineno-10-11>11</a></span>
+<span class=normal><a href=#__codelineno-10-12>12</a></span>
+<span class=normal><a href=#__codelineno-10-13>13</a></span>
+<span class=normal><a href=#__codelineno-10-14>14</a></span>
+<span class=normal><a href=#__codelineno-10-15>15</a></span>
+<span class=normal><a href=#__codelineno-10-16>16</a></span>
+<span class=normal><a href=#__codelineno-10-17>17</a></span>
+<span class=normal><a href=#__codelineno-10-18>18</a></span>
+<span class=normal><a href=#__codelineno-10-19>19</a></span>
+<span class=normal><a href=#__codelineno-10-20>20</a></span>
+<span class=normal><a href=#__codelineno-10-21>21</a></span>
+<span class=normal><a href=#__codelineno-10-22>22</a></span>
+<span class=normal><a href=#__codelineno-10-23>23</a></span>
+<span class=normal><a href=#__codelineno-10-24>24</a></span>
+<span class=normal><a href=#__codelineno-10-25>25</a></span>
+<span class=normal><a href=#__codelineno-10-26>26</a></span>
+<span class=normal><a href=#__codelineno-10-27>27</a></span>
+<span class=normal><a href=#__codelineno-10-28>28</a></span>
+<span class=normal><a href=#__codelineno-10-29>29</a></span>
+<span class=normal><a href=#__codelineno-10-30>30</a></span>
+<span class=normal><a href=#__codelineno-10-31>31</a></span>
+<span class=normal><a href=#__codelineno-10-32>32</a></span>
+<span class=normal><a href=#__codelineno-10-33>33</a></span>
+<span class=normal><a href=#__codelineno-10-34>34</a></span>
+<span class=normal><a href=#__codelineno-10-35>35</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-10-1><a id=__codelineno-10-1 name=__codelineno-10-1></a><span class=k>class</span><span class=w> </span><span class=nc>TreeOfThoughts</span><span class=p>:</span>
+</span><span id=__span-10-2><a id=__codelineno-10-2 name=__codelineno-10-2></a>    <span class=k>def</span><span class=w> </span><span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>model</span><span class=p>):</span>
+</span><span id=__span-10-3><a id=__codelineno-10-3 name=__codelineno-10-3></a>        <span class=bp>self</span><span class=o>.</span><span class=n>model</span> <span class=o>=</span> <span class=n>model</span>
+</span><span id=__span-10-4><a id=__codelineno-10-4 name=__codelineno-10-4></a>        <span class=bp>self</span><span class=o>.</span><span class=n>tree</span> <span class=o>=</span> <span class=p>{}</span>
+</span><span id=__span-10-5><a id=__codelineno-10-5 name=__codelineno-10-5></a>
+</span><span id=__span-10-6><a id=__codelineno-10-6 name=__codelineno-10-6></a>    <span class=k>def</span><span class=w> </span><span class=nf>decompose</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>question</span><span class=p>):</span>
+</span><span id=__span-10-7><a id=__codelineno-10-7 name=__codelineno-10-7></a><span class=w>        </span><span class=sd>&quot;&quot;&quot;生成多个初始思路&quot;&quot;&quot;</span>
+</span><span id=__span-10-8><a id=__codelineno-10-8 name=__codelineno-10-8></a>        <span class=n>thoughts</span> <span class=o>=</span> <span class=p>[]</span>
+</span><span id=__span-10-9><a id=__codelineno-10-9 name=__codelineno-10-9></a>        <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>3</span><span class=p>):</span>
+</span><span id=__span-10-10><a id=__codelineno-10-10 name=__codelineno-10-10></a>            <span class=n>thought</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>generate_thought</span><span class=p>(</span><span class=n>question</span><span class=p>)</span>
+</span><span id=__span-10-11><a id=__codelineno-10-11 name=__codelineno-10-11></a>            <span class=n>thoughts</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>thought</span><span class=p>)</span>
+</span><span id=__span-10-12><a id=__codelineno-10-12 name=__codelineno-10-12></a>        <span class=k>return</span> <span class=n>thoughts</span>
+</span><span id=__span-10-13><a id=__codelineno-10-13 name=__codelineno-10-13></a>
+</span><span id=__span-10-14><a id=__codelineno-10-14 name=__codelineno-10-14></a>    <span class=k>def</span><span class=w> </span><span class=nf>evaluate</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>thought</span><span class=p>):</span>
+</span><span id=__span-10-15><a id=__codelineno-10-15 name=__codelineno-10-15></a><span class=w>        </span><span class=sd>&quot;&quot;&quot;评估思路的质量&quot;&quot;&quot;</span>
+</span><span id=__span-10-16><a id=__codelineno-10-16 name=__codelineno-10-16></a>        <span class=n>score</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>model</span><span class=o>.</span><span class=n>evaluate</span><span class=p>(</span><span class=sa>f</span><span class=s2>&quot;评估这个推理的质量：</span><span class=si>{</span><span class=n>thought</span><span class=si>}</span><span class=s2>&quot;</span><span class=p>)</span>
+</span><span id=__span-10-17><a id=__codelineno-10-17 name=__codelineno-10-17></a>        <span class=k>return</span> <span class=n>score</span>
+</span><span id=__span-10-18><a id=__codelineno-10-18 name=__codelineno-10-18></a>
+</span><span id=__span-10-19><a id=__codelineno-10-19 name=__codelineno-10-19></a>    <span class=k>def</span><span class=w> </span><span class=nf>solve</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>question</span><span class=p>):</span>
+</span><span id=__span-10-20><a id=__codelineno-10-20 name=__codelineno-10-20></a><span class=w>        </span><span class=sd>&quot;&quot;&quot;使用ToT解决问题&quot;&quot;&quot;</span>
+</span><span id=__span-10-21><a id=__codelineno-10-21 name=__codelineno-10-21></a>        <span class=c1># 第一层：生成初始思路</span>
+</span><span id=__span-10-22><a id=__codelineno-10-22 name=__codelineno-10-22></a>        <span class=n>thoughts</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>decompose</span><span class=p>(</span><span class=n>question</span><span class=p>)</span>
+</span><span id=__span-10-23><a id=__codelineno-10-23 name=__codelineno-10-23></a>
+</span><span id=__span-10-24><a id=__codelineno-10-24 name=__codelineno-10-24></a>        <span class=c1># 评估并排序</span>
+</span><span id=__span-10-25><a id=__codelineno-10-25 name=__codelineno-10-25></a>        <span class=n>scored_thoughts</span> <span class=o>=</span> <span class=p>[</span>
+</span><span id=__span-10-26><a id=__codelineno-10-26 name=__codelineno-10-26></a>            <span class=p>(</span><span class=n>thought</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>evaluate</span><span class=p>(</span><span class=n>thought</span><span class=p>))</span> 
+</span><span id=__span-10-27><a id=__codelineno-10-27 name=__codelineno-10-27></a>            <span class=k>for</span> <span class=n>thought</span> <span class=ow>in</span> <span class=n>thoughts</span>
+</span><span id=__span-10-28><a id=__codelineno-10-28 name=__codelineno-10-28></a>        <span class=p>]</span>
+</span><span id=__span-10-29><a id=__codelineno-10-29 name=__codelineno-10-29></a>        <span class=n>scored_thoughts</span><span class=o>.</span><span class=n>sort</span><span class=p>(</span><span class=n>key</span><span class=o>=</span><span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=n>x</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=n>reverse</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span><span id=__span-10-30><a id=__codelineno-10-30 name=__codelineno-10-30></a>
+</span><span id=__span-10-31><a id=__codelineno-10-31 name=__codelineno-10-31></a>        <span class=c1># 选择最佳思路继续展开</span>
+</span><span id=__span-10-32><a id=__codelineno-10-32 name=__codelineno-10-32></a>        <span class=n>best_thought</span> <span class=o>=</span> <span class=n>scored_thoughts</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>]</span>
+</span><span id=__span-10-33><a id=__codelineno-10-33 name=__codelineno-10-33></a>        <span class=n>final_answer</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>expand</span><span class=p>(</span><span class=n>best_thought</span><span class=p>)</span>
+</span><span id=__span-10-34><a id=__codelineno-10-34 name=__codelineno-10-34></a>
+</span><span id=__span-10-35><a id=__codelineno-10-35 name=__codelineno-10-35></a>        <span class=k>return</span> <span class=n>final_answer</span>
+</span></code></pre></div></td></tr></table></div> <h3 id=53-graph-of-thoughts-got>5.3 思维图（Graph of Thoughts, GoT）<a class=headerlink href=#53-graph-of-thoughts-got title="Permanent link">&para;</a></h3> <p><strong>终极形态</strong>：思考不再是树，而是图！可以合并、循环、回溯。</p> <pre class=mermaid><code>graph LR
+    A[思路1] --&gt; C[合并]
+    B[思路2] --&gt; C
+    C --&gt; D[新思路]
+    D --&gt; E{评估}
+    E --&gt;|不足| F[补充思路]
+    F --&gt; C
+    E --&gt;|足够| G[输出答案]</code></pre> <p><strong>GoT支持的操作</strong>：</p> <table> <thead> <tr> <th>操作</th> <th>说明</th> <th>类比</th> </tr> </thead> <tbody> <tr> <td>Generate</td> <td>生成新思路</td> <td>头脑风暴</td> </tr> <tr> <td>Transform</td> <td>转换现有思路</td> <td>换个角度想</td> </tr> <tr> <td>Aggregate</td> <td>合并多个思路</td> <td>综合考量</td> </tr> <tr> <td>Refine</td> <td>精炼完善</td> <td>打磨优化</td> </tr> <tr> <td>Select</td> <td>选择最佳</td> <td>优胜劣汰</td> </tr> </tbody> </table> <hr> <h2 id=_6>六、思维链的实际应用场景<a class=headerlink href=#_6 title="Permanent link">&para;</a></h2> <h3 id=61>6.1 数学解题<a class=headerlink href=#61 title="Permanent link">&para;</a></h3> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-11-1> 1</a></span>
+<span class=normal><a href=#__codelineno-11-2> 2</a></span>
+<span class=normal><a href=#__codelineno-11-3> 3</a></span>
+<span class=normal><a href=#__codelineno-11-4> 4</a></span>
+<span class=normal><a href=#__codelineno-11-5> 5</a></span>
+<span class=normal><a href=#__codelineno-11-6> 6</a></span>
+<span class=normal><a href=#__codelineno-11-7> 7</a></span>
+<span class=normal><a href=#__codelineno-11-8> 8</a></span>
+<span class=normal><a href=#__codelineno-11-9> 9</a></span>
+<span class=normal><a href=#__codelineno-11-10>10</a></span>
+<span class=normal><a href=#__codelineno-11-11>11</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-11-1><a id=__codelineno-11-1 name=__codelineno-11-1></a>问题：一个水池有甲乙两个进水管。甲管单独注满需要6小时，
+</span><span id=__span-11-2><a id=__codelineno-11-2 name=__codelineno-11-2></a>乙管单独注满需要8小时。如果两管同时打开，需要多久注满？
+</span><span id=__span-11-3><a id=__codelineno-11-3 name=__codelineno-11-3></a>
+</span><span id=__span-11-4><a id=__codelineno-11-4 name=__codelineno-11-4></a>CoT推理：
+</span><span id=__span-11-5><a id=__codelineno-11-5 name=__codelineno-11-5></a>让我一步步思考：
+</span><span id=__span-11-6><a id=__codelineno-11-6 name=__codelineno-11-6></a>1. 甲管每小时注入 1/6 池
+</span><span id=__span-11-7><a id=__codelineno-11-7 name=__codelineno-11-7></a>2. 乙管每小时注入 1/8 池
+</span><span id=__span-11-8><a id=__codelineno-11-8 name=__codelineno-11-8></a>3. 两管同时开，每小时注入 1/6 + 1/8 = 4/24 + 3/24 = 7/24 池
+</span><span id=__span-11-9><a id=__codelineno-11-9 name=__codelineno-11-9></a>4. 注满整池需要 24/7 小时 ≈ 3.43小时
+</span><span id=__span-11-10><a id=__codelineno-11-10 name=__codelineno-11-10></a>
+</span><span id=__span-11-11><a id=__codelineno-11-11 name=__codelineno-11-11></a>答案：约3.43小时（或3小时26分钟）
+</span></code></pre></div></td></tr></table></div> <h3 id=62>6.2 代码生成<a class=headerlink href=#62 title="Permanent link">&para;</a></h3> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-12-1> 1</a></span>
+<span class=normal><a href=#__codelineno-12-2> 2</a></span>
+<span class=normal><a href=#__codelineno-12-3> 3</a></span>
+<span class=normal><a href=#__codelineno-12-4> 4</a></span>
+<span class=normal><a href=#__codelineno-12-5> 5</a></span>
+<span class=normal><a href=#__codelineno-12-6> 6</a></span>
+<span class=normal><a href=#__codelineno-12-7> 7</a></span>
+<span class=normal><a href=#__codelineno-12-8> 8</a></span>
+<span class=normal><a href=#__codelineno-12-9> 9</a></span>
+<span class=normal><a href=#__codelineno-12-10>10</a></span>
+<span class=normal><a href=#__codelineno-12-11>11</a></span>
+<span class=normal><a href=#__codelineno-12-12>12</a></span>
+<span class=normal><a href=#__codelineno-12-13>13</a></span>
+<span class=normal><a href=#__codelineno-12-14>14</a></span>
+<span class=normal><a href=#__codelineno-12-15>15</a></span>
+<span class=normal><a href=#__codelineno-12-16>16</a></span>
+<span class=normal><a href=#__codelineno-12-17>17</a></span>
+<span class=normal><a href=#__codelineno-12-18>18</a></span>
+<span class=normal><a href=#__codelineno-12-19>19</a></span>
+<span class=normal><a href=#__codelineno-12-20>20</a></span>
+<span class=normal><a href=#__codelineno-12-21>21</a></span>
+<span class=normal><a href=#__codelineno-12-22>22</a></span>
+<span class=normal><a href=#__codelineno-12-23>23</a></span>
+<span class=normal><a href=#__codelineno-12-24>24</a></span>
+<span class=normal><a href=#__codelineno-12-25>25</a></span>
+<span class=normal><a href=#__codelineno-12-26>26</a></span>
+<span class=normal><a href=#__codelineno-12-27>27</a></span>
+<span class=normal><a href=#__codelineno-12-28>28</a></span>
+<span class=normal><a href=#__codelineno-12-29>29</a></span>
+<span class=normal><a href=#__codelineno-12-30>30</a></span>
+<span class=normal><a href=#__codelineno-12-31>31</a></span>
+<span class=normal><a href=#__codelineno-12-32>32</a></span>
+<span class=normal><a href=#__codelineno-12-33>33</a></span>
+<span class=normal><a href=#__codelineno-12-34>34</a></span>
+<span class=normal><a href=#__codelineno-12-35>35</a></span>
+<span class=normal><a href=#__codelineno-12-36>36</a></span>
+<span class=normal><a href=#__codelineno-12-37>37</a></span>
+<span class=normal><a href=#__codelineno-12-38>38</a></span>
+<span class=normal><a href=#__codelineno-12-39>39</a></span>
+<span class=normal><a href=#__codelineno-12-40>40</a></span>
+<span class=normal><a href=#__codelineno-12-41>41</a></span>
+<span class=normal><a href=#__codelineno-12-42>42</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-12-1><a id=__codelineno-12-1 name=__codelineno-12-1></a>需求：写一个Python函数，判断一个数是否为质数
+</span><span id=__span-12-2><a id=__codelineno-12-2 name=__codelineno-12-2></a>
+</span><span id=__span-12-3><a id=__codelineno-12-3 name=__codelineno-12-3></a>CoT推理：
+</span><span id=__span-12-4><a id=__codelineno-12-4 name=__codelineno-12-4></a>让我一步步设计这个函数：
+</span><span id=__span-12-5><a id=__codelineno-12-5 name=__codelineno-12-5></a>1. 质数定义：大于1的自然数，只能被1和自身整除
+</span><span id=__span-12-6><a id=__codelineno-12-6 name=__codelineno-12-6></a>2. 边界情况：
+</span><span id=__span-12-7><a id=__codelineno-12-7 name=__codelineno-12-7></a>   - 小于等于1的数不是质数
+</span><span id=__span-12-8><a id=__codelineno-12-8 name=__codelineno-12-8></a>   - 2是最小的质数
+</span><span id=__span-12-9><a id=__codelineno-12-9 name=__codelineno-12-9></a>3. 优化思路：
+</span><span id=__span-12-10><a id=__codelineno-12-10 name=__codelineno-12-10></a>   - 不需要检查到n，只需要检查到√n
+</span><span id=__span-12-11><a id=__codelineno-12-11 name=__codelineno-12-11></a>   - 可以先排除偶数
+</span><span id=__span-12-12><a id=__codelineno-12-12 name=__codelineno-12-12></a>4. 算法设计：
+</span><span id=__span-12-13><a id=__codelineno-12-13 name=__codelineno-12-13></a>   ```python
+</span><span id=__span-12-14><a id=__codelineno-12-14 name=__codelineno-12-14></a>   def is_prime(n):
+</span><span id=__span-12-15><a id=__codelineno-12-15 name=__codelineno-12-15></a>       if n &lt;= 1:
+</span><span id=__span-12-16><a id=__codelineno-12-16 name=__codelineno-12-16></a>           return False
+</span><span id=__span-12-17><a id=__codelineno-12-17 name=__codelineno-12-17></a>       if n == 2:
+</span><span id=__span-12-18><a id=__codelineno-12-18 name=__codelineno-12-18></a>           return True
+</span><span id=__span-12-19><a id=__codelineno-12-19 name=__codelineno-12-19></a>       if n % 2 == 0:
+</span><span id=__span-12-20><a id=__codelineno-12-20 name=__codelineno-12-20></a>           return False
+</span><span id=__span-12-21><a id=__codelineno-12-21 name=__codelineno-12-21></a>       for i in range(3, int(n** | 推理过程看起来很完美，但答案错了 | 人工审核关键输出 |
+</span><span id=__span-12-22><a id=__codelineno-12-22 name=__codelineno-12-22></a>| **循环论证** | 用结论证明前提 | 检查逻辑链条 |
+</span><span id=__span-12-23><a id=__codelineno-12-23 name=__codelineno-12-23></a>| **无关推理** | 推理了很多，但和问题无关 | 添加约束提示词 |
+</span><span id=__span-12-24><a id=__codelineno-12-24 name=__codelineno-12-24></a>| **格式依赖** | 模型只在特定格式下有效 | 多样化测试 |
+</span><span id=__span-12-25><a id=__codelineno-12-25 name=__codelineno-12-25></a>
+</span><span id=__span-12-26><a id=__codelineno-12-26 name=__codelineno-12-26></a>### 8.3 最佳实践
+</span><span id=__span-12-27><a id=__codelineno-12-27 name=__codelineno-12-27></a>
+</span><span id=__span-12-28><a id=__codelineno-12-28 name=__codelineno-12-28></a>```mermaid
+</span><span id=__span-12-29><a id=__codelineno-12-29 name=__codelineno-12-29></a>graph TD
+</span><span id=__span-12-30><a id=__codelineno-12-30 name=__codelineno-12-30></a>    A[使用CoT] --&gt; B{问题是否复杂？}
+</span><span id=__span-12-31><a id=__codelineno-12-31 name=__codelineno-12-31></a>    B --&gt;|是| C{模型是否够大？}
+</span><span id=__span-12-32><a id=__codelineno-12-32 name=__codelineno-12-32></a>    B --&gt;|否| D[直接回答即可]
+</span><span id=__span-12-33><a id=__codelineno-12-33 name=__codelineno-12-33></a>    C --&gt;|是| E[使用CoT]
+</span><span id=__span-12-34><a id=__codelineno-12-34 name=__codelineno-12-34></a>    C --&gt;|否| F[升级模型或使用API]
+</span><span id=__span-12-35><a id=__codelineno-12-35 name=__codelineno-12-35></a>    E --&gt; G{需要最高准确率？}
+</span><span id=__span-12-36><a id=__codelineno-12-36 name=__codelineno-12-36></a>    G --&gt;|是| H[使用Self-Consistency]
+</span><span id=__span-12-37><a id=__codelineno-12-37 name=__codelineno-12-37></a>    G --&gt;|否| I[Zero/Few-Shot CoT]
+</span><span id=__span-12-38><a id=__codelineno-12-38 name=__codelineno-12-38></a>    H --&gt; J[验证输出]
+</span><span id=__span-12-39><a id=__codelineno-12-39 name=__codelineno-12-39></a>    I --&gt; J
+</span><span id=__span-12-40><a id=__codelineno-12-40 name=__codelineno-12-40></a>    D --&gt; K[结束]
+</span><span id=__span-12-41><a id=__codelineno-12-41 name=__codelineno-12-41></a>    F --&gt; K
+</span><span id=__span-12-42><a id=__codelineno-12-42 name=__codelineno-12-42></a>    J --&gt; K
+</span></code></pre></div></td></tr></table></div> <p><strong>实操建议</strong>：</p> <p>✅ <strong>应该使用CoT的场景</strong>： 1. 数学计算题 2. 逻辑推理题 3. 代码生成和调试 4. 复杂决策分析 5. 需要解释答案的场景</p> <p>❌ <strong>不建议使用CoT的场景</strong>： 1. 简单事实问答（"珠穆朗玛峰多高？"） 2. 文本翻译 3. 情感分类 4. 文本摘要 5. 创意写作（可能限制想象力）</p> <hr> <h2 id=_7>九、思维链的学术发展脉络<a class=headerlink href=#_7 title="Permanent link">&para;</a></h2> <h3 id=91>9.1 重要论文时间线<a class=headerlink href=#91 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>timeline
+    title 思维链技术发展时间线
+    2022年1月 : Wei等人首次提出CoT概念
+               证明Few-Shot CoT的有效性
+    2022年5月 : Kojima等人发现Zero-Shot CoT
+               "Let's think step by step" 引发关注
+    2022年10月 : Wang等人提出Self-Consistency
+               多路径投票提升准确率
+    2023年3月 : Yao等人提出Tree of Thoughts
+               从线性到树状推理
+    2023年8月 : Besta等人提出Graph of Thoughts
+               图结构推理框架
+    2024年 : CoT成为大模型标配
+               被广泛应用于各种场景</code></pre> <h3 id=92>9.2 核心论文速览<a class=headerlink href=#92 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>论文</th> <th>核心贡献</th> <th>关键发现</th> </tr> </thead> <tbody> <tr> <td><strong>Wei et al. 2022</strong></td> <td>首次定义CoT</td> <td>Few-Shot CoT在GSM8K上提升3倍</td> </tr> <tr> <td><strong>Kojima et al. 2022</strong></td> <td>Zero-Shot CoT</td> <td>一句话就能触发推理能力</td> </tr> <tr> <td><strong>Wang et al. 2022</strong></td> <td>Self-Consistency</td> <td>多采样+投票，再提升5-15%</td> </tr> <tr> <td><strong>Yao et al. 2023</strong></td> <td>Tree of Thoughts</td> <td>支持回溯和全局搜索</td> </tr> <tr> <td><strong>Zhang et al. 2023</strong></td> <td>Auto-CoT</td> <td>自动生成示例，减少人工</td> </tr> </tbody> </table> <hr> <h2 id=cot>十、未来展望：CoT会如何进化？<a class=headerlink href=#cot title="Permanent link">&para;</a></h2> <h3 id=101>10.1 技术趋势<a class=headerlink href=#101 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>graph LR
+    A[当前CoT] --&gt; B[隐式CoT]
+    A --&gt; C[可验证CoT]
+    A --&gt; D[多模态CoT]
+
+    B --&gt; E[模型内部推理，不输出]
+    C --&gt; F[每步推理可被验证]
+    D --&gt; G[结合图像、音频推理]
+
+    style A fill:#E1BEE7
+    style B fill:#CE93D8
+    style C fill:#CE93D8
+    style D fill:#CE93D8</code></pre> <h3 id=102>10.2 潜在突破方向<a class=headerlink href=#102 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th>方向</th> <th>描述</th> <th>意义</th> </tr> </thead> <tbody> <tr> <td><strong>隐式推理</strong></td> <td>模型在内部使用CoT，但只输出答案</td> <td>既准确又简洁</td> </tr> <tr> <td><strong>可验证推理</strong></td> <td>每步推理都可被工具验证</td> <td>消除幻觉</td> </tr> <tr> <td><strong>交互式Co T</strong></td> <td>人类可以介入和修正推理过程</td> <td>人机协作</td> </tr> <tr> <td><strong>跨语言CoT</strong></td> <td>一种语言的推理迁移到其他语言</td> <td>打破语言壁垒</td> </tr> <tr> <td><strong>专业化CoT</strong></td> <td>针对医疗、法律等领域的专用推理模板</td> <td>行业落地</td> </tr> </tbody> </table> <h3 id=103>10.3 对普通用户的启示<a class=headerlink href=#103 title="Permanent link">&para;</a></h3> <pre class=mermaid><code>mindmap
+    root((如何用好CoT))
+        日常使用
+            提问时加"一步步思考"
+            复杂问题要求展示过程
+            验证关键答案
+        开发者
+            在Prompt中集成CoT
+            构建Few-Shot示例库
+            结合工具调用验证
+        企业应用
+            客服系统加入推理
+            决策辅助系统
+            代码审查助手</code></pre> <hr> <h2 id=_8>十一、实战案例完整演示<a class=headerlink href=#_8 title="Permanent link">&para;</a></h2> <h3 id=111-cot>11.1 案例：用CoT解决高考数学题<a class=headerlink href=#111-cot title="Permanent link">&para;</a></h3> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-13-1> 1</a></span>
+<span class=normal><a href=#__codelineno-13-2> 2</a></span>
+<span class=normal><a href=#__codelineno-13-3> 3</a></span>
+<span class=normal><a href=#__codelineno-13-4> 4</a></span>
+<span class=normal><a href=#__codelineno-13-5> 5</a></span>
+<span class=normal><a href=#__codelineno-13-6> 6</a></span>
+<span class=normal><a href=#__codelineno-13-7> 7</a></span>
+<span class=normal><a href=#__codelineno-13-8> 8</a></span>
+<span class=normal><a href=#__codelineno-13-9> 9</a></span>
+<span class=normal><a href=#__codelineno-13-10>10</a></span>
+<span class=normal><a href=#__codelineno-13-11>11</a></span>
+<span class=normal><a href=#__codelineno-13-12>12</a></span>
+<span class=normal><a href=#__codelineno-13-13>13</a></span>
+<span class=normal><a href=#__codelineno-13-14>14</a></span>
+<span class=normal><a href=#__codelineno-13-15>15</a></span>
+<span class=normal><a href=#__codelineno-13-16>16</a></span>
+<span class=normal><a href=#__codelineno-13-17>17</a></span>
+<span class=normal><a href=#__codelineno-13-18>18</a></span>
+<span class=normal><a href=#__codelineno-13-19>19</a></span>
+<span class=normal><a href=#__codelineno-13-20>20</a></span>
+<span class=normal><a href=#__codelineno-13-21>21</a></span>
+<span class=normal><a href=#__codelineno-13-22>22</a></span>
+<span class=normal><a href=#__codelineno-13-23>23</a></span>
+<span class=normal><a href=#__codelineno-13-24>24</a></span>
+<span class=normal><a href=#__codelineno-13-25>25</a></span>
+<span class=normal><a href=#__codelineno-13-26>26</a></span>
+<span class=normal><a href=#__codelineno-13-27>27</a></span>
+<span class=normal><a href=#__codelineno-13-28>28</a></span>
+<span class=normal><a href=#__codelineno-13-29>29</a></span>
+<span class=normal><a href=#__codelineno-13-30>30</a></span>
+<span class=normal><a href=#__codelineno-13-31>31</a></span>
+<span class=normal><a href=#__codelineno-13-32>32</a></span>
+<span class=normal><a href=#__codelineno-13-33>33</a></span>
+<span class=normal><a href=#__codelineno-13-34>34</a></span>
+<span class=normal><a href=#__codelineno-13-35>35</a></span>
+<span class=normal><a href=#__codelineno-13-36>36</a></span>
+<span class=normal><a href=#__codelineno-13-37>37</a></span>
+<span class=normal><a href=#__codelineno-13-38>38</a></span>
+<span class=normal><a href=#__codelineno-13-39>39</a></span>
+<span class=normal><a href=#__codelineno-13-40>40</a></span>
+<span class=normal><a href=#__codelineno-13-41>41</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-13-1><a id=__codelineno-13-1 name=__codelineno-13-1></a>题目：已知等差数列{an}的前n项和为Sn，若S3=9，S6=36，求S9。
+</span><span id=__span-13-2><a id=__codelineno-13-2 name=__codelineno-13-2></a>
+</span><span id=__span-13-3><a id=__codelineno-13-3 name=__codelineno-13-3></a>🔴 不使用CoT（可能出错）：
+</span><span id=__span-13-4><a id=__codelineno-13-4 name=__codelineno-13-4></a>答案是81。
+</span><span id=__span-13-5><a id=__codelineno-13-5 name=__codelineno-13-5></a>
+</span><span id=__span-13-6><a id=__codelineno-13-6 name=__codelineno-13-6></a>🟢 使用CoT（正确且可验证）：
+</span><span id=__span-13-7><a id=__codelineno-13-7 name=__codelineno-13-7></a>让我一步步思考：
+</span><span id=__span-13-8><a id=__codelineno-13-8 name=__codelineno-13-8></a>
+</span><span id=__span-13-9><a id=__codelineno-13-9 name=__codelineno-13-9></a>1. 等差数列前n项和公式：Sn = n/2 × (2a₁ + (n-1)d)
+</span><span id=__span-13-10><a id=__codelineno-13-10 name=__codelineno-13-10></a>
+</span><span id=__span-13-11><a id=__codelineno-13-11 name=__codelineno-13-11></a>2. 根据S3=9：
+</span><span id=__span-13-12><a id=__codelineno-13-12 name=__codelineno-13-12></a>   S3 = 3/2 × (2a₁ + 2d) = 9
+</span><span id=__span-13-13><a id=__codelineno-13-13 name=__codelineno-13-13></a>   3(a₁ + d) = 9
+</span><span id=__span-13-14><a id=__codelineno-13-14 name=__codelineno-13-14></a>   a₁ + d = 3  —— ①
+</span><span id=__span-13-15><a id=__codelineno-13-15 name=__codelineno-13-15></a>
+</span><span id=__span-13-16><a id=__codelineno-13-16 name=__codelineno-13-16></a>3. 根据S6=36：
+</span><span id=__span-13-17><a id=__codelineno-13-17 name=__codelineno-13-17></a>   S6 = 6/2 × (2a₁ + 5d) = 36
+</span><span id=__span-13-18><a id=__codelineno-13-18 name=__codelineno-13-18></a>   3(2a₁ + 5d) = 36
+</span><span id=__span-13-19><a id=__codelineno-13-19 name=__codelineno-13-19></a>   2a₁ + 5d = 12  —— ②
+</span><span id=__span-13-20><a id=__codelineno-13-20 name=__codelineno-13-20></a>
+</span><span id=__span-13-21><a id=__codelineno-13-21 name=__codelineno-13-21></a>4. 联立①②：
+</span><span id=__span-13-22><a id=__codelineno-13-22 name=__codelineno-13-22></a>   由①得：a₁ = 3-d
+</span><span id=__span-13-23><a id=__codelineno-13-23 name=__codelineno-13-23></a>   代入②：2(3-d) + 5d = 12
+</span><span id=__span-13-24><a id=__codelineno-13-24 name=__codelineno-13-24></a>   6 - 2d + 5d = 12
+</span><span id=__span-13-25><a id=__codelineno-13-25 name=__codelineno-13-25></a>   3d = 6
+</span><span id=__span-13-26><a id=__codelineno-13-26 name=__codelineno-13-26></a>   d = 2
+</span><span id=__span-13-27><a id=__codelineno-13-27 name=__codelineno-13-27></a>
+</span><span id=__span-13-28><a id=__codelineno-13-28 name=__codelineno-13-28></a>5. 求a₁：
+</span><span id=__span-13-29><a id=__codelineno-13-29 name=__codelineno-13-29></a>   a₁ = 3 - 2 = 1
+</span><span id=__span-13-30><a id=__codelineno-13-30 name=__codelineno-13-30></a>
+</span><span id=__span-13-31><a id=__codelineno-13-31 name=__codelineno-13-31></a>6. 求S9：
+</span><span id=__span-13-32><a id=__codelineno-13-32 name=__codelineno-13-32></a>   S9 = 9/2 × (2×1 + 8×2)
+</span><span id=__span-13-33><a id=__codelineno-13-33 name=__codelineno-13-33></a>   S9 = 9/2 × 18
+</span><span id=__span-13-34><a id=__codelineno-13-34 name=__codelineno-13-34></a>   S9 = 81
+</span><span id=__span-13-35><a id=__codelineno-13-35 name=__codelineno-13-35></a>
+</span><span id=__span-13-36><a id=__codelineno-13-36 name=__codelineno-13-36></a>答案：S9 = 81
+</span><span id=__span-13-37><a id=__codelineno-13-37 name=__codelineno-13-37></a>
+</span><span id=__span-13-38><a id=__codelineno-13-38 name=__codelineno-13-38></a>验证：
+</span><span id=__span-13-39><a id=__codelineno-13-39 name=__codelineno-13-39></a>- S3 = 3/2 × (2+4) = 9 ✓
+</span><span id=__span-13-40><a id=__codelineno-13-40 name=__codelineno-13-40></a>- S6 = 6/2 × (2+10) = 36 ✓
+</span><span id=__span-13-41><a id=__codelineno-13-41 name=__codelineno-13-41></a>- 计算过程正确！
+</span></code></pre></div></td></tr></table></div> <h3 id=112-cot>11.2 案例：用CoT调试代码<a class=headerlink href=#112-cot title="Permanent link">&para;</a></h3> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-14-1> 1</a></span>
+<span class=normal><a href=#__codelineno-14-2> 2</a></span>
+<span class=normal><a href=#__codelineno-14-3> 3</a></span>
+<span class=normal><a href=#__codelineno-14-4> 4</a></span>
+<span class=normal><a href=#__codelineno-14-5> 5</a></span>
+<span class=normal><a href=#__codelineno-14-6> 6</a></span>
+<span class=normal><a href=#__codelineno-14-7> 7</a></span>
+<span class=normal><a href=#__codelineno-14-8> 8</a></span>
+<span class=normal><a href=#__codelineno-14-9> 9</a></span>
+<span class=normal><a href=#__codelineno-14-10>10</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-14-1><a id=__codelineno-14-1 name=__codelineno-14-1></a>问题：这段Python代码为什么会报错？
+</span><span id=__span-14-2><a id=__codelineno-14-2 name=__codelineno-14-2></a>
+</span><span id=__span-14-3><a id=__codelineno-14-3 name=__codelineno-14-3></a>```python
+</span><span id=__span-14-4><a id=__codelineno-14-4 name=__codelineno-14-4></a>def calculate_average(numbers):
+</span><span id=__span-14-5><a id=__codelineno-14-5 name=__codelineno-14-5></a>    total = sum(numbers)
+</span><span id=__span-14-6><a id=__codelineno-14-6 name=__codelineno-14-6></a>    average = total / len(numbers)
+</span><span id=__span-14-7><a id=__codelineno-14-7 name=__codelineno-14-7></a>    return average
+</span><span id=__span-14-8><a id=__codelineno-14-8 name=__codelineno-14-8></a>
+</span><span id=__span-14-9><a id=__codelineno-14-9 name=__codelineno-14-9></a>result = calculate_average([])
+</span><span id=__span-14-10><a id=__codelineno-14-10 name=__codelineno-14-10></a>print(result)
+</span></code></pre></div></td></tr></table></div> <p>🟢 CoT调试： 让我一步步分析：</p> <ol> <li> <p>代码功能：计算列表平均值</p> </li> <li> <p>逐行检查：</p> </li> <li>第2行：sum([]) = 0 ✓</li> <li>第3行：len([]) = 0</li> <li> <p>第3行：0 / 0 → 除以零！</p> </li> <li> <p>错误类型：ZeroDivisionError</p> </li> <li> <p>根本原因：空列表导致除数为0</p> </li> <li> <p>修复方案： <div class="language-python highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-15-1>1</a></span>
+<span class=normal><a href=#__codelineno-15-2>2</a></span>
+<span class=normal><a href=#__codelineno-15-3>3</a></span>
+<span class=normal><a href=#__codelineno-15-4>4</a></span>
+<span class=normal><a href=#__codelineno-15-5>5</a></span>
+<span class=normal><a href=#__codelineno-15-6>6</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-15-1><a id=__codelineno-15-1 name=__codelineno-15-1></a><span class=k>def</span><span class=w> </span><span class=nf>calculate_average</span><span class=p>(</span><span class=n>numbers</span><span class=p>):</span>
+</span><span id=__span-15-2><a id=__codelineno-15-2 name=__codelineno-15-2></a>    <span class=k>if</span> <span class=ow>not</span> <span class=n>numbers</span><span class=p>:</span>  <span class=c1># 添加边界检查</span>
+</span><span id=__span-15-3><a id=__codelineno-15-3 name=__codelineno-15-3></a>        <span class=k>return</span> <span class=mi>0</span>
+</span><span id=__span-15-4><a id=__codelineno-15-4 name=__codelineno-15-4></a>    <span class=n>total</span> <span class=o>=</span> <span class=nb>sum</span><span class=p>(</span><span class=n>numbers</span><span class=p>)</span>
+</span><span id=__span-15-5><a id=__codelineno-15-5 name=__codelineno-15-5></a>    <span class=n>average</span> <span class=o>=</span> <span class=n>total</span> <span class=o>/</span> <span class=nb>len</span><span class=p>(</span><span class=n>numbers</span><span class=p>)</span>
+</span><span id=__span-15-6><a id=__codelineno-15-6 name=__codelineno-15-6></a>    <span class=k>return</span> <span class=n>average</span>
+</span></code></pre></div></td></tr></table></div></p> </li> </ol> <p>答案：空列表导致除以零，添加边界检查即可修复。 <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-16-1>1</a></span>
+<span class=normal><a href=#__codelineno-16-2>2</a></span>
+<span class=normal><a href=#__codelineno-16-3>3</a></span>
+<span class=normal><a href=#__codelineno-16-4>4</a></span>
+<span class=normal><a href=#__codelineno-16-5>5</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-16-1><a id=__codelineno-16-1 name=__codelineno-16-1></a>---
+</span><span id=__span-16-2><a id=__codelineno-16-2 name=__codelineno-16-2></a>
+</span><span id=__span-16-3><a id=__codelineno-16-3 name=__codelineno-16-3></a>&gt; **思维链的本质：让AI把思考过程&quot;说出来&quot;，通过中间步骤引导它走向正确答案。**
+</span><span id=__span-16-4><a id=__codelineno-16-4 name=__codelineno-16-4></a>
+</span><span id=__span-16-5><a id=__codelineno-16-5 name=__codelineno-16-5></a>### 12.2 核心公式
+</span></code></pre></div></td></tr></table></div> 传统Prompt：问题 → 答案 CoT Prompt：问题 → 推理步骤 → 答案 <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-17-1> 1</a></span>
+<span class=normal><a href=#__codelineno-17-2> 2</a></span>
+<span class=normal><a href=#__codelineno-17-3> 3</a></span>
+<span class=normal><a href=#__codelineno-17-4> 4</a></span>
+<span class=normal><a href=#__codelineno-17-5> 5</a></span>
+<span class=normal><a href=#__codelineno-17-6> 6</a></span>
+<span class=normal><a href=#__codelineno-17-7> 7</a></span>
+<span class=normal><a href=#__codelineno-17-8> 8</a></span>
+<span class=normal><a href=#__codelineno-17-9> 9</a></span>
+<span class=normal><a href=#__codelineno-17-10>10</a></span>
+<span class=normal><a href=#__codelineno-17-11>11</a></span>
+<span class=normal><a href=#__codelineno-17-12>12</a></span>
+<span class=normal><a href=#__codelineno-17-13>13</a></span>
+<span class=normal><a href=#__codelineno-17-14>14</a></span>
+<span class=normal><a href=#__codelineno-17-15>15</a></span>
+<span class=normal><a href=#__codelineno-17-16>16</a></span>
+<span class=normal><a href=#__codelineno-17-17>17</a></span>
+<span class=normal><a href=#__codelineno-17-18>18</a></span>
+<span class=normal><a href=#__codelineno-17-19>19</a></span>
+<span class=normal><a href=#__codelineno-17-20>20</a></span>
+<span class=normal><a href=#__codelineno-17-21>21</a></span>
+<span class=normal><a href=#__codelineno-17-22>22</a></span>
+<span class=normal><a href=#__codelineno-17-23>23</a></span>
+<span class=normal><a href=#__codelineno-17-24>24</a></span>
+<span class=normal><a href=#__codelineno-17-25>25</a></span>
+<span class=normal><a href=#__codelineno-17-26>26</a></span>
+<span class=normal><a href=#__codelineno-17-27>27</a></span>
+<span class=normal><a href=#__codelineno-17-28>28</a></span>
+<span class=normal><a href=#__codelineno-17-29>29</a></span>
+<span class=normal><a href=#__codelineno-17-30>30</a></span>
+<span class=normal><a href=#__codelineno-17-31>31</a></span>
+<span class=normal><a href=#__codelineno-17-32>32</a></span>
+<span class=normal><a href=#__codelineno-17-33>33</a></span>
+<span class=normal><a href=#__codelineno-17-34>34</a></span>
+<span class=normal><a href=#__codelineno-17-35>35</a></span>
+<span class=normal><a href=#__codelineno-17-36>36</a></span>
+<span class=normal><a href=#__codelineno-17-37>37</a></span>
+<span class=normal><a href=#__codelineno-17-38>38</a></span>
+<span class=normal><a href=#__codelineno-17-39>39</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-17-1><a id=__codelineno-17-1 name=__codelineno-17-1></a>### 12.3 三种方法速查
+</span><span id=__span-17-2><a id=__codelineno-17-2 name=__codelineno-17-2></a>
+</span><span id=__span-17-3><a id=__codelineno-17-3 name=__codelineno-17-3></a>| 方法 | 使用难度 | 效果 | 适用场景 |
+</span><span id=__span-17-4><a id=__codelineno-17-4 name=__codelineno-17-4></a>|------|---------|------|---------|
+</span><span id=__span-17-5><a id=__codelineno-17-5 name=__codelineno-17-5></a>| **Zero-Shot CoT** | ⭐ | ⭐⭐⭐ | 快速测试 |
+</span><span id=__span-17-6><a id=__codelineno-17-6 name=__codelineno-17-6></a>| **Few-Shot CoT** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 生产环境 |
+</span><span id=__span-17-7><a id=__codelineno-17-7 name=__codelineno-17-7></a>| **Self-Consistency** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 高准确率需求 |
+</span><span id=__span-17-8><a id=__codelineno-17-8 name=__codelineno-17-8></a>
+</span><span id=__span-17-9><a id=__codelineno-17-9 name=__codelineno-17-9></a>### 12.4 使用清单
+</span><span id=__span-17-10><a id=__codelineno-17-10 name=__codelineno-17-10></a>
+</span><span id=__span-17-11><a id=__codelineno-17-11 name=__codelineno-17-11></a>**使用前检查**：
+</span><span id=__span-17-12><a id=__codelineno-17-12 name=__codelineno-17-12></a>- [ ] 问题是否足够复杂？
+</span><span id=__span-17-13><a id=__codelineno-17-13 name=__codelineno-17-13></a>- [ ] 模型参数是否够大（1000亿+）？
+</span><span id=__span-17-14><a id=__codelineno-17-14 name=__codelineno-17-14></a>- [ ] 是否愿意接受更长的输出？
+</span><span id=__span-17-15><a id=__codelineno-17-15 name=__codelineno-17-15></a>- [ ] 是否有能力验证答案正确性？
+</span><span id=__span-17-16><a id=__codelineno-17-16 name=__codelineno-17-16></a>
+</span><span id=__span-17-17><a id=__codelineno-17-17 name=__codelineno-17-17></a>**使用时步骤**：
+</span><span id=__span-17-18><a id=__codelineno-17-18 name=__codelineno-17-18></a>1. 选择CoT类型（Zero/Few/Self-Consistency）
+</span><span id=__span-17-19><a id=__codelineno-17-19 name=__codelineno-17-19></a>2. 编写提示词（添加&quot;一步步思考&quot;）
+</span><span id=__span-17-20><a id=__codelineno-17-20 name=__codelineno-17-20></a>3. 准备示例（如果是Few-Shot）
+</span><span id=__span-17-21><a id=__codelineno-17-21 name=__codelineno-17-21></a>4. 生成并检查输出
+</span><span id=__span-17-22><a id=__codelineno-17-22 name=__codelineno-17-22></a>5. 验证关键推理步骤
+</span><span id=__span-17-23><a id=__codelineno-17-23 name=__codelineno-17-23></a>
+</span><span id=__span-17-24><a id=__codelineno-17-24 name=__codelineno-17-24></a>### 12.5 最终忠告
+</span><span id=__span-17-25><a id=__codelineno-17-25 name=__codelineno-17-25></a>
+</span><span id=__span-17-26><a id=__codelineno-17-26 name=__codelineno-17-26></a>```mermaid
+</span><span id=__span-17-27><a id=__codelineno-17-27 name=__codelineno-17-27></a>graph TD
+</span><span id=__span-17-28><a id=__codelineno-17-28 name=__codelineno-17-28></a>    A[使用CoT] --&gt; B[不要盲目相信]
+</span><span id=__span-17-29><a id=__codelineno-17-29 name=__codelineno-17-29></a>    A --&gt; C[关键答案要验证]
+</span><span id=__span-17-30><a id=__codelineno-17-30 name=__codelineno-17-30></a>    A --&gt; D[小模型不要用]
+</span><span id=__span-17-31><a id=__codelineno-17-31 name=__codelineno-17-31></a>    A --&gt; E[简单问题不必用]
+</span><span id=__span-17-32><a id=__codelineno-17-32 name=__codelineno-17-32></a>    A --&gt; F[结合工具更可靠]
+</span><span id=__span-17-33><a id=__codelineno-17-33 name=__codelineno-17-33></a>
+</span><span id=__span-17-34><a id=__codelineno-17-34 name=__codelineno-17-34></a>    style A fill:#FFEB3B
+</span><span id=__span-17-35><a id=__codelineno-17-35 name=__codelineno-17-35></a>    style B fill:#FFC107
+</span><span id=__span-17-36><a id=__codelineno-17-36 name=__codelineno-17-36></a>    style C fill:#FFC107
+</span><span id=__span-17-37><a id=__codelineno-17-37 name=__codelineno-17-37></a>    style D fill:#FFC107
+</span><span id=__span-17-38><a id=__codelineno-17-38 name=__codelineno-17-38></a>    style E fill:#FFC107
+</span><span id=__span-17-39><a id=__codelineno-17-39 name=__codelineno-17-39></a>    style F fill:#FFC107
+</span></code></pre></div></td></tr></table></div></p> <hr> <p><strong>写在最后</strong>：</p> <p>思维链（CoT）是近年来大模型领域最实用的技术突破之一。它不需要修改模型本身，只需要巧妙地改变我们提问的方式，就能让AI的推理能力上一个台阶。</p> <p><strong>记住这个魔法咒语</strong>： <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-18-1>1</a></span>
+<span class=normal><a href=#__codelineno-18-2>2</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-18-1><a id=__codelineno-18-1 name=__codelineno-18-1></a>&quot;让我们一步步思考&quot;
+</span><span id=__span-18-2><a id=__codelineno-18-2 name=__codelineno-18-2></a>Let&#39;s think step by step.
+</span></code></pre></div></td></tr></table></div></p> <p>下次遇到复杂问题，不妨试试这个方法。你会发现，原来AI也可以像学霸一样，把解题过程写得明明白白！</p> <hr> <p><em>如果你觉得这篇文章对你有帮助，欢迎</em><em>点赞、收藏、转发</em><em>！有问题也可以在评论区留言，我会第一时间回复。下期我们聊聊</em><em>大模型的工具调用（Function Calling）</em><em>，敬请期待！</em></p> <p>🔔 <strong>关注公众号</strong>，获取更多AI技术干货！</p> <hr> <h2 id=cot_1>附录：CoT提示词模板库<a class=headerlink href=#cot_1 title="Permanent link">&para;</a></h2> <h3 id=1>模板1：通用推理<a class=headerlink href=#1 title="Permanent link">&para;</a></h3> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-19-1>1</a></span>
+<span class=normal><a href=#__codelineno-19-2>2</a></span>
+<span class=normal><a href=#__codelineno-19-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-19-1><a id=__codelineno-19-1 name=__codelineno-19-1></a>请一步步思考这个问题，展示你的推理过程：
+</span><span id=__span-19-2><a id=__codelineno-19-2 name=__codelineno-19-2></a>
+</span><span id=__span-19-3><a id=__codelineno-19-3 name=__codelineno-19-3></a>[你的问题]
+</span></code></pre></div></td></tr></table></div> <h3 id=2>模板2：数学计算<a class=headerlink href=#2 title="Permanent link">&para;</a></h3> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-20-1>1</a></span>
+<span class=normal><a href=#__codelineno-20-2>2</a></span>
+<span class=normal><a href=#__codelineno-20-3>3</a></span>
+<span class=normal><a href=#__codelineno-20-4>4</a></span>
+<span class=normal><a href=#__codelineno-20-5>5</a></span>
+<span class=normal><a href=#__codelineno-20-6>6</a></span>
+<span class=normal><a href=#__codelineno-20-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-20-1><a id=__codelineno-20-1 name=__codelineno-20-1></a>解答这道数学题，要求：
+</span><span id=__span-20-2><a id=__codelineno-20-2 name=__codelineno-20-2></a>1. 列出已知条件
+</span><span id=__span-20-3><a id=__codelineno-20-3 name=__codelineno-20-3></a>2. 说明使用的公式或定理
+</span><span id=__span-20-4><a id=__codelineno-20-4 name=__codelineno-20-4></a>3. 逐步计算
+</span><span id=__span-20-5><a id=__codelineno-20-5 name=__codelineno-20-5></a>4. 验证答案
+</span><span id=__span-20-6><a id=__codelineno-20-6 name=__codelineno-20-6></a>
+</span><span id=__span-20-7><a id=__codelineno-20-7 name=__codelineno-20-7></a>题目：[数学题]
+</span></code></pre></div></td></tr></table></div> <h3 id=3>模板3：代码生成<a class=headerlink href=#3 title="Permanent link">&para;</a></h3> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-21-1>1</a></span>
+<span class=normal><a href=#__codelineno-21-2>2</a></span>
+<span class=normal><a href=#__codelineno-21-3>3</a></span>
+<span class=normal><a href=#__codelineno-21-4>4</a></span>
+<span class=normal><a href=#__codelineno-21-5>5</a></span>
+<span class=normal><a href=#__codelineno-21-6>6</a></span>
+<span class=normal><a href=#__codelineno-21-7>7</a></span>
+<span class=normal><a href=#__codelineno-21-8>8</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-21-1><a id=__codelineno-21-1 name=__codelineno-21-1></a>请按照以下步骤完成代码：
+</span><span id=__span-21-2><a id=__codelineno-21-2 name=__codelineno-21-2></a>1. 理解需求
+</span><span id=__span-21-3><a id=__codelineno-21-3 name=__codelineno-21-3></a>2. 设计算法或流程
+</span><span id=__span-21-4><a id=__codelineno-21-4 name=__codelineno-21-4></a>3. 编写代码
+</span><span id=__span-21-5><a id=__codelineno-21-5 name=__codelineno-21-5></a>4. 添加注释
+</span><span id=__span-21-6><a id=__codelineno-21-6 name=__codelineno-21-6></a>5. 说明时间复杂度
+</span><span id=__span-21-7><a id=__codelineno-21-7 name=__codelineno-21-7></a>
+</span><span id=__span-21-8><a id=__codelineno-21-8 name=__codelineno-21-8></a>需求：[你的需求]
+</span></code></pre></div></td></tr></table></div> <h3 id=4>模板4：逻辑分析<a class=headerlink href=#4 title="Permanent link">&para;</a></h3> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-22-1>1</a></span>
+<span class=normal><a href=#__codelineno-22-2>2</a></span>
+<span class=normal><a href=#__codelineno-22-3>3</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-22-1><a id=__codelineno-22-1 name=__codelineno-22-1></a>请使用假设法或排除法，一步步推理：
+</span><span id=__span-22-2><a id=__codelineno-22-2 name=__codelineno-22-2></a>
+</span><span id=__span-22-3><a id=__codelineno-22-3 name=__codelineno-22-3></a>问题：[逻辑题]
+</span></code></pre></div></td></tr></table></div> <h3 id=5>模板5：决策分析<a class=headerlink href=#5 title="Permanent link">&para;</a></h3> <div class="language-text highlight"><table class=highlighttable><tr><td class=linenos><div class=linenodiv><pre><span></span><span class=normal><a href=#__codelineno-23-1>1</a></span>
+<span class=normal><a href=#__codelineno-23-2>2</a></span>
+<span class=normal><a href=#__codelineno-23-3>3</a></span>
+<span class=normal><a href=#__codelineno-23-4>4</a></span>
+<span class=normal><a href=#__codelineno-23-5>5</a></span>
+<span class=normal><a href=#__codelineno-23-6>6</a></span>
+<span class=normal><a href=#__codelineno-23-7>7</a></span></pre></div></td><td class=code><div><pre><span></span><code><span id=__span-23-1><a id=__codelineno-23-1 name=__codelineno-23-1></a>请从以下角度分析：
+</span><span id=__span-23-2><a id=__codelineno-23-2 name=__codelineno-23-2></a>1. 列出所有选项
+</span><span id=__span-23-3><a id=__codelineno-23-3 name=__codelineno-23-3></a>2. 分析每个选项的优缺点
+</span><span id=__span-23-4><a id=__codelineno-23-4 name=__codelineno-23-4></a>3. 权衡利弊
+</span><span id=__span-23-5><a id=__codelineno-23-5 name=__codelineno-23-5></a>4. 给出建议
+</span><span id=__span-23-6><a id=__codelineno-23-6 name=__codelineno-23-6></a>
+</span><span id=__span-23-7><a id=__codelineno-23-7 name=__codelineno-23-7></a>问题：[决策问题]
+</span></code></pre></div></td></tr></table></div> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> </div> <div class=md-social> <a href=https://github.com/deep2code target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://linkedin.com/in/deep2code target=_blank rel=noopener title=linkedin.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg> </a> <a href=https://twitter.com/deep2code target=_blank rel=noopener title=twitter.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.select", "content.code.annotate", "content.tabs.link", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script> <script src=../../assets/javascripts/bundle.79ae519e.min.js></script> <script src=https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js></script> <script src=../../assets/js/code-block.js></script> <script src=../../assets/js/custom.js></script> </body> </html>

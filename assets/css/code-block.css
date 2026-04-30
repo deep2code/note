@@ -1,0 +1,75 @@
+/* 代码块折叠样式 */
+.code-block-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.code-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+  color: #ccc;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border-bottom: 1px solid #3d3d3d;
+}
+
+.code-block-header:hover {
+  background: linear-gradient(135deg, #3d3d3d 0%, #2a2a2a 100%);
+}
+
+.code-block-header .code-lang {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.code-block-header .toggle-icon {
+  transition: transform 0.3s ease;
+}
+
+.code-block-header.collapsed .toggle-icon {
+  transform: rotate(-90deg);
+}
+
+.code-block-content {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  max-height: 2000px;
+}
+
+.code-block-content.collapsed {
+  max-height: 0;
+}
+
+.code-block-content pre {
+  margin: 0;
+  border-radius: 0;
+}
+
+/* 代码行号样式优化 */
+.highlight .lineno {
+  color: #666;
+  padding-right: 0.75rem;
+  border-right: 1px solid #444;
+  margin-right: 0.75rem;
+  user-select: none;
+}
+
+/* 复制按钮样式优化 */
+.md-clipboard {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.highlight:hover .md-clipboard {
+  opacity: 1;
+}
+
+/* 代码块选择功能 */
+.highlight code {
+  user-select: text;
+}
