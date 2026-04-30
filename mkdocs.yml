@@ -95,11 +95,11 @@ extra_css:
 extra:
         social:
                 - icon: fontawesome/brands/github
-                  link: https://github.com/your-username
+                  link: https://github.com/deep2code
                 - icon: fontawesome/brands/linkedin
-                  link: https://linkedin.com/in/your-username
+                  link: https://linkedin.com/in/deep2code
                 - icon: fontawesome/brands/twitter
-                  link: https://twitter.com/your-username
+                  link: https://twitter.com/deep2code
         generator: false
 
 nav:
